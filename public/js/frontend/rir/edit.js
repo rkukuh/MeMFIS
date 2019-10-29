@@ -59,14 +59,14 @@ let receiving_inspection_report = {
                     width: 150
                 },
                 {
-                    field: "",
+                    field: "qty_pr",
                     title: "Qty PR",
                     sortable: "asc",
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "",
+                    field: "qty_po",
                     title: "Qty PO",
                     sortable: "asc",
                     filterable: !1,
@@ -80,7 +80,7 @@ let receiving_inspection_report = {
                     width: 150
                 },
                 {
-                    field: "",
+                    field: 'unit_name',
                     title: "Unit",
                     sortable: "asc",
                     filterable: !1,

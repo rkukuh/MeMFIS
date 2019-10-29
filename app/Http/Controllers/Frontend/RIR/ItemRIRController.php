@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\RIR;
 
+use Carbon\Carbon;
 use App\Models\RIR;
 use App\Models\Item;
 use Illuminate\Http\Request;
@@ -37,6 +38,7 @@ class ItemRIRController extends Controller
      */
     public function store(Request $request,RIR $rir, Item $item)
     {
+        $request->merge(['expired_at' => Carbon::parse($request->expired_at)]);
         $exists = $rir->items()->where('item_id',$item->id)->first();
         if($exists){
             return response()->json(['title' => "Danger"]);
@@ -60,6 +62,7 @@ class ItemRIRController extends Controller
                     'quantity_unit' => $quantity_unit,
                     'price' => $price,
                     'note' => $request->note,
+                    'expired_at' => $request->expired_at
                     ]
                 ]);
             }else{
@@ -75,6 +78,7 @@ class ItemRIRController extends Controller
                         'quantity_unit' => 1,
                         'price' => $price,
                         'note' => $request->note,
+                        'expired_at' => $request->expired_at
                         ]
                     ]);
                 }
@@ -114,11 +118,13 @@ class ItemRIRController extends Controller
      */
     public function update(Request $request, RIR $rir, Item $item)
     {
+        $request->merge(['expired_at' => Carbon::parse($request->expired_at)]);
         $rir->items()->updateExistingPivot($item->id,
                                 ['unit_id'=>$request->unit_id,
                                 'quantity'=> $request->quantity,
                                 'quantity_unit'=> $quantity_unit,
-                                'note' => $request->note
+                                'note' => $request->note,
+                                'expired_at' => $request->expired_at
                                 ]);
 
         return response()->json($rir);
