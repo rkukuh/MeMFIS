@@ -21,7 +21,7 @@ class CreateBankAccountsTable extends Migration
             $table->string('swift_code')->nullable();
             $table->morphs('bank_accountable');
             $table->unsignedBigInteger('bank_id');
-            $table->unsignedBigInteger('currency_id');
+            $table->unsignedBigInteger('currency_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
