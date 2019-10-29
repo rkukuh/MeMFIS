@@ -935,5 +935,18 @@ class FillComboxController extends Controller
 
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function taxation()
+    {
+        $taxation = Type::ofTax()->pluck('name', 'uuid');
+
+        return json_encode($taxation);
+
+    }
+
 
 }
