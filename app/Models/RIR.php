@@ -58,6 +58,30 @@ class RIR extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A RIR may have zero or many item.
+     *
+     * This function will retrieve all the items of a RIR.
+     * See: Item's rir() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'rir_item','rir_id','item_id')
+                    ->withPivot(
+                        'serial_number',
+                        'quantity',
+                        'quantity_unit',
+                        'unit_id',
+                        'price',
+                        'already_received_amount',
+                        'note',
+                        'expired_at'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * One-Way: An RIR may have one packing condition.
      *
      * This function will retrieve the packing condition of an RIR.

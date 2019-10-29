@@ -17,6 +17,14 @@ class CreateRirItemTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('rir_id');
             $table->unsignedBigInteger('item_id');
+            $table->string('serial_number')->nullable();
+            $table->double('quantity');
+            $table->double('quantity_unit');
+            $table->unsignedBigInteger('unit_id');
+            $table->double('price')->nullable();;
+            $table->double('already_received_amount')->nullable();;
+            $table->string('note')->nullable();
+            $table->timestamp('expired_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -27,6 +35,11 @@ class CreateRirItemTable extends Migration
 
             $table->foreign('item_id')
                     ->references('id')->on('items')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('unit_id')
+                    ->references('id')->on('units')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });

@@ -1,18 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\GoodsReceived;
+namespace App\Http\Controllers\Frontend\RIR;
 
 use Carbon\Carbon;
+use App\Models\RIR;
 use App\Models\Item;
-use App\Models\Storage;
-use App\Models\PurchaseOrder;
-use App\Models\GoodsReceived;
-use App\Helpers\DocumentNumber;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\GoodsReceivedItemStore;
-use App\Http\Requests\Frontend\GoodsReceivedItemUpdate;
 
-class ItemGoodsReceivedController extends Controller
+class ItemRIRController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,13 +33,13 @@ class ItemGoodsReceivedController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\GoodsReceivedStore  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GoodsReceivedItemStore $request,GoodsReceived $goodsReceived, Item $item)
+    public function store(Request $request,RIR $rir, Item $item)
     {
         $request->merge(['expired_at' => Carbon::parse($request->expired_at)]);
-        $exists = $goodsReceived->items()->where('item_id',$item->id)->first();
+        $exists = $rir->items()->where('item_id',$item->id)->first();
         if($exists){
             return response()->json(['title' => "Danger"]);
         }else{
@@ -58,23 +54,23 @@ class ItemGoodsReceivedController extends Controller
                     $quantity_unit = $request->quantity;
                 }
 
-                $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
-                $goodsReceived->items()->attach([$item->id => [
+                $price = $rir->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
+                $rir->items()->attach([$item->id => [
                     'quantity'=> $request->quantity,
                     'already_received_amount'=> 2,// TODO ask whats is it?
                     'unit_id' => $request->unit_id,
                     'quantity_unit' => $quantity_unit,
                     'price' => $price,
                     'note' => $request->note,
-                    'expired_at' => $request->expired_at,
+                    'expired_at' => $request->expired_at
                     ]
                 ]);
             }else{
                 foreach($request->serial_numbers as $serial_number){
                     $item = Item::find($item->id);
 
-                    $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
-                    $goodsReceived->items()->attach([$item->id => [
+                    $price = $rir->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
+                    $rir->items()->attach([$item->id => [
                         'serial_number'=> $serial_number,
                         'quantity'=> 1,
                         'already_received_amount'=> 2,// TODO ask whats is it?
@@ -82,11 +78,11 @@ class ItemGoodsReceivedController extends Controller
                         'quantity_unit' => 1,
                         'price' => $price,
                         'note' => $request->note,
-                        'expired_at' => $request->expired_at,
+                        'expired_at' => $request->expired_at
                         ]
                     ]);
                 }
-                return response()->json($goodsReceived);
+                return response()->json($rir);
             }
         }
     }
@@ -94,54 +90,56 @@ class ItemGoodsReceivedController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\GoodsReceived  $goodsReceived
+     * @param  \App\RIR  $rir
      * @return \Illuminate\Http\Response
      */
-    public function show(GoodsReceived $goodsReceived)
+    public function show(RIR $rir)
     {
-       //
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\GoodsReceived  $goodsReceived
+     * @param  \App\RIR  $rir
      * @return \Illuminate\Http\Response
      */
-    public function edit(GoodsReceived $goodsReceived)
+    public function edit(RIR $rir, Item $item)
     {
-       //
+        return response()->json($rir->items->where('pivot.item_id',$item->id)->first());
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\GoodsReceivedUpdate  $request
-     * @param  \App\Models\GoodsReceived  $goodsReceived
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\RIR  $rir
      * @return \Illuminate\Http\Response
      */
-    public function update(GoodsReceivedItemUpdate $request, GoodsReceived $goodsReceived, Item $item)
+    public function update(Request $request, RIR $rir, Item $item)
     {
-        $request->merge(['expired_at' => Carbon::parse($request->exp_date)]);
-        $goodsReceived->items()->updateExistingPivot($item->id,
-        ['unit_id'=>$request->unit_id,
-        'quantity'=> $request->quantity,
-        'note' => $request->note,
-        'expired_at' => $request->expired_at]);
+        $request->merge(['expired_at' => Carbon::parse($request->expired_at)]);
+        $rir->items()->updateExistingPivot($item->id,
+                                ['unit_id'=>$request->unit_id,
+                                'quantity'=> $request->quantity,
+                                'note' => $request->note,
+                                'expired_at' => $request->expired_at
+                                ]);
 
-        return response()->json($goodsReceived);
+        return response()->json($rir);
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\GoodsReceived  $goodsReceived
+     * @param  \App\RIR  $rir
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GoodsReceived $goodsReceived, Item $item)
+    public function destroy(RIR $rir, Item $item)
     {
-        $goodsReceived->items()->detach($item->id);
+        $rir->items()->detach($item->id);
 
-        return response()->json($goodsReceived);
+        return response()->json($rir);
     }
 }

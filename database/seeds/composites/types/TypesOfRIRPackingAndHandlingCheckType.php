@@ -19,7 +19,7 @@ class TypesOfRIRPackingAndHandlingCheckType extends Seeder
         ]);
 
         Type::create([
-            'code' => 'carton',
+            'code' => 'carton-box',
             'name' => 'Carton Box',
             'of'   => 'rir-packing-handling-type',
         ]);

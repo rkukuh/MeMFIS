@@ -18,18 +18,15 @@ class CreateRirTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->timestamp('rir_date');
-            $table->string('vehicle_no');
             $table->string('delivery_document_number')->nullable();
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('purchase_order_id');
             $table->unsignedBigInteger('vendor_id');
-            $table->unsignedBigInteger('packing_type');
-            $table->unsignedBigInteger('packing_condition');
+            $table->unsignedBigInteger('packing_type')->nullable();
+            $table->unsignedBigInteger('packing_condition')->nullable();
             $table->text('unsatisfactory_packing')->nullable();
-            $table->unsignedBigInteger('preservation_check');
+            $table->unsignedBigInteger('preservation_check')->nullable();
             $table->text('unsatisfactory_preservation')->nullable();
-            $table->unsignedBigInteger('received_by');
-            $table->timestamp('received_at')->nullable();
             $table->text('decision')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
@@ -65,10 +62,6 @@ class CreateRirTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('received_by')
-                    ->references('id')->on('employees')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
         });
     }
 

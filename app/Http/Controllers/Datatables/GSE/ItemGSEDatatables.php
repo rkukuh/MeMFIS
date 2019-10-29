@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\GoodsReceived;
+namespace App\Http\Controllers\Datatables\GSE;
 
 use App\Models\Unit;
 use App\Models\GoodsReceived;
@@ -8,7 +8,7 @@ use App\Models\ListUtil;
 use Illuminate\Http\Order;
 use App\Http\Controllers\Controller;
 
-class ItemGoodsReceivedDatatables extends Controller
+class ItemGSEDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +19,8 @@ class ItemGoodsReceivedDatatables extends Controller
     {
         $goodReceiveds = $goodReceived->items;
 
-        foreach($goodReceiveds as $GoodReceived){
-            $GoodReceived->unit_name .= Unit::find($GoodReceived->pivot->unit_id)->name;
-            $GoodReceived->qty_pr .= $goodReceived->purchase_order->purchase_request->items->where('id',$GoodReceived->id)->first()->pivot->quantity;
-            $GoodReceived->qty_po .= $goodReceived->purchase_order->items->where('id',$GoodReceived->id)->first()->pivot->quantity;
-
+        foreach($goodReceiveds as $goodReceived){
+            $goodReceived->unit_name .= Unit::find($goodReceived->pivot->unit_id)->name;
         }
 
         $data = $alldata = json_decode($goodReceiveds);

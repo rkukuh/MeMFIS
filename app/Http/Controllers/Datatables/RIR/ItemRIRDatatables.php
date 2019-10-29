@@ -1,32 +1,31 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\GoodsReceived;
+namespace App\Http\Controllers\Datatables\RIR;
 
 use App\Models\Unit;
-use App\Models\GoodsReceived;
+use App\Models\RIR;
 use App\Models\ListUtil;
 use Illuminate\Http\Order;
 use App\Http\Controllers\Controller;
 
-class ItemGoodsReceivedDatatables extends Controller
+class ItemRIRDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(GoodsReceived $goodReceived)
+    public function index(RIR $rir)
     {
-        $goodReceiveds = $goodReceived->items;
+        $rirs = $rir->items;
 
-        foreach($goodReceiveds as $GoodReceived){
-            $GoodReceived->unit_name .= Unit::find($GoodReceived->pivot->unit_id)->name;
-            $GoodReceived->qty_pr .= $goodReceived->purchase_order->purchase_request->items->where('id',$GoodReceived->id)->first()->pivot->quantity;
-            $GoodReceived->qty_po .= $goodReceived->purchase_order->items->where('id',$GoodReceived->id)->first()->pivot->quantity;
-
+        foreach($rirs as $Rir){
+            $Rir->unit_name .= Unit::find($Rir->pivot->unit_id)->name;
+            $Rir->qty_pr .= $rir->purchase_order->purchase_request->items->where('id',$Rir->id)->first()->pivot->quantity;
+            $Rir->qty_po .= $rir->purchase_order->items->where('id',$Rir->id)->first()->pivot->quantity;
         }
 
-        $data = $alldata = json_decode($goodReceiveds);
+        $data = $alldata = json_decode($rirs);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

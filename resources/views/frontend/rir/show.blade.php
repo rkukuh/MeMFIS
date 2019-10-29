@@ -256,11 +256,11 @@
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                                     <div class="row">
                                                                         @component('frontend.common.input.radio')
-                                                                            @slot('id', 'statisfactory')
-                                                                            @slot('value', 'statisfactory')
+                                                                            @slot('id', 'Satisfactory')
+                                                                            @slot('value', 'satisfactory')
                                                                             @slot('name', 'condition')
                                                                             @slot('size','12')
-                                                                            @slot('text', 'Statisfactory')
+                                                                            @slot('text', 'Satisfactory')
                                                                         @endcomponent
                                                                     </div>
                                                                     <div class="row">
@@ -450,11 +450,11 @@
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                                     @component('frontend.common.input.radio')
-                                                                        @slot('id', 'statisfactory')
-                                                                        @slot('value', 'statisfactory')
+                                                                        @slot('id', 'Satisfactory')
+                                                                        @slot('value', 'satisfactory')
                                                                         @slot('name', 'condition')
                                                                         @slot('size','12')
-                                                                        @slot('text', 'Statisfactory')
+                                                                        @slot('text', 'Satisfactory')
                                                                     @endcomponent
                                                                 </div>
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
