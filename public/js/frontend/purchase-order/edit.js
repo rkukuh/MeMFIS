@@ -575,8 +575,8 @@ jQuery(document).ready(function () {
             $("#taxation").parent().siblings(".tax_amount").removeClass("hidden");
             $(".total_tax").removeClass("hidden");
             let tax_amount = calculate_tax();
-            $("#total_ppn").val(ForeignFormatter.format(tax_amount));
-            $("#total_ppn").html(ForeignFormatter.format(tax_amount));
+            $("#total_ppn").val(ForeignFormatter.format(parseInt(tax_amount)));
+            $("#total_ppn").html(ForeignFormatter.format(parseInt(tax_amount)));
         }else{
             $("#taxation").parent().siblings(".tax_amount").addClass("hidden");
             $(".total_tax").addClass("hidden");
@@ -586,8 +586,8 @@ jQuery(document).ready(function () {
 
     $("#tax_amount").on("change", function() {
         let tax_total = calculate_tax();
-        $("#total_ppn").val(ForeignFormatter.format(tax_total));
-        $("#total_ppn").html(ForeignFormatter.format(tax_total));
+        $("#total_ppn").val(ForeignFormatter.format(parseInt(tax_total)));
+        $("#total_ppn").html(ForeignFormatter.format(parseInt(tax_total)));
     });
 
     function calculate_tax(){
@@ -597,16 +597,16 @@ jQuery(document).ready(function () {
         let total_discount = parseFloat($("#total_discount").val());
         let subtotal_after_discount = sub_total - total_discount;
         let tax_total = 0;
-
+        let grand_total = subtotal_after_discount;
         if(tax_type == "Include"){
-            tax_total = subtotal_after_discount / ( 1.1 * (tax_amount / 100) );
+            tax_total = subtotal_after_discount / 1.1 * (tax_amount / 100) ;
         }else if(tax_type == "Exclude"){
             tax_total = subtotal_after_discount * (tax_amount / 100);
+            grand_total -= tax_total;
         }
 
-        let grand_total = subtotal_after_discount - tax_total;
-        $("#grand_total").html(ForeignFormatter.format(grand_total));
-        $("#grand_total").val(grand_total);
+        $("#grand_total").html(ForeignFormatter.format(parseInt(grand_total)));
+        $("#grand_total").val(parseInt(grand_total));
 
         return tax_total;
     }
