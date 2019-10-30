@@ -93,12 +93,12 @@
                 <tr width="100%">
                     <td width="40%" valign="top">Aircraft Total Time</td>
                     <td width="1%" valign="top">:</td>
-                    <td width="59%" valign="top"><span>{{$rts->aircraft_total_time}} TAT</span></td>
+                    <td width="59%" valign="top"><span>@if($rts->aircraft_total_time) {{ $rts->aircraft_total_time }} TAT @else - @endif</span></td>
                 </tr>
                 <tr width="100%">
                     <td width="40%" valign="top">Aircraft Total Cycle</td>
                     <td width="1%" valign="top">:</td>
-                    <td width="59%" valign="top"><span>{{$rts->aircraft_total_cycle}} TAC</span></td>
+                    <td width="59%" valign="top"><span>@if($rts->aircraft_total_cycle) {{ $rts->aircraft_total_cycle }} TAC @else - @endif</span></td>
                 </tr>
                 <tr width="100%">
                     <td width="40%" valign="top">Work Performed</td>
@@ -126,7 +126,7 @@
                 <tr width="100%">
                     <td width="40%" valign="top">Exceptions</td>
                     <td width="1%" valign="top">:</td>
-                    <td width="59%" valign="top"><span>{{$rts->exception}}</span></td>
+                    <td width="59%" valign="top"><span>{{ $exceptions }}</span></td>
                 </tr>
             </table>
             <p style="text-align:left;padding:5px;">The work recorded above has been carried out, subject to exception/s
