@@ -83,7 +83,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        
+
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                Additional Project No.
@@ -144,7 +144,7 @@
                                                 @slot('id_error', 'section')
                                             @endcomponent
                                         </div>
-                                      
+
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -153,13 +153,14 @@
                                             </label>
 
                                             @component('frontend.common.input.select2')
-                                                @slot('text', ' Returned By')
-                                                @slot('id', 'returned_by')
-                                                @slot('name', 'returned_by')
-                                                @slot('id_error', 'returned_by')
+                                                @slot('id', 'employee')
+                                                @slot('text', 'employee')
+                                                @slot('name', 'employee')
+                                                @slot('id_error', 'employee')
                                             @endcomponent
+
                                         </div>
-                                   
+
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -169,9 +170,9 @@
 
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
-                                                @slot('id', 'description')
-                                                @slot('name', 'description')
-                                                @slot('text', 'Description')
+                                                @slot('id', 'note')
+                                                @slot('name', 'note')
+                                                @slot('text', 'Note')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -254,7 +255,8 @@
 
     <script src="{{ asset('js/frontend/gse/create.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/returned-by.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/employee.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/employee-uuid.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/defectcard.js') }}"></script>

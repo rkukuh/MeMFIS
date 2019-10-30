@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Frontend\GSE;
 
+use Carbon\Carbon;
 use App\Models\GSE;
+use App\Models\Employee;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\GSEStore;
@@ -49,9 +51,10 @@ class GSEController extends Controller
      */
     public function store(GSEStore $request)
     {
-        dd($request->all());
-        $request->merge(['number' => DocumentNumber::generate('GSE-', ReceivingInspectionReport::withTrashed()->count()+1)]);
-        $GroundSupportEquiptmentStore = ReceivingInspectionReport::create($request->all());
+        $request->merge(['number' => DocumentNumber::generate('GSE-', GSE::withTrashed()->count()+1)]);
+        $request->merge(['returned_at' => Carbon::parse($request->returned_at)]);
+        $request->merge(['returned_by' => Employee::where('uuid',$request->returned_by)->first()->user->id]);
+        $GroundSupportEquiptmentStore = GSE::create($request->all());
 
         return response()->json($GroundSupportEquiptmentStore);
     }
