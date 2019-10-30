@@ -236,12 +236,6 @@ let AdditionalTaskCreate = (function() {
                     filterable: !1,
                 },
                 {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
                     field: 'pivot.quantity',
                     title: 'Qty',
                     sortable: 'asc',
