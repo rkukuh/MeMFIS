@@ -90,6 +90,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\EmployeeLicense::class => Policies\EmployeeLicensePolicy::class,
         Models\PurchaseRequest::class => Policies\PurchaseRequestPolicy::class,
         Models\OTRCertification::class => Policies\OTRCertificationPolicy::class,
+        Models\RIRDocumentCheck::class => Policies\RIRDocumentCheckPolicy::class,
         Models\QuotationHtcrrItem::class => Policies\QuotationHtcrrItemPolicy::class,
         Models\CertificationEmployee::class => Policies\CertificationEmployeePolicy::class,
         Models\Pivots\ProjectWorkPackage::class => Polifcies\ProjectWorkPackagePolicy::class,

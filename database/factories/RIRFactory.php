@@ -41,6 +41,19 @@ $factory->define(RIR::class, function (Faker $faker) {
         'unsatisfactory_packing' => null,
         'preservation_check' => Type::ofRIRPreservationCheck()->get()->random()->id,
         'unsatisfactory_preservation' => null,
+        'received_by' => function () {
+            if (Employee::count()) {
+                return Employee::get()->random()->id;
+            }
+
+            return factory(Employee::class)->create()->id;
+        },
+        'material_condition' => Type::ofRIRMaterialCheckCondition()->get()->random()->id,
+        'material_identification' => Type::ofRIRMaterialCheckIdentification()->get()->random()->id,
+        'material_quality' => Type::ofRIRMaterialCheckQuality()->get()->random()->id,
+        'unsatisfactory_material' => null,
+        'unsatisfactory_document' => null,
+        'received_at' => $faker->randomElement([null, Carbon::now()]),
         'decision' => $faker->randomElement([null, $faker->sentence]),
         'description' => $faker->randomElement([null, $faker->sentence]),
     ];
