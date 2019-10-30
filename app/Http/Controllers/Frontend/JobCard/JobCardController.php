@@ -159,14 +159,13 @@ class JobCardController extends Controller
      */
     public function print($jobCard)
     {
-        $srm = [];
-        $srm["scheduled_priority"]   = Type::where('id', json_decode($jobCard->origin_jobcardable)->eo_header->scheduled_priority_id)->first();
-        $srm["recurrence"]           = Type::where('id', json_decode($jobCard->origin_jobcardable)->eo_header->recurrence_id)->first();
-        $srm["manual_affected"]      = Type::where('id', json_decode($jobCard->origin_jobcardable)->eo_header->manual_affected_id)->first();
-
         $now = Carbon::now();
         $statuses = Status::ofJobCard()->get();
         $jobcard = JobCard::with('jobcardable','quotation')->where('uuid',$jobCard)->first();
+        $srm = [];
+        $srm["scheduled_priority"]   = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->scheduled_priority_id)->first();
+        $srm["recurrence"]           = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->recurrence_id)->first();
+        $srm["manual_affected"]      = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->manual_affected_id)->first();
         $taskcard = json_decode($jobcard->origin_jobcardable);
         foreach($jobcard->helpers as $helper){
             $helper->userID .= $helper->user->id;

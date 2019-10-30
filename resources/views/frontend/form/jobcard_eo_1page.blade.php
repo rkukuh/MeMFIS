@@ -283,7 +283,7 @@
                               @if($eo_additionals->scheduled_priority_text !== "null") {{ $eo_additionals->scheduled_priority_text }} {{ $eo_additionals->scheduled_priority_type }}  @else {{ $srm["scheduled_priority"]->name }} @endif
                             </td>
                             <td valign="top" width="20%">
-                              @if($eo_additionals->recurrence_amount !== null){{ $eo_additionals->recurrence_text }} {{ $eo_additionals->recurrence_type }}  @else {{ $srm["recurrence"]->name }} @endif
+                              @if($eo_additionals->recurrence_text !== null){{ $eo_additionals->recurrence_text }} {{ $eo_additionals->recurrence_type }}  @else {{ $srm["recurrence"]->name }} @endif
                             </td>
                             <td valign="top" width="20%">
                               {{ $eo_additionals->manual_affected }}
