@@ -121,9 +121,9 @@
         <div class="container">
           <table width="100%">
             <tr>
-                <td valign="top" width="36%">Prepared By : <span>name:timestamp</span></td>
-                <td valign="top" width="35%">Print By : <span>name:timestamp</span></td>
-                <td valign="top" width="29%"><b>Form No. F02-0247</b></td>
+                <td valign="top" width="36%">Prepared By : <span>{{ $prepared_by }}:{{ $prepared_at }}</span></td>
+                <td valign="top" width="35%">Print By : <span>{{ Auth::user()->name }}:{{ $now }}</span></td>
+                <td valign="top" width="29%" align="right"><b>Form No. F02-0247</b></td>
             </tr>
           </table>
         </div>
