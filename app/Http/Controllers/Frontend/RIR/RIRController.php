@@ -61,8 +61,14 @@ class RIRController extends Controller
      */
     public function show(RIR $rir)
     {
+        $packing_type = Type::find($rir->packing_type)->code;
+        $packing_condition = Type::find($rir->packing_condition)->code;
+        $preservation_check = Type::find($rir->preservation_check)->code;
         return view('frontend.rir.show', [
-            'receivingInspectionReport' => $rir
+            'receivingInspectionReport' => $rir,
+            'packing_type' => $packing_type,
+            'packing_condition' => $packing_condition,
+            'preservation_check' => $preservation_check
         ]);
     }
 
@@ -74,11 +80,17 @@ class RIRController extends Controller
      */
     public function edit(RIR $rir)
     {
+        $packing_type = Type::find($rir->packing_type)->code;
+        $packing_condition = Type::find($rir->packing_condition)->code;
+        $preservation_check = Type::find($rir->preservation_check)->code;
         return view('frontend.rir.edit', [
             'receivingInspectionReport' => $rir,
             'rir_status' => Status::find($rir->status_id)->code,
             'vendors' => Vendor::all(),
-            'vendor_uuid' => Vendor::find($rir->vendor_id)->uuid
+            'vendor_uuid' => Vendor::find($rir->vendor_id)->uuid,
+            'packing_type' => $packing_type,
+            'packing_condition' => $packing_condition,
+            'preservation_check' => $preservation_check
         ]);
     }
 

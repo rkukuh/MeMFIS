@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\InventoryOut;
+namespace App\Http\Controllers\Frontend\InventoryOut\ToolRequest;
 
 use Auth;
 use App\Models\Employee;
@@ -13,7 +13,7 @@ use App\Http\Requests\Frontend\InventoryOutStore;
 use App\Http\Requests\Frontend\InventoryOutUpdate;
 use App\Helpers\DocumentNumber;
 
-class ToolInventoryOutController extends Controller
+class ToolRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class ToolInventoryOutController extends Controller
      */
     public function index()
     {
-        return view('frontend.inventory-out.tool.index');
+        return view('frontend.tool-request-jobcard.index');
     }
 
     /**
@@ -32,7 +32,7 @@ class ToolInventoryOutController extends Controller
      */
     public function create()
     {
-        return view('frontend.inventory-out.tool.create');
+        return view('frontend.tool-request-jobcard.create');
     }
 
     /**
@@ -60,7 +60,7 @@ class ToolInventoryOutController extends Controller
      */
     public function show(InventoryOut $inventoryOut)
     {
-        return view('frontend.inventory-out.tool.show', [
+        return view('frontend.tool-request-jobcard.show', [
             'inventoryOut' => $inventoryOut
         ]);
     }
@@ -76,7 +76,7 @@ class ToolInventoryOutController extends Controller
         $storages = Storage::get();
         $employees = Employee::get();
 
-        return view('frontend.inventory-out.tool.edit', [
+        return view('frontend.tool-request-jobcard.edit', [
             'storages' => $storages,
             'employees' => $employees,
             'inventoryOut' => $inventoryOut,
@@ -142,18 +142,18 @@ class ToolInventoryOutController extends Controller
         $item = Item::find($item->id);
 
         if (!is_null($request->serial_no)) {
-                $inventoryOut->items()->attach([
-                    $item->id => [
-                        'quantity' => 1,
-                        'unit_id' => $item->unit_id,
-                        'quantity_in_primary_unit' => 1,
-                        'expired_at' => $request->exp_date,
-                        'serial_number' => $request->serial_no,
-                        'purchased_price' => 0, // ??
-                        'total' => 0, // ??
-                        'description' => $request->remark
-                    ]
-                ]);
+            $inventoryOut->items()->attach([
+                $item->id => [
+                    'quantity' => 1,
+                    'unit_id' => $item->unit_id,
+                    'quantity_in_primary_unit' => 1,
+                    'expired_at' => $request->exp_date,
+                    'serial_number' => $request->serial_no,
+                    'purchased_price' => 0, // ??
+                    'total' => 0, // ??
+                    'description' => $request->remark
+                ]
+            ]);
 
             return response()->json($inventoryOut);
         }

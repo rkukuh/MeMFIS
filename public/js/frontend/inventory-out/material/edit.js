@@ -206,7 +206,7 @@ let InventoryOutCreate = {
                     });
                 }
             });
-            $("#item").attr('disabled', true);
+            $("#material").attr('disabled', true);
 
             $.ajax({
                 url: '/get-item-unit-uuid/' + $(this).data('item'),
@@ -371,4 +371,40 @@ let InventoryOutCreate = {
 
 jQuery(document).ready(function () {
     InventoryOutCreate.init();
+});
+
+$("#material").change(function() {
+
+    let item_uuid = $("#material").val();
+
+    $.ajax({
+        url: '/get-serial-number/' + item_uuid,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $('select[name="serial_no"]').empty();
+
+            $('select[name="serial_no"]').append(
+                '<option value=""> Select a Serial Number</option>'
+            );
+
+            $.each(data, function (key, value) {
+                $('select[name="serial_no"]').append(
+                    '<option value="' + value + '">' + value + '</option>'
+                );
+            });
+        }
+    });
+});
+
+$("#serial_no").change(function() {
+    console.log($(this).val());
+    if ($("#serial_no").val() !== '') {
+        $("input[name=qty_request]").val(1);
+        $("input[name=qty_request]").prop('disabled', true);
+        $('#unit_id').prop('disabled', true);
+    } else {
+        $("input[name=qty_request]").prop('disabled', false);
+        $('#unit_id').prop('disabled', false);
+    }
 });
