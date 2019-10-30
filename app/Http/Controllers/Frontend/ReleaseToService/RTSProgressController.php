@@ -131,7 +131,7 @@ class RTSProgressController extends Controller
 
             return view('frontend.rts.create', [
                 'rts' => $rts,
-                'projec' => $project,
+                'project' => $project,
                 'projects' => $projects,
                 'taskcard_number' =>$taskcard_number,
                 'defectcard_number' =>$defectcard_number
@@ -147,45 +147,34 @@ class RTSProgressController extends Controller
      */
     public function store(RTSStore $request)
     {
-        $request->merge(['work_performed' => $request->work_performed.'.'.$request->work_performed_addtional ]);
+        $quotations = Quotation::where('quotationable_id',$request->project_id)->get();
 
-        // $quotations = Quotation::where('quotationable_id',$request->project_id)->get();
+        $taskcard_number = "";
+        foreach($quotations as $quotation){
+            $jobcards = JobCard::where('quotation_id',$quotation->id)->get();
+            foreach($jobcards as $jobcard){
+                if(sizeof($jobcard->progresses) <> 0){
+                    if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released"){
+                        if($jobcard->jobcardable_type == "App\Models\TaskCard"){
+                            $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
+                        }else if($jobcard->jobcardable_type == "App\Models\EOInstruction"){
+                            $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->eo_header->number;
+                        }
+                    }
+                }
+            }
+        }
 
-        // $taskcard_number = "";
-        // foreach($quotations as $quotation){
-        //     $jobcards = JobCard::where('quotation_id',$quotation->id)->get();
-        //     foreach($jobcards as $jobcard){
-        //         if(sizeof($jobcard->progresses) <> 0){
-        //             if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released"){
-        //                 if($jobcard->jobcardable_type == "App\Models\TaskCard"){
-        //                     $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
-        //                 }else if($jobcard->jobcardable_type == "App\Models\EOInstruction"){
-        //                     $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->eo_header->number;
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
+        $taskcard_number = substr($taskcard_number, 2);
 
-        // $taskcard_number = substr($taskcard_number, 2);
+        $request->merge([
+                        'exception' => $taskcard_number,
+                        'work_performed' => $request->work_performed.'.'.$request->work_performed_addtional 
+                    ]);
 
-        // $request->merge(['exception' => $taskcard_number ]);
+                    
         $rts = RTS::create($request->all());
-
-        // if($request->approval <> null){
-        //     $rts->approvals()->save(new Approval([
-        //         'approvable_id' => $rts->id,
-        //         'conducted_by' => Auth::id(),
-        //         'is_approved' => 1
-        //     ]));
-        // }
-
-        $project = Project::find($request->project_id);
-        $project->progresses()->save(new Progress([
-            'status_id' =>  Status::where('code','rts')->first()->id,
-            'progressed_by' => Auth::id()
-        ]));
-
+                    
         return response()->json($rts);
     }
 
