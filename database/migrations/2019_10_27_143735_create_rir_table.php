@@ -32,7 +32,7 @@ class CreateRirTable extends Migration
             $table->unsignedBigInteger('material_quality')->nullable();
             $table->text('unsatisfactory_material')->nullable();
             $table->text('unsatisfactory_document')->nullable();
-            $table->unsignedBigInteger('received_by');
+            $table->unsignedBigInteger('received_by')->nullable();
             $table->timestamp('received_at')->nullable();
             $table->text('decision')->nullable();
             $table->text('description')->nullable();
