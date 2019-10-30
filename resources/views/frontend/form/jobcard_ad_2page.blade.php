@@ -149,7 +149,7 @@
             <tr>
                 <td valign="top" width="36%">Prepared By : <span>{{ $prepared_by }}:{{ $prepared_at }}</span></td>
                 <td valign="top" width="35%">Print By : <span>{{ Auth::user()->name }}:{{ $now }}</span></td>
-                <td valign="top" width="29%" align="right"><b>Form No. F02-0247</b></td>
+                <td valign="top" width="29%"><b>Form No. F02-0247</b></td>
             </tr>
           </table>
         </div>
@@ -301,10 +301,10 @@
                               {{ $jobcard->jobcardable->eo_header->category->name }}
                             </td>
                             <td valign="top" width="20%">
-                              {{ $eo_additionals->scheduled_priority_text }} {{ $eo_additionals->scheduled_priority_type }}
+                              @if($eo_additionals->scheduled_priority_text !== "null") {{ $eo_additionals->scheduled_priority_text }} {{ $eo_additionals->scheduled_priority_type }}  @else {{ $srm["scheduled_priority"]->name }} @endif
                             </td>
                             <td valign="top" width="20%">
-                              {{ $eo_additionals->recurrence_text }} {{ $eo_additionals->recurrence_type }}
+                              @if($eo_additionals->recurrence_amount !== null){{ $eo_additionals->recurrence_text }} {{ $eo_additionals->recurrence_type }}  @else {{ $srm["recurrence"]->name }} @endif 
                             </td>
                             <td valign="top" width="20%">
                               {{ $eo_additionals->manual_affected }}
