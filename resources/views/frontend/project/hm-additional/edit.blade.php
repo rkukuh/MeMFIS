@@ -145,12 +145,12 @@
                                                     <td align="center" width="14%"><b>A/C SN</b></td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="center" valign="top">{{$project->created_at}}</td>
-                                                    <td align="center" valign="top">{{$project->code}}</td>
-                                                    <td align="center" valign="top">{{$project->title}}</td>
-                                                    <td align="center" valign="top">{{$project->aircraft->name}}</td>
-                                                    <td align="center" valign="top">{{$project->aircraft_register}}</td>
-                                                    <td align="center" valign="top">{{$project->aircraft_sn}}</td>
+                                                    <td align="center" valign="top">{{$project->parent->created_at}}</td>
+                                                    <td align="center" valign="top">{{$project->parent->code}}</td>
+                                                    <td align="center" valign="top">{{$project->parent->title}}</td>
+                                                    <td align="center" valign="top">{{$project->parent->aircraft->name}}</td>
+                                                    <td align="center" valign="top">{{$project->parent->aircraft_register}}</td>
+                                                    <td align="center" valign="top">{{$project->parent->aircraft_sn}}</td>
                                                 </tr>
                                             </table>
                                         </div>
