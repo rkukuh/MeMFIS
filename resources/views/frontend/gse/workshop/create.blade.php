@@ -68,17 +68,12 @@
                                                 Ref Document No. @include('frontend.common.label.required')
                                             </label>
                                             @component('frontend.common.input.select2')
-                                            @slot('text', 'Workshop')
-                                            @slot('id', 'item_number_id')
-                                            @slot('name', 'item_number_id')
-                                            @slot('id_error', 'item_number_id')
+                                                @slot('text', 'Workshop')
+                                                @slot('id', 'item_number_id')
+                                                @slot('name', 'item_number_id')
+                                                @slot('id_error', 'item_number_id')
                                             @endcomponent
-                                            {{-- @include('frontend.common.warehouse.index')
-
-                                            @component('frontend.common.input.hidden')
-                                                @slot('id', 'warehouse')
-                                                @slot('name', 'warehouse')
-                                            @endcomponent --}}
+                                            
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">

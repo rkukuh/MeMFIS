@@ -74,19 +74,13 @@
                                             @slot('id_error', 'item_code_id')
                                             @endcomponent
 
-                                            {{-- @include('frontend.common.warehouse.index')
-
-                                            @component('frontend.common.input.hidden')
-                                                @slot('id', 'warehouse')
-                                                @slot('name', 'warehouse')
-                                            @endcomponent --}}
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
 
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                               Additional Project No.
+                                                Additional Project No.
                                             </label>
 
                                             @component('frontend.common.label.data-info')
