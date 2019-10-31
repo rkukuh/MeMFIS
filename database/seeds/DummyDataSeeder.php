@@ -160,5 +160,9 @@ class DummyDataSeeder extends Seeder
 
         $this->call(FefoIns::class);
         $this->call(FefoOuts::class);
+
+        /** RIR's Document Check */
+
+        $this->call(RIRDocumentChecks::class);
     }
 }
