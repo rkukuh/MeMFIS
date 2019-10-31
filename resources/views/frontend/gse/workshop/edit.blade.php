@@ -259,7 +259,7 @@
     <script>
         let gse_uuid = '{{$groundSupportEquiptment->uuid}}';
     </script>
-    <script src="{{ asset('js/frontend/gse/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/gse/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/employee.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
