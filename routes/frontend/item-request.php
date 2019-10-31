@@ -17,20 +17,28 @@ Route::name('frontend.')->group(function () {
                 
                 /** Material Request */
 
-                Route::resource('material-request-jobcard', 'MaterialRequestController');
+                Route::resource('material-request-jobcard', 'MaterialRequestController', [
+                    'parameters' => ['material' => 'itemRequest']
+                ]);
 
                 Route::prefix('material-request-jobcard')->group(function () {
 
-                    Route::post('/{itemRequest}/item/{item}', 'MaterialRequestController@addItem')->name('items.store');
-                    Route::put('/{itemRequest}/item/{item}', 'MaterialRequestController@updateItem')->name('items.update');
-                    Route::delete('/{itemRequest}/item/{item}', 'MaterialRequestController@deleteItem')->name('items.destroy');
-                    Route::put('/{itemRequest}/item/{item}', 'MaterialRequestController@approve')->name('approve');
+                    Route::name('material-request-jobcard.')->group(function() {
+
+                        Route::post('/{itemRequest}/item/{item}', 'MaterialRequestController@addItem')->name('items.store');
+                        Route::put('/{itemRequest}/item/{item}', 'MaterialRequestController@updateItem')->name('items.update');
+                        Route::delete('/{itemRequest}/item/{item}', 'MaterialRequestController@deleteItem')->name('items.destroy');
+                        Route::put('/{itemRequest}/item/{item}', 'MaterialRequestController@approve')->name('approve');
+
+                    });
 
                 });
 
                 /** Tool Request */
 
-                Route::resource('tool-request-jobcard', 'ToolRequestController');
+                Route::resource('tool-request-jobcard', 'ToolRequestController', [
+                    'parameters' => ['tool' => 'itemRequest']
+                ]);
 
                 Route::prefix('tool-request-jobcard')->group(function () {
 
