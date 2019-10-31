@@ -68,10 +68,10 @@
                                                 Ref Document No. @include('frontend.common.label.required')
                                             </label>
                                             @component('frontend.common.input.select2')
-                                            @slot('text', 'Job Card')
-                                                @slot('id', 'jc_no')
-                                                @slot('name', 'jc_no')
-                                                @slot('id_error', 'jc_no')
+                                                @slot('text', 'Job Card')
+                                                @slot('id', 'tool_request')
+                                                @slot('name', 'tool_request')
+                                                @slot('id_error', 'tool_request')
                                             @endcomponent
 
                                         </div>
@@ -252,7 +252,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/employee-uuid.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/jobcard-number.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/jobcard-number.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tool-request.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool-request-jobcard.js') }}"></script>
 
 @endpush

@@ -69,11 +69,11 @@
                                             </label>
                                             @component('frontend.common.input.select2')
                                                 @slot('text', 'Workshop')
-                                                @slot('id', 'item_number_id')
-                                                @slot('name', 'item_number_id')
-                                                @slot('id_error', 'item_number_id')
+                                                @slot('id', 'tool_request')
+                                                @slot('name', 'tool_request')
+                                                @slot('id_error', 'tool_request')
                                             @endcomponent
-                                            
+
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -251,6 +251,7 @@
     <script src="{{ asset('js/frontend/functions/select2/employee.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/employee-uuid.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/workshop.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tool-request.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool-request-defectcard.js') }}"></script>
 @endpush
