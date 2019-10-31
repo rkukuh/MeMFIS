@@ -57,7 +57,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $groundSupportEquiptment->returned_at)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -68,50 +68,17 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $groundSupportEquiptment->request->number)
                                             @endcomponent
                                         </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Project No.
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Storage
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $groundSupportEquiptment->storage->name)
                                             @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        A/C Type
-                                                    </label>
-
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('text', 'Generated')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        A/C Reg
-                                                    </label>
-
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('text', 'Generated')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -121,7 +88,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text',  $groundSupportEquiptment->returnBy->first_name." ".$groundSupportEquiptment->returnBy->last_name)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -130,7 +97,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text',  $groundSupportEquiptment->section)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -141,7 +108,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text',  $groundSupportEquiptment->note)
                                             @endcomponent
                                         </div>
                                     </div>
