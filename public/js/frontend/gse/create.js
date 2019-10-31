@@ -112,6 +112,47 @@ let GseToolReturnedCreate = {
             ]
         });
 
+        $('select[name="tool_request"]').on("change", function() {
+            let uuid = $("#tool_request").val();
+            let type = $("#type").val();
+            if(type == "hm"){
+                $.ajax({
+                    url: '/get-tool-request-hm/'+uuid,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#project_number').html(data);
+                        $('#ac_type').html(data);
+                        $('#ac_reg').html(data);
+                    }
+                });
+            }else if(type == "defectcard"){
+                $.ajax({
+                    url: '/get-tool-request-defectcard/'+uuid,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#project_number').html(data);
+                        $('#ac_type').html(data);
+                        $('#ac_reg').html(data);
+                    }
+                });
+            }else if(type == "workshop"){
+                $.ajax({
+                    url: '/get-tool-request-workshop/'+uuid,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#workshop_number').html(data);
+                        $('#pn').html(data);
+                        $('#desc').html(data);
+                    }
+                });
+            }else if(type == "inv_out"){
+                //DO NOTHING
+            }
+        });
+
         let remove = $('.m_datatable').on('click', '.delete', function () {
             let triggerid = $(this).data('id');
 
