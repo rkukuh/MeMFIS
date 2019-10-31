@@ -59,6 +59,7 @@
                                             @component('frontend.common.input.datepicker')
                                                 @slot('id', 'date')
                                                 @slot('text', 'Date')
+                                                @slot('value', $groundSupportEquiptment->returned_at)
                                                 @slot('name', 'date')
                                                 @slot('id_error','date')
                                             @endcomponent
@@ -70,12 +71,11 @@
                                                 Ref Document No. @include('frontend.common.label.required')
                                             </label>
 
-                                            @include('frontend.common.warehouse.index')
-
-                                            @component('frontend.common.input.hidden')
-                                                @slot('id', 'warehouse')
-                                                @slot('name', 'warehouse')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('id', 'project_number')
+                                                @slot('text', $groundSupportEquiptment->request->number)
                                             @endcomponent
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -84,7 +84,7 @@
 
                                             @component('frontend.common.label.data-info')
                                                 @slot('id', 'project_number')
-                                                @slot('text', 'generate')
+                                                @slot('text', $groundSupportEquiptment->request->requestable->project_additional->code)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -110,7 +110,7 @@
 
                                                     @component('frontend.common.label.data-info')
                                                         @slot('id', 'actype')
-                                                        @slot('text', 'Generate')
+                                                        @slot('text', $groundSupportEquiptment->request->requestable->project_additional->aircraft->name)
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -120,7 +120,7 @@
 
                                                     @component('frontend.common.label.data-info')
                                                         @slot('id', 'acreg')
-                                                        @slot('text', 'Generate')
+                                                        @slot('text', $groundSupportEquiptment->request->requestable->project_additional->aircraft_register)
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -148,6 +148,7 @@
                                                 @slot('text', 'Section Code')
                                                 @slot('id', 'section')
                                                 @slot('name', 'section')
+                                                @slot('value', $groundSupportEquiptment->section)
                                                 @slot('id_error', 'section')
                                             @endcomponent
                                         </div>
@@ -161,6 +162,7 @@
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
                                                 @slot('id', 'description')
+                                                @slot('value', $groundSupportEquiptment->note)
                                                 @slot('name', 'description')
                                                 @slot('text', 'Description')
                                             @endcomponent

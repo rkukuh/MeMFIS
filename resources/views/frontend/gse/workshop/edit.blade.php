@@ -60,6 +60,7 @@
                                                 @slot('id', 'date')
                                                 @slot('text', 'Date')
                                                 @slot('name', 'date')
+                                                @slot('value',  $groundSupportEquiptment->returned_at)
                                                 @slot('id_error','date')
                                             @endcomponent
                                         </div>
@@ -70,11 +71,8 @@
                                                 Ref Document No. @include('frontend.common.label.required')
                                             </label>
 
-                                            @include('frontend.common.warehouse.index')
-
-                                            @component('frontend.common.input.hidden')
-                                                @slot('id', 'warehouse')
-                                                @slot('name', 'warehouse')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $groundSupportEquiptment->request->number)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -84,7 +82,7 @@
 
                                             @component('frontend.common.label.data-info')
                                                 @slot('id', 'project_number')
-                                                @slot('text', 'generate')
+                                                @slot('text', '-')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -110,7 +108,7 @@
 
                                                     @component('frontend.common.label.data-info')
                                                         @slot('id', 'actype')
-                                                        @slot('text', 'Generate')
+                                                        @slot('text', '-')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -120,7 +118,7 @@
 
                                                     @component('frontend.common.label.data-info')
                                                         @slot('id', 'acreg')
-                                                        @slot('text', 'Generate')
+                                                        @slot('text', '-')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -148,6 +146,7 @@
                                                 @slot('text', 'Section Code')
                                                 @slot('id', 'section')
                                                 @slot('name', 'section')
+                                                @slot('value', $groundSupportEquiptment->section)
                                                 @slot('id_error', 'section')
                                             @endcomponent
                                         </div>
@@ -162,6 +161,7 @@
                                                 @slot('rows', '5')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
+                                                @slot('value', $groundSupportEquiptment->note))
                                                 @slot('text', 'Description')
                                             @endcomponent
                                         </div>

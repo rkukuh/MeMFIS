@@ -60,6 +60,7 @@
                                                 @slot('id', 'date')
                                                 @slot('text', 'Date')
                                                 @slot('name', 'date')
+                                                @slot('value',  $groundSupportEquiptment->returned_at)
                                                 @slot('id_error','date')
                                             @endcomponent
                                         </div>
@@ -70,25 +71,10 @@
                                                 Ref Document No. @include('frontend.common.label.required')
                                             </label>
 
-                                            @include('frontend.common.warehouse.index')
-
-                                            @component('frontend.common.input.hidden')
-                                                @slot('id', 'warehouse')
-                                                @slot('name', 'warehouse')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Project No.
-                                            </label>
-
                                             @component('frontend.common.label.data-info')
-                                                @slot('id', 'project_number')
-                                                @slot('text', 'generate')
+                                                @slot('text', $groundSupportEquiptment->request->number)
                                             @endcomponent
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Storage @include('frontend.common.label.required')
@@ -100,30 +86,6 @@
                                                 @slot('name', 'item_storage_id')
                                                 @slot('id_error', 'item_storage_id')
                                             @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        A/C Type
-                                                    </label>
-
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('id', 'actype')
-                                                        @slot('text', 'Generate')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        A/C Reg
-                                                    </label>
-
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('id', 'acreg')
-                                                        @slot('text', 'Generate')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -148,6 +110,7 @@
                                                 @slot('text', 'Section Code')
                                                 @slot('id', 'section')
                                                 @slot('name', 'section')
+                                                @slot('value', '$groundSupportEquiptment->section')
                                                 @slot('id_error', 'section')
                                             @endcomponent
                                         </div>
@@ -162,6 +125,7 @@
                                                 @slot('rows', '5')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
+                                                @slot('value', $groundSupportEquiptment->note)
                                                 @slot('text', 'Description')
                                             @endcomponent
                                         </div>
