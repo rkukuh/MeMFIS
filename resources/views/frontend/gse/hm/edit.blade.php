@@ -105,7 +105,7 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
@@ -257,7 +257,9 @@
 
 
 @push('footer-scripts')
-
+    <script>
+        let gse_uuid = '{{$groundSupportEquiptment->uuid}}';
+    </script>
     <script src="{{ asset('js/frontend/gse/create.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/employee.js') }}"></script>
