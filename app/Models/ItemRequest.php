@@ -7,7 +7,7 @@ use App\MemfisModel;
 class ItemRequest extends MemfisModel
 {
     protected $table = 'requests';
-    
+
     protected $fillable = [
         'number',
         'requestable_type',
@@ -34,6 +34,19 @@ class ItemRequest extends MemfisModel
     public function branches()
     {
         return $this->morphToMany(Branch::class, 'branchable');
+    }
+
+    /**
+     * One-to-Many: A gse may have one request.
+     *
+     * This function will retrieve all the gses of a request.
+     * See: GSE's request() method for the inverse
+     *
+     * @return mixed
+     */
+    public function gses()
+    {
+        return $this->hasMany(GSE::class);
     }
 
     /**

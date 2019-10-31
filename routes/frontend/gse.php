@@ -13,11 +13,9 @@ Route::name('frontend.')->group(function () {
 
         Route::namespace('GSE')->group(function () {
 
-            Route::resource('gse', 'GSEController')->except('create','show','edit');
+            Route::resource('gse', 'GSEController')->except('create');
 
-            Route::get('gse/{type}', 'GSEController@create')->name('gse.create');
-            Route::get('gse/{gse}/{type}', 'GSEController@show')->name('gse.show');
-            Route::get('gse/{gse}/edit/{type}', 'GSEController@edit')->name('gse.edit');
+            Route::get('gse/create/{type}', 'GSEController@create')->name('gse.create');
 
             Route::name('gse.')->group(function () {
                 Route::prefix('gse')->group(function () {
