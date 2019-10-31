@@ -90,6 +90,9 @@ Route::name('component.')->group(function () {
 
         Route::prefix('label')->group(function () {
             Route::get('get-vendors/{vendor}', 'FillLabelController@vendor')->name('get-vendor');
+            Route::get('get-tool-request-hm/{ItemRequest}', 'FillLabelController@toolRequestHM')->name('get-toolRequestHM');
+            Route::get('get-tool-request-defectcard/{ItemRequest}', 'FillLabelController@toolRequestDefectCard')->name('get-tool-request-defectCard');
+            Route::get('get-tool-request-workshop/{ItemRequest}', 'FillLabelController@toolRequestWorkshop')->name('get-tool-request-workshop');
             Route::get('get-project/{project}', 'FillLabelController@project')->name('get-project');
             Route::get('get-customer/{customer}', 'FillLabelController@customer')->name('get-customer');
             Route::get('get-good-received/{GoodsReceived}/item/{item}', 'FillLabelController@GoodsReceived')->name('get-qty-grn-item');
