@@ -10,8 +10,7 @@ class GSE extends MemfisModel
 
     protected $fillable = [
         'number',
-        'gseable_type',
-        'gseable_id',
+        'request_id',
         'storage_id',
         'returned_at',
         'returned_by',
@@ -49,6 +48,19 @@ class GSE extends MemfisModel
     public function receivedBy()
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    /**
+     * One-to-Many: A GSE may have one request.
+     *
+     * This function will retrieve the request of a GSE.
+     * See: GSE's gses() method for the inverse
+     *
+     * @return mixed
+     */
+    public function request()
+    {
+        return $this->belongsTo(ItemRequest::class);
     }
 
     /**

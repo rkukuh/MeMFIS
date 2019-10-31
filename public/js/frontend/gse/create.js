@@ -112,64 +112,50 @@ let GseToolReturnedCreate = {
             ]
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
-
-            swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/category/' + triggerid + '',
-                        success: function (data) {
-                            toastr.success(
-                                'Data Berhasil Dihapus.',
-                                'Sukses!', {
-                                    timeOut: 5000
-                                }
-                            );
-
-                            let table = $('.m_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
-                }
-            });
+        $('select[name="tool_request"]').on("change", function() {
+            let uuid = $("#tool_request").val();
+            let type = $("#type").val();
+            if(type == "hm"){
+                $.ajax({
+                    url: '/label/get-tool-request-hm/'+uuid,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        $('#project_number').html(data.project_no);
+                        $('#ac_type').html(data.ac_type);
+                        $('#ac_reg').html(data.ac_reg);
+                    }
+                });
+            }else if(type == "defectcard"){
+                $.ajax({
+                    url: '/label/get-tool-request-defectcard/'+uuid,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#project_number').html(data.project_no);
+                        $('#ac_type').html(data.ac_type);
+                        $('#ac_reg').html(data.ac_reg);
+                    }
+                });
+            }else if(type == "workshop"){
+                $.ajax({
+                    url: '/label/get-tool-request-workshop/'+uuid,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#workshop_number').html(data.workshop_no);
+                        $('#pn').html(data.number);
+                        $('#desc').html(data.description);
+                    }
+                });
+            }else if(type == "inv_out"){
+                //DO NOTHING
+            }
         });
 
         $('.footer').on('click', '.add-gse', function () {
+            let request_id = $('#tool_request').val();
             let returned_at = $('input[name=date]').val();
             let storage = $('#item_storage_id').val();
             let section = $('input[name=section]').val();
@@ -182,6 +168,7 @@ let GseToolReturnedCreate = {
                 url: '/gse',
                 type: 'POST',
                 data: {
+                    request_id:request_id,
                     returned_at:returned_at,
                     section:section,
                     storage_id:storage,
@@ -207,7 +194,7 @@ let GseToolReturnedCreate = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/gse/'+response.uuid+'/edit';
+                        window.location.href = '/gse/'+response.uuid+'/edit';
                     }
                 }
             });
