@@ -971,9 +971,17 @@ Route::name('datatables.')->group(function () {
                 Route::get('/material', 'InventoryOutMaterialDatatables@index')->name('material.all');
                 Route::get('/material/{inventoryOut}/items', 'InventoryOutMaterialDatatables@getItemsByInventoryOut')->name('material.items');
 
+                /** Material Request */
+                // Route::get('/material', 'InventoryOutMaterialDatatables@index')->name('material.all');
+                // Route::get('/material/{inventoryOut}/items', 'InventoryOutMaterialDatatables@getItemsByInventoryOut')->name('material.items');
+
                 /** Tool */
                 Route::get('/tool', 'InventoryOutToolDatatables@index')->name('tools.all');
                 Route::get('/tool/{inventoryOut}/items', 'InventoryOutToolDatatables@getItemsByInventoryOut')->name('tools.items');
+
+                /** Tool Request */
+                // Route::get('/tool', 'InventoryOutToolDatatables@index')->name('tools.all');
+                // Route::get('/tool/{inventoryOut}/items', 'InventoryOutToolDatatables@getItemsByInventoryOut')->name('tools.items');
 
             });
         });
