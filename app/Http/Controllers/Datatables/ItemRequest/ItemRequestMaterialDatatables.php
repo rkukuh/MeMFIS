@@ -19,20 +19,20 @@ class ItemRequestMaterialDatatables extends Controller
      */
     public function index()
     {
-        $inventories = InventoryOut::with('items', 'approvals')->get();
-        foreach ($inventories as $inventory) {
-            if (!empty($inventory->approvals->first())) {
-                $inventory->status .= 'Approved';
+        $items = ItemRequest::with('storage', 'approvals')->get();
+        foreach ($items as $item) {
+            if (!empty($item->approvals->first())) {
+                $item->status .= 'Approved';
 
-                if (isset($inventory->approvals)) {
-                    $conducted_by  = User::find($inventory->approvals->first()->conducted_by);
-                    $inventory->conducted_by .= $conducted_by->name;
+                if (isset($item->approvals)) {
+                    $conducted_by  = User::find($item->approvals->first()->conducted_by);
+                    $item->conducted_by .= $conducted_by->name;
                 } else {
-                    $inventory->conducted_by .= '';
+                    $item->conducted_by .= '';
                 }
             }
         }
-        $data = $alldata = json_decode($inventories);
+        $data = $alldata = json_decode($items);
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
@@ -246,14 +246,14 @@ class ItemRequestMaterialDatatables extends Controller
         }
         $inventories = $inventories->get();
 
-        foreach($inventories as $inventory){
-            if(!empty($inventory->approvals->toArray())){
-                $inventory->status .= 'Approved';
+        foreach($inventories as $item){
+            if(!empty($item->approvals->toArray())){
+                $item->status .= 'Approved';
             }else{
-                $inventory->status .= '';
+                $item->status .= '';
 
             }
-            $inventory->customer = $inventory->inventoryinable->customer;
+            $item->customer = $item->inventoryinable->customer;
         }
         $data = $alldata = json_decode($inventories);
 
@@ -349,9 +349,9 @@ class ItemRequestMaterialDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function facilities(InventoryIn $inventory,WorkPackage $workPackage)
+    public function facilities(InventoryIn $item,WorkPackage $workPackage)
     {
-        $project_workpackage = ProjectWorkPackage::where('project_id',$inventory->inventoryinable->id)
+        $project_workpackage = ProjectWorkPackage::where('project_id',$item->inventoryinable->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
 
