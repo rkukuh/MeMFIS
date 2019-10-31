@@ -6,7 +6,7 @@ let GseToolReturnedEdit = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation',
+                        url: "/datatables/gse/item/" + gse_uuid,
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -55,42 +55,42 @@ let GseToolReturnedEdit = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'code',
                     title: 'Part Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'pivot.serial_number',
                     title: 'Serial Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'name',
                     title: 'Tool Description',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'pivot.quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'unit_name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: '',
+                    field: 'pivot.note',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
@@ -98,14 +98,16 @@ let GseToolReturnedEdit = {
                 },
                 {
                     field: 'Actions',
-                    width: 110,
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
+                            '<button data-toggle="modal" data-target="#modal_tool_request" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-expred='+t.pivot.expired_at+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                            t.uuid +
+                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                         );
                     }
                 }
