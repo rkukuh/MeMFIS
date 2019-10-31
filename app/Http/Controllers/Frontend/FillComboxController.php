@@ -967,9 +967,9 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function toolRequestProject()
+    public function toolRequestJobCard()
     {
-        $toolRequest = Request::where('requestable_type','App\Models\Project')->pluck('name', 'uuid');
+        $toolRequest = Request::where('requestable_type','App\Models\JobCard')->pluck('name', 'uuid');
 
         return json_encode($toolRequest);
     }

@@ -75,7 +75,7 @@ Route::name('component.')->group(function () {
         Route::get('get-project-additionals', 'FillComboxController@projectAdditional')->name('get-project-additional');
         Route::get('get-categories-material', 'FillComboxController@categoriesMaterial')->name('get-categoriesMaterial');
         Route::get('get-scheduled-priorities', 'FillComboxController@scheduledPriority')->name('get-scheduled-priorities');
-        Route::get('get-tool-request-project', 'FillComboxController@toolRequestProject')->name('get-tool-request-project');
+        Route::get('get-tool-request-jobcard', 'FillComboxController@toolRequestJobCard')->name('get-tool-request-jobcard');
         Route::get('get-tool-request-workshop', 'FillComboxController@toolRequestWorkshop')->name('get-tool-request-workshop');
         Route::get('get-takcard-routine-types', 'FillComboxController@taskcardTypeRoutine')->name('get-takcard-routine-types');
         Route::get('get-applicability-engines', 'FillComboxController@applicabilityEngine')->name('get-applicability-engines');
