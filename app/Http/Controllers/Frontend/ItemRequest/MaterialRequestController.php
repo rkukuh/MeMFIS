@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\InventoryOut\ToolRequest;
+namespace App\Http\Controllers\Frontend\ItemRequest;
 
 use Auth;
 use App\Models\Employee;
 use App\Models\Storage;
 use App\Models\Approval;
 use App\Models\Item;
-use App\Models\InventoryOut;
+use App\Models\ItemRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\InventoryOutStore;
-use App\Http\Requests\Frontend\InventoryOutUpdate;
+use App\Http\Requests\Frontend\ItemRequestStore;
+use App\Http\Requests\Frontend\ItemRequestUpdate;
 use App\Helpers\DocumentNumber;
 
-class ToolRequestController extends Controller
+class MaterialRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class ToolRequestController extends Controller
      */
     public function index()
     {
-        return view('frontend.tool-request-jobcard.index');
+        return view('frontend.material-request-jobcard.index');
     }
 
     /**
@@ -32,108 +32,108 @@ class ToolRequestController extends Controller
      */
     public function create()
     {
-        return view('frontend.tool-request-jobcard.create');
+        return view('frontend.material-request-jobcard.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\InventoryOutStore  $request
+     * @param  \App\Http\Requests\Frontend\ItemRequestStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InventoryOutStore $request)
+    public function store(ItemRequestStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('IOUT-', InventoryOut::withTrashed()->count() + 1)]);
-        $request->merge(['inventoryoutable_type' => 'App\Models\InventoryOut']);
-        $request->merge(['inventoryoutable_id' => InventoryOut::withTrashed()->count() + 1]);
+        $request->merge(['number' => DocumentNumber::generate('ITEM-REQ', ItemRequest::withTrashed()->count() + 1)]);
+        $request->merge(['requestable_type' => 'App\Models\ItemRequest']);
+        $request->merge(['requestable_id' => ItemRequest::withTrashed()->count() + 1]);
 
-        $inventoryOut = InventoryOut::create($request->all());
+        $itemRequest = ItemRequest::create($request->all());
 
-        return response()->json($inventoryOut);
+        return response()->json($itemRequest);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\InventoryOut  $inventoryOut
+     * @param  \App\Models\InventoryOut  $itemRequest
      * @return \Illuminate\Http\Response
      */
-    public function show(InventoryOut $inventoryOut)
+    public function show(ItemRequest $itemRequest)
     {
-        return view('frontend.tool-request-jobcard.show', [
-            'inventoryOut' => $inventoryOut
+        return view('frontend.material-request-jobcard.show', [
+            'itemRequest' => $itemRequest
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\InventoryOut  $inventoryOut
+     * @param  \App\Models\ItemRequest  $itemRequest
      * @return \Illuminate\Http\Response
      */
-    public function edit(InventoryOut $inventoryOut)
+    public function edit(ItemRequest $itemRequest)
     {
         $storages = Storage::get();
         $employees = Employee::get();
 
-        return view('frontend.tool-request-jobcard.edit', [
+        return view('frontend.material-request-jobcard.edit', [
             'storages' => $storages,
             'employees' => $employees,
-            'inventoryOut' => $inventoryOut,
+            'itemRequest' => $itemRequest,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\InventoryOutUpdate  $request
-     * @param  \App\Models\InventoryOut  $inventoryOut
+     * @param  \App\Http\Requests\Frontend\ItemRequestUpdate  $request
+     * @param  \App\Models\ItemRequest  $itemRequest
      * @return \Illuminate\Http\Response
      */
-    public function update(InventoryOutUpdate $request, InventoryOut $inventoryOut)
+    public function update(ItemRequestUpdate $request, ItemRequest $itemRequest)
     {
-        $inventoryOut->update($request->all());
+        $itemRequest->update($request->all());
 
-        return response()->json($inventoryOut);
+        return response()->json($itemRequest);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\InventoryOut  $inventoryOut
+     * @param  \App\Models\ItemRequest  $itemRequest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(InventoryOut $inventoryOut)
+    public function destroy(ItemRequest $itemRequest)
     {
-        $inventoryOut->delete();
+        $itemRequest->delete();
     }
 
     /**
      * Approve the specified resource from storage.
      *
-     * @param  \App\Models\InventoryOut  $inventoryOut
+     * @param  \App\Models\ItemRequest  $itemRequest
      * @return \Illuminate\Http\Response
      */
-    public function approve(InventoryOut $inventoryOut)
+    public function approve(ItemRequest $itemRequest)
     {
-        $inventoryOut->approvals()->save(new Approval([
-            'approvable_id' => $inventoryOut->id,
+        $itemRequest->approvals()->save(new Approval([
+            'approvable_id' => $itemRequest->id,
             'conducted_by' => Auth::id(),
             'is_approved' => 1
         ]));
 
-        return response()->json($inventoryOut);
+        return response()->json($itemRequest);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ItemInventoryOutStore  $request
+     * @param  \App\Http\Requests\Frontend\ItemRequestStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function addItem(InventoryOutStore $request, InventoryOut $inventoryOut, Item $item)
+    public function addItem(ItemRequestStore $request, ItemRequest $itemRequest, Item $item)
     {
-        $exists = $inventoryOut->items()->where('item_id', $item->id)->first();
+        $exists = $itemRequest->items()->where('item_id', $item->id)->first();
 
         if ($exists) {
             return response()->json(['title' => "Danger"]);
@@ -142,7 +142,7 @@ class ToolRequestController extends Controller
         $item = Item::find($item->id);
 
         if (!is_null($request->serial_no)) {
-            $inventoryOut->items()->attach([
+            $itemRequest->items()->attach([
                 $item->id => [
                     'quantity' => 1,
                     'unit_id' => $item->unit_id,
@@ -155,7 +155,7 @@ class ToolRequestController extends Controller
                 ]
             ]);
 
-            return response()->json($inventoryOut);
+            return response()->json($itemRequest);
         }
 
         $quantity_unit = $request->quantity;
@@ -171,7 +171,7 @@ class ToolRequestController extends Controller
             $quantity_unit = $qty_uom * $quantity;
         }
 
-        $inventoryOut->items()->attach([
+        $itemRequest->items()->attach([
             $item->id => [
                 'quantity' => $request->quantity,
                 'unit_id' => $request->unit_id,
@@ -183,19 +183,19 @@ class ToolRequestController extends Controller
             ]
         ]);
 
-        return response()->json($inventoryOut);
+        return response()->json($itemRequest);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\InventoryInUpdate  $request
-     * @param  \App\Models\InventoryOut  $inventoryOut
+     * @param  \App\Models\ItemRequest  $itemRequest
      * @return \Illuminate\Http\Response
      */
-    public function updateItem(InventoryOutUpdate $request, InventoryOut $inventoryOut, Item $item)
+    public function updateItem(ItemRequestUpdate $request, ItemRequest $itemRequest, Item $item)
     {
-        $inventoryOut->items()->updateExistingPivot(
+        $itemRequest->items()->updateExistingPivot(
             $item->id,
             [
                 'quantity' => $request->quantity,
@@ -204,19 +204,19 @@ class ToolRequestController extends Controller
             ]
         );
 
-        return response()->json($inventoryOut);
+        return response()->json($itemRequest);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\InventoryOut  $inventoryOut
+     * @param  \App\Models\ItemRequest  $itemRequest
      * @return \Illuminate\Http\Response
      */
-    public function deleteItem(InventoryOut $inventoryOut, Item $item)
+    public function deleteItem(ItemRequest $itemRequest, Item $item)
     {
-        $inventoryOut->items()->detach($item->id);
+        $itemRequest->items()->detach($item->id);
 
-        return response()->json($inventoryOut);
+        return response()->json($itemRequest);
     }
 }
