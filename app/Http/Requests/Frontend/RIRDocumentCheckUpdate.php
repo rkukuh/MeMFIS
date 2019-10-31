@@ -4,7 +4,7 @@ namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GSEStore extends FormRequest
+class RIRDocumentCheckUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class GSEStore extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**

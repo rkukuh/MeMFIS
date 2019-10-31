@@ -308,7 +308,7 @@
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'If Unsatisfactory Explain')
+                                                                @slot('text', $receivingInspectionReport->unsatisfactory_document)
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -341,70 +341,19 @@
                                                     <hr>
                                                     <div class="form-group m-form__group row mt-5">
                                                         <div class="col-sm-4 col-md-4 col-lg-4">
-                                                            <div class="form-group m-form__group row">
-                                                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                    @component('frontend.common.input.radio')
-                                                                        @slot('id', 'Satisfactory')
-                                                                        @slot('value', 'satisfactory')
-                                                                        @slot('name', 'condition')
-                                                                        @slot('size','12')
-                                                                        @slot('text', 'Satisfactory')
-                                                                    @endcomponent
-                                                                </div>
-                                                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                    @component('frontend.common.input.radio')
-                                                                        @slot('id', 'unsatisfactory')
-                                                                        @slot('value', 'unsatisfactory')
-                                                                        @slot('name', 'condition')
-                                                                        @slot('size','12')
-                                                                        @slot('text', 'Unsatisfactory')
-                                                                    @endcomponent
-                                                                </div>
-                                                            </div>
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text',  $material_condition)
+                                                            @endcomponent
                                                         </div>
                                                         <div class="col-sm-4 col-md-4 col-lg-4">
-                                                            <div class="form-group m-form__group row">
-                                                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                    @component('frontend.common.input.radio')
-                                                                        @slot('id', 'conform')
-                                                                        @slot('value', 'conform')
-                                                                        @slot('name', 'quality')
-                                                                        @slot('size','12')
-                                                                        @slot('text', 'Conform')
-                                                                    @endcomponent
-                                                                </div>
-                                                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                    @component('frontend.common.input.radio')
-                                                                        @slot('id', 'not_conform')
-                                                                        @slot('value', 'not_conform')
-                                                                        @slot('name', 'quality')
-                                                                        @slot('size','12')
-                                                                        @slot('text', 'Not Conform')
-                                                                    @endcomponent
-                                                                </div>
-                                                            </div>
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text',  $material_quality)
+                                                            @endcomponent
                                                         </div>
                                                         <div class="col-sm-4 col-md-4 col-lg-4">
-                                                            <div class="form-group m-form__group row">
-                                                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                    @component('frontend.common.input.radio')
-                                                                        @slot('id', 'conform')
-                                                                        @slot('value', 'conform')
-                                                                        @slot('name', 'identification')
-                                                                        @slot('size','12')
-                                                                        @slot('text', 'Conform')
-                                                                    @endcomponent
-                                                                </div>
-                                                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                    @component('frontend.common.input.radio')
-                                                                        @slot('id', 'not_conform')
-                                                                        @slot('value', 'not_conform')
-                                                                        @slot('name', 'identification')
-                                                                        @slot('size','12')
-                                                                        @slot('text', 'Not Conform')
-                                                                    @endcomponent
-                                                                </div>
-                                                            </div>
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text',  $material_identification)
+                                                            @endcomponent
                                                         </div>
                                                     </div>
                                                     <div class="form-group m-form__group row">
@@ -414,7 +363,7 @@
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'If Unsatisfactory Explain')
+                                                                @slot('text', $receivingInspectionReport->unsatisfactory_material)
                                                             @endcomponent
                                                         <div>
                                                     </div>

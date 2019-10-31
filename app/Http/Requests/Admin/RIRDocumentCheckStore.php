@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Frontend;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GSEStore extends FormRequest
+class RIRDocumentCheckStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class GSEStore extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**

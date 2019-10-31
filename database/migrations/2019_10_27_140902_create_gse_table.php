@@ -14,14 +14,13 @@ class CreateGseTable extends Migration
     public function up()
     {
         Schema::create('gse', function (Blueprint $table) {
-            
+
             $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->nullableMorphs('gseable');
             $table->unsignedBigInteger('storage_id');
-            $table->timestamp('returned_at');
-            $table->timestamp('received_at')->nullable();
-            $table->unsignedBigInteger('received_by');
+            $table->timestamp('returned_at')->nullable();
+            $table->unsignedBigInteger('returned_by');
             $table->string('section')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
@@ -32,7 +31,7 @@ class CreateGseTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('received_by')
+            $table->foreign('returned_by')
                     ->references('id')->on('employees')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
