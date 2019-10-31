@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Datatables\ItemRequest;
 use App\User;
 use App\Models\ItemRequest;
 use App\Models\InventoryOut;
+use App\Models\JobCard;
 use App\Models\Unit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -119,16 +120,16 @@ class ItemRequestMaterialDatatables extends Controller
         echo json_encode($result, JSON_PRETTY_PRINT);
     }
 
-    public function getItemsByItemRequest(ItemRequest $itemRequest)
+    public function getItemsByItemRequest(JobCard $jobcard)
     {
-        $items = $itemRequest->origin_jobcardable_items;
+        $items = json_decode($jobcard->origin_jobcardable_items);
 
         foreach ($items as $item) {
-            $item->unit_uuid .= Unit::find($items->pivot->unit_id)->uuid;
-            $item->unit_name .= Unit::find($items->pivot->unit_id)->name;
+            $item->unit_uuid = Unit::find($item->pivot->unit_id)->uuid;
+            $item->unit_name = Unit::find($item->pivot->unit_id)->name;
         }
 
-        $data = $alldata = json_decode($items);
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
