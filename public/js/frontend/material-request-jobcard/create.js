@@ -17,7 +17,7 @@ let MaterialRequestCreate = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation',
+                        url: '/get-jobcard/'+ jobcard_uuid +'/items',
                         map: function (raw) {
                             let dataSet = raw;
 

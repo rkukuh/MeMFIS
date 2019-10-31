@@ -297,15 +297,13 @@
 
 <script src="{{ asset('js/frontend/functions/select2/ref-project.js') }}"></script>
 
-<script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script> -->
 
-<script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script> -->
 
 <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
 
-<script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
 @endpush

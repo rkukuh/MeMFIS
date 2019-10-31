@@ -34,17 +34,30 @@ use App\Http\Controllers\Controller;
 
 class FillComboxController extends Controller
 {
-/**
- * Display a listing of the resource.
- *
- * @return \Illuminate\Http\Response
- */
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function jobcard()
     {
         $jobcards = JobCard::pluck('number', 'uuid');
 
         return json_encode($jobcards);
 
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jobcardItems($jobcard)
+    {
+        $items = JobCard::where('uuid', $jobcard)
+            ->first();
+
+        return $items->origin_jobcardable_items;
     }
 
     /**
