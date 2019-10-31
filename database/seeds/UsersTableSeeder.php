@@ -90,6 +90,9 @@ class UsersTableSeeder extends Seeder
         $user->assignRole(
             Role::where('name', 'marketing')->first()
         );
+        $user->assignRole(
+            Role::where('name', 'employee')->first()
+        );
 
         $user->employee()->create([
             'code' => 'SU-' . Carbon::now()->timestamp,
@@ -108,6 +111,9 @@ class UsersTableSeeder extends Seeder
 
         $user->assignRole(
             Role::where('name', 'hrd')->first()
+        );
+        $user->assignRole(
+            Role::where('name', 'employee')->first()
         );
 
         $user->employee()->create([
@@ -128,6 +134,9 @@ class UsersTableSeeder extends Seeder
         $user->assignRole(
             Role::where('name', 'ppic')->first()
         );
+        $user->assignRole(
+            Role::where('name', 'employee')->first()
+        );
 
         $user->employee()->create([
             'code' => 'SU-' . Carbon::now()->timestamp,
@@ -147,6 +156,9 @@ class UsersTableSeeder extends Seeder
         $user->assignRole(
             Role::where('name', 'scm')->first()
         );
+        $user->assignRole(
+            Role::where('name', 'employee')->first()
+        );
 
         $user->employee()->create([
             'code' => 'SU-' . Carbon::now()->timestamp,
@@ -165,6 +177,9 @@ class UsersTableSeeder extends Seeder
 
         $user->assignRole(
             Role::where('name', 'finance')->first()
+        );
+        $user->assignRole(
+            Role::where('name', 'employee')->first()
         );
 
         $user->employee()->create([
@@ -187,6 +202,9 @@ class UsersTableSeeder extends Seeder
         $user->assignRole(
             Role::where('name', 'employee')->first()
         );
+        $user->assignRole(
+            Role::where('name', 'employee')->first()
+        );
 
         $user->employee()->create([
             'code' => 'SU-' . Carbon::now()->timestamp,
@@ -201,12 +219,15 @@ class UsersTableSeeder extends Seeder
         $user = User::create([
             'name'      => 'Engineer',
             'email'     => 'engineer@smartaircraft.co.id',
-            'password'  => Hash::make('engineer'),
+            'password'  => Hash::make('admin'),
             'is_active' => 1,
         ]);
 
         $user->assignRole(
             Role::where('name', 'engineer')->first()
+        );
+        $user->assignRole(
+            Role::where('name', 'employee')->first()
         );
 
         $user->employee()->create([
@@ -222,12 +243,15 @@ class UsersTableSeeder extends Seeder
         $user = User::create([
             'name'      => 'Helper 1',
             'email'     => 'helper1@smartaircraft.co.id',
-            'password'  => Hash::make('helper1'),
+            'password'  => Hash::make('admin'),
             'is_active' => 1,
         ]);
 
         $user->assignRole(
             Role::where('name', 'helper')->first()
+        );
+        $user->assignRole(
+            Role::where('name', 'employee')->first()
         );
 
         $user->employee()->create([
@@ -243,12 +267,15 @@ class UsersTableSeeder extends Seeder
         $user = User::create([
             'name'      => 'Helper 2',
             'email'     => 'helper2@smartaircraft.co.id',
-            'password'  => Hash::make('helper2'),
+            'password'  => Hash::make('admin'),
             'is_active' => 1,
         ]);
 
         $user->assignRole(
             Role::where('name', 'helper')->first()
+        );
+        $user->assignRole(
+            Role::where('name', 'employee')->first()
         );
 
         $user->employee()->create([

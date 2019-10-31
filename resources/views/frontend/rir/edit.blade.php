@@ -437,7 +437,7 @@
                                                                         @slot('name', 'general_document[]')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Airway Bill')
-                                                                        @slot('value', 'airway bill')
+                                                                        @slot('value', 'airway-bill')
                                                                     @endcomponent
                                                                     @component('frontend.common.input.checkbox')
                                                                         @slot('id', 'shipping_document')
@@ -445,7 +445,7 @@
                                                                         @slot('name', 'general_document[]')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Shipping Document')
-                                                                        @slot('value', 'shipping document')
+                                                                        @slot('value', 'shipping-document')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -457,7 +457,7 @@
                                                                         @slot('id', 'certificate_of_conformity')
                                                                         @slot('class', 'technical_document')
                                                                         @slot('name', 'technical_document[]')
-                                                                        @slot('value', 'certificate of conformity')
+                                                                        @slot('value', 'comformity-certificate')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Certificate of Conformity')
                                                                     @endcomponent
@@ -465,7 +465,7 @@
                                                                         @slot('id', 'arc_aat')
                                                                         @slot('class', 'technical_document')
                                                                         @slot('name', 'technical_document[]')
-                                                                        @slot('value', 'arc/aat')
+                                                                        @slot('value', 'arc-aat')
                                                                         @slot('size','12')
                                                                         @slot('text', 'ARC/AAT')
                                                                     @endcomponent
@@ -482,6 +482,7 @@
                                                             @component('frontend.common.input.input')
                                                                 @slot('name', 'document_check')
                                                                 @slot('name', 'document_check')
+                                                                @slot('value',  $receivingInspectionReport->unsatisfactory_document)
                                                                 @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent
                                                         <div>
@@ -522,6 +523,9 @@
                                                                         @slot('value', 'satisfactory')
                                                                         @slot('name', 'condition')
                                                                         @slot('size','12')
+                                                                        @if($material_condition == 'satisfactory')
+                                                                            @slot('checked','checked')
+                                                                        @endif
                                                                         @slot('text', 'Satisfactory')
                                                                     @endcomponent
                                                                 </div>
@@ -531,6 +535,9 @@
                                                                         @slot('value', 'unsatisfactory')
                                                                         @slot('name', 'condition')
                                                                         @slot('size','12')
+                                                                        @if($material_condition == 'unsatisfactory')
+                                                                            @slot('checked','checked')
+                                                                        @endif
                                                                         @slot('text', 'Unsatisfactory')
                                                                     @endcomponent
                                                                 </div>
@@ -544,15 +551,21 @@
                                                                         @slot('value', 'conform')
                                                                         @slot('name', 'quality')
                                                                         @slot('size','12')
+                                                                            @if($material_quality == 'conform')
+                                                                            @slot('checked','checked')
+                                                                        @endif
                                                                         @slot('text', 'Conform')
                                                                     @endcomponent
                                                                 </div>
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('id', 'not_conform')
-                                                                        @slot('value', 'not_conform')
+                                                                        @slot('value', 'not-conform')
                                                                         @slot('name', 'quality')
                                                                         @slot('size','12')
+                                                                        @if($material_quality == 'not-conform')
+                                                                            @slot('checked','checked')
+                                                                        @endif
                                                                         @slot('text', 'Not Conform')
                                                                     @endcomponent
                                                                 </div>
@@ -566,15 +579,21 @@
                                                                         @slot('value', 'conform')
                                                                         @slot('name', 'identification')
                                                                         @slot('size','12')
+                                                                        @if($material_identification == 'conform')
+                                                                            @slot('checked','checked')
+                                                                        @endif
                                                                         @slot('text', 'Conform')
                                                                     @endcomponent
                                                                 </div>
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('id', 'not_conform')
-                                                                        @slot('value', 'not_conform')
+                                                                        @slot('value', 'not-conform')
                                                                         @slot('name', 'identification')
                                                                         @slot('size','12')
+                                                                        @if($material_identification == 'not-conform')
+                                                                            @slot('checked','checked')
+                                                                        @endif
                                                                         @slot('text', 'Not Conform')
                                                                     @endcomponent
                                                                 </div>
@@ -590,6 +609,7 @@
                                                             @component('frontend.common.input.input')
                                                                 @slot('name', 'material_check')
                                                                 @slot('name', 'material_check')
+                                                                @slot('value',  $receivingInspectionReport->unsatisfactory_material)
                                                                 @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent
                                                         <div>
@@ -608,6 +628,7 @@
                                                             @component('frontend.common.input.textarea')
                                                                 @slot('name', 'decision')
                                                                 @slot('id', 'decision')
+                                                                @slot('value',  $receivingInspectionReport->decision)
                                                                 @slot('rows', '5')
                                                             @endcomponent
                                                         <div>

@@ -462,10 +462,6 @@ class JobCardController extends Controller
             }else{
                 $prepared_by ="-";
             }
-
-            $eo_additionals = [];
-
-            dd($jobCard);
             
             $pdf = \PDF::loadView('frontend/form/jobcard_eo',[
                     'jobCard' => $jobCard,

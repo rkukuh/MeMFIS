@@ -70,7 +70,7 @@ class QuotationAdditionalController extends Controller
      * @param  \App\Http\Requests\Frontend\QuotationStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuotationStore $request)
     {
         $project = Project::where('uuid', $request->project_id)->first();
         $contact = $defectcard_json = [];

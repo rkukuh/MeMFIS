@@ -61,14 +61,44 @@ class RIRController extends Controller
      */
     public function show(RIR $rir)
     {
-        $packing_type = Type::find($rir->packing_type)->code;
-        $packing_condition = Type::find($rir->packing_condition)->code;
-        $preservation_check = Type::find($rir->preservation_check)->code;
+        if($rir->packing_type){
+            $packing_type = Type::find($rir->packing_type)->code;
+        }else{
+            $packing_type = null;
+        }
+        if($rir->packing_condition){
+            $packing_condition = Type::find($rir->packing_condition)->code;
+        }else{
+            $packing_condition = null;
+        }
+        if($rir->preservation_check){
+            $preservation_check = Type::find($rir->preservation_check)->code;
+        }else{
+            $preservation_check = null;
+        }
+        if($rir->material_condition){
+            $material_condition = Type::find($rir->material_condition)->code;
+        }else{
+            $material_condition = null;
+        }
+        if($rir->material_quality){
+            $material_quality = Type::find($rir->material_quality)->code;
+        }else{
+            $material_quality = null;
+        }
+        if($rir->material_identification){
+            $material_identification = Type::find($rir->material_identification)->code;
+        }else{
+            $material_identification = null;
+        }
         return view('frontend.rir.show', [
             'receivingInspectionReport' => $rir,
             'packing_type' => $packing_type,
             'packing_condition' => $packing_condition,
-            'preservation_check' => $preservation_check
+            'preservation_check' => $preservation_check,
+            'material_condition' => $material_condition,
+            'material_quality' => $material_quality,
+            'material_identification' => $material_identification
         ]);
     }
 
@@ -80,9 +110,37 @@ class RIRController extends Controller
      */
     public function edit(RIR $rir)
     {
-        $packing_type = Type::find($rir->packing_type)->code;
-        $packing_condition = Type::find($rir->packing_condition)->code;
-        $preservation_check = Type::find($rir->preservation_check)->code;
+        if($rir->packing_type){
+            $packing_type = Type::find($rir->packing_type)->code;
+        }else{
+            $packing_type = null;
+        }
+        if($rir->packing_condition){
+            $packing_condition = Type::find($rir->packing_condition)->code;
+        }else{
+            $packing_condition = null;
+        }
+        if($rir->preservation_check){
+            $preservation_check = Type::find($rir->preservation_check)->code;
+        }else{
+            $preservation_check = null;
+        }
+        if($rir->material_condition){
+            $material_condition = Type::find($rir->material_condition)->code;
+        }else{
+            $material_condition = null;
+        }
+        if($rir->material_quality){
+            $material_quality = Type::find($rir->material_quality)->code;
+        }else{
+            $material_quality = null;
+        }
+        if($rir->material_identification){
+            $material_identification = Type::find($rir->material_identification)->code;
+        }else{
+            $material_identification = null;
+        }
+
         return view('frontend.rir.edit', [
             'receivingInspectionReport' => $rir,
             'rir_status' => Status::find($rir->status_id)->code,
@@ -90,7 +148,10 @@ class RIRController extends Controller
             'vendor_uuid' => Vendor::find($rir->vendor_id)->uuid,
             'packing_type' => $packing_type,
             'packing_condition' => $packing_condition,
-            'preservation_check' => $preservation_check
+            'preservation_check' => $preservation_check,
+            'material_condition' => $material_condition,
+            'material_quality' => $material_quality,
+            'material_identification' => $material_identification
         ]);
     }
 
@@ -109,6 +170,9 @@ class RIRController extends Controller
         $request->merge(['packing_type' => Type::ofRIRPackingAndHandlingCheckType()->where('code',$request->packing_type)->first()->id]);
         $request->merge(['packing_condition' => Type::ofRIRPackingAndHandlingCheckCondition()->where('code',$request->packing_condition)->first()->id]);
         $request->merge(['preservation_check' => Type::ofRIRPreservationCheck()->where('code',$request->preservation_check)->first()->id]);
+        $request->merge(['material_condition' => Type::ofRIRMaterialCheckCondition()->where('code',$request->material_condition)->first()->id]);
+        $request->merge(['material_quality' => Type::ofRIRMaterialCheckQuality()->where('code',$request->material_quality)->first()->id]);
+        $request->merge(['material_identification' => Type::ofRIRMaterialCheckIdentification()->where('code',$request->material_identification)->first()->id]);
         $rir->update($request->all());
 
 

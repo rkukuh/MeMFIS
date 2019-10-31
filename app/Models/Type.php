@@ -347,6 +347,50 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of RIR's General Document.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIRGeneralDocument(Builder $query)
+    {
+        return $query->where('of', 'rir-general-document');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's Material Check Condition.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIRMaterialCheckCondition(Builder $query)
+    {
+        return $query->where('of', 'rir-material-condition');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's Material Check Identification.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIRMaterialCheckIdentification(Builder $query)
+    {
+        return $query->where('of', 'rir-material-identification');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's Material Check Quality.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIRMaterialCheckQuality(Builder $query)
+    {
+        return $query->where('of', 'rir-material-quality');
+    }
+
+    /**
      * Scope a query to only include type of RIR's Packing and Handling Check Condition.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -377,6 +421,17 @@ class Type extends MemfisModel
     public function scopeOfRIRPreservationCheck(Builder $query)
     {
         return $query->where('of', 'rir-preservation-check');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's Technical Document.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIRTechnicalDocument(Builder $query)
+    {
+        return $query->where('of', 'rir-technical-document');
     }
 
     /**
