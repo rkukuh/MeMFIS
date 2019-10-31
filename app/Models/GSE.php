@@ -45,9 +45,9 @@ class GSE extends MemfisModel
      *
      * @return mixed
      */
-    public function receivedBy()
+    public function returnBy()
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(Employee::class, 'returned_by');
     }
 
     /**

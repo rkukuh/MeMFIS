@@ -210,5 +210,5 @@
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/tool-request.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool-request-defectcard.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool-request-workshop.js') }}"></script>
 @endpush
