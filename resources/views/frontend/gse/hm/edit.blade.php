@@ -93,12 +93,19 @@
                                                 Storage @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Storage')
-                                                @slot('id', 'item_storage_id')
-                                                @slot('name', 'item_storage_id')
-                                                @slot('id_error', 'item_storage_id')
-                                            @endcomponent
+                                            <select id="item_storage_id" name="item_storage_id" class="form-control m-select2" style="width:100%">
+                                                <option value="">
+                                                    &mdash; Select a Storage &mdash;
+                                                </option>
+
+                                                @foreach ($storages as $storage)
+                                                    <option value="{{ $storage->id }}"
+                                                        @if ($storage->id == $groundSupportEquiptment->storage_id) selected @endif>
+                                                        {{ $storage->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
@@ -131,13 +138,20 @@
                                                 Returned By @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', ' Returned By')
-                                                @slot('id', 'returned_by')
-                                                @slot('name', 'returned_by')
-                                                @slot('id_error', 'returned_by')
-                                            @endcomponent
-                                        </div>
+                                            <select id="employee" name="employee" class="form-control m-select2" style="width:100%">
+                                                <option value="">
+                                                    &mdash; Select a Returned By &mdash;
+                                                </option>
+
+                                                @foreach ($employees as $employee)
+                                                    <option value="{{ $employee->uuid }}"
+                                                        @if ($employee->uuid == $employee_uuid) selected @endif>
+                                                        {{ $employee->first_name." ".$employee->last_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
+                                            </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Section Code
@@ -246,7 +260,6 @@
 
     <script src="{{ asset('js/frontend/gse/create.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/returned-by.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/employee.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
 @endpush
