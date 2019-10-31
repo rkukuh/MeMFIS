@@ -212,6 +212,8 @@
 
 
 @push('footer-scripts')
-
+    <script>
+        let gse_uuid = '{{$groundSupportEquiptment->uuid}}';
+    </script>
     <script src="{{ asset('js/frontend/gse/show.js') }}"></script>
 @endpush
