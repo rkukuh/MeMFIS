@@ -197,10 +197,10 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
+                                                    @component('frontend.common.buttons.update')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-gse')
-                                                        @slot('class', 'add-gse')
+                                                        @slot('id', 'update-gse')
+                                                        @slot('class', 'update-gse')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
