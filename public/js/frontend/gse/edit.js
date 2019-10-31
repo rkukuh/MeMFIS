@@ -6,7 +6,7 @@ let GseToolReturnedEdit = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation',
+                        url: "/datatables/gse/item/" + gse_uuid,
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -55,42 +55,42 @@ let GseToolReturnedEdit = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'code',
                     title: 'Part Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'pivot.serial_number',
                     title: 'Serial Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'name',
                     title: 'Tool Description',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'pivot.quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'unit_name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: '',
+                    field: 'pivot.note',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
@@ -98,18 +98,58 @@ let GseToolReturnedEdit = {
                 },
                 {
                     field: 'Actions',
-                    width: 110,
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
+                            '<button data-toggle="modal" data-target="#modal_gse_item_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-expred='+t.pivot.expired_at+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                            t.uuid +
+                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                         );
                     }
                 }
             ]
+        });
+
+        $('.footer').on('click', '.update-gse', function () {
+            let returned_at = $('input[name=date]').val();
+            let storage = $('#item_storage_id').val();
+            let section = $('input[name=section]').val();
+            let returned_by = $('#employee').val();
+            let note = $('#note').val();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '/gse/'+gse_uuid,
+                type: 'PUT',
+                data: {
+                    returned_at:returned_at,
+                    section:section,
+                    storage_id:storage,
+                    returned_by:returned_by,
+                    note:note,
+                },
+                success: function (response) {
+                    if (response.errors) {
+                        // if (response.errors.title) {
+                        //     $('#title-error').html(response.errors.title[0]);
+                        // }
+
+                        // document.getElementById('manual_affected_id').value = manual_affected_id;
+
+
+                    } else {
+
+                        toastr.success('GSE has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+                    }
+                }
+            });
         });
 
         let remove = $('.m_datatable').on('click', '.delete', function () {
@@ -169,55 +209,6 @@ let GseToolReturnedEdit = {
             });
         });
 
-        $('.footer').on('click', '.add-gse', function () {
-            let received_at = $('input[name=date]').val();
-            let received_by = $('#received-by').val();
-            let ref_po = $('input[name=ref-po]').val();
-            let do_no = $('input[name=do-no]').val();
-            let ref_date = $('input[name=date-ref-date]').val();
-            let warehouse = $('input[name=warehouse]').val();
-            let description = $('#description').val();
-            let vehicle_no = $('input[name=vehicle-no]').val();
-            let container_no = $('input[name=container-no]').val();
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: '/goods-received',
-                type: 'POST',
-                data: {
-                    received_at:received_at,
-                    received_by:received_by,
-                    vehicle_no:vehicle_no,
-                    container_no:container_no,
-                    purchase_order_id:ref_po,
-                    storage_id:warehouse,
-                    description:description,
-                },
-                success: function (response) {
-                    if (response.errors) {
-                        console.log(errors);
-                        // if (response.errors.title) {
-                        //     $('#title-error').html(response.errors.title[0]);
-                        // }
-
-                        // document.getElementById('manual_affected_id').value = manual_affected_id;
-
-
-                    } else {
-                        //    taskcard_reset();
-
-
-                        toastr.success('Taskcard has been created.', 'Success', {
-                            timeOut: 5000
-                        });
-
-                        // window.location.href = '/goods-received/'+response.uuid+'/edit';
-                    }
-                }
-            });
-        });
     }
 };
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Datatables\GSE;
 
 use App\Models\Unit;
-use App\Models\GoodsReceived;
+use App\Models\GSE;
 use App\Models\ListUtil;
 use Illuminate\Http\Order;
 use App\Http\Controllers\Controller;
@@ -15,15 +15,15 @@ class ItemGSEDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(GoodsReceived $goodReceived)
+    public function index(GSE $gse)
     {
-        $goodReceiveds = $goodReceived->items;
+        $gses = $gse->items;
 
-        foreach($goodReceiveds as $goodReceived){
-            $goodReceived->unit_name .= Unit::find($goodReceived->pivot->unit_id)->name;
+        foreach($gses as $Gse){
+            $Gse->unit_name .= Unit::find($Gse->pivot->unit_id)->name;
         }
 
-        $data = $alldata = json_decode($goodReceiveds);
+        $data = $alldata = json_decode($gses);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
