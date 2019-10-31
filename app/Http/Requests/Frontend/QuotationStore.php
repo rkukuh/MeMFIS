@@ -35,7 +35,7 @@ class QuotationStore extends FormRequest
             // 'scheduled_payment_amount' => 'required',
             // 'scheduled_payment_type' => 'required',
             // 'description' => 'required',
-            // 'title' => 'required',
+            'title' => 'required',
             // 'term_of_payment' => 'required',
             // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
         ];
