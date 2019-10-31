@@ -143,11 +143,11 @@ class GSEController extends Controller
      */
     public function update(GSEUpdate $request, GSE $gse)
     {
-        dd($request->all());
-        $request->merge(['number' => DocumentNumber::generate('GSE-', ReceivingInspectionReport::withTrashed()->count()+1)]);
-        $groundSupportEquiptment->update($request->all());
+        $request->merge(['returned_at' => Carbon::parse($request->returned_at)]);
+        $request->merge(['returned_by' => Employee::where('uuid',$request->returned_by)->first()->user->id]);
+        $gse->update($request->all());
 
-        return response()->json($groundSupportEquiptment);
+        return response()->json($gse);
     }
 
     /**

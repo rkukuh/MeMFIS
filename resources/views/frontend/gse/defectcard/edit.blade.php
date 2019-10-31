@@ -175,10 +175,10 @@
 
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
-                                                @slot('id', 'description')
+                                                @slot('id', 'note')
                                                 @slot('value', $groundSupportEquiptment->note)
-                                                @slot('name', 'description')
-                                                @slot('text', 'Description')
+                                                @slot('name', 'note')
+                                                @slot('text', 'Note')
                                             @endcomponent
                                         </div>
                                     </div>

@@ -114,6 +114,44 @@ let GseToolReturnedEdit = {
             ]
         });
 
+        $('.footer').on('click', '.update-gse', function () {
+            let returned_at = $('input[name=date]').val();
+            let storage = $('#item_storage_id').val();
+            let section = $('input[name=section]').val();
+            let returned_by = $('#employee').val();
+            let note = $('#note').val();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '/gse/'+gse_uuid,
+                type: 'PUT',
+                data: {
+                    returned_at:returned_at,
+                    section:section,
+                    storage_id:storage,
+                    returned_by:returned_by,
+                    note:note,
+                },
+                success: function (response) {
+                    if (response.errors) {
+                        // if (response.errors.title) {
+                        //     $('#title-error').html(response.errors.title[0]);
+                        // }
+
+                        // document.getElementById('manual_affected_id').value = manual_affected_id;
+
+
+                    } else {
+
+                        toastr.success('GSE has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+                    }
+                }
+            });
+        });
+
         let remove = $('.m_datatable').on('click', '.delete', function () {
             let triggerid = $(this).data('id');
 
@@ -171,55 +209,6 @@ let GseToolReturnedEdit = {
             });
         });
 
-        $('.footer').on('click', '.add-gse', function () {
-            let received_at = $('input[name=date]').val();
-            let received_by = $('#received-by').val();
-            let ref_po = $('input[name=ref-po]').val();
-            let do_no = $('input[name=do-no]').val();
-            let ref_date = $('input[name=date-ref-date]').val();
-            let warehouse = $('input[name=warehouse]').val();
-            let description = $('#description').val();
-            let vehicle_no = $('input[name=vehicle-no]').val();
-            let container_no = $('input[name=container-no]').val();
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: '/goods-received',
-                type: 'POST',
-                data: {
-                    received_at:received_at,
-                    received_by:received_by,
-                    vehicle_no:vehicle_no,
-                    container_no:container_no,
-                    purchase_order_id:ref_po,
-                    storage_id:warehouse,
-                    description:description,
-                },
-                success: function (response) {
-                    if (response.errors) {
-                        console.log(errors);
-                        // if (response.errors.title) {
-                        //     $('#title-error').html(response.errors.title[0]);
-                        // }
-
-                        // document.getElementById('manual_affected_id').value = manual_affected_id;
-
-
-                    } else {
-                        //    taskcard_reset();
-
-
-                        toastr.success('Taskcard has been created.', 'Success', {
-                            timeOut: 5000
-                        });
-
-                        // window.location.href = '/goods-received/'+response.uuid+'/edit';
-                    }
-                }
-            });
-        });
     }
 };
 
