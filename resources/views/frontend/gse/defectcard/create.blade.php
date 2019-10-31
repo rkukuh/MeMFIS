@@ -51,6 +51,7 @@
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
+                                        <input type="hidden" id="type" name="type" value="defectcard">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Date @include('frontend.common.label.required')
@@ -96,7 +97,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('id', 'actype')
+                                                        @slot('id', 'ac_type')
                                                         @slot('text', 'Generate')
                                                     @endcomponent
                                                 </div>
@@ -106,7 +107,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('id', 'acreg')
+                                                        @slot('id', 'ac_reg')
                                                         @slot('text', 'Generate')
                                                     @endcomponent
                                                 </div>

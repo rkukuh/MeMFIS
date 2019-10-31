@@ -51,6 +51,7 @@
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
+                                        <input type="hidden" id="type" name="type" value="inv_out">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Date @include('frontend.common.label.required')
