@@ -25,6 +25,58 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'account-receivable-reject']);
         Permission::create(['name' => 'account-receivable-void']);
 
+        // ACCOUNT PAYABLE entity permissions:
+
+        Permission::create(['name' => 'account-payable-create']);
+        Permission::create(['name' => 'account-payable-read']);
+        Permission::create(['name' => 'account-payable-edit']);
+        Permission::create(['name' => 'account-payable-delete']);
+        Permission::create(['name' => 'account-payable-remove']);
+        Permission::create(['name' => 'account-payable-report']);
+        Permission::create(['name' => 'account-payable-print']);
+        Permission::create(['name' => 'account-payable-approve']);
+        Permission::create(['name' => 'account-payable-reject']);
+        Permission::create(['name' => 'account-payable-void']);
+
+        // AIRCRAFT  entity permissions:
+
+        Permission::create(['name' => 'aircraft-create']);
+        Permission::create(['name' => 'aircraft-read']);
+        Permission::create(['name' => 'aircraft-edit']);
+        Permission::create(['name' => 'aircraft-delete']);
+        Permission::create(['name' => 'aircraft-remove']);
+        Permission::create(['name' => 'aircraft-report']);
+        Permission::create(['name' => 'aircraft-print']);
+        Permission::create(['name' => 'aircraft-approve']);
+        Permission::create(['name' => 'aircraft-reject']);
+        Permission::create(['name' => 'aircraft-void']);
+
+        // ASSIGN LEAVES entity permissions:
+
+        Permission::create(['name' => 'assign-leaves-create']);
+        Permission::create(['name' => 'assign-leaves-read']);
+        Permission::create(['name' => 'assign-leaves-edit']);
+        Permission::create(['name' => 'assign-leaves-delete']);
+        Permission::create(['name' => 'assign-leaves-remove']);
+        Permission::create(['name' => 'assign-leaves-report']);
+        Permission::create(['name' => 'assign-leaves-print']);
+        Permission::create(['name' => 'assign-leaves-approve']);
+        Permission::create(['name' => 'assign-leaves-reject']);
+        Permission::create(['name' => 'assign-leaves-void']);
+
+        // ASSETS LEAVES entity permissions:
+
+        Permission::create(['name' => 'asset-create']);
+        Permission::create(['name' => 'asset-read']);
+        Permission::create(['name' => 'asset-edit']);
+        Permission::create(['name' => 'asset-delete']);
+        Permission::create(['name' => 'asset-remove']);
+        Permission::create(['name' => 'asset-report']);
+        Permission::create(['name' => 'asset-print']);
+        Permission::create(['name' => 'asset-approve']);
+        Permission::create(['name' => 'asset-reject']);
+        Permission::create(['name' => 'asset-void']);
+
         // ATTENDANCE LIST entity permissions:
 
         Permission::create(['name' => 'attendance-list-create']);
@@ -51,18 +103,31 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'attendance-correction-reject']);
         Permission::create(['name' => 'attendance-correction-void']);
 
-        // ASSIGN LEAVES entity permissions:
+        // BANKS entity permissions:
 
-        Permission::create(['name' => 'assign-leaves-create']);
-        Permission::create(['name' => 'assign-leaves-read']);
-        Permission::create(['name' => 'assign-leaves-edit']);
-        Permission::create(['name' => 'assign-leaves-delete']);
-        Permission::create(['name' => 'assign-leaves-remove']);
-        Permission::create(['name' => 'assign-leaves-report']);
-        Permission::create(['name' => 'assign-leaves-print']);
-        Permission::create(['name' => 'assign-leaves-approve']);
-        Permission::create(['name' => 'assign-leaves-reject']);
-        Permission::create(['name' => 'assign-leaves-void']);
+        Permission::create(['name' => 'bank-create']);
+        Permission::create(['name' => 'bank-read']);
+        Permission::create(['name' => 'bank-edit']);
+        Permission::create(['name' => 'bank-delete']);
+        Permission::create(['name' => 'bank-remove']);
+        Permission::create(['name' => 'bank-report']);
+        Permission::create(['name' => 'bank-print']);
+        Permission::create(['name' => 'bank-approve']);
+        Permission::create(['name' => 'bank-reject']);
+        Permission::create(['name' => 'bank-void']);
+
+        // BALANCE SHEETS entity permissions:
+
+        Permission::create(['name' => 'balance-sheet-create']);
+        Permission::create(['name' => 'balance-sheet-read']);
+        Permission::create(['name' => 'balance-sheet-edit']);
+        Permission::create(['name' => 'balance-sheet-delete']);
+        Permission::create(['name' => 'balance-sheet-remove']);
+        Permission::create(['name' => 'balance-sheet-report']);
+        Permission::create(['name' => 'balance-sheet-print']);
+        Permission::create(['name' => 'balance-sheet-approve']);
+        Permission::create(['name' => 'balance-sheet-reject']);
+        Permission::create(['name' => 'balance-sheet-void']);
 
         // BENEFITS entity permissions:
 
@@ -90,31 +155,18 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'category-item-reject']);
         Permission::create(['name' => 'category-item-void']);
 
-        // CUSTOMER entity permissions:
+        // CATEGORY ITEM CODE OF ACCOUNTING entity permissions:
 
-        Permission::create(['name' => 'customer-create']);
-        Permission::create(['name' => 'customer-read']);
-        Permission::create(['name' => 'customer-edit']);
-        Permission::create(['name' => 'customer-delete']);
-        Permission::create(['name' => 'customer-remove']);
-        Permission::create(['name' => 'customer-report']);
-        Permission::create(['name' => 'customer-print']);
-        Permission::create(['name' => 'customer-approve']);
-        Permission::create(['name' => 'customer-reject']);
-        Permission::create(['name' => 'customer-void']);
-
-        // COMPANY STRUCTUR & DEPARTEMENT entity permissions:
-
-        Permission::create(['name' => 'csd-create']);
-        Permission::create(['name' => 'csd-read']);
-        Permission::create(['name' => 'csd-edit']);
-        Permission::create(['name' => 'csd-delete']);
-        Permission::create(['name' => 'csd-remove']);
-        Permission::create(['name' => 'csd-report']);
-        Permission::create(['name' => 'csd-print']);
-        Permission::create(['name' => 'csd-approve']);
-        Permission::create(['name' => 'csd-reject']);
-        Permission::create(['name' => 'csd-void']);
+        Permission::create(['name' => 'category-item-coa-create']);
+        Permission::create(['name' => 'category-item-coa-read']);
+        Permission::create(['name' => 'category-item-coa-edit']);
+        Permission::create(['name' => 'category-item-coa-delete']);
+        Permission::create(['name' => 'category-item-coa-remove']);
+        Permission::create(['name' => 'category-item-coa-report']);
+        Permission::create(['name' => 'category-item-coa-print']);
+        Permission::create(['name' => 'category-item-coa-approve']);
+        Permission::create(['name' => 'category-item-coa-reject']);
+        Permission::create(['name' => 'category-item-coa-void']);
 
         // CALENDAR entity permissions:
 
@@ -129,6 +181,19 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'calendar-reject']);
         Permission::create(['name' => 'calendar-void']);
 
+        // MASTER CAPABILITY entity permissions:
+
+        Permission::create(['name' => 'capability-create']);
+        Permission::create(['name' => 'capability-read']);
+        Permission::create(['name' => 'capability-edit']);
+        Permission::create(['name' => 'capability-delete']);
+        Permission::create(['name' => 'capability-remove']);
+        Permission::create(['name' => 'capability-report']);
+        Permission::create(['name' => 'capability-print']);
+        Permission::create(['name' => 'capability-approve']);
+        Permission::create(['name' => 'capability-reject']);
+        Permission::create(['name' => 'capability-void']);
+
         // CASHBOOK entity permissions:
 
         Permission::create(['name' => 'cashbook-create']);
@@ -142,7 +207,33 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'cashbook-reject']);
         Permission::create(['name' => 'cashbook-void']);
 
-        // COA entity permissions:
+        // CASH / BANK REPORT entity permissions:
+
+        Permission::create(['name' => 'cbr-create']);
+        Permission::create(['name' => 'cbr-read']);
+        Permission::create(['name' => 'cbr-edit']);
+        Permission::create(['name' => 'cbr-delete']);
+        Permission::create(['name' => 'cbr-remove']);
+        Permission::create(['name' => 'cbr-report']);
+        Permission::create(['name' => 'cbr-print']);
+        Permission::create(['name' => 'cbr-approve']);
+        Permission::create(['name' => 'cbr-reject']);
+        Permission::create(['name' => 'cbr-void']);
+
+        // CUSTOMER entity permissions:
+
+        Permission::create(['name' => 'customer-create']);
+        Permission::create(['name' => 'customer-read']);
+        Permission::create(['name' => 'customer-edit']);
+        Permission::create(['name' => 'customer-delete']);
+        Permission::create(['name' => 'customer-remove']);
+        Permission::create(['name' => 'customer-report']);
+        Permission::create(['name' => 'customer-print']);
+        Permission::create(['name' => 'customer-approve']);
+        Permission::create(['name' => 'customer-reject']);
+        Permission::create(['name' => 'customer-void']);
+
+        // MASTER COA entity permissions:
 
         Permission::create(['name' => 'coa-create']);
         Permission::create(['name' => 'coa-read']);
@@ -154,6 +245,19 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'coa-approve']);
         Permission::create(['name' => 'coa-reject']);
         Permission::create(['name' => 'coa-void']);
+
+        // COMPANY STRUCTUR & DEPARTEMENT entity permissions:
+
+        Permission::create(['name' => 'csd-create']);
+        Permission::create(['name' => 'csd-read']);
+        Permission::create(['name' => 'csd-edit']);
+        Permission::create(['name' => 'csd-delete']);
+        Permission::create(['name' => 'csd-remove']);
+        Permission::create(['name' => 'csd-report']);
+        Permission::create(['name' => 'csd-print']);
+        Permission::create(['name' => 'csd-approve']);
+        Permission::create(['name' => 'csd-reject']);
+        Permission::create(['name' => 'csd-void']);
 
         // DISCREPANCY FOUND entity permissions:
 
@@ -180,6 +284,19 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'defectcard-approve']);
         Permission::create(['name' => 'defectcard-reject']);
         Permission::create(['name' => 'defectcard-void']);
+
+        // DEFECT REPORT entity permissions:
+
+        Permission::create(['name' => 'defect-report-create']);
+        Permission::create(['name' => 'defect-report-read']);
+        Permission::create(['name' => 'defect-report-edit']);
+        Permission::create(['name' => 'defect-report-delete']);
+        Permission::create(['name' => 'defect-report-remove']);
+        Permission::create(['name' => 'defect-report-report']);
+        Permission::create(['name' => 'defect-report-print']);
+        Permission::create(['name' => 'defect-report-approve']);
+        Permission::create(['name' => 'defect-report-reject']);
+        Permission::create(['name' => 'defect-report-void']);
 
         // EMPLOYMENT STATUS entity permissions:
 
@@ -219,6 +336,19 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'event-holiday-approve']);
         Permission::create(['name' => 'event-holiday-reject']);
         Permission::create(['name' => 'event-holiday-void']);
+
+        // GENERAL LEDGER entity permissions:
+
+        Permission::create(['name' => 'general-ledger-create']);
+        Permission::create(['name' => 'general-ledger-read']);
+        Permission::create(['name' => 'general-ledger-edit']);
+        Permission::create(['name' => 'general-ledger-delete']);
+        Permission::create(['name' => 'general-ledger-remove']);
+        Permission::create(['name' => 'general-ledger-report']);
+        Permission::create(['name' => 'general-ledger-print']);
+        Permission::create(['name' => 'general-ledger-approve']);
+        Permission::create(['name' => 'general-ledger-reject']);
+        Permission::create(['name' => 'general-ledger-void']);
 
         // GOODS RECEIVED NOTE entity permissions:
 
@@ -350,6 +480,45 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'jobcard-hardtime-reject']);
         Permission::create(['name' => 'jobcard-hardtime-void']);
 
+        // JOBCARD WORKSHOP entity permissions:
+
+        Permission::create(['name' => 'jobcard-workshop-create']);
+        Permission::create(['name' => 'jobcard-workshop-read']);
+        Permission::create(['name' => 'jobcard-workshop-edit']);
+        Permission::create(['name' => 'jobcard-workshop-delete']);
+        Permission::create(['name' => 'jobcard-workshop-remove']);
+        Permission::create(['name' => 'jobcard-workshop-report']);
+        Permission::create(['name' => 'jobcard-workshop-print']);
+        Permission::create(['name' => 'jobcard-workshop-approve']);
+        Permission::create(['name' => 'jobcard-workshop-reject']);
+        Permission::create(['name' => 'jobcard-workshop-void']);
+
+        // JOB SCOPE LEVEL entity permissions:
+
+        Permission::create(['name' => 'jsl-create']);
+        Permission::create(['name' => 'jsl-read']);
+        Permission::create(['name' => 'jsl-edit']);
+        Permission::create(['name' => 'jsl-delete']);
+        Permission::create(['name' => 'jsl-remove']);
+        Permission::create(['name' => 'jsl-report']);
+        Permission::create(['name' => 'jsl-print']);
+        Permission::create(['name' => 'jsl-approve']);
+        Permission::create(['name' => 'jsl-reject']);
+        Permission::create(['name' => 'jsl-void']);
+
+        // JOB REQUEST entity permissions:
+
+        Permission::create(['name' => 'job-request-create']);
+        Permission::create(['name' => 'job-request-read']);
+        Permission::create(['name' => 'job-request-edit']);
+        Permission::create(['name' => 'job-request-delete']);
+        Permission::create(['name' => 'job-request-remove']);
+        Permission::create(['name' => 'job-request-report']);
+        Permission::create(['name' => 'job-request-print']);
+        Permission::create(['name' => 'job-request-approve']);
+        Permission::create(['name' => 'job-request-reject']);
+        Permission::create(['name' => 'job-request-void']);
+
         // LEAVE PERIOD entity permissions:
 
         Permission::create(['name' => 'leave-period-create']);
@@ -402,6 +571,19 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'leave-datalist-reject']);
         Permission::create(['name' => 'leave-datalist-void']);
 
+        // Manufacturer  entity permissions:
+
+        Permission::create(['name' => 'manufacturer-create']);
+        Permission::create(['name' => 'manufacturer-read']);
+        Permission::create(['name' => 'manufacturer-edit']);
+        Permission::create(['name' => 'manufacturer-delete']);
+        Permission::create(['name' => 'manufacturer-remove']);
+        Permission::create(['name' => 'manufacturer-report']);
+        Permission::create(['name' => 'manufacturer-print']);
+        Permission::create(['name' => 'manufacturer-approve']);
+        Permission::create(['name' => 'manufacturer-reject']);
+        Permission::create(['name' => 'manufacturer-void']);
+
         // MATERIAL REQUEST JOBCARD entity permissions:
 
         Permission::create(['name' => 'mrj-create']);
@@ -428,19 +610,6 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'material-transfer-reject']);
         Permission::create(['name' => 'material-transfer-void']);
 
-        // MASTER entity permissions:
-
-        Permission::create(['name' => 'master-create']);
-        Permission::create(['name' => 'master-read']);
-        Permission::create(['name' => 'master-edit']);
-        Permission::create(['name' => 'master-delete']);
-        Permission::create(['name' => 'master-remove']);
-        Permission::create(['name' => 'master-report']);
-        Permission::create(['name' => 'master-print']);
-        Permission::create(['name' => 'master-approve']);
-        Permission::create(['name' => 'master-reject']);
-        Permission::create(['name' => 'master-void']);
-
         // OVERTIME entity permissions:
 
         Permission::create(['name' => 'overtime-create']);
@@ -453,6 +622,19 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'overtime-approve']);
         Permission::create(['name' => 'overtime-reject']);
         Permission::create(['name' => 'overtime-void']);
+
+        // PAYROLL entity permissions:
+
+        Permission::create(['name' => 'payroll-create']);
+        Permission::create(['name' => 'payroll-read']);
+        Permission::create(['name' => 'payroll-edit']);
+        Permission::create(['name' => 'payroll-delete']);
+        Permission::create(['name' => 'payroll-remove']);
+        Permission::create(['name' => 'payroll-report']);
+        Permission::create(['name' => 'payroll-print']);
+        Permission::create(['name' => 'payroll-approve']);
+        Permission::create(['name' => 'payroll-reject']);
+        Permission::create(['name' => 'payroll-void']);
 
         // PROJECT entity permissions:
 
@@ -467,19 +649,6 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'project-reject']);
         Permission::create(['name' => 'project-void']);
 
-        // PURCHASE REQUEST entity permissions:
-
-        Permission::create(['name' => 'purchase-request-create']);
-        Permission::create(['name' => 'purchase-request-read']);
-        Permission::create(['name' => 'purchase-request-edit']);
-        Permission::create(['name' => 'purchase-request-delete']);
-        Permission::create(['name' => 'purchase-request-remove']);
-        Permission::create(['name' => 'purchase-request-report']);
-        Permission::create(['name' => 'purchase-request-print']);
-        Permission::create(['name' => 'purchase-request-approve']);
-        Permission::create(['name' => 'purchase-request-reject']);
-        Permission::create(['name' => 'purchase-request-void']);
-
         // PRICE LIST entity permissions:
 
         Permission::create(['name' => 'pricelist-create']);
@@ -492,6 +661,19 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'pricelist-approve']);
         Permission::create(['name' => 'pricelist-reject']);
         Permission::create(['name' => 'pricelist-void']);
+
+        // PURCHASE REQUEST entity permissions:
+
+        Permission::create(['name' => 'purchase-request-create']);
+        Permission::create(['name' => 'purchase-request-read']);
+        Permission::create(['name' => 'purchase-request-edit']);
+        Permission::create(['name' => 'purchase-request-delete']);
+        Permission::create(['name' => 'purchase-request-remove']);
+        Permission::create(['name' => 'purchase-request-report']);
+        Permission::create(['name' => 'purchase-request-print']);
+        Permission::create(['name' => 'purchase-request-approve']);
+        Permission::create(['name' => 'purchase-request-reject']);
+        Permission::create(['name' => 'purchase-request-void']);
 
         // PURCHASE ORDER entity permissions:
 
@@ -506,19 +688,6 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'purchase-order-reject']);
         Permission::create(['name' => 'purchase-order-void']);
 
-        // POSITION entity permissions:
-
-        Permission::create(['name' => 'position-create']);
-        Permission::create(['name' => 'position-read']);
-        Permission::create(['name' => 'position-edit']);
-        Permission::create(['name' => 'position-delete']);
-        Permission::create(['name' => 'position-remove']);
-        Permission::create(['name' => 'position-report']);
-        Permission::create(['name' => 'position-print']);
-        Permission::create(['name' => 'position-approve']);
-        Permission::create(['name' => 'position-reject']);
-        Permission::create(['name' => 'position-void']);
-
         // PROPOSE LEAVE entity permissions:
 
         Permission::create(['name' => 'propose-leave-create']);
@@ -531,6 +700,32 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'propose-leave-approve']);
         Permission::create(['name' => 'propose-leave-reject']);
         Permission::create(['name' => 'propose-leave-void']);
+
+        // PROFIT LOSS entity permissions:
+
+        Permission::create(['name' => 'profit-loss-create']);
+        Permission::create(['name' => 'profit-loss-read']);
+        Permission::create(['name' => 'profit-loss-edit']);
+        Permission::create(['name' => 'profit-loss-delete']);
+        Permission::create(['name' => 'profit-loss-remove']);
+        Permission::create(['name' => 'profit-loss-report']);
+        Permission::create(['name' => 'profit-loss-print']);
+        Permission::create(['name' => 'profit-loss-approve']);
+        Permission::create(['name' => 'profit-loss-reject']);
+        Permission::create(['name' => 'profit-loss-void']);
+
+        // POSITION entity permissions:
+
+        Permission::create(['name' => 'position-create']);
+        Permission::create(['name' => 'position-read']);
+        Permission::create(['name' => 'position-edit']);
+        Permission::create(['name' => 'position-delete']);
+        Permission::create(['name' => 'position-remove']);
+        Permission::create(['name' => 'position-report']);
+        Permission::create(['name' => 'position-print']);
+        Permission::create(['name' => 'position-approve']);
+        Permission::create(['name' => 'position-reject']);
+        Permission::create(['name' => 'position-void']);
 
         // QUOTATION entity permissions:
 
@@ -560,16 +755,16 @@ class PermissionsTableSeeder extends Seeder
 
         // RECEIVING INSPECTION REPORT entity permissions:
 
-        Permission::create(['name' => 'receiving-ir-create']);
-        Permission::create(['name' => 'receiving-ir-read']);
-        Permission::create(['name' => 'receiving-ir-edit']);
-        Permission::create(['name' => 'receiving-ir-delete']);
-        Permission::create(['name' => 'receiving-ir-remove']);
-        Permission::create(['name' => 'receiving-ir-report']);
-        Permission::create(['name' => 'receiving-ir-print']);
-        Permission::create(['name' => 'receiving-ir-approve']);
-        Permission::create(['name' => 'receiving-ir-reject']);
-        Permission::create(['name' => 'receiving-ir-void']);
+        Permission::create(['name' => 'receiving-inspection-report-create']);
+        Permission::create(['name' => 'receiving-inspection-report-read']);
+        Permission::create(['name' => 'receiving-inspection-report-edit']);
+        Permission::create(['name' => 'receiving-inspection-report-delete']);
+        Permission::create(['name' => 'receiving-inspection-report-remove']);
+        Permission::create(['name' => 'receiving-inspection-report-report']);
+        Permission::create(['name' => 'receiving-inspection-report-print']);
+        Permission::create(['name' => 'receiving-inspection-report-approve']);
+        Permission::create(['name' => 'receiving-inspection-report-reject']);
+        Permission::create(['name' => 'receiving-inspection-report-void']);
 
         // SETTING entity permissions:
 
@@ -583,6 +778,45 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'setting-approve']);
         Permission::create(['name' => 'setting-reject']);
         Permission::create(['name' => 'setting-void']);
+
+        // STOCK MONITORING entity permissions:
+
+        Permission::create(['name' => 'stock-monitoring-create']);
+        Permission::create(['name' => 'stock-monitoring-read']);
+        Permission::create(['name' => 'stock-monitoring-edit']);
+        Permission::create(['name' => 'stock-monitoring-delete']);
+        Permission::create(['name' => 'stock-monitoring-remove']);
+        Permission::create(['name' => 'stock-monitoring-report']);
+        Permission::create(['name' => 'stock-monitoring-print']);
+        Permission::create(['name' => 'stock-monitoring-approve']);
+        Permission::create(['name' => 'stock-monitoring-reject']);
+        Permission::create(['name' => 'stock-monitoring-void']);
+
+        // STORAGE entity permissions:
+
+        Permission::create(['name' => 'storage-create']);
+        Permission::create(['name' => 'storage-read']);
+        Permission::create(['name' => 'storage-edit']);
+        Permission::create(['name' => 'storage-delete']);
+        Permission::create(['name' => 'storage-remove']);
+        Permission::create(['name' => 'storage-report']);
+        Permission::create(['name' => 'storage-print']);
+        Permission::create(['name' => 'storage-approve']);
+        Permission::create(['name' => 'storage-reject']);
+        Permission::create(['name' => 'storage-void']);
+
+        // STRIP REPORT entity permissions:
+
+        Permission::create(['name' => 'strip-report-create']);
+        Permission::create(['name' => 'strip-report-read']);
+        Permission::create(['name' => 'strip-report-edit']);
+        Permission::create(['name' => 'strip-report-delete']);
+        Permission::create(['name' => 'strip-report-remove']);
+        Permission::create(['name' => 'strip-report-report']);
+        Permission::create(['name' => 'strip-report-print']);
+        Permission::create(['name' => 'strip-report-approve']);
+        Permission::create(['name' => 'strip-report-reject']);
+        Permission::create(['name' => 'strip-report-void']);
 
         // TASKCARD entity permissions:
 
@@ -609,6 +843,32 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'trj-approve']);
         Permission::create(['name' => 'trj-reject']);
         Permission::create(['name' => 'trj-void']);
+
+        // TRIAL BALANCE entity permissions:
+
+        Permission::create(['name' => 'trial-balance-create']);
+        Permission::create(['name' => 'trial-balance-read']);
+        Permission::create(['name' => 'trial-balance-edit']);
+        Permission::create(['name' => 'trial-balance-delete']);
+        Permission::create(['name' => 'trial-balance-remove']);
+        Permission::create(['name' => 'trial-balance-report']);
+        Permission::create(['name' => 'trial-balance-print']);
+        Permission::create(['name' => 'trial-balance-approve']);
+        Permission::create(['name' => 'trial-balance-reject']);
+        Permission::create(['name' => 'trial-balance-void']);
+
+        // UNIT entity permissions:
+
+        Permission::create(['name' => 'unit-create']);
+        Permission::create(['name' => 'unit-read']);
+        Permission::create(['name' => 'unit-edit']);
+        Permission::create(['name' => 'unit-delete']);
+        Permission::create(['name' => 'unit-remove']);
+        Permission::create(['name' => 'unit-report']);
+        Permission::create(['name' => 'unit-print']);
+        Permission::create(['name' => 'unit-approve']);
+        Permission::create(['name' => 'unit-reject']);
+        Permission::create(['name' => 'unit-void']);
 
         // USER entity permissions:
 
