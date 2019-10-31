@@ -14,14 +14,13 @@ class GSE extends MemfisModel
         'gseable_id',
         'storage_id',
         'returned_at',
-        'received_at',
-        'received_by',
+        'returned_by',
         'section',
         'note',
     ];
 
     protected $dates = [
-        'returned_at', 
+        'returned_at',
         'received_at'
     ];
 

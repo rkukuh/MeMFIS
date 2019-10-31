@@ -137,9 +137,9 @@ let receiving_inspection_report = {
             let date = $('#date').val();
             let status = $('input[name="status"]:checked').val();
             let type = $('input[name="type"]:checked').val();
-            let condition = $('input[name="condition"]:checked').val();
             let preservation_check = $('input[name="preservation_check"]:checked').val();
             let condition_material = $('input[name="condition_material"]:checked').val();
+            let condition = $('input[name="condition"]:checked').val();
             let quality = $('input[name="quality"]:checked').val();
             let identification = $('input[name="identification"]:checked').val();
             let packing_handling_check = $('#packing_handling_check').val();
@@ -167,9 +167,9 @@ let receiving_inspection_report = {
                     packing_type:type,
                     packing_condition:condition_material,
                     preservation_check:preservation_check,
-                    condition:condition,
-                    quality:quality,
-                    identification:identification,
+                    material_condition:condition,
+                    material_quality:quality,
+                    material_identification:identification,
                     unsatisfactory_packing:packing_handling_check,
                     unsatisfactory_preservation:preservation_check_explain,
                     unsatisfactory_document:document_check,

@@ -51,7 +51,7 @@
 
                                         <select name="project" id="project" class="form-control m-select2" style="width:100%" disabled>
                                             @foreach ($projects as $project)
-                                                <option value="{{$project->id}}" @if($project->id == $projec->id) selected @endif>{{$project->code}}</option>
+                                                <option value="{{$project->id}}" @if($project->id == $project->id) selected @endif>{{$project->code}}</option>
                                             @endforeach
                                         </select>
 
@@ -62,7 +62,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $projec->aircraft->name)
+                                                @slot('text', $project->aircraft->name)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -73,10 +73,10 @@
                                         </label>
 
                                         @component('frontend.common.input.datepicker')
-                                        @slot('id', 'date')
-                                        @slot('text', 'Date')
-                                        @slot('name', 'date')
-                                        @slot('id_error', 'date')
+                                            @slot('id', 'date')
+                                            @slot('text', 'Date')
+                                            @slot('name', 'date')
+                                            @slot('id_error', 'date')
                                         @endcomponent
                                     </div>
 
@@ -86,7 +86,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $project->aircraft_register)
+                                                @slot('text', $project->aircraft_register)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-3 col-md-3 col-lg-3">
@@ -95,7 +95,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $project->aircraft_sn)
+                                                @slot('text', $project->aircraft_sn)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -107,10 +107,10 @@
                                         </label>
 
                                         @component('frontend.common.input.number')
-                                        @slot('id', 'total_time')
-                                        @slot('text', 'Total Time')
-                                        @slot('name', 'total_time')
-                                        @slot('id_error', 'total_time')
+                                            @slot('id', 'total_time')
+                                            @slot('text', 'Total Time')
+                                            @slot('name', 'total_time')
+                                            @slot('id_error', 'total_time')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -119,10 +119,10 @@
                                         </label>
 
                                         @component('frontend.common.input.number')
-                                        @slot('id', 'total_cycle')
-                                        @slot('text', 'Total Cycle')
-                                        @slot('name', 'total_cycle')
-                                        @slot('id_error', 'total_cyle')
+                                            @slot('id', 'total_cycle')
+                                            @slot('text', 'Total Cycle')
+                                            @slot('name', 'total_cycle')
+                                            @slot('id_error', 'total_cyle')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -134,12 +134,12 @@
                                         </label>
 
                                         @component('frontend.common.input.text')
-                                        @slot('id', 'work_performed')
-                                        @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed')
-                                        @slot('value', $projec->quotations->first()->title)
-                                        @slot('editable', 'readonly')
-                                        @slot('id_error', 'work_performed')
+                                            @slot('id', 'work_performed')
+                                            @slot('text', 'Work Performed')
+                                            @slot('name', 'work_performed')
+                                            @slot('value', $project->quotations->first()->title)
+                                            @slot('editable', 'readonly')
+                                            @slot('id_error', 'work_performed')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -147,12 +147,12 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         @component('frontend.common.input.textarea')
-                                        @slot('rows', '5')
-                                        @slot('id', 'work_performed_addtional')
-                                        @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed_addtional')
-                                        @slot('id_error', 'work_performed_addtional')
-                                        @slot('placeholder','Optional')
+                                            @slot('rows', '5')
+                                            @slot('id', 'work_performed_addtional')
+                                            @slot('text', 'Work Performed')
+                                            @slot('name', 'work_performed_addtional')
+                                            @slot('id_error', 'work_performed_addtional')
+                                            @slot('placeholder','Optional')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -164,10 +164,10 @@
                                         </label>
 
                                         @component('frontend.common.input.textarea')
-                                        @slot('rows', '5')
-                                        @slot('id', 'work_data')
-                                        @slot('name', 'work_data')
-                                        @slot('text', 'Work Data')
+                                            @slot('rows', '5')
+                                            @slot('id', 'work_data')
+                                            @slot('name', 'work_data')
+                                            @slot('text', 'Work Data')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -178,11 +178,11 @@
                                         </label>
 
                                         @component('frontend.common.input.textarea')
-                                        @slot('rows', '5')
-                                        @slot('id', 'exceptions')
-                                        @slot('name', 'exceptions')
-                                        @slot('value', $taskcard_number)
-                                        @slot('disabled', 'disabled')
+                                            @slot('rows', '5')
+                                            @slot('id', 'exceptions')
+                                            @slot('name', 'exceptions')
+                                            @slot('value', $taskcard_number)
+                                            @slot('disabled', 'disabled')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -195,30 +195,30 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
-                                                @slot('id', 'DGCA')
-                                                @slot('checked', 'checked')
-                                                @slot('name', 'approval[]')
-                                                @slot('text', 'Indonesia DGCA No : 145D-093')
-                                                @slot('value', 'Indonesia DGCA No : 145D-093')
-                                                @slot('style_div','margin-top:30px')
+                                                    @slot('id', 'DGCA')
+                                                    @slot('checked', 'checked')
+                                                    @slot('name', 'approval[]')
+                                                    @slot('text', 'Indonesia DGCA No : 145D-093')
+                                                    @slot('value', 'Indonesia DGCA No : 145D-093')
+                                                    @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div>
                                             <!-- <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
-                                                @slot('id', 'FAA')
-                                                @slot('name', 'approval[]')
-                                                @slot('text', 'Federal Aviation Administration - FAA')
-                                                @slot('value', 'Federal Aviation Administration - FAA')
-                                                @slot('style_div','margin-top:30px')
+                                                    @slot('id', 'FAA')
+                                                    @slot('name', 'approval[]')
+                                                    @slot('text', 'Federal Aviation Administration - FAA')
+                                                    @slot('value', 'Federal Aviation Administration - FAA')
+                                                    @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
-                                                @slot('id', 'EASA')
-                                                @slot('name', 'approval[]')
-                                                @slot('text', 'European Union Aviation Safety Agency - EASA')
-                                                @slot('value', 'European Union Aviation Safety Agency - EASA')
-                                                @slot('style_div','margin-top:30px')
+                                                    @slot('id', 'EASA')
+                                                    @slot('name', 'approval[]')
+                                                    @slot('text', 'European Union Aviation Safety Agency - EASA')
+                                                    @slot('value', 'European Union Aviation Safety Agency - EASA')
+                                                    @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div> -->
                                         </div>
@@ -229,10 +229,11 @@
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
-                                                @component('frontend.common.buttons.save-and-print')
-                                                    @slot('type','button')
-                                                    @slot('id', 'add-rts')
-                                                    @slot('class', 'add-rts')
+                                                @component('frontend.common.buttons.submit')
+                                                        @slot('type','button')
+                                                        @slot('id', 'add-rts')
+                                                        @slot('class', 'add-rts')
+                                                        @slot('text', 'Save New Release to Service')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')

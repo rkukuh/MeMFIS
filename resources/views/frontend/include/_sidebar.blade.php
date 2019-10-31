@@ -18,7 +18,7 @@
                     <span class="m-menu__link-text">Dashboard</span>
                 </a>
             </li>
-            @role('admin')
+            @role('admin|marketing')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     MARKETING
@@ -42,7 +42,7 @@
                 </a>
             </li>
             @endrole
-            @role('admin')
+            @role('admin|ppic|engineer|helper')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     PPC/SUPPORTING
@@ -124,6 +124,7 @@
                 <div class="m-menu__submenu">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
+                        @hasanyrole('engineer|helper')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.jobcard.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -134,6 +135,8 @@
                                 </span>
                             </a>
                         </li>
+                        @endrole
+                        @hasanyrole('ppic')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.jobcard-ppc.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -144,6 +147,8 @@
                                 </span>
                             </a>
                         </li>
+                        @endrole
+                        @hasanyrole('engineer')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.taskrelease-jobcard.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -160,10 +165,11 @@
                                     <span></span>
                                 </i>
                                 <span class="m-menu__link-text">
-                                        RII Release
+                                    RII Release
                                 </span>
                             </a>
                         </li>
+                        @endrole
                     </ul>
                 </div>
             </li>
@@ -178,6 +184,7 @@
                 <div class="m-menu__submenu">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
+                        @hasanyrole('engineer|helper')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.jobcard.hardtime.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -188,6 +195,8 @@
                                 </span>
                             </a>
                         </li>
+                        @endrole
+                        @hasanyrole('ppic')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.jobcard-hardtime-ppc.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -198,6 +207,8 @@
                                 </span>
                             </a>
                         </li>
+                        @endrole
+                        @hasanyrole('engineer')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.taskrelease-htcrr.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -218,6 +229,7 @@
                                 </span>
                             </a>
                         </li>
+                        @endrole
                     </ul>
                 </div>
             </li>
@@ -232,6 +244,7 @@
                 <div class="m-menu__submenu">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
+                        @hasanyrole('engineer|helper')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.discrepancy-mechanic.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -252,6 +265,8 @@
                                 </span>
                             </a>
                         </li>
+                        @endrole
+                        @hasanyrole('ppic')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.discrepancy-ppc.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -262,6 +277,7 @@
                                 </span>
                             </a>
                         </li>
+                        @endrole
                     </ul>
                 </div>
             </li>
@@ -276,6 +292,7 @@
                 <div class="m-menu__submenu">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
+                        @hasanyrole('engineer|helper')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.defectcard.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -286,6 +303,8 @@
                                 </span>
                             </a>
                         </li>
+                        @endrole
+                        @hasanyrole('ppic')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.defectcard-ppc.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -306,6 +325,8 @@
                                 </span>
                             </a>
                         </li>
+                        @endrole
+                        @hasanyrole('engineer')
                         <li class="m-menu__item" aria-haspopup="true">
                                 <a href="{{ route('frontend.taskrelease-defectcard.index') }}" class="m-menu__link">
                                     <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -326,6 +347,7 @@
                                     </span>
                                 </a>
                             </li>
+                        @endrole
                     </ul>
                 </div>
             </li>
@@ -388,7 +410,7 @@
                 </div>
             </li>
             @endrole
-            @role('admin')
+            @role('admin|scm')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     PURCHASING
@@ -493,104 +515,7 @@
                 </a>
             </li>
             @endrole
-            @hasanyrole('hrd|employee|admin')
-            <li class="m-menu__section">
-                <h4 class="m-menu__section-text">
-                    MY PROFILE
-                </h4>
-                <i class="m-menu__section-icon flaticon-more-v3"></i>
-            </li>
-
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.employee.index') }}" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Employee
-                    </span>
-                </a>
-            </li>
-
-            <li class="m-menu__section">
-                <h4 class="m-menu__section-text">
-                    ATTENDANCE
-                </h4>
-                <i class="m-menu__section-icon flaticon-more-v3"></i>
-            </li>
-
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.import-fingerprint.index') }}" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Import From Fingerprint Machine
-                    </span>
-                </a>
-            </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.attendance.index') }}" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Attendance List
-                    </span>
-                </a>
-            </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.attendance-correction.index') }}" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Attendance Correction
-                    </span>
-                </a>
-            </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.overtime.index') }}" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Overtime
-                    </span>
-                </a>
-            </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.propose-leave.index') }}" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Propose Leave
-                    </span>
-                </a>
-            </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Leave Report
-                    </span>
-                </a>
-            </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Calendar
-                    </span>
-                </a>
-            </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Assign Leaves
-                    </span>
-                </a>
-            </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Leave Datalist
-                    </span>
-                </a>
-            </li>
-            @endrole
-            @role('admin')
+            @role('admin|finance')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     Finance & Accounting
@@ -623,7 +548,7 @@
                 </a>
             </li>
             @endrole
-            @role('admin')
+            @role('admin|scm')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     WAREHOUSE
@@ -1013,6 +938,103 @@
                         </li>
                     </ul>
                 </div>
+            </li>
+            @endrole
+            @hasanyrole('hrd|employee|admin')
+            <li class="m-menu__section">
+                <h4 class="m-menu__section-text">
+                    MY PROFILE
+                </h4>
+                <i class="m-menu__section-icon flaticon-more-v3"></i>
+            </li>
+
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.employee.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Employee
+                    </span>
+                </a>
+            </li>
+
+            <li class="m-menu__section">
+                <h4 class="m-menu__section-text">
+                    ATTENDANCE
+                </h4>
+                <i class="m-menu__section-icon flaticon-more-v3"></i>
+            </li>
+
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.import-fingerprint.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Import From Fingerprint Machine
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.attendance.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Attendance List
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.attendance-correction.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Attendance Correction
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.overtime.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Overtime
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.propose-leave.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Propose Leave
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Leave Report
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Calendar
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Assign Leaves
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Leave Datalist
+                    </span>
+                </a>
             </li>
             @endrole
         </ul>

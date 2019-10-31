@@ -127,10 +127,17 @@ let Quotation = {
                     filterable: !1,
                 },
                 {
-                    field: 'conducted_by',
+                    field: '',
                     title: 'Approve By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e , i){
+                        if(t.conducted_by){
+                            return t.conducted_by+" "+t.conducted_at;
+                        }else{
+                            return "-";
+                        }
+                    },
                 },
                 {
                     field: 'Actions',

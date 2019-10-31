@@ -55,6 +55,9 @@ return [
             ]
         ],
         'quotations' => 20,
+        'rir' => [
+            'document-checks' => 20,
+        ],
         'rirs' => 20,
         'schools' => 20,
         'statuses' => 20,

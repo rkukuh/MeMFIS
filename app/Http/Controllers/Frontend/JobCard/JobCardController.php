@@ -162,6 +162,10 @@ class JobCardController extends Controller
         $now = Carbon::now();
         $statuses = Status::ofJobCard()->get();
         $jobcard = JobCard::with('jobcardable','quotation')->where('uuid',$jobCard)->first();
+        $srm = [];
+        $srm["scheduled_priority"]   = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->scheduled_priority_id)->first();
+        $srm["recurrence"]           = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->recurrence_id)->first();
+        $srm["manual_affected"]      = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->manual_affected_id)->first();
         $taskcard = json_decode($jobcard->origin_jobcardable);
         foreach($jobcard->helpers as $helper){
             $helper->userID .= $helper->user->id;
@@ -274,7 +278,8 @@ class JobCardController extends Controller
                         'helpers' => $helpers,
                         'now' => $now,
                         'actual_manhours'=> $actual_manhours,
-                        'taskcard' => $taskcard
+                        'taskcard' => $taskcard,
+                        'srm' => $srm
                         ]);
                 return $pdf->stream();
             }
@@ -297,7 +302,8 @@ class JobCardController extends Controller
                         'helpers' => $helpers,
                         'now' => $now,
                         'actual_manhours'=> $actual_manhours,
-                        'taskcard' => $taskcard
+                        'taskcard' => $taskcard,
+                        'srm' => $srm
                         ]);
                 return $pdf->stream();
             }
@@ -320,7 +326,8 @@ class JobCardController extends Controller
                         'helpers' => $helpers,
                         'now' => $now,
                         'actual_manhours'=> $actual_manhours,
-                        'taskcard' => $taskcard
+                        'taskcard' => $taskcard,
+                        'srm' => $srm
                         ]);
                 return $pdf->stream();
             }
@@ -343,7 +350,8 @@ class JobCardController extends Controller
                     'helpers' => $helpers,
                     'now' => $now,
                     'actual_manhours'=> $actual_manhours,
-                    'taskcard' => $taskcard
+                    'taskcard' => $taskcard,
+                        'srm' => $srm
                     ]);
                 return $pdf->stream();
             }
@@ -369,7 +377,8 @@ class JobCardController extends Controller
                 'helpers' => $helpers,
                 'now' => $now,
                 'actual_manhours'=> $actual_manhours,
-                'taskcard' => $taskcard])->render();
+                'taskcard' => $taskcard,
+                        'srm' => $srm])->render();
 
                 $pdf = App::make('dompdf.wrapper');
                 $pdf->loadHTML($view1)->setPaper('a4', 'portrait');
@@ -396,6 +405,7 @@ class JobCardController extends Controller
                    'now' => $now,
                    'actual_manhours'=> $actual_manhours,
                    'taskcard' => $taskcard,
+                        'srm' => $srm,
                    'last' => $last,
                    'defectcard' => $defectcard
                    ])->render();
@@ -496,7 +506,8 @@ class JobCardController extends Controller
                         'now' => $now,
                         'eo_additionals'=> $eo_additionals,
                         'actual_manhours'=> $actual_manhours,
-                        'taskcard' => $taskcard
+                        'taskcard' => $taskcard,
+                        'srm' => $srm
                     ]);
                 return $pdf->stream();
                 }else{
@@ -518,7 +529,8 @@ class JobCardController extends Controller
                             'now' => $now,
                             'eo_additionals'=> $eo_additionals,
                             'actual_manhours'=> $actual_manhours,
-                            'taskcard' => $taskcard
+                            'taskcard' => $taskcard,
+                        'srm' => $srm
                         ]);
                     return $pdf->stream();
                 }
@@ -542,7 +554,8 @@ class JobCardController extends Controller
                         'now' => $now,
                         'actual_manhours'=> $actual_manhours,
                         'eo_additionals'=> $eo_additionals,
-                        'taskcard' => $taskcard
+                        'taskcard' => $taskcard,
+                        'srm' => $srm
                     ]);
                     return $pdf->stream();
                 }else{
@@ -564,7 +577,8 @@ class JobCardController extends Controller
                             'now' => $now,
                             'actual_manhours'=> $actual_manhours,
                             'eo_additionals'=> $eo_additionals,
-                            'taskcard' => $taskcard
+                            'taskcard' => $taskcard,
+                        'srm' => $srm
                         ]);
                     return $pdf->stream();
                 }
@@ -589,7 +603,8 @@ class JobCardController extends Controller
                         'now' => $now,
                         'actual_manhours'=> $actual_manhours,
                         'eo_additionals'=> $eo_additionals,
-                        'taskcard' => $taskcard
+                        'taskcard' => $taskcard,
+                        'srm' => $srm
                     ]);
                     return $pdf->stream();
                 }else{
@@ -611,7 +626,8 @@ class JobCardController extends Controller
                             'now' => $now,
                             'actual_manhours'=> $actual_manhours,
                             'eo_additionals'=> $eo_additionals,
-                            'taskcard' => $taskcard
+                            'taskcard' => $taskcard,
+                        'srm' => $srm
                         ]);
                     return $pdf->stream();
                 }
@@ -636,7 +652,8 @@ class JobCardController extends Controller
                         'now' => $now,
                         'eo_additionals'=> $eo_additionals,
                         'actual_manhours'=> $actual_manhours,
-                        'taskcard' => $taskcard
+                        'taskcard' => $taskcard,
+                        'srm' => $srm
                     ]);
                     return $pdf->stream();
                 }else{
@@ -658,7 +675,8 @@ class JobCardController extends Controller
                             'now' => $now,
                             'eo_additionals'=> $eo_additionals,
                             'actual_manhours'=> $actual_manhours,
-                            'taskcard' => $taskcard
+                            'taskcard' => $taskcard,
+                        'srm' => $srm
                         ]);
                 return $pdf->stream();
                 }
@@ -682,7 +700,8 @@ class JobCardController extends Controller
                         'helpers' => $helpers,
                         'now' => $now,
                         'eo_additionals'=> $eo_additionals,
-                        'taskcard' => $taskcard
+                        'taskcard' => $taskcard,
+                        'srm' => $srm
                     ]);
                 return $pdf->stream();
                 }else{
@@ -703,7 +722,8 @@ class JobCardController extends Controller
                         'helpers' => $helpers,
                         'now' => $now,
                         'eo_additionals'=> $eo_additionals,
-                        'taskcard' => $taskcard
+                        'taskcard' => $taskcard,
+                        'srm' => $srm
                     ]);
                     return $pdf->stream();
                 }
@@ -727,7 +747,8 @@ class JobCardController extends Controller
                         'helpers' => $helpers,
                         'now' => $now,
                         'eo_additionals'=> $eo_additionals,
-                        'taskcard' => $taskcard
+                        'taskcard' => $taskcard,
+                        'srm' => $srm
                     ]);
                 return $pdf->stream();
                 }else{
@@ -748,7 +769,8 @@ class JobCardController extends Controller
                         'helpers' => $helpers,
                         'now' => $now,
                         'eo_additionals'=> $eo_additionals,
-                        'taskcard' => $taskcard
+                        'taskcard' => $taskcard,
+                        'srm' => $srm
                     ]);
                     return $pdf->stream();
                 }

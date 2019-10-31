@@ -18,6 +18,7 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfBenefitBaseCalculation::class);
         $this->call(TypesOfBenefitProrateCalculation::class);
         $this->call(TypesOfCapability::class);
+        $this->call(TypesOfCoa::class);
         $this->call(TypesOfCompany::class);
         $this->call(TypesOfDefectCardCloseReason::class);
         $this->call(TypesOfDefectCardPauseReason::class);
@@ -40,9 +41,14 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfProjectWorkPackageManhour::class);
         $this->call(TypesOfPurchaseRequest::class);
         $this->call(TypesOfRegulator::class);
+        $this->call(TypesOfRIRGeneralDocument::class);
+        $this->call(TypesOfRIRMaterialCheckCondition::class);
+        $this->call(TypesOfRIRMaterialCheckIdentification::class);
+        $this->call(TypesOfRIRMaterialCheckQuality::class);
         $this->call(TypesOfRIRPackingAndHandlingCheckCondition::class);
         $this->call(TypesOfRIRPackingAndHandlingCheckType::class);
         $this->call(TypesOfRIRPreservationCheck::class);
+        $this->call(TypesOfRIRTechnicalDocument::class);
         $this->call(TypesOfScheduledPayment::class);
         $this->call(TypesOfSchoolDegree::class);
         $this->call(TypesOfTaskCardEOManualAffected::class);
@@ -55,6 +61,5 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfTermOfPayment::class);
         $this->call(TypesOfUnit::class);
         $this->call(TypesOfWebsite::class);
-        $this->call(TypesOfCoa::class);
     }
 }

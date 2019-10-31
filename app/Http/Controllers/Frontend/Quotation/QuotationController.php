@@ -325,7 +325,7 @@ class QuotationController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Quotation approve.
      *
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
