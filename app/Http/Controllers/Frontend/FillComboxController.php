@@ -12,7 +12,6 @@ use App\Models\Promo;
 use App\Models\Access;
 use App\Models\FefoIn;
 use App\Models\Vendor;
-use App\Models\Request;
 use App\Models\JobCard;
 use App\Models\License;
 use App\Models\Project;
@@ -26,6 +25,7 @@ use App\Models\Employee;
 use App\Models\Facility;
 use App\Models\TaskCard;
 use App\Models\DefectCard;
+use App\Models\ItemRequest;
 use App\Models\InventoryOut;
 use App\Models\Manufacturer;
 use App\Models\PurchaseOrder;
@@ -969,7 +969,7 @@ class FillComboxController extends Controller
      */
     public function toolRequestJobCard()
     {
-        $toolRequest = Request::where('requestable_type','App\Models\JobCard')->pluck('name', 'uuid');
+        $toolRequest = ItemRequest::where('requestable_type','App\Models\JobCard')->pluck('number', 'uuid');
 
         return json_encode($toolRequest);
     }
@@ -981,7 +981,7 @@ class FillComboxController extends Controller
      */
     public function toolRequestDefectCard()
     {
-        $toolRequest = Type::where('requestable_type','App\Models\DefectCard')->pluck('name', 'uuid');
+        $toolRequest = ItemRequest::where('requestable_type','App\Models\DefectCard')->pluck('number', 'uuid');
 
         return json_encode($toolRequest);
     }
@@ -993,7 +993,7 @@ class FillComboxController extends Controller
      */
     public function toolRequestWorkshop()
     {
-        $toolRequest = Type::where('requestable_type','App\Models\Workshop')->pluck('name', 'uuid');
+        $toolRequest = ItemRequest::where('requestable_type','App\Models\Workshop')->pluck('number', 'uuid');
 
         return json_encode($toolRequest);
     }
@@ -1003,9 +1003,9 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function toolRequestInventpryOut()
+    public function toolRequestInventoryOut()
     {
-        $toolRequest = Type::where('requestable_type','App\Models\InventoryOut')->pluck('name', 'uuid');
+        $toolRequest = ItemRequest::where('requestable_type','App\Models\InventoryOut')->pluck('number', 'uuid');
 
         return json_encode($toolRequest);
     }
