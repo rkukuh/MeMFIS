@@ -16,8 +16,7 @@ $factory->define(GSE::class, function (Faker $faker) {
         'gseable_id' => null,
         'storage_id' => Storage::get()->random()->id,
         'returned_at' => Carbon::now(),
-        'received_at' => Carbon::now(),
-        'received_by' => Employee::get()->random()->id,
+        'returned_by' => Employee::get()->random()->id,
         'section' => null,
         'note' => $faker->randomElement([null, $faker->sentence]),
     ];
