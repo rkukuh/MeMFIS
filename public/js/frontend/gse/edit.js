@@ -102,7 +102,7 @@ let GseToolReturnedEdit = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_tool_request" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-expred='+t.pivot.expired_at+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_gse_item_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-expred='+t.pivot.expired_at+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
