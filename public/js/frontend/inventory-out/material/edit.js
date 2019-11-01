@@ -398,7 +398,6 @@ $("#material").change(function() {
 });
 
 $("#serial_no").change(function() {
-    console.log($(this).val());
     if ($("#serial_no").val() !== '') {
         $("input[name=qty_request]").val(1);
         $("input[name=qty_request]").prop('disabled', true);

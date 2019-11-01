@@ -21,6 +21,7 @@ Route::name('component.')->group(function () {
         Route::get('get-promos', 'FillComboxController@promo')->name('get-promos');
         Route::get('get-vendors', 'FillComboxController@vendor')->name('get-vendor');
         Route::get('get-jobcard', 'FillComboxController@jobcard')->name('get-jobcard');
+        Route::get('get-jobcard/{jobcard}/items', 'FillComboxController@jobcardItems')->name('get-jobcard-items');
         Route::get('get-projects', 'FillComboxController@project')->name('get-project');
         Route::get('get-accesses', 'FillComboxController@access')->name('get-accesses');
         Route::get('get-stations', 'FillComboxController@station')->name('get-stations');
@@ -45,6 +46,8 @@ Route::name('component.')->group(function () {
         Route::get('get-categories-item', 'FillComboxController@categories')->name('get-categories');
         Route::get('get-inventory-in', 'FillComboxController@inventoryIn')->name('get-inventory-in');
         Route::get('get-payment-term', 'FillComboxController@paymentTerm')->name('get-payment-term');
+        Route::get('get-tool-request/{toolRequest}', 'FillComboxController@toolRequest')->name('get-tool-request');
+        Route::get('get-tool-request/{toolRequest}/{item}', 'FillComboxController@toolRequestSerialNumber')->name('get-tool-request-serial-number');
         Route::get('get-pr-types', 'FillComboxController@purchaseRequestType')->name('get-pr-types');
         Route::get('get-item-units/{item}', 'FillComboxController@itemUnits')->name('get-item-units');
         Route::get('get-taxation-types', 'FillComboxController@taxation')->name('get-taxation-types');

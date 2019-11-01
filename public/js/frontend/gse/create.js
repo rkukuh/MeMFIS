@@ -1,117 +1,107 @@
 let GseToolReturnedCreate = {
     init: function () {
-        $('.gse_tool_returned_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/quotation',
-                        map: function (raw) {
-                            let dataSet = raw;
+        function item(uuid) {
+            $(".gse_tool_returned_datatable").mDatatable({
+                data: {
+                    type: "remote",
+                    source: {
+                        read: {
+                            method: "GET",
+                            url: "/datatables/request/item/" + uuid,
+                            map: function(raw) {
+                                let dataSet = raw;
 
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
+                                if (typeof raw.data !== "undefined") {
+                                    dataSet = raw.data;
+                                }
+
+                                return dataSet;
                             }
-
-                            return dataSet;
+                        }
+                    },
+                    pageSize: 10,
+                    serverPaging: !0,
+                    serverFiltering: !1,
+                    serverSorting: !0
+                },
+                layout: {
+                    theme: "default",
+                    class: "",
+                    scroll: false,
+                    footer: !1
+                },
+                sortable: !0,
+                filterable: !1,
+                pagination: !0,
+                search: {
+                    input: $("#generalSearch")
+                },
+                toolbar: {
+                    items: {
+                        pagination: {
+                            pageSizeSelect: [5, 10, 20, 30, 50, 100]
                         }
                     }
                 },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !1,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                columns: [
+                    {
+                        field: '#',
+                        title: 'No',
+                        width:'40',
+                        sortable: 'asc',
+                        filterable: !1,
+                        textAlign: 'center',
+                        template: function (row, index, datatable) {
+                            return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                        }
+                    },
+                    {
+                        field: 'code',
+                        title: 'Part Number',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150
+                    },
+                    {
+                        field: 'pivot.serial_number',
+                        title: 'Serial Number',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150
+                    },
+                    {
+                        field: 'name',
+                        title: 'Tool Description',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150
+                    },
+                    {
+                        field: 'pivot.quantity',
+                        title: 'Qty',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150
+                    },
+                    {
+                        field: 'unit_name',
+                        title: 'Unit',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150,
+                    },
+                    {
+                        field: 'pivot.note',
+                        title: 'Remark',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150,
                     }
-                }
-            },
-            columns: [
-                {
-                    field: '#',
-                    title: 'No',
-                    width:'40',
-                    sortable: 'asc',
-                    filterable: !1,
-                    textAlign: 'center',
-                    template: function (row, index, datatable) {
-                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
-                    }
-                },
-                {
-                    field: '',
-                    title: 'Part Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: '',
-                    title: 'Serial Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: '',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: '',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: '',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                },
-                {
-                    field: '',
-                    title: 'Remark',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                },
-                {
-                    field: 'Actions',
-                    width: 110,
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
-                }
-            ]
-        });
+                ]
+            });
+        }
 
+        let item_datatables_init = true;
         $('select[name="tool_request"]').on("change", function() {
             let uuid = $("#tool_request").val();
             let type = $("#type").val();
@@ -121,7 +111,6 @@ let GseToolReturnedCreate = {
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {
-                        console.log(data);
                         $('#project_number').html(data.project_no);
                         $('#ac_type').html(data.ac_type);
                         $('#ac_reg').html(data.ac_reg);
@@ -151,6 +140,21 @@ let GseToolReturnedCreate = {
                 });
             }else if(type == "inv_out"){
                 //DO NOTHING
+            }
+
+            if (item_datatables_init == true) {
+                item_datatables_init = false;
+                item(uuid);
+                table = $(".gse_tool_returned_datatable").mDatatable();
+                table.originalDataSet = [];
+                table.reload();
+            } else {
+                let table = $(".gse_tool_returned_datatable").mDatatable();
+                table.destroy();
+                item(uuid);
+                table = $(".gse_tool_returned_datatable").mDatatable();
+                table.originalDataSet = [];
+                table.reload();
             }
         });
 
