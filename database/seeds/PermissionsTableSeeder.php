@@ -155,6 +155,17 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'category-item-reject']);
         Permission::create(['name' => 'category-item-void']);
 
+        Permission::create(['name' => 'item-create']);
+        Permission::create(['name' => 'item-read']);
+        Permission::create(['name' => 'item-edit']);
+        Permission::create(['name' => 'item-delete']);
+        Permission::create(['name' => 'item-remove']);
+        Permission::create(['name' => 'item-report']);
+        Permission::create(['name' => 'item-print']);
+        Permission::create(['name' => 'item-approve']);
+        Permission::create(['name' => 'item-reject']);
+        Permission::create(['name' => 'item-void']);
+
         // CATEGORY ITEM CODE OF ACCOUNTING entity permissions:
 
         Permission::create(['name' => 'category-item-coa-create']);
