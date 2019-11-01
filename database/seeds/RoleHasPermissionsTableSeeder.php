@@ -552,18 +552,18 @@ class RoleHasPermissionsTableSeeder extends Seeder
 
         // FINANCE ACCOUNTING role permissions:
 
-        $fa = Role::where('name', 'fa')->first();
+        $fa = Role::where('name', 'finance')->first();
 
-        $fa->givePermissionTo('account-receiveable-create');
-        $fa->givePermissionTo('account-receiveable-read');
-        $fa->givePermissionTo('account-receiveable-edit');
-        $fa->givePermissionTo('account-receiveable-delete');
-        $fa->givePermissionTo('account-receiveable-remove');
-        $fa->givePermissionTo('account-receiveable-report');
-        $fa->givePermissionTo('account-receiveable-print');
-        $fa->givePermissionTo('account-receiveable-approve');
-        $fa->givePermissionTo('account-receiveable-reject');
-        $fa->givePermissionTo('account-receiveable-void');
+        $fa->givePermissionTo('account-receivable-create');
+        $fa->givePermissionTo('account-receivable-read');
+        $fa->givePermissionTo('account-receivable-edit');
+        $fa->givePermissionTo('account-receivable-delete');
+        $fa->givePermissionTo('account-receivable-remove');
+        $fa->givePermissionTo('account-receivable-report');
+        $fa->givePermissionTo('account-receivable-print');
+        $fa->givePermissionTo('account-receivable-approve');
+        $fa->givePermissionTo('account-receivable-reject');
+        $fa->givePermissionTo('account-receivable-void');
 
         $fa->givePermissionTo('account-payable-create');
         $fa->givePermissionTo('account-payable-read');

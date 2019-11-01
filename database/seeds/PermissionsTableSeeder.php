@@ -417,16 +417,16 @@ class PermissionsTableSeeder extends Seeder
 
         // ITEMS entity permissions:
 
-        Permission::create(['name' => 'items-create']);
-        Permission::create(['name' => 'items-read']);
-        Permission::create(['name' => 'items-edit']);
-        Permission::create(['name' => 'items-delete']);
-        Permission::create(['name' => 'items-remove']);
-        Permission::create(['name' => 'items-report']);
-        Permission::create(['name' => 'items-print']);
-        Permission::create(['name' => 'items-approve']);
-        Permission::create(['name' => 'items-reject']);
-        Permission::create(['name' => 'items-void']);
+        Permission::create(['name' => 'item-create']);
+        Permission::create(['name' => 'item-read']);
+        Permission::create(['name' => 'item-edit']);
+        Permission::create(['name' => 'item-delete']);
+        Permission::create(['name' => 'item-remove']);
+        Permission::create(['name' => 'item-report']);
+        Permission::create(['name' => 'item-print']);
+        Permission::create(['name' => 'item-approve']);
+        Permission::create(['name' => 'item-reject']);
+        Permission::create(['name' => 'item-void']);
 
         // INVENTORY IN entity permissions:
 
@@ -466,6 +466,19 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'jobcard-approve']);
         Permission::create(['name' => 'jobcard-reject']);
         Permission::create(['name' => 'jobcard-void']);
+
+        // JOURNAL entity permissions:
+
+        Permission::create(['name' => 'journal-create']);
+        Permission::create(['name' => 'journal-read']);
+        Permission::create(['name' => 'journal-edit']);
+        Permission::create(['name' => 'journal-delete']);
+        Permission::create(['name' => 'journal-remove']);
+        Permission::create(['name' => 'journal-report']);
+        Permission::create(['name' => 'journal-print']);
+        Permission::create(['name' => 'journal-approve']);
+        Permission::create(['name' => 'journal-reject']);
+        Permission::create(['name' => 'journal-void']);
 
         // JOBCARD HARD TIME entity permissions:
 
