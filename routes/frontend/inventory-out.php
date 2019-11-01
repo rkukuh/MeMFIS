@@ -25,7 +25,7 @@ Route::name('frontend.')->group(function () {
                     Route::post('/material/{inventoryOut}/item/{item}', 'MaterialInventoryOutController@addItem')->name('material.items.store');
                     Route::put('/material/{inventoryOut}/item/{item}', 'MaterialInventoryOutController@updateItem')->name('material.items.update');
                     Route::delete('/material/{inventoryOut}/item/{item}', 'MaterialInventoryOutController@deleteItem')->name('material.items.destroy');
-                    Route::put('/material/{inventoryOut}/approve', 'MaterialInventoryOutController@approve')->name('material.approve');
+                    Route::put('/material/{inventoryOut}/approve', 'MaterialInventoryOutController@approve')->name('material.approve')->middleware('permission:inventory-out-approve');
 
                     /** TOOL */
 
@@ -36,7 +36,7 @@ Route::name('frontend.')->group(function () {
                     Route::post('/tool/{inventoryOut}/item/{item}', 'ToolInventoryOutController@addItem')->name('tool.items.store');
                     Route::put('/tool/{inventoryOut}/item/{item}', 'ToolInventoryOutController@updateItem')->name('tool.items.update');
                     Route::delete('/tool/{inventoryOut}/item/{item}', 'ToolInventoryOutController@deleteItem')->name('tool.items.destroy');
-                    Route::put('/tool/{inventoryOut}/approve', 'ToolInventoryOutController@approve')->name('tool.approve');
+                    Route::put('/tool/{inventoryOut}/approve', 'ToolInventoryOutController@approve')->name('tool.approve')->middleware('permission:inventory-out-approve');
                 });
             });
         });
