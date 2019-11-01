@@ -237,7 +237,7 @@ class RoleHasPermissionsTableSeeder extends Seeder
         $scm->givePermissionTo('interchange-approve');
         $scm->givePermissionTo('interchange-reject');
         $scm->givePermissionTo('interchange-void');
-        
+
         $scm->givePermissionTo('vendor-create');
         $scm->givePermissionTo('vendor-read');
         $scm->givePermissionTo('vendor-edit');
@@ -384,7 +384,7 @@ class RoleHasPermissionsTableSeeder extends Seeder
         $hrd->givePermissionTo('attendance-list-approve');
         $hrd->givePermissionTo('attendance-list-reject');
         $hrd->givePermissionTo('attendance-list-void');
-        
+
         $hrd->givePermissionTo('attendance-correction-create');
         $hrd->givePermissionTo('attendance-correction-read');
         $hrd->givePermissionTo('attendance-correction-edit');
@@ -608,7 +608,7 @@ class RoleHasPermissionsTableSeeder extends Seeder
         $fa->givePermissionTo('balance-sheet-approve');
         $fa->givePermissionTo('balance-sheet-reject');
         $fa->givePermissionTo('balance-sheet-void');
-        
+
         $fa->givePermissionTo('cashbook-create');
         $fa->givePermissionTo('cashbook-read');
         $fa->givePermissionTo('cashbook-edit');
@@ -707,7 +707,7 @@ class RoleHasPermissionsTableSeeder extends Seeder
         $fa->givePermissionTo('trial-balance-approve');
         $fa->givePermissionTo('trial-balance-reject');
         $fa->givePermissionTo('trial-balance-void');
-        
+
         // WORKSHOP JAKARTA role permissions:
 
         $wj = Role::where('name', 'workshop-jakarta')->first();

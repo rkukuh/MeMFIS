@@ -34,17 +34,30 @@ use App\Http\Controllers\Controller;
 
 class FillComboxController extends Controller
 {
-/**
- * Display a listing of the resource.
- *
- * @return \Illuminate\Http\Response
- */
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function jobcard()
     {
         $jobcards = JobCard::pluck('number', 'uuid');
 
         return json_encode($jobcards);
 
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jobcardItems($jobcard)
+    {
+        $items = JobCard::where('uuid', $jobcard)
+            ->first();
+
+        return $items->origin_jobcardable_items;
     }
 
     /**
@@ -960,6 +973,30 @@ class FillComboxController extends Controller
 
         return json_encode($taxation);
 
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolRequestSerialNumber(ItemRequest $toolRequest, Item $item)
+    {
+        $toolRequest = $toolRequest->items->where('uuid',$item->uuid)->pluck('pivot.serial_number', 'pivot.serial_number');
+
+        return json_encode($toolRequest);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolRequest(ItemRequest $toolRequest)
+    {
+        $toolRequest = $toolRequest->items->pluck('code', 'uuid');
+
+        return json_encode($toolRequest);
     }
 
     /**

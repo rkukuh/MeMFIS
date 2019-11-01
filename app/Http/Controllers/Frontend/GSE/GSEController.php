@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\GSE;
 
 use Carbon\Carbon;
 use App\Models\GSE;
+use App\Models\Storage;
 use App\Models\Employee;
 use App\Models\ItemRequest;
 use App\Helpers\DocumentNumber;
@@ -101,19 +102,35 @@ class GSEController extends Controller
 
         if($type == 'App\Models\JobCard'){
             return view('frontend.gse.hm.edit', [
-            'groundSupportEquiptment' => $gse]);
-        }
+            'groundSupportEquiptment' => $gse,
+            'employees' => Employee::all(),
+            'employee_uuid' => Employee::find($gse->returned_by)->uuid,
+            'storages' => Storage::all()
+            ]);
+            }
         else if($type == 'App\Models\DefectCard'){
             return view('frontend.gse.defectcard.edit', [
-            'groundSupportEquiptment' => $gse]);
+            'groundSupportEquiptment' => $gse,
+            'employees' => Employee::all(),
+            'employee_uuid' => Employee::find($gse->returned_by)->uuid,
+            'storages' => Storage::all()
+            ]);
         }
         else if($type == 'App\Models\Workshop'){
             return view('frontend.gse.workshop.edit', [
-            'groundSupportEquiptment' => $gse]);
+            'groundSupportEquiptment' => $gse,
+            'employees' => Employee::all(),
+            'employee_uuid' => Employee::find($gse->returned_by)->uuid,
+            'storages' => Storage::all()
+            ]);
         }
         else if($type == 'App\Models\InventoryOut'){
             return view('frontend.gse.inventory-out.edit', [
-            'groundSupportEquiptment' => $gse]);
+            'groundSupportEquiptment' => $gse,
+            'employees' => Employee::all(),
+            'employee_uuid' => Employee::find($gse->returned_by)->uuid,
+            'storages' => Storage::all()
+            ]);
         }
     }
 
@@ -126,11 +143,11 @@ class GSEController extends Controller
      */
     public function update(GSEUpdate $request, GSE $gse)
     {
-        dd($request->all());
-        $request->merge(['number' => DocumentNumber::generate('GSE-', ReceivingInspectionReport::withTrashed()->count()+1)]);
-        $groundSupportEquiptment->update($request->all());
+        $request->merge(['returned_at' => Carbon::parse($request->returned_at)]);
+        $request->merge(['returned_by' => Employee::where('uuid',$request->returned_by)->first()->user->id]);
+        $gse->update($request->all());
 
-        return response()->json($groundSupportEquiptment);
+        return response()->json($gse);
     }
 
     /**

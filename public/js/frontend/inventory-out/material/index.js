@@ -151,7 +151,7 @@ let InventoryOut = {
         });
 
         $('.inventory_out_datatable').on('click', '.delete', function () {
-            let inventory_uuid = $(this).data('uuid');
+            let inventory_uuid = $(this).data('id');
 
             swal({
                 title: 'Sure want to remove?',

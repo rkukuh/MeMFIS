@@ -39,6 +39,38 @@ class GSE extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A GSE may have zero or many item.
+     *
+     * This function will retrieve all the items of a GSE.
+     * See: Item's gse() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'gse_item','gse_id','item_id')
+                    ->withPivot(
+                        'serial_number',
+                        'quantity',
+                        'unit_id',
+                        'note',
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
+     * One-Way: An RIR may have one packing condition.
+     *
+     * This function will retrieve the packing condition of an RIR.
+     *
+     * @return mixed
+     */
+    public function packing_condition()
+    {
+        return $this->belongsTo(Type::class, 'packing_condition');
+    }
+
+    /**
      * One-Way: A GSE may have one receiver.
      *
      * This function will retrieve the receiver of a GSE.

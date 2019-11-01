@@ -105,7 +105,6 @@ let receiving_inspection_report = {
         }
 
         let item_datatables_init = true;
-
         $('select[name="purchase_order"]').on("change", function() {
             let uuid = $("#purchase_order").val();
             if (item_datatables_init == true) {
