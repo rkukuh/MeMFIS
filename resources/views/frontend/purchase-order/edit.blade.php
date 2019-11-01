@@ -366,17 +366,32 @@
                                                                 @endcomponent
                                                             </div>
                                                         </div>
-                                                        <div class="form-group m-form__group row">
+                                                        <div class="form-group m-form__group row grand_total_foreign">
                                                             <div class="col-sm-6 col-md-6 col-lg-6"></div>
                                                             <div class="col-sm-2 col-md-2 col-lg-2">
                                                                 <div class="m--align-left" style="padding-top:15px">
-                                                                    Grand Total
+                                                                    Total in {{ $purchaseOrder->currency->name }}
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'grand_total')
                                                                     @slot('class', 'grand_total')
+                                                                    @slot('text', '0')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-6 col-md-6 col-lg-6"></div>
+                                                            <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="m--align-left" style="padding-top:15px">
+                                                                    Total in Rupiah
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'grand_total_rupiah')
+                                                                    @slot('class', 'grand_total_rupiah')
                                                                     @slot('text', '0')
                                                                 @endcomponent
                                                             </div>
@@ -436,6 +451,10 @@
     <script>
         let po_uuid = "{{$purchaseOrder->uuid}}";
         let currencyCode = "{{$purchaseOrder->currency->code}}";
+        let exchange_rate = "{{$purchaseOrder->exchange_rate}}";
+        if(currencyCode == "idr"){
+            $(".grand_total_foreign").addClass("hidden");
+        }
     </script>
 
     <script src="{{ asset('js/custom.js') }}"></script>

@@ -15,7 +15,7 @@ Route::name('frontend.')->group(function () {
             Route::post('/project-hm-additional/calculateManhours','ProjectHMAdditionalController@calculateManhours')->name('project-hm-additional.calculateManhours');
 
             Route::resource('project', 'ProjectController');
-            Route::post('/project/{project}/approve', 'ProjectController@approve')->name('project.approve');
+            Route::post('/project/{project}/approve', 'ProjectController@approve')->name('project.approve')->middleware('permission:project-approve');
 
 
             Route::resource('project-hm', 'ProjectHMController', [
