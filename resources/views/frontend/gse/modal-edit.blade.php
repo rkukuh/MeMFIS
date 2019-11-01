@@ -72,7 +72,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                     @component('frontend.common.buttons.submit')
-                                        @slot('class', 'add-instruction')
+                                        @slot('class', 'update-item')
                                         @slot('type', 'button')
                                     @endcomponent
                                     @component('frontend.common.buttons.reset')

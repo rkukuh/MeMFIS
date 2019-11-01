@@ -17,16 +17,8 @@ class RoleHasPermissionsTableSeeder extends Seeder
 
         $admin = Role::where('name', 'admin')->first();
 
-        $admin->givePermissionTo('user-create');
-        $admin->givePermissionTo('user-read');
-        $admin->givePermissionTo('user-edit');
-        $admin->givePermissionTo('user-delete');
-        $admin->givePermissionTo('user-remove');
-        $admin->givePermissionTo('user-report');
-        $admin->givePermissionTo('user-print');
-        $admin->givePermissionTo('user-approve');
-        $admin->givePermissionTo('user-reject');
-        $admin->givePermissionTo('user-void');
+        $permissions = Permission::get();
+        $admin->syncPermissions($permissions);
 
         // MARKETING role permissions:
 

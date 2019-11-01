@@ -298,13 +298,11 @@ let Quotation = {
                         },
                         error: function (jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
-                            $.each(errors.error, function (index, value) {
-                                toastr.error(value.message, value.title, {
-                                    "closeButton": true,
-                                    "timeOut": "0",
-                                }
+                            toastr.error(errors.message, errors.title, {
+                                "closeButton": true,
+                                "timeOut": "0",
+                            }
                             );
-                            });
                         }
                     });
                 }
@@ -354,13 +352,11 @@ let Quotation = {
                         },
                         error: function (jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
-                            $.each(errors.error, function (index, value) {
-                                toastr.error(value.message, value.title, {
-                                    "closeButton": true,
-                                    "timeOut": "0",
-                                }
+                            toastr.error(errors.message, errors.title, {
+                                "closeButton": true,
+                                "timeOut": "0",
+                            }
                             );
-                            });
                         }
                     });
                 }

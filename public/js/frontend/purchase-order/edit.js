@@ -20,9 +20,11 @@ let PurchaseOrder = {
 
                             let subtotal = discount = grandtotal = 0;
                             $.each(dataSet, function( index, data ) {
-                                subtotal += parseFloat(data.pivot.subtotal_before_discount);
-                                grandtotal += parseFloat(data.pivot.subtotal_before_discount);
-                                discount += parseFloat(data.discount_amount);
+                                if(data.pivot.subtotal_before_discount){
+                                    subtotal += parseFloat(data.pivot.subtotal_before_discount);
+                                    grandtotal += parseFloat(data.pivot.subtotal_before_discount);
+                                    discount += parseFloat(data.discount_amount);
+                                }
                             });
 
                             grandtotal -= discount;
@@ -32,6 +34,8 @@ let PurchaseOrder = {
                             $("#total_discount").val(discount);
                             $("#grand_total").html(ForeignFormatter.format(grandtotal));
                             $("#grand_total").val(grandtotal);
+                            $("#grand_total_rupiah").html(IDRformatter.format(grandtotal*exchange_rate));
+                            $("#grand_total_rupiah").val(grandtotal*exchange_rate);
                             return dataSet;
                         }
                     }
