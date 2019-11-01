@@ -51,6 +51,7 @@
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
+                                        <input type="hidden" id="type" name="type" value="inv_out">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Date @include('frontend.common.label.required')
@@ -70,9 +71,9 @@
 
                                             @component('frontend.common.input.select2')
                                             @slot('text', 'Inventory Out')
-                                            @slot('id', 'item_number_id')
-                                            @slot('name', 'item_number_id')
-                                            @slot('id_error', 'item_number_id')
+                                            @slot('id', 'tool_request')
+                                            @slot('name', 'tool_request')
+                                            @slot('id_error', 'tool_request')
                                             @endcomponent
 
 
@@ -217,8 +218,8 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/employee-uuid.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/inventory-out.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/inventory-out.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tool-request.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool-request-inv-out.js') }}"></script>
 
 
 @endpush

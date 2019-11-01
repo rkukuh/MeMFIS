@@ -233,6 +233,25 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** Reuqest */
+
+        Route::name('request.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'request',
+                'namespace' => 'Request'
+
+            ], function () {
+
+                // Route::get('/', 'RequestDatatables@index')->name('all');
+                Route::get('/item/{itemRequest}', 'ItemRequestDatatables@index')->name('request.item');
+
+
+            });
+
+        });
+
         /** POSITION */
 
         Route::name('position.')->group(function () {
@@ -971,17 +990,31 @@ Route::name('datatables.')->group(function () {
                 Route::get('/material', 'InventoryOutMaterialDatatables@index')->name('material.all');
                 Route::get('/material/{inventoryOut}/items', 'InventoryOutMaterialDatatables@getItemsByInventoryOut')->name('material.items');
 
-                /** Material Request */
-                // Route::get('/material', 'InventoryOutMaterialDatatables@index')->name('material.all');
-                // Route::get('/material/{inventoryOut}/items', 'InventoryOutMaterialDatatables@getItemsByInventoryOut')->name('material.items');
-
                 /** Tool */
                 Route::get('/tool', 'InventoryOutToolDatatables@index')->name('tools.all');
                 Route::get('/tool/{inventoryOut}/items', 'InventoryOutToolDatatables@getItemsByInventoryOut')->name('tools.items');
 
+            });
+        });
+
+        /** Item Request */
+
+        Route::name('item-request.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'item-request',
+                'namespace' => 'ItemRequest'
+
+            ], function () {
+
+                /** Material Request */
+                Route::get('/material', 'ItemRequestMaterialDatatables@index')->name('material.all');
+                Route::get('/material/{jobcard}/items', 'ItemRequestMaterialDatatables@getItemsByItemRequest')->name('material.items');
+
                 /** Tool Request */
-                // Route::get('/tool', 'InventoryOutToolDatatables@index')->name('tools.all');
-                // Route::get('/tool/{inventoryOut}/items', 'InventoryOutToolDatatables@getItemsByInventoryOut')->name('tools.items');
+                Route::get('/tool', 'ItemRequestToolDatatables@index')->name('tools.all');
+                Route::get('/tool/{jobcard}/items', 'ItemRequestToolDatatables@getItemsByItemRequest')->name('tools.items');
 
             });
         });
