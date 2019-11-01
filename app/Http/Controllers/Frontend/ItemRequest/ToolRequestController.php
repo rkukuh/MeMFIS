@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\InventoryOut\MaterialRequest;
+namespace App\Http\Controllers\Frontend\ItemRequest;
 
 use Auth;
 use App\Models\Employee;
 use App\Models\Storage;
 use App\Models\Approval;
 use App\Models\Item;
-use App\Models\InventoryOut;
+use App\Models\ItemRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\InventoryOutStore;
 use App\Http\Requests\Frontend\InventoryOutUpdate;
 use App\Helpers\DocumentNumber;
 
-class MaterialRequestController extends Controller
+class ToolRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class MaterialRequestController extends Controller
      */
     public function index()
     {
-        return view('frontend.material-request-jobcard.index');
+        return view('frontend.tool-request-jobcard.index');
     }
 
     /**
@@ -32,7 +32,7 @@ class MaterialRequestController extends Controller
      */
     public function create()
     {
-        return view('frontend.material-request-jobcard.create');
+        return view('frontend.tool-request-jobcard.create');
     }
 
     /**
@@ -60,7 +60,7 @@ class MaterialRequestController extends Controller
      */
     public function show(InventoryOut $inventoryOut)
     {
-        return view('frontend.material-request-jobcard.show', [
+        return view('frontend.tool-request-jobcard.show', [
             'inventoryOut' => $inventoryOut
         ]);
     }
@@ -76,7 +76,7 @@ class MaterialRequestController extends Controller
         $storages = Storage::get();
         $employees = Employee::get();
 
-        return view('frontend.material-request-jobcard.edit', [
+        return view('frontend.tool-request-jobcard.edit', [
             'storages' => $storages,
             'employees' => $employees,
             'inventoryOut' => $inventoryOut,

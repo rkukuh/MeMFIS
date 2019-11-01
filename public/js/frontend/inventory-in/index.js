@@ -151,7 +151,7 @@ let InventoryIn = {
         });
 
         $('.inventory_in_datatable').on('click', '.delete', function () {
-            let inventory_uuid = $(this).data('uuid');
+            let inventory_uuid = $(this).data('id');
 
             swal({
                 title: 'Sure want to remove?',
@@ -170,7 +170,7 @@ let InventoryIn = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/inventory-in/' + inventory_uuid + '',
+                        url: '/inventory-in/' + inventory_uuid +'',
                         success: function (data) {
                             toastr.success('Inventory has been deleted.', 'Deleted', {
                                     timeOut: 5000

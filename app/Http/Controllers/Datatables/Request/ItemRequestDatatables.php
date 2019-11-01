@@ -1,29 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\GSE;
+namespace App\Http\Controllers\Datatables\Request;
 
 use App\Models\Unit;
-use App\Models\GSE;
+use App\Models\ItemRequest;
 use App\Models\ListUtil;
 use Illuminate\Http\Order;
 use App\Http\Controllers\Controller;
 
-class ItemGSEDatatables extends Controller
+class ItemRequestDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(GSE $gse)
+    public function index(ItemRequest $itemRequest)
     {
-        $gses = $gse->items;
-
-        foreach($gses as $Gse){
-            $Gse->unit_name .= Unit::find($Gse->pivot->unit_id)->name;
+        foreach($itemRequest->items as $item){
+            $item->unit_name .= Unit::find($item->pivot->unit_id)->name;
         }
 
-        $data = $alldata = json_decode($gses);
+        $data = $alldata = json_decode($itemRequest->items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

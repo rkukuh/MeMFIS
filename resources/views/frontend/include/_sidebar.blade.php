@@ -42,7 +42,7 @@
                 </a>
             </li>
             @endrole
-            @role('admin|ppic|engineer|helper')
+            @role('admin|ppic|admin|engineer|helper|admin')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     PPC/SUPPORTING
@@ -124,7 +124,7 @@
                 <div class="m-menu__submenu">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
-                        @hasanyrole('engineer|helper')
+                        @hasanyrole('engineer|helper|admin')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.jobcard.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -136,7 +136,7 @@
                             </a>
                         </li>
                         @endrole
-                        @hasanyrole('ppic')
+                        @hasanyrole('ppic|admin')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.jobcard-ppc.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -148,7 +148,7 @@
                             </a>
                         </li>
                         @endrole
-                        @hasanyrole('engineer')
+                        @hasanyrole('engineer|helper|admin')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.taskrelease-jobcard.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -184,7 +184,7 @@
                 <div class="m-menu__submenu">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
-                        @hasanyrole('engineer|helper')
+                        @hasanyrole('engineer|helper|admin')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.jobcard.hardtime.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -196,7 +196,7 @@
                             </a>
                         </li>
                         @endrole
-                        @hasanyrole('ppic')
+                        @hasanyrole('ppic|admin')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.jobcard-hardtime-ppc.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -208,7 +208,7 @@
                             </a>
                         </li>
                         @endrole
-                        @hasanyrole('engineer')
+                        @hasanyrole('engineer|helper|admin')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.taskrelease-htcrr.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -244,7 +244,7 @@
                 <div class="m-menu__submenu">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
-                        @hasanyrole('engineer|helper')
+                        @hasanyrole('engineer|helper|admin')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.discrepancy-mechanic.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -266,7 +266,7 @@
                             </a>
                         </li>
                         @endrole
-                        @hasanyrole('ppic')
+                        @hasanyrole('ppic|admin')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.discrepancy-ppc.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -292,7 +292,7 @@
                 <div class="m-menu__submenu">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
-                        @hasanyrole('engineer|helper')
+                        @hasanyrole('engineer|helper|admin')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.defectcard.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -304,7 +304,7 @@
                             </a>
                         </li>
                         @endrole
-                        @hasanyrole('ppic')
+                        @hasanyrole('ppic|admin')
                         <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.defectcard-ppc.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -326,7 +326,7 @@
                             </a>
                         </li>
                         @endrole
-                        @hasanyrole('engineer')
+                        @hasanyrole('engineer|helper|admin')
                         <li class="m-menu__item" aria-haspopup="true">
                                 <a href="{{ route('frontend.taskrelease-defectcard.index') }}" class="m-menu__link">
                                     <i class="m-menu__link-bullet m-menu__link-bullet--dot">
