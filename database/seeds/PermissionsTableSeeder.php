@@ -426,6 +426,19 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'invoice-reject']);
         Permission::create(['name' => 'invoice-void']);
 
+        // JOURNAL entity permissions:
+
+        Permission::create(['name' => 'journal-create']);
+        Permission::create(['name' => 'journal-read']);
+        Permission::create(['name' => 'journal-edit']);
+        Permission::create(['name' => 'journal-delete']);
+        Permission::create(['name' => 'journal-remove']);
+        Permission::create(['name' => 'journal-report']);
+        Permission::create(['name' => 'journal-print']);
+        Permission::create(['name' => 'journal-approve']);
+        Permission::create(['name' => 'journal-reject']);
+        Permission::create(['name' => 'journal-void']);
+
         // ITEMS entity permissions:
 
         Permission::create(['name' => 'items-create']);
