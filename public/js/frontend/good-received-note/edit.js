@@ -269,10 +269,8 @@ let goods_received_note = {
             document.getElementById('item-description').innerText = description;
             let unit_id = $(this).data('unit');
 
-            $('select[name="unit_material"]').empty();
-
             $.ajax({
-                url: '/get-units',
+                url: '/get-item-unit-uuid/'+$(this).data('uuid'),
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -294,6 +292,7 @@ let goods_received_note = {
                     });
                 }
             });
+
             document.getElementById('qty').value = $(this).data('quantity');
             document.getElementById('exp_date').value = $(this).data('expred');
             document.getElementById('note').value = $(this).data('note');

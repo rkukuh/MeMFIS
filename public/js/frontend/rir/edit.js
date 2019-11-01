@@ -295,7 +295,7 @@ let receiving_inspection_report = {
             let unit_id = $(this).data('unit');
 
             $.ajax({
-                url: '/get-units',
+                url: '/get-item-unit-uuid/'+$(this).data('uuid'),
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -317,6 +317,7 @@ let receiving_inspection_report = {
                     });
                 }
             });
+
             document.getElementById('qty').value = $(this).data('quantity');
             document.getElementById('exp_date').value = $(this).data('expred');
             document.getElementById('note').value = $(this).data('note');

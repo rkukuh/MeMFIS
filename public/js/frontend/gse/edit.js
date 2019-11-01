@@ -234,7 +234,7 @@ let GseToolReturnedEdit = {
             let unit_id = $(this).data('unit');
 
             $.ajax({
-                url: '/get-units',
+                url: '/get-item-unit-uuid/'+$(this).data('uuid'),
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -329,7 +329,7 @@ let GseToolReturnedEdit = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/rir/' + rir_uuid + '/item/'+$(this).data('uuid'),
+                        url: '/gse/' + gse_uuid + '/item/'+$(this).data('uuid'),
                         success: function (data) {
                             toastr.success('Item GSE has been deleted.', 'Deleted', {
                                     timeOut: 5000
