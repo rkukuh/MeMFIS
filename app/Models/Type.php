@@ -237,6 +237,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of ItemRequest.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfItemRequest(Builder $query)
+    {
+        return $query->where('of', 'item-request');
+    }
+
+    /**
      * Scope a query to only include type of JobCard close reason.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -333,6 +344,94 @@ class Type extends MemfisModel
     public function scopeOfRegulator(Builder $query)
     {
         return $query->where('of', 'regulator');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's General Document.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIRGeneralDocument(Builder $query)
+    {
+        return $query->where('of', 'rir-general-document');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's Material Check Condition.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIRMaterialCheckCondition(Builder $query)
+    {
+        return $query->where('of', 'rir-material-condition');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's Material Check Identification.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIRMaterialCheckIdentification(Builder $query)
+    {
+        return $query->where('of', 'rir-material-identification');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's Material Check Quality.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIRMaterialCheckQuality(Builder $query)
+    {
+        return $query->where('of', 'rir-material-quality');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's Packing and Handling Check Condition.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIRPackingAndHandlingCheckCondition(Builder $query)
+    {
+        return $query->where('of', 'rir-packing-handling-condition');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's Packing and Handling Check Type.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIRPackingAndHandlingCheckType(Builder $query)
+    {
+        return $query->where('of', 'rir-packing-handling-type');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's Preservation Check.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIRPreservationCheck(Builder $query)
+    {
+        return $query->where('of', 'rir-preservation-check');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's Technical Document.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIRTechnicalDocument(Builder $query)
+    {
+        return $query->where('of', 'rir-technical-document');
     }
 
     /**

@@ -18,16 +18,24 @@ let PurchaseOrder = {
                             }
 
 
-                            let subtotal = discount = 0;
+                            let subtotal = discount = grandtotal = 0;
                             $.each(dataSet, function( index, data ) {
-                                subtotal += parseInt(data.pivot.subtotal_after_discount);
-                                discount += parseInt(data.discount);
+                                if(data.pivot.subtotal_before_discount){
+                                    subtotal += parseFloat(data.pivot.subtotal_before_discount);
+                                    grandtotal += parseFloat(data.pivot.subtotal_before_discount);
+                                    discount += parseFloat(data.discount_amount);
+                                }
                             });
-                            $("#sub_total").html(subtotal);
-                            $("#sub_total").val(subtotal);
-                            $("#total_discount").html(discount);
-                            $("#total_discount").val(discount);
 
+                            grandtotal -= discount;
+                            $("#sub_total").html(ForeignFormatter.format(subtotal));
+                            $("#sub_total").val(subtotal);
+                            $("#total_discount").html(ForeignFormatter.format(discount));
+                            $("#total_discount").val(discount);
+                            $("#grand_total").html(ForeignFormatter.format(grandtotal));
+                            $("#grand_total").val(grandtotal);
+                            $("#grand_total_rupiah").html(IDRformatter.format(grandtotal*exchange_rate));
+                            $("#grand_total_rupiah").val(grandtotal*exchange_rate);
                             return dataSet;
                         }
                     }
@@ -95,19 +103,19 @@ let PurchaseOrder = {
                 filterable: !1,
             },
             {
-                field: 'discount',
+                field: 'discount_amount',
                 title: 'Disc PR',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: 'pivot.discount_percentage',
+                field: 'discount_percentage',
                 title: 'Disc %',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: 'pivot.subtotal_after_discount',
+                field: 'pivot.subtotal_before_discount',
                 title: 'Total',
                 sortable: 'asc',
                 filterable: !1,
@@ -271,15 +279,15 @@ let PurchaseOrder = {
         });
 
         $('.modal-footer').on('click', '.update-item', function () {
-            let uuid = $('#uuid').val();
             let qty = $('#qty').val();
-            let unit_id = $('#unit_id').val();
+            let uuid = $('#uuid').val();
             let price = $('#price').val();
-            let ppn = $('#ppn').val();
             let promo = $('#promo').val();
+            let unit_id = $('#unit_id').val();
+            let tax_type = $('#taxation').val();
+            let tax_amount = $('#tax_amount').val();
             let promo_type = $('#promo-type').val();
             let remark_material = $('#remark_material').val();
-
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -287,13 +295,14 @@ let PurchaseOrder = {
                 url: "/purchase-order/"+po_uuid+"/item/"+uuid,
                 type: "PUT",
                 data: {
+                    price:price,
+                    promo:promo,
                     quantity:qty,
                     unit_id:unit_id,
-                    price:price,
-                    ppn:ppn,
-                    promo:promo,
-                    promo_type:promo_type,
+                    tax_type:tax_type,
                     note:remark_material,
+                    promo_type:promo_type,
+                    tax_amount:tax_amount,
                 },
                 success: function(response) {
                     if (response.errors) {
@@ -351,6 +360,13 @@ let PurchaseOrder = {
             let top_day_amount = $('#top_day_amount').val();
             let top_start_at = $('#top_start_at').val();
 
+            let tax_type = $('#taxation').val();
+            let tax_amount = parseFloat($('#tax_amount').val());
+            let subtotal = parseFloat($('#sub_total').val());
+            let total_after_tax = parseFloat($('#grand_total').val());
+            let total_discount = parseFloat($('#total_discount').val());
+            let total_before_tax = subtotal - total_discount;
+
             if($('#cash').is(":checked")){
                 top = 'cash';
 
@@ -375,10 +391,15 @@ let PurchaseOrder = {
                     ship_at:date_shipping,
                     vendor_id:vendor,
                     top_type:top,
+                    tax_type:tax_type,
+                    tax_amount:tax_amount,
                     shipping_address:shipping_address,
                     top_day_amount:top_day_amount,
                     top_start_at:top_start_at,
+                    subtotal:subtotal,
                     description:description,
+                    total_after_tax:total_after_tax,
+                    total_before_tax:total_before_tax,
                 },
                 success: function (response) {
                     if (response.errors) {
@@ -551,4 +572,45 @@ let PurchaseOrder = {
 
 jQuery(document).ready(function () {
     PurchaseOrder.init();
+    $("#taxation").select2();
+    $("#taxation").on("change", function() {
+        let tax_type = this.options[this.selectedIndex].text;
+        if(tax_type !== "No Taxation"){
+            $("#taxation").parent().siblings(".tax_amount").removeClass("hidden");
+            $(".total_tax").removeClass("hidden");
+            let tax_amount = calculate_tax();
+            $("#total_ppn").val(ForeignFormatter.format(parseInt(tax_amount)));
+            $("#total_ppn").html(ForeignFormatter.format(parseInt(tax_amount)));
+        }else{
+            $("#taxation").parent().siblings(".tax_amount").addClass("hidden");
+            $(".total_tax").addClass("hidden");
+        }
+    });
+
+    $("#tax_amount").on("change", function() {
+        let tax_total = calculate_tax();
+        $("#total_ppn").val(ForeignFormatter.format(parseInt(tax_total)));
+        $("#total_ppn").html(ForeignFormatter.format(parseInt(tax_total)));
+    });
+
+    function calculate_tax(){
+        let tax_type = $("#taxation option:selected").text();
+        let tax_amount = parseFloat($("#tax_amount").val());
+        let sub_total = parseFloat($("#sub_total").val());
+        let total_discount = parseFloat($("#total_discount").val());
+        let subtotal_after_discount = sub_total - total_discount;
+        let tax_total = 0;
+        let grand_total = subtotal_after_discount;
+        if(tax_type == "Include"){
+            tax_total = subtotal_after_discount / 1.1 * (tax_amount / 100) ;
+        }else if(tax_type == "Exclude"){
+            tax_total = subtotal_after_discount * (tax_amount / 100);
+            grand_total -= tax_total;
+        }
+
+        $("#grand_total").html(ForeignFormatter.format(parseInt(grand_total)));
+        $("#grand_total").val(parseInt(grand_total));
+
+        return tax_total;
+    }
 });

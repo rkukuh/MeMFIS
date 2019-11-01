@@ -69,14 +69,14 @@ let goods_received_note = {
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'qty_pr',
                     title: 'Qty PR',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'qty_po',
                     title: 'Qty PO',
                     sortable: 'asc',
                     filterable: !1,
@@ -191,7 +191,7 @@ let goods_received_note = {
             });
 
             let item_uuid = $("#material").val();
-            let exp_date = $("#exp_date_2").val();
+            let exp_date = $('input[name=exp_date2]').val();
             let qty = $("#quantity").val();
             let unit_id = $("#unit_material").val();
             let note = $("#remark").val();
@@ -424,7 +424,6 @@ $("#material").on("change", function () {
     $.ajax({
         url: '/label/get-good-received/'+grn_uuid+'/item/'+ item_uuid ,
         type: 'GET',
-        dataType: 'json',
         success: function (qty_item) {
             document.getElementById('item_reciveded').innerText = qty_item;
         }

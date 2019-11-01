@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Datatables\PurchaseOrder;
 use App\Models\PurchaseOrder;
 use App\Models\Unit;
 use App\Models\ListUtil;
+use App\Models\Pivots\PurchaseOrderItem;
 use Illuminate\Http\Order;
 use App\Http\Controllers\Controller;
 
@@ -20,8 +21,12 @@ class ItemPurchaseOrderDatatables extends Controller
         $purchaseOrders = $purchaseOrder->items;
 
         foreach($purchaseOrders as $purchaseOrder){
-            $purchaseOrder->discount .= intval($purchaseOrder->pivot->subtotal_before_discount) - intval($purchaseOrder->pivot->subtotal_after_discount);
             $purchaseOrder->unit_name .= Unit::find($purchaseOrder->pivot->unit_id)->name;
+            $discount = PurchaseOrderItem::where('purchase_order_id', $purchaseOrder->pivot->purchase_order_id)->where('item_id', $purchaseOrder->pivot->item_id)->first()->promos->first();
+            if($discount){
+                $purchaseOrder->discount_amount = $discount->pivot->amount;
+                $purchaseOrder->discount_percentage = $discount->pivot->value."%";
+            }
         }
 
         $data = $alldata = json_decode($purchaseOrders);

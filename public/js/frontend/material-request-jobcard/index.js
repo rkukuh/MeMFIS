@@ -10,7 +10,7 @@ let MaterialRequest = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation',
+                        url: '/datatables/item-request/material',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -66,38 +66,35 @@ let MaterialRequest = {
                     width: 150
                 },
                 {
-                    field: 'customer.name',
+                    field: 'number',
                     title: 'Material Request No.',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'number',
+                    field: '',
                     title: 'JC No.',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        return '<a href="/quotation/'+t.uuid+'">' + t.number + "</a>"
-                    }
+                    width: 150
                 },
                 {
-                    field: 'project.no_wo',
+                    field: 'storage.name',
                     title: 'Storage',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'project.no_wo',
+                    field: 'note',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'project.no_wo',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -110,7 +107,7 @@ let MaterialRequest = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'conducted_by',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
@@ -157,7 +154,7 @@ let MaterialRequest = {
         });
 
         $('.m_datatable').on('click', '.delete', function () {
-            let quotation_uuid = $(this).data('id');
+            let request_uuid = $(this).data('id');
 
             swal({
                 title: 'Sure want to remove?',
@@ -176,9 +173,9 @@ let MaterialRequest = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/quotation/' + quotation_uuid + '',
+                        url: '/item-request/material-request-jobcard/' + request_uuid,
                         success: function (data) {
-                            toastr.success('Quotation has been deleted.', 'Deleted', {
+                            toastr.success('Item Request has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
@@ -201,7 +198,7 @@ let MaterialRequest = {
         });
 
         $('.m_datatable').on('click', '.approve', function () {
-            let quotation_uuid = $(this).data('id');
+            let request_uuid = $(this).data('id');
 
             swal({
                 title: 'Sure want to Approve?',
@@ -219,10 +216,10 @@ let MaterialRequest = {
                                 'content'
                             )
                         },
-                        type: 'POST',
-                        url: '/quotation/' + quotation_uuid + '/approve',
+                        type: 'PUT',
+                        url: '/item-request/material-request-jobcard/' + request_uuid + '/approve',
                         success: function (data) {
-                            toastr.success('Quotation has been approved.', 'Approved', {
+                            toastr.success('Item Request has been approved.', 'Approved', {
                                     timeOut: 5000
                                 }
                             );
@@ -234,10 +231,11 @@ let MaterialRequest = {
                         },
                         error: function (jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
+                            toastr.error(errors.message, errors.title, {
+                                "closeButton": true,
+                                "timeOut": "0",
+                            }
+                            );
                         }
                     });
                 }

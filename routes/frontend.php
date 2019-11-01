@@ -63,6 +63,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('language', 'LanguageController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
+        Route::resource('overtime', 'OvertimeController');
         Route::resource('workshift', 'WorkshiftController');
         Route::resource('leave-type', 'LeaveTypeController');
         Route::resource('job-tittle', 'JobTittleController');
@@ -70,7 +71,11 @@ Route::name('frontend.')->group(function () {
         Route::resource('leave-period','LeavePeriodController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
-        Route::resource('overtime', 'OvertimeController');
+
+        /** TRANSACTION */
+
+        Route::resource('mutation', 'MutationController');
+        // Route::resource('item-request', 'ItemRequestController');
 
         /** CERTIFICATION */
 

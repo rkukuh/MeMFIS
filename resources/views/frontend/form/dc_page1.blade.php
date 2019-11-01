@@ -109,7 +109,7 @@
             <li>
                 <div class="jobcard-info">
                     <fieldset>
-                        <legend>DC No : DC-022877</legend>
+                        <legend>DC No : {{$defectcard->code}}</legend>
                         <div class="jobcard-info-detail">
                         <table width="80%" cellpadding="3">
                             <tr>

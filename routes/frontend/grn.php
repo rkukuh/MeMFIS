@@ -12,7 +12,7 @@ Route::name('frontend.')->group(function () {
         Route::namespace('GoodsReceived')->group(function () {
 
             Route::resource('goods-received', 'GoodsReceivedController');
-            Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve');
+            Route::put('goods-received/{goodsReceived}/approve', 'GoodsReceivedController@approve')->name('goods-received.approve')->middleware('permission:grn-approve');
 
             Route::name('goods-received.')->group(function () {
                 Route::prefix('goods-received')->group(function () {

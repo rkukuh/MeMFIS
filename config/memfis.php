@@ -23,7 +23,9 @@ return [
         'employees' => 20,
         'facilities' => 20,
         'goods-received' => 20,
+        'gse' => 20,
         'htcrr' => 20,
+        'item-requests' => 20,
         'inventory_ins' => 20,
         'fefo_ins' => 100,
         'inventory_outs' => 20,
@@ -33,6 +35,7 @@ return [
         'licenses' => 20,
         'levels' => 20,
         'manhours' => 20,
+        'mutations' => 20,
         'positions' => 20,
         'projects' => 20,
         'promos' => 20,
@@ -52,6 +55,10 @@ return [
             ]
         ],
         'quotations' => 20,
+        'rir' => [
+            'document-checks' => 20,
+        ],
+        'rirs' => 20,
         'schools' => 20,
         'statuses' => 20,
         'storages' => 20,
