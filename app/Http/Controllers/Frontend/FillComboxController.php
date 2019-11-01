@@ -980,6 +980,30 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function toolRequestSerialNumber(ItemRequest $toolRequest, Item $item)
+    {
+        $toolRequest = $toolRequest->items->where('uuid',$item->uuid)->pluck('pivot.serial_number', 'pivot.serial_number');
+
+        return json_encode($toolRequest);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolRequest(ItemRequest $toolRequest)
+    {
+        $toolRequest = $toolRequest->items->pluck('code', 'uuid');
+
+        return json_encode($toolRequest);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function toolRequestJobCard()
     {
         $toolRequest = ItemRequest::where('requestable_type','App\Models\JobCard')->pluck('number', 'uuid');
