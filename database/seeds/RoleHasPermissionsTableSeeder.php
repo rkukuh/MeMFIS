@@ -237,7 +237,7 @@ class RoleHasPermissionsTableSeeder extends Seeder
         $scm->givePermissionTo('interchange-approve');
         $scm->givePermissionTo('interchange-reject');
         $scm->givePermissionTo('interchange-void');
-        
+
         $scm->givePermissionTo('vendor-create');
         $scm->givePermissionTo('vendor-read');
         $scm->givePermissionTo('vendor-edit');
@@ -384,7 +384,7 @@ class RoleHasPermissionsTableSeeder extends Seeder
         $hrd->givePermissionTo('attendance-list-approve');
         $hrd->givePermissionTo('attendance-list-reject');
         $hrd->givePermissionTo('attendance-list-void');
-        
+
         $hrd->givePermissionTo('attendance-correction-create');
         $hrd->givePermissionTo('attendance-correction-read');
         $hrd->givePermissionTo('attendance-correction-edit');
@@ -552,18 +552,18 @@ class RoleHasPermissionsTableSeeder extends Seeder
 
         // FINANCE ACCOUNTING role permissions:
 
-        $fa = Role::where('name', 'fa')->first();
+        $fa = Role::where('name', 'finance')->first();
 
-        $fa->givePermissionTo('account-receiveable-create');
-        $fa->givePermissionTo('account-receiveable-read');
-        $fa->givePermissionTo('account-receiveable-edit');
-        $fa->givePermissionTo('account-receiveable-delete');
-        $fa->givePermissionTo('account-receiveable-remove');
-        $fa->givePermissionTo('account-receiveable-report');
-        $fa->givePermissionTo('account-receiveable-print');
-        $fa->givePermissionTo('account-receiveable-approve');
-        $fa->givePermissionTo('account-receiveable-reject');
-        $fa->givePermissionTo('account-receiveable-void');
+        $fa->givePermissionTo('account-receivable-create');
+        $fa->givePermissionTo('account-receivable-read');
+        $fa->givePermissionTo('account-receivable-edit');
+        $fa->givePermissionTo('account-receivable-delete');
+        $fa->givePermissionTo('account-receivable-remove');
+        $fa->givePermissionTo('account-receivable-report');
+        $fa->givePermissionTo('account-receivable-print');
+        $fa->givePermissionTo('account-receivable-approve');
+        $fa->givePermissionTo('account-receivable-reject');
+        $fa->givePermissionTo('account-receivable-void');
 
         $fa->givePermissionTo('account-payable-create');
         $fa->givePermissionTo('account-payable-read');
@@ -608,7 +608,7 @@ class RoleHasPermissionsTableSeeder extends Seeder
         $fa->givePermissionTo('balance-sheet-approve');
         $fa->givePermissionTo('balance-sheet-reject');
         $fa->givePermissionTo('balance-sheet-void');
-        
+
         $fa->givePermissionTo('cashbook-create');
         $fa->givePermissionTo('cashbook-read');
         $fa->givePermissionTo('cashbook-edit');
@@ -707,7 +707,7 @@ class RoleHasPermissionsTableSeeder extends Seeder
         $fa->givePermissionTo('trial-balance-approve');
         $fa->givePermissionTo('trial-balance-reject');
         $fa->givePermissionTo('trial-balance-void');
-        
+
         // WORKSHOP JAKARTA role permissions:
 
         $wj = Role::where('name', 'workshop-jakarta')->first();
