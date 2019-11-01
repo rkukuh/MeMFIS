@@ -268,4 +268,13 @@
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/employee.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/serial-number.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/material-po.js') }}"></script> --}}
+
+    <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script> --}}
+
 @endpush
