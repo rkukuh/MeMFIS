@@ -233,6 +233,25 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** Reuqest */
+
+        Route::name('request.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'request',
+                'namespace' => 'Request'
+
+            ], function () {
+
+                // Route::get('/', 'RequestDatatables@index')->name('all');
+                Route::get('/item/{itemRequest}', 'ItemRequestDatatables@index')->name('request.item');
+
+
+            });
+
+        });
+
         /** POSITION */
 
         Route::name('position.')->group(function () {
