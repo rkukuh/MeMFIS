@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Frontend\GSE;
 
-use App\Iten;
-use App\GSE;
+use App\Models\GSE;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -37,10 +37,12 @@ class ItemGSEController extends Controller
      */
     public function store(Request $request, GSE $gse, Item $item)
     {
-        $gse->items()->attach([$item->pivot->item_id => [
-            'quantity'=> 0,
-            'quantity_unit' => 0,
-            'unit_id' => $item->pivot->unit_id
+        // dd($request->all());
+        $gse->items()->attach([$item->id => [
+            'serial_number'=> $request->serial_no,
+            'quantity'=> $request->quantity,
+            'unit_id' => $request->unit_id,
+            'note' => $request->note
             ]
         ]);
     }
