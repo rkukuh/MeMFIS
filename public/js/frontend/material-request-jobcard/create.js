@@ -11,131 +11,137 @@ let MaterialRequestCreate = {
             $('#ref_project').removeAttr("disabled");
         });
 
-        $('.material_request_project_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/quotation',
-                        map: function (raw) {
-                            let dataSet = raw;
+        // var jobcard_uuid = '';
 
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
+        $("#ref_jobcard").change(function () {
+            jobcard_uuid = $(this).val();
+
+            $('.material_request_project_datatable').mDatatable({
+                data: {
+                    type: 'remote',
+                    source: {
+                        read: {
+                            method: 'GET',
+                            url: '/datatables/item-request/material/'+ jobcard_uuid +'/items',
+                            map: function (raw) {
+                                let dataSet = raw;
+
+                                if (typeof raw.data !== 'undefined') {
+                                    dataSet = raw.data;
+                                }
+
+                                return dataSet;
                             }
-
-                            return dataSet;
+                        }
+                    },
+                    pageSize: 10,
+                    serverPaging: !0,
+                    serverFiltering: !1,
+                    serverSorting: !0
+                },
+                layout: {
+                    theme: 'default',
+                    class: '',
+                    scroll: false,
+                    footer: !1
+                },
+                sortable: !0,
+                filterable: !1,
+                pagination: !0,
+                search: {
+                    input: $('#generalSearch')
+                },
+                toolbar: {
+                    items: {
+                        pagination: {
+                            pageSizeSelect: [5, 10, 20, 30, 50, 100]
                         }
                     }
                 },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !1,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: '#',
-                    title: 'No',
-                    width:'40',
-                    sortable: 'asc',
-                    filterable: !1,
-                    textAlign: 'center',
-                    template: function (row, index, datatable) {   
-                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
-                    }
-                },
-                {
-                    field: 'quotation_number',
-                    title: 'Part Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: '',
-                    title: 'Serial Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: '',
-                    title: 'Item Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: '',
-                    title: 'Expired Date',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: '',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'status',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                },
-                {
-                    field: 'status',
-                    title: 'Remark',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                },
-                {
-                    field: 'Actions',
-                    width: 110,
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_material_request" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-instruction_uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                            t.uuid +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                columns: [
+                    {
+                        field: '#',
+                        title: 'No',
+                        width: '40',
+                        sortable: 'asc',
+                        filterable: !1,
+                        textAlign: 'center',
+                        template: function (row, index, datatable) {
+                            return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                        }
+                    },
+                    {
+                        field: 'code',
+                        title: 'Part Number',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150
+                    },
+                    {
+                        field: '',
+                        title: 'Serial Number',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150
+                    },
+                    {
+                        field: 'description',
+                        title: 'Item Description',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150
+                    },
+                    {
+                        field: '',
+                        title: 'Expired Date',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150
+                    },
+                    {
+                        field: 'pivot.quantity',
+                        title: 'Qty',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150
+                    },
+                    {
+                        field: 'unit_name',
+                        title: 'Unit',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150,
+                    },
+                    {
+                        field: 'pivot.note',
+                        title: 'Remark',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150,
+                    },
+                    {
+                        field: 'Actions',
+                        width: 110,
+                        sortable: !1,
+                        overflow: 'visible',
+                        template: function (t, e, i) {
+                            return (
+                                '<button data-toggle="modal" data-target="#modal_material_request" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-instruction_uuid=' +
+                                t.uuid +
+                                '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                                '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                                t.uuid +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                 '<i class="la la-exchange"></i>' +
-                            '</a>'+
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                '</a>' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
+                                '</a>'
+                            );
+                        }
                     }
-                }
-            ]
+                ]
+            });
         });
 
         let remove = $('.m_datatable').on('click', '.delete', function () {

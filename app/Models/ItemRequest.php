@@ -7,7 +7,7 @@ use App\MemfisModel;
 class ItemRequest extends MemfisModel
 {
     protected $table = 'requests';
-    
+
     protected $fillable = [
         'number',
         'requestable_type',
@@ -34,6 +34,40 @@ class ItemRequest extends MemfisModel
     public function branches()
     {
         return $this->morphToMany(Branch::class, 'branchable');
+    }
+
+    /**
+     * One-to-Many: A gse may have one request.
+     *
+     * This function will retrieve all the gses of a request.
+     * See: GSE's request() method for the inverse
+     *
+     * @return mixed
+     */
+    public function gses()
+    {
+        return $this->hasMany(GSE::class);
+    }
+
+    /**
+     * Many-to-Many: A GSE may have zero or many item.
+     *
+     * This function will retrieve all the items of a GSE.
+     * See: Item's gse() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'item_request','request_id','item_id')
+                    ->withPivot(
+                        'serial_number',
+                        'quantity',
+                        'unit_id',
+                        'interchange_id',
+                        'note',
+                    )
+                    ->withTimestamps();
     }
 
     /**
@@ -72,5 +106,18 @@ class ItemRequest extends MemfisModel
     public function storage()
     {
         return $this->belongsTo(Storage::class);
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many approvals.
+     *
+     * This function will get all GoodsReceived's approvals.
+     * See: Approvals's approvable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function approvals()
+    {
+        return $this->morphMany(Approval::class, 'approvable');
     }
 }

@@ -8,22 +8,23 @@ use App\Models\Item;
 use App\Models\Type;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
+use App\Models\Vendor;
 use App\Models\Access;
 use App\Models\Project;
 use App\Models\License;
 use App\Models\Storage;
 use App\Models\Customer;
-use App\Models\Vendor;
 use App\Models\Aircraft;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Employee;
 use App\Models\TaskCard;
-use App\Models\GoodsReceived;
+use App\Models\ItemRequest;
+use Illuminate\Http\Request;
 use App\Models\Manufacturer;
 use App\Models\PurchaseOrder;
+use App\Models\GoodsReceived;
 use App\Models\PurchaseRequest;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\EmployeeLicense;
 
@@ -78,6 +79,48 @@ class FillLabelController extends Controller
         $customer->load('phones','faxes','emails','addresses')->get();
 
         return json_encode($customer);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolRequestHM(ItemRequest $ItemRequest)
+    {
+        $data['project_no'] = $ItemRequest->requestable->quotation->quotationable->code;
+        $data['ac_type'] = $ItemRequest->requestable->quotation->quotationable->aircraft->name;
+        $data['ac_reg'] = $ItemRequest->requestable->quotation->quotationable->aircraft_register;
+
+        return json_encode($data);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolRequestDefectCard(ItemRequest $ItemRequest)
+    {
+        $data['project_no'] = $ItemRequest->requestable->project_additional->code;
+        $data['ac_type'] = $ItemRequest->requestable->project_additional->aircraft->name;
+        $data['ac_reg'] = $ItemRequest->requestable->project_additional->aircraft_register;
+
+        return json_encode($data);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolRequestWorkshop(ItemRequest $ItemRequest)
+    {
+        $data['workshop_no'] = "WORKSHOP NUMBER";
+        $data['number'] = "PN-0000";
+        $data['description'] = "escriptionD";
+
+        return json_encode($data);
     }
 
     /**

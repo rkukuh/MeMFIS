@@ -75,7 +75,7 @@ Route::name('frontend.')->group(function () {
         /** TRANSACTION */
 
         Route::resource('mutation', 'MutationController');
-        Route::resource('item-request', 'ItemRequestController');
+        // Route::resource('item-request', 'ItemRequestController');
 
         /** CERTIFICATION */
 
