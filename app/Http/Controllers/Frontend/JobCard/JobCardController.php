@@ -162,11 +162,7 @@ class JobCardController extends Controller
         $now = Carbon::now();
         $statuses = Status::ofJobCard()->get();
         $jobcard = JobCard::with('jobcardable','quotation')->where('uuid',$jobCard)->first();
-        $srm = [];
-        $srm["scheduled_priority"]   = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->scheduled_priority_id)->first();
-        $srm["recurrence"]           = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->recurrence_id)->first();
-        $srm["manual_affected"]      = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->manual_affected_id)->first();
-        $taskcard = json_decode($jobcard->origin_jobcardable);
+    
         foreach($jobcard->helpers as $helper){
             $helper->userID .= $helper->user->id;
         }
@@ -278,8 +274,6 @@ class JobCardController extends Controller
                         'helpers' => $helpers,
                         'now' => $now,
                         'actual_manhours'=> $actual_manhours,
-                        'taskcard' => $taskcard,
-                        'srm' => $srm
                         ]);
                 return $pdf->stream();
             }
@@ -302,8 +296,6 @@ class JobCardController extends Controller
                         'helpers' => $helpers,
                         'now' => $now,
                         'actual_manhours'=> $actual_manhours,
-                        'taskcard' => $taskcard,
-                        'srm' => $srm
                         ]);
                 return $pdf->stream();
             }
@@ -326,8 +318,6 @@ class JobCardController extends Controller
                         'helpers' => $helpers,
                         'now' => $now,
                         'actual_manhours'=> $actual_manhours,
-                        'taskcard' => $taskcard,
-                        'srm' => $srm
                         ]);
                 return $pdf->stream();
             }
@@ -350,8 +340,6 @@ class JobCardController extends Controller
                     'helpers' => $helpers,
                     'now' => $now,
                     'actual_manhours'=> $actual_manhours,
-                    'taskcard' => $taskcard,
-                        'srm' => $srm
                     ]);
                 return $pdf->stream();
             }
@@ -362,23 +350,22 @@ class JobCardController extends Controller
                 $last = false;
 
                 $view1 = \View::make('frontend.form.preliminaryinspection-one')->with(['jobcard' => $jobcard,
-                'username' => $username,
-                'lastStatus' => $lastStatus,
-                'dateClosed' => $dateClosed,
-                'accomplished_by' => $accomplished_by,
-                'accomplished_at' => $accomplished_at,
-                'inspected_by' => $inspected_by,
-                'inspected_at' => $inspected_at,
-                'rii_by' => $rii_by,
-                'rii_at' => $rii_at,
-                'prepared_by' => $prepared_by,
-                'prepared_at' => $prepared_at,
-                'rii_status' => $rii_status,
-                'helpers' => $helpers,
-                'now' => $now,
-                'actual_manhours'=> $actual_manhours,
-                'taskcard' => $taskcard,
-                        'srm' => $srm])->render();
+                    'username' => $username,
+                    'lastStatus' => $lastStatus,
+                    'dateClosed' => $dateClosed,
+                    'accomplished_by' => $accomplished_by,
+                    'accomplished_at' => $accomplished_at,
+                    'inspected_by' => $inspected_by,
+                    'inspected_at' => $inspected_at,
+                    'rii_by' => $rii_by,
+                    'rii_at' => $rii_at,
+                    'prepared_by' => $prepared_by,
+                    'prepared_at' => $prepared_at,
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers,
+                    'now' => $now,
+                    'actual_manhours'=> $actual_manhours,
+                ])->render();
 
                 $pdf = App::make('dompdf.wrapper');
                 $pdf->loadHTML($view1)->setPaper('a4', 'portrait');
@@ -404,8 +391,6 @@ class JobCardController extends Controller
                    'helpers' => $helpers,
                    'now' => $now,
                    'actual_manhours'=> $actual_manhours,
-                   'taskcard' => $taskcard,
-                        'srm' => $srm,
                    'last' => $last,
                    'defectcard' => $defectcard
                    ])->render();
@@ -424,6 +409,11 @@ class JobCardController extends Controller
                 );
             }
         }elseif($jobcard->jobcardable_type == "App\Models\EOInstruction"){
+            $srm = [];
+            $srm["scheduled_priority"]   = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->scheduled_priority_id)->first();
+            $srm["recurrence"]           = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->recurrence_id)->first();
+            $srm["manual_affected"]      = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->manual_affected_id)->first();
+            $taskcard = json_decode($jobcard->origin_jobcardable);
             $eo_additionals = new stdClass;
 
             $eo_additionals->scheduled_priority = Type::find($jobcard->jobcardable->eo_header->scheduled_priority_id)->name;

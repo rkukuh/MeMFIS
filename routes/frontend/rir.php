@@ -14,7 +14,7 @@ Route::name('frontend.')->group(function () {
         Route::namespace('RIR')->group(function () {
 
             Route::resource('rir', 'RIRController');
-            Route::put('rir/{rir}/approve', 'RIRController@approve')->name('rir.approve');
+            Route::put('rir/{rir}/approve', 'RIRController@approve')->name('rir.approve')->middleware('permission:receiving-inspection-report-approve');
 
             Route::name('rir.')->group(function () {
                 Route::prefix('rir')->group(function () {

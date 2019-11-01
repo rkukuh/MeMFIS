@@ -231,10 +231,11 @@ let MaterialRequest = {
                         },
                         error: function (jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
+                            toastr.error(errors.message, errors.title, {
+                                "closeButton": true,
+                                "timeOut": "0",
+                            }
+                            );
                         }
                     });
                 }

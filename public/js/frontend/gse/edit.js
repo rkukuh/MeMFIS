@@ -114,6 +114,31 @@ let GseToolReturnedEdit = {
             ]
         });
 
+        $('select[name="tool"]').on("change", function() {
+            let item_uuid = $("#tool").val();
+
+            $.ajax({
+                url: '/get-tool-request/'+request_uuid+'/'+item_uuid,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                    $('select[name="serial_no"]').empty();
+
+                    $('select[name="serial_no"]').append(
+                        '<option value=""> Select Serial Number</option>'
+                    );
+
+                    $.each(data, function (key, value) {
+                        $('select[name="serial_no"]').append(
+                            '<option value="' + key + '">' + value + '</option>'
+                        );
+                    });
+                }
+            });
+
+        });
+
         $('.footer').on('click', '.update-gse', function () {
             let returned_at = $('input[name=date]').val();
             let storage = $('#item_storage_id').val();
@@ -152,17 +177,150 @@ let GseToolReturnedEdit = {
             });
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
+        $('.modal-footer').on('click', '.add-item', function () {
+            let item_uuid = $("#tool").val();
+            let serial_no = $("#serial_no").val();
+            let qty = $("#quantity").val();
+            let unit_id = $("#unit_tool").val();
+            let note = $("#remark").val();
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                url: '/gse/'+gse_uuid+'/item/'+item_uuid,
+                type: "POST",
+                data: {
+                    serial_no: serial_no,
+                    quantity: qty,
+                    unit_id: unit_id,
+                    note: note,
+                    // serial_numbers: serial_numbers,
+                },
+                success: function(response) {
+                    if (response.errors) {
+                        if (response.errors.quantity) {
+                            $('#quantity-error').html(response.errors.quantity[0]);
+                        }
+
+                    } else {
+                        if (response.title == "Danger") {
+                            toastr.error("Item already exists!", "Error", {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $('#modal_gse_item_add').modal('hide');
+
+                            toastr.success(
+                                "GSE's Item has been updated.",
+                                "Success",
+                                {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $(".gse_tool_returned_datatable").mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
+                    }
+                }
+            });
+        });
+        $('.gse_tool_returned_datatable').on('click', '.edit-item', function () {
+            let description = "";
+            document.getElementById('item-label').innerText = $(this).data('item');
+            let unit_id = $(this).data('unit');
+
+            $.ajax({
+                url: '/get-units',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    let index = 1;
+
+                    $('select[name="unit_id"]').empty();
+
+                    $.each(data, function (key, value) {
+                        if (key == unit_id) {
+                            $('select[name="unit_id"]').append(
+                                '<option value="' + key + '" selected>' + value + '</option>'
+                            );
+                        } else {
+                            $('select[name="unit_id"]').append(
+                                '<option value="' + key + '">' + value + '</option>'
+                            );
+                        }
+
+                    });
+                }
+            });
+
+            document.getElementById('qty').value = $(this).data('quantity');
+            document.getElementById('note').value = $(this).data('note');
+
+            document.getElementById('uuid').value = $(this).data('uuid');
+        });
+        $(".modal-footer").on("click", ".update-item", function() {
+
+            let uuid = $("input[name=uuid]").val();
+            let exp_date = $("#exp_date").val();
+            let qty = $("#qty").val();
+            let unit_id = $("#unit_id").val();
+            let note = $("#note").val();
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                url: '/rir/'+rir_uuid+'/item/'+uuid,
+                type: "PUT",
+                data: {
+                    serial_no: serial_no,
+                    quantity: qty,
+                    unit_id: unit_id,
+                    note: note,
+                },
+                success: function(response) {
+                    if (response.errors) {
+                        // if (response.errors.quantity) {
+                        //     $('#qty-error').html(response.errors.quantity[0]);
+                        // }
+                        // document.getElementById('manual_affected_id').value = manual_affected_id;
+                    } else {
+                        //    taskcard_reset();
+                        $('#modal_gse_item_edit').modal('hide');
+
+                        toastr.success(
+                            "RIR has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+
+                        let table = $(".gse_tool_returned_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                    }
+                }
+            });
+        });
+
+        $('.gse_tool_returned_datatable').on('click', '.delete', function () {
 
             swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
+            })
+            .then(result => {
                 if (result.value) {
                     $.ajax({
                         headers: {
@@ -171,22 +329,19 @@ let GseToolReturnedEdit = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/category/' + triggerid + '',
+                        url: '/rir/' + rir_uuid + '/item/'+$(this).data('uuid'),
                         success: function (data) {
-                            toastr.success(
-                                'Data Berhasil Dihapus.',
-                                'Sukses!', {
+                            toastr.success('Item GSE has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.gse_tool_returned_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
                         },
                         error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
                             let errors = jqXhr.responseJSON;
 
                             $.each(errors.errors, function (index, value) {
@@ -194,17 +349,6 @@ let GseToolReturnedEdit = {
                             });
                         }
                     });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
                 }
             });
         });

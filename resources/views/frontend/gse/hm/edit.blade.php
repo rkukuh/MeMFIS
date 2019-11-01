@@ -263,6 +263,7 @@
 @push('footer-scripts')
     <script>
         let gse_uuid = '{{$groundSupportEquiptment->uuid}}';
+        let request_uuid = '{{$groundSupportEquiptment->request->uuid}}';
     </script>
     <script src="{{ asset('js/frontend/gse/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
@@ -272,9 +273,9 @@
     <script src="{{ asset('js/frontend/functions/select2/serial-number.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/material-po.js') }}"></script> --}}
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool-request.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
-    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script> --}}
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
 
 @endpush

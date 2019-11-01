@@ -294,8 +294,6 @@ let receiving_inspection_report = {
             document.getElementById('item-description').innerText = description;
             let unit_id = $(this).data('unit');
 
-            $('select[name="unit_material"]').empty();
-
             $.ajax({
                 url: '/get-units',
                 type: 'GET',
