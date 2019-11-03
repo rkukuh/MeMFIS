@@ -65,7 +65,7 @@ class ItemRequest extends MemfisModel
                         'quantity',
                         'unit_id',
                         'interchange_id',
-                        'note',
+                        'note'
                     )
                     ->withTimestamps();
     }
