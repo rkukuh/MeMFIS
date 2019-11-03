@@ -60,7 +60,7 @@ class ItemRequest extends MemfisModel
      */
     public function items()
     {
-        return $this->belongsToMany(Item::class, 'item_request','request_id','item_id')
+        return $this->belongsToMany(Item::class, 'item_request', 'request_id', 'item_id')
                     ->withPivot(
                         'serial_number',
                         'quantity',
