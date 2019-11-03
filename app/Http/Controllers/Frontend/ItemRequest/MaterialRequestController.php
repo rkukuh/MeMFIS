@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemRequestStore;
 use App\Http\Requests\Frontend\ItemRequestUpdate;
 use App\Helpers\DocumentNumber;
+use App\Models\JobCard;
 use App\Models\Type;
 
 class MaterialRequestController extends Controller
@@ -23,6 +24,9 @@ class MaterialRequestController extends Controller
      */
     public function index()
     {
+        $jobcard = JobCard::where('uuid', '=', 'e83107ef-badd-4595-9878-72bace74651a')->first();
+        $items = $jobcard->jobcardable->materials;
+        dd($items->toArray());
         return view('frontend.material-request-jobcard.index');
     }
 
@@ -55,6 +59,19 @@ class MaterialRequestController extends Controller
         $request->merge(['requestable_id' => ItemRequest::withTrashed()->count() + 1]);
 
         $itemRequest = ItemRequest::create($request->all());
+
+        $jobcard = JobCard::where('uuid', $request->jc_no)->first();
+        $items = $jobcard->jobcardable->materials;
+
+        foreach ($items as $item) {
+            $itemRequest->items()->attach([
+                'request_id' => $itemRequest->id,
+                'item_id' => $item->pivot->item_id,
+                'unit_id' => $item->pivot->unit_id,
+                'quantity' => $item->pivot->quantity,
+                'note' => $item->pivot->note
+            ]);
+        }
 
         return response()->json($itemRequest);
     }

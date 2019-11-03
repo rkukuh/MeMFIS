@@ -12,7 +12,7 @@ let MaterialRequestCreate = {
         });
 
         $("#ref_jobcard").change(function () {
-            let jobcard_uuid = $(this).val();            
+            let jobcard_uuid = $(this).val();   
 
             $('.material_request_project_datatable').mDatatable({
                 data: {
@@ -20,7 +20,7 @@ let MaterialRequestCreate = {
                     source: {
                         read: {
                             method: 'GET',
-                            url: '/datatables/item-request/material/'+ jobcard_uuid +'/items',
+                            url: '/datatables/jobcard/'+ jobcard_uuid +'/materials',
                             map: function (raw) {
                                 let dataSet = raw;
 
@@ -121,63 +121,6 @@ let MaterialRequestCreate = {
             });
         });
 
-        let remove = $('.material_request_project_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
-
-            swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/category/' + triggerid + '',
-                        success: function (data) {
-                            toastr.success(
-                                'Data Berhasil Dihapus.',
-                                'Sukses!', {
-                                    timeOut: 5000
-                                }
-                            );
-
-                            let table = $('.material_request_project_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
-                }
-            });
-        });
-
         $('.footer').on('click', '.add-request', function () {
             let note = $('#remark').val();
             let section_code = $('input[name=section_code]').val();
@@ -208,7 +151,7 @@ let MaterialRequestCreate = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/item-request/material-request-jobcard/'+response.uuid+'/edit';
+                        // window.location.href = '/item-request/material-request-jobcard/'+response.uuid+'/edit';
                     }
                 }
             });
