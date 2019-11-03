@@ -10,6 +10,7 @@ class ItemRequest extends MemfisModel
 
     protected $fillable = [
         'number',
+        'type_id',
         'requestable_type',
         'requestable_id',
         'requested_at',

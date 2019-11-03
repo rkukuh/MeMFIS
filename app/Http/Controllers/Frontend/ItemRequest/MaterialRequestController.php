@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemRequestStore;
 use App\Http\Requests\Frontend\ItemRequestUpdate;
 use App\Helpers\DocumentNumber;
+use App\Models\Type;
 
 class MaterialRequestController extends Controller
 {
@@ -43,7 +44,13 @@ class MaterialRequestController extends Controller
      */
     public function store(ItemRequestStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('ITEM-REQ', ItemRequest::withTrashed()->count() + 1)]);
+        $type = Type::where('code', '=', 'material')
+            ->where('of', 'item-request')
+            ->pluck('id')
+            ->first();
+
+        $request->merge(['number' => DocumentNumber::generate('MTRQ-', ItemRequest::withTrashed()->count() + 1)]);
+        $request->merge(['type_id' => $type]);
         $request->merge(['requestable_type' => 'App\Models\ItemRequest']);
         $request->merge(['requestable_id' => ItemRequest::withTrashed()->count() + 1]);
 
