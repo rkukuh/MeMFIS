@@ -233,7 +233,15 @@ class JobCardEngineerController extends Controller
      */
     public function update(JobCardUpdate $request, JobCard $jobcard)
     {
-
+        $last_action = Progress::where('progressed_by', Auth::id())->orderBy('created_at', 'DESC')->first();
+        if(Status::where('id',$last_action->status_id)->first()->code == 'progress'){
+            $error_notification = array(
+                'message' => "You can't run this jobcard",
+                'title' => "Danger",
+                'alert-type' => "error"
+            );
+            return redirect()->back()->with($error_notification);
+        }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             $jobcard->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
