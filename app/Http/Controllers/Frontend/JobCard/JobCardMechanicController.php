@@ -183,6 +183,15 @@ class JobCardMechanicController extends Controller
      */
     public function update(JobCardUpdate $request, JobCard $jobcard)
     {
+        $last_action = Progress::where('progressed_by', Auth::id())->orderBy('created_at', 'DESC')->first();
+        if(Status::where('id',$last_action->status_id)->first()->code == 'progress'){
+            $error_notification = array(
+                'message' => "You can't run this jobcard",
+                'title' => "Danger",
+                'alert-type' => "error"
+            );
+            return redirect()->back()->with($error_notification);
+        }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open"){
                 return redirect()->route('frontend.jobcard.index')->with($this->error_notification);

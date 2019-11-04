@@ -3,6 +3,9 @@ let SerialNumberSelect2 = {
         $('#serial_no, #serial_no_validate').select2({
             placeholder: 'Select a Serial Number'
         });
+        $('#sn, #sn_validate').select2({
+            placeholder: 'Select a Serial Number'
+        });
     }
 };
 
