@@ -188,6 +188,19 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function storageUUID()
+    {
+        $storages = Storage::pluck('name', 'uuid');
+
+        return json_encode($storages);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function licenses($id)
     {
         $general_license = License::where('code', 'general-license')->first();

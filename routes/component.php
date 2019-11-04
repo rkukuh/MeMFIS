@@ -42,6 +42,7 @@ Route::name('component.')->group(function () {
         Route::get('get-work-orders', 'FillComboxController@workOrder')->name('get-work-orders');
         Route::get('get-recurrences', 'FillComboxController@recurrence')->name('get-recurrences');
         Route::get('get-storages-combobox', 'FillComboxController@storages')->name('get-storages');
+        Route::get('get-storages', 'FillComboxController@storageUUID')->name('get-storages-uuid');
         Route::get('get-repeat-types', 'FillComboxController@repeatType')->name('get-repeat-types');
         Route::get('get-categories-item', 'FillComboxController@categories')->name('get-categories');
         Route::get('get-inventory-in', 'FillComboxController@inventoryIn')->name('get-inventory-in');
