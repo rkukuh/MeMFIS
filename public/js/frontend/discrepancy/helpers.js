@@ -223,6 +223,14 @@ $('.add_helper').on('click', function(){
             helpers_datatable.originalDataSet = [];
             helpers_datatable.reload();
 
+        },error: function (jqXhr, json, errorThrown) {
+            let errors = jqXhr.responseJSON;
+            $.each( errors, function(index, value) {
+                toastr.error(value.message, value.title, {
+                    "closeButton": true,
+                    "timeOut": "0",
+                });
+            });
         }
       });
 });
