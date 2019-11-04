@@ -130,7 +130,7 @@ let goods_received_note = {
 
         $('.footer').on('click', '.update-goods-received', function () {
             let received_at = $('input[name=date]').val();
-            let received_by = $('#received-by').val();
+            let received_by = $('#employee').val();
             let ref_po = $('input[name=ref-po]').val();
             let do_no = $('input[name=deliv-number]').val();
             let do_date = $('input[name=do-date]').val();
