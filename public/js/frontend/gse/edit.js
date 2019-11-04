@@ -102,7 +102,7 @@ let GseToolReturnedEdit = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_gse_item_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-expred='+t.pivot.expired_at+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_gse_item_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-sn='+t.pivot.serial_number+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
@@ -230,9 +230,9 @@ let GseToolReturnedEdit = {
         });
         $('.gse_tool_returned_datatable').on('click', '.edit-item', function () {
             let description = "";
+            let sn = $(this).data('sn');
             document.getElementById('item-label').innerText = $(this).data('item');
             let unit_id = $(this).data('unit');
-
             $.ajax({
                 url: '/get-item-unit-uuid/'+$(this).data('uuid'),
                 type: 'GET',
@@ -256,28 +256,51 @@ let GseToolReturnedEdit = {
                     });
                 }
             });
+            $.ajax({
+                url: '/get-tool-request/'+request_uuid+'/'+$(this).data('uuid'),
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('select[name="sn"]').empty();
+
+                    $('select[name="sn"]').append(
+                        '<option value=""> Select Serial Number</option>'
+                    );
+                    $.each(data, function (key, value) {
+                        if(sn == value){
+                            $('select[name="sn"]').append(
+                                '<option value="' + key + '" selected>' + value + '</option>'
+                            );
+                        }else{
+                            $('select[name="sn"]').append(
+                                '<option value="' + key + '">' + value + '</option>'
+                            );
+
+                        }
+                    });
+                }
+            });
 
             document.getElementById('qty').value = $(this).data('quantity');
-            document.getElementById('note').value = $(this).data('note');
+            document.getElementById('note-edit').value = $(this).data('note');
 
             document.getElementById('uuid').value = $(this).data('uuid');
         });
         $(".modal-footer").on("click", ".update-item", function() {
-
             let uuid = $("input[name=uuid]").val();
-            let exp_date = $("#exp_date").val();
+            let sn = $("#sn").val();
             let qty = $("#qty").val();
             let unit_id = $("#unit_id").val();
-            let note = $("#note").val();
+            let note = $("#note-edit").val();
 
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: '/rir/'+rir_uuid+'/item/'+uuid,
+                url: '/gse/'+gse_uuid+'/item/'+uuid,
                 type: "PUT",
                 data: {
-                    serial_no: serial_no,
+                    serial_no: sn,
                     quantity: qty,
                     unit_id: unit_id,
                     note: note,
@@ -293,7 +316,7 @@ let GseToolReturnedEdit = {
                         $('#modal_gse_item_edit').modal('hide');
 
                         toastr.success(
-                            "RIR has been updated.",
+                            "GSE's item has been updated.",
                             "Success",
                             {
                                 timeOut: 5000
