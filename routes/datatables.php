@@ -422,6 +422,22 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** STOCK MONITORING */
+
+        Route::name('stock-monitoring.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'stock-monitoring',
+                'namespace' => 'StockMonitoring'
+
+            ], function () {
+
+                Route::get('/', 'StockMonitoringDatatables@index')->name('.all');
+
+            });
+
+        });
         /** FEFO IN */
 
         Route::name('fefo-in.')->group(function () {

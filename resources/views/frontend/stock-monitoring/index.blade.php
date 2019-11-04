@@ -82,6 +82,7 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/stock-monitoring/by-partnumber/index.js')}}"></script>
-    <script src="{{ asset('js/frontend/stock-monitoring/by-storage/index.js')}}"></script>
+    {{-- <script src="{{ asset('js/frontend/stock-monitoring/by-partnumber/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/stock-monitoring/by-storage/index.js')}}"></script> --}}
+    <script src="{{ asset('js/frontend/stock-monitoring/index.js')}}"></script>
 @endpush
