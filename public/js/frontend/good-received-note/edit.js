@@ -448,10 +448,10 @@ $("#material").on("change", function () {
 });
 
 $("#quantity").on("change", function () {
-    let qty = $("#quantity").val();
-    let max = $("#quantity").attr("max");
+    let qty = parseInt($("#quantity").val());
+    let max = parseInt($("#quantity").attr("max"));
     $('.clone').remove();
-    if($("#quantity").val() < max){
+    if(qty <= max){
         for (let number = 0; number < qty; number++) {
             let clone = $(".blueprint").clone();
             clone.removeClass("blueprint hidden");
@@ -460,6 +460,7 @@ $("#quantity").on("change", function () {
             clone.slideDown("slow",function(){});
         }
     }else{
+        $("#quantity").val(max)
         for (let number = 0; number < max; number++) {
             let clone = $(".blueprint").clone();
             clone.removeClass("blueprint hidden");
@@ -467,5 +468,5 @@ $("#quantity").on("change", function () {
             $(".serial_number_inputs").after(clone);
             clone.slideDown("slow",function(){});
         }
-        }
+    }
 });
