@@ -269,8 +269,8 @@
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
                                                 @slot('type','button')
-                                                @slot('id', 'add-workpackage')
-                                                @slot('class', 'add-workpackage')
+                                                @slot('id', 'update-item-request')
+                                                @slot('class', 'update-item-request')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
@@ -303,12 +303,6 @@
 <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/ref-jobcard.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/ref-project.js') }}"></script>
-
-<script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
-
-<script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
 @endpush

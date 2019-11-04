@@ -121,9 +121,8 @@ let MaterialRequestEdit = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_material_request" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-instruction_uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '<button data-toggle="modal" data-target="#modal_material_request" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Edit" data-item=' +
+                            t.uuid + ' data-date=' + t.pivot.expired_at + ' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-serial=' + t.pivot.serial_number + ' data-remark=' + t.pivot.description + '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
                             t.uuid +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
@@ -191,9 +190,15 @@ let MaterialRequestEdit = {
 
             document.getElementById('qty_request').value = $(this).data('quantity');
             document.getElementById('uuid').value = $(this).data('uuid');
-            document.getElementById('item_remark').value = $(this).data('remark');
+            let remark = $(this).data('remark');
+
+            if (remark === null) {
+                document.getElementById('item_remark').value = '';                
+            } else {
+                document.getElementById('item_remark').value = $(this).data('remark');
+            }
+
             document.getElementById('serial_no').value = $(this).data('serial');
-            document.getElementById('exp_date').value = $(this).data('date');
 
             $('.btn-success').addClass('update-item');
             $('.btn-success').removeClass('add-item');
@@ -211,7 +216,7 @@ let MaterialRequestEdit = {
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: "/item-request/material/" + request_uuid + "/item/" + material,
+                url: "/item-request/material-request-jobcard/" + request_uuid + "/item/" + material,
                 type: "PUT",
                 data: {
                     item_id: material,
@@ -222,9 +227,9 @@ let MaterialRequestEdit = {
                     remark: remark,
                 },
                 success: function (response) {
-                    $('#modal_item').modal('hide');
+                    $('#modal_material_request').modal('hide');
 
-                    $('#modal_item').on('hidden.bs.modal', function (e) {
+                    $('#modal_material_request').on('hidden.bs.modal', function (e) {
                         $(this)
                             .find("input,textarea")
                             .val('')
@@ -234,7 +239,7 @@ let MaterialRequestEdit = {
                             .end();
                     });
 
-                    toastr.success("Item has been added.", "Success", {
+                    toastr.success("Item has been updated.", "Success", {
                         timeOut: 5000
                     });
 
@@ -268,7 +273,7 @@ let MaterialRequestEdit = {
                                 )
                             },
                             type: 'DELETE',
-                            url: '/item-request/material/' + request_uuid + '/item/' + $(this).data('uuid'),
+                            url: '/item-request/material-request-jobcard/' + request_uuid + '/item/' + $(this).data('uuid'),
                             success: function (data) {
                                 toastr.success('Item has been deleted.', 'Deleted', {
                                     timeOut: 5000
@@ -293,30 +298,32 @@ let MaterialRequestEdit = {
         });
 
         $('.footer').on('click', '.update-item-request', function () {
-            let ref_no = $('input[name=ref-no]').val();
-            let description = $('#remark').val();
+            let note = $('#description').val();
             let section_code = $('input[name=section_code]').val();
             let storage_id = $('#item_storage_id').val();
             let date = $('input[name=date]').val();
+            let received_by = $('#received-by').val();
+            let jc_no = $("#ref_jobcard").val();
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '/inventory-out/material/' + inventoryout_uuid,
+                url: '/item-request/material-request-jobcard/' + request_uuid,
                 type: 'PUT',
                 data: {
-                    ref_no: ref_no,
+                    jc_no: jc_no,
                     storage_id: storage_id,
-                    inventoried_at: date,
-                    description: description,
+                    requested_at: date,
+                    note: note,
                     section: section_code,
+                    received_by: received_by
                 },
                 success: function (response) {
                     if (response.errors) {
                         console.log(errors)
                     } else {
-                        toastr.success('InventoryOut has been updated.', 'Success', {
+                        toastr.success('Item Request has been updated.', 'Success', {
                             timeOut: 5000
                         });
                     }

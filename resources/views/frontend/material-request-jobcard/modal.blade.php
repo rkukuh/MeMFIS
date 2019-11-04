@@ -1,5 +1,4 @@
-<div class="modal fade" id="modal_material_request" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="modal_material_request" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -25,11 +24,11 @@
                                 </label>
 
                                 @component('frontend.common.input.select2')
-                                    @slot('text', 'Item')
-                                    @slot('id', 'material')
-                                    @slot('name', 'item')
-                                    @slot('id_error', 'item')
-                                    @slot('style', 'width:100%')
+                                @slot('text', 'Item')
+                                @slot('id', 'material')
+                                @slot('name', 'material')
+                                @slot('id_error', 'item')
+                                @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
                         </div>
@@ -38,12 +37,12 @@
                                 <label class="form-control-label">
                                     Serial Number
                                 </label>
-        
-                                @component('frontend.common.input.number')
-                                    @slot('id', 'qty')
-                                    @slot('text', 'Qty')
-                                    @slot('name', 'qty')
-                                    @slot('id_error', 'qty')
+
+                                @component('frontend.common.input.select2')
+                                @slot('id', 'serial_no')
+                                @slot('text', 'Serial Number')
+                                @slot('name', 'serial_no')
+                                @slot('id_error', 'serial_no')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -52,44 +51,44 @@
                                 </label>
 
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', 'generate')
+                                @slot('text', 'generate')
                                 @endcomponent
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Jobcard Qty 
+                                    Jobcard Qty
                                 </label>
-        
+
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', 'generate')
+                                @slot('text', 'generate')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <div class="form-group m-form__group row ">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                           Qty Request
+                                            Qty Request
                                         </label>
-        
+
                                         @component('frontend.common.input.number')
-                                            @slot('text', 'Qty Request')
-                                            @slot('id', 'qty_request')
-                                            @slot('name', 'qty_request')
-                                            @slot('id_error', 'qty_request')
+                                        @slot('text', 'Qty Request')
+                                        @slot('id', 'qty_request')
+                                        @slot('name', 'qty_request')
+                                        @slot('id_error', 'qty_request')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                             Unit
                                         </label>
-        
+
                                         @component('frontend.common.input.select2')
-                                            @slot('text', 'Unit')
-                                            @slot('id', 'unit_id')
-                                            @slot('name', 'unit_id')
-                                            @slot('id_error', 'unit')
+                                        @slot('text', 'Unit')
+                                        @slot('id', 'unit_id')
+                                        @slot('name', 'unit_id')
+                                        @slot('id_error', 'unit')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -102,11 +101,11 @@
                                 </label>
 
                                 @component('frontend.common.input.textarea')
-                                    @slot('rows', '3')
-                                    @slot('id', 'remark')
-                                    @slot('name', 'remark')
-                                    @slot('text', 'Remark')
-                                    @slot('required', 'required')
+                                @slot('rows', '3')
+                                @slot('id', 'item_remark')
+                                @slot('name', 'item_remark')
+                                @slot('text', 'Remark')
+                                @slot('required', 'required')
                                 @endcomponent
                             </div>
                         </div>
@@ -121,18 +120,18 @@
                                                     <label class="form-control-label">
                                                         Stock Qty
                                                     </label>
-                    
+
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'generate')
+                                                    @slot('text', 'generate')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         Qty Form
                                                     </label>
-                    
+
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'generate')
+                                                    @slot('text', 'generate')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -145,18 +144,18 @@
                                                     <label class="form-control-label">
                                                         Reserved Qty
                                                     </label>
-                    
+
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'generate')
+                                                    @slot('text', 'generate')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         Total Stock
                                                     </label>
-                    
+
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'generate')
+                                                    @slot('text', 'generate')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -169,13 +168,13 @@
                     <div class="modal-footer modal-footer-instruction">
                         <div class="flex">
                             <div class="action-buttons">
-                                    @component('frontend.common.buttons.submit')
-                                        @slot('class', 'add-instruction')
-                                        @slot('type', 'button')
-                                    @endcomponent
-                                    @component('frontend.common.buttons.reset')
-                                        @slot('class', 'reset-item')
-                                    @endcomponent
+                                @component('frontend.common.buttons.submit')
+                                @slot('class', 'add-instruction')
+                                @slot('type', 'button')
+                                @endcomponent
+                                @component('frontend.common.buttons.reset')
+                                @slot('class', 'reset-item')
+                                @endcomponent
                                 @include('frontend.common.buttons.close')
                             </div>
                         </div>
@@ -185,3 +184,13 @@
         </div>
     </div>
 </div>
+
+@push('footer-scripts')
+<script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/material-uuid.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/select2/serial-number.js')}}"></script>
+@endpush
