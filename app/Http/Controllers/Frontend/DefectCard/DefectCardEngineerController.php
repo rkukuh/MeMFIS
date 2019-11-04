@@ -319,11 +319,22 @@ class DefectCardEngineerController extends Controller
      */
     public function add_helper(DefectCard $DefectCard, Request $request)
     {
+        
         $employee = Employee::where('code', $request->helper)->first();
-        $DefectCard->helpers()->attach($employee->id, ['additionals' => $request->reference]);
-        $DefectCard->current_helpers = $DefectCard->helpers()->count();
-
-        return response()->json($DefectCard);
+        $result = $DefectCard->helpers()->where('code', $employee->code)->first();
+        if(isset($result) ){
+            $error_message = array(
+                'message' => "Helper already exists!.",
+                'title' => $employee->code,
+                'alert-type' => "error"
+            );
+            return response()->json(['error' => $error_message], '403');
+        }else{
+            $DefectCard->helpers()->attach($employee->id, ['additionals' => $request->reference]);
+            $DefectCard->current_helpers = $DefectCard->helpers()->count();
+            
+            return response()->json($DefectCard);
+        }
     }
 
     /**
