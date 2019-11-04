@@ -232,7 +232,6 @@ let GseToolReturnedEdit = {
             let description = "";
             document.getElementById('item-label').innerText = $(this).data('item');
             let unit_id = $(this).data('unit');
-
             $.ajax({
                 url: '/get-item-unit-uuid/'+$(this).data('uuid'),
                 type: 'GET',
@@ -256,28 +255,45 @@ let GseToolReturnedEdit = {
                     });
                 }
             });
+            $.ajax({
+                url: '/get-tool-request/'+request_uuid+'/'+$(this).data('uuid'),
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('select[name="sn"]').empty();
+
+                    $('select[name="sn"]').append(
+                        '<option value=""> Select Serial Number</option>'
+                    );
+
+                    $.each(data, function (key, value) {
+                        $('select[name="sn"]').append(
+                            '<option value="' + key + '">' + value + '</option>'
+                        );
+                    });
+                }
+            });
 
             document.getElementById('qty').value = $(this).data('quantity');
-            document.getElementById('note').value = $(this).data('note');
+            document.getElementById('note-edit').value = $(this).data('note');
 
             document.getElementById('uuid').value = $(this).data('uuid');
         });
         $(".modal-footer").on("click", ".update-item", function() {
-
             let uuid = $("input[name=uuid]").val();
-            let exp_date = $("#exp_date").val();
+            let sn = $("#sn").val();
             let qty = $("#qty").val();
             let unit_id = $("#unit_id").val();
-            let note = $("#note").val();
+            let note = $("#note-edit").val();
 
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: '/rir/'+rir_uuid+'/item/'+uuid,
+                url: '/gse/'+gse_uuid+'/item/'+uuid,
                 type: "PUT",
                 data: {
-                    serial_no: serial_no,
+                    serial_no: sn,
                     quantity: qty,
                     unit_id: unit_id,
                     note: note,
@@ -293,7 +309,7 @@ let GseToolReturnedEdit = {
                         $('#modal_gse_item_edit').modal('hide');
 
                         toastr.success(
-                            "RIR has been updated.",
+                            "GSE's item has been updated.",
                             "Success",
                             {
                                 timeOut: 5000
