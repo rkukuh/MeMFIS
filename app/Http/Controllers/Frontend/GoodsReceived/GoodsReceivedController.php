@@ -104,7 +104,9 @@ class GoodsReceivedController extends Controller
     {
         return view('frontend.goods-received-note.edit', [
             'goodsReceived' => $goodsReceived,
-            'additionals' => json_decode($goodsReceived->additionals)
+            'additionals' => json_decode($goodsReceived->additionals),
+            'employees' => Employee::all(),
+            'employee_uuid' => Employee::find($goodsReceived->received_by)->uuid
         ]);
 
     }
@@ -120,6 +122,7 @@ class GoodsReceivedController extends Controller
     {
         $request->merge(['storage_id' => Storage::where('uuid',$request->storage_id)->first()->id]);
         $request->merge(['received_at' => Carbon::parse($request->received_at)]);
+        $request->merge(['received_by' => Employee::where('uuid',$request->received_by)->first()->user->id]);
 
         $goodsReceived->update($request->all());
 
