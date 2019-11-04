@@ -23,5 +23,5 @@
         @include('frontend.stock-monitoring.filter')
     </div>
 
-    <div class="m_datatable_by_storage" id="scrolling_both"></div>
+    <div class="stock_monitoring_datatable" id="scrolling_both"></div>
 </div>

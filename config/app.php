@@ -163,7 +163,7 @@ return [
 
         Barryvdh\DomPDF\ServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
-        Directoryxx\Finac\FAServiceProvider::class,
+        // Directoryxx\Finac\FAServiceProvider::class,
 
 
     ],
