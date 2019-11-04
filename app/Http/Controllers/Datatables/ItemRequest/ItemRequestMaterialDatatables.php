@@ -127,7 +127,7 @@ class ItemRequestMaterialDatatables extends Controller
             $item->unit_name = Unit::find($item->pivot->unit_id)->name;
         }
 
-        $data = $alldata = $items;
+        $data = $alldata = json_decode($items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

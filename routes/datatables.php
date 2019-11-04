@@ -1010,11 +1010,11 @@ Route::name('datatables.')->group(function () {
 
                 /** Material Request */
                 Route::get('/material', 'ItemRequestMaterialDatatables@index')->name('material.all');
-                Route::get('/material/{jobcard}/items', 'ItemRequestMaterialDatatables@getItemsByItemRequest')->name('material.items');
+                Route::get('/material/{itemRequest}/items', 'ItemRequestMaterialDatatables@getItemsByItemRequest')->name('material.items');
 
                 /** Tool Request */
                 Route::get('/tool', 'ItemRequestToolDatatables@index')->name('tools.all');
-                Route::get('/tool/{jobcard}/items', 'ItemRequestToolDatatables@getItemsByItemRequest')->name('tools.items');
+                Route::get('/tool/{itemRequest}/items', 'ItemRequestToolDatatables@getItemsByItemRequest')->name('tools.items');
 
             });
         });

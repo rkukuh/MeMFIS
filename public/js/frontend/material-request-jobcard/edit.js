@@ -17,7 +17,7 @@ let MaterialRequestEdit = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation',
+                        url: '/datatables/item-request/material/'+ request_uuid +'/items',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -66,21 +66,21 @@ let MaterialRequestEdit = {
                     }
                 },
                 {
-                    field: 'quotation_number',
+                    field: 'code',
                     title: 'Part Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'pivot.serial_number',
                     title: 'Serial Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'description',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
@@ -94,21 +94,21 @@ let MaterialRequestEdit = {
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'pivot.quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'status',
+                    field: 'unit_name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: 'status',
+                    field: 'note',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
@@ -137,109 +137,188 @@ let MaterialRequestEdit = {
                 }
             ]
         });
+        
+        $('.material_request_project_datatable').on('click', '.edit-item', function () {
+            let item_uuid = $(this).data('item');
+            let unit_id = $(this).data('unit');
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
+            $.ajax({
+                url: '/get-materials-uuid/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
 
-            swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/category/' + triggerid + '',
-                        success: function (data) {
-                            toastr.success(
-                                'Data Berhasil Dihapus.',
-                                'Sukses!', {
-                                    timeOut: 5000
-                                }
+                    $('select[name="material"]').empty();
+
+                    $.each(data, function (key, value) {
+                        if (key == item_uuid) {
+                            $('select[name="material"]').append(
+                                '<option value="' + key + '" selected>' + value + '</option>'
                             );
-
-                            let table = $('.m_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
+                        } else {
+                            $('select[name="material"]').append(
+                                '<option value="' + key + '">' + value + '</option>'
+                            );
                         }
+
                     });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
+                }
+            });
+            $("#material").attr('disabled', true);
+
+            $.ajax({
+                url: '/get-item-unit-uuid/' + $(this).data('item'),
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                    $('select[name="unit_id"]').empty();
+
+                    $.each(data, function (key, value) {
+                        if (key == unit_id) {
+                            $('select[name="unit_id"]').append(
+                                '<option value="' + key + '" selected>' + value + '</option>'
+                            );
+                        } else {
+                            $('select[name="unit_id"]').append(
+                                '<option value="' + key + '">' + value + '</option>'
+                            );
+                        }
+
+                    });
+                }
+            });
+
+            document.getElementById('qty_request').value = $(this).data('quantity');
+            document.getElementById('uuid').value = $(this).data('uuid');
+            document.getElementById('item_remark').value = $(this).data('remark');
+            document.getElementById('serial_no').value = $(this).data('serial');
+            document.getElementById('exp_date').value = $(this).data('date');
+
+            $('.btn-success').addClass('update-item');
+            $('.btn-success').removeClass('add-item');
+        });
+
+        $(".modal-footer").on("click", ".update-item", function () {
+            let material = $("#material").val();
+            let quantity = $("input[name=qty_request]").val();
+            let exp_date = $("#exp_date").val();
+            let unit = $("#unit_id").val();
+            let remark = $("#remark").val();
+            let serial_no = $("#serial_no").val();
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                url: "/item-request/material/" + request_uuid + "/item/" + material,
+                type: "PUT",
+                data: {
+                    item_id: material,
+                    quantity: quantity,
+                    expired_at: exp_date,
+                    unit_id: unit,
+                    serial_no: serial_no,
+                    remark: remark,
+                },
+                success: function (response) {
+                    $('#modal_item').modal('hide');
+
+                    $('#modal_item').on('hidden.bs.modal', function (e) {
+                        $(this)
+                            .find("input,textarea")
+                            .val('')
+                            .end()
+                            .find("select")
+                            .select2('val', 'All')
+                            .end();
+                    });
+
+                    toastr.success("Item has been added.", "Success", {
+                        timeOut: 5000
+                    });
+
+                    let table = $('.material_request_project_datatable').mDatatable();
+
+                    table.originalDataSet = [];
+                    table.reload();
+
+                    $('.btn-success').addClass('add-item');
+                    $('.btn-success').removeClass('update-item');
                 }
             });
         });
 
-        $('.footer').on('click', '.add-goods-received', function () {
-            let received_at = $('input[name=date]').val();
-            let received_by = $('#received-by').val();
-            let ref_po = $('input[name=ref-po]').val();
-            let do_no = $('input[name=do-no]').val();
-            let ref_date = $('input[name=date-ref-date]').val();
-            let warehouse = $('input[name=warehouse]').val();
-            let description = $('#description').val();
-            let vehicle_no = $('input[name=vehicle-no]').val();
-            let container_no = $('input[name=container-no]').val();
+        $('.material_request_project_datatable').on('click', '.delete', function () {
+
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+                .then(result => {
+                    if (result.value) {
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                    'content'
+                                )
+                            },
+                            type: 'DELETE',
+                            url: '/item-request/material/' + request_uuid + '/item/' + $(this).data('uuid'),
+                            success: function (data) {
+                                toastr.success('Item has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                                );
+
+                                let table = $('.material_request_project_datatable').mDatatable();
+
+                                table.originalDataSet = [];
+                                table.reload();
+                            },
+                            error: function (jqXhr, json, errorThrown) {
+                                let errors = jqXhr.responseJSON;
+
+                                $.each(errors.errors, function (index, value) {
+                                    $('#delete-error').html(value);
+                                });
+                            }
+                        });
+                    }
+                });
+        });
+
+        $('.footer').on('click', '.update-item-request', function () {
+            let ref_no = $('input[name=ref-no]').val();
+            let description = $('#remark').val();
+            let section_code = $('input[name=section_code]').val();
+            let storage_id = $('#item_storage_id').val();
+            let date = $('input[name=date]').val();
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '/goods-received',
-                type: 'POST',
+                url: '/inventory-out/material/' + inventoryout_uuid,
+                type: 'PUT',
                 data: {
-                    received_at:received_at,
-                    received_by:received_by,
-                    vehicle_no:vehicle_no,
-                    container_no:container_no,
-                    purchase_order_id:ref_po,
-                    storage_id:warehouse,
-                    description:description,
+                    ref_no: ref_no,
+                    storage_id: storage_id,
+                    inventoried_at: date,
+                    description: description,
+                    section: section_code,
                 },
                 success: function (response) {
                     if (response.errors) {
-                        console.log(errors);
-                        // if (response.errors.title) {
-                        //     $('#title-error').html(response.errors.title[0]);
-                        // }
-
-                        // document.getElementById('manual_affected_id').value = manual_affected_id;
-
-
+                        console.log(errors)
                     } else {
-                        //    taskcard_reset();
-
-
-                        toastr.success('Taskcard has been created.', 'Success', {
+                        toastr.success('InventoryOut has been updated.', 'Success', {
                             timeOut: 5000
                         });
-
-                        // window.location.href = '/goods-received/'+response.uuid+'/edit';
                     }
                 }
             });

@@ -122,7 +122,7 @@ let MaterialRequestCreate = {
         });
 
         $('.footer').on('click', '.add-request', function () {
-            let note = $('#remark').val();
+            let note = $('#description').val();
             let section_code = $('input[name=section_code]').val();
             let storage_id = $('#item_storage_id').val();
             let date = $('input[name=date]').val();
@@ -151,7 +151,7 @@ let MaterialRequestCreate = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/item-request/material-request-jobcard/'+response.uuid+'/edit';
+                        window.location.href = '/item-request/material-request-jobcard/'+response.uuid+'/edit';
                     }
                 }
             });
