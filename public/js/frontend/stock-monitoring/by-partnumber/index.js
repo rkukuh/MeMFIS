@@ -6,7 +6,7 @@ let ByPartNumber = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/employee/statuses',
+                        url: '/datatables/stock-monitoring/item/1871b68c-cdb5-4c83-8ebe-4a62db327253',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -45,77 +45,81 @@ let ByPartNumber = {
             },
             columns: [
                 {
-                    field: '',
+                    field: 'item.code',
                     title: 'Part Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'serial_number',
                     title: 'Serial No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'item.name',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
-                    title: 'Storage',
+                    field: 'storage.name',
+                    title: 'Storage.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'category',
                     title: 'Category',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'expired_at',
                     title: 'Expired Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
-                    title: 'Total Stock',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: '',
-                    title: 'Allocated Stock',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: '',
+                    field: 'avaliable_stock',
                     title: 'Available Stock',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return t.quantity-t.used_quantity
+                    }
                 },
                 {
-                    field: '',
+                    field: 'project_number',
+                    title: 'Allocation',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        if(t.grn_id){
+                            return t.good_received.purchase_order.purchase_request.purchase_requestable.code
+                        }else{
+                            return "free"
+                        }
+                    }
+                },
+                {
+                    field: 'min',
                     title: 'Min Stock',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'max',
                     title: 'Max Stock',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'unit',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                },
+                }
             ]
         });
     }
