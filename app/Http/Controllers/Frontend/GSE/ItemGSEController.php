@@ -80,8 +80,8 @@ class ItemGSEController extends Controller
     {
         $gse->items()->updateExistingPivot($item->id,
                 ['unit_id'=>$request->unit_id,
+                'serial_number'=> $request->serial_no,
                 'quantity'=> $request->quantity,
-                'quantity_unit'=> $quantity_unit,
                 'note' => $request->note
                 ]);
 

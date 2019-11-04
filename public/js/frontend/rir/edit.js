@@ -295,7 +295,7 @@ let receiving_inspection_report = {
             let unit_id = $(this).data('unit');
 
             $.ajax({
-                url: '/get-units',
+                url: '/get-item-unit-uuid/'+$(this).data('uuid'),
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -317,6 +317,7 @@ let receiving_inspection_report = {
                     });
                 }
             });
+
             document.getElementById('qty').value = $(this).data('quantity');
             document.getElementById('exp_date').value = $(this).data('expred');
             document.getElementById('note').value = $(this).data('note');
@@ -470,10 +471,10 @@ $("#material").on("change", function () {
 });
 
 $("#quantity").on("change", function () {
-    let qty = $("#quantity").val();
-    let max = $("#quantity").attr("max");
+    let qty = parseInt($("#quantity").val());
+    let max = parseInt($("#quantity").attr("max"));
     $('.clone').remove();
-    if($("#quantity").val() < max){
+    if(qty <= max){
         for (let number = 0; number < qty; number++) {
             let clone = $(".blueprint").clone();
             clone.removeClass("blueprint hidden");
@@ -482,6 +483,7 @@ $("#quantity").on("change", function () {
             clone.slideDown("slow",function(){});
         }
     }else{
+        $("#quantity").val(max)
         for (let number = 0; number < max; number++) {
             let clone = $(".blueprint").clone();
             clone.removeClass("blueprint hidden");
@@ -489,5 +491,5 @@ $("#quantity").on("change", function () {
             $(".serial_number_inputs").after(clone);
             clone.slideDown("slow",function(){});
         }
-        }
+    }
 });

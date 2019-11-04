@@ -19,25 +19,47 @@
                     <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
-                            <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Tool
+                                    Item
                                 </label>
 
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', 'generate')
+                                    @slot('id', 'item-label')
+                                @endcomponent
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Serial Number
+                                </label>
+
+                                @component('frontend.common.input.select2')
+                                    @slot('text', 'Serial Number')
+                                    @slot('id', 'sn')
+                                    @slot('name', 'sn')
+                                    @slot('id_error', 'sn')
+                                    @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
-                                    Qty
+                                    Received Items
+                                </label>
+                                @component('frontend.common.label.data-info')
+                                    @slot('text', '0')
+                                    @slot('id', 'item_reciveded')
+                                @endcomponent
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                <label class="form-control-label">
+                                    Qty Received
                                 </label>
 
                                 @component('frontend.common.input.number')
                                     @slot('id', 'qty')
-                                    @slot('text', 'Qty')
+                                    @slot('text', 'Qty Received')
                                     @slot('name', 'qty')
                                     @slot('id_error', 'qty')
                                 @endcomponent
@@ -47,8 +69,11 @@
                                     Unit
                                 </label>
 
-                                @component('frontend.common.label.data-info')
-                                    @slot('text', 'generate')
+                                @component('frontend.common.input.select2')
+                                    @slot('text', 'Unit')
+                                    @slot('id', 'unit_id')
+                                    @slot('name', 'unit_id')
+                                    @slot('id_error', 'unit_id')
                                 @endcomponent
                             </div>
                         </div>
@@ -60,9 +85,9 @@
 
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')
-                                    @slot('id', 'remark')
-                                    @slot('name', 'remark')
-                                    @slot('text', 'Remark')
+                                    @slot('id', 'note-edit')
+                                    @slot('name', 'note-edit')
+                                    @slot('text', 'Description')
                                     @slot('required', 'required')
                                 @endcomponent
                             </div>

@@ -83,7 +83,7 @@
 
                                             @component('frontend.common.label.data-info')
                                                 @slot('id', 'project_number')
-                                                @slot('text', $groundSupportEquiptment->request->requestable->quotation->quotationable->code)
+                                                {{-- @slot('text', $groundSupportEquiptment->request->requestable->quotation->quotationable->code) --}}
                                             @endcomponent
                                         </div>
                                     </div>
@@ -116,7 +116,7 @@
 
                                                     @component('frontend.common.label.data-info')
                                                         @slot('id', 'actype')
-                                                        @slot('text', $groundSupportEquiptment->request->requestable->quotation->quotationable->aircraft->name)
+                                                        {{-- @slot('text', $groundSupportEquiptment->request->requestable->quotation->quotationable->aircraft->name) --}}
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -126,7 +126,7 @@
 
                                                     @component('frontend.common.label.data-info')
                                                         @slot('id', 'acreg')
-                                                        @slot('text', $groundSupportEquiptment->request->requestable->quotation->quotationable->aircraft_register)
+                                                        {{-- @slot('text', $groundSupportEquiptment->request->requestable->quotation->quotationable->aircraft_register) --}}
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -275,7 +275,8 @@
     <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool-request.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
 
 @endpush
