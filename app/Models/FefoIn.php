@@ -26,6 +26,19 @@ class FefoIn extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * One-to-Many: A FefoIn may have one good received.
+     *
+     * This function will retrieve the good received of a FefoIn.
+     * See: GoodsReceived's fefoins() method for the inverse
+     *
+     * @return mixed
+     */
+    public function good_received()
+    {
+        return $this->belongsTo(GoodsReceived::class, 'grn_id');
+    }
+
+    /**
      * One-to-Many: A inventory must have an inventory in
      *
      * This function will retrieve the inventory in of a inventory.
@@ -59,17 +72,4 @@ class FefoIn extends MemfisModel
         return $this->belongsTo(Storage::class);
     }
 
-    /***************************************** ACCESSOR ******************************************/
-
-    /**
-     * Get the Stock's item.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function getItemStorageWithBookMiAttribute($value)
-    {
-        dd($value);
-        // return optional($this->categories->first());
-    }
 }

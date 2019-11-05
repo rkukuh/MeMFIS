@@ -4,14 +4,14 @@
             <div class="form-group m-form__group row align-items-center">
                 <div class="col-md-4">
                     <div class="m-input-icon m-input-icon--left">
-                        <input type="text" class="form-control m-input" placeholder="Search..."
-                            id="generalSearch5">
-                        <span class="m-input-icon__icon m-input-icon__icon--left">
-                            <span><i class="la la-search"></i></span>
-                        </span>
                     </div>
                 </div>
-                @include('frontend.common.buttons.filter')
+                    @component('frontend.common.input.select2')
+                        @slot('text', 'Storage')
+                        @slot('id', 'item_storage_id')
+                        @slot('name', 'item_storage_id')
+                        @slot('id_error', 'item_storage_id')
+                    @endcomponent
             </div>
         </div>
         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
@@ -19,9 +19,5 @@
         </div>
     </div>
 
-    <div class="col-lg-12">
-        @include('frontend.stock-monitoring.filter')
-    </div>
-
-    <div class="stock_monitoring_datatable" id="scrolling_both"></div>
+    <div class="m_datatable_by_storage" id="scrolling_both"></div>
 </div>
