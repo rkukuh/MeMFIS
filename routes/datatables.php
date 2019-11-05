@@ -433,7 +433,8 @@ Route::name('datatables.')->group(function () {
 
             ], function () {
 
-                Route::get('/', 'StockMonitoringDatatables@index')->name('.all');
+                Route::get('/item/{item}', 'StockMonitoringDatatables@partNumber')->name('.all');
+                Route::get('/storage/{storage}', 'StockMonitoringDatatables@storage')->name('.all');
 
             });
 
