@@ -7,8 +7,9 @@ use App\Imports\EnginesImport;
 use App\Imports\CustomersImport;
 use App\Imports\WorkAreasImport;
 use App\Imports\TaskCardsCNimport;
-use App\Imports\TaskCardsCPCPTriganaimport;
 use App\Imports\TaskCardsCNItemimport;
+use App\Imports\MaterialsAndToolsCNImport;
+use App\Imports\TaskCardsCPCPTriganaimport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Imports\TaskCardsBoeingImport;
@@ -35,14 +36,14 @@ class OldDataController extends Controller
 
     public function materialsAndToolsCN()
     {
-        // Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'master-materials-cn.xlsx');
-        // Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'master-tools-cn.xlsx');
+        Excel::import(new MaterialsAndToolsCNImport, $this->import_directory . 'master-materials-cn.xlsx');
+        Excel::import(new MaterialsAndToolsCNImport, $this->import_directory . 'master-tools-cn.xlsx');
     }
 
     public function taskCardCNItems()
     {
-        // Excel::import(new TaskCardsCNItemimport, $this->import_directory . 'cn-item-tc.xlsx');
-        // Excel::import(new TaskCardsCNItemimport, $this->import_directory . 'cn-tool-tc.xlsx');
+        Excel::import(new TaskCardsCNItemimport, $this->import_directory . 'cn-item-tc.xlsx');
+        Excel::import(new TaskCardsCNItemimport, $this->import_directory . 'cn-tool-tc.xlsx');
     }
 
     public function taskCardsBoeing()
