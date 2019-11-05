@@ -178,7 +178,7 @@
                             {{ $attention->phone }} / {{ $attention->fax }}
                         @else
                         -
-                        @endif 
+                        @endif
                     </td>
                 </tr>
                 <tr>
@@ -193,7 +193,7 @@
                             {{ $attention->address }}
                         @else
                             -
-                        @endif 
+                        @endif
                     </td>
                 </tr>
                 <tr>
@@ -208,7 +208,7 @@
                         {{ $attention->name }}
                         @else
                         -
-                        @endif 
+                        @endif
                     </td>
                 </tr>
                 <tr>
@@ -219,7 +219,7 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{ $quotation->quotationable->no_wo}} 
+                        {{ $quotation->quotationable->no_wo}}
                     </td>
                 </tr>
             </table>
@@ -299,15 +299,16 @@
                         <td width="8%" align="center" valign="top"></td>
                         <td width="42%" align="left" valign="top">- Manhours Price :{{ $total_manhour }} x {{ $quotation->currency->symbol }} {{ number_format($data_defectcard->manhour_rate) }}</td>
                         <td width="16%" align="center" valign="top"> {{ $quotation->currency->symbol }}. {{ number_format($total_manhour * $data_defectcard->manhour_rate) }}</td>
-                        @if($data_defectcard->discount_value == null && $data_defectcard->discount_type == null)
+                        {{-- @if($data_defectcard->discount_value == null && $data_defectcard->discount_type == null) --}}
                             <td width="17%" align="center" valign="top"></td>
-                        @else
-                            @if($data_defectcard->discount_type ==  'amount')
+                        {{-- @else --}}
+                            {{-- @if($data_defectcard->discount_type ==  'amount')
                             <td width="17%" align="center" valign="top">{{ $quotation->currency->symbol}}. {{ number_format($data_defectcard->discount_value) }}</td>
                             @elseif($data_defectcard->discount_type == 'percentage'){
                             <td width="17%" align="center" valign="top">{{ $data_defectcard->discount_value }}%</td>
-                            @endif
-                        @endif
+                            @endif --}}
+                            <td width="17%"></td>
+                        {{-- @endif --}}
                         <td width="17%" align="center" valign="top">{{ $quotation->currency->symbol }}. {{ number_format($total_manhour * $data_defectcard->manhour_rate + $mat_tool_price) }}</td>
                     </tr>
                     <tr>
@@ -335,7 +336,7 @@
                     <td width="50%" rowspan="6" valign="top"><b>Term & Condition</b><br>
                         @if(isset($quotation->term_of_condition))
                             {{ $quotation->term_of_condition}}
-                        @else   
+                        @else
                             -
                         @endif
                         PPN Include
@@ -355,7 +356,7 @@
                 @endif
                 <tr>
                     <th width="40%" valign="top" align="left" style="border-top:  2px solid black;">Grand Total in {{ $quotation->currency->name  }}</th>
-                    <th width="25%" valign="top" align="right" style="border-top:  2px solid black;">{{ $quotation->currency->symbol }}. {{ number_format($GrandTotal - $discount) }}</th>
+                    {{-- <th width="25%" valign="top" align="right" style="border-top:  2px solid black;">{{ $quotation->currency->symbol }}. {{ number_format($GrandTotal - $discount) }}</th> --}}
                 </tr>
                 <tr>
                     <th width="40%" valign="top" align="left">Grand Total in Rupiah</th>

@@ -55,7 +55,7 @@ class QuotationAdditionalController extends Controller
     {
         $websites = Type::ofWebsite()->get();
         $total_manhour = json_decode($project->data_defectcard)->total_manhour_with_performance_factor;
-        
+
         return view('frontend.quotation.additional.create', [
             'project' => $project,
             'websites' => $websites,
@@ -94,7 +94,7 @@ class QuotationAdditionalController extends Controller
         $request->merge(['scheduled_payment_amount' => json_encode([])]);
 
         $defectcards = DefectCard::where('project_additional_id',$project->id)->get();
-       
+
         $quotation = Quotation::create($request->all());
 
         $customer = Customer::find($quotation->parent->quotationable->customer->id)->levels->last()->score;
@@ -231,7 +231,7 @@ class QuotationAdditionalController extends Controller
             'project_id' => $project->id,
             'charge' => json_encode($charges),
             'data_defectcard' => $defectcard_json,
-            'attention' => json_encode($attention), 
+            'attention' => json_encode($attention),
             'customer_id' => $project->customer->id,
             'scheduled_payment_amount' => json_encode($scheduled_payment_amount),
             'scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id,
@@ -385,15 +385,15 @@ class QuotationAdditionalController extends Controller
         $mat_tool_price = QuotationDefectCardItem::where('quotation_id', $quotation->id)->sum('subtotal');
         $grandtotal = $data_defectcard->total_manhour * $data_defectcard->manhour_rate + $mat_tool_price;
 
-        if($data_defectcard->discount_type = "percentage"){
-            $discount = $grandtotal * ($data_defectcard->discount_value / 100);
-        }else{
-            $discount = $data_defectcard->discount_value;
-        }
+        // if($data_defectcard->discount_type = "percentage"){
+        //     $discount = $grandtotal * ($data_defectcard->discount_value / 100);
+        // }else{
+        //     $discount = $data_defectcard->discount_value;
+        // }
 
         $pdf = \PDF::loadView('frontend/form/additional_quotation_1',[
                 'username' => $username,
-                'discount' => $discount,
+                'discount' => '$discount',
                 'quotation' => $quotation,
                 'GrandTotal' => $grandtotal,
                 'totalCharge' => $totalCharge,
@@ -402,7 +402,7 @@ class QuotationAdditionalController extends Controller
                 'data_defectcard' => $data_defectcard,
                 'attention' => json_decode($quotation->attention),
                 ]);
-                
+
         return $pdf->stream();
     }
 
