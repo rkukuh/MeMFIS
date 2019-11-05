@@ -125,8 +125,8 @@ let ByPartNumber = {
             });
         }
         let item_datatables_init = true;
-        $('select[name="storage"]').on("change", function() {
-            let uuid = $("#purchase_order").val();
+        $('select[name="part_number"]').on("change", function() {
+            let uuid = $("#part_number").val();
             if (item_datatables_init == true) {
                 item_datatables_init = false;
                 item(uuid);

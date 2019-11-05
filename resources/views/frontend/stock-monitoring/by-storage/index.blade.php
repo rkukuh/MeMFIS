@@ -19,9 +19,5 @@
         </div>
     </div>
 
-    <div class="col-lg-12">
-        @include('frontend.stock-monitoring.filter')
-    </div>
-
     <div class="m_datatable_by_storage" id="scrolling_both"></div>
 </div>
