@@ -83,6 +83,8 @@ class QuotationAdditionalController extends Controller
 
         $defectcard_json["manhour_rate"] = $request->manhour_rate;
         $defectcard_json["total_manhour"] = $request->total_manhour;
+        $defectcard_json["discount_value"] = 0;
+        $defectcard_json["discount_type"] = "amount";
 
         $request->merge(['number' => DocumentNumber::generate('QADD-', Quotation::withTrashed()->count()+1)]);
         $request->merge(['attention' => json_encode($contact)]);
