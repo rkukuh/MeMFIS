@@ -21,7 +21,6 @@ Route::name('component.')->group(function () {
         Route::get('get-promos', 'FillComboxController@promo')->name('get-promos');
         Route::get('get-vendors', 'FillComboxController@vendor')->name('get-vendor');
         Route::get('get-jobcard', 'FillComboxController@jobcard')->name('get-jobcard');
-        Route::get('get-jobcard/{jobcard}/items', 'FillComboxController@jobcardItems')->name('get-jobcard-items');
         Route::get('get-projects', 'FillComboxController@project')->name('get-project');
         Route::get('get-accesses', 'FillComboxController@access')->name('get-accesses');
         Route::get('get-stations', 'FillComboxController@station')->name('get-stations');
@@ -40,6 +39,7 @@ Route::name('component.')->group(function () {
         Route::get('get-defectcard', 'FillComboxController@defectcard')->name('get-defectcard');
         Route::get('get-currencies', 'FillComboxController@currencies')->name('get-currencies');
         Route::get('get-work-orders', 'FillComboxController@workOrder')->name('get-work-orders');
+        Route::get('get-part-number', 'FillComboxController@partNumber')->name('get-part-number');
         Route::get('get-recurrences', 'FillComboxController@recurrence')->name('get-recurrences');
         Route::get('get-storages-combobox', 'FillComboxController@storages')->name('get-storages');
         Route::get('get-storages', 'FillComboxController@storageUUID')->name('get-storages-uuid');
@@ -47,8 +47,6 @@ Route::name('component.')->group(function () {
         Route::get('get-categories-item', 'FillComboxController@categories')->name('get-categories');
         Route::get('get-inventory-in', 'FillComboxController@inventoryIn')->name('get-inventory-in');
         Route::get('get-payment-term', 'FillComboxController@paymentTerm')->name('get-payment-term');
-        Route::get('get-tool-request/{toolRequest}', 'FillComboxController@toolRequest')->name('get-tool-request');
-        Route::get('get-tool-request/{toolRequest}/{item}', 'FillComboxController@toolRequestSerialNumber')->name('get-tool-request-serial-number');
         Route::get('get-pr-types', 'FillComboxController@purchaseRequestType')->name('get-pr-types');
         Route::get('get-item-units/{item}', 'FillComboxController@itemUnits')->name('get-item-units');
         Route::get('get-taxation-types', 'FillComboxController@taxation')->name('get-taxation-types');
@@ -70,6 +68,8 @@ Route::name('component.')->group(function () {
         Route::get('get-aviation-degree', 'FillComboxController@aviationDegrees')->name('get-eaviation-degree');
         Route::get('get-manual-affecteds', 'FillComboxController@manualAffected')->name('get-manual-affecteds');
         Route::get('get-item-unit-uuid/{item}', 'FillComboxController@itemUnitUuid')->name('get-item-unit-uuid');
+        Route::get('get-jobcard/{jobcard}/items', 'FillComboxController@jobcardItems')->name('get-jobcard-items');
+        Route::get('get-tool-request/{toolRequest}', 'FillComboxController@toolRequest')->name('get-tool-request');
         Route::get('get-serial-number/{item}', 'FillComboxController@itemSerialNumber')->name('get-serial-number');
         Route::get('get-po-materials/{purchaseOrder}', 'FillComboxController@poMaterial')->name('get-po-material');
         Route::get('get-project-quotation', 'FillComboxController@projectQuotation')->name('get-project-quotation');
@@ -91,6 +91,7 @@ Route::name('component.')->group(function () {
         Route::get('get-takcard-preliminary-types', 'FillComboxController@taskcardTypePreliminary')->name('get-takcard-preliminary-types');
         Route::get('get-tool-request-inventory-out', 'FillComboxController@toolRequestInventoryOut')->name('get-tool-request-inventory-out');
         Route::get('get-project-additionals-approved', 'FillComboxController@projectAdditionalApproved')->name('get-project-additional-approved');
+        Route::get('get-tool-request/{toolRequest}/{item}', 'FillComboxController@toolRequestSerialNumber')->name('get-tool-request-serial-number');
 
         Route::prefix('label')->group(function () {
             Route::get('get-vendors/{vendor}', 'FillLabelController@vendor')->name('get-vendor');

@@ -397,6 +397,18 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function partNumber()
+    {
+        $items = Item::pluck('code', 'uuid');
+
+        return $items;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function itemUUID()
     {
         $items = Item::with('categories')
