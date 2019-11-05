@@ -75,7 +75,7 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', $purchaseRequest->project->code)
+                                                    @slot('text', $purchaseRequest->purchase_requestable->code)
                                                 @endcomponent
 
                                             </div>
@@ -166,7 +166,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @include('frontend.purchase-request.general.modal-edit')
+                                                        @include('frontend.purchase-request.project.modal-edit')
 
                                                         <div class="item_datatable" id="scrolling_both"></div>
                                                     </div>

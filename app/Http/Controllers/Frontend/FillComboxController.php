@@ -188,6 +188,19 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function storageUUID()
+    {
+        $storages = Storage::pluck('name', 'uuid');
+
+        return json_encode($storages);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function licenses($id)
     {
         $general_license = License::where('code', 'general-license')->first();
@@ -375,6 +388,18 @@ class FillComboxController extends Controller
     {
         $items = Item::with('categories')
             ->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name', 'id');
+
+        return $items;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function partNumber()
+    {
+        $items = Item::pluck('code', 'uuid');
 
         return $items;
     }
