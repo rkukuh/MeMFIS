@@ -122,14 +122,12 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{-- {{$quotation->quotationable->customer->name}} --}}
-                        generate
+                        {{ $quotation->quotationable->customer->name}}
                     </td>
                     <td width="33%" rowspan="5" align="center">
-                            <div class="barcode">
-                                {{-- {!!DNS2D::getBarcodeHTML($quotation->number, 'QRCODE',5.6,5.6)!!} --}}
-                                {!!DNS2D::getBarcodeHTML('quotation', 'QRCODE',5.6,5.6)!!}
-                            </div>
+                        <div class="barcode">
+                            {!!DNS2D::getBarcodeHTML($quotation->number, 'QRCODE',5.6,5.6)!!}
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -140,7 +138,11 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        031-8686481/031-8686482
+                        @if($attention)
+                            {{ $attention->phone }} / {{ $attention->fax }}
+                        @else
+                        -
+                        @endif 
                     </td>
                 </tr>
                 <tr>
@@ -151,7 +153,11 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        JL. RAYA INDONESIA
+                        @if($attention)
+                            {{ $attention->address }}
+                        @else
+                            -
+                        @endif 
                     </td>
                 </tr>
                 <tr>
@@ -162,12 +168,11 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{-- @if($attention)
+                        @if($attention)
                         {{ $attention->name }}
                         @else
                         -
-                        @endif --}}
-                        generate
+                        @endif 
                     </td>
                 </tr>
                 <tr>
@@ -178,8 +183,7 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{-- {{$quotation->quotationable->no_wo}} --}}
-                        generate
+                        {{ $quotation->quotationable->no_wo}} 
                     </td>
                 </tr>
             </table>

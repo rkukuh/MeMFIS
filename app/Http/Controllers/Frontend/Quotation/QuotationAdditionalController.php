@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend\Quotation;
 
 use Auth;
+use App;
+
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\Status;
@@ -26,6 +28,7 @@ use App\Models\Pivots\QuotationWorkPackage;
 use App\Http\Requests\Frontend\QuotationStore;
 use App\Http\Requests\Frontend\QuotationUpdate;
 use App\Models\QuotationWorkPackageTaskCardItem;
+use iio\libmergepdf\Merger;
 
 class QuotationAdditionalController extends Controller
 {
@@ -393,7 +396,9 @@ class QuotationAdditionalController extends Controller
             $discount = $data_defectcard->discount_value;
         }
 
-        $pdf = \PDF::loadView('frontend/form/additional_quotation_1',[
+        $page_merger = new Merger();
+
+        $page1 = \View::make('frontend/form/additional_quotation_1')->with([
                 'username' => $username,
                 'discount' => $discount,
                 'quotation' => $quotation,
@@ -403,9 +408,51 @@ class QuotationAdditionalController extends Controller
                 'mat_tool_price' => $mat_tool_price,
                 'data_defectcard' => $data_defectcard,
                 'attention' => json_decode($quotation->attention),
-                ]);
-                
-        return $pdf->stream();
+                ])->render();
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($page1)->setPaper('a4', 'portrait');
+        $page_merger->addRaw($pdf->output());
+
+        $page2 = \View::make('frontend/form/additional_quotation_2')->with([
+                'username' => $username,
+                'discount' => $discount,
+                'quotation' => $quotation,
+                'GrandTotal' => $grandtotal,
+                'totalCharge' => $totalCharge,
+                'total_manhour' => $total_manhour,
+                'mat_tool_price' => $mat_tool_price,
+                'data_defectcard' => $data_defectcard,
+                'attention' => json_decode($quotation->attention),
+                ])->render();
+
+        $pdf2 = App::make('dompdf.wrapper');
+        $pdf2->loadHTML($page2)->setPaper('a4', 'portrait');
+        $page_merger->addRaw($pdf2->output());
+
+        $page3 = \View::make('frontend/form/additional_quotation_3')->with([
+                'username' => $username,
+                'discount' => $discount,
+                'quotation' => $quotation,
+                'GrandTotal' => $grandtotal,
+                'totalCharge' => $totalCharge,
+                'total_manhour' => $total_manhour,
+                'mat_tool_price' => $mat_tool_price,
+                'data_defectcard' => $data_defectcard,
+                'attention' => json_decode($quotation->attention),
+                ])->render();
+
+        $pdf3 = App::make('dompdf.wrapper');
+        $pdf3->loadHTML($page3)->setPaper('a4', 'portrait');
+        $page_merger->addRaw($pdf3->output());
+
+        file_put_contents('storage/Quotation/Additional/'.$quotation->uuid.'.pdf', $page_merger->merge());
+        $quotationAdditional = new \PDF;
+        $quotationAdditional = $quotation->uuid.'.pdf';
+
+        return response()->file(
+            public_path('storage/Quotation/Additional/'.$quotation->uuid.'.pdf')
+        );
     }
 
 }
