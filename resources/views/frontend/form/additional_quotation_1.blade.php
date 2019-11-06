@@ -345,7 +345,7 @@
                 </tr>
                 <tr>
                     <td width="40%" valign="top" align="left">Disc</td>
-                    <td width="25%" valign="top" align="right">- {{ $quotation->currency->symbol }} {{ $discount }}</td>
+                    <td width="25%" valign="top" align="right">- {{ $quotation->currency->symbol }}. {{ number_format($discount, 2, ",", ".") }}</td>
                 </tr>
                 @if($totalCharge > 0)
                 <tr>
