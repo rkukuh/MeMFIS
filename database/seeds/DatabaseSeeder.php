@@ -152,6 +152,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call(QuotationDefectCardItemsTableSeeder::class);
 
+        /** PURCHASE REQUEST's ITEMs */
+
+        $this->call(PurchaseRequestItemsTableSeeder::class);
+
         /** PURCHASE ORDER's ITEMs */
 
         $this->call(PurchaseOrderItemsTableSeeder::class);

@@ -152,6 +152,10 @@ class DummyDataSeeder extends Seeder
 
         $this->call(QuotationDefectCardItems::class);
 
+        /** PURCHASE REQUEST's ITEMs */
+
+        $this->call(PurchaseRequestItems::class);
+
         /** PURCHASE ORDER's ITEMs */
 
         $this->call(PurchaseOrderItems::class);
