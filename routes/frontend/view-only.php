@@ -89,10 +89,10 @@ Route::group([
 
         /** Material Request */
 
-        Route::view('/material-transfer', 'frontend.material-transfer.index')->name('material-transfer.index');
-        Route::view('/material-transfer/create', 'frontend.material-transfer.create')->name('material-transfer.create');
-        Route::view('/material-transfer/edit', 'frontend.material-transfer.edit')->name('material-transfer.edit');
-        Route::view('/material-transfer/show', 'frontend.material-transfer.show')->name('material-transfer.show');
+        // Route::view('/material-transfer', 'frontend.material-transfer.index')->name('material-transfer.index');
+        // Route::view('/material-transfer/create', 'frontend.material-transfer.create')->name('material-transfer.create');
+        // Route::view('/material-transfer/edit', 'frontend.material-transfer.edit')->name('material-transfer.edit');
+        // Route::view('/material-transfer/show', 'frontend.material-transfer.show')->name('material-transfer.show');
 
         /** Category Item */
 
