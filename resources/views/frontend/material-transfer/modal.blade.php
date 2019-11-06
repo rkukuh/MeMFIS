@@ -96,7 +96,7 @@
 
                                 @component('frontend.common.input.textarea')
                                 @slot('rows', '3')
-                                @slot('id', 'remark')
+                                @slot('id', 'item_remark')
                                 @slot('name', 'remark')
                                 @slot('text', 'Remark')
                                 @slot('required', 'required')

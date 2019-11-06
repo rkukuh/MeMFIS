@@ -6,7 +6,7 @@ let MutationEdit = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/material-transfer/' + mutation_uuid + '/items',
+                        url: '/datatables/mutation/material-transfer/' + mutation_uuid + '/items',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -63,13 +63,13 @@ let MutationEdit = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'pivot.serial_number',
                     title: 'Serial Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'name',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
@@ -81,19 +81,19 @@ let MutationEdit = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'pivot.quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'unit_name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: "description",
+                    field: "pivot.note",
                     title: "Remark",
                 },
                 {
@@ -103,12 +103,9 @@ let MutationEdit = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_item" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-instruction_uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                            t.uuid +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                            '<button data-toggle="modal" data-target="#modal_item" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Edit" data-item=' +
+                            t.uuid + ' data-date=' + t.pivot.expired_at + ' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-remark=' + t.pivot.note + ' data-serial=' + t.pivot.serial_number + '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t\t<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                             '<i class="la la-trash"></i>' +
                             '</a>'
                         );
@@ -120,10 +117,10 @@ let MutationEdit = {
 
         $(".modal-footer").on("click", ".add-item", function () {
             let item = $("#item").val();
-            let quantity = $("input[name=qty]").val();
+            let quantity = $("input[name=qty_request]").val();
             let exp_date = $("#exp_date").val();
             let unit = $("#unit_id").val();
-            let remark = $("#item_remark").val();
+            let note = $("#item_remark").val();
             let serial_numbers = $("#serial_no").val();
 
             $.ajax({
@@ -138,7 +135,7 @@ let MutationEdit = {
                     exp_date: exp_date,
                     unit_id: unit,
                     serial_no: serial_numbers,
-                    remark: remark,
+                    note: note,
                 },
                 success: function (response) {
                     $('#modal_item').modal('hide');
@@ -216,7 +213,7 @@ let MutationEdit = {
                 }
             });
 
-            document.getElementById('qty').value = $(this).data('quantity');
+            document.getElementById('qty_request').value = $(this).data('quantity');
             document.getElementById('uuid').value = $(this).data('uuid');
             document.getElementById('item_remark').value = $(this).data('remark');
             document.getElementById('exp_date').value = $(this).data('date');
@@ -227,10 +224,10 @@ let MutationEdit = {
 
         $(".modal-footer").on("click", ".update-item", function () {
             let item = $("#item").val();
-            let quantity = $("input[name=qty]").val();
+            let quantity = $("input[name=qty_request]").val();
             let exp_date = $("#exp_date").val();
             let unit = $("#unit_id").val();
-            let remark = $("#item_remark").val();
+            let note = $("#item_remark").val();
             let serial_no = $("#serial_no").val();
 
             $.ajax({
@@ -245,7 +242,7 @@ let MutationEdit = {
                     exp_date: exp_date,
                     unit_id: unit,
                     serial_no: serial_no,
-                    remark: remark,
+                    note: note,
                 },
                 success: function (response) {
                     $('#modal_item').modal('hide');
@@ -260,11 +257,11 @@ let MutationEdit = {
                             .end();
                     });
 
-                    toastr.success("Item has been added.", "Success", {
+                    toastr.success("Item has been updated.", "Success", {
                         timeOut: 5000
                     });
 
-                    let table = $(".item_datatable").mDatatable();
+                    let table = $(".material_transfer_datatable").mDatatable();
 
                     table.originalDataSet = [];
                     table.reload();

@@ -84,8 +84,10 @@ class Mutation extends MemfisModel
             ->withPivot(
                 'serial_number',
                 'quantity',
+                'quantity_in_primary_unit',
                 'unit_id',
-                'interchange_id',
+                'purchased_price',
+                'total',
                 'note'
             )
             ->withTimestamps();

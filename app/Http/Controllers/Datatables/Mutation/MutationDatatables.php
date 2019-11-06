@@ -120,7 +120,7 @@ class MutationDatatables extends Controller
         echo json_encode($result, JSON_PRETTY_PRINT);
     }
 
-    public function getItemsByInventoryIn(Mutation $mutation)
+    public function getItemsByMutation(Mutation $mutation)
     {
         $mutations = $mutation->items;
 

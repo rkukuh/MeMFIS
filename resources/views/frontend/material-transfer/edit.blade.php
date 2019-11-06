@@ -250,7 +250,7 @@
 <script src="{{ asset('js/frontend/functions/select2/warehouse-out.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script> -->
 
 <!-- <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
