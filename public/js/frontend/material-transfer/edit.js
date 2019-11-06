@@ -120,11 +120,11 @@ let MutationEdit = {
 
         $(".modal-footer").on("click", ".add-item", function () {
             let item = $("#item").val();
-            let quantity = $("input[name=qty_request]").val();
+            let quantity = $("input[name=qty]").val();
             let exp_date = $("#exp_date").val();
             let unit = $("#unit_id").val();
-            let remark = $("#remark").val();
-            let serial_no = $("#serial_no").val();
+            let remark = $("#item_remark").val();
+            let serial_numbers = $("#serial_no").val();
 
             $.ajax({
                 headers: {
@@ -133,17 +133,17 @@ let MutationEdit = {
                 url: "/material-transfer/" + mutation_uuid + "/item/" + item,
                 type: "POST",
                 data: {
-                    item_id: material,
+                    item_id: item,
                     quantity: quantity,
-                    expired_at: exp_date,
+                    exp_date: exp_date,
                     unit_id: unit,
-                    serial_no: serial_no,
+                    serial_no: serial_numbers,
                     remark: remark,
                 },
                 success: function (response) {
-                    $('#modal_mutation').modal('hide');
+                    $('#modal_item').modal('hide');
 
-                    $('#modal_mutation').on('hidden.bs.modal', function (e) {
+                    $('#modal_item').on('hidden.bs.modal', function (e) {
                         $(this)
                             .find("input,textarea")
                             .val('')
@@ -216,10 +216,9 @@ let MutationEdit = {
                 }
             });
 
-            document.getElementById('qty_request').value = $(this).data('quantity');
+            document.getElementById('qty').value = $(this).data('quantity');
             document.getElementById('uuid').value = $(this).data('uuid');
             document.getElementById('item_remark').value = $(this).data('remark');
-            document.getElementById('serial_no').value = $(this).data('serial');
             document.getElementById('exp_date').value = $(this).data('date');
 
             $('.btn-success').addClass('update-item');
@@ -228,10 +227,10 @@ let MutationEdit = {
 
         $(".modal-footer").on("click", ".update-item", function () {
             let item = $("#item").val();
-            let quantity = $("input[name=qty_request]").val();
+            let quantity = $("input[name=qty]").val();
             let exp_date = $("#exp_date").val();
             let unit = $("#unit_id").val();
-            let remark = $("#remark").val();
+            let remark = $("#item_remark").val();
             let serial_no = $("#serial_no").val();
 
             $.ajax({
@@ -241,17 +240,17 @@ let MutationEdit = {
                 url: "/material-transfer/" + mutation_uuid + "/item/" + item,
                 type: "PUT",
                 data: {
-                    item_id: material,
+                    item_id: item,
                     quantity: quantity,
-                    expired_at: exp_date,
+                    exp_date: exp_date,
                     unit_id: unit,
                     serial_no: serial_no,
                     remark: remark,
                 },
                 success: function (response) {
-                    $('#modal_mutation').modal('hide');
+                    $('#modal_item').modal('hide');
 
-                    $('#modal_mutation').on('hidden.bs.modal', function (e) {
+                    $('#modal_item').on('hidden.bs.modal', function (e) {
                         $(this)
                             .find("input,textarea")
                             .val('')
@@ -265,7 +264,7 @@ let MutationEdit = {
                         timeOut: 5000
                     });
 
-                    let table = $(".material_transfer_datatable").mDatatable();
+                    let table = $(".item_datatable").mDatatable();
 
                     table.originalDataSet = [];
                     table.reload();
@@ -330,7 +329,7 @@ let MutationEdit = {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '/material-transfer/' + inventoryout_uuid,
+                url: '/material-transfer/' + mutation_uuid,
                 type: 'PUT',
                 data: {
                     ref_no: ref_no,
@@ -343,7 +342,7 @@ let MutationEdit = {
                     if (response.errors) {
                         console.log(errors)
                     } else {
-                        toastr.success('Mutation has been updated.', 'Success', {
+                        toastr.success('Material Transfer has been updated.', 'Success', {
                             timeOut: 5000
                         });
                     }
@@ -358,28 +357,8 @@ jQuery(document).ready(function () {
     MutationEdit.init();
 });
 
-$("#item").change(function () {
-
+$("#item").on("change", function () {
     let item_uuid = $("#item").val();
-
-    $.ajax({
-        url: '/get-serial-number/' + item_uuid,
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            $('select[name="serial_no"]').empty();
-
-            $('select[name="serial_no"]').append(
-                '<option value=""> Select a Serial Number</option>'
-            );
-
-            $.each(data, function (key, value) {
-                $('select[name="serial_no"]').append(
-                    '<option value="' + value + '">' + value + '</option>'
-                );
-            });
-        }
-    });
 
     $.ajax({
         url: '/get-item-unit-uuid/' + item_uuid,
@@ -399,15 +378,4 @@ $("#item").change(function () {
             });
         }
     });
-});
-
-$("#serial_no").change(function () {
-    if ($("#serial_no").val() !== '') {
-        $("input[name=qty_request]").val(1);
-        $("input[name=qty_request]").prop('disabled', true);
-        $('#unit_id').prop('disabled', true);
-    } else {
-        $("input[name=qty_request]").prop('disabled', false);
-        $('#unit_id').prop('disabled', false);
-    }
 });

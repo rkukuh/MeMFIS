@@ -194,7 +194,7 @@
                                                             <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                                                 @component('frontend.common.buttons.create-new')
                                                                 @slot('text', 'Item')
-                                                                @slot('data_target', '#modal_mutation')
+                                                                @slot('data_target', '#modal_item')
                                                                 @endcomponent
 
 
