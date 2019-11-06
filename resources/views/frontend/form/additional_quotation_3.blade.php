@@ -98,8 +98,7 @@
     </header>
 
     <footer style="margin-top:14px;">
-        {{-- <span style="margin-left:6px">Created By : Name ; {{$quotation->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span><span style="position:absolute; right:20px;" class="num">PAGE </span> --}}
-        <span style="margin-left:6px">Created By : Name ; Timestamp &nbsp;&nbsp;&nbsp; Printed By : admin ; Timestamp</span><span style="position:absolute; right:20px;" class="num">PAGE </span>
+        <span style="margin-left:6px">{{ $quotation->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{ $username}} ; {{ date('Y-m-d H:i:s') }}</span><span style="position:absolute; right:20px;" >PAGE {{ $page }} of 3 </span>
         <img src="./img/form/printoutquotation/FooterQuotation.png" width="100%" alt="" >
     </footer>
 
@@ -195,22 +194,18 @@
                 <tr>
                     <th width="14%" valign="top">Date</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->created_at}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{ $quotation->created_at }}</td>
                     <th width="14%" valign="top">Project No</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->quotationable->code}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{ $quotation->quotationable->code }}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Quotation No.</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->currency->name}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{ $quotation->number }}</td>
                     <th width="14%" valign="top">A/C Type</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->quotationable->aircraft->name}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{ $quotation->quotationable->aircraft->name}}</td>
                 </tr>
             </table>
         </div>
@@ -228,20 +223,24 @@
                     <td width="12%" align="center"><b>Price</b></td>
                     <td width="12%" align="center"><b>Total</b></td>
                 </tr>
-                <tr>
-                    <td width="8%" align="center" valign="top">1</td>
-                    <td width="15%" align="center" valign="top">DC-123</td>
-                    <td width="12%" align="center" valign="top">PN-123</td>
-                    <td width="26%" valign="top">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum cupiditate doloremque, doloribus culpa ad possimus quis eveniet fuga dolore quos totam impedit molestiae voluptatibus aperiam repudiandae nesciunt nisi? Voluptatum, culpa.</td>
-                    <td width="8%" align="center" valign="top">123</td>
-                    <td width="7%" align="center" valign="top">bot</td>
-                    <td width="12%" align="center" valign="top">Rp. 123222</td>
-                    <td width="12%" align="center" valign="top"> Rp. 1232323</td>
-                </tr>
+                @foreach($items as $item)
+                    <tr>
+                        <td width="8%" align="center" valign="top">{{ $numbering+= 1 }}</td>
+                        <td width="15%" align="center" valign="top">{{ $item->defectcard->code }}</td>
+                        <td width="12%" align="center" valign="top">{{ $item->item->code }}</td>
+                        <td width="26%" valign="top">{{ $item->note }}</td>
+                        <td width="8%" align="center" valign="top">{{ $item->quantity }}</td>
+                        <td width="7%" align="center" valign="top">{{ $item->unit->name }}</td>
+                        <td width="12%" align="center" valign="top">Rp. {{ number_format($item->price_amount) }}</td>
+                        <td width="12%" align="center" valign="top"> Rp. {{ number_format($item->subtotal) }}</td>
+                    </tr>
+                @endforeach
                 <tr style="background:#f7dd16;">
                     <td colspan="4" align="center"><b>Total Additional Material</b></td>
-                    <td align="center" valign="top">Qty Total</td>
-                    <td colspan="3" align="center" valign="top"><b>Sum Total</b></td>
+                    <td align="center" valign="top"><b>Qty Total</b></td>
+                    <td align="center" valign="top"><b>{{ number_format($total_item_quantity) }}</b></td>
+                    <td align="center" valign="top"><b>Total</b></td>
+                    <td colspan="3" align="center" valign="top"><b>Rp. {{ number_format($total_item_price) }}</b></td>
                 </tr>
             </table>
         </div>

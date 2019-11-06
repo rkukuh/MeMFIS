@@ -85,9 +85,6 @@
 
 </style>
 <body>
-    
-
-
     <header>
         <img src="./img/form/printoutquotation/HeaderQuotation.png" alt=""width="100%">
         <div id="head">
@@ -98,8 +95,7 @@
     </header>
 
     <footer style="margin-top:14px;">
-        {{-- <span style="margin-left:6px">Created By : Name ; {{$quotation->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span><span style="position:absolute; right:20px;" class="num">PAGE </span> --}}
-        <span style="margin-left:6px">Created By : Name ; Timestamp &nbsp;&nbsp;&nbsp; Printed By : admin ; Timestamp</span><span style="position:absolute; right:20px;" class="num">PAGE </span>
+        <span style="margin-left:6px">{{ $quotation->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{ $username}} ; {{ date('Y-m-d H:i:s') }}</span><span style="position:absolute; right:20px;" >PAGE {{ $page }} of 3 </span>
         <img src="./img/form/printoutquotation/FooterQuotation.png" width="100%" alt="" >
     </footer>
 
@@ -195,22 +191,18 @@
                 <tr>
                     <th width="14%" valign="top">Date</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->created_at}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{ $quotation->created_at }}</td>
                     <th width="14%" valign="top">Project No</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->quotationable->code}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{ $quotation->quotationable->code }}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Quotation No.</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->currency->name}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{ $quotation->number }}</td>
                     <th width="14%" valign="top">A/C Type</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->quotationable->aircraft->name}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{ $quotation->quotationable->aircraft->name}}</td>
                 </tr>
             </table>
         </div>
@@ -224,15 +216,17 @@
                     <td width="53%" align="center"><b>Complaint</b></td>
                     <td width="17%" align="center"><b>Mhrs</b></td>
                 </tr>
+                @foreach($quotation->defectcards as $key => $defectcard)
                 <tr>
-                    <td width="8%" align="center" valign="top">1</td>
-                    <td width="22%" align="center" valign="top">DC-123</td>
-                    <td width="53%" valign="top">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi ipsum quas similique quisquam nihil optio sunt numquam non totam maiores praesentium voluptatem in iusto enim, aut laborum ex temporibus. Adipisci.</td>
-                    <td width="17%" align="center" valign="top">12</td>
+                    <td width="8%" align="center" valign="top">{{ $key+1 }}</td>
+                    <td width="22%" align="center" valign="top">{{ $defectcard->code }}</td>
+                    <td width="53%" valign="top">{{ $defectcard->complaint }}</td>
+                    <td width="17%" align="center" valign="top">{{ $defectcard->estimation_manhour }}</td>
                 </tr>
+                @endforeach
                 <tr style="background:#f7dd16;">
-                    <td colspan="3" align="center" valign="top"><b>Total Manhrs</b></td>
-                    <td></td>
+                    <td colspan="3" align="center" valign="top"><b>Total Manhours </b></td>
+                    <td align="center"><b>{{ $quotation->defectcards()->sum('estimation_manhour') }}</b></td>
                 </tr>
             </table>
         </div>

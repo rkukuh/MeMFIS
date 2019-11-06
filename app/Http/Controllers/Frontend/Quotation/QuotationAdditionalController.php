@@ -385,6 +385,20 @@ class QuotationAdditionalController extends Controller
             }
         }
 
+        $items = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.jobcardable','item','unit','price')->where('quotation_id', $quotation->id)->get();
+        $total_item_price = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.jobcardable','item','unit','price')->where('quotation_id', $quotation->id)
+        ->sum('subtotal');
+
+
+        $total_item_quantity = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.jobcardable','item','unit','price')->where('quotation_id', $quotation->id)
+        ->sum('quantity');
+
+        // dd($items);
+
+        // foreach($quotation->defectcards as $defectcard){
+        //     dd($defectcard->items);
+        // }
+
         $data_defectcard = json_decode($quotation->data_defectcard);
         $total_manhour = $data_defectcard->total_manhour;
         $mat_tool_price = QuotationDefectCardItem::where('quotation_id', $quotation->id)->sum('subtotal');
@@ -400,6 +414,7 @@ class QuotationAdditionalController extends Controller
 
         $page1 = \View::make('frontend/form/additional_quotation_1')->with([
                 'username' => $username,
+                'page' => 1,
                 'discount' => $discount,
                 'quotation' => $quotation,
                 'GrandTotal' => $grandtotal,
@@ -416,6 +431,7 @@ class QuotationAdditionalController extends Controller
 
         $page2 = \View::make('frontend/form/additional_quotation_2')->with([
                 'username' => $username,
+                'page' => 2,
                 'discount' => $discount,
                 'quotation' => $quotation,
                 'GrandTotal' => $grandtotal,
@@ -431,7 +447,10 @@ class QuotationAdditionalController extends Controller
         $page_merger->addRaw($pdf2->output());
 
         $page3 = \View::make('frontend/form/additional_quotation_3')->with([
+                'numbering' => 0,
+                'items' => $items,
                 'username' => $username,
+                'page' => 3,
                 'discount' => $discount,
                 'quotation' => $quotation,
                 'GrandTotal' => $grandtotal,
@@ -439,6 +458,8 @@ class QuotationAdditionalController extends Controller
                 'total_manhour' => $total_manhour,
                 'mat_tool_price' => $mat_tool_price,
                 'data_defectcard' => $data_defectcard,
+                'total_item_price' => $total_item_price,
+                'total_item_quantity' => $total_item_quantity,
                 'attention' => json_decode($quotation->attention),
                 ])->render();
 
