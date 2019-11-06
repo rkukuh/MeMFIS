@@ -19,7 +19,6 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['purchase-request-project' => 'purchaseRequest']
             ]);
 
-
             Route::name('purchase-request.')->group(function () {
                 Route::prefix('purchase-request')->group(function () {
                     Route::put('/{purchaseRequest}/project/approve', 'ProjectPurchaseRequestController@approve')->name('project.approve');
@@ -30,10 +29,6 @@ Route::name('frontend.')->group(function () {
                     Route::delete('/{purchaseRequest}/item/{item}', 'ItemPurchaseRequestController@destroy')->name('destroy');
                 });
             });
-
-
-
-
 
         });
 
