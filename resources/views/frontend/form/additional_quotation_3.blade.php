@@ -239,7 +239,7 @@
                     <tr style="background:#f7dd16;">
                         <td colspan="3" align="center"><b>Total Additional Material</b></td>
                         <td align="center" valign="top"><b>Qty Total</b></td>
-                        <td align="center" valign="top"><b>{{ number_format($total_item_quantity) }}</b></td>
+                        <td align="center" valign="top"><b>{{ number_format($total_item_quantity,0, ",", "." ) }}</b></td>
                         <td align="center" valign="top"><b>Total</b></td>
                         <td colspan="3" align="center" valign="top"><b>Rp. {{ number_format($total_item_price, 2, ",", ".") }}</b></td>
                     </tr>
