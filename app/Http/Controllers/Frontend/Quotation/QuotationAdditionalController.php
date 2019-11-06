@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend\Quotation;
 
 use Auth;
+use App;
+
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\Status;
@@ -26,6 +28,7 @@ use App\Models\Pivots\QuotationWorkPackage;
 use App\Http\Requests\Frontend\QuotationStore;
 use App\Http\Requests\Frontend\QuotationUpdate;
 use App\Models\QuotationWorkPackageTaskCardItem;
+use iio\libmergepdf\Merger;
 
 class QuotationAdditionalController extends Controller
 {
@@ -55,7 +58,7 @@ class QuotationAdditionalController extends Controller
     {
         $websites = Type::ofWebsite()->get();
         $total_manhour = json_decode($project->data_defectcard)->total_manhour_with_performance_factor;
-
+        
         return view('frontend.quotation.additional.create', [
             'project' => $project,
             'websites' => $websites,
@@ -83,6 +86,8 @@ class QuotationAdditionalController extends Controller
 
         $defectcard_json["manhour_rate"] = $request->manhour_rate;
         $defectcard_json["total_manhour"] = $request->total_manhour;
+        $defectcard_json["discount_value"] = 0;
+        $defectcard_json["discount_type"] = "amount";
 
         $request->merge(['number' => DocumentNumber::generate('QADD-', Quotation::withTrashed()->count()+1)]);
         $request->merge(['attention' => json_encode($contact)]);
@@ -94,7 +99,7 @@ class QuotationAdditionalController extends Controller
         $request->merge(['scheduled_payment_amount' => json_encode([])]);
 
         $defectcards = DefectCard::where('project_additional_id',$project->id)->get();
-
+       
         $quotation = Quotation::create($request->all());
 
         $customer = Customer::find($quotation->parent->quotationable->customer->id)->levels->last()->score;
@@ -231,7 +236,7 @@ class QuotationAdditionalController extends Controller
             'project_id' => $project->id,
             'charge' => json_encode($charges),
             'data_defectcard' => $defectcard_json,
-            'attention' => json_encode($attention),
+            'attention' => json_encode($attention), 
             'customer_id' => $project->customer->id,
             'scheduled_payment_amount' => json_encode($scheduled_payment_amount),
             'scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id,
@@ -380,20 +385,37 @@ class QuotationAdditionalController extends Controller
             }
         }
 
+        $items = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.jobcardable','item','unit','price')->where('quotation_id', $quotation->id)->get();
+        $total_item_price = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.jobcardable','item','unit','price')->where('quotation_id', $quotation->id)
+        ->sum('subtotal');
+
+
+        $total_item_quantity = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.jobcardable','item','unit','price')->where('quotation_id', $quotation->id)
+        ->sum('quantity');
+
+        // dd($items);
+
+        // foreach($quotation->defectcards as $defectcard){
+        //     dd($defectcard->items);
+        // }
+
         $data_defectcard = json_decode($quotation->data_defectcard);
         $total_manhour = $data_defectcard->total_manhour;
         $mat_tool_price = QuotationDefectCardItem::where('quotation_id', $quotation->id)->sum('subtotal');
         $grandtotal = $data_defectcard->total_manhour * $data_defectcard->manhour_rate + $mat_tool_price;
 
-        // if($data_defectcard->discount_type = "percentage"){
-        //     $discount = $grandtotal * ($data_defectcard->discount_value / 100);
-        // }else{
-        //     $discount = $data_defectcard->discount_value;
-        // }
+        if($data_defectcard->discount_type = "percentage"){
+            $discount = $grandtotal * ($data_defectcard->discount_value / 100);
+        }else{
+            $discount = $data_defectcard->discount_value;
+        }
 
-        $pdf = \PDF::loadView('frontend/form/additional_quotation_1',[
+        $page_merger = new Merger();
+
+        $page1 = \View::make('frontend/form/additional_quotation_1')->with([
                 'username' => $username,
-                'discount' => '$discount',
+                'page' => 1,
+                'discount' => $discount,
                 'quotation' => $quotation,
                 'GrandTotal' => $grandtotal,
                 'totalCharge' => $totalCharge,
@@ -401,9 +423,57 @@ class QuotationAdditionalController extends Controller
                 'mat_tool_price' => $mat_tool_price,
                 'data_defectcard' => $data_defectcard,
                 'attention' => json_decode($quotation->attention),
-                ]);
+                ])->render();
 
-        return $pdf->stream();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($page1)->setPaper('a4', 'portrait');
+        $page_merger->addRaw($pdf->output());
+
+        $page2 = \View::make('frontend/form/additional_quotation_2')->with([
+                'username' => $username,
+                'page' => 2,
+                'discount' => $discount,
+                'quotation' => $quotation,
+                'GrandTotal' => $grandtotal,
+                'totalCharge' => $totalCharge,
+                'total_manhour' => $total_manhour,
+                'mat_tool_price' => $mat_tool_price,
+                'data_defectcard' => $data_defectcard,
+                'attention' => json_decode($quotation->attention),
+                ])->render();
+
+        $pdf2 = App::make('dompdf.wrapper');
+        $pdf2->loadHTML($page2)->setPaper('a4', 'portrait');
+        $page_merger->addRaw($pdf2->output());
+
+        $page3 = \View::make('frontend/form/additional_quotation_3')->with([
+                'numbering' => 0,
+                'items' => $items,
+                'username' => $username,
+                'page' => 3,
+                'discount' => $discount,
+                'quotation' => $quotation,
+                'GrandTotal' => $grandtotal,
+                'totalCharge' => $totalCharge,
+                'total_manhour' => $total_manhour,
+                'mat_tool_price' => $mat_tool_price,
+                'data_defectcard' => $data_defectcard,
+                'total_item_price' => $total_item_price,
+                'total_item_quantity' => $total_item_quantity,
+                'attention' => json_decode($quotation->attention),
+                ])->render();
+
+        $pdf3 = App::make('dompdf.wrapper');
+        $pdf3->loadHTML($page3)->setPaper('a4', 'portrait');
+        $page_merger->addRaw($pdf3->output());
+
+        file_put_contents('storage/Quotation/Additional/'.$quotation->uuid.'.pdf', $page_merger->merge());
+        $quotationAdditional = new \PDF;
+        $quotationAdditional = $quotation->uuid.'.pdf';
+
+        return response()->file(
+            public_path('storage/Quotation/Additional/'.$quotation->uuid.'.pdf')
+        );
     }
 
 }

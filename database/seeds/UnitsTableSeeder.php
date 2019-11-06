@@ -34,12 +34,6 @@ class UnitsTableSeeder extends Seeder
         ]);
 
         Unit::create([
-            'name' => 'Meter Square',
-            'symbol' => 'm2',
-            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
-        ]);
-
-        Unit::create([
             'name' => 'Inch',
             'symbol' => 'in',
             'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
@@ -62,6 +56,13 @@ class UnitsTableSeeder extends Seeder
             'symbol' => 'ft',
             'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
         ]);
+
+        Unit::create([
+            'name' => 'Square Inch',
+            'symbol' => 'in2',
+            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
+        ]);
+
 
         /** QUANTITY */
 
@@ -144,12 +145,6 @@ class UnitsTableSeeder extends Seeder
         ]);
 
         Unit::create([
-            'name' => 'Sheet',
-            'symbol' => 'sht',
-            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
-        ]);
-
-        Unit::create([
             'name' => 'Bar',
             'symbol' => 'bar',
             'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
@@ -161,6 +156,7 @@ class UnitsTableSeeder extends Seeder
             'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
         ]);
 
+    
         /** WEIGHT / VOLUME */
 
         Unit::create([
@@ -171,7 +167,7 @@ class UnitsTableSeeder extends Seeder
 
         Unit::create([
             'name' => 'Ton',
-            'symbol' => 'ton',
+            'symbol' => 'kg',
             'type_id' => Type::ofUnit()->where('code', 'weight')->first()->id,
         ]);
 
@@ -210,5 +206,6 @@ class UnitsTableSeeder extends Seeder
             'symbol' => 'ons',
             'type_id' => Type::ofUnit()->where('code', 'weight')->first()->id,
         ]);
+       
     }
 }
