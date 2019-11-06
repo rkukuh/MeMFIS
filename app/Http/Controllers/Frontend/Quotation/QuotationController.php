@@ -639,7 +639,7 @@ class QuotationController extends Controller
         }
 
         $htcrrs = HtCrr::where('project_id',$quotation->quotationable->id)->whereNull('parent_id')->get();
-        $mats_tools_htcrr = QuotationHtcrrItem::where('quotation_id', $quotation->id)->sum('price_amount');
+        $mats_tools_htcrr = QuotationHtcrrItem::where('quotation_id', $quotation->id)->sum('subtotal');
         if (sizeof($htcrrs) > 0) {
             $data_htcrr = json_decode($quotation->data_htcrr, true);
             $htcrr_workpackage = new WorkPackage();
