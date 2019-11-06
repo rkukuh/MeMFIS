@@ -1019,6 +1019,23 @@ Route::name('datatables.')->group(function () {
             });
         });
 
+        /** Mutation */
+
+        Route::name('mutation')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'mutation',
+                'namespace' => 'Mutation'
+
+            ], function () {
+
+                Route::get('/material-transfer', 'MutationDatatables@index');
+                Route::get('/material-transfer/{mutation}/items', 'MutationDatatables@getItemsByMutation');
+
+            });
+        });
+
         Route::get('/testing', 'UnitDatatables@index')->name('testing.index');
 
 

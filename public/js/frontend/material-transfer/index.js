@@ -10,7 +10,7 @@ let MaterialTransfer = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation',
+                        url: '/datatables/mutation/material-transfer',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -48,31 +48,28 @@ let MaterialTransfer = {
             },
             columns: [
                 {
-                    field: '',
+                    field: 'mutated_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'number',
                     title: 'Material Transfer No.',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'storage_out.name',
                     title: 'Warehouse Out',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
-                    template: function (t) {
-                        return '<a href="/quotation/'+t.uuid+'">' + t.number + "</a>"
-                    }
                 },
                 {
-                    field: '',
+                    field: 'storage_in.name',
                     title: 'Warehouse In',
                     sortable: 'asc',
                     filterable: !1,
@@ -86,14 +83,14 @@ let MaterialTransfer = {
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'note',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -114,7 +111,7 @@ let MaterialTransfer = {
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'conducted_by',
                     title: 'Approve By',
                     sortable: 'asc',
                     filterable: !1,
@@ -125,13 +122,13 @@ let MaterialTransfer = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/quotation/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="/material-transfer/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
                             '</a>' +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid + '">' +
                                 '<i class="la la-check"></i>' +
                             '</a>'+
-                            '<a href="quotation/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
+                            '<a href="material-transfer/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
                                 '<i class="la la-print"></i>' +
                             '</a>'
 
@@ -142,7 +139,7 @@ let MaterialTransfer = {
         });
 
         $('.material_transfer_datatable').on('click', '.approve', function () {
-            let quotation_uuid = $(this).data('id');
+            let mutation_uuid = $(this).data('id');
 
             swal({
                 title: 'Sure want to Approve?',
@@ -161,14 +158,14 @@ let MaterialTransfer = {
                             )
                         },
                         type: 'POST',
-                        url: '/quotation/' + quotation_uuid + '/approve',
+                        url: '/material-transfer/' + mutation_uuid + '/approve',
                         success: function (data) {
-                            toastr.success('Quotation has been approved.', 'Approved', {
+                            toastr.success('Mutation has been approved.', 'Approved', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.material_transfer_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
