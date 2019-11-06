@@ -20,6 +20,8 @@ class CreateMutationsTable extends Migration
             $table->unsignedBigInteger('storage_out');
             $table->unsignedBigInteger('storage_in');
             $table->timestamp('mutated_at');
+            $table->unsignedBigInteger('shipping_by');
+            $table->unsignedBigInteger('received_by');
             $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -33,6 +35,16 @@ class CreateMutationsTable extends Migration
                     ->references('id')->on('storages')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
+
+            $table->foreign('shipping_by')
+                ->references('id')->on('employees')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('received_by')
+                ->references('id')->on('employees')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

@@ -11,6 +11,8 @@ class Mutation extends MemfisModel
         'storage_out',
         'storage_in',
         'mutated_at',
+        'shipping_by',
+        'received_by',
         'note',
     ];
 
