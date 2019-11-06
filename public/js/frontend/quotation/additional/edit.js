@@ -426,7 +426,8 @@ let AdditionalTaskQtnEdit = {
             let is_ppn =  $('#is_ppn').prop("checked");
             let ppn = 0;
             if(is_ppn){
-                ppn = $('#grand_total_rupiah').attr("value") * 1.1;
+                ppn = $('#grand_total_rupiah').attr("value") / 1.1 * 0.1;
+                ppn = ppn - $('#grand_total_rupiah').attr("value");
                 is_ppn = 1;
             }else{
                 ppn = $('#grand_total_rupiah').attr("value") * 0.1;
