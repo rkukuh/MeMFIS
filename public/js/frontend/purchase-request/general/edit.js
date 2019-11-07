@@ -87,7 +87,7 @@ let PurchaseRequest = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_project_update" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.item.uuid+' data-quantity='+t.quantity+' data-unit='+t.unit_id+' data-remark='+t.note+' data-id=' +
+                            '<button data-toggle="modal" data-target="#modal_general" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.item.uuid+' data-quantity='+t.quantity+' data-unit='+t.unit_id+' data-remark='+t.note+' data-id=' +
                             t.id +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
@@ -170,9 +170,9 @@ let PurchaseRequest = {
                                 timeOut: 5000
                             });
                         } else {
-                            $('#modal_project_update').modal('hide');
+                            $('#modal_general').modal('hide');
 
-                            $('#modal_project_update').on('hidden.bs.modal', function (e) {
+                            $('#modal_general').on('hidden.bs.modal', function (e) {
                                 $(this)
                                 .find("input,textarea")
                                     .val('')
@@ -286,7 +286,7 @@ let PurchaseRequest = {
                         // document.getElementById('manual_affected_id').value = manual_affected_id;
                     } else {
                         //    taskcard_reset();
-                        $('#modal_project_update').modal('hide');
+                        $('#modal_general').modal('hide');
 
                         toastr.success(
                             "Item has been updated.",
