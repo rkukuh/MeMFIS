@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Datatables\PurchaseRequest;
 
 use App\Models\PurchaseRequest;
 use App\Models\Type;
+use App\Models\Unit;
 use App\Models\Project;
 use App\Models\Pivots\PurchaseRequestItem;
 use App\Models\QuotationWorkPackageTaskCardItem;
@@ -419,6 +420,10 @@ class ProjectPurchaseRequestDatatables extends Controller
     public function pr_item(PurchaseRequest $purchaseRequest)
     {
         $items = PurchaseRequestItem::with('item')->where('purchase_request_id',$purchaseRequest->id)->get();
+
+        foreach($items as $item){
+            $item->unit_name .= Unit::find($item->unit_id)->name;
+        }
 
         $data = $alldata = json_decode($items);
 
