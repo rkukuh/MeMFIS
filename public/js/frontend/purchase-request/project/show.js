@@ -76,7 +76,7 @@ let PurchaseRequestGeneralShow = {
                     title: "Request Qty"
                 },
                 {
-                    field: "unit_id",
+                    field: "unit_name",
                     title: "Unit"
                 },
                 {
