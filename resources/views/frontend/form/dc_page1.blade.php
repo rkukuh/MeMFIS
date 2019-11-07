@@ -350,8 +350,8 @@
                     <td width="40%" valign="top">{{ $helper->pivot->additionals }}</td>
                     <td width="16%" align="center" valign="top">@if(array_key_exists($helper->id, $date_close) && isset($date_close[$helper->id])) {{ $date_close[$helper->id] }} @else - @endif</td>
                     <td width="8%" align="center" valign="top">@if(array_key_exists($helper->id, $actual_manhours)) {{ number_format($actual_manhours[$helper->id], 2) }} @else - @endif</td>
-                    <td width="15%" align="center" valign="top">{{ $helper->first_name }} {{ $helper->last_name }} </td>
-                    <td width="15%" align="center" valign="top">-</td>
+                    <td width="15%" align="center" valign="top">{{ $helper->first_name }} </td>
+                    <td width="15%" align="center" valign="top">{{ $released_by }} @if($released_at){{ date_format($released_at, 'd-m-Y') }} @endif</td>
                 </tr>
                 @endforeach
                 <tr>
@@ -359,10 +359,20 @@
                     <td valign="top" align="center"><b>Total</b> <div style="padding-top:12px">{{ number_format(array_sum($actual_manhours), 2) }}</div></td>
                     <td colspan="2" valign="top">   
                         <div style="position:relative">
+                        @if($defectcard->is_rii == 1)
                             <b>RII Item :</b>
                             <div style="position:absolute; right:0;top:42px;">
-                                (Stamp + Sign)
+                                {{ $rii_by }} @if($rii_at){{ date_format($rii_at, 'd-m-Y') }} @endif
                             </div>
+                        @else
+                            <b>RII Item :</b>
+                            <div style="position:absolute; right:0;top:42px;">
+                                {{ $rii_by }} @if($rii_at){{ date_format($rii_at, 'd-m-Y') }} @endif
+                            </div>
+                            <div>
+                                <img src="./img/RII.png" alt="" width="220px" height="50px">
+                            </div>
+                        @endif
                         </div>
                     </td>
                 </tr>
