@@ -178,7 +178,7 @@
                             {{ $attention->phone }} / {{ $attention->fax }}
                         @else
                         -
-                        @endif
+                        @endif 
                     </td>
                 </tr>
                 <tr>
@@ -193,7 +193,7 @@
                             {{ $attention->address }}
                         @else
                             -
-                        @endif
+                        @endif 
                     </td>
                 </tr>
                 <tr>
@@ -208,7 +208,7 @@
                         {{ $attention->name }}
                         @else
                         -
-                        @endif
+                        @endif 
                     </td>
                 </tr>
                 <tr>
@@ -219,7 +219,7 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{ $quotation->quotationable->no_wo}}
+                        {{ $quotation->quotationable->no_wo}} 
                     </td>
                 </tr>
             </table>
@@ -231,7 +231,7 @@
                 <tr>
                     <th width="14%" valign="top">Date</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top">{{ $quotation->created_at}}</td>
+                    <td width="35%" valign="top">{{ date_format($quotation->created_at, 'd-m-Y') }}</td>
                     <th width="14%" valign="top">Project No</th>
                     <td width="1%" valign="top">:</td>
                     <td width="35%" valign="top">{{ $quotation->quotationable->code}}</td>
@@ -247,7 +247,7 @@
                 <tr>
                     <th width="14%" valign="top">Exchange Rate</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top">{{ $quotation->exchange_rate}}</td>
+                    <td width="35%" valign="top">Rp. {{ number_format($quotation->exchange_rate, 2, ",", ".") }}</td>
                     <th width="14%" valign="top">A/C Reg.</th>
                     <td width="1%" valign="top">:</td>
                     <td width="35%" valign="top">{{ $quotation->quotationable->aircraft_register}}</td>
@@ -255,7 +255,7 @@
                 <tr>
                     <th width="14%" valign="top">Valid Until</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top">{{ $quotation->valid_until}}</td>
+                    <td width="35%" valign="top">{{ date_format($quotation->valid_until, 'd-m-Y') }}</td>
                     <th width="14%" valign="top">A/C Serial No.</th>
                     <td width="1%" valign="top">:</td>
                     <td width="35%" valign="top">{{ $quotation->quotationable->aircraft_sn}}</td>
@@ -297,26 +297,25 @@
                     </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Manhours Price :{{ $total_manhour }} x {{ $quotation->currency->symbol }} {{ number_format($data_defectcard->manhour_rate) }}</td>
-                        <td width="16%" align="center" valign="top"> {{ $quotation->currency->symbol }}. {{ number_format($total_manhour * $data_defectcard->manhour_rate) }}</td>
-                        {{-- @if($data_defectcard->discount_value == null && $data_defectcard->discount_type == null) --}}
+                        <td width="42%" align="left" valign="top">- Manhours Price :{{ $total_manhour }} x {{ $quotation->currency->symbol }} {{ number_format($data_defectcard->manhour_rate, 2, ",", ".") }}</td>
+                        <td width="16%" align="center" valign="top"> {{ $quotation->currency->symbol }}. {{ number_format($total_manhour * $data_defectcard->manhour_rate, 2, ",", ".") }}</td>
+                        @if($data_defectcard->discount_value == null && $data_defectcard->discount_type == null)
                             <td width="17%" align="center" valign="top"></td>
-                        {{-- @else --}}
-                            {{-- @if($data_defectcard->discount_type ==  'amount')
-                            <td width="17%" align="center" valign="top">{{ $quotation->currency->symbol}}. {{ number_format($data_defectcard->discount_value) }}</td>
+                        @else
+                            @if($data_defectcard->discount_type ==  'amount')
+                            <td width="17%" align="center" valign="top">{{ $quotation->currency->symbol}}. {{ number_format($data_defectcard->discount_value, 2, ",", ".") }}</td>
                             @elseif($data_defectcard->discount_type == 'percentage'){
                             <td width="17%" align="center" valign="top">{{ $data_defectcard->discount_value }}%</td>
-                            @endif --}}
-                            <td width="17%"></td>
-                        {{-- @endif --}}
-                        <td width="17%" align="center" valign="top">{{ $quotation->currency->symbol }}. {{ number_format($total_manhour * $data_defectcard->manhour_rate + $mat_tool_price) }}</td>
+                            @endif
+                        @endif
+                        <td width="17%" align="center" valign="top">{{ $quotation->currency->symbol }}. {{ number_format($total_manhour * $data_defectcard->manhour_rate + $mat_tool_price, 2, ",", ".") }}</td>
                     </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
                         <td width="42%" align="left" valign="top">- Additional Material Price</td>
                         <td width="16%" align="center" valign="top">
                             @if($mat_tool_price)
-                                {{ $quotation->currency->symbol }}. {{ number_format($mat_tool_price) }}
+                                {{ $quotation->currency->symbol }}. {{ number_format($mat_tool_price, 2, ",", ".") }}
                             @else
                                 -
                             @endif
@@ -336,31 +335,31 @@
                     <td width="50%" rowspan="6" valign="top"><b>Term & Condition</b><br>
                         @if(isset($quotation->term_of_condition))
                             {{ $quotation->term_of_condition}}
-                        @else
+                        @else   
                             -
                         @endif
                         PPN Include
                     </td>
                     <td width="40%" valign="top" align="left">Total</td>
-                    <td width="25%" valign="top" align="right">{{ $quotation->currency->symbol }}. {{ number_format($GrandTotal) }}</td>
+                    <td width="25%" valign="top" align="right">{{ $quotation->currency->symbol }}. {{ number_format($GrandTotal, 2, ",", ".") }}</td>
                 </tr>
                 <tr>
                     <td width="40%" valign="top" align="left">Disc</td>
-                    <td width="25%" valign="top" align="right">- {{ $quotation->currency->symbol }} {{ $discount }}</td>
+                    <td width="25%" valign="top" align="right">- {{ $quotation->currency->symbol }}. {{ number_format($discount, 2, ",", ".") }}</td>
                 </tr>
                 @if($totalCharge > 0)
                 <tr>
                     <td width="40%" valign="top" align="left">Delivery Cost</td>
-                    <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }}</td>
+                    <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge, 2, ",", ".") }}</td>
                 </tr>
                 @endif
                 <tr>
                     <th width="40%" valign="top" align="left" style="border-top:  2px solid black;">Grand Total in {{ $quotation->currency->name  }}</th>
-                    {{-- <th width="25%" valign="top" align="right" style="border-top:  2px solid black;">{{ $quotation->currency->symbol }}. {{ number_format($GrandTotal - $discount) }}</th> --}}
+                    <th width="25%" valign="top" align="right" style="border-top:  2px solid black;">{{ $quotation->currency->symbol }}. {{ number_format($GrandTotal - $discount, 2, ",", ".") }}</th>
                 </tr>
                 <tr>
                     <th width="40%" valign="top" align="left">Grand Total in Rupiah</th>
-                    <th width="25%" valign="top" align="right">Rp. {{ number_format($GrandTotal * $quotation->exchange_rate) }}</th>
+                    <th width="25%" valign="top" align="right">Rp. {{ number_format($GrandTotal * $quotation->exchange_rate, 2, ",", ".") }}</th>
                 </tr>
             </table>
         </div>

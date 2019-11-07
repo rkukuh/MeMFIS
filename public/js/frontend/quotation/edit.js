@@ -431,6 +431,7 @@ let Quotation = {
             let ppn = tax_percentage = 0;
             if(tax_type){
                 ppn = $('#grand_total_rupiah').attr("value") / 1.1 * 0.1;
+                ppn = ppn - $('#grand_total_rupiah').attr("value");
                 tax_type = "include";
                 tax_percentage = 10;
             }else{

@@ -87,6 +87,7 @@ Route::name('component.')->group(function () {
         Route::get('get-tool-request-defectcard', 'FillComboxController@toolRequestDefectCard')->name('get-tool-request-defectcard');
         Route::get('get-item-po-details/{purchaseOrder}/{item}', 'FillComboxController@ItemPODetails')->name('get-item-po-details');
         Route::get('get-scheduled-payment-types', 'FillComboxController@scheduledPaymentType')->name('get-scheduled-payment-types');
+        Route::get('get-project-purchase-request', 'FillComboxController@projectPurchaseRequest')->name('get-project-purchase-request');
         Route::get('get-takcard-non-routine-types', 'FillComboxController@taskcardTypeNonRoutine')->name('get-takcard-non-routine-types');
         Route::get('get-takcard-preliminary-types', 'FillComboxController@taskcardTypePreliminary')->name('get-takcard-preliminary-types');
         Route::get('get-tool-request-inventory-out', 'FillComboxController@toolRequestInventoryOut')->name('get-tool-request-inventory-out');
