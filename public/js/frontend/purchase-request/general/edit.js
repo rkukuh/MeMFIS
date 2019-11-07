@@ -64,7 +64,7 @@ let PurchaseRequest = {
                     filterable: !1
                 },
                 {
-                    field: "",
+                    field: "stock_avaliable",
                     title: "Stock Available",
                     sortable: "asc",
                     filterable: !1

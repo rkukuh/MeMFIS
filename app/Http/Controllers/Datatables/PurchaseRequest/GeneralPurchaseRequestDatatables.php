@@ -7,6 +7,7 @@ use App\Models\Type;
 use App\Models\Unit;
 use App\Models\Pivots\PurchaseRequestItem;
 use App\Models\ListUtil;
+use App\Models\CheckStock;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -322,6 +323,11 @@ class GeneralPurchaseRequestDatatables extends Controller
 
         foreach($items as $item){
             $item->unit_name .= Unit::find($item->unit_id)->name;
+
+            $stock  = new CheckStock;
+
+            $item->stock_avaliable .= $stock->itemFree($item->item->uuid);
+
         }
 
         $data = $alldata = json_decode($items);
