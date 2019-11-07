@@ -649,6 +649,19 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'payroll-reject']);
         Permission::create(['name' => 'payroll-void']);
 
+        // PETTY CASH / BON SEMENTARA entity permissions:
+
+        Permission::create(['name' => 'pettycash-create']);
+        Permission::create(['name' => 'pettycash-read']);
+        Permission::create(['name' => 'pettycash-edit']);
+        Permission::create(['name' => 'pettycash-delete']);
+        Permission::create(['name' => 'pettycash-remove']);
+        Permission::create(['name' => 'pettycash-report']);
+        Permission::create(['name' => 'pettycash-print']);
+        Permission::create(['name' => 'pettycash-approve']);
+        Permission::create(['name' => 'pettycash-reject']);
+        Permission::create(['name' => 'pettycash-void']);
+
         // PROJECT entity permissions:
 
         Permission::create(['name' => 'project-create']);

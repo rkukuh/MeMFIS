@@ -144,6 +144,22 @@ class DefectCardController extends Controller
 
         $date_close = $released = [];
 
+        if( sizeof($defectcard->approvals) >= 3){
+            $released_by = $defectcard->approvals[2]->conductedBy->first_name." ".$defectcard->approvals[2]->conductedBy->last_name;
+            $released_at = $defectcard->approvals[2]->created_at;
+        }else{
+            $released_by = "-";
+            $released_at = null;
+        }
+
+        if( sizeof($defectcard->approvals) == 4){
+            $rii_by = $defectcard->approvals[2]->conductedBy->first_name." ".$defectcard->approvals[2]->conductedBy->last_name;
+            $rii_at = $defectcard->approvals[2]->created_at;
+        }else{
+            $rii_by = "-";
+            $rii_at = null;
+        }
+
         $progresses_groups = $defectcard->progresses->groupBy('progressed_by')->sortBy('created_at');
         $actual_manhours = [];
         foreach($progresses_groups as $progresses_group){
@@ -151,7 +167,6 @@ class DefectCardController extends Controller
             $manhours = null;
             foreach($progresses_group as $key => $progress){
                 $status = $statuses->find($progress->status_id)->code;
-                // dump($status);
                 // close date
                 if($status == "closed"){
                     $date_close[$progress->progressedBy->id] = $progress->created_at;
@@ -184,8 +199,6 @@ class DefectCardController extends Controller
             $actual_manhours[$progress->progressedBy->id] = $manhours;
         }
 
-        // dd("break");
-
         $zones = $defectcard->zones->pluck('name')->toArray();
         $zones = join(',', $zones);
         
@@ -202,7 +215,18 @@ class DefectCardController extends Controller
         }else{
             $text = "";
         }
-        $view1 = \View::make('frontend.form.dc_page1')->with(['defectcard' => $defectcard,'propose_corrections'=> $propose_corrections, 'text'=> $text, 'zones' => $zones, 'actual_manhours' => $actual_manhours, 'date_close' => $date_close])->render();
+        $view1 = \View::make('frontend.form.dc_page1')->with([
+            'defectcard' => $defectcard,
+            'propose_corrections'=> $propose_corrections, 
+            'text'=> $text, 
+            'zones' => $zones, 
+            'actual_manhours' => $actual_manhours, 
+            'date_close' => $date_close, 
+            'released_by' => $released_by, 
+            'released_at' => $released_at,
+            'rii_by' => $rii_by, 
+            'rii_at' => $rii_at
+            ])->render();
         $view2 = \View::make('frontend.form.dc_page2')->with('defectcard', $defectcard)->render();
 
         $pdf = App::make('dompdf.wrapper');

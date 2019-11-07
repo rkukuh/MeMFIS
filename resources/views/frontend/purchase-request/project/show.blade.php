@@ -71,7 +71,7 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', $purchaseRequest->project->code)
+                                                    @slot('text', $purchaseRequest->purchase_requestable->code)
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">

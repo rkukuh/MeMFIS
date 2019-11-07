@@ -389,15 +389,8 @@ class QuotationAdditionalController extends Controller
         $total_item_price = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.jobcardable','item','unit','price')->where('quotation_id', $quotation->id)
         ->sum('subtotal');
 
-
         $total_item_quantity = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.jobcardable','item','unit','price')->where('quotation_id', $quotation->id)
         ->sum('quantity');
-
-        // dd($items);
-
-        // foreach($quotation->defectcards as $defectcard){
-        //     dd($defectcard->items);
-        // }
 
         $data_defectcard = json_decode($quotation->data_defectcard);
         $total_manhour = $data_defectcard->total_manhour;
@@ -411,13 +404,15 @@ class QuotationAdditionalController extends Controller
         }
 
         $page_merger = new Merger();
+        $created_by = User::find($quotation->audits->first()->user_id)->name;
 
         $page1 = \View::make('frontend/form/additional_quotation_1')->with([
-                'username' => $username,
                 'page' => 1,
+                'username' => $username,
                 'discount' => $discount,
                 'quotation' => $quotation,
                 'GrandTotal' => $grandtotal,
+                'created_by' => $created_by,
                 'totalCharge' => $totalCharge,
                 'total_manhour' => $total_manhour,
                 'mat_tool_price' => $mat_tool_price,
@@ -430,11 +425,12 @@ class QuotationAdditionalController extends Controller
         $page_merger->addRaw($pdf->output());
 
         $page2 = \View::make('frontend/form/additional_quotation_2')->with([
-                'username' => $username,
                 'page' => 2,
+                'username' => $username,
                 'discount' => $discount,
                 'quotation' => $quotation,
                 'GrandTotal' => $grandtotal,
+                'created_by' => $created_by,
                 'totalCharge' => $totalCharge,
                 'total_manhour' => $total_manhour,
                 'mat_tool_price' => $mat_tool_price,
@@ -447,12 +443,13 @@ class QuotationAdditionalController extends Controller
         $page_merger->addRaw($pdf2->output());
 
         $page3 = \View::make('frontend/form/additional_quotation_3')->with([
+                'page' => 3,
                 'numbering' => 0,
                 'items' => $items,
                 'username' => $username,
-                'page' => 3,
                 'discount' => $discount,
                 'quotation' => $quotation,
+                'created_by' => $created_by,
                 'GrandTotal' => $grandtotal,
                 'totalCharge' => $totalCharge,
                 'total_manhour' => $total_manhour,

@@ -16,10 +16,12 @@ class ItemDatatables extends Controller
      */
     public function index()
     {
+        ini_set('memory_limit', '-1');
+
         $items = Item::with('unit', 'categories')
                         ->whereHas('categories', function ($query) {
                             $query->where('code','<>','tool');
-                        })->get();
+                        })->take(10000)->get();
 
         $data = $alldata = json_decode($items);
 
