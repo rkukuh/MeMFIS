@@ -6,7 +6,7 @@ let PurchaseRequest = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/purchase-request/item/'+pr_uuid+'/general',
+                        url: '/datatables/purchase-request/item/'+pr_uuid+'/project',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -50,18 +50,18 @@ let PurchaseRequest = {
                     filterable: !1,
                     template: function(t) {
                         return (
-                            '<a href="/item/' + t.uuid + '">' + t.code + "</a>"
+                            '<a href="/item/' + t.item.uuid + '">' + t.item.code + "</a>"
                         );
                     }
                 },
                 {
-                    field: "name",
+                    field: "item.name",
                     title: "Item Description",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: '',
+                    field: 'quantity_requirement',
                     title: 'Project Requirement Qty',
                     sortable: 'asc',
                     filterable: !1,
@@ -73,15 +73,15 @@ let PurchaseRequest = {
                     filterable: !1
                 },
                 {
-                    field: "pivot.quantity",
+                    field: "quantity",
                     title: "Request Qty"
                 },
                 {
-                    field: "pivot.unit_id",
+                    field: "unit_id",
                     title: "Unit"
                 },
                 {
-                    field: "pivot.note",
+                    field: "note",
                     title: "Remark"
                 },
                 {
@@ -90,11 +90,11 @@ let PurchaseRequest = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_general_update" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-remark='+t.pivot.note+' data-uuid=' +
-                            t.uuid +
+                            '<button data-toggle="modal" data-target="#modal_general_update" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.item.code+' data-quantity='+t.quantity+' data-unit='+t.unit_id+' data-remark='+t.note+' data-id=' +
+                            t.id +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                            t.uuid +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
+                            t.id +
                             ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                         );
                     }
@@ -175,12 +175,12 @@ let PurchaseRequest = {
 
             document.getElementById('material').innerText = $(this).data('item');
             document.getElementById('qty-material').value = $(this).data('quantity');
-            document.getElementById('uuid').value = $(this).data('uuid');
+            document.getElementById('uuid').value = $(this).data('id');
             document.getElementById('remark-material').value = $(this).data('remark');
         });
 
         $(".modal-footer").on("click", ".update-item", function() {
-            let uuid = $("input[name=uuid]").val();
+            let id = $("input[name=uuid]").val();
             let quantity = $("#qty-material").val();
             let unit_id = $("#unit_material").val();
             let note = $("#remark-material").val();
@@ -189,7 +189,7 @@ let PurchaseRequest = {
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: '/purchase-request/'+pr_uuid+'/project/item/'+uuid,
+                url: '/purchase-request/project/item/'+id,
                 type: "PUT",
                 data: {
                     quantity: quantity,
@@ -245,7 +245,7 @@ let PurchaseRequest = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/purchase-request/' + pr_uuid + '/item/'+$(this).data('uuid'),
+                        url: '/purchase-request/item/'+$(this).data('id'),
                         success: function (data) {
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000

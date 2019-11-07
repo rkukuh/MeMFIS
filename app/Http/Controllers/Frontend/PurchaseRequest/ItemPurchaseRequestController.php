@@ -10,6 +10,7 @@ use App\Models\Approval;
 use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\PurchaseRequestItem;
 use App\Http\Requests\Frontend\ItemPurchaseRequestStore;
 use App\Http\Requests\Frontend\ItemGeneralPurchaseRequestUpdate;
 use App\Http\Requests\Frontend\ItemProjectPurchaseRequestUpdate;
@@ -97,9 +98,11 @@ class ItemPurchaseRequestController extends Controller
      * @param  \App\Models\PurchaseRequest  $purchaseRequest
      * @return \Illuminate\Http\Response
      */
-    public function updateGeneral(ItemGeneralPurchaseRequestUpdate $request, PurchaseRequest $purchaseRequest, Item $item)
+    public function updateGeneral(ItemGeneralPurchaseRequestUpdate $request, $item)
     {
-        $purchaseRequest->items()->updateExistingPivot($item->id, [ 'unit_id'=>$request->unit_id, 'quantity'=> $request->quantity, 'note' => $request->note]);
+        $purchaseRequest = PurchaseRequestItem::find($item);
+
+        $purchaseRequest->update($request->all());
 
         return response()->json($purchaseRequest);
     }
@@ -111,9 +114,11 @@ class ItemPurchaseRequestController extends Controller
      * @param  \App\Models\PurchaseRequest  $purchaseRequest
      * @return \Illuminate\Http\Response
      */
-    public function updateProject(ItemProjectPurchaseRequestUpdate $request, PurchaseRequest $purchaseRequest, Item $item)
+    public function updateProject(ItemProjectPurchaseRequestUpdate $request, $item)
     {
-        $purchaseRequest->items()->updateExistingPivot($item->id, [ 'unit_id'=>$request->unit_id, 'quantity'=> $request->quantity, 'note' => $request->note]);
+        $purchaseRequest = PurchaseRequestItem::find($item);
+
+        $purchaseRequest->update($request->all());
 
         return response()->json($purchaseRequest);
     }
@@ -124,9 +129,9 @@ class ItemPurchaseRequestController extends Controller
      * @param  \App\Models\PurchaseRequest  $purchaseRequest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PurchaseRequest $purchaseRequest,Item $item)
+    public function destroy($item)
     {
-        $purchaseRequest->items()->detach($item->id);
+        $purchaseRequest = PurchaseRequestItem::find($item)->delete();
 
         return response()->json($purchaseRequest);
 
