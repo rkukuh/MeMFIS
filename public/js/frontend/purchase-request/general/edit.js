@@ -53,12 +53,12 @@ let PurchaseRequest = {
                     filterable: !1,
                     template: function(t) {
                         return (
-                            '<a href="/item/' + t.uuid + '">' + t.code + "</a>"
+                            '<a href="/item/' + t.item.uuid + '">' + t.item.code + "</a>"
                         );
                     }
                 },
                 {
-                    field: "name",
+                    field: "item.name",
                     title: "Item Description",
                     sortable: "asc",
                     filterable: !1
@@ -70,7 +70,7 @@ let PurchaseRequest = {
                     filterable: !1
                 },
                 {
-                    field: "pivot.quantity",
+                    field: "quantity",
                     title: "Request Qty"
                 },
                 {
@@ -78,7 +78,7 @@ let PurchaseRequest = {
                     title: "Unit"
                 },
                 {
-                    field: "pivot.note",
+                    field: "note",
                     title: "Remark"
                 },
                 {
@@ -87,11 +87,11 @@ let PurchaseRequest = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_general" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.uuid+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-remark='+t.pivot.note+' data-uuid=' +
-                            t.uuid +
+                            '<button data-toggle="modal" data-target="#modal_project_update" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.item.uuid+' data-quantity='+t.quantity+' data-unit='+t.unit_id+' data-remark='+t.note+' data-id=' +
+                            t.id +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                            t.uuid +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
+                            t.id +
                             ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                         );
                     }
@@ -170,9 +170,9 @@ let PurchaseRequest = {
                                 timeOut: 5000
                             });
                         } else {
-                            $('#modal_general').modal('hide');
+                            $('#modal_project_update').modal('hide');
 
-                            $('#modal_general').on('hidden.bs.modal', function (e) {
+                            $('#modal_project_update').on('hidden.bs.modal', function (e) {
                                 $(this)
                                 .find("input,textarea")
                                     .val('')
@@ -198,10 +198,6 @@ let PurchaseRequest = {
                 }
             });
         });
-
-        // $('#modal_general').on('hidden.bs.modal', function () {
-        //     alert('s');
-        // })
 
         $('.item_datatable').on('click', '.edit-item', function () {
             let unit_id = $(this).data('unit');
@@ -256,7 +252,7 @@ let PurchaseRequest = {
 
             // document.getElementById('material').innerText = $(this).data('item');
             document.getElementById('qty').value = $(this).data('quantity');
-            document.getElementById('uuid').value = $(this).data('uuid');
+            document.getElementById('uuid').value = $(this).data('id');
             document.getElementById('remark').value = $(this).data('remark');
 
             $('.btn-success').addClass('update-item');
@@ -273,7 +269,7 @@ let PurchaseRequest = {
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: '/purchase-request/'+pr_uuid+'/general/item/'+uuid,
+                url: '/purchase-request/general/item/'+uuid,
                 type: "PUT",
                 data: {
                     quantity: quantity,
@@ -290,7 +286,7 @@ let PurchaseRequest = {
                         // document.getElementById('manual_affected_id').value = manual_affected_id;
                     } else {
                         //    taskcard_reset();
-                        $('#modal_general').modal('hide');
+                        $('#modal_project_update').modal('hide');
 
                         toastr.success(
                             "Item has been updated.",
@@ -332,7 +328,7 @@ let PurchaseRequest = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/purchase-request/' + pr_uuid + '/item/'+$(this).data('uuid'),
+                        url: '/purchase-request/item/'+$(this).data('id'),
                         success: function (data) {
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
