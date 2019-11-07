@@ -69,6 +69,7 @@ class ProjectPurchaseRequestController extends Controller
                 }
 
                 $purchaseRequest->items()->attach([$item->item_id => [
+                    'quantity_requirement'=> $item->quantity,
                     'quantity'=> $item->quantity,
                     'unit_id' => $item->unit_id,
                     'quantity_unit' => $quantity_unit]
@@ -91,6 +92,7 @@ class ProjectPurchaseRequestController extends Controller
                 }
 
                 $purchaseRequest->items()->attach([$item->item_id => [
+                    'quantity_requirement'=> $item->quantity,
                     'quantity'=> $item->quantity,
                     'unit_id' => $item->unit_id,
                     'quantity_unit' => $quantity_unit]

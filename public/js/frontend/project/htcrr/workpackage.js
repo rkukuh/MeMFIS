@@ -179,32 +179,30 @@ let Workpackage = {
         let material_htcrr_datatables_init = true;
         let triggeruuid = "";
         let htcrr_materials = $('.ht_crr_datatable').on('click', '.material_htcrr', function () {
+            triggeruuid = $(this).data('uuid');
             if (material_htcrr_datatables_init == true) {
                 material_htcrr_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
                 htcrr_material(triggeruuid);
                 $('#m_datatable_material_htcrr').DataTable().ajax.reload();
             }
             else {
                 let table = $('#m_datatable_material_htcrr').DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('uuid');
                 htcrr_material(triggeruuid);
                 $('#m_datatable_material_htcrr').DataTable().ajax.reload();
             }
         });
         let tool_htcrr_datatables_init = true;
         let htcrr_tools = $('.ht_crr_datatable').on('click', '.tool_htcrr', function () {
+            triggeruuid = $(this).data('uuid');
             if (tool_htcrr_datatables_init == true) {
                 tool_htcrr_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
                 htcrr_tool(triggeruuid);
                 $('#m_datatable_tool_htcrr').DataTable().ajax.reload();
             }
             else {
                 let table = $('#m_datatable_tool_htcrr').DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('uuid');
                 htcrr_tool(triggeruuid);
                 $('#m_datatable_tool_htcrr').DataTable().ajax.reload();
             }
@@ -536,6 +534,8 @@ let Workpackage = {
     }
 };
 function htcrr_tool(triggeruuid) {
+    $("#htcrr_uuid_for_tool").val(triggeruuid);
+    let htcrr_uuid = $("#htcrr_uuid_for_tool").val();
     $("#m_datatable_tool_htcrr").DataTable({
         "dom": '<"top"f>rt<"bottom">pl',
         responsive: !0,
@@ -544,7 +544,7 @@ function htcrr_tool(triggeruuid) {
         serverSide: !0,
         lengthMenu: [5, 10, 25, 50 ],
         pageLength:5,
-        ajax: "/datatables/project/"+triggeruuid+"/tools",
+        ajax: "/datatables/project/"+htcrr_uuid+"/tools",
         columns: [
             {
                 data: "name"
@@ -585,6 +585,7 @@ function htcrr_tool(triggeruuid) {
 
     $('.modal-footer').on('click', '.add-htcrr-tool', function (e) {
         e.stopImmediatePropagation();
+        let htcrr_uuid = $("#htcrr_uuid_for_tool").val();
         let tool = $('#tool').val();
         let unit_tool = $('#unit_tool').val();
         let quantity = $('input[name=quantity]').val();
@@ -595,7 +596,7 @@ function htcrr_tool(triggeruuid) {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: 'post',
-            url: '/project-hm/htcrr/'+triggeruuid+'/item/',
+            url: '/project-hm/htcrr/'+htcrr_uuid+'/item/',
             data: {
                 _token: $('input[name=_token]').val(),
                 item_id: tool,
@@ -683,6 +684,8 @@ function htcrr_tool(triggeruuid) {
 };
 
 function htcrr_material(triggeruuid) {
+    $("#htcrr_uuid_for_material").val(triggeruuid);
+    let htcrr_uuid = $("#htcrr_uuid_for_material").val();
     $("#m_datatable_material_htcrr").DataTable({
         "dom": '<"top"f>rt<"bottom">pl',
         responsive: !0,
@@ -691,7 +694,7 @@ function htcrr_material(triggeruuid) {
         serverSide: !0,
         lengthMenu: [5, 10, 25, 50 ],
         pageLength:5,
-        ajax: "/datatables/project/"+triggeruuid+"/materials",
+        ajax: "/datatables/project/"+htcrr_uuid+"/materials",
         columns: [
             {
                 data: "name"
@@ -731,19 +734,20 @@ function htcrr_material(triggeruuid) {
 
 
     $('.modal-footer').on('click', '.add-htcrr-item', function (e) {
+        let htcrr_uuid = $("#htcrr_uuid_for_material").val();
+
         e.stopImmediatePropagation();
         let material = $('#material').val();
         let unit_material = $('#unit_material').val();
         let quantity = $('input[name=quantity_material]').val();
         let remark_material = $('#remark_material').val();
 
-
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: 'post',
-            url: '/project-hm/htcrr/'+triggeruuid+'/item/',
+            url: '/project-hm/htcrr/'+htcrr_uuid+'/item/',
             data: {
                 _token: $('input[name=_token]').val(),
                 item_id: material,
@@ -781,6 +785,7 @@ function htcrr_material(triggeruuid) {
 
     $('.dataTable').on('click', '.delete-item', function () {
       let triggeruuiditem = $(this).data('uuid');
+      
       swal({
           title: 'Sure want to remove?',
           type: 'question',
@@ -879,8 +884,8 @@ $('.m_tabs_manhour').on('click', function () {
         url: "/project-htcrr/"+project_uuid+"/getManhours",
         method: "get",
         success: function(dataFetched){
-            $('#total_mhrs').html(dataFetched.total_mhrs);
-            $('#total').html(dataFetched.mhrs_pfrm_factor);
+            $('#total_mhrs').html(numberFormat.format(dataFetched.total_mhrs));
+            $('#total').html(numberFormat.format(dataFetched.mhrs_pfrm_factor));
         },
         });
     }

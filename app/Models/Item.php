@@ -288,6 +288,7 @@ class Item extends MemfisModel implements HasMedia
     {
         return $this->belongsToMany(PurchaseRequest::class, 'item_purchase_request', 'purchase_request_id', 'item_id')
                     ->withPivot(
+                        'quantity_requirement',
                         'quantity',
                         'quantity_unit',
                         'unit_id',
