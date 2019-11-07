@@ -90,7 +90,7 @@ let PurchaseRequest = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_project" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.item.code+' data-quantity='+t.quantity+' data-unit='+t.unit_id+' data-remark='+t.note+' data-id=' +
+                            '<button data-toggle="modal" data-target="#modal_project" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.item.code+' data-item_uuid='+t.item.uuid+' data-quantity='+t.quantity+' data-unit='+t.unit_id+' data-remark='+t.note+' data-id=' +
                             t.id +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
@@ -146,11 +146,36 @@ let PurchaseRequest = {
 
         $('.item_datatable').on('click', '.edit-item', function () {
             let unit_id = $(this).data('unit');
+            let item_uuid = $(this).data('item_uuid');
 
             $('select[name="unit_material"]').empty();
 
+            // $.ajax({
+            //     url: '/get-units',
+            //     type: 'GET',
+            //     dataType: 'json',
+            //     success: function (data) {
+            //         let index = 1;
+
+            //         $('select[name="unit_material"]').empty();
+
+            //         $.each(data, function (key, value) {
+            //             if (key == unit_id) {
+            //                 $('select[name="unit_material"]').append(
+            //                     '<option value="' + key + '" selected>' + value + '</option>'
+            //                 );
+            //             } else {
+            //                 $('select[name="unit_material"]').append(
+            //                     '<option value="' + key + '">' + value + '</option>'
+            //                 );
+            //             }
+
+            //         });
+            //     }
+            // });
+
             $.ajax({
-                url: '/get-units',
+                url: '/get-item-unit-uuid/'+ item_uuid,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
