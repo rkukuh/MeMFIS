@@ -6,6 +6,7 @@ use App\Models\PurchaseRequest;
 use App\Models\Type;
 use App\Models\Unit;
 use App\Models\Project;
+use App\Models\CheckStock;
 use App\Models\Pivots\PurchaseRequestItem;
 use App\Models\QuotationWorkPackageTaskCardItem;
 use App\Models\ListUtil;
@@ -423,6 +424,11 @@ class ProjectPurchaseRequestDatatables extends Controller
 
         foreach($items as $item){
             $item->unit_name .= Unit::find($item->unit_id)->name;
+
+            $stock  = new CheckStock;
+
+            $item->stock_avaliable .= $stock->itemFree($item->item->uuid);
+
         }
 
         $data = $alldata = json_decode($items);
