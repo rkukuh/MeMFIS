@@ -35,7 +35,7 @@ class ItemInventoryInController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ItemInventoryInStore  $request
+     * @param  \App\Http\Requests\Frontend\InventoryInStore  $request
      * @return \Illuminate\Http\Response
      */
     public function store(InventoryInStore $request, InventoryIn $inventoryIn, Item $item)
