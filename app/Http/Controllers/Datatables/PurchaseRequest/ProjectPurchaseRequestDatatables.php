@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Datatables\PurchaseRequest;
 
 use App\Models\PurchaseRequest;
 use App\Models\Type;
+use App\Models\Unit;
 use App\Models\Project;
+use App\Models\CheckStock;
+use App\Models\Pivots\PurchaseRequestItem;
 use App\Models\QuotationWorkPackageTaskCardItem;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
@@ -417,7 +420,18 @@ class ProjectPurchaseRequestDatatables extends Controller
      */
     public function pr_item(PurchaseRequest $purchaseRequest)
     {
-        $data = $alldata = json_decode($purchaseRequest->items);
+        $items = PurchaseRequestItem::with('item')->where('purchase_request_id',$purchaseRequest->id)->get();
+
+        foreach($items as $item){
+            $item->unit_name .= Unit::find($item->unit_id)->name;
+
+            $stock  = new CheckStock;
+
+            $item->stock_avaliable .= $stock->itemFree($item->item->uuid);
+
+        }
+
+        $data = $alldata = json_decode($items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

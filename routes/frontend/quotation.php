@@ -20,7 +20,7 @@ Route::name('frontend.')->group(function () {
             Route::prefix('quotation-additional')->group(function () {
                 Route::get('/create/{project}','QuotationAdditionalController@create')->name('quotation-additional.create');
                 Route::post('/{quotation}/discount','QuotationAdditionalController@discount')->name('quotation-additional.discount');
-                Route::post('/{quotation}/approve', 'QuotationAdditionalController@approve')->name('quotation.approve')->middleware('permission:quotation-approve');
+                Route::post('/{quotation}/approve', 'QuotationAdditionalController@approve')->name('quotation.approve');
                 Route::get('/{quotation}/print', 'QuotationAdditionalController@print');
             });
 
@@ -29,7 +29,7 @@ Route::name('frontend.')->group(function () {
                 Route::get('/{quotation}/print', 'QuotationController@print');
                 Route::post('/{quotation}/workpackage/{workpackage}/discount', 'QuotationController@discount')->name('quotation.discount');
                 Route::post('/{quotation}/workpackage/{workpackage}/discount/htcrr', 'QuotationController@discount_htcrr')->name('quotation.discount.htcrr');
-                Route::post('/{quotation}/approve', 'QuotationController@approve')->name('quotation.approve')->middleware('permission:quotation-approve');
+                Route::post('/{quotation}/approve', 'QuotationController@approve')->name('quotation.approve');
 
                 Route::name('quotation.')->group(function () {
 

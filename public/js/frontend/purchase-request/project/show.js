@@ -7,7 +7,6 @@ let PurchaseRequestGeneralShow = {
                     read: {
                         method: 'GET',
                         url: '/datatables/purchase-request/item/'+pr_uuid+'/project',
-
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -50,38 +49,38 @@ let PurchaseRequestGeneralShow = {
                     filterable: !1,
                     template: function(t) {
                         return (
-                            '<a href="/item/' + t.uuid + '">' + t.code + "</a>"
+                            '<a href="/item/' + t.item.uuid + '">' + t.item.code + "</a>"
                         );
                     }
                 },
                 {
-                    field: "name",
+                    field: "item.name",
                     title: "Item Description",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: '',
+                    field: 'quantity_requirement',
                     title: 'Project Requirement Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: "",
+                    field: "stock_avaliable",
                     title: "Stock Available",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: "pivot.quantity",
+                    field: "quantity",
                     title: "Request Qty"
                 },
                 {
-                    field: "pivot.unit_id",
+                    field: "unit_name",
                     title: "Unit"
                 },
                 {
-                    field: "pivot.note",
+                    field: "note",
                     title: "Remark"
                 },
             ]

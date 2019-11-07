@@ -48,6 +48,7 @@ class PurchaseRequest extends MemfisModel
     {
         return $this->belongsToMany(Item::class, 'item_purchase_request', 'purchase_request_id', 'item_id')
                     ->withPivot(
+                        'quantity_requirement',
                         'quantity',
                         'quantity_unit',
                         'unit_id',

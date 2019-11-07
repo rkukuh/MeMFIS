@@ -8,8 +8,10 @@ use App\Models\Price;
 use App\Models\Category;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class MaterialsAndToolsImport implements ToModel, WithHeadingRow
+class MaterialsAndToolsImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading
 {
     /**
     * @param array $row
@@ -174,5 +176,21 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
         }
 
         $item->categories()->sync($category);
+    }
+
+    /**
+     * Batch size for importing items data.
+     */
+    public function batchSize(): int
+    {
+        return 1000;
+    }
+    
+    /** 
+     * Chunk siza data.
+     */
+    public function chunkSize(): int
+    {
+        return 1000;
     }
 }

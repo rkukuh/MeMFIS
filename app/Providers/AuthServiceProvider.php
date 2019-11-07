@@ -103,6 +103,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\ProjectWorkPackageEngineer::class => Policies\ProjectWorkPackageEngineerPolicy::class,
         Models\ProjectWorkPackageFacility::class => Policies\ProjectWorkPackageFacilityPolicy::class,
         Models\ProjectWorkPackageTaskCard::class => Policies\ProjectWorkPackageTaskCardPolicy::class,
+        Models\Pivots\PurchaseRequestItem::class => Policies\Pivots\PurchaseRequestItemPolicy::class,
         Models\Pivots\EOInstructionWorkPackage::class => Policies\EOInstructionWorkPackagePolicy::class,
         Models\TaskCardWorkPackageSuccessor::class => Policies\TaskCardWorkPackageSuccessorPolicy::class,
         Models\TaskCardWorkPackagePredecessor::class => Policies\TaskCardWorkPackagePredecessorPolicy::class,
