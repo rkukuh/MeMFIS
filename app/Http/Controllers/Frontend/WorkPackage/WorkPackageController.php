@@ -359,6 +359,10 @@ class WorkPackageController extends Controller
                     $query->where('code', 'si');
                 })
                 ->count();
+        
+        $preliminary = $workPackage->taskcards->load('type')->where('type.code', 'preliminary')->count('uuid');
+
+
 
         $otr["eri"] = $eri;
         $total_taskcard  = $workPackage->taskcards->count('uuid') + $workPackage->eo_instructions->count('uuid');
@@ -376,6 +380,7 @@ class WorkPackageController extends Controller
             'otr' => $otr,
             'si' => $si,
             'ea' => $ea,
+            'preliminary' => $preliminary,
             'eo' => $eo,
         ]);
     }

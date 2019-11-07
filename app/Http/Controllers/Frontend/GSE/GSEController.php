@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Frontend\GSE;
 
+use Carbon\Carbon;
 use App\Models\GSE;
+use App\Models\Storage;
+use App\Models\Employee;
+use App\Models\ItemRequest;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\GSEStore;
@@ -17,7 +21,7 @@ class GSEController extends Controller
      */
     public function index()
     {
-        return view('frontend.rir.index');
+        return view('frontend.gse.index');
     }
 
     /**
@@ -49,9 +53,11 @@ class GSEController extends Controller
      */
     public function store(GSEStore $request)
     {
-        dd($request->all());
-        $request->merge(['number' => DocumentNumber::generate('GSE-', ReceivingInspectionReport::withTrashed()->count()+1)]);
-        $GroundSupportEquiptmentStore = ReceivingInspectionReport::create($request->all());
+        $request->merge(['number' => DocumentNumber::generate('GSE-', GSE::withTrashed()->count()+1)]);
+        $request->merge(['returned_at' => Carbon::parse($request->returned_at)]);
+        $request->merge(['returned_by' => Employee::where('uuid',$request->returned_by)->first()->user->id]);
+        $request->merge(['request_id' => ItemRequest::where('uuid',$request->request_id)->first()->id]);
+        $GroundSupportEquiptmentStore = GSE::create($request->all());
 
         return response()->json($GroundSupportEquiptmentStore);
     }
@@ -62,23 +68,25 @@ class GSEController extends Controller
      * @param  \App\Models\GSE  $gse
      * @return \Illuminate\Http\Response
      */
-    public function show(GSE $gse, $item)
+    public function show(GSE $gse)
     {
-        if($type == 'hm'){
+        $type =  $gse->request->requestable_type;
+
+        if($type == 'App\Models\JobCard'){
             return view('frontend.gse.hm.show', [
-            'groundSupportEquiptment' => $groundSupportEquiptment]);
+            'groundSupportEquiptment' => $gse]);
         }
-        else if($type == 'defectcard'){
+        else if($type == 'App\Models\DefectCard'){
             return view('frontend.gse.defectcard.show', [
-            'groundSupportEquiptment' => $groundSupportEquiptment]);
+            'groundSupportEquiptment' => $gse]);
         }
-        else if($type == 'workshop'){
+        else if($type == 'App\Models\Workshop'){
             return view('frontend.gse.workshop.show', [
-            'groundSupportEquiptment' => $groundSupportEquiptment]);
+            'groundSupportEquiptment' => $gse]);
         }
-        else if($type == 'inventory-out'){
+        else if($type == 'App\Models\InventoryOut'){
             return view('frontend.gse.inventory-out.show', [
-            'groundSupportEquiptment' => $groundSupportEquiptment]);
+            'groundSupportEquiptment' => $gse]);
         }
     }
 
@@ -88,23 +96,41 @@ class GSEController extends Controller
      * @param  \App\Models\GSE  $gse
      * @return \Illuminate\Http\Response
      */
-    public function edit(GSE $gse, $item)
+    public function edit(GSE $gse)
     {
-        if($type == 'hm'){
+        $type =  $gse->request->requestable_type;
+
+        if($type == 'App\Models\JobCard'){
             return view('frontend.gse.hm.edit', [
-            'groundSupportEquiptment' => $groundSupportEquiptment]);
-        }
-        else if($type == 'defectcard'){
+            'groundSupportEquiptment' => $gse,
+            'employees' => Employee::all(),
+            'employee_uuid' => Employee::find($gse->returned_by)->uuid,
+            'storages' => Storage::all()
+            ]);
+            }
+        else if($type == 'App\Models\DefectCard'){
             return view('frontend.gse.defectcard.edit', [
-            'groundSupportEquiptment' => $groundSupportEquiptment]);
+            'groundSupportEquiptment' => $gse,
+            'employees' => Employee::all(),
+            'employee_uuid' => Employee::find($gse->returned_by)->uuid,
+            'storages' => Storage::all()
+            ]);
         }
-        else if($type == 'workshop'){
+        else if($type == 'App\Models\Workshop'){
             return view('frontend.gse.workshop.edit', [
-            'groundSupportEquiptment' => $groundSupportEquiptment]);
+            'groundSupportEquiptment' => $gse,
+            'employees' => Employee::all(),
+            'employee_uuid' => Employee::find($gse->returned_by)->uuid,
+            'storages' => Storage::all()
+            ]);
         }
-        else if($type == 'inventory-out'){
+        else if($type == 'App\Models\InventoryOut'){
             return view('frontend.gse.inventory-out.edit', [
-            'groundSupportEquiptment' => $groundSupportEquiptment]);
+            'groundSupportEquiptment' => $gse,
+            'employees' => Employee::all(),
+            'employee_uuid' => Employee::find($gse->returned_by)->uuid,
+            'storages' => Storage::all()
+            ]);
         }
     }
 
@@ -117,11 +143,11 @@ class GSEController extends Controller
      */
     public function update(GSEUpdate $request, GSE $gse)
     {
-        dd($request->all());
-        $request->merge(['number' => DocumentNumber::generate('GSE-', ReceivingInspectionReport::withTrashed()->count()+1)]);
-        $groundSupportEquiptment->update($request->all());
+        $request->merge(['returned_at' => Carbon::parse($request->returned_at)]);
+        $request->merge(['returned_by' => Employee::where('uuid',$request->returned_by)->first()->user->id]);
+        $gse->update($request->all());
 
-        return response()->json($groundSupportEquiptment);
+        return response()->json($gse);
     }
 
     /**
@@ -132,8 +158,8 @@ class GSEController extends Controller
      */
     public function destroy(GSE $gse)
     {
-        $groundSupportEquiptment->delete();
+        $gse->delete();
 
-        return response()->json($groundSupportEquiptment);
+        return response()->json($gse);
     }
 }

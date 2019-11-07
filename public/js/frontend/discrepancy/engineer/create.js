@@ -224,20 +224,30 @@ let helper = {
         } );
 
         $('.add_helper').on('click', function () {
+            mApp.block(".add_helper", {}),
+            setTimeout(function() {
+                mApp.unblock(".add_helper");
+            }, 2e3);
+            let addedHelpers = helper.column(0).data();
             let fname = $("#defectcard_helper option:selected").text();
             let defectcard_helper = $('#defectcard_helper').val();
             let reference = $("#reference").val();
-
-            let newRow = [];
-            newRow["code"] = defectcard_helper;
-            newRow["helper"] = fname;
-            newRow["reference"] = reference;
-            helper.row.add( newRow ).draw();
-            
-            $("#reference").val("");
-            $("#defectcard_helper").val("").select2();
-            
-            $("#modal_helper").modal("hide");
+            if($.inArray(defectcard_helper,addedHelpers) < 0){
+                let newRow = [];
+                newRow["code"] = defectcard_helper;
+                newRow["helper"] = fname;
+                newRow["reference"] = reference;
+                helper.row.add( newRow ).draw();
+                
+                $("#reference").val("");
+                $("#defectcard_helper").val("").select2();
+                
+                // $("#modal_helper").modal("hide");
+            }else{
+                toastr.error('Helper already exists!.', 'Danger', {
+                    timeOut: 5000
+                });
+            }
         });
 
         $('#helper_datatable tbody').on( 'click', 'tr', function () {

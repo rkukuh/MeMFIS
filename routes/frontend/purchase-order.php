@@ -13,7 +13,7 @@ Route::name('frontend.')->group(function () {
 
             Route::resource('purchase-order', 'PurchaseOrderController');
 
-            Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
+            Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve')->middleware('permission:purchase-order-approve');
 
             Route::name('purchase-order.')->group(function () {
                 Route::prefix('purchase-order')->group(function () {

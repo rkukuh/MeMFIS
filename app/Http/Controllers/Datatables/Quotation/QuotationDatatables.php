@@ -31,13 +31,15 @@ class QuotationDatatables extends Controller
             }
             else if(!empty($quotation->approvals->toArray())){
                 $quotation->status .= 'Approved';
+               
 
-                if(isset($quotation->approvals)){
+                if(sizeof($quotation->approvals->toArray()) > 0){
+                    // dump("here");
                     $conducted_by  = User::find($quotation->approvals->first()->conducted_by);
                     $quotation->conducted_by .= $conducted_by->name;
-                }else{
-                    $quotation->conducted_by .= '';
+                    $quotation->conducted_at .= $quotation->approvals->first()->created_at;
                 }
+                    
             }else{
                 $quotation->status .= 'Not Approved';
 
@@ -59,6 +61,8 @@ class QuotationDatatables extends Controller
             }
 
         }
+
+        // dd("break");
         $data = $alldata = json_decode($quotations);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -302,7 +306,7 @@ class QuotationDatatables extends Controller
         }
 
         $htcrrs = HtCrr::where('project_id',$quotation->quotationable->id)->whereNull('parent_id')->get();
-        $mats_tools_htcrr = QuotationHtcrrItem::where('quotation_id', $quotation->id)->sum('price_amount');
+        $mats_tools_htcrr = QuotationHtcrrItem::where('quotation_id', $quotation->id)->sum('subtotal');
         if (sizeof($htcrrs) > 0) {
             $htcrr_workpackage = new WorkPackage();
             $htcrr_workpackage->code = "Workpackage HT CRR";

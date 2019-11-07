@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Datatables\RIR;
 
-use App\Models\RIR;
 use App\User;
+use App\Models\RIR;
+use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class RIRDatatables extends Controller
 {
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -116,5 +117,22 @@ class RIRDatatables extends Controller
         ];
 
         echo json_encode($result, JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * Show data from model with flter on datatable.
+     *
+     * @param $list, $args, $operator
+     * @return \Illuminate\Http\Response
+     */
+    public function list_filter($list, $args = array(), $operator = 'AND')
+    {
+        if (! is_array($list)) {
+            return array();
+        }
+
+        $util = new ListUtil($list);
+
+        return $util->filter($args, $operator);
     }
 }

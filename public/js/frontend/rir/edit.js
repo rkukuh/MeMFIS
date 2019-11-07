@@ -137,9 +137,9 @@ let receiving_inspection_report = {
             let date = $('#date').val();
             let status = $('input[name="status"]:checked').val();
             let type = $('input[name="type"]:checked').val();
-            let condition = $('input[name="condition"]:checked').val();
             let preservation_check = $('input[name="preservation_check"]:checked').val();
             let condition_material = $('input[name="condition_material"]:checked').val();
+            let condition = $('input[name="condition"]:checked').val();
             let quality = $('input[name="quality"]:checked').val();
             let identification = $('input[name="identification"]:checked').val();
             let packing_handling_check = $('#packing_handling_check').val();
@@ -167,9 +167,9 @@ let receiving_inspection_report = {
                     packing_type:type,
                     packing_condition:condition_material,
                     preservation_check:preservation_check,
-                    condition:condition,
-                    quality:quality,
-                    identification:identification,
+                    material_condition:condition,
+                    material_quality:quality,
+                    material_identification:identification,
                     unsatisfactory_packing:packing_handling_check,
                     unsatisfactory_preservation:preservation_check_explain,
                     unsatisfactory_document:document_check,
@@ -294,10 +294,8 @@ let receiving_inspection_report = {
             document.getElementById('item-description').innerText = description;
             let unit_id = $(this).data('unit');
 
-            $('select[name="unit_material"]').empty();
-
             $.ajax({
-                url: '/get-units',
+                url: '/get-item-unit-uuid/'+$(this).data('uuid'),
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -319,6 +317,7 @@ let receiving_inspection_report = {
                     });
                 }
             });
+
             document.getElementById('qty').value = $(this).data('quantity');
             document.getElementById('exp_date').value = $(this).data('expred');
             document.getElementById('note').value = $(this).data('note');
@@ -472,10 +471,10 @@ $("#material").on("change", function () {
 });
 
 $("#quantity").on("change", function () {
-    let qty = $("#quantity").val();
-    let max = $("#quantity").attr("max");
+    let qty = parseInt($("#quantity").val());
+    let max = parseInt($("#quantity").attr("max"));
     $('.clone').remove();
-    if($("#quantity").val() < max){
+    if(qty <= max){
         for (let number = 0; number < qty; number++) {
             let clone = $(".blueprint").clone();
             clone.removeClass("blueprint hidden");
@@ -484,6 +483,7 @@ $("#quantity").on("change", function () {
             clone.slideDown("slow",function(){});
         }
     }else{
+        $("#quantity").val(max)
         for (let number = 0; number < max; number++) {
             let clone = $(".blueprint").clone();
             clone.removeClass("blueprint hidden");
@@ -491,5 +491,5 @@ $("#quantity").on("change", function () {
             $(".serial_number_inputs").after(clone);
             clone.slideDown("slow",function(){});
         }
-        }
+    }
 });

@@ -114,12 +114,18 @@
                                                             <label class="form-control-label">
                                                                 Received By @include('frontend.common.label.required')
                                                             </label>
-                                                            @component('frontend.common.input.select2')
-                                                                @slot('id', 'received-by')
-                                                                @slot('text', 'received-by')
-                                                                @slot('name', 'received-by')
-                                                                @slot('id_error', 'received-by')
-                                                            @endcomponent
+                                                            <select id="employee" name="employee" class="form-control m-select2" style="width:100%">
+                                                                <option value="">
+                                                                    &mdash; Select a Returned By &mdash;
+                                                                </option>
+
+                                                                @foreach ($employees as $employee)
+                                                                    <option value="{{ $employee->uuid }}"
+                                                                        @if ($employee->uuid == $employee_uuid) selected @endif>
+                                                                        {{ $employee->first_name." ".$employee->last_name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
@@ -295,6 +301,7 @@
             document.getElementById('warehouse').value = '{{$goodsReceived->storage->uuid}}';
         });
     </script>
+    <script src="{{ asset('js/frontend/functions/select2/employee.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/material-po.js') }}"></script>
@@ -313,6 +320,5 @@
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
 
 @endpush

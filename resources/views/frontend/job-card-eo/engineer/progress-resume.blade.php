@@ -141,7 +141,7 @@
                                             Scheduled Priority
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            @if($jobcard->jobcardable->eo_header->scheduled_priority_text !== "null") {{ $jobcard->jobcardable->eo_header->scheduled_priority_text }} {{$jobcard->jobcardable->eo_header->scheduled_priority_type}} @else - @endif
+                                            @if(json_decode($jobcard->origin_jobcardable)->eo_header->scheduled_priority_text !== "null") {{ json_decode($jobcard->origin_jobcardable)->eo_header->scheduled_priority_text }} {{json_decode($jobcard->origin_jobcardable)->eo_header->scheduled_priority_type}} @else {{ $srm["scheduled_priority"]->name }} @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -149,7 +149,7 @@
                                             Recurrence
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$jobcard->jobcardable->eo_header->recurrence_amount}} {{$jobcard->jobcardable->eo_header->recurrence_type}}
+                                            @if(json_decode($jobcard->origin_jobcardable)->eo_header->recurrence_amount !== null) {{ json_decode($jobcard->origin_jobcardable)->eo_header->recurrence_amount }} {{ json_decode($jobcard->origin_jobcardable)->eo_header->recurrence_type }} @else {{ $srm["recurrence"]->name }} @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -157,7 +157,7 @@
                                             Manuals Affected
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{App\Models\Type::find($jobcard->jobcardable->eo_header->manual_affected_id)->name}} {{$jobcard->jobcardable->eo_header->manual_affected_text}}
+                                            {{App\Models\Type::find(json_decode($jobcard->origin_jobcardable)->eo_header->manual_affected_id)->name}} {{json_decode($jobcard->origin_jobcardable)->eo_header->manual_affected_text}} 
                                         </td>
                                     </tr>
                                     <tr>

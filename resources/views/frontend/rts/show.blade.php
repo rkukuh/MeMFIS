@@ -50,7 +50,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
+                                            @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
                                         @endcomponent
 
                                     </div>
@@ -60,7 +60,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
+                                            @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
+                                            @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
                                         @endcomponent
                                     </div>
 
@@ -81,7 +81,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
+                                            @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -95,21 +95,21 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
+                                            @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
                                         @endcomponent
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
+                                            @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
                                         @endcomponent
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
+                                            @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, doloribus.')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -121,7 +121,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni quis modi veniam nemo sint natus debitis quod tempora repellendus officia cumque tenetur aut, maxime deserunt laudantium perferendis eius aperiam repudiandae veritatis a! Ipsa, vitae nihil? Aliquam, modi nemo. Sunt quod optio architecto quam similique corrupti vitae reiciendis praesentium ea molestias. Molestias voluptatum error impedit magnam laboriosam corrupti tempora exercitationem, repudiandae optio laudantium, beatae illum accusantium provident fugit porro dolorem. Quibusdam maiores asperiores animi fugit aliquam, atque voluptatem molestias quidem, eaque ex assumenda quam labore deserunt illo minima? Deleniti beatae exercitationem maiores voluptatibus vitae molestias? Commodi inventore laborum, deleniti aliquam est amet voluptates. Molestiae vel veritatis modi repudiandae inventore non nihil libero et veniam excepturi in accusantium reprehenderit nulla eum voluptate quasi rem nostrum fugit ex, illo voluptas deserunt obcaecati officia dolor. Vitae aliquid necessitatibus repudiandae suscipit aliquam? Dolor rem nisi, aliquid tempore, suscipit sapiente nulla adipisci quis repellendus temporibus pariatur.')
+                                            @slot('text', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni quis modi veniam nemo sint natus debitis quod tempora repellendus officia cumque tenetur aut, maxime deserunt laudantium perferendis eius aperiam repudiandae veritatis a! Ipsa, vitae nihil? Aliquam, modi nemo. Sunt quod optio architecto quam similique corrupti vitae reiciendis praesentium ea molestias. Molestias voluptatum error impedit magnam laboriosam corrupti tempora exercitationem, repudiandae optio laudantium, beatae illum accusantium provident fugit porro dolorem. Quibusdam maiores asperiores animi fugit aliquam, atque voluptatem molestias quidem, eaque ex assumenda quam labore deserunt illo minima? Deleniti beatae exercitationem maiores voluptatibus vitae molestias? Commodi inventore laborum, deleniti aliquam est amet voluptates. Molestiae vel veritatis modi repudiandae inventore non nihil libero et veniam excepturi in accusantium reprehenderit nulla eum voluptate quasi rem nostrum fugit ex, illo voluptas deserunt obcaecati officia dolor. Vitae aliquid necessitatibus repudiandae suscipit aliquam? Dolor rem nisi, aliquid tempore, suscipit sapiente nulla adipisci quis repellendus temporibus pariatur.')
                                         @endcomponent
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -131,7 +131,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                            @slot('text', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni quis modi veniam nemo sint natus debitis quod tempora repellendus officia cumque tenetur aut, maxime deserunt laudantium perferendis eius aperiam repudiandae veritatis a! Ipsa, vitae nihil? Aliquam, modi nemo. Sunt quod optio architecto quam similique corrupti vitae reiciendis praesentium ea molestias. Molestias voluptatum error impedit magnam laboriosam corrupti tempora exercitationem, repudiandae optio laudantium, beatae illum accusantium provident fugit porro dolorem. Quibusdam maiores asperiores animi fugit aliquam, atque voluptatem molestias quidem, eaque ex assumenda quam labore deserunt illo minima? Deleniti beatae exercitationem maiores voluptatibus vitae molestias? Commodi inventore laborum, deleniti aliquam est amet voluptates. Molestiae vel veritatis modi repudiandae inventore non nihil libero et veniam excepturi in accusantium reprehenderit nulla eum voluptate quasi rem nostrum fugit ex, illo voluptas deserunt obcaecati officia dolor. Vitae aliquid necessitatibus repudiandae suscipit aliquam? Dolor rem nisi, aliquid tempore, suscipit sapiente nulla adipisci quis repellendus temporibus pariatur.')
+                                                @slot('text', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni quis modi veniam nemo sint natus debitis quod tempora repellendus officia cumque tenetur aut, maxime deserunt laudantium perferendis eius aperiam repudiandae veritatis a! Ipsa, vitae nihil? Aliquam, modi nemo. Sunt quod optio architecto quam similique corrupti vitae reiciendis praesentium ea molestias. Molestias voluptatum error impedit magnam laboriosam corrupti tempora exercitationem, repudiandae optio laudantium, beatae illum accusantium provident fugit porro dolorem. Quibusdam maiores asperiores animi fugit aliquam, atque voluptatem molestias quidem, eaque ex assumenda quam labore deserunt illo minima? Deleniti beatae exercitationem maiores voluptatibus vitae molestias? Commodi inventore laborum, deleniti aliquam est amet voluptates. Molestiae vel veritatis modi repudiandae inventore non nihil libero et veniam excepturi in accusantium reprehenderit nulla eum voluptate quasi rem nostrum fugit ex, illo voluptas deserunt obcaecati officia dolor. Vitae aliquid necessitatibus repudiandae suscipit aliquam? Dolor rem nisi, aliquid tempore, suscipit sapiente nulla adipisci quis repellendus temporibus pariatur.')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -144,29 +144,29 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-4 col-md-4 col-lg-4">
                                                     @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'DGCA')
-                                                    @slot('name', 'approval[]')
-                                                    @slot('text', 'Indonesia DGCA No : 145D-093')
-                                                    @slot('value', 'Indonesia DGCA No : 145D-093')
-                                                    @slot('style_div','margin-top:30px')
+                                                        @slot('id', 'DGCA')
+                                                        @slot('name', 'approval[]')
+                                                        @slot('text', 'Indonesia DGCA No : 145D-093')
+                                                        @slot('value', 'Indonesia DGCA No : 145D-093')
+                                                        @slot('style_div','margin-top:30px')
                                                     @endcomponent
                                                 </div>
                                                 <!-- <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
-                                                @slot('id', 'FAA')
-                                                @slot('name', 'approval[]')
-                                                @slot('text', 'Federal Aviation Administration - FAA')
-                                                @slot('value', 'Federal Aviation Administration - FAA')
-                                                @slot('style_div','margin-top:30px')
+                                                    @slot('id', 'FAA')
+                                                    @slot('name', 'approval[]')
+                                                    @slot('text', 'Federal Aviation Administration - FAA')
+                                                    @slot('value', 'Federal Aviation Administration - FAA')
+                                                    @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
-                                                @slot('id', 'EASA')
-                                                @slot('name', 'approval[]')
-                                                @slot('text', 'European Union Aviation Safety Agency - EASA')
-                                                @slot('value', 'European Union Aviation Safety Agency - EASA')
-                                                @slot('style_div','margin-top:30px')
+                                                    @slot('id', 'EASA')
+                                                    @slot('name', 'approval[]')
+                                                    @slot('text', 'European Union Aviation Safety Agency - EASA')
+                                                    @slot('value', 'European Union Aviation Safety Agency - EASA')
+                                                    @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div> -->
                                             </div>
@@ -178,9 +178,9 @@
                                             <div class="flex">
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
-                                                    @slot('type','button')
-                                                    @slot('id', 'add-RTS')
-                                                    @slot('class', 'add-RTS')
+                                                        @slot('type','button')
+                                                        @slot('id', 'add-RTS')
+                                                        @slot('class', 'add-RTS')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')

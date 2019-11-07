@@ -98,8 +98,7 @@
     </header>
 
     <footer style="margin-top:14px;">
-        {{-- <span style="margin-left:6px">Created By : Name ; {{$quotation->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span><span style="position:absolute; right:20px;" class="num">PAGE </span> --}}
-        <span style="margin-left:6px">Created By : Name ; Timestamp &nbsp;&nbsp;&nbsp; Printed By : admin ; Timestamp</span><span style="position:absolute; right:20px;" class="num">PAGE </span>
+        <span style="margin-left:6px">{{ $quotation->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{ $username}} ; {{ date('Y-m-d H:i:s') }}</span><span style="position:absolute; right:20px;" >PAGE {{ $page }} of 3 </span>
         <img src="./img/form/printoutquotation/FooterQuotation.png" width="100%" alt="" >
     </footer>
 
@@ -122,14 +121,12 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{-- {{$quotation->quotationable->customer->name}} --}}
-                        generate
+                        {{ $quotation->quotationable->customer->name}}
                     </td>
                     <td width="33%" rowspan="5" align="center">
-                            <div class="barcode">
-                                {{-- {!!DNS2D::getBarcodeHTML($quotation->number, 'QRCODE',5.6,5.6)!!} --}}
-                                {!!DNS2D::getBarcodeHTML('quotation', 'QRCODE',5.6,5.6)!!}
-                            </div>
+                        <div class="barcode">
+                            {!!DNS2D::getBarcodeHTML($quotation->number, 'QRCODE',5.6,5.6)!!}
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -140,7 +137,11 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        031-8686481/031-8686482
+                        @if($attention)
+                            {{ $attention->phone }} / {{ $attention->fax }}
+                        @else
+                        -
+                        @endif 
                     </td>
                 </tr>
                 <tr>
@@ -151,7 +152,11 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        JL. RAYA INDONESIA
+                        @if($attention)
+                            {{ $attention->address }}
+                        @else
+                            -
+                        @endif 
                     </td>
                 </tr>
                 <tr>
@@ -162,12 +167,11 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{-- @if($attention)
+                        @if($attention)
                         {{ $attention->name }}
                         @else
                         -
-                        @endif --}}
-                        generate
+                        @endif 
                     </td>
                 </tr>
                 <tr>
@@ -178,8 +182,7 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{-- {{$quotation->quotationable->no_wo}} --}}
-                        generate
+                        {{ $quotation->quotationable->no_wo}} 
                     </td>
                 </tr>
             </table>
@@ -191,29 +194,25 @@
                 <tr>
                     <th width="14%" valign="top">Date</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->created_at}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{ date_format($quotation->created_at, 'd-m-Y') }}</td>
                     <th width="14%" valign="top">Project No</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->quotationable->code}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{ $quotation->quotationable->code }}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Quotation No.</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->currency->name}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{ $quotation->number }}</td>
                     <th width="14%" valign="top">A/C Type</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->quotationable->aircraft->name}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{ $quotation->quotationable->aircraft->name}}</td>
                 </tr>
             </table>
         </div>
     </div>
     <div id="content3">
         <div class="container">
-            <table width="100%" border="1" cellpadding="4">
+            <table width="100%" border="1" cellpadding="4" >
                 <tr style="background:#f7dd16;">
                     <td width="8%" align="center"><b>No</b></td>
                     <td width="15%" align="center"><b>Defect Card No.</b></td>
@@ -222,23 +221,40 @@
                     <td width="8%" align="center"><b>Qty</b></td>
                     <td width="7%" align="center"><b>Unit</b></td>
                     <td width="12%" align="center"><b>Price</b></td>
-                    <td width="12%" align="center"><b>Total</b></td>
+                    <td width="14%" align="center"><b>Total</b></td>
                 </tr>
+                @if(sizeof($items) > 0)
+                    @foreach($items as $item)
+                        <tr>
+                            <td width="8%" align="center" valign="top">{{ $numbering+= 1 }}</td>
+                            <td width="15%" align="center" valign="top">{{ $item->defectcard->code }}</td>
+                            <td width="12%" align="center" valign="top">{{ $item->item->code }}</td>
+                            <td width="26%" valign="top">{{ $item->note }}</td>
+                            <td width="8%" align="center" valign="top">{{ $item->quantity }}</td>
+                            <td width="7%" align="center" valign="top">{{ $item->unit->name }}</td>
+                            <td width="12%" align="center" valign="top">Rp. {{ number_format($item->price_amount, 2, ",", ".") }}</td>
+                            <td width="14%" align="center" valign="top"> Rp. {{ number_format($item->subtotal, 2, ",", ".") }}</td>
+                        </tr>
+                    @endforeach
+                    <tr style="background:#f7dd16;">
+                        <td colspan="3" align="center"><b>Total Additional Material</b></td>
+                        <td align="center" valign="top"><b>Qty Total</b></td>
+                        <td align="center" valign="top"><b>{{ number_format($total_item_quantity,0, ",", "." ) }}</b></td>
+                        <td align="center" valign="top"><b>Total</b></td>
+                        <td colspan="3" align="center" valign="top"><b>Rp. {{ number_format($total_item_price, 2, ",", ".") }}</b></td>
+                    </tr>
+                @else
                 <tr>
-                    <td width="8%" align="center" valign="top">1</td>
-                    <td width="15%" align="center" valign="top">DC-123</td>
-                    <td width="12%" align="center" valign="top">PN-123</td>
-                    <td width="26%" valign="top">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum cupiditate doloremque, doloribus culpa ad possimus quis eveniet fuga dolore quos totam impedit molestiae voluptatibus aperiam repudiandae nesciunt nisi? Voluptatum, culpa.</td>
-                    <td width="8%" align="center" valign="top">123</td>
-                    <td width="7%" align="center" valign="top">bot</td>
-                    <td width="12%" align="center" valign="top">Rp. 123222</td>
-                    <td width="12%" align="center" valign="top"> Rp. 1232323</td>
+                    <td width="100%" align="center" valign="top" colspan="7"><i>No item</i></td>
                 </tr>
                 <tr style="background:#f7dd16;">
-                    <td colspan="4" align="center"><b>Total Additional Material</b></td>
-                    <td align="center" valign="top">Qty Total</td>
-                    <td colspan="3" align="center" valign="top"><b>Sum Total</b></td>
-                </tr>
+                        <td colspan="3" align="center"><b>Total Additional Material</b></td>
+                        <td align="center" valign="top"><b>Qty Total</b></td>
+                        <td align="center" valign="top"><b>0</b></td>
+                        <td align="center" valign="top"><b>Total</b></td>
+                        <td colspan="3" align="center" valign="top"><b>Rp. 0</td>
+                    </tr>
+                @endif
             </table>
         </div>
     </div>

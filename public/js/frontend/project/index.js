@@ -263,19 +263,19 @@ let Aircraft = {
                             table.originalDataSet = [];
                             table.reload();
                         },
-                        error: function (jqXhr, json, errorThrown) {
+                        error: function(jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
-                            $.each(errors.error, function (index, value) {
+                            $.each(errors, function(index, value) {
                                 toastr.error(value.message, value.title, {
-                                    "closeButton": true,
-                                    "timeOut": "0",
-                                }
-                            );
+                                    closeButton: true,
+                                    timeOut: "0"
+                                });
                             });
                         }
                     });
                 }
             });
+
         });
 
 

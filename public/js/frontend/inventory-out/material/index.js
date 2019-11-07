@@ -151,7 +151,7 @@ let InventoryOut = {
         });
 
         $('.inventory_out_datatable').on('click', '.delete', function () {
-            let inventory_uuid = $(this).data('uuid');
+            let inventory_uuid = $(this).data('id');
 
             swal({
                 title: 'Sure want to remove?',
@@ -228,10 +228,11 @@ let InventoryOut = {
                             },
                             error: function (jqXhr, json, errorThrown) {
                                 let errors = jqXhr.responseJSON;
-
-                                $.each(errors.errors, function (index, value) {
-                                    $('#delete-error').html(value);
-                                });
+                                toastr.error(errors.message, errors.title, {
+                                    "closeButton": true,
+                                    "timeOut": "0",
+                                }
+                                );
                             }
                         });
                     }

@@ -89,10 +89,10 @@ Route::group([
 
         /** Material Request */
 
-        Route::view('/material-transfer', 'frontend.material-transfer.index')->name('material-transfer.index');
-        Route::view('/material-transfer/create', 'frontend.material-transfer.create')->name('material-transfer.create');
-        Route::view('/material-transfer/edit', 'frontend.material-transfer.edit')->name('material-transfer.edit');
-        Route::view('/material-transfer/show', 'frontend.material-transfer.show')->name('material-transfer.show');
+        // Route::view('/material-transfer', 'frontend.material-transfer.index')->name('material-transfer.index');
+        // Route::view('/material-transfer/create', 'frontend.material-transfer.create')->name('material-transfer.create');
+        // Route::view('/material-transfer/edit', 'frontend.material-transfer.edit')->name('material-transfer.edit');
+        // Route::view('/material-transfer/show', 'frontend.material-transfer.show')->name('material-transfer.show');
 
         /** Category Item */
 
@@ -101,25 +101,30 @@ Route::group([
         Route::view('/category-item/edit', 'frontend.category-item.edit')->name('category-item.edit');
         Route::view('/category-item/show', 'frontend.category-item.show')->name('category-item.show');
 
-        /** GSE-Tool Returned */
+        // /** GSE-Tool Returned */
 
-        Route::view('/gse', 'frontend.gse.index')->name('gse.index');
+        // Route::view('/gse', 'frontend.gse.index')->name('gse.index');
 
-        Route::view('/gse/hm/create', 'frontend.gse.hm.create')->name('gse.hm.create');
-        Route::view('/gse/hm/edit', 'frontend.gse.hm.edit')->name('gse.hm.edit');
-        Route::view('/gse/hm/show', 'frontend.gse.hm.show')->name('gse.hm.show');
+        // Route::view('/gse/hm/create', 'frontend.gse.hm.create')->name('gse.hm.create');
+        // Route::view('/gse/hm/edit', 'frontend.gse.hm.edit')->name('gse.hm.edit');
+        // Route::view('/gse/hm/show', 'frontend.gse.hm.show')->name('gse.hm.show');
 
-        Route::view('/gse/workshop/create', 'frontend.gse.workshop.create')->name('gse.workshop.create');
-        Route::view('/gse/workshop/edit', 'frontend.gse.workshop.edit')->name('gse.workshop.edit');
-        Route::view('/gse/workshop/show', 'frontend.gse.workshop.show')->name('gse.workshop.show');
+        // Route::view('/gse/workshop/create', 'frontend.gse.workshop.create')->name('gse.workshop.create');
+        // Route::view('/gse/workshop/edit', 'frontend.gse.workshop.edit')->name('gse.workshop.edit');
+        // Route::view('/gse/workshop/show', 'frontend.gse.workshop.show')->name('gse.workshop.show');
 
-        Route::view('/gse/defectcard/create', 'frontend.gse.defectcard.create')->name('gse.defectcard.create');
-        Route::view('/gse/defectcard/edit', 'frontend.gse.defectcard.edit')->name('gse.defectcard.edit');
-        Route::view('/gse/defectcard/show', 'frontend.gse.defectcard.show')->name('gse.defectcard.show');
+        // Route::view('/gse/defectcard/create', 'frontend.gse.defectcard.create')->name('gse.defectcard.create');
+        // Route::view('/gse/defectcard/edit', 'frontend.gse.defectcard.edit')->name('gse.defectcard.edit');
+        // Route::view('/gse/defectcard/show', 'frontend.gse.defectcard.show')->name('gse.defectcard.show');
 
-        Route::view('/gse/inventory-out/create', 'frontend.gse.inventory-out.create')->name('gse.inventory-out.create');
-        Route::view('/gse/inventory-out/edit', 'frontend.gse.inventory-out.edit')->name('gse.inventory-out.edit');
-        Route::view('/gse/inventory-out/show', 'frontend.gse.inventory-out.show')->name('gse.inventory-out.show');
+        // Route::view('/gse/inventory-out/create', 'frontend.gse.inventory-out.create')->name('gse.inventory-out.create');
+        // Route::view('/gse/inventory-out/edit', 'frontend.gse.inventory-out.edit')->name('gse.inventory-out.edit');
+        // Route::view('/gse/inventory-out/show', 'frontend.gse.inventory-out.show')->name('gse.inventory-out.show');
+
+
+        // /** STOCK MONITORING */
+
+        // Route::view('/stock-monitoring', 'frontend.stock-monitoring.index')->name('stock-monitoring.index');
 
         /** ATTENDANCE */
 

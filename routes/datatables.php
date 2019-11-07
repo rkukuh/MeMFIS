@@ -233,6 +233,25 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** Reuqest */
+
+        Route::name('request.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'request',
+                'namespace' => 'Request'
+
+            ], function () {
+
+                // Route::get('/', 'RequestDatatables@index')->name('all');
+                Route::get('/item/{itemRequest}', 'ItemRequestDatatables@index')->name('request.item');
+
+
+            });
+
+        });
+
         /** POSITION */
 
         Route::name('position.')->group(function () {
@@ -403,6 +422,23 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** STOCK MONITORING */
+
+        Route::name('stock-monitoring.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'stock-monitoring',
+                'namespace' => 'StockMonitoring'
+
+            ], function () {
+
+                Route::get('/item/{item}', 'StockMonitoringDatatables@partNumber')->name('.all');
+                Route::get('/storage/{storage}', 'StockMonitoringDatatables@storage')->name('.all');
+
+            });
+
+        });
         /** FEFO IN */
 
         Route::name('fefo-in.')->group(function () {
@@ -974,6 +1010,45 @@ Route::name('datatables.')->group(function () {
                 /** Tool */
                 Route::get('/tool', 'InventoryOutToolDatatables@index')->name('tools.all');
                 Route::get('/tool/{inventoryOut}/items', 'InventoryOutToolDatatables@getItemsByInventoryOut')->name('tools.items');
+
+            });
+        });
+
+        /** Item Request */
+
+        Route::name('item-request.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'item-request',
+                'namespace' => 'ItemRequest'
+
+            ], function () {
+
+                /** Material Request */
+                Route::get('/material', 'ItemRequestMaterialDatatables@index')->name('material.all');
+                Route::get('/material/{itemRequest}/items', 'ItemRequestMaterialDatatables@getItemsByItemRequest')->name('material.items');
+
+                /** Tool Request */
+                Route::get('/tool', 'ItemRequestToolDatatables@index')->name('tools.all');
+                Route::get('/tool/{itemRequest}/items', 'ItemRequestToolDatatables@getItemsByItemRequest')->name('tools.items');
+
+            });
+        });
+
+        /** Mutation */
+
+        Route::name('mutation')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'mutation',
+                'namespace' => 'Mutation'
+
+            ], function () {
+
+                Route::get('/material-transfer', 'MutationDatatables@index');
+                Route::get('/material-transfer/{mutation}/items', 'MutationDatatables@getItemsByMutation');
 
             });
         });

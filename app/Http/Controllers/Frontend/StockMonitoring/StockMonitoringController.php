@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\StockMonitoring;
 
-use App\Models\Mutation;
+use App\Models\FefoIn;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\MutationStore;
-use App\Http\Requests\Frontend\MutationUpdate;
 
-class MutationController extends Controller
+class StockMonitoringController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class MutationController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.stock-monitoring.index');
     }
 
     /**
@@ -32,10 +31,10 @@ class MutationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\MutationStore  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MutationStore $request)
+    public function store(Request $request)
     {
         //
     }
@@ -43,10 +42,10 @@ class MutationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Mutation  $mutation
+     * @param  \App\Models\FefoIn  $fefoIn
      * @return \Illuminate\Http\Response
      */
-    public function show(Mutation $mutation)
+    public function show(FefoIn $fefoIn)
     {
         //
     }
@@ -54,10 +53,10 @@ class MutationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Mutation  $mutation
+     * @param  \App\Models\FefoIn  $fefoIn
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mutation $mutation)
+    public function edit(FefoIn $fefoIn)
     {
         //
     }
@@ -65,11 +64,11 @@ class MutationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\MutationUpdate  $request
-     * @param  \App\Models\Mutation  $mutation
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\FefoIn  $fefoIn
      * @return \Illuminate\Http\Response
      */
-    public function update(MutationUpdate $request, Mutation $mutation)
+    public function update(Request $request, FefoIn $fefoIn)
     {
         //
     }
@@ -77,10 +76,10 @@ class MutationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Mutation  $mutation
+     * @param  \App\Models\FefoIn  $fefoIn
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mutation $mutation)
+    public function destroy(FefoIn $fefoIn)
     {
         //
     }

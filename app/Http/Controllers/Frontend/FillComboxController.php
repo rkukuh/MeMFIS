@@ -2,41 +2,39 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Zone;
-use App\Models\DefectCard;
 use App\Models\Item;
-use App\Models\JobCard;
-use App\Models\Type;
-use App\Models\Unit;
 use Spatie\Tags\Tag;
+use App\Models\Unit;
+use App\Models\Type;
+use App\Models\Zone;
 use App\Models\Level;
 use App\Models\Promo;
-use App\Models\Vendor;
 use App\Models\Access;
-use App\Models\Project;
+use App\Models\FefoIn;
+use App\Models\Vendor;
+use App\Models\JobCard;
 use App\Models\License;
-use App\Models\Storage;
+use App\Models\Project;
 use App\Models\Station;
-use App\Models\Facility;
-use App\Models\Customer;
+use App\Models\Storage;
 use App\Models\Aircraft;
 use App\Models\Category;
 use App\Models\Currency;
+use App\Models\Customer;
 use App\Models\Employee;
+use App\Models\Facility;
 use App\Models\TaskCard;
-use App\Models\Manufacturer;
-use Illuminate\Http\Request;
-use App\Models\PurchaseOrder;
-use App\Models\PurchaseRequest;
-use App\Http\Controllers\Controller;
-use App\Models\FefoIn;
-use App\Models\Pivots\EmployeeLicense;
-use App\Models\InventoryIn;
+use App\Models\DefectCard;
+use App\Models\ItemRequest;
 use App\Models\InventoryOut;
+use App\Models\Manufacturer;
+use App\Models\PurchaseOrder;
+use App\Models\Pivots\EmployeeLicense;
+use App\Http\Controllers\Controller;
 
 class FillComboxController extends Controller
 {
-/**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -47,6 +45,19 @@ class FillComboxController extends Controller
 
         return json_encode($jobcards);
 
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jobcardItems($jobcard)
+    {
+        $items = JobCard::where('uuid', $jobcard)
+            ->first();
+
+        return $items->origin_jobcardable_items;
     }
 
     /**
@@ -70,7 +81,7 @@ class FillComboxController extends Controller
     public function categories()
     {
         $categories = Category::ofItem()
-                              ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($categories);
 
@@ -84,8 +95,8 @@ class FillComboxController extends Controller
     public function categoriesMaterial()
     {
         $categories = Category::ofItem()
-                              ->where('code','<>','tool')
-                              ->pluck('name', 'id');
+            ->where('code', '<>', 'tool')
+            ->pluck('name', 'id');
 
         return json_encode($categories);
 
@@ -99,7 +110,7 @@ class FillComboxController extends Controller
     public function categorieTakcard()
     {
         $categories = Category::ofTaskCardEO()
-                              ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($categories);
 
@@ -126,7 +137,7 @@ class FillComboxController extends Controller
     public function units()
     {
         $units = Unit::selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
-                     ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($units);
 
@@ -140,13 +151,13 @@ class FillComboxController extends Controller
     public function currencies()
     {
         $currencies = Currency::selectRaw('id, CONCAT(name, " (", symbol ,")") as full_name')
-        ->pluck('full_name', 'id');
+            ->pluck('full_name', 'id');
 
         return json_encode($currencies);
 
     }
 
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -177,12 +188,25 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function storageUUID()
+    {
+        $storages = Storage::pluck('name', 'uuid');
+
+        return json_encode($storages);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function licenses($id)
     {
         $general_license = License::where('code', 'general-license')->first();
-        $licenses = EmployeeLicense::where('employee_id',$id)
-                    ->where('license_id',$general_license->id)
-                    ->pluck('code', 'id');
+        $licenses = EmployeeLicense::where('employee_id', $id)
+            ->where('license_id', $general_license->id)
+            ->pluck('code', 'id');
 
         return json_encode($licenses);
 
@@ -196,7 +220,7 @@ class FillComboxController extends Controller
     public function employees()
     {
         $employees = Employee::selectRaw('id, CONCAT(first_name," ", last_name) as name')
-                    ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($employees);
 
@@ -210,7 +234,7 @@ class FillComboxController extends Controller
     public function employeeUuid()
     {
         $employees = Employee::selectRaw('uuid, CONCAT(first_name, " ", last_name) as name')
-                    ->pluck('name', 'uuid');
+            ->pluck('name', 'uuid');
 
         return json_encode($employees);
 
@@ -224,7 +248,7 @@ class FillComboxController extends Controller
     public function aviationDegrees()
     {
         $aviation_degrees = Type::ofAviationDegree()
-                    ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($aviation_degrees);
 
@@ -266,7 +290,7 @@ class FillComboxController extends Controller
     public function otrCertification()
     {
         $otr_certifications = Type::ofTaskCardSkill()
-                              ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($otr_certifications);
 
@@ -280,7 +304,7 @@ class FillComboxController extends Controller
     public function workArea()
     {
         $work_areas = Type::ofWorkArea()
-                              ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($work_areas);
 
@@ -294,7 +318,7 @@ class FillComboxController extends Controller
     public function thresholdType()
     {
         $threshold_types = Type::ofMaintenanceCycle()
-                              ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($threshold_types);
 
@@ -308,7 +332,7 @@ class FillComboxController extends Controller
     public function repeatType()
     {
         $repeat_types = Type::ofMaintenanceCycle()
-                            ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($repeat_types);
 
@@ -322,7 +346,7 @@ class FillComboxController extends Controller
     public function applicabilityEngine()
     {
         $applicability_engines = Category::ofItem()
-                              ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($applicability_engines);
 
@@ -336,7 +360,7 @@ class FillComboxController extends Controller
     public function aircraftTaskcard()
     {
         $aircraft_taskcards = Category::ofItem()
-                              ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($aircraft_taskcards);
 
@@ -363,7 +387,19 @@ class FillComboxController extends Controller
     public function item()
     {
         $items = Item::with('categories')
-                 ->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name','id');
+            ->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name', 'id');
+
+        return $items;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function partNumber()
+    {
+        $items = Item::pluck('code', 'uuid');
 
         return $items;
     }
@@ -376,7 +412,7 @@ class FillComboxController extends Controller
     public function itemUUID()
     {
         $items = Item::with('categories')
-                 ->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name','uuid');
+            ->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name', 'uuid');
 
         return $items;
     }
@@ -428,7 +464,7 @@ class FillComboxController extends Controller
     public function paymentTerm()
     {
         $payment_terms = Type::ofPaymentTerm()
-                        ->pluck('name');
+            ->pluck('name');
 
         return json_encode($payment_terms);
     }
@@ -441,7 +477,7 @@ class FillComboxController extends Controller
     public function scheduledPaymentType()
     {
         $scheduled_payment_type = Type::ofScheduledPayment()
-                        ->pluck('name','id');
+            ->pluck('name', 'id');
 
         return json_encode($scheduled_payment_type);
     }
@@ -454,7 +490,7 @@ class FillComboxController extends Controller
     public function addressType()
     {
         $addresses = Type::ofAddress()
-                        ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($addresses);
     }
@@ -467,7 +503,7 @@ class FillComboxController extends Controller
     public function unitType()
     {
         $units = Type::ofUnit()
-                        ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($units);
     }
@@ -509,10 +545,10 @@ class FillComboxController extends Controller
     public function itemSerialNumber($item)
     {
         $serialNumbers = FefoIn::where('item_id', $item)
-                ->whereNotNull('serial_number')
-                ->pluck('serial_number')
-                ->toArray();
-        
+            ->whereNotNull('serial_number')
+            ->pluck('serial_number')
+            ->toArray();
+
         return json_encode($serialNumbers);
     }
 
@@ -536,7 +572,7 @@ class FillComboxController extends Controller
     public function websiteType()
     {
         $websites = Type::ofWebsite()
-                        ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($websites);
     }
@@ -561,7 +597,7 @@ class FillComboxController extends Controller
     public function taskcardType()
     {
         $taskcard_types = Type::ofTaskCardTask()
-                        ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($taskcard_types);
     }
@@ -574,7 +610,7 @@ class FillComboxController extends Controller
     public function taskcardTypeRoutine()
     {
         $taskcard_type_routines = Type::ofTaskCardTypeRoutine()
-                        ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($taskcard_type_routines);
     }
@@ -587,7 +623,7 @@ class FillComboxController extends Controller
     public function taskcardTypeNonRoutine()
     {
         $taskcard_type_non_routines = Type::ofTaskCardTypeNonRoutine()
-                                    ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($taskcard_type_non_routines);
     }
@@ -672,7 +708,7 @@ class FillComboxController extends Controller
     public function scheduledPriority()
     {
         $accesses = Type::ofTaskCardEOScheduledPriority()
-                    ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($accesses);
     }
@@ -685,7 +721,7 @@ class FillComboxController extends Controller
     public function recurrence()
     {
         $accesses = Type::ofTaskCardEORecurrence()
-                    ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($accesses);
     }
@@ -698,7 +734,7 @@ class FillComboxController extends Controller
     public function manualAffected()
     {
         $accesses = Type::ofTaskCardEOManualAffected()
-                    ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return json_encode($accesses);
     }
@@ -711,9 +747,9 @@ class FillComboxController extends Controller
     public function tool()
     {
         $items = Item::with('categories')
-                ->whereHas('categories', function ($query) {
-                    $query->where('code', 'tool');
-                })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name','id');
+            ->whereHas('categories', function ($query) {
+                $query->where('code', 'tool');
+            })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name', 'id');
 
         return $items;
     }
@@ -741,9 +777,9 @@ class FillComboxController extends Controller
     public function material()
     {
         $items = Item::with('categories')
-                ->whereHas('categories', function ($query) {
-                    $query->where('code', 'raw')->orWhere('code', 'cons')->orWhere('code', 'comp')->orWhere('code', 'service')->orWhere('code', 'facility');
-                })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name','id');
+            ->whereHas('categories', function ($query) {
+                $query->where('code', 'raw')->orWhere('code', 'cons')->orWhere('code', 'comp')->orWhere('code', 'service')->orWhere('code', 'facility');
+            })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name', 'id');
 
         return $items;
     }
@@ -770,19 +806,19 @@ class FillComboxController extends Controller
      */
     public function poMaterial(purchaseOrder $purchaseOrder)
     {
-        $items = $purchaseOrder->items->pluck('name','uuid');
+        $items = $purchaseOrder->items->pluck('name', 'uuid');
 
         return $items;
     }
 
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function ItemPODetails(purchaseOrder $purchaseOrder, Item $item)
     {
-        $items = $purchaseOrder->items->where('code',$item->code)->first();
+        $items = $purchaseOrder->items->where('code', $item->code)->first();
 
         return $items;
     }
@@ -794,7 +830,19 @@ class FillComboxController extends Controller
      */
     public function project()
     {
-        $projects = Project::with('approvals')->whereHas('approvals')->pluck('title','uuid');
+        $projects = Project::with('approvals')->whereHas('approvals')->pluck('title', 'uuid');
+
+        return json_encode($projects);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function projectPurchaseRequest()
+    {
+        $projects = Project::has('quotations')->whereDoesntHave('purchase_requests')->pluck('title', 'uuid');
 
         return json_encode($projects);
     }
@@ -806,7 +854,7 @@ class FillComboxController extends Controller
      */
     public function projectQuotation()
     {
-        $projects = Project::has('quotations')->pluck('title','uuid');
+        $projects = Project::has('quotations')->pluck('title', 'uuid');
 
         return json_encode($projects);
     }
@@ -818,7 +866,7 @@ class FillComboxController extends Controller
      */
     public function projectAdditional()
     {
-        $projects = Project::with('approvals')->where('parent_id',null)->pluck('code','uuid');
+        $projects = Project::with('approvals')->where('parent_id', null)->pluck('code', 'uuid');
 
         return json_encode($projects);
     }
@@ -830,7 +878,7 @@ class FillComboxController extends Controller
      */
     public function projectAdditionalApproved()
     {
-        $projects = Project::with('approvals')->where('parent_id','<>',null)->whereHas('approvals')->pluck('title','uuid');
+        $projects = Project::with('approvals')->where('parent_id', '<>', null)->whereHas('approvals')->pluck('title', 'uuid');
 
         return json_encode($projects);
     }
@@ -842,7 +890,7 @@ class FillComboxController extends Controller
      */
     public function purchaseRequestType()
     {
-        $PRs = Type::where('of','purchase-request')->where('name','<>','Project')->pluck('name','uuid');
+        $PRs = Type::where('of', 'purchase-request')->where('name', '<>', 'Project')->pluck('name', 'uuid');
 
         return json_encode($PRs);
     }
@@ -854,7 +902,7 @@ class FillComboxController extends Controller
      */
     public function employee()
     {
-        $employees = Employee::pluck('first_name','code','id');
+        $employees = Employee::pluck('first_name', 'code', 'id');
 
         return json_encode($employees);
     }
@@ -866,20 +914,20 @@ class FillComboxController extends Controller
      */
     public function workOrder()
     {
-        $projects = Project::with('approvals','quotations')->whereHas('approvals')->get();
+        $projects = Project::with('approvals', 'quotations')->whereHas('approvals')->get();
         $work_orders = $result = [];
 
-        foreach($projects as $key => $project){
-            if(sizeof($project->quotations) > 0){
-                foreach($project->quotations as $quotation){
-                    if(sizeof($quotation->approvals) > 0){
+        foreach ($projects as $key => $project) {
+            if (sizeof($project->quotations) > 0) {
+                foreach ($project->quotations as $quotation) {
+                    if (sizeof($quotation->approvals) > 0) {
                         $projects[$key] = "";
                     }
                 };
             }
         }
 
-        $work_orders = $projects->pluck('no_wo','uuid');
+        $work_orders = $projects->pluck('no_wo', 'uuid');
         $work_orders = array_filter($work_orders->toArray());
         return json_encode($work_orders);
     }
@@ -907,7 +955,7 @@ class FillComboxController extends Controller
         $websites = Type::ofWebsite()->get();
 
         return view('frontend.testing.repeaterBlank', [
-            'websites' => $websites
+            'websites' => $websites,
         ]);
     }
 
@@ -919,7 +967,7 @@ class FillComboxController extends Controller
     public function customerLevel()
     {
         $customerLevel = Level::ofCustomer()
-                              ->pluck('name', 'uuid');
+            ->pluck('name', 'uuid');
 
         return json_encode($customerLevel);
 
@@ -945,7 +993,7 @@ class FillComboxController extends Controller
      */
     public function promo()
     {
-        $promo = Promo::where('code','like','discount%')->pluck('name', 'uuid');
+        $promo = Promo::where('code', 'like', 'discount%')->pluck('name', 'uuid');
 
         return json_encode($promo);
 
@@ -964,5 +1012,76 @@ class FillComboxController extends Controller
 
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolRequestSerialNumber(ItemRequest $toolRequest, Item $item)
+    {
+        $toolRequest = $toolRequest->items->where('uuid',$item->uuid)->pluck('pivot.serial_number', 'pivot.serial_number');
+
+        return json_encode($toolRequest);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolRequest(ItemRequest $toolRequest)
+    {
+        $toolRequest = $toolRequest->items->pluck('code', 'uuid');
+
+        return json_encode($toolRequest);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolRequestJobCard()
+    {
+        $toolRequest = ItemRequest::where('requestable_type','App\Models\JobCard')->pluck('number', 'uuid');
+
+        return json_encode($toolRequest);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolRequestDefectCard()
+    {
+        $toolRequest = ItemRequest::where('requestable_type','App\Models\DefectCard')->pluck('number', 'uuid');
+
+        return json_encode($toolRequest);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolRequestWorkshop()
+    {
+        $toolRequest = ItemRequest::where('requestable_type','App\Models\Workshop')->pluck('number', 'uuid');
+
+        return json_encode($toolRequest);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolRequestInventoryOut()
+    {
+        $toolRequest = ItemRequest::where('requestable_type','App\Models\InventoryOut')->pluck('number', 'uuid');
+
+        return json_encode($toolRequest);
+    }
 
 }

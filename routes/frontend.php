@@ -52,11 +52,15 @@ Route::name('frontend.')->group(function () {
         Route::resource('bank', 'BankController');
         Route::resource('promo', 'PromoController');
         Route::resource('school', 'SchoolController');
-        Route::resource('vendor', 'VendorController');
+
+        Route::resource('vendor', 'VendorController')->except('index');
+        Route::get('supplier', 'VendorController@index')->name('vendor.index');
+
+        Route::resource('storage', 'StorageController')->except('index');
+        Route::get('warehouse', 'StorageController@index')->name('storage.index');
+
         Route::resource('branch', 'BranchController');
-        Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
-        // Route::resource('manhour', 'ManhourController');
         Route::resource('benefit', 'BenefitController');
         Route::resource('company', 'CompanyController');
         Route::resource('holiday', 'HolidayController');
@@ -74,8 +78,8 @@ Route::name('frontend.')->group(function () {
 
         /** TRANSACTION */
 
-        Route::resource('mutation', 'MutationController');
-        Route::resource('item-request', 'ItemRequestController');
+        // Route::resource('mutation', 'MutationController');
+        // Route::resource('item-request', 'ItemRequestController');
 
         /** CERTIFICATION */
 
