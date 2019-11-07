@@ -1,154 +1,154 @@
 @extends('frontend.master')
 
 @section('content')
-    <div class="m-subheader hidden">
-        <div class="d-flex align-items-center">
-            <div class="mr-auto">
-                <h3 class="m-subheader__title m-subheader__title--separator">
-                    Material Transfer
-                </h3>
-                <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
-                    <li class="m-nav__item m-nav__item--home">
-                        <a href="" class="m-nav__link m-nav__link--icon">
-                            <i class="m-nav__link-icon la la-home"></i>
-                        </a>
-                    </li>
-                    <li class="m-nav__separator">
-                        -
-                    </li>
-                    <li class="m-nav__item">
-                        <a href="{{ route('frontend.material-transfer.index') }}" class="m-nav__link">
-                            <span class="m-nav__link-text">
-                                Material Transfer
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+<div class="m-subheader hidden">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title m-subheader__title--separator">
+                Material Transfer
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+                <li class="m-nav__separator">
+                    -
+                </li>
+                <li class="m-nav__item">
+                    <a href="{{ route('frontend.material-transfer.index') }}" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Material Transfer
+                        </span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
-    <div class="m-content">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="m-portlet">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <span class="m-portlet__head-icon m--hide">
-                                    <i class="la la-gear"></i>
-                                </span>
+</div>
+<div class="m-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="m-portlet">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon m--hide">
+                                <i class="la la-gear"></i>
+                            </span>
 
-                                @include('frontend.common.label.create-new')
+                            @include('frontend.common.label.create-new')
 
-                                <h3 class="m-portlet__head-text">
-                                    Material Transfer
-                                </h3>
-                            </div>
+                            <h3 class="m-portlet__head-text">
+                                Material Transfer
+                            </h3>
                         </div>
                     </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-                            <form id="itemform" name="itemform">
-                                <div class="m-portlet__body">
-                                    <div class="form-group m-form__group row d-flex justify-content-center">
-                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                            <label class="form-control-label">
-                                                Date @include('frontend.common.label.required')
-                                            </label>
+                </div>
+                <div class="m-portlet m-portlet--mobile">
+                    <div class="m-portlet__body">
+                        <form id="itemform" name="itemform">
+                            <div class="m-portlet__body">
+                                <div class="form-group m-form__group row d-flex justify-content-center">
+                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                        <label class="form-control-label">
+                                            Date @include('frontend.common.label.required')
+                                        </label>
 
-                                            @component('frontend.common.input.datepicker')
-                                                @slot('id', 'date')
-                                                @slot('text', 'Date')
-                                                @slot('name', 'date')
-                                                @slot('id_error','requested_at')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-1 col-md-1 col-lg-1 pl-5 mt-5"></div>
-                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                            <label class="form-control-label">
-                                                Shipping By @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Shipping By')
-                                                @slot('id', 'shipping_by')
-                                                @slot('name', 'shipping_by')
-                                                @slot('id_error', 'shipping_by')
-                                            @endcomponent
-                                        </div>
+                                        @component('frontend.common.input.datepicker')
+                                        @slot('id', 'date')
+                                        @slot('text', 'Date')
+                                        @slot('name', 'date')
+                                        @slot('id_error','requested_at')
+                                        @endcomponent
                                     </div>
-                                    <div class="form-group m-form__group row  d-flex justify-content-center">
-                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                            <label class="form-control-label">
-                                                Warehouse Out @include('frontend.common.label.required')
-                                            </label>
+                                    <div class="col-sm-1 col-md-1 col-lg-1 pl-5 mt-5"></div>
+                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                        <label class="form-control-label">
+                                            Shipping By @include('frontend.common.label.required')
+                                        </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Warehouse Out')
-                                                @slot('id', 'warehouse_out')
-                                                @slot('name', 'warehouse_out')
-                                                @slot('id_error', 'warehouse_out')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-1 col-md-1 col-lg-1 px-5 mt-5">
-                                            <h4>To</h4>
-                                        </div>
-                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                            <label class="form-control-label">
-                                                Warehouse In @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Warehouse In')
-                                                @slot('id', 'warehouse_in')
-                                                @slot('name', 'warehouse_in')
-                                                @slot('id_error', 'warehouse_in')
-                                            @endcomponent
-                                        </div>
+                                        @component('frontend.common.input.select2')
+                                        @slot('text', 'Shipping By')
+                                        @slot('id', 'shipping_by')
+                                        @slot('name', 'received-by')
+                                        @slot('id_error', 'shipping_by')
+                                        @endcomponent
                                     </div>
-                                    <div class="form-group m-form__group row  d-flex justify-content-center">
-                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                            <label class="form-control-label">
-                                                Ref. Document @include('frontend.common.label.optional')
-                                            </label>
+                                </div>
+                                <div class="form-group m-form__group row  d-flex justify-content-center">
+                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                        <label class="form-control-label">
+                                            Warehouse Out @include('frontend.common.label.required')
+                                        </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('id', 'material')
-                                                @slot('text', 'Ref. Document ')
-                                                @slot('name', 'material')
-                                                @slot('id_error','material')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-1 col-md-1 col-lg-1 pl-5 mt-5"></div>
-                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                            <label class="form-control-label">
-                                                Received By @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'received-by')
-                                                @slot('text', 'Received By')
-                                                @slot('name', 'received-by')
-                                                @slot('id_error','received-by')
-                                            @endcomponent
-                                        </div>
+                                        @component('frontend.common.input.select2')
+                                        @slot('text', 'Warehouse Out')
+                                        @slot('id', 'warehouse_out')
+                                        @slot('name', 'item_storage_id')
+                                        @slot('id_error', 'warehouse_out')
+                                        @endcomponent
                                     </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <label class="form-control-label">
-                                                Remark 
-                                            </label>
-
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '5')
-                                                @slot('id', 'remark')
-                                                @slot('name', 'remark')
-                                                @slot('text', 'Remark')
-                                            @endcomponent
-                                        </div>
+                                    <div class="col-sm-1 col-md-1 col-lg-1 px-5 mt-5">
+                                        <h4>To</h4>
                                     </div>
+                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                        <label class="form-control-label">
+                                            Warehouse In @include('frontend.common.label.required')
+                                        </label>
 
-                                    <!-- <div class="form-group m-form__group row">
+                                        @component('frontend.common.input.select2')
+                                        @slot('text', 'Warehouse In')
+                                        @slot('id', 'warehouse_in')
+                                        @slot('name', 'item_storage_id')
+                                        @slot('id_error', 'warehouse_in')
+                                        @endcomponent
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row  d-flex justify-content-center">
+                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                        <label class="form-control-label">
+                                            Ref. Document @include('frontend.common.label.optional')
+                                        </label>
+
+                                        @component('frontend.common.input.text')
+                                        @slot('id', 'ref_no')
+                                        @slot('text', 'Ref. Document ')
+                                        @slot('name', 'ref_no')
+                                        @slot('id_error','ref_no')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-1 col-md-1 col-lg-1 pl-5 mt-5"></div>
+                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                        <label class="form-control-label">
+                                            Received By @include('frontend.common.label.required')
+                                        </label>
+
+                                        @component('frontend.common.input.select2')
+                                        @slot('id', 'received-by')
+                                        @slot('text', 'Received By')
+                                        @slot('name', 'received-by')
+                                        @slot('id_error','received-by')
+                                        @endcomponent
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <label class="form-control-label">
+                                            Remark
+                                        </label>
+
+                                        @component('frontend.common.input.textarea')
+                                        @slot('rows', '5')
+                                        @slot('id', 'remark')
+                                        @slot('name', 'remark')
+                                        @slot('text', 'Remark')
+                                        @endcomponent
+                                    </div>
+                                </div>
+
+                                <!-- <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <div class="m-portlet">
                                                 <div class="m-portlet__head">
@@ -201,51 +201,55 @@
                                             </div>
                                         </div>
                                     </div> -->
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                            <div class="flex">
-                                                <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
-                                                        @slot('id', 'add-material-transfer')
-                                                        @slot('class', 'add-material-transfer')
-                                                    @endcomponent
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                        <div class="flex">
+                                            <div class="action-buttons">
+                                                @component('frontend.common.buttons.submit')
+                                                @slot('type','button')
+                                                @slot('id', 'add-mutation')
+                                                @slot('class', 'add-mutation')
+                                                @endcomponent
 
-                                                    @include('frontend.common.buttons.reset')
+                                                @include('frontend.common.buttons.reset')
 
-                                                    @include('frontend.common.buttons.back')
+                                                @include('frontend.common.buttons.back')
 
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @push('footer-scripts')
 
-    <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+<script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/shipping-by.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/warehouse-in.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/warehouse-out.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/shipping-by.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/warehouse-in.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/warehouse-out.js') }}"></script>
 
-    <!-- <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
+
+<!-- <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script> -->
 
-    <script src="{{ asset('js/frontend/material-transfer/create.js') }}"></script>
+<script src="{{ asset('js/frontend/material-transfer/create.js') }}"></script>
 @endpush

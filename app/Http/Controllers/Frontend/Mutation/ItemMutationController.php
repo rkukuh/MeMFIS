@@ -56,11 +56,11 @@ class ItemMutationController extends Controller
                         'quantity' => 1,
                         'unit_id' => $item->unit_id,
                         'quantity_in_primary_unit' => 1,
-                        'expired_at' => $request->exp_date,
+                        // 'expired_at' => $request->exp_date,
                         'serial_number' => $serial_number,
                         'purchased_price' => 0, // ??
                         'total' => 0, // ??
-                        'description' => $request->remark
+                        'note' => $request->remark
                     ]
                 ]);
             }
@@ -86,10 +86,10 @@ class ItemMutationController extends Controller
                 'quantity' => $request->quantity,
                 'unit_id' => $request->unit_id,
                 'quantity_in_primary_unit' => $quantity_unit,
-                'expired_at' => $request->exp_date,
+                // 'expired_at' => $request->exp_date,
                 'purchased_price' => 0, // ??
                 'total' => 0, // ??
-                'description' => $request->remark
+                'note' => $request->remark
             ]
         ]);
 
@@ -132,7 +132,7 @@ class ItemMutationController extends Controller
             [
                 'quantity' => $request->quantity,
                 'unit_id' => $request->unit_id,
-                'description' => $request->remark
+                'note' => $request->note
             ]);
 
         return response()->json($mutation);

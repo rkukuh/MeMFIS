@@ -13,7 +13,9 @@ Route::name('frontend.')->group(function () {
 
         Route::namespace('Mutation')->group(function () {
             
-            Route::resource('material-transfer', 'MutationController');
+            Route::resource('material-transfer', 'MutationController', [
+                'parameters' => ['material-transfer' => 'mutation']
+            ]);
 
             Route::prefix('material-transfer')->group(function () {
                 Route::post('/{mutation}/item/{item}', 'ItemMutationController@store');
