@@ -49,7 +49,7 @@ class EmployeeAttendanceController extends Controller
             $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME);
             $filename = $name.'.'.$file->getClientOriginalExtension();
             
-            $exist = Storage::disk('local')->url('attendance_files/'.$file->getClientOriginalName());
+            $exist = Storage::disk('s3')->url('attendance_files/'.$file->getClientOriginalName());
         
             if($exist){
                 $random = str_random(5);
@@ -61,7 +61,7 @@ class EmployeeAttendanceController extends Controller
                 'attendance_files',$filename
             );
 
-            $storagePath = Storage::disk('local')->path($path);
+            $storagePath = Storage::disk('s3')->path($path);
             AttendanceFile::create([
                 'uuid' => Str::uuid(),
                 'name' => $name,
