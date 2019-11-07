@@ -17,7 +17,7 @@
             <div class="modal-body">
 
                     <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id=TtoolForm">
-                        <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
+                        <input type="hidden" class="form-control form-control-danger m-input" name="htcrr_uuid_for_tool" id="htcrr_uuid_for_tool">
                         <div class="m-portlet__body">
                             <div class="form-group m-form__group row ">
                                 <div class="col-sm-6 col-md-6 col-lg-6">
