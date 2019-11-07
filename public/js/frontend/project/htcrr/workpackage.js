@@ -884,8 +884,8 @@ $('.m_tabs_manhour').on('click', function () {
         url: "/project-htcrr/"+project_uuid+"/getManhours",
         method: "get",
         success: function(dataFetched){
-            $('#total_mhrs').html(dataFetched.total_mhrs);
-            $('#total').html(dataFetched.mhrs_pfrm_factor);
+            $('#total_mhrs').html(numberFormat.format(dataFetched.total_mhrs));
+            $('#total').html(numberFormat.format(dataFetched.mhrs_pfrm_factor));
         },
         });
     }
