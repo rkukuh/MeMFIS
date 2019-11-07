@@ -42,6 +42,12 @@ Route::name('testing.')->group(function () {
             dd($result);
 
         });
+        Route::get('/test22', function () {
+            $test  = Directoryxx\Finac\Model\APaymentA::all();
+
+            dd($test);
+
+        });
 
         Route::get('/convert-unit-to-prelimary', function () {
 

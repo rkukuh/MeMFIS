@@ -191,7 +191,7 @@
                 <tr>
                     <th width="14%" valign="top">Date</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top">{{ $quotation->created_at }}</td>
+                    <td width="35%" valign="top">{{ date_format($quotation->created_at, 'd-m-Y') }}</td>
                     <th width="14%" valign="top">Project No</th>
                     <td width="1%" valign="top">:</td>
                     <td width="35%" valign="top">{{ $quotation->quotationable->code }}</td>

@@ -10,6 +10,7 @@ class ItemRequest extends MemfisModel
 
     protected $fillable = [
         'number',
+        'type_id',
         'requestable_type',
         'requestable_id',
         'requested_at',
@@ -59,13 +60,13 @@ class ItemRequest extends MemfisModel
      */
     public function items()
     {
-        return $this->belongsToMany(Item::class, 'item_request','request_id','item_id')
+        return $this->belongsToMany(Item::class, 'item_request', 'request_id', 'item_id')
                     ->withPivot(
                         'serial_number',
                         'quantity',
                         'unit_id',
                         'interchange_id',
-                        'note',
+                        'note'
                     )
                     ->withTimestamps();
     }

@@ -194,7 +194,7 @@
                 <tr>
                     <th width="14%" valign="top">Date</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top">{{ $quotation->created_at }}</td>
+                    <td width="35%" valign="top">{{ date_format($quotation->created_at, 'd-m-Y') }}</td>
                     <th width="14%" valign="top">Project No</th>
                     <td width="1%" valign="top">:</td>
                     <td width="35%" valign="top">{{ $quotation->quotationable->code }}</td>
@@ -212,7 +212,7 @@
     </div>
     <div id="content3">
         <div class="container">
-            <table width="100%" border="1" cellpadding="4">
+            <table width="100%" border="1" cellpadding="4" >
                 <tr style="background:#f7dd16;">
                     <td width="8%" align="center"><b>No</b></td>
                     <td width="15%" align="center"><b>Defect Card No.</b></td>
@@ -221,27 +221,40 @@
                     <td width="8%" align="center"><b>Qty</b></td>
                     <td width="7%" align="center"><b>Unit</b></td>
                     <td width="12%" align="center"><b>Price</b></td>
-                    <td width="12%" align="center"><b>Total</b></td>
+                    <td width="14%" align="center"><b>Total</b></td>
                 </tr>
-                @foreach($items as $item)
-                    <tr>
-                        <td width="8%" align="center" valign="top">{{ $numbering+= 1 }}</td>
-                        <td width="15%" align="center" valign="top">{{ $item->defectcard->code }}</td>
-                        <td width="12%" align="center" valign="top">{{ $item->item->code }}</td>
-                        <td width="26%" valign="top">{{ $item->note }}</td>
-                        <td width="8%" align="center" valign="top">{{ $item->quantity }}</td>
-                        <td width="7%" align="center" valign="top">{{ $item->unit->name }}</td>
-                        <td width="12%" align="center" valign="top">Rp. {{ number_format($item->price_amount) }}</td>
-                        <td width="12%" align="center" valign="top"> Rp. {{ number_format($item->subtotal) }}</td>
+                @if(sizeof($items) > 0)
+                    @foreach($items as $item)
+                        <tr>
+                            <td width="8%" align="center" valign="top">{{ $numbering+= 1 }}</td>
+                            <td width="15%" align="center" valign="top">{{ $item->defectcard->code }}</td>
+                            <td width="12%" align="center" valign="top">{{ $item->item->code }}</td>
+                            <td width="26%" valign="top">{{ $item->note }}</td>
+                            <td width="8%" align="center" valign="top">{{ $item->quantity }}</td>
+                            <td width="7%" align="center" valign="top">{{ $item->unit->name }}</td>
+                            <td width="12%" align="center" valign="top">Rp. {{ number_format($item->price_amount, 2, ",", ".") }}</td>
+                            <td width="14%" align="center" valign="top"> Rp. {{ number_format($item->subtotal, 2, ",", ".") }}</td>
+                        </tr>
+                    @endforeach
+                    <tr style="background:#f7dd16;">
+                        <td colspan="3" align="center"><b>Total Additional Material</b></td>
+                        <td align="center" valign="top"><b>Qty Total</b></td>
+                        <td align="center" valign="top"><b>{{ number_format($total_item_quantity,0, ",", "." ) }}</b></td>
+                        <td align="center" valign="top"><b>Total</b></td>
+                        <td colspan="3" align="center" valign="top"><b>Rp. {{ number_format($total_item_price, 2, ",", ".") }}</b></td>
                     </tr>
-                @endforeach
-                <tr style="background:#f7dd16;">
-                    <td colspan="4" align="center"><b>Total Additional Material</b></td>
-                    <td align="center" valign="top"><b>Qty Total</b></td>
-                    <td align="center" valign="top"><b>{{ number_format($total_item_quantity) }}</b></td>
-                    <td align="center" valign="top"><b>Total</b></td>
-                    <td colspan="3" align="center" valign="top"><b>Rp. {{ number_format($total_item_price) }}</b></td>
+                @else
+                <tr>
+                    <td width="100%" align="center" valign="top" colspan="7"><i>No item</i></td>
                 </tr>
+                <tr style="background:#f7dd16;">
+                        <td colspan="3" align="center"><b>Total Additional Material</b></td>
+                        <td align="center" valign="top"><b>Qty Total</b></td>
+                        <td align="center" valign="top"><b>0</b></td>
+                        <td align="center" valign="top"><b>Total</b></td>
+                        <td colspan="3" align="center" valign="top"><b>Rp. 0</td>
+                    </tr>
+                @endif
             </table>
         </div>
     </div>

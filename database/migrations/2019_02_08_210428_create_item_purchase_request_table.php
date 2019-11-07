@@ -17,6 +17,7 @@ class CreateItemPurchaseRequestTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('purchase_request_id');
             $table->unsignedBigInteger('item_id');
+            $table->double('quantity_requirement');
             $table->double('quantity');
             $table->double('quantity_unit');
             $table->unsignedBigInteger('unit_id');

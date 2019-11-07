@@ -155,7 +155,7 @@ class PurchaseOrderController extends Controller
         $tax_amount = $tax_percentage = 0;
         if($tax->code == "include"){
             $tax_percentage = $request->tax_amount;
-            $tax_amount = $subtotal_after_discount / 1.1 * ($request->tax_amount / 100);
+            $tax_amount = $request->total_before_tax - ( $subtotal_after_discount / 1.1 * ($request->tax_amount / 100) );
         }elseif($tax->code == "exclude"){
             $tax_percentage = $request->tax_amount;
             $tax_amount = $subtotal_after_discount * ($request->tax_amount / 100);

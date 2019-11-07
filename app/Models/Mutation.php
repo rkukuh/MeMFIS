@@ -11,6 +11,8 @@ class Mutation extends MemfisModel
         'storage_out',
         'storage_in',
         'mutated_at',
+        'shipping_by',
+        'received_by',
         'note',
     ];
 
@@ -66,5 +68,28 @@ class Mutation extends MemfisModel
     public function storage_out()
     {
         return $this->belongsTo(Storage::class, 'storage_out');
+    }
+
+    /**
+     * Many-to-Many: A GSE may have zero or many item.
+     *
+     * This function will retrieve all the items of a GSE.
+     * See: Item's gse() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'item_mutation', 'mutation_id', 'item_id')
+            ->withPivot(
+                'serial_number',
+                'quantity',
+                'quantity_in_primary_unit',
+                'unit_id',
+                'purchased_price',
+                'total',
+                'note'
+            )
+            ->withTimestamps();
     }
 }
