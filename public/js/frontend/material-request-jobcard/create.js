@@ -11,10 +11,8 @@ let MaterialRequestCreate = {
             $('#ref_project').removeAttr("disabled");
         });
 
-        // var jobcard_uuid = '';
-
         $("#ref_jobcard").change(function () {
-            jobcard_uuid = $(this).val();
+            let jobcard_uuid = $(this).val();   
 
             $('.material_request_project_datatable').mDatatable({
                 data: {
@@ -22,7 +20,7 @@ let MaterialRequestCreate = {
                     source: {
                         read: {
                             method: 'GET',
-                            url: '/datatables/item-request/material/'+ jobcard_uuid +'/items',
+                            url: '/datatables/jobcard/'+ jobcard_uuid +'/materials',
                             map: function (raw) {
                                 let dataSet = raw;
 
@@ -118,134 +116,42 @@ let MaterialRequestCreate = {
                         sortable: 'asc',
                         filterable: !1,
                         width: 150,
-                    },
-                    {
-                        field: 'Actions',
-                        width: 110,
-                        sortable: !1,
-                        overflow: 'visible',
-                        template: function (t, e, i) {
-                            return (
-                                '<button data-toggle="modal" data-target="#modal_material_request" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-instruction_uuid=' +
-                                t.uuid +
-                                '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                                '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                                t.uuid +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-exchange"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
-                        }
                     }
                 ]
             });
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
-
-            swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/category/' + triggerid + '',
-                        success: function (data) {
-                            toastr.success(
-                                'Data Berhasil Dihapus.',
-                                'Sukses!', {
-                                    timeOut: 5000
-                                }
-                            );
-
-                            let table = $('.m_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
-                }
-            });
-        });
-
-        $('.footer').on('click', '.add-goods-received', function () {
-            let received_at = $('input[name=date]').val();
+        $('.footer').on('click', '.add-request', function () {
+            let note = $('#description').val();
+            let section_code = $('input[name=section_code]').val();
+            let storage_id = $('#item_storage_id').val();
+            let date = $('input[name=date]').val();
             let received_by = $('#received-by').val();
-            let ref_po = $('input[name=ref-po]').val();
-            let do_no = $('input[name=do-no]').val();
-            let ref_date = $('input[name=date-ref-date]').val();
-            let warehouse = $('input[name=warehouse]').val();
-            let description = $('#description').val();
-            let vehicle_no = $('input[name=vehicle-no]').val();
-            let container_no = $('input[name=container-no]').val();
+            let jc_no = $("#ref_jobcard").val();
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '/goods-received',
+                url: '/item-request/material-request-jobcard',
                 type: 'POST',
                 data: {
-                    received_at:received_at,
-                    received_by:received_by,
-                    vehicle_no:vehicle_no,
-                    container_no:container_no,
-                    purchase_order_id:ref_po,
-                    storage_id:warehouse,
-                    description:description,
+                    jc_no : jc_no,
+                    storage_id: storage_id,
+                    requested_at: date,
+                    note: note,
+                    section: section_code,
+                    received_by: received_by
                 },
                 success: function (response) {
                     if (response.errors) {
                         console.log(errors);
-                        // if (response.errors.title) {
-                        //     $('#title-error').html(response.errors.title[0]);
-                        // }
-
-                        // document.getElementById('manual_affected_id').value = manual_affected_id;
-
-
                     } else {
-                        //    taskcard_reset();
-
-
-                        toastr.success('Taskcard has been created.', 'Success', {
+                        toastr.success('Item Request has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/goods-received/'+response.uuid+'/edit';
+                        window.location.href = '/item-request/material-request-jobcard/'+response.uuid+'/edit';
                     }
                 }
             });

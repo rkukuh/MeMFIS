@@ -148,7 +148,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group m-form__group row">
+                                    <!-- <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <div class="m-portlet">
                                                 <div class="m-portlet__head">
@@ -200,7 +200,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
@@ -241,11 +241,11 @@
     <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+    <!-- <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script> -->
 
     <script src="{{ asset('js/frontend/material-transfer/create.js') }}"></script>
 @endpush

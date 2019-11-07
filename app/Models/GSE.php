@@ -53,7 +53,7 @@ class GSE extends MemfisModel
                         'serial_number',
                         'quantity',
                         'unit_id',
-                        'note',
+                        'note'
                     )
                     ->withTimestamps();
     }

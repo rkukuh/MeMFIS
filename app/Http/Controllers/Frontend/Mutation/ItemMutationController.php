@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\InventoryIn;
+namespace App\Http\Controllers\Frontend\Mutation;
 
-use App\Models\InventoryIn;
+use App\Models\Mutation;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\InventoryInStore;
-use App\Http\Requests\Frontend\InventoryInUpdate;
+use App\Http\Requests\Frontend\MutationStore;
+use App\Http\Requests\Frontend\MutationUpdate;
 use App\Models\Item;
 
-class ItemInventoryInController extends Controller
+class ItemMutationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class ItemInventoryInController extends Controller
      */
     public function index()
     {
-        $items = InventoryIn::with('items')->get();
+        $items = Mutation::with('items')->get();
 
         return response()->json($items);
     }
@@ -35,12 +35,12 @@ class ItemInventoryInController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\InventoryInStore  $request
+     * @param  \App\Http\Requests\Frontend\MutationStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InventoryInStore $request, InventoryIn $inventoryIn, Item $item)
+    public function store(MutationStore $request, Mutation $mutation, Item $item)
     {
-        $exists = $inventoryIn->items()->where('item_id', $item->id)->first();
+        $exists = $mutation->items()->where('item_id', $item->id)->first();
 
         if ($exists) {
             return response()->json(['title' => "Danger"]);
@@ -51,7 +51,7 @@ class ItemInventoryInController extends Controller
         if (!is_null($request->serial_no)) {
             foreach ($request->serial_no as $serial_number) {
 
-                $inventoryIn->items()->attach([
+                $mutation->items()->attach([
                     $item->id => [
                         'quantity' => 1,
                         'unit_id' => $item->unit_id,
@@ -65,7 +65,7 @@ class ItemInventoryInController extends Controller
                 ]);
             }
 
-            return response()->json($inventoryIn);
+            return response()->json($mutation);
         }
 
         $quantity_unit = $request->quantity;
@@ -81,7 +81,7 @@ class ItemInventoryInController extends Controller
             $quantity_unit = $qty_uom * $quantity;
         }
 
-        $inventoryIn->items()->attach([
+        $mutation->items()->attach([
             $item->id => [
                 'quantity' => $request->quantity,
                 'unit_id' => $request->unit_id,
@@ -93,16 +93,16 @@ class ItemInventoryInController extends Controller
             ]
         ]);
 
-        return response()->json($inventoryIn);
+        return response()->json($mutation);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\InventoryIn  $inventoryIn
+     * @param  \App\Models\Mutation  $mutation
      * @return \Illuminate\Http\Response
      */
-    public function show(InventoryIn $inventoryIn)
+    public function show(Mutation $mutation)
     {
 
         //
@@ -111,10 +111,10 @@ class ItemInventoryInController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\InventoryIn  $inventoryIn
+     * @param  \App\Models\Mutation  $mutation
      * @return \Illuminate\Http\Response
      */
-    public function edit(InventoryIn $inventoryIn)
+    public function edit(Mutation $mutation)
     {
         //
     }
@@ -122,32 +122,32 @@ class ItemInventoryInController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\InventoryInUpdate  $request
-     * @param  \App\Models\InventoryIn  $inventoryIn
+     * @param  \App\Http\Requests\Frontend\MutationUpdate  $request
+     * @param  \App\Models\Mutation  $mutation
      * @return \Illuminate\Http\Response
      */
-    public function update(InventoryInUpdate $request, InventoryIn $inventoryIn, Item $item)
+    public function update(MutationUpdate $request, Mutation $mutation, Item $item)
     {
-        $inventoryIn->items()->updateExistingPivot($item->id,
+        $mutation->items()->updateExistingPivot($item->id,
             [
                 'quantity' => $request->quantity,
                 'unit_id' => $request->unit_id,
                 'description' => $request->remark
             ]);
 
-        return response()->json($inventoryIn);
+        return response()->json($mutation);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\InventoryIn  $inventoryIn
+     * @param  \App\Models\Mutation  $mutation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(InventoryIn $inventoryIn, Item $item)
+    public function destroy(Mutation $mutation, Item $item)
     {
-        $inventoryIn->items()->detach($item->id);
+        $mutation->items()->detach($item->id);
 
-        return response()->json($inventoryIn);
+        return response()->json($mutation);
     }
 }
