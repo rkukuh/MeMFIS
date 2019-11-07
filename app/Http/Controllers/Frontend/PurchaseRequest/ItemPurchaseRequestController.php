@@ -45,7 +45,7 @@ class ItemPurchaseRequestController extends Controller
      */
     public function store(ItemPurchaseRequestStore $request,PurchaseRequest $purchaseRequest,Item $item)
     {
-        $exists = $purchaseRequest->items()->where('item_id',$item->id)->first();
+        $exists = PurchaseRequestItem::where('purchase_request_id',$purchaseRequest->id)->where('item_id',$item->id)->first();
         if($exists){
             return response()->json(['title' => "Danger"]);
         }else{
