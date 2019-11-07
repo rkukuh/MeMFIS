@@ -135,7 +135,7 @@
     </header>
 
     <footer style="margin-top:14px;">
-        <span style="margin-left:6px">{{ $quotation->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{ $username}} ; {{ date('Y-m-d H:i:s') }}</span><span style="position:absolute; right:20px;" >PAGE {{ $page }} of 3 </span>
+        <span style="margin-left:6px">{{ $created_by }} : {{ $quotation->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{ $username}} ; {{ date('Y-m-d H:i:s') }}</span><span style="position:absolute; right:20px;" >PAGE {{ $page }} of 3 </span>
         <img src="./img/form/printoutquotation/FooterQuotation.png" width="100%" alt="" >
     </footer>
 
