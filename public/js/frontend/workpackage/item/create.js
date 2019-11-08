@@ -187,6 +187,8 @@ let Workpackage3 = {
         });
 
         $('.add-item').on('click', function () {
+            mApp.block(".add-item");
+
             let quantity = $('input[name=quantity_item]').val();
             let material = $('#material').val();
             let unit_material = $('#unit_material').val();
@@ -221,6 +223,7 @@ let Workpackage3 = {
                         document.getElementById('quantity').value = quantity;
 
                     } else {
+                        mApp.unblock(".add-item");
 
                         toastr.success('Material has been created.', 'Success', {
                             timeOut: 5000
@@ -238,6 +241,8 @@ let Workpackage3 = {
         });
 
         $('.materials_datatable').on('click', '.delete-material', function () {
+            mApp.block(".delete-material");
+
             let material_uuid = $(this).data('uuid');
 
             swal({
@@ -259,6 +264,8 @@ let Workpackage3 = {
                         type: 'DELETE',
                         url: '/workpackage/'+workPackage_uuid+'/'+material_uuid+'/item',
                         success: function (data) {
+                            mApp.unblock(".delete-material");
+
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
@@ -282,6 +289,8 @@ let Workpackage3 = {
         });
 
         $('.add-tool').on('click', function () {
+            mApp.block(".add-tool");
+
             let quantity = $('input[name=quantity]').val();
             let tool = $('#tool').val();
             let unit_tool = $('#unit_tool').val();
@@ -314,6 +323,7 @@ let Workpackage3 = {
 
                         document.getElementById('quantity').value = quantity;
                     } else {
+                        mApp.unblock(".add-tool");
 
                         toastr.success('Tool has been created.', 'Success', {
                             timeOut: 5000
@@ -338,6 +348,8 @@ let Workpackage3 = {
         });
 
         $('.tools_datatable').on('click', '.delete-tool', function () {
+            mApp.block(".delete-tool");
+            
             let tool_uuid = $(this).data('uuid');
 
             swal({
@@ -359,6 +371,8 @@ let Workpackage3 = {
                         type: 'DELETE',
                         url: '/workpackage/'+workPackage_uuid+'/'+tool_uuid+'/item',
                         success: function (data) {
+                            mApp.block(".delete-tool");
+
                             toastr.success('Tool has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }

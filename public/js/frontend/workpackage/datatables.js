@@ -380,6 +380,8 @@ let Datatables = {
         });
 
         $("#basic_datatable").on("click", ".select-basic", function() {
+            mApp.block(".select-basic");
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -396,6 +398,8 @@ let Datatables = {
                             timeOut: 5000
                         });
                     } else {
+                        mApp.unblock(".select-basic");
+
                         $("#modal_basic").modal("hide");
 
                         toastr.success("Task Card has been added.", "Success", {
@@ -412,6 +416,8 @@ let Datatables = {
         });
 
         $("#sip_datatable").on("click", ".select-sip", function() {
+            mApp.block(".select-sip");
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -428,6 +434,8 @@ let Datatables = {
                             timeOut: 5000
                         });
                     } else {
+                        mApp.unblock(".select-sip");
+
                         $("#modal_sip").modal("hide");
 
                         toastr.success("Task Card has been added.", "Success", {
@@ -444,6 +452,8 @@ let Datatables = {
         });
 
         $("#cpcp_datatable").on("click", ".select-cpcp", function() {
+            mApp.block(".select-cpcp");
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -461,6 +471,8 @@ let Datatables = {
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
+                        mApp.unblock(".select-cpcp");
+
                         $("#modal_cpcp").modal("hide");
 
                         toastr.success("Task Card has been added.", "Success", {
@@ -477,6 +489,8 @@ let Datatables = {
         });
 
         $("#si_datatable").on("click", ".select-si", function() {
+            mApp.block(".select-si");
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -494,6 +508,8 @@ let Datatables = {
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
+                        mApp.unblock(".select-si");
+
                         $("#modal_si").modal("hide");
 
                         toastr.success("Task Card has been added.", "Success", {
@@ -510,6 +526,8 @@ let Datatables = {
         });
 
         $("#preliminary_datatable").on("click", ".select-preliminary", function() {
+            mApp.block(".select-preliminary");
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -527,6 +545,8 @@ let Datatables = {
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
+                        mApp.unblock(".select-preliminary");
+
                         $("#modal_preliminary").modal("hide");
 
                         toastr.success("Task Card has been added.", "Success", {

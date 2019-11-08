@@ -94,10 +94,10 @@ let Workpackage2 = {
         });
 
         let simpan = $('.action-buttons').on('click', '.add-workpackage', function () {
+            mApp.block(".add-workpackage");
+
             $('#name-error').html('');
             $('#simpan').text('Simpan');
-
-
             let title = $('input[name=title]').val();
             let applicability_airplane = $('#applicability_airplane').val();
             let description = $('#description').val();
@@ -129,6 +129,7 @@ let Workpackage2 = {
 
                     } else {
                         // $('#modal_customer').modal('hide');
+                        mApp.unblock(".add-workpackage");
 
                         toastr.success('Work Package has been created.', 'Success', {
                             timeOut: 5000
