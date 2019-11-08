@@ -5,7 +5,7 @@ Route::name('testing.')->group(function () {
     Route::group(['prefix' => '_test'], function () {
 
         Route::get('/view/files', function() {
-            $key = 'master/taskcard/routine/251913_fe5798f4-f563-11e4-9d1f-468364efb121.jpg';
+            $key = 'master/taskcard/routine/Progress Report 6 Nop 2019.pdf';
             $s3 = Storage::disk('s3');
             $client = $s3->getDriver()->getAdapter()->getClient();
             $bucket = Config::get('filesystems.disks.s3.bucket');
@@ -17,8 +17,9 @@ Route::name('testing.')->group(function () {
 
             $request = $client->createPresignedRequest($command, '+20 minutes');
 
-            $url = (string) $request->getUri();
-
+            $url = $request->getUri();
+            // return (string) $request->getUri();
+            
             return view('frontend.testing.view-file',[
                 'url' => $url
             ]);
