@@ -521,9 +521,9 @@ let Workpackage = {
                     tat: tat,
                 },
                 success: function (data) {
+                    mApp.unblock(".add-engineer");
                     if (data.errors) {
                     } else {
-                        mApp.unblock(".add-engineer");
 
                         toastr.success('Engineer team has been created.', 'Success', {
                             timeOut: 5000
@@ -610,6 +610,7 @@ function htcrr_tool(triggeruuid) {
                 note: remark_tool,
             },
             success: function (data) {
+                mApp.unblock(".add-htcrr-tool");
                 if (data.errors) {
                     if (data.errors.uom) {
                         $('#unit_material-error').html(data.errors.uom[0]);
@@ -621,7 +622,6 @@ function htcrr_tool(triggeruuid) {
                     // document.getElementById('tool').value = tool;
                     // document.getElementById('quantity').value = quantity;
                 } else {
-                    mApp.unblock(".add-htcrr-tool");
 
                     toastr.success('Tool has been added to taskcard.', 'Success', {
                         timeOut: 5000
@@ -763,6 +763,7 @@ function htcrr_material(triggeruuid) {
                 note: remark_material,
             },
             success: function (data) {
+                mApp.unblock(".add-htcrr-item");
                 if (data.errors) {
                     if (data.errors.uom) {
                         $('#unit_material-error').html(data.errors.uom[0]);
@@ -775,7 +776,6 @@ function htcrr_material(triggeruuid) {
                     // document.getElementById('quantity').value = quantity;
 
                 } else {
-                    mApp.unblock(".add-htcrr-item");
 
                     toastr.success('Material has been added to taskcard.', 'Success', {
                         timeOut: 5000
@@ -874,9 +874,9 @@ $('.footer-manhour').on('click', '.add-manhour', function () {
             total: total,
         },
         success: function (data) {
+            mApp.unblock(".add-manhour");
             if (data.errors) {
             } else {
-                mApp.unblock(".add-manhour");
 
                 toastr.success('Manhours Propotion has been created.', 'Success', {
                     timeOut: 5000

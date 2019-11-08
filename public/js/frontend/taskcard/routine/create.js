@@ -181,6 +181,7 @@ let TaskCard = {
                 contentType: false,
 
                 success: function (response) {
+                    mApp.unblock(".add-taskcard");  
                     if (response.errors) {
                         if (response.errors.title) {
                             $('#title-error').html(response.errors.title[0]);
@@ -242,7 +243,6 @@ let TaskCard = {
 
                     } else {
 
-                        mApp.unblock(".add-taskcard");  
                         toastr.success('Taskcard has been created.', 'Success', {
                             timeOut: 5000
                         });

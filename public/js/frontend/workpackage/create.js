@@ -116,6 +116,7 @@ let Workpackage2 = {
                     is_template:'1',
                 },
                 success: function (data) {
+                    mApp.unblock(".add-workpackage");
                     if (data.errors) {
                         if (data.errors.aircraft_id) {
                             $('#applicability-airplane-error').html(data.errors.aircraft_id[0]);
@@ -129,7 +130,6 @@ let Workpackage2 = {
 
                     } else {
                         // $('#modal_customer').modal('hide');
-                        mApp.unblock(".add-workpackage");
 
                         toastr.success('Work Package has been created.', 'Success', {
                             timeOut: 5000

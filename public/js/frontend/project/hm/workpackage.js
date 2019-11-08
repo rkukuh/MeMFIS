@@ -216,9 +216,9 @@ let Workpackage = {
                     installation_manhour_estimation: installation,
                 },
                 success: function (data) {
+                    mApp.unblock(".add-htcrr");
                     if (data.errors) {
                     } else {
-                        mApp.unblock(".add-htcrr");
 
 
                         toastr.success('HT/CRR has been created.', 'Success', {
@@ -466,9 +466,9 @@ let Workpackage = {
                     tat: tat,
                 },
                 success: function (data) {
+                    mApp.unblock(".add-engineer");
                     if (data.errors) {
                     } else {
-                        mApp.unblock(".add-engineer");
 
                         toastr.success('Engineer team has been created.', 'Success', {
                             timeOut: 5000
@@ -498,9 +498,9 @@ let Workpackage = {
                     facility_array: facility_array,
                 },
                 success: function (data) {
+                    mApp.unblock(".add-facility");
                     if (data.errors) {
                     } else {
-                        mApp.unblock(".add-facility");
 
                         toastr.success('Facility has been created.', 'Success', {
                             timeOut: 5000

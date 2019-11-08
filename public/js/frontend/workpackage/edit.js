@@ -168,9 +168,9 @@ let Workpackage = {
                     sequence: sequence
                 },
                 success: function(data) {
+                    mApp.unblock(".sequence");
                     if (data.errors) {
                     } else {
-                        mApp.unblock(".sequence");
 
                         toastr.success(
                             "Sequence has been updated.",
@@ -227,9 +227,9 @@ let Workpackage = {
                     sequence: sequence
                 },
                 success: function(data) {
+                    mApp.unblock(".sequence-intruction");
                     if (data.errors) {
                     } else {
-                        mApp.unblock(".sequence-intruction");
 
                         toastr.success(
                             "Instruction sequence has been updated.",
@@ -294,9 +294,9 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
-                        mApp.unblock(".mandatory");
 
                         toastr.success(
                             "Mandatory has been updated.",
@@ -452,9 +452,9 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
-                        mApp.unblock(".mandatory");
 
                         toastr.success(
                             "Mandatory has been updated.",
@@ -590,9 +590,9 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
-                        mApp.unblock(".mandatory");
 
                         toastr.success(
                             "Mandatory has been updated.",
@@ -689,9 +689,9 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
-                        mApp.unblock(".mandatory");
 
                         toastr.success(
                             "Mandatory has been updated.",
@@ -1015,9 +1015,9 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
-                        mApp.unblock(".mandatory");
 
                         toastr.success(
                             "Mandatory has been updated.",
@@ -1212,9 +1212,9 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
-                        mApp.unblock(".mandatory");
 
                         toastr.success(
                             "Mandatory has been updated.",
@@ -1303,6 +1303,7 @@ let Workpackage = {
                     taskcard: $(this).data("uuid")
                 },
                 success: function(data) {
+                    mApp.unblock(".select-instruction");
                     if (data.errors) {
                         // if (data.errors.name) {
                         //     $('#name-error').html(data.errors.name[0]);
@@ -1314,7 +1315,6 @@ let Workpackage = {
                                 timeOut: 5000
                             });
                         } else {
-                            mApp.unblock(".select-instruction");
 
                             $("#modal_instruction").modal("hide");
 
@@ -1468,9 +1468,9 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
-                        mApp.unblock(".mandatory");
 
                         toastr.success(
                             "Mandatory has been updated.",
@@ -1604,9 +1604,9 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
-                        mApp.unblock(".mandatory");
 
                         toastr.success(
                             "Mandatory has been updated.",
@@ -1765,6 +1765,7 @@ let Workpackage = {
                         is_template: "1"
                     },
                     success: function(data) {
+                        mApp.unblock(".delete-instruction");
                         if (data.errors) {
                             if (data.errors.aircraft_id) {
                                 $("#applicability-airplane-error").html(
@@ -1778,7 +1779,6 @@ let Workpackage = {
                             // document.getElementById('applicability-airplane').value = applicability-airplane;
                             // document.getElementById('title').value = title;
                         } else {
-                            mApp.unblock(".delete-instruction");
 
                             // $('#modal_customer').modal('hide');
 

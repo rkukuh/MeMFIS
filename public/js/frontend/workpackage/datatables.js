@@ -393,12 +393,12 @@ let Datatables = {
                     taskcard: $(this).data("uuid")
                 },
                 success: function(data) {
+                    mApp.unblock(".select-basic");
                     if (data.title == "Danger") {
                         toastr.error("Task card already exists!", "Error", {
                             timeOut: 5000
                         });
                     } else {
-                        mApp.unblock(".select-basic");
 
                         $("#modal_basic").modal("hide");
 
@@ -429,12 +429,12 @@ let Datatables = {
                     taskcard: $(this).data("uuid")
                 },
                 success: function(data) {
+                    mApp.unblock(".select-sip");
                     if (data.title == "Danger") {
                         toastr.error("Task card already exists!", "Error", {
                             timeOut: 5000
                         });
                     } else {
-                        mApp.unblock(".select-sip");
 
                         $("#modal_sip").modal("hide");
 
@@ -465,13 +465,13 @@ let Datatables = {
                     taskcard: $(this).data("uuid")
                 },
                 success: function(data) {
+                    mApp.unblock(".select-cpcp");
                     if (data.errors) {
                         // if (data.errors.name) {
                         //     $('#name-error').html(data.errors.name[0]);
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
-                        mApp.unblock(".select-cpcp");
 
                         $("#modal_cpcp").modal("hide");
 
@@ -502,13 +502,13 @@ let Datatables = {
                     taskcard: $(this).data("uuid")
                 },
                 success: function(data) {
+                    mApp.unblock(".select-si");
                     if (data.errors) {
                         // if (data.errors.name) {
                         //     $('#name-error').html(data.errors.name[0]);
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
-                        mApp.unblock(".select-si");
 
                         $("#modal_si").modal("hide");
 
@@ -539,13 +539,13 @@ let Datatables = {
                     taskcard: $(this).data("uuid")
                 },
                 success: function(data) {
+                    mApp.unblock(".select-preliminary");
                     if (data.errors) {
                         // if (data.errors.name) {
                         //     $('#name-error').html(data.errors.name[0]);
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
-                        mApp.unblock(".select-preliminary");
 
                         $("#modal_preliminary").modal("hide");
 

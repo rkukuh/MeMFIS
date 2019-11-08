@@ -257,6 +257,8 @@ let Customer = {
         });
 
         $('.modal-footer').on('click', '.add-address', function () {
+            mApp.block(".add-address");
+
             let address = $('#address-modal').val();
             let address_type = $('#address_type').val();
 
@@ -271,6 +273,8 @@ let Customer = {
                     address_type: address_type
                 },
                 success: function (data) {
+                    mApp.unblock(".add-address");
+
                     if (data.errors) {
                         $.each(data.errors, function (key, value) {
                             var name = $("input[name='"+key+"']");
@@ -281,6 +285,7 @@ let Customer = {
                             name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
                           });
                     } else {
+
                         $('#modal_address').modal('hide');
 
                         let table = $('.customer_address_datatable').mDatatable();

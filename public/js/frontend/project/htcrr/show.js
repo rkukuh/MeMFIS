@@ -289,9 +289,9 @@ $('.footer-manhour').on('click', '.add-manhour', function () {
             total: total,
         },
         success: function (data) {
+            mApp.unblock(".add-manhour");
             if (data.errors) {
             } else {
-                mApp.unblock(".add-manhour");
 
                 toastr.success('Manhours Propotion has been created.', 'Success', {
                     timeOut: 5000

@@ -1,6 +1,7 @@
 let Customer = {
     init: function () {
         let simpan = $('.footer').on('click', '.add-customer', function () {
+            mApp.block(".add-customer");
 
             let name = $('input[name=name]').val();
             let payment_term =  $('input[name=term_of_payment]').val();
@@ -171,6 +172,8 @@ let Customer = {
                     level:level,
                 },
                 success: function (data) {
+                    mApp.unblock(".add-customer");
+
                     if (data.errors) {
                         if (data.errors.name) {
                             $('#level-error').html(data.errors.level[0]);

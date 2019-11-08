@@ -469,10 +469,10 @@ let AdditionalTaskCreate = (function() {
                     cache: false,
                     data:data,
                     success: function (data) {
+                        mApp.unblock(".add-project-additional");
                         if (data.errors) {
 
                         } else {
-                            mApp.unblock(".add-project-additional");
 
                             toastr.success('Defectcard has been created.', 'Success', {
                                 timeOut: 5000
@@ -509,10 +509,10 @@ let AdditionalTaskCreate = (function() {
                     cache: false,
                     data:data,
                     success: function (data) {
+                        mApp.unblock(".delete-project-additional");
                         if (data.errors) {
 
                         } else {
-                            mApp.unblock(".delete-project-additional");
 
                             toastr.success('Defectcard Aditional has been deleted.', 'Success', {
                                 timeOut: 5000
@@ -565,6 +565,7 @@ $('.footer-additional').on('click', '.update-additional-data', function () {
             total_manhours_with_performance_factor:total_manhours_with_performance_factor,
         },
         success: function (data) {
+            mApp.unblock(".update-additional-data");
             if (data.errors) {
                 // if (data.errors.customer_id) {
                 //     $('#customer-error').html(data.errors.customer_id[0]);
@@ -573,7 +574,6 @@ $('.footer-additional').on('click', '.update-additional-data', function () {
                 // document.getElementById('customer').value = data.getAll('customer_id');
 
             } else {
-                mApp.unblock(".update-additional-data");
 
                 toastr.success('Project Additional has been Updated.', 'Success', {
                     timeOut: 5000

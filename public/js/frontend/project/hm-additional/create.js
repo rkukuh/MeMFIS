@@ -345,10 +345,11 @@ let AdditionalTaskCreate = (function() {
                     cache: false,
                     data:data,
                     success: function (data) {
+                        mApp.unblock(".add-project-additional");
+
                         if (data.errors) {
 
                         } else {
-                            mApp.unblock(".add-project-additional");
 
                             toastr.success('Project Aditional has been created.', 'Success', {
                                 timeOut: 5000

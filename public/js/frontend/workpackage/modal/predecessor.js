@@ -136,6 +136,7 @@ $('.modal-footer').on('click', '.add-predecessor', function () {
             order: order_predecessor,
         },
         success: function (data) {
+            mApp.unblock(".add-predecessor");
             if (data.errors) {
                 // if (data.errors.name) {
                 //     $('#name-error').html(data.errors.name[0]);
@@ -147,7 +148,6 @@ $('.modal-footer').on('click', '.add-predecessor', function () {
                 // }
 
             } else {
-                mApp.unblock(".add-predecessor");
 
                 $('#add_modal_predecessor').modal('hide');
 
@@ -300,6 +300,7 @@ $.ajax({
         order: order_predecessor,
     },
     success: function (data) {
+        mApp.unblock(".add-predecessor-instruction");
         if (data.errors) {
             // if (data.errors.name) {
             //     $('#name-error').html(data.errors.name[0]);
@@ -311,7 +312,6 @@ $.ajax({
             // }
 
         } else {
-            mApp.unblock(".add-predecessor-instruction");
 
             $('#add_modal_predecessor_instruction').modal('hide');
 

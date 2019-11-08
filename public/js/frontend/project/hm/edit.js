@@ -163,6 +163,7 @@ let Project = {
                     workpackage: $(this).data('uuid'),
                 },
                 success: function (data) {
+                    mApp.unblock(".select-workpackage");
                     if (data.errors) {
                         if (data.errors.customer_id) {
                             $('#customer-error').html(data.errors.customer_id[0]);
@@ -186,7 +187,6 @@ let Project = {
                         document.getElementById('reg').value = data.getAll('aircraft_register');
                         document.getElementById('serial-number').value = data.getAll('aircraft_sn');
                     } else {
-                        mApp.unblock(".select-workpackage");
 
                         $('#modal_project').modal('hide');
 
@@ -285,6 +285,7 @@ let Project = {
                     project_uuid: project_uuid
                 },
                 success: function (data) {
+                    mApp.unblock(".add-blank-workpackage");
                     if (data.errors) {
                         if (data.errors.title) {
                             $('#title-error').html(data.errors.title[0]);
@@ -292,7 +293,6 @@ let Project = {
                             document.getElementById('title').value = title;
                         }
                     } else {
-                        mApp.unblock(".add-blank-workpackage");
 
                         toastr.success('Project has been created.', 'Success', {
                             timeOut: 5000
@@ -414,6 +414,7 @@ let Project = {
                 contentType: false,
                 cache: false,
                 success: function (data) {
+                    mApp.unblock(".update-project");
                     if (data.errors) {
                         if (data.errors.customer_id) {
                             $('#customer-error').html(data.errors.customer_id[0]);
@@ -438,7 +439,6 @@ let Project = {
                         document.getElementById('serial-number').value = data.getAll('aircraft_sn');
 
                     } else {
-                        mApp.unblock(".update-project");
 
                         toastr.success('Project has been created.', 'Success', {
                             timeOut: 5000

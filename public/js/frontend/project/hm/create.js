@@ -23,6 +23,8 @@ let Project = {
                 cache: false,
                 data:data,
                 success: function (data) {
+                    mApp.unblock(".add-project");
+
                     if (data.errors) {
                         if (data.errors.customer_id) {
                             $('#customer-error').html(data.errors.customer_id[0]);
@@ -47,7 +49,6 @@ let Project = {
                         document.getElementById('serial-number').value = data.getAll('aircraft_sn');
 
                     } else {
-                        mApp.unblock(".add-project");
 
                         toastr.success('Project has been created.', 'Success', {
                             timeOut: 5000

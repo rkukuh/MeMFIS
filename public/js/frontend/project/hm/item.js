@@ -577,6 +577,7 @@ let Workpackage3 = {
 
                 },
                 success: function (data) {
+                    mApp.unblock(".add-item");
                     if (data.errors) {
                         if (data.errors.item_id) {
                             $('#material-error').html(data.errors.item_id[0]);
@@ -597,7 +598,6 @@ let Workpackage3 = {
                         document.getElementById('quantity').value = quantity;
 
                     } else {
-                        mApp.unblock(".add-item");
 
 
                         toastr.success('Material has been created.', 'Success', {
