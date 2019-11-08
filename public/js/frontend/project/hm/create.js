@@ -1,6 +1,8 @@
 let Project = {
     init: function () {
         $('.add-project').on('click', function () {
+            mApp.block(".add-project");
+
             let data = new FormData();
             data.append("title", $('#project_title').val());
             data.append("customer_id", $('#customer').val());
@@ -45,6 +47,8 @@ let Project = {
                         document.getElementById('serial-number').value = data.getAll('aircraft_sn');
 
                     } else {
+                        mApp.unblock(".add-project");
+
                         toastr.success('Project has been created.', 'Success', {
                             timeOut: 5000
                         });

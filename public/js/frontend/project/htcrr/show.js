@@ -270,6 +270,8 @@ $('.m_taskcard_htcrr').on('click', function () {
 });
 
 $('.footer-manhour').on('click', '.add-manhour', function () {
+    mApp.block(".add-manhour");
+    
     let performa = $('#perfoma').val();
     let manhour = $('#total_mhrs').attr('value');
     manhour = parseFloat(manhour);
@@ -289,6 +291,7 @@ $('.footer-manhour').on('click', '.add-manhour', function () {
         success: function (data) {
             if (data.errors) {
             } else {
+                mApp.unblock(".add-manhour");
 
                 toastr.success('Manhours Propotion has been created.', 'Success', {
                     timeOut: 5000

@@ -459,6 +459,8 @@ let Workpackage = {
         });
 
         $('.footer').on('click', '.add-engineer', function () {
+            mApp.block(".add-engineer");
+
             let engineer_qty = [], engineer_skills = [], engineer = [];
             $('#engineer_skills ').each(function() {
                 engineer_skills.push($(this).val());
@@ -521,6 +523,7 @@ let Workpackage = {
                 success: function (data) {
                     if (data.errors) {
                     } else {
+                        mApp.unblock(".add-engineer");
 
                         toastr.success('Engineer team has been created.', 'Success', {
                             timeOut: 5000
@@ -585,6 +588,8 @@ function htcrr_tool(triggeruuid) {
 
     $('.modal-footer').on('click', '.add-htcrr-tool', function (e) {
         e.stopImmediatePropagation();
+        mApp.block(".add-htcrr-tool");
+
         let htcrr_uuid = $("#htcrr_uuid_for_tool").val();
         let tool = $('#tool').val();
         let unit_tool = $('#unit_tool').val();
@@ -616,6 +621,7 @@ function htcrr_tool(triggeruuid) {
                     // document.getElementById('tool').value = tool;
                     // document.getElementById('quantity').value = quantity;
                 } else {
+                    mApp.unblock(".add-htcrr-tool");
 
                     toastr.success('Tool has been added to taskcard.', 'Success', {
                         timeOut: 5000
@@ -734,9 +740,10 @@ function htcrr_material(triggeruuid) {
 
 
     $('.modal-footer').on('click', '.add-htcrr-item', function (e) {
-        let htcrr_uuid = $("#htcrr_uuid_for_material").val();
-
         e.stopImmediatePropagation();
+        mApp.block(".add-htcrr-item");
+
+        let htcrr_uuid = $("#htcrr_uuid_for_material").val();
         let material = $('#material').val();
         let unit_material = $('#unit_material').val();
         let quantity = $('input[name=quantity_material]').val();
@@ -768,6 +775,7 @@ function htcrr_material(triggeruuid) {
                     // document.getElementById('quantity').value = quantity;
 
                 } else {
+                    mApp.unblock(".add-htcrr-item");
 
                     toastr.success('Material has been added to taskcard.', 'Success', {
                         timeOut: 5000
@@ -847,6 +855,8 @@ $('.m_taskcard_htcrr').on('click', function () {
 });
 
 $('.footer-manhour').on('click', '.add-manhour', function () {
+    mApp.block(".add-manhour");
+
     let performa = $('#perfoma').val();
     let manhour = $('#total_mhrs').attr('value');
     manhour = parseFloat(manhour);
@@ -866,6 +876,7 @@ $('.footer-manhour').on('click', '.add-manhour', function () {
         success: function (data) {
             if (data.errors) {
             } else {
+                mApp.unblock(".add-manhour");
 
                 toastr.success('Manhours Propotion has been created.', 'Success', {
                     timeOut: 5000

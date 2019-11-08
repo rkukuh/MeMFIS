@@ -183,6 +183,7 @@ let Workpackage = {
         });
 
         $('.modal-footer').on('click', '.add-htcrr', function () {
+            mApp.block(".add-htcrr");
 
             let pn = $('#item').val();
             let position = $('input[name=position]').val();
@@ -217,6 +218,8 @@ let Workpackage = {
                 success: function (data) {
                     if (data.errors) {
                     } else {
+                        mApp.unblock(".add-htcrr");
+
 
                         toastr.success('HT/CRR has been created.', 'Success', {
                             timeOut: 5000
@@ -401,6 +404,8 @@ let Workpackage = {
         });
 
         $('.footer').on('click', '.add-engineer', function () {
+            mApp.block(".add-engineer");
+
             let engineer_qty = [], engineer_skills = [], engineer = [];
             $('#engineer_skills ').each(function() {
                 engineer_skills.push($(this).val());
@@ -463,6 +468,7 @@ let Workpackage = {
                 success: function (data) {
                     if (data.errors) {
                     } else {
+                        mApp.unblock(".add-engineer");
 
                         toastr.success('Engineer team has been created.', 'Success', {
                             timeOut: 5000
@@ -474,6 +480,8 @@ let Workpackage = {
         });
 
         $('.footer').on('click', '.add-facility', function () {
+            mApp.block(".add-facility");
+
             let facility_array = [];
             $('select[name^=facility]').each(function (i) {
                 facility_array[i] = $(this).val();
@@ -492,6 +500,7 @@ let Workpackage = {
                 success: function (data) {
                     if (data.errors) {
                     } else {
+                        mApp.unblock(".add-facility");
 
                         toastr.success('Facility has been created.', 'Success', {
                             timeOut: 5000

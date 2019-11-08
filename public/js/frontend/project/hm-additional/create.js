@@ -325,6 +325,8 @@ let AdditionalTaskCreate = (function() {
             });
 
             $('.add-project-additional').on('click', function () {
+                mApp.block(".add-project-additional");
+
                 let data = new FormData();
                 data.append("defectcard_uuid", UUID);
                 data.append("title", $("#additional_project_title").val());
@@ -346,6 +348,8 @@ let AdditionalTaskCreate = (function() {
                         if (data.errors) {
 
                         } else {
+                            mApp.unblock(".add-project-additional");
+
                             toastr.success('Project Aditional has been created.', 'Success', {
                                 timeOut: 5000
                             });

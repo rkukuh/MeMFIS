@@ -150,6 +150,8 @@ let Project = {
         })
 
         $('#project_datatable').on('click', '.select-workpackage', function () {
+            mApp.block(".select-workpackage");
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -184,6 +186,8 @@ let Project = {
                         document.getElementById('reg').value = data.getAll('aircraft_register');
                         document.getElementById('serial-number').value = data.getAll('aircraft_sn');
                     } else {
+                        mApp.unblock(".select-workpackage");
+
                         $('#modal_project').modal('hide');
 
                         toastr.success('Work Package has been created.', 'Success',  {
@@ -259,6 +263,8 @@ let Project = {
         });
 
         $('.add-blank-workpackage').on('click', function () {
+            mApp.block(".add-blank-workpackage");
+
             let registerForm = $('#BlankWorkpackageForm');
             let applicability_airplane = $('#applicability_airplane').val();
             let title = $('#title').val();
@@ -286,6 +292,8 @@ let Project = {
                             document.getElementById('title').value = title;
                         }
                     } else {
+                        mApp.unblock(".add-blank-workpackage");
+
                         toastr.success('Project has been created.', 'Success', {
                             timeOut: 5000
                         });
@@ -383,6 +391,8 @@ let Project = {
         });
 
         $('.update-project').on('click', function () {
+            mApp.block(".update-project");
+
             let data = new FormData();
             data.append("title", $('#project_title').val());
             data.append("customer_id", $('#customer').val());
@@ -428,6 +438,8 @@ let Project = {
                         document.getElementById('serial-number').value = data.getAll('aircraft_sn');
 
                     } else {
+                        mApp.unblock(".update-project");
+
                         toastr.success('Project has been created.', 'Success', {
                             timeOut: 5000
                         });

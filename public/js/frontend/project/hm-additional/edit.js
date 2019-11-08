@@ -448,6 +448,8 @@ let AdditionalTaskCreate = (function() {
             });
 
             $('.add-project-additional').on('click', function () {
+                mApp.block(".add-project-additional");
+
                 let data = new FormData();
                 data.append("defectcard_uuid", UUID);
                 data.append("title", $("#additional_project_title").val());
@@ -470,6 +472,8 @@ let AdditionalTaskCreate = (function() {
                         if (data.errors) {
 
                         } else {
+                            mApp.unblock(".add-project-additional");
+
                             toastr.success('Defectcard has been created.', 'Success', {
                                 timeOut: 5000
                             });
@@ -489,6 +493,8 @@ let AdditionalTaskCreate = (function() {
                 });
             });
             $('.delete-project-additional').on('click', function () {
+                mApp.block(".delete-project-additional");
+
                 let data = new FormData();
                 data.append("defectcard_uuid", UUID_Selected);
 
@@ -506,6 +512,8 @@ let AdditionalTaskCreate = (function() {
                         if (data.errors) {
 
                         } else {
+                            mApp.unblock(".delete-project-additional");
+
                             toastr.success('Defectcard Aditional has been deleted.', 'Success', {
                                 timeOut: 5000
                             });
@@ -537,6 +545,8 @@ jQuery(document).ready(function () {
 });
 
 $('.footer-additional').on('click', '.update-additional-data', function () {
+    mApp.block(".update-additional-data");
+
     let total_manhours = $("#estimation_manhour").attr('value');
     let additional_project_title = $("#additional_project_title").val();
     let performance_factor = $("#performance_factor").val();
@@ -563,6 +573,8 @@ $('.footer-additional').on('click', '.update-additional-data', function () {
                 // document.getElementById('customer').value = data.getAll('customer_id');
 
             } else {
+                mApp.unblock(".update-additional-data");
+
                 toastr.success('Project Additional has been Updated.', 'Success', {
                     timeOut: 5000
                 });
