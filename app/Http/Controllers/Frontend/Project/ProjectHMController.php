@@ -57,7 +57,7 @@ class ProjectHMController extends Controller
         if ($request->hasFile('fileInput')) {
             $destination = 'project/hm/workOrder';
             $fileName = $request->file('fileInput')->getClientOriginalName();
-            $fileUpload = Storage::disk('public')->putFileAs($destination,$request->file('fileInput'), $fileName);
+            $fileUpload = Storage::disk('s3')->putFileAs($destination,$request->file('fileInput'), $fileName);
         }
 
         return response()->json($project);
@@ -113,7 +113,7 @@ class ProjectHMController extends Controller
         if ($request->hasFile('fileInput')) {
             $destination = 'project/hm/workOrder';
             $fileName = $request->file('fileInput')->getClientOriginalName();
-            $fileUpload = Storage::disk('public')->putFileAs($destination,$request->file('fileInput'), $fileName);
+            $fileUpload = Storage::disk('s3')->putFileAs($destination,$request->file('fileInput'), $fileName);
         }
 
         return response()->json($project);

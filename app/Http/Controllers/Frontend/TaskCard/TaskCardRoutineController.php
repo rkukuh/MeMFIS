@@ -335,7 +335,7 @@ class TaskCardRoutineController extends Controller
                 $data = $request->input('image');
                 $photo = $request->file('fileInput')->getClientOriginalName();
                 $destination = 'master/taskcard/routine/';
-                $stat = Storage::disk('public')->putFileAs($destination,$request->file('fileInput'), $photo);
+                $stat = Storage::disk('s3')->put($destination,$request->file('fileInput'), $photo);
             }
 
             return response()->json($taskCard);
@@ -379,6 +379,17 @@ class TaskCardRoutineController extends Controller
 
     public function createTaskcard($request)
     {
+        if ($request->hasFile('fileInput')) {
+            //Store $filenametostore in the database
+            $data = $request->input('image');
+            $photo = $request->file('fileInput')->getClientOriginalName();
+            $destination = 'master/taskcard/routine/';
+            $stat = Storage::disk('s3')->put($destination,$request->file('fileInput'), $photo);
+
+            return response()->json($stat);
+        }
+
+
         $accesses = $zones = $additionals = [];
 
         $additionals["internal_number"] = $request->additionals->internal_number;
@@ -465,13 +476,6 @@ class TaskCardRoutineController extends Controller
                         ]));
                     }
                 }
-            }
-
-            if ($request->hasFile('fileInput')) {
-                $data = $request->input('image');
-                $photo = $request->file('fileInput')->getClientOriginalName();
-                $destination = 'master/taskcard/routine/';
-                $stat = Storage::disk('public')->putFileAs($destination,$request->file('fileInput'), $photo);
             }
 
             if($request->station){

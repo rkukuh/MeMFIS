@@ -253,7 +253,7 @@ let Aircraft = {
                         type: 'POST',
                         url: '/project/' + project_uuid + '/approve',
                         success: function (data) {
-                            toastr.success('Quotation has been approved.', 'Approved', {
+                            toastr.success('Project has been approved.', 'Approved', {
                                     timeOut: 5000
                                 }
                             );
