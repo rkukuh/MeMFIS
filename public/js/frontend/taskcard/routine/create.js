@@ -55,6 +55,8 @@ let TaskCard = {
         });
 
         $('.footer').on('click', '.add-taskcard', function () {
+            mApp.block(".add-taskcard");
+                
             let status = true;
             let access = [];
             let i = 0;
@@ -240,11 +242,12 @@ let TaskCard = {
 
                     } else {
 
+                        mApp.unblock(".add-taskcard");  
                         toastr.success('Taskcard has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/taskcard-routine/' + response.uuid + '/edit';
+                        window.location.href = '/taskcard-routine/' + response.uuid + '/edit';
                     }
                 },
                 error: function (jqXhr, json, errorThrown) {

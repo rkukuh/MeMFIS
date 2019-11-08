@@ -335,7 +335,7 @@ class TaskCardRoutineController extends Controller
                 $data = $request->input('image');
                 $photo = $request->file('fileInput')->getClientOriginalName();
                 $destination = 'master/taskcard/routine/';
-                $stat = Storage::disk('s3')->put($destination,$request->file('fileInput'), $photo);
+                $stat = Storage::disk('s3')->putFileAs($destination,$request->file('fileInput'), $photo);
             }
 
             return response()->json($taskCard);
@@ -379,16 +379,7 @@ class TaskCardRoutineController extends Controller
 
     public function createTaskcard($request)
     {
-        if ($request->hasFile('fileInput')) {
-            //Store $filenametostore in the database
-            $data = $request->input('image');
-            $photo = $request->file('fileInput')->getClientOriginalName();
-            $destination = 'master/taskcard/routine/';
-            $stat = Storage::disk('s3')->put($destination,$request->file('fileInput'), $photo);
-
-            return response()->json($stat);
-        }
-
+        
 
         $accesses = $zones = $additionals = [];
 
@@ -490,6 +481,42 @@ class TaskCardRoutineController extends Controller
                     }
                 }
             }
+
+            if($request->hasFile('fileInput')) {
+     
+                //get filename without extension
+                $filename = $request->file('fileInput')->getClientOriginalName();
+         
+                //filename to store
+                $directory = 'master/taskcard/routine';
+         
+                //Upload File to s3
+                $key = Storage::disk('s3')->putFileAs($directory, $request->file('fileInput'), $filename);
+    
+                //todo: save file information into file table
+    
+                // // how to get url to view or download files
+                // $s3 = Storage::disk('s3');
+                // $client = $s3->getDriver()->getAdapter()->getClient();
+                // $bucket = 'memfis3';//Config::get('filesystems.disks.s3.bucket');
+    
+                // $command = $client->getCommand('GetObject', [
+                //     'Bucket' => $bucket,
+                //     'Key' => $key
+                // ]);
+    
+                // $request = $client->createPresignedRequest($command, '+20 minutes');
+    
+                // $url = $request->getUri();
+                // // return (string) $request->getUri();
+                // // return response()->download($url);
+                // return view('frontend.testing.view-file',[
+                //     'url' => $url
+                // ]);
+    
+                //Store $filenametostore in the database
+            }
+            
             return response()->json($taskcard);
         }else{
             // TODO: Return error message as JSON
