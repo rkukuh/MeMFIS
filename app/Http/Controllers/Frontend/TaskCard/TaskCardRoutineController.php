@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend\TaskCard;
+use Config;
 
 use App\Models\Type;
 use App\Models\Zone;
@@ -10,7 +11,6 @@ use App\Models\Station;
 use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\Threshold;
-use App\Helpers\DocumentNumber;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardRoutineStore;
@@ -498,7 +498,7 @@ class TaskCardRoutineController extends Controller
                 // // how to get url to view or download files
                 // $s3 = Storage::disk('s3');
                 // $client = $s3->getDriver()->getAdapter()->getClient();
-                // $bucket = 'memfis3';//Config::get('filesystems.disks.s3.bucket');
+                // $bucket = Config::get('filesystems.disks.s3.bucket');
     
                 // $command = $client->getCommand('GetObject', [
                 //     'Bucket' => $bucket,
