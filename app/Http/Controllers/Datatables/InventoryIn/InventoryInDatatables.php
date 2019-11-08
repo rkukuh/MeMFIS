@@ -20,9 +20,10 @@ class InventoryInDatatables extends Controller
         $inventories = InventoryIn::with('storage', 'items', 'approvals')->get();
 
         foreach ($inventories as $inventory) {
+            $inventory->status .= 'Open';
 
             if (!empty($inventory->approvals->first())) {
-                $inventory->status .= 'Approved';
+                $inventory->status = 'Approved';
 
                 if (isset($inventory->approvals)) {
                     $conducted_by  = User::find($inventory->approvals->first()->conducted_by);

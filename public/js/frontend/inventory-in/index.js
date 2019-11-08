@@ -114,7 +114,7 @@ let InventoryIn = {
                 },
                 {
                     field: '',
-                    title: 'Returned By',
+                    title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
