@@ -459,6 +459,8 @@ let Workpackage = {
         });
 
         $('.footer').on('click', '.add-engineer', function () {
+            mApp.block(".add-engineer");
+
             let engineer_qty = [], engineer_skills = [], engineer = [];
             $('#engineer_skills ').each(function() {
                 engineer_skills.push($(this).val());
@@ -519,6 +521,7 @@ let Workpackage = {
                     tat: tat,
                 },
                 success: function (data) {
+                    mApp.unblock(".add-engineer");
                     if (data.errors) {
                     } else {
 
@@ -585,6 +588,8 @@ function htcrr_tool(triggeruuid) {
 
     $('.modal-footer').on('click', '.add-htcrr-tool', function (e) {
         e.stopImmediatePropagation();
+        mApp.block(".add-htcrr-tool");
+
         let htcrr_uuid = $("#htcrr_uuid_for_tool").val();
         let tool = $('#tool').val();
         let unit_tool = $('#unit_tool').val();
@@ -605,6 +610,7 @@ function htcrr_tool(triggeruuid) {
                 note: remark_tool,
             },
             success: function (data) {
+                mApp.unblock(".add-htcrr-tool");
                 if (data.errors) {
                     if (data.errors.uom) {
                         $('#unit_material-error').html(data.errors.uom[0]);
@@ -734,9 +740,10 @@ function htcrr_material(triggeruuid) {
 
 
     $('.modal-footer').on('click', '.add-htcrr-item', function (e) {
-        let htcrr_uuid = $("#htcrr_uuid_for_material").val();
-
         e.stopImmediatePropagation();
+        mApp.block(".add-htcrr-item");
+
+        let htcrr_uuid = $("#htcrr_uuid_for_material").val();
         let material = $('#material').val();
         let unit_material = $('#unit_material').val();
         let quantity = $('input[name=quantity_material]').val();
@@ -756,6 +763,7 @@ function htcrr_material(triggeruuid) {
                 note: remark_material,
             },
             success: function (data) {
+                mApp.unblock(".add-htcrr-item");
                 if (data.errors) {
                     if (data.errors.uom) {
                         $('#unit_material-error').html(data.errors.uom[0]);
@@ -847,6 +855,8 @@ $('.m_taskcard_htcrr').on('click', function () {
 });
 
 $('.footer-manhour').on('click', '.add-manhour', function () {
+    mApp.block(".add-manhour");
+
     let performa = $('#perfoma').val();
     let manhour = $('#total_mhrs').attr('value');
     manhour = parseFloat(manhour);
@@ -864,6 +874,7 @@ $('.footer-manhour').on('click', '.add-manhour', function () {
             total: total,
         },
         success: function (data) {
+            mApp.unblock(".add-manhour");
             if (data.errors) {
             } else {
 

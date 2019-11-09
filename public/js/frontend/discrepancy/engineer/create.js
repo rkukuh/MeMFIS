@@ -224,10 +224,7 @@ let helper = {
         } );
 
         $('.add_helper').on('click', function () {
-            mApp.block(".add_helper", {}),
-            setTimeout(function() {
-                mApp.unblock(".add_helper");
-            }, 2e3);
+            mApp.block(".add_helper");
             let addedHelpers = helper.column(0).data();
             let fname = $("#defectcard_helper option:selected").text();
             let defectcard_helper = $('#defectcard_helper').val();
@@ -248,6 +245,7 @@ let helper = {
                     timeOut: 5000
                 });
             }
+            mApp.unblock(".add_helper");
         });
 
         $('#helper_datatable tbody').on( 'click', 'tr', function () {

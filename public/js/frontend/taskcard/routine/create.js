@@ -55,6 +55,8 @@ let TaskCard = {
         });
 
         $('.footer').on('click', '.add-taskcard', function () {
+            mApp.block(".add-taskcard");
+                
             let status = true;
             let access = [];
             let i = 0;
@@ -179,6 +181,7 @@ let TaskCard = {
                 contentType: false,
 
                 success: function (response) {
+                    mApp.unblock(".add-taskcard");  
                     if (response.errors) {
                         if (response.errors.title) {
                             $('#title-error').html(response.errors.title[0]);
@@ -244,7 +247,7 @@ let TaskCard = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/taskcard-routine/' + response.uuid + '/edit';
+                        window.location.href = '/taskcard-routine/' + response.uuid + '/edit';
                     }
                 },
                 error: function (jqXhr, json, errorThrown) {

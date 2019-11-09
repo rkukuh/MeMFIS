@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend\TaskCard;
+use Config;
 
 use App\Models\Type;
 use App\Models\Zone;
@@ -10,7 +11,6 @@ use App\Models\Station;
 use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\Threshold;
-use App\Helpers\DocumentNumber;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardRoutineStore;
@@ -75,7 +75,7 @@ class TaskCardRoutineController extends Controller
     {
         $this->decoder($request);
         // $aircrafts = Aircraft::whereIn('id', $request->applicability_airplane)->pluck('id');
-
+        
         $checker = [];
         // get all the taskcard with the same number
         $taskcards = TaskCard::where('number', $request->number)->get();
@@ -85,14 +85,14 @@ class TaskCardRoutineController extends Controller
                 $taskcard->additionals = json_decode($taskcard->additionals);
                 $zones = $taskcard->zones()->pluck('name')->toArray();
 
-                // check if the internal number are the same
+                // check if the internal number are the same 
                 if($request->additionals->internal_number == $taskcard->additionals->internal_number){
                     // TODO : check even they are have the same zone's name but have a diffrent airplane type, it's okay
                     //check if the zones got any diffrents if yes (not empty), it's okay, if not (empty), then it's identical taskcard
                     $diff = array_diff( $request->zone , $zones);
                     array_push($checker, empty($diff));
                 }
-            }
+            }  
         }else{
             $taskcard = $this->createTaskcard($request);
 
@@ -177,7 +177,7 @@ class TaskCardRoutineController extends Controller
 
         foreach($taskCard->zones as $i => $zone_taskcard){
             $zone_taskcards[$i] =  $zone_taskcard->id;
-
+            
         }
 
         foreach($taskCard->related_to as $i => $relation_taskcard){
@@ -229,7 +229,7 @@ class TaskCardRoutineController extends Controller
     {
         $this->decoder($request);
         $accesses = $zones = $additionals = [];
-
+        
         $additionals["internal_number"] = $request->additionals->internal_number;
         $additionals["document_library"] = $request->document_library;
         $request->merge(['additionals' => json_encode($additionals, true)]);
@@ -335,7 +335,7 @@ class TaskCardRoutineController extends Controller
                 $data = $request->input('image');
                 $photo = $request->file('fileInput')->getClientOriginalName();
                 $destination = 'master/taskcard/routine/';
-                $stat = Storage::disk('s3')->put($destination,$request->file('fileInput'), $photo);
+                $stat = Storage::disk('s3')->putFileAs($destination,$request->file('fileInput'), $photo);
             }
 
             return response()->json($taskCard);
@@ -374,11 +374,13 @@ class TaskCardRoutineController extends Controller
     }
 
     /**
-     * create taskcard
+     * create taskcard 
      */
 
     public function createTaskcard($request)
     {
+        
+
         $accesses = $zones = $additionals = [];
 
         $additionals["internal_number"] = $request->additionals->internal_number;
@@ -390,7 +392,7 @@ class TaskCardRoutineController extends Controller
                 ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
             );
         }
-
+       
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
 
@@ -480,13 +482,41 @@ class TaskCardRoutineController extends Controller
                 }
             }
 
-            if ($request->hasFile('fileInput')) {
+            if($request->hasFile('fileInput')) {
+     
+                //get filename without extension
+                $filename = $request->file('fileInput')->getClientOriginalName();
+         
+                //filename to store
+                $directory = 'master/taskcard/routine';
+         
+                //Upload File to s3
+                $key = Storage::disk('s3')->putFileAs($directory, $request->file('fileInput'), $filename);
+    
+                //todo: save file information into file table
+    
+                // // how to get url to view or download files
+                // $s3 = Storage::disk('s3');
+                // $client = $s3->getDriver()->getAdapter()->getClient();
+                // $bucket = Config::get('filesystems.disks.s3.bucket');
+    
+                // $command = $client->getCommand('GetObject', [
+                //     'Bucket' => $bucket,
+                //     'Key' => $key
+                // ]);
+    
+                // $request = $client->createPresignedRequest($command, '+20 minutes');
+    
+                // $url = $request->getUri();
+                // // return (string) $request->getUri();
+                // // return response()->download($url);
+                // return view('frontend.testing.view-file',[
+                //     'url' => $url
+                // ]);
+    
                 //Store $filenametostore in the database
-                // $data = $request->input('image');
-                $destination = 'master/taskcard/routine/';
-                $photo = $request->file('fileInput')->getClientOriginalName();
-                $stat = Storage::disk('s3')->putFileAs($destination,$request->file('fileInput'), $photo);
             }
+            
             return response()->json($taskcard);
         }else{
             // TODO: Return error message as JSON
