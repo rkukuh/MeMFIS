@@ -57,12 +57,18 @@
         width:100%;
         margin-top:220px;
     }
+    #content3{
+        margin-top:30px;
+    }
 
-    #content3 table tr td{
-      border-left:  1px solid  #d4d7db;
-      border-right:  1px solid  #d4d7db;
-      border-top:  1px solid  #d4d7db;
-      border-bottom:  1px solid  #d4d7db;
+    #content3 .head-table{
+        border-top:  2px solid  #d4d7db;
+        border-bottom:  2px solid  #d4d7db;
+    }
+
+    #content3 .body-table{
+        height: 175px;
+        border-bottom:  2px solid  #d4d7db;
     }
 
     #content4 .body{
@@ -190,7 +196,7 @@
             </div>
         </div>
         
-        <div id="content3">
+        {{-- <div id="content3">
             <table width="100%" cellpadding="6">
                 <tr style="background:#f7dd16;">
                     <th valign="top" align="center">No</th>
@@ -213,6 +219,36 @@
                     <td valign="top">Remark</td>
                 </tr>
             </table>
+        </div> --}}
+        <div id="content3">
+            <div class="head-table">
+                <table width="100%" cellpadding="3">
+                    <tr>
+                        <th valign="top" align="center" width="5%">No</th>
+                        <th valign="top" align="center" width="16%">P/N</th>
+                        <th valign="top" align="center" width="16%">Serial No.</th>
+                        <th valign="top" align="center" width="24%">Item Description</th>
+                        <th valign="top" align="center" width="7%">Qty</th>
+                        <th valign="top" align="center" width="7%">Unit</th>
+                        <th valign="top" align="center" width="14%">Expired Date</th>
+                        <th valign="top" align="center" width="11%">Location</th>
+                    </tr>
+                </table>
+            </div>
+            <div class="body-table">
+                <table width="100%" cellpadding="3">
+                    <tr>
+                        <td valign="top" align="center" width="5%">1</td>
+                        <td valign="top" align="center" width="16%">P/N 1232</td>
+                        <td valign="top" align="center" width="16%">2</td>
+                        <td valign="top" width="24%">Lorem, ipsum dolor sit amet consec</td>
+                        <td valign="top" align="center" width="7%">Bot</td>
+                        <td valign="top" align="center" width="7%">12.000</td>
+                        <td valign="top" align="center" width="14%">24.000</td>
+                        <td valign="top" align="center" width="11%">12%</td>
+                    </tr>
+                </table>
+            </div>  
         </div>
     
         <div id="content4">
