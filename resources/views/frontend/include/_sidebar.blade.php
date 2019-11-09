@@ -533,6 +533,12 @@
                         <span class="m-menu__link-text">Journal</span>
                     </a>
                 </li>
+                <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                    <a href="/supplier-invoice" class="m-menu__link m-menu__toggle">
+                        <i class="m-menu__link-icon flaticon-list-3"></i>
+                        <span class="m-menu__link-text">Supplier Invoice</span>
+                    </a>
+                </li>
             @endrole
 
             @hasanyrole('admin|scm')
