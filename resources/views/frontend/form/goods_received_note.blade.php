@@ -195,31 +195,6 @@
                 </table>
             </div>
         </div>
-        
-        {{-- <div id="content3">
-            <table width="100%" cellpadding="6">
-                <tr style="background:#f7dd16;">
-                    <th valign="top" align="center">No</th>
-                    <th valign="top" align="center">P/N</th>
-                    <th valign="top" align="center">Serial No.</th>
-                    <th valign="top" align="center">Item Description</th>
-                    <th valign="top" align="center">Qty</th>
-                    <th valign="top" align="center">Unit</th>
-                    <th valign="top" align="center">Expired Date</th>
-                    <th valign="top" align="center">Location</th>
-                </tr>
-                <tr>
-                    <td valign="top" align="center">1</td>
-                    <td valign="top" align="center">Pr-12312</td>
-                    <td valign="top" align="center">11</th>
-                    <td valign="top" align="center">Lorem ipsum dolor, sit amet consectetur </td>
-                    <td valign="top" align="center">Bot</td>
-                    <td valign="top" align="center">Bot</td>
-                    <td valign="top" align="center">Bot</td>
-                    <td valign="top">Remark</td>
-                </tr>
-            </table>
-        </div> --}}
         <div id="content3">
             <div class="head-table">
                 <table width="100%" cellpadding="3">
@@ -250,7 +225,6 @@
                 </table>
             </div>  
         </div>
-    
         <div id="content4">
             <div style="margin:0 12px">
                 <p style="font-size:14px;">Remark :</p>
