@@ -583,7 +583,7 @@
 <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 <script src="{{ asset('js/frontend/quotation/workpackage-edit.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/edit.js') }}"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('/assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/scheduled-payment.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/repeater.js') }}"></script>
 

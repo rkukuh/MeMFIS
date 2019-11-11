@@ -4,6 +4,26 @@ Route::name('testing.')->group(function () {
 
     Route::group(['prefix' => '_test'], function () {
 
+        Route::get('/view/files', function() {
+            $key = 'master/taskcard/routine/Progress Report 6 Nop 2019.pdf';
+            $s3 = Storage::disk('s3');
+            $client = $s3->getDriver()->getAdapter()->getClient();
+            $bucket = Config::get('filesystems.disks.s3.bucket');
+
+            $command = $client->getCommand('GetObject', [
+                'Bucket' => $bucket,
+                'Key' => $key
+            ]);
+
+            $request = $client->createPresignedRequest($command, '+20 minutes');
+
+            $url = $request->getUri();
+            // return (string) $request->getUri();
+            
+            return view('frontend.testing.view-file',[
+                'url' => $url
+            ]);
+        });
         Route::get('/po', function () {
             // $po = App\Models\PurchaseOrder::find(16);
 

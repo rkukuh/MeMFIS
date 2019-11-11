@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                    
+
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
                             </div>
@@ -193,7 +193,6 @@
 
     <script src="{{ asset('js/frontend/functions/action-botton/unit-type.js')}}"></script>
     <script src="{{ asset('js/frontend/price-list/index.js')}}"></script>
-    <script src="{{ asset('js/frontend/common/item.js') }}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 
 @endpush

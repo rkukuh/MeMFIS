@@ -29,7 +29,7 @@ let Vendor = {
             type_phone_array = type_phone_array.filter(function (el) {
 
                 return el != null && el != "";
-        
+
             });
 
             let fax_array = [];
@@ -49,7 +49,7 @@ let Vendor = {
             type_fax_array = type_fax_array.filter(function (el) {
 
                 return el != null && el != "";
-        
+
             });
 
             let email_array = [];
@@ -65,11 +65,11 @@ let Vendor = {
                     type_email_array[i] = $(this).val();
                 }
             });
-            
+
             type_email_array = type_email_array.filter(function (el) {
 
                 return el != null && el != "";
-            
+
             });
 
 
@@ -139,7 +139,7 @@ let Vendor = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/vendor',
+                url: '/supplier',
                 // cache: false,
                 // processData: false,
                 // contentType: false,
@@ -193,7 +193,7 @@ let Vendor = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/vendor/' + data.uuid + '/edit';
+                        window.location.href = '/supplier/' + data.uuid + '/edit';
 
                     }
                 }

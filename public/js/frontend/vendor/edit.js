@@ -85,7 +85,7 @@ let Vendor = {
             type_phone_array = type_phone_array.filter(function (el) {
 
                 return el != null && el != "";
-            
+
                 });
 
             let fax_array = [];
@@ -104,7 +104,7 @@ let Vendor = {
             type_fax_array = type_fax_array.filter(function (el) {
 
                 return el != null && el != "";
-            
+
                 });
 
             let website_array = [];
@@ -135,7 +135,7 @@ let Vendor = {
             type_email_array = type_email_array.filter(function (el) {
 
                 return el != null && el != "";
-            
+
                 });
 
             let document_array = [];
@@ -197,7 +197,7 @@ let Vendor = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/customer/' + customer_uuid,
+                url: '/supplier/' + customer_uuid,
                 data: {
                     _token: $('input[name=_token]').val(),
                     // code: code,

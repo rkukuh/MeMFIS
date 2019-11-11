@@ -735,6 +735,7 @@ let Workpackage = {
         });
 
         let show = $('.m_datatable').on('click', '.show', function () {
+
             $('#button').hide();
             $('#simpan').text('Perbarui');
 

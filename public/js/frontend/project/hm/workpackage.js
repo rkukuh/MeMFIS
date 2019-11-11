@@ -183,6 +183,7 @@ let Workpackage = {
         });
 
         $('.modal-footer').on('click', '.add-htcrr', function () {
+            mApp.block(".add-htcrr");
 
             let pn = $('#item').val();
             let position = $('input[name=position]').val();
@@ -215,8 +216,10 @@ let Workpackage = {
                     installation_manhour_estimation: installation,
                 },
                 success: function (data) {
+                    mApp.unblock(".add-htcrr");
                     if (data.errors) {
                     } else {
+
 
                         toastr.success('HT/CRR has been created.', 'Success', {
                             timeOut: 5000
@@ -401,6 +404,8 @@ let Workpackage = {
         });
 
         $('.footer').on('click', '.add-engineer', function () {
+            mApp.block(".add-engineer");
+
             let engineer_qty = [], engineer_skills = [], engineer = [];
             $('#engineer_skills ').each(function() {
                 engineer_skills.push($(this).val());
@@ -461,6 +466,7 @@ let Workpackage = {
                     tat: tat,
                 },
                 success: function (data) {
+                    mApp.unblock(".add-engineer");
                     if (data.errors) {
                     } else {
 
@@ -474,6 +480,8 @@ let Workpackage = {
         });
 
         $('.footer').on('click', '.add-facility', function () {
+            mApp.block(".add-facility");
+
             let facility_array = [];
             $('select[name^=facility]').each(function (i) {
                 facility_array[i] = $(this).val();
@@ -490,6 +498,7 @@ let Workpackage = {
                     facility_array: facility_array,
                 },
                 success: function (data) {
+                    mApp.unblock(".add-facility");
                     if (data.errors) {
                     } else {
 

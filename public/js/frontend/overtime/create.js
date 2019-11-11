@@ -8,7 +8,7 @@ let Employee = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50 ],
             pageLength:5,
-            ajax: "/datatables/employee",
+            ajax: "/datatables/employee/modal",
             columns: [
                 {
                     data: "code"
