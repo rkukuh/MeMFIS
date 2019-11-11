@@ -183,50 +183,116 @@ class JobCardMechanicController extends Controller
      */
     public function update(JobCardUpdate $request, JobCard $jobcard)
     {
-        // $last_action = Progress::where('progressed_by', Auth::id())->orderBy('created_at', 'DESC')->first();
-        // if(Status::where('id',$last_action->status_id)->first()->code == 'progress'){
-        //     $error_notification = array(
-        //         'message' => "You can't run this jobcard",
-        //         'title' => "Danger",
-        //         'alert-type' => "error"
-        //     );
-        //     return redirect()->back()->with($error_notification);
-        // }
-        if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
-            if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open"){
-                return redirect()->route('frontend.jobcard.index')->with($this->error_notification);
-            }else{
+        $last_action = Progress::where('progressed_by', Auth::id())->orderBy('created_at', 'DESC')->first();
+        if(!empty($last_action) && Status::where('id',$last_action->status_id)->first()->code == 'progress' ){
+            if($last_action->progressable_id == $jobcard->id  and $last_action->progressable_type == 'App\Models\JobCard' ){
+                if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
+                    $jobcard->progresses()->save(new Progress([
+                        'status_id' =>  $this->statuses->where('code','progress')->first()->id,
+                        'progressed_by' => Auth::id()
+                    ]));
+        
+                    if($request->helper){
+                        $helpers = Employee::whereIn('code',$request->helper)->pluck('id');
+                        $jobcard->helpers()->sync($helpers);
+                    }
+        
+                    return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
+                }
+                if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
+                    $jobcard->progresses()->save(new Progress([
+                        'status_id' =>  $this->statuses->where('code','pending')->first()->id,
+                        'reason_id' =>  Type::ofJobCardPauseReason()->where('uuid',$request->pause)->first()->id,
+                        'reason_text' =>  $request->reason,
+                        'progressed_by' => Auth::id()
+                    ]));
+        
+                    return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
+                }
+                if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
+        
+                    foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
+                        if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
+                            return redirect()->route('frontend.jobcard.index')->with($this->error_notification);
+                        }
+                    }
+        
+                    foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
+                        if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "closed" and $this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "open"){
+                            $jobcard->progresses()->save(new Progress([
+                                'status_id' =>  $this->statuses->where('code','closed')->first()->id,
+                                'reason_id' =>  Type::ofJobCardCloseReason()->where('uuid',$request->accomplishment)->first()->id,
+                                'reason_text' =>  $request->note,
+                                'progressed_by' =>  $key
+                            ]));
+                        }
+                    }
+        
+                    if($request->discrepancy == 1){
+                        return redirect()->route('frontend.discrepancy.jobcard.engineer.discrepancy',$jobcard->uuid);
+                    }
+                    else{
+                        return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
+                    }
+                }
+            }
+        }elseif(!empty($last_action) && Status::where('id',$last_action->status_id)->first()->code != 'progress' ){
+            if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
                 $jobcard->progresses()->save(new Progress([
                     'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                     'progressed_by' => Auth::id()
                 ]));
+    
+                if($request->helper){
+                    $helpers = Employee::whereIn('code',$request->helper)->pluck('id');
+                    $jobcard->helpers()->sync($helpers);
+                }
+    
                 return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
             }
-        }
-        if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
-            $jobcard->progresses()->save(new Progress([
-                'status_id' =>  $this->statuses->where('code','pending')->first()->id,
-                'reason_id' =>  Type::ofJobCardPauseReason()->where('uuid',$request->pause)->first()->id,
-                'reason_text' =>  $request->reason,
-                'progressed_by' => Auth::id()
-            ]));
-            return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
-        }
-        if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
-            $jobcard->progresses()->save(new Progress([
-                'status_id' =>  $this->statuses->where('code','closed')->first()->id,
-                'reason_id' =>  Type::ofJobCardCloseReason()->where('uuid',$request->accomplishment)->first()->id,
-                'reason_text' =>  $request->note,
-                'progressed_by' => Auth::id()
-            ]));
-
-            if($request->discrepancy == 1){
-                return redirect()->route('frontend.discrepancy.jobcard.mechanic.discrepancy',$jobcard->uuid);
-            }
-            else{
+            if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
+                $jobcard->progresses()->save(new Progress([
+                    'status_id' =>  $this->statuses->where('code','pending')->first()->id,
+                    'reason_id' =>  Type::ofJobCardPauseReason()->where('uuid',$request->pause)->first()->id,
+                    'reason_text' =>  $request->reason,
+                    'progressed_by' => Auth::id()
+                ]));
+    
                 return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
             }
-
+            if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
+    
+                foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
+                    if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
+                        return redirect()->route('frontend.jobcard.index')->with($this->error_notification);
+                    }
+                }
+    
+                foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
+                    if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "closed" and $this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "open"){
+                        $jobcard->progresses()->save(new Progress([
+                            'status_id' =>  $this->statuses->where('code','closed')->first()->id,
+                            'reason_id' =>  Type::ofJobCardCloseReason()->where('uuid',$request->accomplishment)->first()->id,
+                            'reason_text' =>  $request->note,
+                            'progressed_by' =>  $key
+                        ]));
+                    }
+                }
+    
+                if($request->discrepancy == 1){
+                    return redirect()->route('frontend.discrepancy.jobcard.engineer.discrepancy',$jobcard->uuid);
+                }
+                else{
+                    return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
+                }
+            }
+        }else{
+            $error_notification = array(
+                'message' => "You can't run this jobcard",
+                'title' => "Danger",
+                'alert-type' => "error"
+            );
+            return redirect()->back()->with($error_notification);
         }
     }
 

@@ -39,14 +39,14 @@ class TaskCardRoutineItemsController extends Controller
      */
     public function store(TaskCard $taskcard, TaskCardRoutineItemStore $request)
     {
-        $taskcard->items()->attach($taskcard->id, [
-            'item_id' => $request->item_id,
+        $request->merge(['item_id' => Item::where('uuid',$request->item_id)->first()->id]);
+        $taskcard->items()->attach($request->item_id, [
             'unit_id' => $request->unit_id,
             'quantity' => $request->quantity,
             'note' => $request->note
         ]);
 
-        return response()->json($taskcard);
+        // return response()->json($taskcard);
     }
 
     /**

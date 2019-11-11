@@ -355,6 +355,7 @@ class QuotationController extends Controller
                 'alert-type' => "error"
             );
             array_push($error_messages, $error_message);
+            return response()->json(['error' => $error_messages], '403');
         }
         // if( max($work_progress) != 100){
 
@@ -364,6 +365,7 @@ class QuotationController extends Controller
         //         'alert-type' => "error"
         //     );
         //     array_push($error_messages, $error_message);
+        // return response()->json(['error' => $error_messages], '403');
         // }
 
         if(sizeof($error_messages) > 0){

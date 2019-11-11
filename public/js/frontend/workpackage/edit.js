@@ -148,6 +148,8 @@ let Workpackage = {
         });
 
         $(".modal-footer").on("click", ".sequence", function() {
+            mApp.block(".sequence");
+
             triggeruuid = $("input[name=uuid]").val();
             sequence = $("input[name=sequence]").val();
 
@@ -166,8 +168,10 @@ let Workpackage = {
                     sequence: sequence
                 },
                 success: function(data) {
+                    mApp.unblock(".sequence");
                     if (data.errors) {
                     } else {
+
                         toastr.success(
                             "Sequence has been updated.",
                             "Success",
@@ -202,6 +206,8 @@ let Workpackage = {
         });
 
         $(".modal-footer").on("click", ".sequence-intruction", function() {
+            mApp.block(".sequence-intruction");
+
             triggeruuid = $("input[name=uuid-instruction]").val();
             sequence = $("input[name=sequence-instruction]").val();
 
@@ -221,8 +227,10 @@ let Workpackage = {
                     sequence: sequence
                 },
                 success: function(data) {
+                    mApp.unblock(".sequence-intruction");
                     if (data.errors) {
                     } else {
+
                         toastr.success(
                             "Instruction sequence has been updated.",
                             "Success",
@@ -261,6 +269,8 @@ let Workpackage = {
         });
 
         $(".basic_datatable").on("click", ".mandatory", function() {
+            mApp.block(".mandatory");
+
             triggeruuid = $(this).data("uuid");
             mandatory = $(this).data("mandatory");
             if (mandatory == 0) {
@@ -284,8 +294,10 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
+
                         toastr.success(
                             "Mandatory has been updated.",
                             "Success",
@@ -415,6 +427,8 @@ let Workpackage = {
         });
 
         $(".sip_datatable").on("click", ".mandatory", function() {
+            mApp.block(".mandatory");
+
             triggeruuid = $(this).data("uuid");
             mandatory = $(this).data("mandatory");
             if (mandatory == 0) {
@@ -438,8 +452,10 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
+
                         toastr.success(
                             "Mandatory has been updated.",
                             "Success",
@@ -549,6 +565,8 @@ let Workpackage = {
         });
 
         $(".cpcp_datatable").on("click", ".mandatory", function() {
+            mApp.block(".mandatory");
+
             triggeruuid = $(this).data("uuid");
             mandatory = $(this).data("mandatory");
             if (mandatory == 0) {
@@ -572,8 +590,10 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
+
                         toastr.success(
                             "Mandatory has been updated.",
                             "Success",
@@ -643,6 +663,8 @@ let Workpackage = {
         });
 
         $(".ad-sb_datatable").on("click", ".mandatory", function() {
+            mApp.block(".mandatory");
+
             triggeruuid = $(this).data("uuid");
             mandatory = $(this).data("mandatory");
             if (mandatory == 0) {
@@ -667,8 +689,10 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
+
                         toastr.success(
                             "Mandatory has been updated.",
                             "Success",
@@ -797,6 +821,8 @@ let Workpackage = {
         });
 
         $(".cmr-awl_datatable").on("click", ".mandatory", function() {
+            mApp.block(".mandatory");
+
             triggeruuid = $(this).data("uuid");
             mandatory = $(this).data("mandatory");
             if (mandatory == 0) {
@@ -823,6 +849,8 @@ let Workpackage = {
                 success: function(data) {
                     if (data.errors) {
                     } else {
+                        mApp.unblock(".mandatory");
+
                         toastr.success(
                             "Mandatory has been updated.",
                             "Success",
@@ -961,6 +989,8 @@ let Workpackage = {
         });
 
         $(".eo_datatable").on("click", ".mandatory", function() {
+            mApp.block(".mandatory");
+
             triggeruuid = $(this).data("uuid");
             mandatory = $(this).data("mandatory");
             if (mandatory == 0) {
@@ -985,8 +1015,10 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
+
                         toastr.success(
                             "Mandatory has been updated.",
                             "Success",
@@ -1154,6 +1186,8 @@ let Workpackage = {
         });
 
         $(".ea_datatable").on("click", ".mandatory", function() {
+            mApp.block(".mandatory");
+
             triggeruuid = $(this).data("uuid");
             mandatory = $(this).data("mandatory");
             if (mandatory == 0) {
@@ -1178,8 +1212,10 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
+
                         toastr.success(
                             "Mandatory has been updated.",
                             "Success",
@@ -1254,6 +1290,8 @@ let Workpackage = {
         }
 
         $("#instruction_datatable").on("click", ".select-instruction", function() {
+            mApp.block(".select-instruction");
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -1265,6 +1303,7 @@ let Workpackage = {
                     taskcard: $(this).data("uuid")
                 },
                 success: function(data) {
+                    mApp.unblock(".select-instruction");
                     if (data.errors) {
                         // if (data.errors.name) {
                         //     $('#name-error').html(data.errors.name[0]);
@@ -1276,6 +1315,7 @@ let Workpackage = {
                                 timeOut: 5000
                             });
                         } else {
+
                             $("#modal_instruction").modal("hide");
 
                             toastr.success("Instruction has been added.", "Success", {
@@ -1403,6 +1443,8 @@ let Workpackage = {
         });
 
         $(".si_datatable").on("click", ".mandatory", function() {
+            mApp.block(".mandatory");
+
             triggeruuid = $(this).data("uuid");
             mandatory = $(this).data("mandatory");
             if (mandatory == 0) {
@@ -1426,8 +1468,10 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
+
                         toastr.success(
                             "Mandatory has been updated.",
                             "Success",
@@ -1535,6 +1579,8 @@ let Workpackage = {
         });
 
         $(".preliminary_datatable").on("click", ".mandatory", function() {
+            mApp.block(".mandatory");
+
             triggeruuid = $(this).data("uuid");
             mandatory = $(this).data("mandatory");
             if (mandatory == 0) {
@@ -1558,8 +1604,10 @@ let Workpackage = {
                     is_mandatory: is_mandatory
                 },
                 success: function(data) {
+                    mApp.unblock(".mandatory");
                     if (data.errors) {
                     } else {
+
                         toastr.success(
                             "Mandatory has been updated.",
                             "Success",
@@ -1591,6 +1639,8 @@ let Workpackage = {
                 showCancelButton: true
             }).then(result => {
                 if (result.value) {
+                    mApp.block(".delete");
+
                     $.ajax({
                         headers: {
                             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -1604,6 +1654,8 @@ let Workpackage = {
                             "/taskcard/" +
                             triggeruuid,
                         success: function(data) {
+                            mApp.unblock(".delete");
+
                             toastr.success(
                                 "Taskcard has been deleted.",
                                 "Deleted",
@@ -1645,6 +1697,8 @@ let Workpackage = {
                 showCancelButton: true
             }).then(result => {
                 if (result.value) {
+                    mApp.block(".delete-instruction");
+
                     $.ajax({
                         headers: {
                             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -1659,6 +1713,8 @@ let Workpackage = {
                             triggeruuid+
                             "/instruction",
                         success: function(data) {
+                            mApp.unblock(".delete-instruction");
+
                             toastr.success(
                                 "Instruction has been deleted.",
                                 "Deleted",
@@ -1686,10 +1742,9 @@ let Workpackage = {
             });
         });
 
-        let simpan = $(".action-buttons").on(
-            "click",
-            ".add-workpackage.update",
-            function() {
+        let simpan = $(".action-buttons").on("click", ".add-workpackage.update", function() {
+                mApp.block(".delete-instruction");
+
                 let title = $("input[name=title]").val();
                 let applicability_airplane = $("#applicability_airplane").val();
                 let description = $("#description").val();
@@ -1710,6 +1765,7 @@ let Workpackage = {
                         is_template: "1"
                     },
                     success: function(data) {
+                        mApp.unblock(".delete-instruction");
                         if (data.errors) {
                             if (data.errors.aircraft_id) {
                                 $("#applicability-airplane-error").html(
@@ -1723,6 +1779,7 @@ let Workpackage = {
                             // document.getElementById('applicability-airplane').value = applicability-airplane;
                             // document.getElementById('title').value = title;
                         } else {
+
                             // $('#modal_customer').modal('hide');
 
                             toastr.success(

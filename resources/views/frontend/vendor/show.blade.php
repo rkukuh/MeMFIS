@@ -17,7 +17,7 @@
                     -
                 </li>
                 <li class="m-nav__item">
-                    <a href="{{ route('frontend.vendor.index') }}" class="m-nav__link">
+                    <a href="{{ route('frontend.supplier.index') }}" class="m-nav__link">
                         <span class="m-nav__link-text">
                             Vendor
                         </span>
@@ -53,7 +53,7 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Vendor Name  
+                                            Vendor Name
                                         </label>
 
                                         @component('frontend.common.label.data-info')
@@ -63,7 +63,7 @@
 
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Term of Payment 
+                                            Term of Payment
                                         </label>
 
                                         @component('frontend.common.label.data-info')
@@ -76,7 +76,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Phone  
+                                                    Phone
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
@@ -120,7 +120,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Fax 
+                                                    Fax
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
@@ -201,8 +201,8 @@
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Type.
-                                                </label> 
-                                                
+                                                </label>
+
                                                 @component('frontend.common.label.data-info')
                                                     @slot('text', 'generate')
                                                 @endcomponent
@@ -213,7 +213,7 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Account Code  
+                                            Account Code
                                         </label>
 
 
@@ -234,9 +234,9 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <label class="form-control-label">
-                                                            Bank Name 
+                                                            Bank Name
                                                         </label>
-                                
+
                                                         @component('frontend.common.label.data-info')
                                                             @slot('text', 'generate')
                                                         @endcomponent
@@ -256,7 +256,7 @@
                                                         <label class="form-control-label">
                                                             Bank Account Number
                                                         </label>
-                                    
+
                                                         @component('frontend.common.label.data-info')
                                                             @slot('text', 'generate')
                                                         @endcomponent
@@ -267,8 +267,8 @@
                                                         <label class="form-control-label">
                                                             Currency
                                                         </label>
-                                    
-                                                    
+
+
                                                         @component('frontend.common.label.data-info')
                                                             @slot('text', 'generate')
                                                         @endcomponent
@@ -289,9 +289,9 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Active 
+                                            Active
                                         </label><br>
-                    
+
                                         <span class="m-bootstrap-switch m-bootstrap-switch--pill">
                                             <input name="isActive" data-switch="true" type="checkbox" data-on-color="success" disabled>
                                         </span>
