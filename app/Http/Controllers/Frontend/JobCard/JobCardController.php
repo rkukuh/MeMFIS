@@ -345,8 +345,10 @@ class JobCardController extends Controller
             }
             elseif($jobcard->jobcardable->type->code == "preliminary"){
                 $m = new Merger();
-
-                $defectcards = array_chunk($jobcard->defectcards->toArray(),15);
+                $defectcards = [];
+                if(sizeof($jobcard->defectcards) > 0){
+                    $defectcards = array_chunk($jobcard->defectcards->toArray(),15);
+                }
                 $last = false;
 
                 $view1 = \View::make('frontend.form.preliminaryinspection-one')->with(['jobcard' => $jobcard,
