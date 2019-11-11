@@ -20,12 +20,12 @@ let PurchaseOrder = {
 
                             let subtotal = discount = grandtotal = 0;
                             $.each(dataSet, function( index, data ) {
-                                if(data.pivot.subtotal_before_discount){
-                                    subtotal += parseFloat(data.pivot.subtotal_before_discount);
-                                    grandtotal += parseFloat(data.pivot.subtotal_before_discount);
+                                if(data.subtotal_before_discount){
                                     discount += parseFloat(data.discount_amount);
                                 }
-                            });
+                                subtotal += parseFloat(data.pivot.subtotal_before_discount);
+                                grandtotal += parseFloat(data.pivot.subtotal_before_discount);
+                        });
 
                             grandtotal -= discount;
                             $("#sub_total").html(ForeignFormatter.format(subtotal));
@@ -284,7 +284,7 @@ let PurchaseOrder = {
             let price = $('#price').val();
             let promo = $('#promo').val();
             let unit_id = $('#unit_id').val();
-            let tax_type = $('#taxation').val();
+            // let tax_type = $('#taxation').val();
             let tax_amount = $('#tax_amount').val();
             let promo_type = $('#promo-type').val();
             let remark_material = $('#remark_material').val();
@@ -299,7 +299,7 @@ let PurchaseOrder = {
                     promo:promo,
                     quantity:qty,
                     unit_id:unit_id,
-                    tax_type:tax_type,
+                    // tax_type:tax_type,
                     note:remark_material,
                     promo_type:promo_type,
                     tax_amount:tax_amount,
