@@ -48,7 +48,7 @@ class OvertimeController extends Controller
         $isAdmin = Auth::user()->hasRole("admin");
         $employee_id = Auth::id();
         if ($isAdmin) {
-            $uuid = $request->input("search-journal-val");
+            $uuid = $request->input("search-employee-val");
             $employee_id = Employee::where("uuid",$uuid)->first()->id;
         }
 
@@ -116,14 +116,13 @@ class OvertimeController extends Controller
      */
     public function update(OvertimeUpdate $request, Overtime $overtime)
     {
-        // dd($request->validated());
         $overtime_data = Overtime::findOrFail($overtime->id);
         $validated = $request->validated();
         
         $isAdmin = Auth::user()->hasRole("admin");
         $employee_id = Auth::id();
         if ($isAdmin) {
-            $uuid = $validated["search-journal-val"];
+            $uuid = $validated["search-employee-val"];
             $employee_id = Employee::where("uuid",$uuid)->first()->id;
         }
 
@@ -170,5 +169,9 @@ class OvertimeController extends Controller
     public function approve(Overtime $overtime, Request $request)
     {
         # code...
+    }
+
+    public function getAttendance(Employee $employee, $date){
+        // $attendances = Attendances::where()
     }
 }

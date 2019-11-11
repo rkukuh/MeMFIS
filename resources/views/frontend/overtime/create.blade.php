@@ -52,15 +52,18 @@
                                 @csrf
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6 form-group{{$errors->has("search-journal-val") ? " has-error" : ""}}">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 form-group{{$errors->has("search-employee-val") ? " has-error" : ""}}">
                                             @hasanyrole('hrd|admin')
                                                 <label class="form-control-label">
                                                     Propose Leave To @include('frontend.common.label.optional')
                                                 </label>
-                                            
+                                                @component('frontend.common.input.hidden')
+                                                    @slot('id', 'uuid_employee')
+                                                    @slot('name', 'uuid_employee')
+                                                @endcomponent
                                                 @include('frontend.common.employee.index')
                                             @endrole
-                                            <small class="text-danger">{{ $errors->first('search-journal-val') }}</small>
+                                            <small class="text-danger">{{ $errors->first('search-employee-val') }}</small>
                                             @hasanyrole('employee')
                                                 <label class="form-control-label">
                                                     Employee Name 
@@ -71,6 +74,7 @@
                                                     @slot('text', 'generate from user login')
                                                 @endcomponent
                                             @endrole
+                                            
                                         </div>
 
                                         <div class="col-sm-6 col-md-6 col-lg-6 form-group{{$errors->has("date") ? " has-error" : ""}}">
@@ -195,4 +199,6 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/timepicker.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+    <script src="{{ asset('js/frontend/overtime/create.js') }}"></script>
+
 @endpush
