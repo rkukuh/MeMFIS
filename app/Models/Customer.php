@@ -45,6 +45,19 @@ class Customer extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many coa.
+     *
+     * This function will get all customer's coa.
+     * See: Coa's coa() method for the inverse
+     *
+     * @return mixed
+     */
+    public function coa()
+    {
+        return $this->morphOne(Coas::class, 'coable');
+    }
+
+    /**
      * Polymorphic: A customer can have zero or many documents.
      *
      * This function will get all of the customer's documents.

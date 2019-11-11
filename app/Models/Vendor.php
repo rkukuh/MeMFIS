@@ -13,7 +13,7 @@ class Vendor extends MemfisModel
         'payment_term',
         'banned_at',
     ];
-    
+
     protected $dates = ['banned_at'];
 
     /*************************************** RELATIONSHIP ****************************************/
@@ -45,16 +45,16 @@ class Vendor extends MemfisModel
     }
 
     /**
-     * Polymorphic: A customer can have zero or many phones.
+     * Polymorphic: An entity can have zero or many coa.
      *
-     * This function will get all of the customer's phones.
-     * See: Phone's phoneable() method for the inverse
+     * This function will get all vendor's coa.
+     * See: Coa's coa() method for the inverse
      *
      * @return mixed
      */
-    public function phones()
+    public function coa()
     {
-        return $this->morphMany(Phone::class, 'phoneable');
+        return $this->morphOne(Coas::class, 'coable');
     }
 
     /**
@@ -94,6 +94,19 @@ class Vendor extends MemfisModel
     public function faxes()
     {
         return $this->morphMany(Fax::class, 'faxable');
+    }
+
+    /**
+     * Polymorphic: A customer can have zero or many phones.
+     *
+     * This function will get all of the customer's phones.
+     * See: Phone's phoneable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function phones()
+    {
+        return $this->morphMany(Phone::class, 'phoneable');
     }
 
     /**
