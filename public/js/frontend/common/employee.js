@@ -71,7 +71,7 @@ let Employee = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50 ],
             pageLength:5,
-            ajax: "/datatables/employee",
+            ajax: "/datatables/employee/modal",
             columns: [
                 {
                     data: "code"
@@ -115,7 +115,7 @@ let Employee = {
             document.getElementById('search-journal-val').value = uuid;
 
             $('.search-journal').html(code + " - " + name);
-            $('#modal_account_code').modal('hide');
+            $('#modal_employee').modal('hide');
         });
     }
 };
