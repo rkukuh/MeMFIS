@@ -336,13 +336,13 @@
                                                                     PPN
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2">
+                                                            {{-- <div class="col-sm-2 col-md-2 col-lg-2">
                                                                 @component('frontend.common.input.select2')
                                                                     @slot('id', 'taxation')
                                                                     @slot('name', 'taxation')
                                                                 @endcomponent
-                                                            </div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2 tax_amount">
+                                                            </div> --}}
+                                                            <div class="col-sm-4 col-md-4 col-lg-4 tax_amount">
                                                                 @component('frontend.common.input.number')
                                                                     @slot('id', 'tax_amount')
                                                                     @slot('name', 'tax_amount')
