@@ -49,7 +49,9 @@ class EmployeeAttendanceController extends Controller
             $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME);
             $filename = $name.'.'.$file->getClientOriginalExtension();
             
-            $exist = Storage::disk('s3')->url('attendance_files/'.$file->getClientOriginalName());
+            //todo to be able import to s3 disk
+            $exist = Storage::disk('local')->url('attendance_files/'.$file->getClientOriginalName());
+            // $exist = "/storage/attendance_files/BRC2190960192_attlog.dat"
         
             if($exist){
                 $random = str_random(5);
@@ -61,7 +63,8 @@ class EmployeeAttendanceController extends Controller
                 'attendance_files',$filename
             );
 
-            $storagePath = Storage::disk('s3')->path($path);
+            $storagePath = Storage::disk('local')->path($path);
+            // $storagePath = "/home/smartaircraft-dev/Projects/MeMFIS/storage/app/attendance_files/BRC2190960192_attlog_jZ4Yb.dat"
             AttendanceFile::create([
                 'uuid' => Str::uuid(),
                 'name' => $name,
@@ -71,7 +74,7 @@ class EmployeeAttendanceController extends Controller
             ]);
             
             $data = $storagePath;
-            $lines = file($data);
+            $lines = file($file);
             $rows = [];
 
             $data_all = [];
