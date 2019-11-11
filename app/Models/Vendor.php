@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use Directoryxx\Finac\Model\Coa;
 
 class Vendor extends MemfisModel
 {
@@ -47,14 +48,14 @@ class Vendor extends MemfisModel
     /**
      * Polymorphic: An entity can have zero or many coa.
      *
-     * This function will get all vendor's coa.
+     * This function will get all customer's coa.
      * See: Coa's coa() method for the inverse
      *
      * @return mixed
      */
     public function coa()
     {
-        return $this->morphOne(Coas::class, 'coable');
+        return $this->morphToMany(Coa::class, 'coable');
     }
 
     /**

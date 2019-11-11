@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use Directoryxx\Finac\Model\Coa;
 
 class Customer extends MemfisModel
 {
@@ -54,7 +55,7 @@ class Customer extends MemfisModel
      */
     public function coa()
     {
-        return $this->morphOne(Coas::class, 'coable');
+        return $this->morphToMany(Coa::class, 'coable');
     }
 
     /**
