@@ -8,7 +8,7 @@ $(document).ready(function () {
 
                 $('select[name^=helper]').empty();
                 $('select[name^=helper]').each(function(){
-                        $(this).prepend('<option value=""> Select a Helper </option>');
+                        $(this).prepend('<option value="">Select a Helper</option>');
                         let helper = $(this);
                         $.each(data, function (key, value) {
                            helper.append('<option value="' + key + '">' + value + '</option>');

@@ -144,13 +144,13 @@ class PurchaseOrderController extends Controller
             'top_start_at' => Carbon::parse($request->top_start_at),
             'top_type' => Type::where('code',$request->top_type)->first()->id,
             'vendor' => $request->vendor,
-            
+
         ]);
 
         $purchaseOrder->update($request->all());
-        
+
         //todo ppn
-        $tax = Type::ofTax()->where('uuid', $request->tax_type)->first();
+        $tax = Type::ofTax()->where('code', 'exclude')->first();
         $subtotal_after_discount = $request->total_before_tax;
         $tax_amount = $tax_percentage = 0;
         if($tax->code == "include"){
@@ -160,7 +160,7 @@ class PurchaseOrderController extends Controller
             $tax_percentage = $request->tax_amount;
             $tax_amount = $subtotal_after_discount * ($request->tax_amount / 100);
         }
-        
+
         if(sizeof($purchaseOrder->taxes) > 0){
             if($tax->code == "none"){
                 $purchaseOrder->taxes()->delete();
