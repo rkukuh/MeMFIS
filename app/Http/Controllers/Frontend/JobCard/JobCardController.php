@@ -162,7 +162,7 @@ class JobCardController extends Controller
         $now = Carbon::now();
         $statuses = Status::ofJobCard()->get();
         $jobcard = JobCard::with('jobcardable','quotation')->where('uuid',$jobCard)->first();
-    
+
         foreach($jobcard->helpers as $helper){
             $helper->userID .= $helper->user->id;
         }
@@ -345,10 +345,8 @@ class JobCardController extends Controller
             }
             elseif($jobcard->jobcardable->type->code == "preliminary"){
                 $m = new Merger();
-                $defectcards = [];
-                if(sizeof($jobcard->defectcards) > 0){
-                    $defectcards = array_chunk($jobcard->defectcards->toArray(),15);
-                }
+                
+                $defectcards = array_chunk($jobcard->defectcards->toArray(),15);
                 $last = false;
 
                 $view1 = \View::make('frontend.form.preliminaryinspection-one')->with(['jobcard' => $jobcard,
