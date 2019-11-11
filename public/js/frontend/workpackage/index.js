@@ -116,6 +116,8 @@ let Workpackage = {
         });
 
         $('.workpackage_datatable').on('click', '.delete', function () {
+            mApp.block(".delete");
+
             let workpackage_uuid = $(this).data('id');
 
             swal({
@@ -137,6 +139,8 @@ let Workpackage = {
                         type: 'DELETE',
                         url: '/workpackage/' + workpackage_uuid + '',
                         success: function (data) {
+                            mApp.unblock(".delete");
+
                             toastr.success('Work Package has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }

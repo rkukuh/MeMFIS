@@ -1,6 +1,6 @@
 let ItemDatatables = {
     init: function () {
-        $("#item_datatable").DataTable({
+        $("#tool_datatable").DataTable({
             "dom": '<"top"f>rt<"bottom">pl',
             responsive: !0,
             searchDelay: 500,
@@ -8,7 +8,7 @@ let ItemDatatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50 ],
             pageLength:5,
-            ajax: "/datatables/item/modal/",
+            ajax: "/datatables/tool/modal/",
             columns: [
                 {
                     data: "code"
@@ -25,7 +25,7 @@ let ItemDatatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-item" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-tool" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -40,23 +40,23 @@ let ItemDatatables = {
         $('.paging_simple_numbers').addClass('padding-datatable');
 
         $('.dataTables_filter').on('click', '.refresh', function () {
-            $('#item_datatable').DataTable().ajax.reload();
+            $('#tool_datatable').DataTable().ajax.reload();
         });
 
-        $('.dataTable').on('click', '.select-item', function () {
+        $('.dataTable').on('click', '.select-tool', function () {
             $.ajax({
                 url: '/get-item-unit-uuid/'+$(this).data('uuid'),
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    $('select[name="unit_material"]').empty();
+                    $('select[name="unit_tool"]').empty();
 
-                    $('select[name="unit_material"]').append(
+                    $('select[name="unit_tool"]').append(
                         '<option value=""> Select a Unit</option>'
                     );
 
                     $.each(data, function (key, value) {
-                        $('select[name="unit_material"]').append(
+                        $('select[name="unit_tool"]').append(
                             '<option value="' + key + '">' + value + '</option>'
                         );
                     });
@@ -67,11 +67,11 @@ let ItemDatatables = {
             let code = $(this).data('code');
             let name = $(this).data('name');
 
-            $('.input-item-uuid').val(uuid);
+            $('.input-tool-uuid').val(uuid);
             // document.getElementById('account_code').value = uuid;
 
-            $('.search-item').html(code + " - " + name);
-            $('#modal_item_search').modal('hide');
+            $('.search-tool').html(code + " - " + name);
+            $('#modal_tool_search').modal('hide');
         });
     }
 };

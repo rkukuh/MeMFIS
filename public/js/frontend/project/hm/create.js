@@ -1,6 +1,8 @@
 let Project = {
     init: function () {
         $('.add-project').on('click', function () {
+            mApp.block(".add-project");
+
             let data = new FormData();
             data.append("title", $('#project_title').val());
             data.append("customer_id", $('#customer').val());
@@ -21,6 +23,8 @@ let Project = {
                 cache: false,
                 data:data,
                 success: function (data) {
+                    mApp.unblock(".add-project");
+
                     if (data.errors) {
                         if (data.errors.customer_id) {
                             $('#customer-error').html(data.errors.customer_id[0]);
@@ -45,6 +49,7 @@ let Project = {
                         document.getElementById('serial-number').value = data.getAll('aircraft_sn');
 
                     } else {
+
                         toastr.success('Project has been created.', 'Success', {
                             timeOut: 5000
                         });

@@ -557,6 +557,8 @@ let Workpackage3 = {
         });
 
         $('.add-item').on('click', function () {
+            mApp.block(".add-item");
+            
             let quantity = $('input[name=quantity_item]').val();
             let material = $('#material').val();
             let unit_material = $('#unit_material').val();
@@ -575,6 +577,7 @@ let Workpackage3 = {
 
                 },
                 success: function (data) {
+                    mApp.unblock(".add-item");
                     if (data.errors) {
                         if (data.errors.item_id) {
                             $('#material-error').html(data.errors.item_id[0]);
@@ -595,6 +598,7 @@ let Workpackage3 = {
                         document.getElementById('quantity').value = quantity;
 
                     } else {
+
 
                         toastr.success('Material has been created.', 'Success', {
                             timeOut: 5000
@@ -656,6 +660,8 @@ let Workpackage3 = {
         });
 
         $('.add-tool').on('click', function () {
+            mApp.block(".add-tool");
+
             let quantity = $('input[name=quantity]').val();
             let tool = $('#tool').val();
             let unit_tool = $('#unit_tool').val();
@@ -692,6 +698,7 @@ let Workpackage3 = {
 
                         document.getElementById('quantity').value = quantity;
                     } else {
+                        mApp.block(".add-tool");
 
                         toastr.success('Tool has been created.', 'Success', {
                             timeOut: 5000
