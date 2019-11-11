@@ -55,8 +55,7 @@ class TaskCardRoutineItemStore extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            $item = Item::find($this->item_id);
-
+            $item = Item::where('uuid',$this->item_id)->first();
             $unit = Unit::find($this->unit_id);
 
             if($item->unit_id == $unit->id or $item->units->where('uom.unit_id',$unit->id)->first() <> null){

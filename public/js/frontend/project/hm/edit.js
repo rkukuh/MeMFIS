@@ -150,6 +150,8 @@ let Project = {
         })
 
         $('#project_datatable').on('click', '.select-workpackage', function () {
+            mApp.block(".select-workpackage");
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -161,6 +163,7 @@ let Project = {
                     workpackage: $(this).data('uuid'),
                 },
                 success: function (data) {
+                    mApp.unblock(".select-workpackage");
                     if (data.errors) {
                         if (data.errors.customer_id) {
                             $('#customer-error').html(data.errors.customer_id[0]);
@@ -184,6 +187,7 @@ let Project = {
                         document.getElementById('reg').value = data.getAll('aircraft_register');
                         document.getElementById('serial-number').value = data.getAll('aircraft_sn');
                     } else {
+
                         $('#modal_project').modal('hide');
 
                         toastr.success('Work Package has been created.', 'Success',  {
@@ -259,6 +263,8 @@ let Project = {
         });
 
         $('.add-blank-workpackage').on('click', function () {
+            mApp.block(".add-blank-workpackage");
+
             let registerForm = $('#BlankWorkpackageForm');
             let applicability_airplane = $('#applicability_airplane').val();
             let title = $('#title').val();
@@ -279,6 +285,7 @@ let Project = {
                     project_uuid: project_uuid
                 },
                 success: function (data) {
+                    mApp.unblock(".add-blank-workpackage");
                     if (data.errors) {
                         if (data.errors.title) {
                             $('#title-error').html(data.errors.title[0]);
@@ -286,6 +293,7 @@ let Project = {
                             document.getElementById('title').value = title;
                         }
                     } else {
+
                         toastr.success('Project has been created.', 'Success', {
                             timeOut: 5000
                         });
@@ -383,6 +391,8 @@ let Project = {
         });
 
         $('.update-project').on('click', function () {
+            mApp.block(".update-project");
+
             let data = new FormData();
             data.append("title", $('#project_title').val());
             data.append("customer_id", $('#customer').val());
@@ -404,6 +414,7 @@ let Project = {
                 contentType: false,
                 cache: false,
                 success: function (data) {
+                    mApp.unblock(".update-project");
                     if (data.errors) {
                         if (data.errors.customer_id) {
                             $('#customer-error').html(data.errors.customer_id[0]);
@@ -428,6 +439,7 @@ let Project = {
                         document.getElementById('serial-number').value = data.getAll('aircraft_sn');
 
                     } else {
+
                         toastr.success('Project has been created.', 'Success', {
                             timeOut: 5000
                         });

@@ -232,6 +232,8 @@ let Aircraft = {
         });
 
         $('.project_datatable').on('click', '.approve', function () {
+            mApp.block(".approver");
+
             let project_uuid = $(this).data('uuid');
 
             swal({
@@ -253,7 +255,9 @@ let Aircraft = {
                         type: 'POST',
                         url: '/project/' + project_uuid + '/approve',
                         success: function (data) {
-                            toastr.success('Quotation has been approved.', 'Approved', {
+                            mApp.unblock(".approver");
+
+                            toastr.success('Project has been approved.', 'Approved', {
                                     timeOut: 5000
                                 }
                             );
