@@ -19,12 +19,16 @@
                                     Item
                                 </label>
 
-                                @component('frontend.common.input.select2')
+                                {{-- @component('frontend.common.input.select2')
                                     @slot('text', 'Item')
                                     @slot('id', 'item')
                                     @slot('name', 'item')
                                     @slot('id_error', 'item')
                                     @slot('style', 'width:100%')
+                                @endcomponent --}}
+                                @component('frontend.common.item.index')
+                                    @slot('name_item','material')
+                                    @slot('id_item','material')
                                 @endcomponent
                             </div>
                         </div>
@@ -47,10 +51,10 @@
                                 </label>
 
                                 @component('frontend.common.input.select2')
+                                    @slot('id', 'unit_material')
                                     @slot('text', 'Unit')
-                                    @slot('id', 'unit_id')
-                                    @slot('name', 'unit_id')
-                                    @slot('id_error', 'unit_id')
+                                    @slot('name', 'unit_material')
+                                    @slot('id_error', 'unit_material')
                                     @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
@@ -92,8 +96,11 @@
 </div>
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material-uom.js') }}"></script>
+
+    {{-- <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/item-uuid.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-uom.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-uom.js') }}"></script> --}}
 @endpush

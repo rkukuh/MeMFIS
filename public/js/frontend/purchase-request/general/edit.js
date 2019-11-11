@@ -141,9 +141,9 @@ let PurchaseRequest = {
         });
 
         $(".modal-footer").on("click", ".add-item", function() {
-            let item = $("#item").val();
+            let item = $("#material").val();
             let quantity = $("input[name=qty]").val();
-            let unit = $("#unit_id").val();
+            let unit = $("#unit_material").val();
             let remark = $("#remark").val();
             $.ajax({
                 headers: {
