@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Frontend;
 
 use Auth;
-use App\Models\Overtime;
-use App\Http\Controllers\Controller;
-use App\Models\Approval;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
+
 use App\Models\Status;
+use App\Models\Overtime;
+use App\Models\Employee;
+use App\Models\EmployeeAttendance;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\OvertimeStore;
 use App\Http\Requests\Frontend\OvertimeUpdate;
-use App\Models\Employee;
-use Carbon\Carbon;
 
 class OvertimeController extends Controller
 {
@@ -44,6 +45,7 @@ class OvertimeController extends Controller
     public function store(OvertimeStore $request)
     {
         $is_validated = $request->validated();
+        // dd($is_validated);
 
         $isAdmin = Auth::user()->hasRole("admin");
         $employee_id = Auth::id();
@@ -171,7 +173,17 @@ class OvertimeController extends Controller
         # code...
     }
 
+    /**
+     * API for getting attendace for certain employee on that date
+     * 
+     * @param \App\Models\Employee  $employee
+     * @param $date 
+     * @return \Illuminate\Http\Response
+     * 
+     */
     public function getAttendance(Employee $employee, $date){
-        // $attendances = Attendances::where()
+        $attendances = EmployeeAttendance::where('employee_id',$employee->id)->whereDate('date', $date)->first();
+
+        return response()->json($attendances);
     }
 }
