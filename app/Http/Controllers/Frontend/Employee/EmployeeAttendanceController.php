@@ -168,7 +168,7 @@ class EmployeeAttendanceController extends Controller
                     $employee = Employee::where('code',$data_final[$i]['nrp'])->first();
                     if(isset($employee->id)){
 
-                        if(!$employee->employee_attendace()->where('employee_attendances.date',$data_final[$i]['date'][$y]['date'])->first()){
+                        if(!$employee->employee_attendance()->where('employee_attendances.date',$data_final[$i]['date'][$y]['date'])->first()){
                             $in = '00:00:00';
                             $out = '00:00:00';
                             $status = Status::where('code','normal')->first()->id;
@@ -271,7 +271,7 @@ class EmployeeAttendanceController extends Controller
                                 }
                             }
 
-                            $employee->employee_attendace()->create([
+                            $employee->employee_attendance()->create([
                                 'uuid' => Str::uuid(),
                                 'date' => $data_final[$i]['date'][$y]['date'],
                                 'in' => $in,

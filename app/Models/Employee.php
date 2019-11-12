@@ -288,7 +288,7 @@ class Employee extends MemfisModel implements HasMedia
      *
      * @return mixed
      */
-    public function employee_attendace()
+    public function employee_attendance()
     {
         return $this->hasMany(EmployeeAttendance::class);
     }
