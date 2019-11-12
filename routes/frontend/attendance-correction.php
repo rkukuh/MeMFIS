@@ -16,7 +16,7 @@ Route::name('frontend.')->group(function () {
             Route::name('attendance-correction.')->group(function () {
                 Route::prefix('attendance-correction')->group(function () {
 
-                    Route::view('/attendance-correction/approve', 'AttendanceCorrectionController@approval')->name('attendance-correction.approve');
+                    Route::view('/approve', 'AttendanceCorrectionController@approval')->name('attendance-correction.approve');
 
                     /** API */
                     // Route::get('/{employee}/date/{date}', 'AttendanceCorrectionController@getAttendance')->name('get.attendance');
