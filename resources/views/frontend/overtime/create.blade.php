@@ -55,7 +55,7 @@
                                         <div class="col-sm-6 col-md-6 col-lg-6 form-group{{$errors->has("search-employee-val") ? " has-error" : ""}}">
                                             @hasanyrole('hrd|admin')
                                                 <label class="form-control-label">
-                                                    Propose Leave To @include('frontend.common.label.optional')
+                                                    Propose Leave To @include('frontend.common.label.required')
                                                 </label>
                                                 @component('frontend.common.input.hidden')
                                                     @slot('id', 'uuid_employee')
@@ -79,7 +79,7 @@
 
                                         <div class="col-sm-6 col-md-6 col-lg-6 form-group{{$errors->has("date") ? " has-error" : ""}}">
                                             <label class="form-control-label">
-                                                Date @include('frontend.common.label.optional') 
+                                                Date @include('frontend.common.label.required') 
                                             </label>
 
                                             @component('frontend.common.input.datepicker')
@@ -95,7 +95,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6 form-group{{$errors->has("start_time") ? " has-error" : ""}}">
                                                     <label class="form-control-label">
-                                                        Start Time  @include('frontend.common.label.optional')
+                                                        Start Time  @include('frontend.common.label.required')
                                                     </label>
 
                                                     @component('frontend.common.input.timepicker')
@@ -108,7 +108,7 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6 form-group{{$errors->has("end_time") ? " has-error" : ""}}">
                                                     <label class="form-control-label">
-                                                        End Time @include('frontend.common.label.optional')
+                                                        End Time @include('frontend.common.label.required')
                                                     </label>
         
                                                     @component('frontend.common.input.timepicker')
@@ -129,7 +129,7 @@
                                                     @component('frontend.common.input.number')
                                                         @slot('name','hours')
                                                         @slot('input_append','Hours')
-                                                        @slot('readonly','readonly')
+                                                        @slot('disabled','disabled')
                                                         @slot('class', "hours_diff_val")
                                                     @endcomponent
                                                 </div>
@@ -137,7 +137,7 @@
                                                     @component('frontend.common.input.number')
                                                         @slot('name','minutes')
                                                         @slot('input_append','Minutes')
-                                                        @slot('readonly','readonly')
+                                                        @slot('disabled','disabled')
                                                         @slot('class', "minutes_diff_val")
                                                     @endcomponent
                                                 </div>
@@ -145,7 +145,7 @@
                                                     @component('frontend.common.input.number')
                                                         @slot('name','second')
                                                         @slot('input_append','Seconds')
-                                                        @slot('readonly','readonly')
+                                                        @slot('disabled','disabled')
                                                         @slot('class', "seconds_diff_val")
                                                     @endcomponent
                                                 </div>
@@ -155,7 +155,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 form-group{{$errors->has("description") ? " has-error" : ""}}">
                                             <label class="form-control-label">
-                                                Description 
+                                                Description @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.textarea')
@@ -197,7 +197,7 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/timepicker.js')}}"></script>
+    <!-- <script src="{{ asset('js/frontend/functions/timepicker.js')}}"></script> -->
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/overtime/create.js') }}"></script>
 
