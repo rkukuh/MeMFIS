@@ -48,15 +48,17 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <form id="itemform" name="itemform">
+                            <form id="attendanceCorrectionForm" name="attendanceCorrectionForm" action="{{ route('frontend.attendance-correction.store') }}">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Employee Name @include('frontend.common.label.required')
                                             </label>
-                                         
-                                         
+                                            @component('frontend.common.input.hidden')
+                                                @slot('id', 'uuid_employee')
+                                                @slot('name', 'uuid_employee')
+                                            @endcomponent
                                             @include('frontend.common.employee.index')
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -80,32 +82,27 @@
 
                                             @component('frontend.common.input.select2')
                                                 @slot('text', 'Correction Time')
-                                                @slot('id', 'correction_time')
-                                                @slot('name', 'correction_time')
-                                                @slot('id_error', 'correction_time')
+                                                @slot('id', 'attendance_correction_time_type')
+                                                @slot('name', 'attendance_correction_time_type')
+                                                @slot('id_error', 'attendance_correction_time_type')
                                             @endcomponent
-
-                                            {{-- Check-In
-                                            Check-Out --}}
-
                                         </div>
-                                        @if("checkin" == "checkin")
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Time 
-                                                </label>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Time 
+                                            </label>
 
-                                                @component('frontend.common.input.timepicker')
-                                                    @slot('id', 'time')
-                                                    @slot('class','m_timepicker_1 text-center')
-                                                @endcomponent
-                                            </div>
-                                        @endif
+                                            @component('frontend.common.input.timepicker')
+                                                @slot('id', 'time_correction')
+                                                @slot('name', 'time_correction')
+                                                @slot('class','text-center')
+                                            @endcomponent
+                                        </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Description 
+                                                Description @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.textarea')
@@ -146,6 +143,9 @@
 @endsection
 
 @push('footer-scripts')
+    <script src="{{ asset('js/frontend/attendance-correction/create.js')}}"></script>
+    
+    <script src="{{ asset('js/frontend/functions/fill-combobox/correction-time.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/correction-time.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/timepicker.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
