@@ -66,7 +66,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('language', 'LanguageController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
-        Route::resource('overtime', 'OvertimeController');
         Route::resource('workshift', 'WorkshiftController');
         Route::resource('leave-type', 'LeaveTypeController');
         Route::resource('job-tittle', 'JobTittleController');
