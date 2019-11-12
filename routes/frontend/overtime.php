@@ -9,7 +9,7 @@ Route::name('frontend.')->group(function () {
 
     ], function () {
 
-        // Route::namespace('Overtime')->group(function () {
+        Route::namespace('Overtime')->group(function () {
 
             Route::resource('overtime', 'OvertimeController');
 
@@ -22,7 +22,7 @@ Route::name('frontend.')->group(function () {
                 });
             });
 
-        // });
+        });
 
     });
 

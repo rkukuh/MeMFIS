@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Overtime;
 
 use Auth;
 use Carbon\Carbon;
@@ -174,7 +174,7 @@ class OvertimeController extends Controller
     }
 
     /**
-     * API for getting attendace for certain employee on that date
+     * API for getting attendance for certain employee on that date
      * 
      * @param \App\Models\Employee  $employee
      * @param $date 
