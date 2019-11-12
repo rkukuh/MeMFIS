@@ -11,6 +11,7 @@ require('datatables.php');
 
 require('frontend.php');
 require('frontend/aircraft.php');
+require('frontend/attendance-correction.php');
 require('frontend/customer.php');
 require('frontend/position.php');
 require('frontend/defectcard.php');
