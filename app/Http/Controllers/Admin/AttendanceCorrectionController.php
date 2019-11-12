@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\AttendanceCorrection;
-
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\AttendanceCorrectionStore;
-use App\Http\Requests\Frontend\AttendanceCorrectionUpdate;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\AttendanceCorrection;
-
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\AttendanceCorrectionStore;
+use App\Http\Requests\Admin\AttendanceCorrectionUpdate;
 
 class AttendanceCorrectionController extends Controller
 {
@@ -19,8 +16,7 @@ class AttendanceCorrectionController extends Controller
      */
     public function index()
     {
-        return view('frontend.attendance-correction.index');
-
+        //
     }
 
     /**
@@ -30,18 +26,18 @@ class AttendanceCorrectionController extends Controller
      */
     public function create()
     {
-        return view('frontend.attendance-correction.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\AttendanceCorrectionStore  $request
+     * @param  \App\Http\Requests\Admin\AttendanceCorrectionStore  $request
      * @return \Illuminate\Http\Response
      */
     public function store(AttendanceCorrectionStore $request)
     {
-        dd($request);
+        //
     }
 
     /**
@@ -63,13 +59,13 @@ class AttendanceCorrectionController extends Controller
      */
     public function edit(AttendanceCorrection $attendanceCorrection)
     {
-        return view('frontend.attendance-correction.edit');
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\AttendanceCorrectionUpdate  $request
+     * @param  \App\Http\Requests\Admin\AttendanceCorrectionUpdate  $request
      * @param  \App\Models\AttendanceCorrection  $attendanceCorrection
      * @return \Illuminate\Http\Response
      */
@@ -87,13 +83,5 @@ class AttendanceCorrectionController extends Controller
     public function destroy(AttendanceCorrection $attendanceCorrection)
     {
         //
-    }
-
-
-    /**
-     * Attendance correction approval
-     */
-    public function approval(){
-
     }
 }

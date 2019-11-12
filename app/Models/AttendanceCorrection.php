@@ -2,9 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\MemfisModel;
 
-class AttendanceCorrection extends Model
+class AttendanceCorrection extends MemfisModel
 {
-    //
+    // protected $table = 'attendancecorrections';
+
+    protected $fillable = [
+        'imported_by',
+        'name',
+        'filename',
+        'path'
+    ];
 }

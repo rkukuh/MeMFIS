@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\AttendanceCorrection;
+namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
+use App\Models\AttendanceCorrection;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\AttendanceCorrectionStore;
 use App\Http\Requests\Frontend\AttendanceCorrectionUpdate;
-
-use App\Models\AttendanceCorrection;
-
 
 class AttendanceCorrectionController extends Controller
 {
@@ -19,8 +16,7 @@ class AttendanceCorrectionController extends Controller
      */
     public function index()
     {
-        return view('frontend.attendance-correction.index');
-
+        //
     }
 
     /**
@@ -30,7 +26,7 @@ class AttendanceCorrectionController extends Controller
      */
     public function create()
     {
-        return view('frontend.attendance-correction.create');
+        //
     }
 
     /**
@@ -41,7 +37,7 @@ class AttendanceCorrectionController extends Controller
      */
     public function store(AttendanceCorrectionStore $request)
     {
-        dd($request);
+        //
     }
 
     /**
@@ -63,7 +59,7 @@ class AttendanceCorrectionController extends Controller
      */
     public function edit(AttendanceCorrection $attendanceCorrection)
     {
-        return view('frontend.attendance-correction.edit');
+        //
     }
 
     /**
@@ -87,13 +83,5 @@ class AttendanceCorrectionController extends Controller
     public function destroy(AttendanceCorrection $attendanceCorrection)
     {
         //
-    }
-
-
-    /**
-     * Attendance correction approval
-     */
-    public function approval(){
-
     }
 }
