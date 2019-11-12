@@ -51,7 +51,7 @@ let Employee = {
             document.getElementById('search-employee-val').value = uuid;
 
             $('.search-journal').html(code + " - " + name);
-            $('#uuid_employee').val(code);
+            $('#uuid_employee').val(uuid);
             $('#modal_employee').modal('hide');
         });
     }
