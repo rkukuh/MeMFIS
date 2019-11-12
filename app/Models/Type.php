@@ -50,6 +50,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Address.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfAttendanceCorrection(Builder $query)
+    {
+        return $query->where('of', 'attendance-correction');
+    }
+
+    /**
      * Scope a query to only include type of Aviation School Degree.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
