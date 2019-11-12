@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\AttendanceCorrectionStore;
 use App\Http\Requests\Frontend\AttendanceCorrectionUpdate;
 
+use App\Models\Type;
+use App\Models\Employee;
 use App\Models\AttendanceCorrection;
 
 
@@ -41,7 +43,18 @@ class AttendanceCorrectionController extends Controller
      */
     public function store(AttendanceCorrectionStore $request)
     {
-        dd($request);
+        $employee = Employee::where("uuid", $request->uuid_employee)->first();
+        $correction_type = Type::ofAttendanceCorrection()->where("code", $request->attendance_correction_time_type)->first();
+    
+        $AttendanceCorrection = AttendanceCorrection::create([
+            'correction_time' => $request->time_correction, 
+            'correction_date' => $request->date, 
+            'employee_id' => $employee->id, 
+            'type_id' => $correction_type->id,
+            'status_id' => 1,// to do , set to valid value
+        ]);
+
+        return redirect()->route('frontend.attendance-correction.index')->with('success', 'Attendance Correction has been created.');
     }
 
     /**

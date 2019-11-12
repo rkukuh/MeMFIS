@@ -48,8 +48,9 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <form id="attendanceCorrectionForm" name="attendanceCorrectionForm" action="{{ route('frontend.attendance-correction.store') }}">
+                            <form id="attendanceCorrectionForm" name="attendanceCorrectionForm" method="POST" action="{{ route('frontend.attendance-correction.store') }}">
                                 <div class="m-portlet__body">
+                                    @csrf
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -118,7 +119,6 @@
                                             <div class="flex">
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
                                                         @slot('id', 'add-attendance')
                                                         @slot('class', 'add-attendance')
                                                     @endcomponent
@@ -132,7 +132,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
