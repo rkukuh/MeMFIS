@@ -14,6 +14,8 @@ class AttendanceCorrection extends MemfisModel
         'correction_date',
         'correction_time',
         'employee_id',
+        'status_id',
+        'description_id',
         'type_id',
     ];
 

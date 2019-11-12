@@ -19,6 +19,7 @@ class CreateAttendancecorrectionsTable extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->date('correction_date');
             $table->time('correction_time');
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('type_id')->nullable(); //correctin time type
             $table->timestamps();
             $table->softDeletes();
