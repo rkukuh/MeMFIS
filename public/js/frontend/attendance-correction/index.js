@@ -6,7 +6,7 @@ let AttendanceCorrection = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/price-list-item',
+                        url: '/datatables/attendance-correction',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -14,6 +14,7 @@ let AttendanceCorrection = {
                                 dataSet = raw.data;
                             }
                             
+                            console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -55,13 +56,13 @@ let AttendanceCorrection = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'created_at',
                     title: 'Created Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'code',
+                    field: 'uuid',
                     title: 'Correction Number',
                     sortable: 'asc',
                     filterable: !1,
