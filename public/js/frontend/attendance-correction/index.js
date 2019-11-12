@@ -71,38 +71,26 @@ let AttendanceCorrection = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'employee.code',
                     title: 'NRP',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'employee.first_name',
                     title: 'Employee Name',
                     sortable: 'asc',
                     filterable: !1,
                 },
                
                 {
-                    field: '',
+                    field: 'correction_date',
                     title: 'Corrected Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
-                    title: 'Check-in',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: '',
-                    title: 'check-out',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: '',
+                    field: 'description',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,

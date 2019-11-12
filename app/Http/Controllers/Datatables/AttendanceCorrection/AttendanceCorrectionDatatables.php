@@ -17,7 +17,7 @@ class AttendanceCorrectionDatatables extends Controller
      */
     public function index()
     {
-        $AttendanceCorrections = AttendanceCorrection::get();
+        $AttendanceCorrections = AttendanceCorrection::with('employee')->get();
 
         foreach($AttendanceCorrections as $AttendanceCorrection){
             if($AttendanceCorrection->deleted_at <> null){
