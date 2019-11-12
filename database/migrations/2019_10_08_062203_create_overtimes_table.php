@@ -37,7 +37,7 @@ class CreateOvertimesTable extends Migration
             // ->onUpdate('cascade')
             // ->onDelete('restrict');
 
-            $table->foreign('statuses_id')
+            $table->foreign('status_id')
             ->references('id')->on('statuses')
             ->onUpdate('cascade')
             ->onDelete('restrict');

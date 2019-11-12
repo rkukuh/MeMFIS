@@ -28,6 +28,11 @@ class CreateAttendancecorrectionsTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('restrict');
 
+            $table->foreign('status_id')
+            ->references('id')->on('statuses')
+            ->onUpdate('cascade')
+            ->onDelete('restrict');
+
             $table->foreign('type_id')
             ->references('id')->on('types')
             ->onUpdate('cascade')
