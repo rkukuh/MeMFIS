@@ -12,12 +12,13 @@ class AttendanceCorrection extends MemfisModel
 
     protected $fillable = [
         'code',
+        'employee_id',
         'correction_date',
         'correction_time',
-        'employee_id',
-        'status_id',
-        'description_id',
+        'description',
+        'attendance_id',
         'type_id',
+        'status_id',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

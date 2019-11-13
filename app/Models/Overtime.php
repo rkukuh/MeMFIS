@@ -7,15 +7,16 @@ use App\MemfisModel;
 class Overtime extends MemfisModel
 {
     protected $fillable = [
-        "uuid",
-        "code",
-        "employee_id",
-        "status_id",
-        "date",
-        "start",
-        "end",
-        "total",
-        "desc"
+        // "uuid",
+        'code',
+        'attendance_id',
+        'employee_id',
+        'status_id',
+        'date',
+        'start',
+        'end',
+        'total',
+        'description'
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
