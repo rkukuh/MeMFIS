@@ -18,7 +18,7 @@ class CreateOvertimesTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
             $table->unsignedBigInteger('employee_id')->index();
-            // $table->unsignedBigInteger('approved_by_id')->nullable();
+            $table->unsignedBigInteger('attendance_id')->nullable();
             $table->unsignedBigInteger('status_id')->index();
             $table->date("date");
             $table->time('start');
@@ -33,10 +33,10 @@ class CreateOvertimesTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('restrict');
 
-            // $table->foreign('approved_by_id')
-            // ->references('id')->on('employees')
-            // ->onUpdate('cascade')
-            // ->onDelete('restrict');
+            $table->foreign('attendance_id')
+            ->references('id')->on('employee_attendances')
+            ->onUpdate('cascade')
+            ->onDelete('restrict');
 
             $table->foreign('status_id')
             ->references('id')->on('statuses')

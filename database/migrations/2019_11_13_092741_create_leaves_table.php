@@ -19,6 +19,7 @@ class CreateLeavesTable extends Migration
             $table->date('end_date');
             $table->unsignedBigInteger('employee_id')->index();
             $table->unsignedBigInteger('status_id')->index();
+            $table->unsignedBigInteger('attendance_id')->nullable();
             $table->unsignedBigInteger('type_id')->nullable(); //correctin time type
             $table->timestamps();
             $table->softDeletes();
@@ -30,6 +31,11 @@ class CreateLeavesTable extends Migration
 
             $table->foreign('status_id')
             ->references('id')->on('statuses')
+            ->onUpdate('cascade')
+            ->onDelete('restrict');
+
+            $table->foreign('attendance_id')
+            ->references('id')->on('employee_attendances')
             ->onUpdate('cascade')
             ->onDelete('restrict');
 
