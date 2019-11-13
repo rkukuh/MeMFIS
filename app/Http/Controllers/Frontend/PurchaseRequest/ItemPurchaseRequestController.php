@@ -106,6 +106,7 @@ class ItemPurchaseRequestController extends Controller
     {
         $purchaseRequest = PurchaseRequestItem::find($item);
         $request->merge(['item_id' =>  Item::where('uuid',$request->item_id)->first()->id]);
+        $request->merge(['unit_id' =>  Unit::where('uuid',$request->unit_id)->first()->id]);
 
         $purchaseRequest->update($request->all());
 

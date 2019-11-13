@@ -277,7 +277,7 @@ let PurchaseRequest = {
             let item = $("#material").val();
             let uuid = $("input[name=uuid]").val();
             let quantity = $("input[name=qty]").val();
-            let unit = $("#unit_id").val();
+            let unit = $("#unit_material").val();
             let remark = $("#remark").val();
 
             $.ajax({
