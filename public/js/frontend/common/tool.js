@@ -44,7 +44,7 @@ let ToolDatatables = {
 
         $('.dataTable').on('click', '.select-tool', function () {
             $.ajax({
-                url: '/get-item-unit-uuid/'+$(this).data('uuid'),
+                url: '/get-units/'+$(this).data('uuid'),
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
