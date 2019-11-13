@@ -155,6 +155,8 @@ Route::name('datatables.')->group(function () {
                 Route::get('/', 'EmployeeDatatables@index')->name('all');
                 Route::get('/statuses', 'EmployeeStatusesDatatables@index')->name('employee.statuses');
                 Route::get('/attendance-file', 'EmployeeAttendanceDatatables@index')->name('attendance.index');
+                Route::get('/modal', 'EmployeeDatatables@employeeModal')->name('modal');
+
                 /** Polymorph */
                 Route::get('/{customer}/faxes', 'EmployeeFaxesDatatables@index')->name('faxes.index');
                 Route::get('/{customer}/emails', 'EmployeeEmailsDatatables@index')->name('emails.index');

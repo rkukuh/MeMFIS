@@ -13,6 +13,7 @@ use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\PurchaseOrderItem;
 use App\Http\Requests\Frontend\PurchaseOrderStore;
 use App\Http\Requests\Frontend\PurchaseOrderUpdate;
 
@@ -241,5 +242,23 @@ class PurchaseOrderController extends Controller
         );
 
         return response()->json($status_notification);
+    }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\PurchaseOrder $purchaseOrder
+     * @return \Illuminate\Http\Response
+     */
+    public function print(PurchaseOrder $purchaseOrder)
+    {
+        $pdf = \PDF::loadView('frontend/form/purchase_order',[
+                'username' => Auth::user()->name,
+                'purchaseOrder' => $purchaseOrder,
+                'items' => PurchaseOrderItem::where('purchase_order_id',$purchaseOrder->id)->get(),
+                'created_by' => $purchaseOrder->audits->first()->user->name
+                ]);
+
+        return $pdf->stream();
     }
 }

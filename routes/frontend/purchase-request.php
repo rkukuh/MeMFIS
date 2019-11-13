@@ -21,6 +21,8 @@ Route::name('frontend.')->group(function () {
 
             Route::name('purchase-request.')->group(function () {
                 Route::prefix('purchase-request')->group(function () {
+                    Route::get('/{purchaseRequest}/general/print', 'GeneralPurchaseRequestController@print')->name('general.print');
+                    Route::get('/{purchaseRequest}/project/print', 'ProjectPurchaseRequestController@print')->name('project.print');
                     Route::put('/{purchaseRequest}/project/approve', 'ProjectPurchaseRequestController@approve')->name('project.approve')->middleware('permission:purchase-request-approve');
                     Route::put('/{purchaseRequest}/general/approve', 'GeneralPurchaseRequestController@approve')->name('general.approve')->middleware('permission:purchase-request-approve');
                     Route::post('/{purchaseRequest}/item/{item}', 'ItemPurchaseRequestController@store')->name('item.store');
