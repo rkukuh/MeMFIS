@@ -45,7 +45,7 @@ class InventoryInController extends Controller
         $request->merge(['inventoryinable_type' => 'App\Models\InventoryIn']);
         $request->merge(['inventoryinable_id' => InventoryIn::withTrashed()->count()+1]);
 
-        $additionals = null;
+        $additionals = [];
 
         $additionals['ref_no'] = $request->ref_no;
         $additionals['created_by'] = Auth::id();
@@ -98,11 +98,9 @@ class InventoryInController extends Controller
      */
     public function update(InventoryInUpdate $request, InventoryIn $inventoryIn)
     {
-        $additionals = null;
+        $additionals = [];
         $additionals['ref_no'] = $request->ref_no;
-
         $request->merge(['additional' => json_encode($additionals)]);
-        // dd($request->all());
         $inventoryIn->update($request->all());
 
         return response()->json($inventoryIn);

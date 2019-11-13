@@ -20,6 +20,13 @@ class InventoryInDatatables extends Controller
         $inventories = InventoryIn::with('storage', 'items', 'approvals')->get();
 
         foreach ($inventories as $inventory) {
+            if (!is_null($inventory->additional)) {
+                $additional = json_decode($inventory->additional);
+                $inventory->ref_no = $additional->ref_no;
+                $created_by = User::find($additional->created_by);
+                $inventory->created_by = $created_by->name;
+            }
+
             $inventory->status .= 'Open';
 
             if (!empty($inventory->approvals->first())) {
