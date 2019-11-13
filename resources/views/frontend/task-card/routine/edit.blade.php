@@ -854,7 +854,6 @@
 @push('footer-scripts')
     <script>
         let TaskCard_uuid = '{{ $taskcard->uuid }}';
-        let url = '/datatables/item/modal/';
     </script>
 
     <script>
