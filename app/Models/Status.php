@@ -28,6 +28,17 @@ class Status extends MemfisModel
     }
 
     /**
+     * Scope a query to only include status of attendance correction.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfAttendanceCorrection(Builder $query)
+    {
+        return $query->where('of', 'attendance-correction');
+    }
+
+    /**
      * Scope a query to only include status of customer's component repair.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -80,6 +91,17 @@ class Status extends MemfisModel
     public function scopeOfJobCard(Builder $query)
     {
         return $query->where('of', 'jobcard');
+    }
+
+    /**
+     * Scope a query to only include status of leave.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfLeave(Builder $query)
+    {
+        return $query->where('of', 'leave');
     }
 
     /**
