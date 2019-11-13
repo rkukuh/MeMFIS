@@ -542,6 +542,20 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function UnitUuid(Item $item)
+    {
+        $unit = $item->unit()->pluck('name', 'uuid');
+        $units = $item->units()->pluck('name', 'uuid');
+        $uom = $unit->toArray() + $units->toArray();
+
+        return json_encode($uom);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function itemSerialNumber($item)
     {
         $serialNumbers = FefoIn::where('item_id', $item)

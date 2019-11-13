@@ -36,6 +36,7 @@ Route::name('component.')->group(function () {
         Route::get('get-work-areas', 'FillComboxController@workArea')->name('get-work-areas');
         Route::get('get-facilities', 'FillComboxController@facility')->name('get-facilities');
         Route::get('get-licenses/{id}', 'FillComboxController@licenses')->name('get-licenses');
+        Route::get('get-units/{item}', 'FillComboxController@UnitUuid')->name('get-unit-uuid');
         Route::get('get-defectcard', 'FillComboxController@defectcard')->name('get-defectcard');
         Route::get('get-currencies', 'FillComboxController@currencies')->name('get-currencies');
         Route::get('get-work-orders', 'FillComboxController@workOrder')->name('get-work-orders');
