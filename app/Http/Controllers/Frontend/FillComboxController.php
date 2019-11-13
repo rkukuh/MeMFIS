@@ -557,6 +557,21 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function itemExpiredDate($item)
+    {
+        $expDate = FefoIn::where('item_id', $item)
+            ->pluck('expired_at')
+            ->first()
+            ->toArray();
+
+        return json_encode($expDate);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function iterchange(Item $item)
     {
         $interchange = $item->interchanges()->pluck('name', 'uuid');

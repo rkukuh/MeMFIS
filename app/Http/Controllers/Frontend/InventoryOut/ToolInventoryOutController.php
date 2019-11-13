@@ -47,6 +47,13 @@ class ToolInventoryOutController extends Controller
         $request->merge(['inventoryoutable_type' => 'App\Models\InventoryOut']);
         $request->merge(['inventoryoutable_id' => InventoryOut::withTrashed()->count() + 1]);
 
+        $additionals = [];
+
+        $additionals['ref_no'] = $request->ref_no;
+        $additionals['created_by'] = Auth::id();
+
+        $request->merge(['additional' => json_encode($additionals)]);
+
         $inventoryOut = InventoryOut::create($request->all());
 
         return response()->json($inventoryOut);
@@ -61,7 +68,8 @@ class ToolInventoryOutController extends Controller
     public function show(InventoryOut $inventoryOut)
     {
         return view('frontend.inventory-out.tool.show', [
-            'inventoryOut' => $inventoryOut
+            'inventoryOut' => $inventoryOut,
+            'additionals' => json_decode($inventoryOut->additional)
         ]);
     }
 
@@ -80,6 +88,7 @@ class ToolInventoryOutController extends Controller
             'storages' => $storages,
             'employees' => $employees,
             'inventoryOut' => $inventoryOut,
+            'additionals' => json_decode($inventoryOut->additional)
         ]);
     }
 
@@ -92,6 +101,9 @@ class ToolInventoryOutController extends Controller
      */
     public function update(InventoryOutUpdate $request, InventoryOut $inventoryOut)
     {
+        $additionals = [];
+        $additionals['ref_no'] = $request->ref_no;
+        $request->merge(['additional' => json_encode($additionals)]);
         $inventoryOut->update($request->all());
 
         return response()->json($inventoryOut);

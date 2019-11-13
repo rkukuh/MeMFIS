@@ -21,6 +21,7 @@ class CreateInventoryOutTable extends Migration
             $table->timestamp('inventoried_at');
             $table->nullableMorphs('inventoryoutable');
             $table->unsignedBigInteger('received_by');
+            $table->json('additional')->nullable();
             $table->string('section')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
