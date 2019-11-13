@@ -10,6 +10,8 @@ use App\Models\Status;
 use App\Models\Overtime;
 use App\Models\Employee;
 use App\Models\EmployeeAttendance;
+
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\OvertimeStore;
 use App\Http\Requests\Frontend\OvertimeUpdate;
@@ -61,7 +63,7 @@ class OvertimeController extends Controller
         $end_diff = Carbon::parse($date." ".$end,"Asia/Jakarta");
         $time_diff = $start_diff->diff($end_diff)->format("%H:%I:%S");
         $desc = $request->input("description");
-        $code = DocumentNumber::generate('OVRT-', OvertimeStore::withTrashed()->count()+1);
+        $code = DocumentNumber::generate('OVRT-', Overtime::withTrashed()->count()+1);
         // $timestamp_start = Carbon::parse($date." ".$start,"Asia/Jakarta");
         // $timestamp_end = Carbon::parse($date." ". $end,"Asia/Jakarta");
         // ->format("%H:%I:%S")
@@ -77,7 +79,7 @@ class OvertimeController extends Controller
                 "end" => $end,
                 "desc" => $desc,
                 "total" => $time_diff,
-                "statuses_id" => $status
+                "status_id" => $status
             ]
         );
 
@@ -138,7 +140,7 @@ class OvertimeController extends Controller
         $time_diff = $start_diff->diff($end_diff)->format("%H:%I:%S");
         $desc = $validated["description"];
         
-        $status = $overtime->statuses_id;
+        $status = $overtime->status_id;
 
         $data = [
                 "uuid" => $overtime->uuid,
@@ -148,7 +150,7 @@ class OvertimeController extends Controller
                 "end" => $end,
                 "desc" => $desc,
                 "total" => $time_diff,
-                "statuses_id" => $status
+                "status_id" => $status
             ]
 ;
         $overtime_data->fill($data);
@@ -170,9 +172,54 @@ class OvertimeController extends Controller
         //
     }
 
-    public function approve(Overtime $overtime, Request $request)
+    /**
+     * Overtime approval
+     * 
+     * @param  \App\Models\Overtime  $Overtime
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(Overtime $Overtime, Request $request)
     {
-        # code...
+        $status = Status::ofOvertime()->where('code', 'approved')->first();
+        
+        $Overtime->approvals()->save(new Approval([
+            'is_approved' => 1,
+            'note' => $request->note,
+            'conducted_by' => Auth::id(),
+            'approvable_id' => $Overtime->id,
+        ]));
+
+        $result = $Overtime->update([
+            'status_id' => $status->id
+        ]);
+
+        return response()->json($result);
+    }
+
+    /**
+     * Attendance correction reject
+     * 
+     * @param  \App\Models\Overtime  $Overtime
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function reject(Overtime $Overtime, Request $request)
+    {
+        $status = Status::ofOvertime()->where('code', 'rejected')->first();
+
+        $Overtime->approvals()->save(new Approval([
+            'is_approved' => 0,
+            'note' => $request->note,
+            'conducted_by' => Auth::id(),
+            'approvable_id' => $Overtime->id,
+        ]));
+
+        $result = $Overtime->update([
+            'status_id' => $status->id
+        ]);
+        
+        return response()->json($result);
     }
 
     /**
