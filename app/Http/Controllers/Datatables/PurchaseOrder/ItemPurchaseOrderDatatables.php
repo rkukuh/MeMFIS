@@ -367,13 +367,12 @@ class ItemPurchaseOrderDatatables extends Controller
             }
 
             $columnsDefault = [
+                'code'     => true,
+                'name'     => true,
+                'description'    => true,
                 'uuid'     => true,
-                'ordered_at'     => true,
-                'number'     => true,
-                'purchase_request'     => true,
-                'vendor'     => true,
                 'Actions'      => true,
-                ];
+                    ];
 
             if ( isset( $_REQUEST['columnsDef'] ) && is_array( $_REQUEST['columnsDef'] ) ) {
                 $columnsDefault = [];
@@ -383,9 +382,16 @@ class ItemPurchaseOrderDatatables extends Controller
             }
 
             // get all raw data
-            $purchase_request = PurchaseOrderItem::with('item')->where('purchase_order_id',$purchaseOrder->id)->get();
-            dd($$purchase_request);
-            $alldata = json_decode( $purchase_request, true);
+            $purchase_requests = PurchaseOrderItem::with('item')->where('purchase_order_id',$purchaseOrder->id)->get();
+            foreach ($purchase_requests as $purchase_request){
+
+                $purchase_request->code .= $purchase_request->item->code;
+                $purchase_request->name .= $purchase_request->item->name;
+                $purchase_request->description .= $purchase_request->item->description;
+                $purchase_request->uuid .= $purchase_request->item->uuid;
+            }
+
+            $alldata = json_decode( $purchase_requests, true);
 
             $data = [];
             // internal use; filter selected columns only from raw data
