@@ -19,7 +19,7 @@ class CreateOvertimesTable extends Migration
             $table->string('code')->nullable();
             $table->unsignedBigInteger('employee_id')->index();
             // $table->unsignedBigInteger('approved_by_id')->nullable();
-            $table->unsignedBigInteger('statuses_id')->index();
+            $table->unsignedBigInteger('status_id')->index();
             $table->date("date");
             $table->time('start');
             $table->time('end');

@@ -17,11 +17,12 @@ class CreateAttendancecorrectionsTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
-            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('employee_id')->index();
             $table->date('correction_date');
             $table->time('correction_time');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('type_id')->nullable(); //correctin time type
+            $table->unsignedBigInteger('status_id')->index();
             $table->timestamps();
             $table->softDeletes();
 
