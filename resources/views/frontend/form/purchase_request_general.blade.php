@@ -38,7 +38,7 @@
 
     #head{
         top:115px;
-        left: 160px;   
+        left: 160px;
         position: absolute;
         color:white;
     }
@@ -84,7 +84,7 @@
                 <tr>
                     <td width="29%" valign="top">Purchase Request No.</td>
                     <td width="2%" valign="top">:</td>
-                    <td width="69%" valign="top">PRPJ-2019/07/00001</td>
+                    <td width="69%" valign="top">{{$purchaseRequest->number}}</td>
                 </tr>
             </table>
         </div>
@@ -106,7 +106,7 @@
                 <table style="margin-top:80px;" width="100%">
                     <tr>
                         <td width="50%" align="center">
-                            Name ; Timestamp
+                            {{$created_by}} ; {{$purchaseRequest->created_at}}
                         </td>
                         <td width="50%" align="center">
                             Name ; Timestamp
@@ -115,7 +115,7 @@
                 </table>
             </div>
         </div>
-        <span style="margin-left:6px;">Created By : Name ; Timestamp &nbsp;&nbsp;&nbsp; Printed By : Name ; Timestamp</span>
+        <span style="margin-left:6px;">Created By : {{$created_by}} ; {{$purchaseRequest->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
         <img src="./img/form/printoutpurchase-request/FooterPurchaseRequest.png" width="100%" alt="" >
     </footer>
 
@@ -128,19 +128,19 @@
                     <td valign="top" width="47%"></td>
                     <td width="32%" rowspan="4">
                         <div class="barcode">
-                            {!!DNS2D::getBarcodeHTML('getbarcode', 'QRCODE',4.5,4.5)!!}
+                            {!!DNS2D::getBarcodeHTML($purchaseRequest->number, 'QRCODE',4.5,4.5)!!}
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td valign="top" width="20%">Date</td>
                     <td valign="top"width="1%">:</td>
-                    <td valign="top" width="47%">10/07/2019</td>
+                    <td valign="top" width="47%">{{$purchaseRequest->requested_at}}</td>
                 </tr>
                 <tr>
                     <td valign="top" width="20%">Date Required</td>
                     <td valign="top"width="1%">:</td>
-                    <td valign="top" width="47%">10-07-2019</td>
+                    <td valign="top" width="47%">{{$purchaseRequest->required_at}}</td>
                 </tr>
                 <tr>
                     <td valign="top" width="20%"></td>
@@ -150,7 +150,7 @@
             </table>
         </div>
     </div>
-        
+
     <div id="content2">
         <div class="container">
             <table width="100%" cellpadding="6">
@@ -162,54 +162,19 @@
                     <th valign="top" align="center" width="8%">Unit</th>
                     <th valign="top" align="center" width="26%">Remark</th>
                 </tr>
-                <tr>
-                    <td valign="top" align="center" width="6%">1</td>
-                    <td valign="top" align="center" width="21%">Pr-12312</td>
-                    <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                    <td valign="top" align="center" width="8%">11</td>
-                    <td valign="top" align="center" width="8%">Bot</td>
-                    <td valign="top" width="26%">Remark</td>
-                </tr>
-                <tr>
-                    <td valign="top" align="center" width="6%">2</td>
-                    <td valign="top" align="center" width="21%">Pr-12312</td>
-                    <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                    <td valign="top" align="center" width="8%">11</td>
-                    <td valign="top" align="center" width="8%">Bot</td>
-                    <td valign="top" width="26%">Remark</td>
-                </tr>
-                <tr>
-                    <td valign="top" align="center" width="6%">3</td>
-                    <td valign="top" align="center" width="21%">Pr-12312</td>
-                    <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                    <td valign="top" align="center" width="8%">11</td>
-                    <td valign="top" align="center" width="8%">Bot</td>
-                    <td valign="top" width="26%">Remark</td>
-                </tr>
-                <tr>
-                    <td valign="top" align="center" width="6%">4</td>
-                    <td valign="top" align="center" width="21%">Pr-12312</td>
-                    <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                    <td valign="top" align="center" width="8%">11</td>
-                    <td valign="top" align="center" width="8%">Bot</td>
-                    <td valign="top" width="26%">Remark</td>
-                </tr>
-                <tr>
-                    <td valign="top" align="center" width="6%">5</td>
-                    <td valign="top" align="center" width="21%">Pr-12312</td>
-                    <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                    <td valign="top" align="center" width="8%">11</td>
-                    <td valign="top" align="center" width="8%">Bot</td>
-                    <td valign="top" width="26%">Remark</td>
-                </tr>
-                <tr>
-                    <td valign="top" align="center" width="6%">6</td>
-                    <td valign="top" align="center" width="21%">Pr-12312</td>
-                    <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                    <td valign="top" align="center" width="8%">11</td>
-                    <td valign="top" align="center" width="8%">Bot</td>
-                    <td valign="top" width="26%">Remark</td>
-                </tr>
+                @php
+                    $i = 1;
+                @endphp
+                @foreach($items as $item)
+                    <tr>
+                        <td valign="top" align="center" width="6%">{{$i++}}</td>
+                        <td valign="top" align="center" width="21%">{{$item->item->code}}</td>
+                        <td valign="top" width="31%">{{$item->item->description}} </th>
+                        <td valign="top" align="center" width="8%">{{$item->quantity}}</td>
+                        <td valign="top" align="center" width="8%">{{$item->unit->name}}</td>
+                        <td valign="top" width="26%">{{$item->note}}</td>
+                    </tr>
+                @endforeach
             </table>
         </div>
     </div>
@@ -220,12 +185,12 @@
             <div class="body">
                 <table width="100%">
                     <tr>
-                        <td>Lorem, Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad excepturi obcaecati unde vel autem quas facilis! Quod distinctio dolor cupiditate, sequi doloremque commodi fuga illo facere, recusandae ipsum earum sed!</td>
+                        <td>{{$purchaseRequest->description}}</td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
-    
+
 </body>
 </html>
