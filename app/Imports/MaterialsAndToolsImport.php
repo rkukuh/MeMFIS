@@ -8,8 +8,10 @@ use App\Models\Price;
 use App\Models\Category;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class MaterialsAndToolsImport implements ToModel, WithHeadingRow
+class MaterialsAndToolsImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading
 {
     /**
     * @param array $row
@@ -19,104 +21,100 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         /** Set the unit of measurement */
-        // dump($row['um']);
-        switch ($row['um']) {
-            case 'EA':
+
+        switch ($row['unit']) {
+            case 'Each (ea)':
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Each')->first()->id;
                 break;
-            case 'SET':
+            case 'set (Set)':
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Set')->first()->id;
                 break;
-            case 'ASY':
+            case 'Assembly (Asy)':
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Assembly')->first()->id;
                 break;
-            case 'UNT':
+            case 'Unit (unt)':
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Unit')->first()->id;
                 break;
-            case 'KIT':
+            case 'kit (Kit)':
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Kit')->first()->id;
                 break;
-            case 'M':
+            case 'meter (m)':
                 $unit = Unit::ofDimension()
                             ->where('name', 'Meter')->first()->id;
                 break;
-            case 'MM':
+            case 'milimeter (mm)':
                 $unit = Unit::ofDimension()
                             ->where('name', 'Milimeter')->first()->id;
                 break;
-            case 'M2':
+            case 'Square Meter (m2)':
                 $unit = Unit::ofDimension()
                             ->where('name', 'Square Meter')->first()->id;
                 break;
-            case 'QT':
+            case 'Quart (qt)':
                 $unit = Unit::ofWeight()
                             ->where('name', 'Quart')->first()->id;
                 break;
-            case 'PAC':
+            case 'Pack (pac)':
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Pack')->first()->id;
                 break;
-            case 'GAL':
+            case 'Gallon (gal)':
                 $unit = Unit::ofWeight()
                             ->where('name', 'Gallon')->first()->id;
                 break;
-            case 'KG':
+            case 'Kilogram (kg)':
                 $unit = Unit::ofWeight()
                             ->where('name', 'Kilogram')->first()->id;
                 break;
-            case 'CAN':
+            case 'can (Can)':
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Can')->first()->id;
                 break;
-            case 'FT':
+            case 'Feet (ft)':
                 $unit = Unit::ofDimension()
-                            ->where('name', 'Foot')->first()->id;
+                            ->where('name', 'Feet')->first()->id;
                 break;
-            case 'LB':
+            case 'Pound (lb)':
                 $unit = Unit::ofWeight()
                             ->where('name', 'Pound')->first()->id;
                 break;
-            case 'PAI':
+            case 'Pail (pai)':
                 $unit = Unit::ofWeight()
                             ->where('name', 'Pail')->first()->id;
                 break;
-            case 'TUB':
+            case 'Tube (tub)':
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Tube')->first()->id;
                 break;
-            case 'OC':
+            case 'Ounce (ons)':
                 $unit = Unit::ofWeight()
                             ->where('name', 'Ounce')->first()->id;
-            case 'ONS':
-                $unit = Unit::ofWeight()
-                            ->where('name', 'Ounce')->first()->id;
+            case 'box (Box)':
+                $unit = Unit::ofQuantity()
+                            ->where('name', 'Box')->first()->id;
                 break;
-            case 'BT':
+            case 'Bottle (Btl)':
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Bottle')->first()->id;
                 break;
-            case 'ROL':
+            case 'roll (Roll)':
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Roll')->first()->id;
                 break;
-            case 'ROLL':
-                $unit = Unit::ofQuantity()
-                            ->where('name', 'Roll')->first()->id;
-                break;
-            case 'L':
+            case 'Liter (lt)':
                 $unit = Unit::ofWeight()
                             ->where('name', 'Liter')->first()->id;
                 break;
-            case 'SHT':
+            case 'sheet (Sheet)':
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Sheet')->first()->id;
                 break;
-            case 'PAA':
+            case 'pair (paa)':
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Paa')->first()->id;
                 break;
@@ -124,51 +122,50 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Bar')->first()->id;
                 break;
+            case 'null':
+                $unit = null;
+                break;
             default:
                 $unit = null;
         }
 
         /** Set the category */
 
-        switch ($row['categories']) {
-            case 'CONSUMABLE':
+        switch ($row['category']) {
+            case 'Consumable':
                 $category = Category::ofItem()
                                     ->where('name', 'Consumable')->first()->id;
                 break;
-            case 'RAWMAT':
+            case 'Raw Material':
                 $category = Category::ofItem()
                                     ->where('name', 'Raw Material')->first()->id;
                 break;
-            case 'RAW MATERIAL':
-                $category = Category::ofItem()
-                                    ->where('name', 'Raw Material')->first()->id;
-                break;
-            case 'TOOLS':
+            case 'Tools':
                 $category = Category::ofItem()
                                     ->where('name', 'Tool')->first()->id;
                 break;
-            case 'TOOL':
-            $category = Category::ofItem()
-                                ->where('name', 'Tool')->first()->id;
-                break;
-            case 'COMP':
+            case 'Component':
                 $category = Category::ofItem()
                                     ->where('name', 'Component')->first()->id;
-                break;
-            case 'BDP':
-                $category = Category::ofItem()
-                                    ->where('name', 'Consumable')->first()->id;
                 break;
             default:
                 $category = Category::ofItem()
                                     ->where('name', 'Consumable')->first()->id;
         }
 
+        switch ($row['stockable']) {
+            case 'YES':
+                $is_stock = true;
+                break;
+            default:
+                $is_stock = false;
+        }
+
         $item = new Item([
-            'code'      => $row['material'],
-            'name'      => $row['material_description'],
+            'code'      => $row['pn'],
+            'name'      => $row['name'],
             'unit_id'   => $unit,
-            'is_stock'  => true,
+            'is_stock'  => $is_stock,
         ]);
 
         $item->save();
@@ -179,5 +176,21 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
         }
 
         $item->categories()->sync($category);
+    }
+
+    /**
+     * Batch size for importing items data.
+     */
+    public function batchSize(): int
+    {
+        return 1000;
+    }
+    
+    /** 
+     * Chunk siza data.
+     */
+    public function chunkSize(): int
+    {
+        return 1000;
     }
 }

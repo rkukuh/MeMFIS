@@ -58,4 +58,17 @@ class Progress extends MemfisModel
     {
         return $this->belongsTo(Type::class);
     }
+
+    /**
+     * One-to-One: A Progress have one Status.
+     *
+     * This function will retrieve Status of a Progress.
+     * See: Status progress() method for the inverse
+     *
+     * @return mixed
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 }

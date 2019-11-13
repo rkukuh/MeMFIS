@@ -155,6 +155,8 @@ Route::name('datatables.')->group(function () {
                 Route::get('/', 'EmployeeDatatables@index')->name('all');
                 Route::get('/statuses', 'EmployeeStatusesDatatables@index')->name('employee.statuses');
                 Route::get('/attendance-file', 'EmployeeAttendanceDatatables@index')->name('attendance.index');
+                Route::get('/modal', 'EmployeeDatatables@employeeModal')->name('modal');
+
                 /** Polymorph */
                 Route::get('/{customer}/faxes', 'EmployeeFaxesDatatables@index')->name('faxes.index');
                 Route::get('/{customer}/emails', 'EmployeeEmailsDatatables@index')->name('emails.index');
@@ -422,6 +424,23 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** STOCK MONITORING */
+
+        Route::name('stock-monitoring.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'stock-monitoring',
+                'namespace' => 'StockMonitoring'
+
+            ], function () {
+
+                Route::get('/item/{item}', 'StockMonitoringDatatables@partNumber')->name('.all');
+                Route::get('/storage/{storage}', 'StockMonitoringDatatables@storage')->name('.all');
+
+            });
+
+        });
         /** FEFO IN */
 
         Route::name('fefo-in.')->group(function () {

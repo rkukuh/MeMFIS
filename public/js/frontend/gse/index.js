@@ -163,12 +163,12 @@ let GseToolReturned = {
                         type: 'DELETE',
                         url: '/gse/' + gse_uuid + '',
                         success: function (data) {
-                            toastr.success('Quotation has been deleted.', 'Deleted', {
+                            toastr.success('GSE has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.gse_tool_returned_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -207,23 +207,24 @@ let GseToolReturned = {
                         type: 'POST',
                         url: '/gse/' + gse_uuid + '/approve',
                         success: function (data) {
-                            toastr.success('Quotation has been approved.', 'Approved', {
+                            toastr.success('GSE has been approved.', 'Approved', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.gse_tool_returned_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
                         },
-                        error: function (jqXhr, json, errorThrown) {
+                        error: function(jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
-                            toastr.error(errors.message, errors.title, {
-                                "closeButton": true,
-                                "timeOut": "0",
-                            }
-                            );
+                            $.each(errors, function(index, value) {
+                                toastr.error(value.message, value.title, {
+                                    closeButton: true,
+                                    timeOut: "0"
+                                });
+                            });
                         }
                     });
                 }

@@ -170,13 +170,14 @@ let MaterialTransfer = {
                             table.originalDataSet = [];
                             table.reload();
                         },
-                        error: function (jqXhr, json, errorThrown) {
+                        error: function(jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
-                            toastr.error(errors.message, errors.title, {
-                                "closeButton": true,
-                                "timeOut": "0",
-                            }
-                            );
+                            $.each(errors, function(index, value) {
+                                toastr.error(value.message, value.title, {
+                                    closeButton: true,
+                                    timeOut: "0"
+                                });
+                            });
                         }
                     });
                 }

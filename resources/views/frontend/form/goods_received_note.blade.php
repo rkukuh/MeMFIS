@@ -38,7 +38,7 @@
 
     #head{
         top:5px;
-        left: 350px;   
+        left: 350px;
         position: absolute;
         color:white;
     }
@@ -57,12 +57,18 @@
         width:100%;
         margin-top:220px;
     }
+    #content3{
+        margin-top:30px;
+    }
 
-    #content3 table tr td{
-      border-left:  1px solid  #d4d7db;
-      border-right:  1px solid  #d4d7db;
-      border-top:  1px solid  #d4d7db;
-      border-bottom:  1px solid  #d4d7db;
+    #content3 .head-table{
+        border-top:  2px solid  #d4d7db;
+        border-bottom:  2px solid  #d4d7db;
+    }
+
+    #content3 .body-table{
+        height: 175px;
+        border-bottom:  2px solid  #d4d7db;
     }
 
     #content4 .body{
@@ -77,17 +83,17 @@
         <header>
             <img src="./img/form/printoutgrn/HeaderGRN.png" alt=""width="100%">
             <div id="head">
-                <p style="font-size:40px">Good Received Notes</p>
-                <table width="75%" style="font-size:16px;margin-top:-40px;">
+                <p style="font-size:40px;color:#34408a"><b>Good Received Notes</b></p>
+                <table width="75%" style="font-size:16px;margin-top:-40px;color:#34408a">
                     <tr>
                         <td width="22%" valign="top"><b>GRN No.</b></td>
                         <td width="2%" valign="top">:</td>
-                        <td width="76%" valign="top">001/GRN-PJ/MMF/02/19</td>
+                        <td width="76%" valign="top">{{$goodsReceived->number}}</td>
                     </tr>
                 </table>
             </div>
         </header>
-        
+
         <footer>
             <div style="margin-bottom:75px; font-size:16px">
                 <div class="container">
@@ -107,12 +113,18 @@
                                 Name ; Timestamp
                             </td>
                             <td width="50%" align="center">
-                                Name ; Timestamp
+                                {{$goodsReceived->receivedBy->first_name." ".$goodsReceived->receivedBy->lat_name}} ; {{$goodsReceived->received_at}}
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
+            <table width="100%">
+                <tr>
+                    <td>  <span style="margin-left:6px;">Created By : {{$created_by}} ; {{$goodsReceived->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span> </td>
+                    <td>Form No. : F02-0211</td>
+                </tr>
+            </table>
             <img src="./img/form/printoutgrn/FooterGRN.png" width="100%" alt="" >
         </footer>
 
@@ -121,12 +133,12 @@
             <div class="container">
                 <table width="100%" cellpadding="3">
                     <tr>
-                        <td valign="top" width="13%"><b>Supplier</b></td>
+                        <td valign="top" width="13%"><b>Vendor</b></td>
                         <td valign="top"width="1%">:</td>
-                        <td valign="top" width="54%">PT. Maju Mundur</td>
+                        <td valign="top" width="54%">{{$goodsReceived->purchase_order->vendor->name}}</td>
                         <td valign="top" width="32%" rowspan="6">
                             <div class="barcode">
-                                {!!DNS2D::getBarcodeHTML('getbarcode', 'QRCODE',5.6,5.6)!!}
+                                {!!DNS2D::getBarcodeHTML($goodsReceived->number, 'QRCODE',5.6,5.6)!!}
                             </div>
                         </td>
                     </tr>
@@ -143,7 +155,7 @@
                     <tr>
                         <td valign="top" width="13%"><b>Ref. DO No</b></td>
                         <td valign="top"width="1%">:</td>
-                        <td valign="top" width="54%">Nomer Surat Jalan - Date</td>
+                        <td valign="top" width="54%"></td>
                     </tr>
                     <tr>
                         <td valign="top" width="13%"><b></b></td>
@@ -165,100 +177,69 @@
                     <tr>
                         <td width="10%" valign="top"><b>Date</b></td>
                         <td width="1%" valign="top">:</td>
-                        <td width="39%" valign="top">01 Februari 2019</td>
+                        <td width="39%" valign="top">{{$goodsReceived->received_at}}</td>
                         <td width="18%" valign="top"></td>
                         <td width="11%" valign="top"><b>PO No.</b></td>
                         <td width="1%" valign="top">:</td>
-                        <td width="20%" valign="top">01 Februari 2019</td>
+                        <td width="20%" valign="top">{{$goodsReceived->purchase_order->number}}</td>
                     </tr>
                     <tr>
-                        <td width="10%" valign="top"><b>Warehouse</b></td>
+                        <td width="10%" valign="top"><b>Storage</b></td>
                         <td width="1%" valign="top">:</td>
-                        <td width="39%" valign="top">01 Februari 2019</td>
+                        <td width="39%" valign="top">{{$goodsReceived->storage->name}}</td>
                         <td width="18%" valign="top"></td>
                         <td width="11%" valign="top"><b>PR No.</b></td>
                         <td width="1%" valign="top">:</td>
-                        <td width="20%" valign="top">01 Februari 2019</td>
+                        <td width="20%" valign="top">{{$goodsReceived->purchase_order->purchase_request->number}}</td>
                     </tr>
                 </table>
             </div>
         </div>
-        
         <div id="content3">
-            <div class="container">
-                <table width="100%" cellpadding="6">
-                    <tr style="background:#f7dd16;">
-                        <th valign="top" align="center" width="6%">No</th>
-                        <th valign="top" align="center" width="21%">P/N</th>
-                        <th valign="top" align="center" width="31%">Item Description</th>
-                        <th valign="top" align="center" width="8%">Qty</th>
-                        <th valign="top" align="center" width="8%">Unit</th>
-                        <th valign="top" align="center" width="26%">Description</th>
-                    </tr>
+            <div class="head-table">
+                <table width="100%" cellpadding="3">
                     <tr>
-                        <td valign="top" align="center" width="6%">1</td>
-                        <td valign="top" align="center" width="21%">Pr-12312</td>
-                        <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                        <td valign="top" align="center" width="8%">11</td>
-                        <td valign="top" align="center" width="8%">Bot</td>
-                        <td valign="top" width="26%">Remark</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" align="center" width="6%">2</td>
-                        <td valign="top" align="center" width="21%">Pr-12312</td>
-                        <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                        <td valign="top" align="center" width="8%">11</td>
-                        <td valign="top" align="center" width="8%">Bot</td>
-                        <td valign="top" width="26%">Remark</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" align="center" width="6%">3</td>
-                        <td valign="top" align="center" width="21%">Pr-12312</td>
-                        <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                        <td valign="top" align="center" width="8%">11</td>
-                        <td valign="top" align="center" width="8%">Bot</td>
-                        <td valign="top" width="26%">Remark</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" align="center" width="6%">4</td>
-                        <td valign="top" align="center" width="21%">Pr-12312</td>
-                        <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                        <td valign="top" align="center" width="8%">11</td>
-                        <td valign="top" align="center" width="8%">Bot</td>
-                        <td valign="top" width="26%">Remark</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" align="center" width="6%">5</td>
-                        <td valign="top" align="center" width="21%">Pr-12312</td>
-                        <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                        <td valign="top" align="center" width="8%">11</td>
-                        <td valign="top" align="center" width="8%">Bot</td>
-                        <td valign="top" width="26%">Remark</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" align="center" width="6%">6</td>
-                        <td valign="top" align="center" width="21%">Pr-12312</td>
-                        <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                        <td valign="top" align="center" width="8%">11</td>
-                        <td valign="top" align="center" width="8%">Bot</td>
-                        <td valign="top" width="26%">Remark</td>
+                        <th valign="top" align="center" width="5%">No</th>
+                        <th valign="top" align="center" width="16%">P/N</th>
+                        <th valign="top" align="center" width="16%">Serial No.</th>
+                        <th valign="top" align="center" width="24%">Item Description</th>
+                        <th valign="top" align="center" width="7%">Qty</th>
+                        <th valign="top" align="center" width="7%">Unit</th>
+                        <th valign="top" align="center" width="14%">Expired Date</th>
+                        <th valign="top" align="center" width="11%">Location</th>
                     </tr>
                 </table>
             </div>
+            <div class="body-table">
+                <table width="100%" cellpadding="3">
+                    @php $i = 1 ;@endphp
+                    @foreach($goodsReceived->items as $item)
+                        <tr>
+                            <td valign="top" align="center" width="5%">{{$i++}}</td>
+                            <td valign="top" align="center" width="16%">{{$item->code}}</td>
+                            <td valign="top" align="center" width="16%">{{$item->pivot->serial_number}}</td>
+                            <td valign="top" width="24%">{{$item->description}}</td>
+                            <td valign="top" align="center" width="7%">{{$item->pivot->quantity}}</td>
+                            <td valign="top" align="center" width="7%">{{$item->pivot->unit_id}}</td>
+                            <td valign="top" align="center" width="14%">{{$item->pivot->expired_at}}</td>
+                            <td valign="top" align="center" width="11%"></td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
         </div>
-    
         <div id="content4">
-        <div class="container">
-            <p style="font-size:14px;">Description :</p>
-            <div class="body">
-                <table width="100%">
-                    <tr>
-                        <td>Lorem, Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad excepturi obcaecati unde vel autem quas facilis! Quod distinctio dolor cupiditate, sequi doloremque commodi fuga illo facere, recusandae ipsum earum sed!</td>
-                    </tr>
-                </table>
+            <div style="margin:0 12px">
+                <p style="font-size:14px;">Remark :</p>
+                <div class="body">
+                    <table width="100%">
+                        <tr>
+                            <td>{{$goodsReceived->note}}</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-        
+
 </body>
 </html>

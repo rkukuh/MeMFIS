@@ -49,7 +49,7 @@ class OldDataImport extends Command
         $this->line('Importing: Work Areas');
         app()->make(OldDataController::class)->workAreas();
 
-        $this->line('Importing: Materials and Tools');
+        // $this->line('Importing: Materials and Tools');
         // app()->make(OldDataController::class)->materialsAndTools();
 
         $this->line('Importing: Task Cards for Boeing');

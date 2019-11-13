@@ -40,18 +40,38 @@ let ItemDatatables = {
         $('.paging_simple_numbers').addClass('padding-datatable');
 
         $('.dataTables_filter').on('click', '.refresh', function () {
-            $('#m_datatable_journal').DataTable().ajax.reload();
+            $('#item_datatable').DataTable().ajax.reload();
         });
 
-        $('.dataTable').on('click', '.select-account_code', function () {
+        $('.dataTable').on('click', '.select-item', function () {
+            $.ajax({
+                url: '/get-item-unit-uuid/'+$(this).data('uuid'),
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('select[name="unit_material"]').empty();
+
+                    $('select[name="unit_material"]').append(
+                        '<option value=""> Select a Unit</option>'
+                    );
+
+                    $.each(data, function (key, value) {
+                        $('select[name="unit_material"]').append(
+                            '<option value="' + key + '">' + value + '</option>'
+                        );
+                    });
+                }
+            });
+
             let uuid = $(this).data('uuid');
             let code = $(this).data('code');
             let name = $(this).data('name');
 
-            document.getElementById('account_code').value = uuid;
+            $('.input-item-uuid').val(uuid);
+            // document.getElementById('account_code').value = uuid;
 
-            $('.search-journal').html(code + " - " + name);
-            $('#modal_account_code').modal('hide');
+            $('.search-item').html(code + " - " + name);
+            $('#modal_item_search').modal('hide');
         });
     }
 };

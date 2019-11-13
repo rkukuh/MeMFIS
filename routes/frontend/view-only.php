@@ -122,9 +122,9 @@ Route::group([
         // Route::view('/gse/inventory-out/show', 'frontend.gse.inventory-out.show')->name('gse.inventory-out.show');
 
 
-        /** STOCK MONITORING */
+        // /** STOCK MONITORING */
 
-        Route::view('/stock-monitoring', 'frontend.stock-monitoring.index')->name('stock-monitoring.index');
+        // Route::view('/stock-monitoring', 'frontend.stock-monitoring.index')->name('stock-monitoring.index');
 
         /** ATTENDANCE */
 

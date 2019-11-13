@@ -135,7 +135,7 @@
                         @component('frontend.common.input.number')
                             @slot('id', 'charge')
                             @slot('name', 'charge')
-                            @slot('class', 'charge')
+                            @slot('class', 'charges')
                             @slot('value' , 0)
                             @slot('min', 0)
                         @endcomponent

@@ -50,8 +50,8 @@
                                         </label>
 
                                         <select name="project" id="project" class="form-control m-select2" style="width:100%" disabled>
-                                            @foreach ($projects as $project)
-                                                <option value="{{$project->id}}" @if($project->id == $project->id) selected @endif>{{$project->code}}</option>
+                                            @foreach ($projects as $data)
+                                                <option value="{{$data->id}}" @if($data->id == $project->id) selected @endif>{{$data->code}}</option>
                                             @endforeach
                                         </select>
 
@@ -62,7 +62,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                                @slot('text', $project->aircraft->name)
+                                            @slot('text', $project->aircraft->name)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                                @slot('text', $project->aircraft_register)
+                                            @slot('text', $project->aircraft_register)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-3 col-md-3 col-lg-3">
@@ -95,7 +95,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                                @slot('text', $project->aircraft_sn)
+                                            @slot('text', $project->aircraft_sn)
                                         @endcomponent
                                     </div>
                                 </div>

@@ -355,16 +355,18 @@ class QuotationController extends Controller
                 'alert-type' => "error"
             );
             array_push($error_messages, $error_message);
+            return response()->json(['error' => $error_messages], '403');
         }
-        if( max($work_progress) != 100){
+        // if( max($work_progress) != 100){
 
-            $error_message = array(
-                'message' => "Scheduled payment work progress still not 100%",
-                'title' => $quotation->number,
-                'alert-type' => "error"
-            );
-            array_push($error_messages, $error_message);
-        }
+        //     $error_message = array(
+        //         'message' => "Scheduled payment work progress still not 100%",
+        //         'title' => $quotation->number,
+        //         'alert-type' => "error"
+        //     );
+        //     array_push($error_messages, $error_message);
+        // return response()->json(['error' => $error_messages], '403');
+        // }
 
         if(sizeof($error_messages) > 0){
             return response()->json(['error' => $error_messages], '403');
@@ -639,7 +641,7 @@ class QuotationController extends Controller
         }
 
         $htcrrs = HtCrr::where('project_id',$quotation->quotationable->id)->whereNull('parent_id')->get();
-        $mats_tools_htcrr = QuotationHtcrrItem::where('quotation_id', $quotation->id)->sum('price_amount');
+        $mats_tools_htcrr = QuotationHtcrrItem::where('quotation_id', $quotation->id)->sum('subtotal');
         if (sizeof($htcrrs) > 0) {
             $data_htcrr = json_decode($quotation->data_htcrr, true);
             $htcrr_workpackage = new WorkPackage();

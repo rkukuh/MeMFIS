@@ -704,6 +704,7 @@
                             </div>
 
                             @include('frontend.task-card.routine.tool.modal')
+                            @include('frontend.common.tool.modal')
 
                             <div class="tool_datatable" id="tool_datatable"></div>
                         </div>
@@ -742,6 +743,7 @@
                             </div>
 
                             @include('frontend.task-card.routine.item.modal')
+                            @include('frontend.common.item.modal')
 
                             <div class="item_datatable" id="item_datatable"></div>
                         </div>
@@ -949,10 +951,10 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool-uom.js') }}"></script>
 
 
-    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/ac-type.js') }}"></script>
 

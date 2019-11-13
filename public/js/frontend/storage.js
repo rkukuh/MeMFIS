@@ -124,7 +124,7 @@ let Storage = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/storage',
+                url: '/warehouse',
                 data: {
                     _token: $('input[name=_token]').val(),
                     code: code,
@@ -194,7 +194,7 @@ let Storage = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/storage/' + triggerid + '/edit',
+                url: '/warehouse/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('id').value = data.id;
                     document.getElementById('name').value = data.name;
@@ -226,7 +226,7 @@ let Storage = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/storage/' + triggerid,
+                url: '/warehouse/' + triggerid,
                 data: {
                     _token: $('input[name=_token]').val(),
                     name: name
@@ -265,7 +265,7 @@ let Storage = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/storage/' + triggerid,
+                url: '/warehouse/' + triggerid,
                 success: function (data) {
                     document.getElementById('TitleModalCustomer').innerHTML = 'Detail Customer #ID-' + triggerid;
                     document.getElementById('name').value = data.name;
@@ -301,7 +301,7 @@ let Storage = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/storage/' + triggerid + '',
+                        url: '/warehouse/' + triggerid + '',
                         success: function (data) {
                             toastr.success(
                                 'Data berhasil dihapus.',

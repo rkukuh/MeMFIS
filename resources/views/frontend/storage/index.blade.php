@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.storage.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.warehouse.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Storage
                             </span>

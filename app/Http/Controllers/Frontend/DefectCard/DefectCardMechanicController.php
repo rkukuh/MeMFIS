@@ -181,15 +181,15 @@ class DefectCardMechanicController extends Controller
      */
     public function update(Request $request, DefectCard $defectcard)
     {
-        $last_action = Progress::where('progressed_by', Auth::id())->orderBy('created_at', 'DESC')->first();
-        if(Status::where('id',$last_action->status_id)->first()->code == 'progress'){
-            $error_notification = array(
-                'message' => "You can't run this defectcard",
-                'title' => "Danger",
-                'alert-type' => "error"
-            );
-            return redirect()->back()->with($error_notification);
-        }
+        // $last_action = Progress::where('progressed_by', Auth::id())->orderBy('created_at', 'DESC')->first();
+        // if(Status::where('id',$last_action->status_id)->first()->code == 'progress'){
+        //     $error_notification = array(
+        //         'message' => "You can't run this defectcard",
+        //         'title' => "Danger",
+        //         'alert-type' => "error"
+        //     );
+        //     return redirect()->back()->with($error_notification);
+        // }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             $defectcard->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
