@@ -6,6 +6,16 @@ use App\MemfisModel;
 
 class leave extends MemfisModel
 {
+    protected $fillable = [
+        'code',
+        'start_date',
+        'end_date',
+        'employee_id',
+        'status_id',
+        'attendance_id',
+        'type_id',
+        'description',
+    ];
     
     /*************************************** RELATIONSHIP ****************************************/
 
