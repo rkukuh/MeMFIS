@@ -85,7 +85,7 @@ class InventoryInController extends Controller
         return view('frontend.inventory-in.edit', [
             'storages' => $storages,
             'inventoryIn' => $inventoryIn,
-            'additionals' => json_decode($inventoryIn->additionals)
+            'additionals' => json_decode($inventoryIn->additional)
         ]);
     }
 
