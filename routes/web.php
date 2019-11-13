@@ -21,6 +21,7 @@ require('frontend/facility.php');
 require('frontend/grn.php');
 require('frontend/gse.php');
 require('frontend/htcrr.php');
+require('frontend/leave.php');
 require('frontend/item.php');
 require('frontend/interchange.php');
 require('frontend/inventory-in.php');
