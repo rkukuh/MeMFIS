@@ -69,7 +69,7 @@
         }
 
         #content2 .body-table{
-            height: 175px;
+            height: 195px;
             border-bottom:  2px solid  #d4d7db;
         }
 
@@ -113,7 +113,12 @@
     </header>
 
     <footer>
-        <span style="margin-left:6px;">Created By : Name ; Timestamp &nbsp;&nbsp;&nbsp; Printed By : Name ; Timestamp</span>
+        <table width="100%">
+            <tr>
+                <td>  <span style="margin-left:6px;">Created By : Name ; Timestamp &nbsp;&nbsp;&nbsp; Printed By : Name ; Timestamp</span> </td>
+                <td>Form No. : F02-0504</td>
+            </tr>
+        </table>
         <img src="./img/form/printoutpurchase-order/FooterPO.png" width="100%" alt="" >
     </footer>
 
@@ -199,27 +204,62 @@
                     <th valign="top" width="12%">Rp. 1.221.232</th>
                 </tr>
                 <tr>
-                    <td valign="top" width="78%">Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint laborum architecto nemo facilis magni eos unde aperiam eius alias cupiditate, consequuntur fugit, voluptatum cumque autem? Sapiente, architecto! Nesciunt, dolores suscipit. ipsum dolor sit amet consectetur adipisicing elit. Voluptates veritatis accusantium lorem</td>
+                    <td valign="top" width="78%" rowspan="2">Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint laborum architecto nemo facilis magni eos unde aperiam eius alias cupiditate, consequuntur fugit, voluptatum cumque autem? Sapiente, architecto! Nesciunt, dolores suscipit. ipsum dolor sit amet consectetur adipisicing elit. Voluptates veritatis accusantium lorem</td>
                     <th valign="top" width="8%">PPN 10%</th>
                     <th valign="top" width="2%">:</th>
                     <th valign="top" width="12%">Rp. 1.221.232</th>
                 </tr>
+                <tr>
+                    <th valign="top" width="8%">Grandtotal</th>
+                    <th valign="top" width="2%">:</th>
+                    <th valign="top" width="12%">Rp. 1.221.232</th>
+                </tr>
             </table>
-            <div style="position:relative;">
-                <div style="width:100%;position:relative;margin-top:10px;">
-                    <img src="./img/form/printoutpurchase-order/PO.jpg" width="30%" alt="" style="position:absolute;right:158px;">
-                </div>
-                <table width="100%" style="margin-top:11px;z-index:1">
+            <div>
+                <table width="100%" style="margin-top:11px;">
                     <tr>
                         <th valign="top" width="78%">Term of Payment : 30 Days / cash</th>
-                        <th valign="top" width="8%" style="color:white;">Grandtotal</th>
-                        <th valign="top" width="2%" style="color:white;">:</th>
-                        <th valign="top" width="12%" style="color:white;">Rp. 1.221.232</th>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
 
+    <div id="content4">
+        <div class="container">
+            <table width="100%" style="margin-top:20px;">
+                <tr>
+                    <td valign="top" width="37%" height="70" rowspan="3">
+                        <span style="line-height:20px;">
+                            <b>Shipping Address :</b> <br> PT. MERPATI MAINTANANCE FACILITY <br> JL. RAYA JUANDA NO.16 <br>
+                            BETRO,SEDATI SIDOARJO JAWA TIMUR <br> INDONESIA 61253
+                        </span>
+                    </td>
+                    <td align="center" valign="top" width="30%">
+                        <b>Checked By</b>
+                    </td>
+                    <td align="center" valign="top" width="33%">
+                        <b>Approved By</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" valign="bottom" height="70" width="30%">
+                        <b>Name;Timestamp (Approval 1)</b><br>
+                        <span>jabatan(link with HR)</span>
+                    </td>
+                    <td align="center" valign="bottom" height="70" width="33%">
+                        <b>Name;Timestamp (Approval 2)</b><br>
+                        <span>jabatan(link with HR)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" valign="bottom" width="30%">
+                    </td>
+                    <td align="center" valign="bottom"width="33%">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

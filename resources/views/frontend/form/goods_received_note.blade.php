@@ -57,12 +57,18 @@
         width:100%;
         margin-top:220px;
     }
+    #content3{
+        margin-top:30px;
+    }
 
-    #content3 table tr td{
-      border-left:  1px solid  #d4d7db;
-      border-right:  1px solid  #d4d7db;
-      border-top:  1px solid  #d4d7db;
-      border-bottom:  1px solid  #d4d7db;
+    #content3 .head-table{
+        border-top:  2px solid  #d4d7db;
+        border-bottom:  2px solid  #d4d7db;
+    }
+
+    #content3 .body-table{
+        height: 175px;
+        border-bottom:  2px solid  #d4d7db;
     }
 
     #content4 .body{
@@ -77,8 +83,8 @@
         <header>
             <img src="./img/form/printoutgrn/HeaderGRN.png" alt=""width="100%">
             <div id="head">
-                <p style="font-size:40px">Good Received Notes</p>
-                <table width="75%" style="font-size:16px;margin-top:-40px;">
+                <p style="font-size:40px;color:#34408a"><b>Good Received Notes</b></p>
+                <table width="75%" style="font-size:16px;margin-top:-40px;color:#34408a">
                     <tr>
                         <td width="22%" valign="top"><b>GRN No.</b></td>
                         <td width="2%" valign="top">:</td>
@@ -113,6 +119,12 @@
                     </table>
                 </div>
             </div>
+            <table width="100%">
+                <tr>
+                    <td>  <span style="margin-left:6px;">Created By : Name ; Timestamp &nbsp;&nbsp;&nbsp; Printed By : Name ; Timestamp</span> </td>
+                    <td>Form No. : F02-0211</td>
+                </tr>
+            </table>
             <img src="./img/form/printoutgrn/FooterGRN.png" width="100%" alt="" >
         </footer>
 
@@ -121,7 +133,7 @@
             <div class="container">
                 <table width="100%" cellpadding="3">
                     <tr>
-                        <td valign="top" width="13%"><b>Supplier</b></td>
+                        <td valign="top" width="13%"><b>Vendor</b></td>
                         <td valign="top"width="1%">:</td>
                         <td valign="top" width="54%">PT. Maju Mundur</td>
                         <td valign="top" width="32%" rowspan="6">
@@ -172,7 +184,7 @@
                         <td width="20%" valign="top">01 Februari 2019</td>
                     </tr>
                     <tr>
-                        <td width="10%" valign="top"><b>Warehouse</b></td>
+                        <td width="10%" valign="top"><b>Storage</b></td>
                         <td width="1%" valign="top">:</td>
                         <td width="39%" valign="top">01 Februari 2019</td>
                         <td width="18%" valign="top"></td>
@@ -183,82 +195,48 @@
                 </table>
             </div>
         </div>
-        
         <div id="content3">
-            <div class="container">
-                <table width="100%" cellpadding="6">
-                    <tr style="background:#f7dd16;">
-                        <th valign="top" align="center" width="6%">No</th>
-                        <th valign="top" align="center" width="21%">P/N</th>
-                        <th valign="top" align="center" width="31%">Item Description</th>
-                        <th valign="top" align="center" width="8%">Qty</th>
-                        <th valign="top" align="center" width="8%">Unit</th>
-                        <th valign="top" align="center" width="26%">Description</th>
-                    </tr>
+            <div class="head-table">
+                <table width="100%" cellpadding="3">
                     <tr>
-                        <td valign="top" align="center" width="6%">1</td>
-                        <td valign="top" align="center" width="21%">Pr-12312</td>
-                        <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                        <td valign="top" align="center" width="8%">11</td>
-                        <td valign="top" align="center" width="8%">Bot</td>
-                        <td valign="top" width="26%">Remark</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" align="center" width="6%">2</td>
-                        <td valign="top" align="center" width="21%">Pr-12312</td>
-                        <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                        <td valign="top" align="center" width="8%">11</td>
-                        <td valign="top" align="center" width="8%">Bot</td>
-                        <td valign="top" width="26%">Remark</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" align="center" width="6%">3</td>
-                        <td valign="top" align="center" width="21%">Pr-12312</td>
-                        <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                        <td valign="top" align="center" width="8%">11</td>
-                        <td valign="top" align="center" width="8%">Bot</td>
-                        <td valign="top" width="26%">Remark</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" align="center" width="6%">4</td>
-                        <td valign="top" align="center" width="21%">Pr-12312</td>
-                        <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                        <td valign="top" align="center" width="8%">11</td>
-                        <td valign="top" align="center" width="8%">Bot</td>
-                        <td valign="top" width="26%">Remark</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" align="center" width="6%">5</td>
-                        <td valign="top" align="center" width="21%">Pr-12312</td>
-                        <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                        <td valign="top" align="center" width="8%">11</td>
-                        <td valign="top" align="center" width="8%">Bot</td>
-                        <td valign="top" width="26%">Remark</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" align="center" width="6%">6</td>
-                        <td valign="top" align="center" width="21%">Pr-12312</td>
-                        <td valign="top" width="31%">Lorem ipsum dolor, sit amet consectetur </th>
-                        <td valign="top" align="center" width="8%">11</td>
-                        <td valign="top" align="center" width="8%">Bot</td>
-                        <td valign="top" width="26%">Remark</td>
+                        <th valign="top" align="center" width="5%">No</th>
+                        <th valign="top" align="center" width="16%">P/N</th>
+                        <th valign="top" align="center" width="16%">Serial No.</th>
+                        <th valign="top" align="center" width="24%">Item Description</th>
+                        <th valign="top" align="center" width="7%">Qty</th>
+                        <th valign="top" align="center" width="7%">Unit</th>
+                        <th valign="top" align="center" width="14%">Expired Date</th>
+                        <th valign="top" align="center" width="11%">Location</th>
                     </tr>
                 </table>
             </div>
+            <div class="body-table">
+                <table width="100%" cellpadding="3">
+                    <tr>
+                        <td valign="top" align="center" width="5%">1</td>
+                        <td valign="top" align="center" width="16%">P/N 1232</td>
+                        <td valign="top" align="center" width="16%">2</td>
+                        <td valign="top" width="24%">Lorem, ipsum dolor sit amet consec</td>
+                        <td valign="top" align="center" width="7%">Bot</td>
+                        <td valign="top" align="center" width="7%">12.000</td>
+                        <td valign="top" align="center" width="14%">24.000</td>
+                        <td valign="top" align="center" width="11%">12%</td>
+                    </tr>
+                </table>
+            </div>  
         </div>
-    
         <div id="content4">
-        <div class="container">
-            <p style="font-size:14px;">Description :</p>
-            <div class="body">
-                <table width="100%">
-                    <tr>
-                        <td>Lorem, Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad excepturi obcaecati unde vel autem quas facilis! Quod distinctio dolor cupiditate, sequi doloremque commodi fuga illo facere, recusandae ipsum earum sed!</td>
-                    </tr>
-                </table>
+            <div style="margin:0 12px">
+                <p style="font-size:14px;">Remark :</p>
+                <div class="body">
+                    <table width="100%">
+                        <tr>
+                            <td>Lorem, Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad excepturi obcaecati unde vel autem quas facilis! Quod distinctio dolor cupiditate, sequi doloremque commodi fuga illo facere, recusandae ipsum earum sed!</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
         
 </body>
 </html>
