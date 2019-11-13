@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\PurchaseRequest;
 
 use Auth;
 use Carbon\Carbon;
+use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\Approval;
@@ -45,6 +46,7 @@ class ItemPurchaseRequestController extends Controller
      */
     public function store(ItemPurchaseRequestStore $request,PurchaseRequest $purchaseRequest,Item $item)
     {
+        $request->merge(['unit_id' =>  Unit::where('uuid',$request->unit_id)->first()->id]);
         $exists = PurchaseRequestItem::where('purchase_request_id',$purchaseRequest->id)->where('item_id',$item->id)->first();
         if($exists){
             return response()->json(['title' => "Danger"]);
@@ -86,9 +88,11 @@ class ItemPurchaseRequestController extends Controller
      * @param  \App\Models\PurchaseRequest  $purchaseRequest
      * @return \Illuminate\Http\Response
      */
-    public function edit(PurchaseRequest $purchaseRequest)
+    public function edit(PurchaseRequest $purchaseRequest, $item)
     {
-        //
+        $item = Item::find($item);
+
+        return response()->json($item);
     }
 
     /**
@@ -101,6 +105,7 @@ class ItemPurchaseRequestController extends Controller
     public function updateGeneral(ItemGeneralPurchaseRequestUpdate $request, $item)
     {
         $purchaseRequest = PurchaseRequestItem::find($item);
+        $request->merge(['item_id' =>  Item::where('uuid',$request->item_id)->first()->id]);
 
         $purchaseRequest->update($request->all());
 

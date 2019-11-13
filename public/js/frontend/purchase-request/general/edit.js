@@ -87,7 +87,7 @@ let PurchaseRequest = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_general" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.item.uuid+' data-quantity='+t.quantity+' data-unit='+t.unit_id+' data-remark='+t.note+' data-id=' +
+                            '<button data-toggle="modal" data-target="#modal_general" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.item.uuid+' data-item_code='+t.item.code+' data-item_name='+t.item.name+' data-quantity='+t.quantity+' data-unit='+t.item.unit.uuid+' data-remark='+t.note+' data-id=' +
                             t.id +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
@@ -180,9 +180,9 @@ let PurchaseRequest = {
                                 .find("input[type=checkbox], input[type=radio]")
                                     .prop("checked", "")
                                     .end()
-                                .find("select")
-                                    .select2('val','All')
-                                    .end();
+                                // .find("select")
+                                //     .select2('val','All')
+                                //     .end();
                             })
 
                             toastr.success("Item has been added.", "Success", {
@@ -200,48 +200,38 @@ let PurchaseRequest = {
         });
 
         $('.item_datatable').on('click', '.edit-item', function () {
-            let unit_id = $(this).data('unit');
+            let unit_uuid = $(this).data('unit');
 
-            $.ajax({
-                url: '/get-items-uuid/',
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
+            let code = $(this).data('item_code');
+            let name = $(this).data('item_name');
 
-                    $('select[name="item"]').empty();
+            $('.input-item-uuid').val($(this).data('item'));
 
-                    $.each(data, function (key, value) {
-                        if (key == uuid) {
-                            $('select[name="item"]').append(
-                                '<option value="' + key + '" selected>' + value + '</option>'
-                            );
-                        } else {
-                            $('select[name="item"]').append(
-                                '<option value="' + key + '">' + value + '</option>'
-                            );
-                        }
+            $('.search-item').html(code + " - " + name);
 
-                    });
-                }
-            });
             $("#item").attr('disabled', true);
 
             $.ajax({
-                url: '/get-item-unit-uuid/'+ $(this).data('item'),
+                url: '/get-units/'+$(this).data('item'),
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    let index = 1;
+                    $('select[name="unit_material"]').empty();
 
-                    $('select[name="unit_id"]').empty();
+                    $('select[name="unit_material"]').append(
+                        '<option value=""> Select a Unit</option>'
+                    );
 
                     $.each(data, function (key, value) {
-                        if (key == unit_id) {
-                            $('select[name="unit_id"]').append(
+                        // $('select[name="unit_material"]').append(
+                        //     '<option value="' + key + '">' + value + '</option>'
+                        // );
+                        if (key == unit_uuid) {
+                            $('select[name="unit_material"]').append(
                                 '<option value="' + key + '" selected>' + value + '</option>'
                             );
                         } else {
-                            $('select[name="unit_id"]').append(
+                            $('select[name="unit_material"]').append(
                                 '<option value="' + key + '">' + value + '</option>'
                             );
                         }
@@ -249,6 +239,30 @@ let PurchaseRequest = {
                     });
                 }
             });
+
+            // $.ajax({
+            //     url: '/get-item-unit-uuid/'+ $(this).data('item'),
+            //     type: 'GET',
+            //     dataType: 'json',
+            //     success: function (data) {
+            //         let index = 1;
+
+            //         $('select[name="unit_id"]').empty();
+
+            //         $.each(data, function (key, value) {
+            //             if (key == unit_id) {
+            //                 $('select[name="unit_id"]').append(
+            //                     '<option value="' + key + '" selected>' + value + '</option>'
+            //                 );
+            //             } else {
+            //                 $('select[name="unit_id"]').append(
+            //                     '<option value="' + key + '">' + value + '</option>'
+            //                 );
+            //             }
+
+            //         });
+            //     }
+            // });
 
             // document.getElementById('material').innerText = $(this).data('item');
             document.getElementById('qty').value = $(this).data('quantity');
@@ -260,6 +274,7 @@ let PurchaseRequest = {
         });
 
         $(".modal-footer").on("click", ".update-item", function() {
+            let item = $("#material").val();
             let uuid = $("input[name=uuid]").val();
             let quantity = $("input[name=qty]").val();
             let unit = $("#unit_id").val();
@@ -272,6 +287,7 @@ let PurchaseRequest = {
                 url: '/purchase-request/general/item/'+uuid,
                 type: "PUT",
                 data: {
+                    item_id: item,
                     quantity: quantity,
                     unit_id: unit,
                     note: remark,
