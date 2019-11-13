@@ -11,6 +11,7 @@ class AttendanceCorrection extends MemfisModel
     protected $dates = ['correction_date'];
 
     protected $fillable = [
+        'code',
         'correction_date',
         'correction_time',
         'employee_id',
@@ -45,5 +46,31 @@ class AttendanceCorrection extends MemfisModel
     public function employee()
     {
         return $this->belongsTo(Employee::class);
+    }
+
+     /**
+     * One-to-One: An Attendance Correction have one Status Attendance Status.
+     *
+     * This function will retrieve Status Attendance correction of a given Employee.
+     * See: Status attendance_correction() method for the inverse
+     *
+     * @return mixed
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    /**
+     * One-to-Many: An attendance correction may have zero or many type.
+     *
+     * This function will retrieve the type of an address.
+     * See: Type's attendance_correction() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
     }
 }

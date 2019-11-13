@@ -17,17 +17,14 @@ class AttendanceCorrectionDatatables extends Controller
      */
     public function index()
     {
-        $AttendanceCorrections = AttendanceCorrection::with('employee')->get();
+        $AttendanceCorrections = AttendanceCorrection::with('employee','status','approvals')->get();
 
         foreach($AttendanceCorrections as $AttendanceCorrection){
-            if($AttendanceCorrection->deleted_at <> null){
-                $AttendanceCorrection->status .= 'Void';
-            }
-            else if(!empty($AttendanceCorrection->approvals->toArray())){
-                $AttendanceCorrection->status .= 'Approved';
+            if(sizeof($AttendanceCorrection->approvals) > 0){
+                $conductedBy = $AttendanceCorrection->approvals->first()->conductedBy;
+                $AttendanceCorrection->conductedBy .= date_format($AttendanceCorrection->created_at,"d/m/Y") ." ".$conductedBy->full_name;
             }else{
-                $AttendanceCorrection->status .= '';
-
+                $AttendanceCorrection->conductedBy .= " ";
             }
         }
 
