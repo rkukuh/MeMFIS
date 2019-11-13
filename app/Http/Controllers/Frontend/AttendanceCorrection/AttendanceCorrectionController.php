@@ -178,12 +178,12 @@ class AttendanceCorrectionController extends Controller
     }
 
     /**
-     * Attendance correction rejection
+     * Attendance correction reject
      * 
      * @param  \App\Models\AttendanceCorrection  $attcor
      * @return \Illuminate\Http\Response
      */
-    public function rejection(AttendanceCorrection $attcor, Request $request){
+    public function reject(AttendanceCorrection $attcor, Request $request){
         $status = Status::ofAttendanceCorrection()->where('code', 'rejected')->first();
 
         $attcor->approvals()->save(new Approval([

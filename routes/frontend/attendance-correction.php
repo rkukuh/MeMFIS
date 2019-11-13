@@ -19,7 +19,7 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('attendance-correction')->group(function () {
 
                     Route::post('/{attcor}/approve', 'AttendanceCorrectionController@approval')->name('attendance-correction.approve');
-                    Route::post('/{attcor}/reject', 'AttendanceCorrectionController@rejection')->name('attendance-correction.reject');
+                    Route::post('/{attcor}/reject', 'AttendanceCorrectionController@reject')->name('attendance-correction.reject');
 
                     /** API */
                     // Route::get('/{employee}/date/{date}', 'AttendanceCorrectionController@getAttendance')->name('get.attendance');
