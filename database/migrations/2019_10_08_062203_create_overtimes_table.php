@@ -20,11 +20,11 @@ class CreateOvertimesTable extends Migration
             $table->unsignedBigInteger('employee_id')->index();
             $table->unsignedBigInteger('attendance_id')->nullable();
             $table->unsignedBigInteger('status_id')->index();
-            $table->date("date");
+            $table->date('date');
             $table->time('start');
             $table->time('end');
-            $table->time("total");
-            $table->text('desc');
+            $table->time('total');
+            $table->text('description');
             $table->timestamps();
             $table->softDeletes();
 
