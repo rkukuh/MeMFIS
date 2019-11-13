@@ -22,6 +22,19 @@ class AttendanceCorrection extends MemfisModel
 
     /*************************************** RELATIONSHIP ****************************************/
 
+    /**
+     * One-to-One: An employee attendance have zero or one correction.
+     *
+     * This function will retrieve correction of a given attendance.
+     * See: Attendance Correction's attendance() method for the inverse
+     *
+     * @return mixed
+     */
+    public function attendance_correction()
+    {
+        return $this->belongsTo(EmployeeAttendance::class);
+    }
+
      /**
      * Polymorphic: An entity can have zero or many approvals.
      *

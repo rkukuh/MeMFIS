@@ -18,6 +18,21 @@ class Overtime extends MemfisModel
         "desc"
     ];
 
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-One: An employee attendance have zero or one overtime.
+     *
+     * This function will retrieve overtime of a given attendance.
+     * See: Employee Attendance's attendance_overtime() method for the inverse
+     *
+     * @return mixed
+     */
+    public function attendance()
+    {
+        return $this->belongsTo(EmployeeAttendance::class);
+    }
+
     /**
      * One-to-Many: An employee may have zero or many attendance.
      *
@@ -39,7 +54,7 @@ class Overtime extends MemfisModel
      *
      * @return mixed
      */
-    public function statuses()
+    public function status()
     {
         return $this->belongsTo(Status::class);
     }
