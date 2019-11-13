@@ -38,7 +38,7 @@
 
     #head{
         top:5px;
-        left: 350px;   
+        left: 350px;
         position: absolute;
         color:white;
     }
@@ -88,12 +88,12 @@
                     <tr>
                         <td width="22%" valign="top"><b>GRN No.</b></td>
                         <td width="2%" valign="top">:</td>
-                        <td width="76%" valign="top">001/GRN-PJ/MMF/02/19</td>
+                        <td width="76%" valign="top">{{$goodsReceived->number}}</td>
                     </tr>
                 </table>
             </div>
         </header>
-        
+
         <footer>
             <div style="margin-bottom:75px; font-size:16px">
                 <div class="container">
@@ -113,7 +113,7 @@
                                 Name ; Timestamp
                             </td>
                             <td width="50%" align="center">
-                                Name ; Timestamp
+                                {{$goodsReceived->receivedBy->first_name." ".$goodsReceived->receivedBy->lat_name}} ; {{$goodsReceived->received_at}}
                             </td>
                         </tr>
                     </table>
@@ -121,7 +121,7 @@
             </div>
             <table width="100%">
                 <tr>
-                    <td>  <span style="margin-left:6px;">Created By : Name ; Timestamp &nbsp;&nbsp;&nbsp; Printed By : Name ; Timestamp</span> </td>
+                    <td>  <span style="margin-left:6px;">Created By : {{$created_by}} ; {{$goodsReceived->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span> </td>
                     <td>Form No. : F02-0211</td>
                 </tr>
             </table>
@@ -135,10 +135,10 @@
                     <tr>
                         <td valign="top" width="13%"><b>Vendor</b></td>
                         <td valign="top"width="1%">:</td>
-                        <td valign="top" width="54%">PT. Maju Mundur</td>
+                        <td valign="top" width="54%">{{$goodsReceived->purchase_order->vendor->name}}</td>
                         <td valign="top" width="32%" rowspan="6">
                             <div class="barcode">
-                                {!!DNS2D::getBarcodeHTML('getbarcode', 'QRCODE',5.6,5.6)!!}
+                                {!!DNS2D::getBarcodeHTML($goodsReceived->number, 'QRCODE',5.6,5.6)!!}
                             </div>
                         </td>
                     </tr>
@@ -155,7 +155,7 @@
                     <tr>
                         <td valign="top" width="13%"><b>Ref. DO No</b></td>
                         <td valign="top"width="1%">:</td>
-                        <td valign="top" width="54%">Nomer Surat Jalan - Date</td>
+                        <td valign="top" width="54%"></td>
                     </tr>
                     <tr>
                         <td valign="top" width="13%"><b></b></td>
@@ -177,20 +177,20 @@
                     <tr>
                         <td width="10%" valign="top"><b>Date</b></td>
                         <td width="1%" valign="top">:</td>
-                        <td width="39%" valign="top">01 Februari 2019</td>
+                        <td width="39%" valign="top">{{$goodsReceived->received_at}}</td>
                         <td width="18%" valign="top"></td>
                         <td width="11%" valign="top"><b>PO No.</b></td>
                         <td width="1%" valign="top">:</td>
-                        <td width="20%" valign="top">01 Februari 2019</td>
+                        <td width="20%" valign="top">{{$goodsReceived->purchase_order->number}}</td>
                     </tr>
                     <tr>
                         <td width="10%" valign="top"><b>Storage</b></td>
                         <td width="1%" valign="top">:</td>
-                        <td width="39%" valign="top">01 Februari 2019</td>
+                        <td width="39%" valign="top">{{$goodsReceived->storage->name}}</td>
                         <td width="18%" valign="top"></td>
                         <td width="11%" valign="top"><b>PR No.</b></td>
                         <td width="1%" valign="top">:</td>
-                        <td width="20%" valign="top">01 Februari 2019</td>
+                        <td width="20%" valign="top">{{$goodsReceived->purchase_order->purchase_request->number}}</td>
                     </tr>
                 </table>
             </div>
@@ -212,18 +212,21 @@
             </div>
             <div class="body-table">
                 <table width="100%" cellpadding="3">
-                    <tr>
-                        <td valign="top" align="center" width="5%">1</td>
-                        <td valign="top" align="center" width="16%">P/N 1232</td>
-                        <td valign="top" align="center" width="16%">2</td>
-                        <td valign="top" width="24%">Lorem, ipsum dolor sit amet consec</td>
-                        <td valign="top" align="center" width="7%">Bot</td>
-                        <td valign="top" align="center" width="7%">12.000</td>
-                        <td valign="top" align="center" width="14%">24.000</td>
-                        <td valign="top" align="center" width="11%">12%</td>
-                    </tr>
+                    @php $i = 1 ;@endphp
+                    @foreach($goodsReceived->items as $item)
+                        <tr>
+                            <td valign="top" align="center" width="5%">{{$i++}}</td>
+                            <td valign="top" align="center" width="16%">{{$item->code}}</td>
+                            <td valign="top" align="center" width="16%">{{$item->pivot->serial_number}}</td>
+                            <td valign="top" width="24%">{{$item->description}}</td>
+                            <td valign="top" align="center" width="7%">{{$item->pivot->quantity}}</td>
+                            <td valign="top" align="center" width="7%">{{$item->pivot->unit_id}}</td>
+                            <td valign="top" align="center" width="14%">{{$item->pivot->expired_at}}</td>
+                            <td valign="top" align="center" width="11%"></td>
+                        </tr>
+                    @endforeach
                 </table>
-            </div>  
+            </div>
         </div>
         <div id="content4">
             <div style="margin:0 12px">
@@ -231,12 +234,12 @@
                 <div class="body">
                     <table width="100%">
                         <tr>
-                            <td>Lorem, Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad excepturi obcaecati unde vel autem quas facilis! Quod distinctio dolor cupiditate, sequi doloremque commodi fuga illo facere, recusandae ipsum earum sed!</td>
+                            <td>{{$goodsReceived->note}}</td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-        
+
 </body>
 </html>
