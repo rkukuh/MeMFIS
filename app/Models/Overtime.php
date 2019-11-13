@@ -8,6 +8,7 @@ class Overtime extends MemfisModel
 {
     protected $fillable = [
         "uuid",
+        "code",
         "employee_id",
         "status_id",
         "date",

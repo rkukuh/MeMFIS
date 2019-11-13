@@ -61,6 +61,7 @@ class OvertimeController extends Controller
         $end_diff = Carbon::parse($date." ".$end,"Asia/Jakarta");
         $time_diff = $start_diff->diff($end_diff)->format("%H:%I:%S");
         $desc = $request->input("description");
+        $code = DocumentNumber::generate('OVRT-', OvertimeStore::withTrashed()->count()+1);
         // $timestamp_start = Carbon::parse($date." ".$start,"Asia/Jakarta");
         // $timestamp_end = Carbon::parse($date." ". $end,"Asia/Jakarta");
         // ->format("%H:%I:%S")
@@ -69,6 +70,7 @@ class OvertimeController extends Controller
 
         Overtime::create([
                 "uuid" => Str::uuid(),
+                "code" => $code,
                 "employee_id" => $employee_id,
                 "date" => $date,
                 "start" => $start,
