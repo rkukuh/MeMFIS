@@ -1,5 +1,5 @@
 let ItemDatatables = {
-    init: function () {
+    init: function (url) {
         $("#item_datatable").DataTable({
             "dom": '<"top"f>rt<"bottom">pl',
             responsive: !0,
@@ -8,7 +8,7 @@ let ItemDatatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50 ],
             pageLength:5,
-            ajax: "/datatables/item/modal/",
+            ajax: url,
             columns: [
                 {
                     data: "code"
@@ -76,5 +76,11 @@ let ItemDatatables = {
 };
 
 jQuery(document).ready(function () {
-    ItemDatatables.init();
+    if(typeof url === 'undefined'){
+        url = "/datatables/item/modal/";
+        ItemDatatables.init(url);
+    }else{
+        ItemDatatables.init(url);
+    }
+
 });
