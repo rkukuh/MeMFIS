@@ -80,7 +80,7 @@
     </style>
 </head>
 <body>
-    
+
     <header>
         <img src="./img/form/printoutpurchase-order/HeaderPO.png" alt=""width="100%">
         <div id="head">
@@ -90,22 +90,22 @@
                     <tr>
                         <td valign="top" width="35%">Purchase Order No.</td>
                         <td valign="top" width="1%">:</td>
-                        <td valign="top" width="64%">Nomor PO</td>
+                        <td valign="top" width="64%">{{$purchaseOrder->number}}</td>
                     </tr>
                     <tr>
                         <td valign="top" width="35%">Date</td>
                         <td valign="top" width="1%">:</td>
-                        <td valign="top" width="64%">16 Januari 2019</td>
+                        <td valign="top" width="64%">{{$purchaseOrder->ordered_at}}</td>
                     </tr>
                     <tr>
                         <td valign="top" width="35%">Valid Until</td>
                         <td valign="top" width="1%">:</td>
-                        <td valign="top" width="64%">20 Januari 2019</td>
+                        <td valign="top" width="64%">{{$purchaseOrder->valid_until}}</td>
                     </tr>
                     <tr>
                         <td valign="top" width="35%">Ref PR No.</td>
                         <td valign="top" width="1%">:</td>
-                        <td valign="top" width="64%">001/PR-PJ/MMF/01/19</td>
+                        <td valign="top" width="64%">{{$purchaseOrder->purchase_request->number}}</td>
                     </tr>
                 </table>
             </div>
@@ -115,7 +115,7 @@
     <footer>
         <table width="100%">
             <tr>
-                <td>  <span style="margin-left:6px;">Created By : Name ; Timestamp &nbsp;&nbsp;&nbsp; Printed By : Name ; Timestamp</span> </td>
+                <td>  <span style="margin-left:6px;">Created By : {{$created_by}} ; {{$purchaseOrder->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span> </td>
                 <td>Form No. : F02-0504</td>
             </tr>
         </table>
@@ -143,19 +143,19 @@
                     </td>
                     <td valign="top" width="33%" height="70" align="center">
                         <div class="barcode">
-                            {!!DNS2D::getBarcodeHTML('PO-Number', 'QRCODE',5.6,5.6)!!}
+                            {!!DNS2D::getBarcodeHTML($purchaseOrder->number, 'QRCODE',5.6,5.6)!!}
                         </div>
                     </td>
                 </tr>
             </table>
-            <table width="100%" style="margin-top:15px;"> 
+            <table width="100%" style="margin-top:15px;">
                 <tr>
                     <td valign="top" width="5%">Currency</td>
                     <td valign="top" width="1%">:</td>
-                    <td valign="top" width="10%">USD</td>
+                    <td valign="top" width="10%">{{$purchaseOrder->currency->name}}</td>
                     <td valign="top" width="5%">Rate</td>
                     <td valign="top" width="1%">:</td>
-                    <td valign="top" width="78%">Rp. 15.000</td>
+                    <td valign="top" width="78%">{{$purchaseOrder->exchange_rate}}</td>
                 </tr>
             </table>
         </div>
@@ -179,19 +179,24 @@
         </div>
         <div class="body-table">
             <table width="100%" cellpadding="3">
-                <tr>
-                    <td valign="top" align="center" width="5%">1</td>
-                    <td valign="top" align="center" width="11%">P/N 1232</td>
-                    <td valign="top" width="24%">Lorem, ipsum dolor sit amet consec</td>
-                    <td valign="top" align="center" width="7%">2</td>
-                    <td valign="top" align="center" width="7%">Bot</td>
-                    <td valign="top" align="center" width="7%">12.000</td>
-                    <td valign="top" align="center" width="14%">24.000</td>
-                    <td valign="top" align="center" width="11%">12%</td>
-                    <td valign="top" align="center" width="14%">12.000</td>
-                </tr>
+                @php
+                    $i = 1;
+                @endphp
+                @foreach($items as $item)
+                    <tr>
+                        <td valign="top" align="center" width="5%">{{$i++}}</td>
+                        <td valign="top" align="center" width="11%">{{$item->item->code}}</td>
+                        <td valign="top" width="24%">{{$item->item->description}}</td>
+                        <td valign="top" align="center" width="7%">{{$item->quantity}}</td>
+                        <td valign="top" align="center" width="7%">{{$item->unit->name}}</td>
+                        <td valign="top" align="center" width="7%">{{$item->price}}</td>
+                        <td valign="top" align="center" width="14%">{{$item->quantity*$item->price}}</td>
+                        <td valign="top" align="center" width="11%">??</td>
+                        <td valign="top" align="center" width="14%">??</td>
+                    </tr>
+                @endforeach
             </table>
-        </div>  
+        </div>
     </div>
 
     <div id="content3">
@@ -201,18 +206,18 @@
                     <th valign="top" width="78%">Description :</th>
                     <th valign="top" width="8%">Total</th>
                     <th valign="top" width="2%">:</th>
-                    <th valign="top" width="12%">Rp. 1.221.232</th>
+                    <th valign="top" width="12%">{{$purchaseOrder->subtotal}}</th>
                 </tr>
                 <tr>
                     <td valign="top" width="78%" rowspan="2">Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint laborum architecto nemo facilis magni eos unde aperiam eius alias cupiditate, consequuntur fugit, voluptatum cumque autem? Sapiente, architecto! Nesciunt, dolores suscipit. ipsum dolor sit amet consectetur adipisicing elit. Voluptates veritatis accusantium lorem</td>
                     <th valign="top" width="8%">PPN 10%</th>
                     <th valign="top" width="2%">:</th>
-                    <th valign="top" width="12%">Rp. 1.221.232</th>
+                    <th valign="top" width="12%">{{$purchaseOrder->subtotal*10/100}}</th>
                 </tr>
                 <tr>
                     <th valign="top" width="8%">Grandtotal</th>
                     <th valign="top" width="2%">:</th>
-                    <th valign="top" width="12%">Rp. 1.221.232</th>
+                    <th valign="top" width="12%">{{$purchaseOrder->total_after_tax}}</th>
                 </tr>
             </table>
             <div>
