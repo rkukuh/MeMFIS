@@ -98,8 +98,8 @@ class InventoryInController extends Controller
      */
     public function update(InventoryInUpdate $request, InventoryIn $inventoryIn)
     {
-        $additionals = [];
-        $additionals['ref_no'] = $request->ref_no;
+        $additionals = json_decode($inventoryIn->additional);
+        $additionals->ref_no = $request->ref_no;
         $request->merge(['additional' => json_encode($additionals)]);
         $inventoryIn->update($request->all());
 
