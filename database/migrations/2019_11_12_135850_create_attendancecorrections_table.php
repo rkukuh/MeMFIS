@@ -16,6 +16,7 @@ class CreateAttendancecorrectionsTable extends Migration
         Schema::create('attendancecorrections', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
+            $table->string('code')->nullable();
             $table->unsignedBigInteger('employee_id');
             $table->date('correction_date');
             $table->time('correction_time');

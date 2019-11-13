@@ -16,6 +16,7 @@ class CreateOvertimesTable extends Migration
         Schema::create('overtimes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
+            $table->string('code')->nullable();
             $table->unsignedBigInteger('employee_id')->index();
             // $table->unsignedBigInteger('approved_by_id')->nullable();
             $table->unsignedBigInteger('statuses_id')->index();
