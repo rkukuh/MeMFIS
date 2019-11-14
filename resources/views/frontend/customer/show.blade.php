@@ -456,7 +456,7 @@
                                                             @component('frontend.common.label.data-info')
                                                                 @slot('padding', '0')
                                                                 @slot('class', 'search-journal')
-                                                                @slot('text',$coa->code.'-'.$coa->name)
+                                                                @slot('text',$coa)
                                                             @endcomponent
                                                             @else
                                                             <div class="search-journal" id="search-journal">
