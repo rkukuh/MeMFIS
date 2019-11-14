@@ -91,6 +91,7 @@ Route::name('component.')->group(function () {
         Route::get('get-project-purchase-request', 'FillComboxController@projectPurchaseRequest')->name('get-project-purchase-request');
         Route::get('get-takcard-non-routine-types', 'FillComboxController@taskcardTypeNonRoutine')->name('get-takcard-non-routine-types');
         Route::get('get-takcard-preliminary-types', 'FillComboxController@taskcardTypePreliminary')->name('get-takcard-preliminary-types');
+        Route::get('get-attendance-correction-types', 'FillComboxController@attendanceCorrection')->name('get-attendance-correction-types');
         Route::get('get-tool-request-inventory-out', 'FillComboxController@toolRequestInventoryOut')->name('get-tool-request-inventory-out');
         Route::get('get-project-additionals-approved', 'FillComboxController@projectAdditionalApproved')->name('get-project-additional-approved');
         Route::get('get-tool-request/{toolRequest}/{item}', 'FillComboxController@toolRequestSerialNumber')->name('get-tool-request-serial-number');

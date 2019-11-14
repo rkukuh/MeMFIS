@@ -988,7 +988,7 @@
                     </a>
                 </li>
                 <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                    <a href="{{ route('frontend.propose-leave.index') }}" class="m-menu__link m-menu__toggle">
+                    <a href="{{ route('frontend.leave.index') }}" class="m-menu__link m-menu__toggle">
                         <i class="m-menu__link-icon flaticon-list-3"></i>
                         <span class="m-menu__link-text">
                             Propose Leave
