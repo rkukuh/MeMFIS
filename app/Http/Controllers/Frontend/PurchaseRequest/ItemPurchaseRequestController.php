@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers\Frontend\PurchaseRequest;
 
-use Auth;
-use Carbon\Carbon;
-use App\Models\Unit;
-use App\Models\Item;
-use App\Models\Type;
-use App\Models\Approval;
-use App\Helpers\DocumentNumber;
-use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
-use App\Models\Pivots\PurchaseRequestItem;
-use App\Http\Requests\Frontend\ItemPurchaseRequestStore;
 use App\Http\Requests\Frontend\ItemGeneralPurchaseRequestUpdate;
 use App\Http\Requests\Frontend\ItemProjectPurchaseRequestUpdate;
+use App\Http\Requests\Frontend\ItemPurchaseRequestStore;
+use App\Models\Item;
+use App\Models\Pivots\PurchaseRequestItem;
+use App\Models\PurchaseRequest;
+use App\Models\Unit;
 
 class ItemPurchaseRequestController extends Controller
 {
@@ -44,27 +39,26 @@ class ItemPurchaseRequestController extends Controller
      * @param  \App\Http\Requests\Frontend\ItemPurchaseRequestStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ItemPurchaseRequestStore $request,PurchaseRequest $purchaseRequest,Item $item)
+    public function store(ItemPurchaseRequestStore $request, PurchaseRequest $purchaseRequest, Item $item)
     {
-        $request->merge(['unit_id' =>  Unit::where('uuid',$request->unit_id)->first()->id]);
-        $exists = PurchaseRequestItem::where('purchase_request_id',$purchaseRequest->id)->where('item_id',$item->id)->first();
-        if($exists){
+        $request->merge(['unit_id' => Unit::where('uuid', $request->unit_id)->first()->id]);
+        $exists = PurchaseRequestItem::where('purchase_request_id', $purchaseRequest->id)->where('item_id', $item->id)->first();
+        if ($exists) {
             return response()->json(['title' => "Danger"]);
-        }else{
+        } else {
             $item = Item::find($item->id);
-            if($request->unit_id <> $item->unit_id){
+            if ($request->unit_id != $item->unit_id) {
                 $quantity = $request->quantity;
-                $qty_uom = $item->units->where('uom.unit_id',$request->unit_id)->first()->uom->quantity;
-                $quantity_unit = $qty_uom*$quantity;
-            }
-            else{
+                $qty_uom = $item->units->where('uom.unit_id', $request->unit_id)->first()->uom->quantity;
+                $quantity_unit = $qty_uom * $quantity;
+            } else {
                 $quantity_unit = $request->quantity;
             }
             $purchaseRequest->items()->attach($item->id, [
                 'quantity' => $request->quantity,
                 'unit_id' => $request->unit_id,
                 'quantity_unit' => $quantity_unit,
-                'note' => $request->remark
+                'note' => $request->remark,
             ]);
 
             return response()->json($purchaseRequest);
@@ -105,12 +99,18 @@ class ItemPurchaseRequestController extends Controller
     public function updateGeneral(ItemGeneralPurchaseRequestUpdate $request, $item)
     {
         $purchaseRequest = PurchaseRequestItem::find($item);
-        $request->merge(['item_id' =>  Item::where('uuid',$request->item_id)->first()->id]);
-        $request->merge(['unit_id' =>  Unit::where('uuid',$request->unit_id)->first()->id]);
+        $request->merge(['item_id' => Item::where('uuid', $request->item_id)->first()->id]);
+        $request->merge(['unit_id' => Unit::where('uuid', $request->unit_id)->first()->id]);
+        $exists = PurchaseRequestItem::where('id', '<>', $item)->where('item_id', $request->item_id)->first();
+        if ($exists) {
+            return response()->json(['title' => "Danger"]);
+        } else {
 
-        $purchaseRequest->update($request->all());
+            $purchaseRequest->update($request->all());
 
-        return response()->json($purchaseRequest);
+            return response()->json($purchaseRequest);
+        }
+
     }
 
     /**

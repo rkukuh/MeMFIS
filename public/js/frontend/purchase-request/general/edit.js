@@ -166,7 +166,7 @@ let PurchaseRequest = {
 
                     } else {
                         if (response.title == "Danger") {
-                            toastr.error("Task card already exists!", "Error", {
+                            toastr.error("Item already exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
@@ -301,25 +301,31 @@ let PurchaseRequest = {
 
                         // document.getElementById('manual_affected_id').value = manual_affected_id;
                     } else {
-                        //    taskcard_reset();
-                        $('#modal_general').modal('hide');
-
-                        toastr.success(
-                            "Item has been updated.",
-                            "Success",
-                            {
+                        if (response.title == "Danger") {
+                            toastr.error("Item already exists!", "Error", {
                                 timeOut: 5000
-                            }
-                        );
+                            });
+                        } else {
 
-                        let table = $(".item_datatable").mDatatable();
+                            //    taskcard_reset();
+                            $('#modal_general').modal('hide');
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            toastr.success(
+                                "Item has been updated.",
+                                "Success",
+                                {
+                                    timeOut: 5000
+                                }
+                            );
 
-                        $('.btn-success').removeClass('update-item');
-                        $('.btn-success').addClass('add-item');
+                            let table = $(".item_datatable").mDatatable();
 
+                            table.originalDataSet = [];
+                            table.reload();
+
+                            $('.btn-success').removeClass('update-item');
+                            $('.btn-success').addClass('add-item');
+                        }
                     }
                 }
             });
