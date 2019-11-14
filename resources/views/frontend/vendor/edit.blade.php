@@ -1102,10 +1102,7 @@
 <script>
     let vendor_uuid = '{{ $vendor->uuid }}';
 
-    let code = '{{$coa->code}}';
-    let name = '{{$coa->name}}';
-
-    $('.search-journal').html(code + " - " + name);
+    $('.search-journal').html('{{$coa}}');
 </script>
 
 <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
