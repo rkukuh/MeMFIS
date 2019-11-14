@@ -19,13 +19,6 @@
                                     Item
                                 </label>
 
-                                {{-- @component('frontend.common.input.select2')
-                                    @slot('text', 'Item')
-                                    @slot('id', 'item')
-                                    @slot('name', 'item')
-                                    @slot('id_error', 'item')
-                                    @slot('style', 'width:100%')
-                                @endcomponent --}}
                                 @component('frontend.common.item.index')
                                     @slot('name_item','material')
                                     @slot('id_item','material')
