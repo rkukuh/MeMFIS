@@ -41,4 +41,5 @@ require('frontend/inventory-out.php');
 require('frontend/item-request.php');
 require('frontend/stock-monitoring.php');
 require('frontend/mutation.php');
+require('frontend/vendor.php');
 require('testing.php');

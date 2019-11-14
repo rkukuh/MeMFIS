@@ -52,9 +52,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('bank', 'BankController');
         Route::resource('promo', 'PromoController');
         Route::resource('school', 'SchoolController');
-        Route::resource('supplier', 'VendorController',[
-            'parameters' => ['supplier' => 'vendor']
-        ]);
         Route::resource('warehouse', 'StorageController',[
             'parameters' => ['warehouse' => 'storage']
         ]);
