@@ -1200,16 +1200,14 @@
     let customer_uuid = '{{ $customer->uuid }}';
 
     $('.select').select2();
-        $('.selectWebsite').select2();
-        $('.selectDocument').select2();
+    $('.selectWebsite').select2();
+    $('.selectDocument').select2();
 
-</script>
-
-<script>
-    let code = '{{$coa->code}}';
+        let code = '{{$coa->code}}';
     let name = '{{$coa->name}}';
 
     $('.search-journal').html(code + " - " + name);
+
 </script>
 
 <script src="{{ asset('js/frontend/common/account-code.js') }}"></script>

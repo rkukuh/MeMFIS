@@ -139,7 +139,6 @@ class CustomerController extends Controller
 
             $customer->coa()->save(Coa::find($request->account_code));
 
-
             return response()->json($customer);
         }
 
