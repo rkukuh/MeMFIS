@@ -31,7 +31,7 @@ let Customer = {
             type_phone_array = type_phone_array.filter(function (el) {
 
                 return el != null && el != "";
-        
+
             });
 
             let fax_array = [];
@@ -51,7 +51,7 @@ let Customer = {
             type_fax_array = type_fax_array.filter(function (el) {
 
                 return el != null && el != "";
-        
+
             });
 
             let website_array = [];
@@ -78,11 +78,11 @@ let Customer = {
                     type_email_array[i] = $(this).val();
                 }
             });
-            
+
             type_email_array = type_email_array.filter(function (el) {
 
                 return el != null && el != "";
-            
+
             });
 
             let document_array = [];
@@ -138,7 +138,7 @@ let Customer = {
                attn_email_array.push(attn_email_array_row);
             });
             attn_email_array.pop();
-            
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -200,7 +200,7 @@ let Customer = {
 
                         window.location.href = '/customer/' + data.uuid + '/edit';
                         // window.location.href = '/customer';
-          
+
 
                     }
                 }

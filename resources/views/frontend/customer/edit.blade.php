@@ -124,7 +124,7 @@
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                         <label class="form-control-label">
                                                             Type. @include('frontend.common.label.required')
-                                                        </label> 
+                                                        </label>
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
                                                     </div>
@@ -917,7 +917,7 @@
                 </div>
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
-                        <div class="form-group m-form__group row">                          
+                        <div class="form-group m-form__group row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="repeaterAttention">
                                     @if($attentions)
@@ -959,16 +959,6 @@
                                                                 @endforeach
                                                             @endif
                                                         </select>
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3 hidden">
-                                                        <label class="form-control-label">
-                                                            Extension
-                                                        </label>
-                                                        @component('frontend.common.input.text')
-                                                            @slot('name', 'attn-ext')
-                                                            @slot('text', 'Ext')
-                                                            @slot('value', $attention->ext)
-                                                        @endcomponent
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
@@ -1215,25 +1205,12 @@
 
 </script>
 
-{{-- <script>
-    function initMap() {
-        var myLatLng = {
-            lat: -7.265757,
-            lng: 112.734146
-        };
+<script>
+    let code = '{{$coa->code}}';
+    let name = '{{$coa->name}}';
 
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 10,
-            center: myLatLng
-        });
-
-        var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            title: 'Hello World!'
-        });
-    }
-</script> --}}
+    $('.search-journal').html(code + " - " + name);
+</script>
 
 <script src="{{ asset('js/frontend/common/account-code.js') }}"></script>
 <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
