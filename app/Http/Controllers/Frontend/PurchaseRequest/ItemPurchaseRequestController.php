@@ -98,13 +98,20 @@ class ItemPurchaseRequestController extends Controller
      */
     public function updateGeneral(ItemGeneralPurchaseRequestUpdate $request, $item)
     {
+        $material = Item::where('uuid', $request->item_id)->first();
         $purchaseRequest = PurchaseRequestItem::find($item);
-        $request->merge(['item_id' => Item::where('uuid', $request->item_id)->first()->id]);
+        $request->merge(['item_id' => $material->id]);
         $request->merge(['unit_id' => Unit::where('uuid', $request->unit_id)->first()->id]);
-        $exists = PurchaseRequestItem::where('id', '<>', $item)->where('item_id', $request->item_id)->first();
+        $exists = PurchaseRequestItem::where('purchase_request_id', $purchaseRequest->purchase_request_id)->where('id', '<>', $item)->where('item_id', $request->item_id)->first();
         if ($exists) {
             return response()->json(['title' => "Danger"]);
         } else {
+            if ($request->unit_id != $material->unit_id) {
+                $qty_uom = $material->units->where('uom.unit_id', $request->unit_id)->first()->uom->quantity;
+                $request->merge(['quantity_unit' => $qty_uom * $request->quantity]);
+            } else {
+                $request->merge(['quantity_unit' => $request->quantity]);
+            }
 
             $purchaseRequest->update($request->all());
 
