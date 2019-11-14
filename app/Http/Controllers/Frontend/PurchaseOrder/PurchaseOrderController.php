@@ -13,6 +13,7 @@ use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\PurchaseOrderItem;
 use App\Http\Requests\Frontend\PurchaseOrderStore;
 use App\Http\Requests\Frontend\PurchaseOrderUpdate;
 
@@ -144,13 +145,13 @@ class PurchaseOrderController extends Controller
             'top_start_at' => Carbon::parse($request->top_start_at),
             'top_type' => Type::where('code',$request->top_type)->first()->id,
             'vendor' => $request->vendor,
-            
+
         ]);
 
         $purchaseOrder->update($request->all());
-        
+
         //todo ppn
-        $tax = Type::ofTax()->where('uuid', $request->tax_type)->first();
+        $tax = Type::ofTax()->where('code', 'exclude')->first();
         $subtotal_after_discount = $request->total_before_tax;
         $tax_amount = $tax_percentage = 0;
         if($tax->code == "include"){
@@ -160,7 +161,7 @@ class PurchaseOrderController extends Controller
             $tax_percentage = $request->tax_amount;
             $tax_amount = $subtotal_after_discount * ($request->tax_amount / 100);
         }
-        
+
         if(sizeof($purchaseOrder->taxes) > 0){
             if($tax->code == "none"){
                 $purchaseOrder->taxes()->delete();
@@ -241,5 +242,23 @@ class PurchaseOrderController extends Controller
         );
 
         return response()->json($status_notification);
+    }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\PurchaseOrder $purchaseOrder
+     * @return \Illuminate\Http\Response
+     */
+    public function print(PurchaseOrder $purchaseOrder)
+    {
+        $pdf = \PDF::loadView('frontend/form/purchase_order',[
+                'username' => Auth::user()->name,
+                'purchaseOrder' => $purchaseOrder,
+                'items' => PurchaseOrderItem::where('purchase_order_id',$purchaseOrder->id)->get(),
+                'created_by' => $purchaseOrder->audits->first()->user->name
+                ]);
+
+        return $pdf->stream();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use Directoryxx\Finac\Model\Coa;
 
 class Customer extends MemfisModel
 {
@@ -42,6 +43,19 @@ class Customer extends MemfisModel
     public function bank_accounts()
     {
         return $this->morphMany(BankAccount::class, 'bank_accountable');
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many coa.
+     *
+     * This function will get all customer's coa.
+     * See: Coa's coa() method for the inverse
+     *
+     * @return mixed
+     */
+    public function coa()
+    {
+        return $this->morphToMany(Coa::class, 'coable');
     }
 
     /**

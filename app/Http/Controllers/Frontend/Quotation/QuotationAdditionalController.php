@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\Quotation;
 use Auth;
 use App;
 
+use App\User;
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\Status;
@@ -58,7 +59,7 @@ class QuotationAdditionalController extends Controller
     {
         $websites = Type::ofWebsite()->get();
         $total_manhour = json_decode($project->data_defectcard)->total_manhour_with_performance_factor;
-        
+
         return view('frontend.quotation.additional.create', [
             'project' => $project,
             'websites' => $websites,
@@ -99,7 +100,7 @@ class QuotationAdditionalController extends Controller
         $request->merge(['scheduled_payment_amount' => json_encode([])]);
 
         $defectcards = DefectCard::where('project_additional_id',$project->id)->get();
-       
+
         $quotation = Quotation::create($request->all());
 
         $customer = Customer::find($quotation->parent->quotationable->customer->id)->levels->last()->score;
@@ -236,7 +237,7 @@ class QuotationAdditionalController extends Controller
             'project_id' => $project->id,
             'charge' => json_encode($charges),
             'data_defectcard' => $defectcard_json,
-            'attention' => json_encode($attention), 
+            'attention' => json_encode($attention),
             'customer_id' => $project->customer->id,
             'scheduled_payment_amount' => json_encode($scheduled_payment_amount),
             'scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id,
@@ -305,15 +306,15 @@ class QuotationAdditionalController extends Controller
             );
             array_push($error_messages, $error_message);
         }
-        if( max($work_progress) != 100){
+        // if( max($work_progress) != 100){
 
-            $error_message = array(
-                'message' => "Scheduled payment work progress still not 100%",
-                'title' => $quotation->number,
-                'alert-type' => "error"
-            );
-            array_push($error_messages, $error_message);
-        }
+        //     $error_message = array(
+        //         'message' => "Scheduled payment work progress still not 100%",
+        //         'title' => $quotation->number,
+        //         'alert-type' => "error"
+        //     );
+        //     array_push($error_messages, $error_message);
+        // }
 
         if(sizeof($error_messages) > 0){
             return response()->json(['error' => $error_messages], '403');
