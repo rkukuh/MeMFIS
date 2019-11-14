@@ -452,15 +452,15 @@
 
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-8 col-md-8 col-lg-8">
-                                                            @if (isset($customer->journal))
+                                                            @if (sizeOf($customer->coa)<> 0)
                                                             @component('frontend.common.label.data-info')
                                                                 @slot('padding', '0')
                                                                 @slot('class', 'search-journal')
-                                                                @slot('text', $customer->account_code_and_name)
+                                                                @slot('text',$coa->code.'-'.$coa->name)
                                                             @endcomponent
                                                             @else
                                                             <div class="search-journal" id="search-journal">
-                                                                Search account code
+                                                                -
                                                             </div>
                                                             @endif
                                                         </div>

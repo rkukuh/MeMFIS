@@ -626,41 +626,13 @@
                                         Account Code @include('frontend.common.label.optional')
                                     </label>
 
-                                    <div style="background-color:beige;padding:15px 10px 5px 15px;">
-
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-8 col-md-8 col-lg-8">
-                                                @if (isset($vendor->journal))
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('padding', '0')
-                                                    @slot('class', 'search-journal')
-                                                    @slot('text', $vendor->account_code_and_name)
-                                                @endcomponent
-                                                @else
-                                                <div class="search-journal" id="search-journal">
-                                                    Search account code
-                                                </div>
-                                                @endif
-                                            </div>
-
-                                            <div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding: 0;">
-                                                @component('frontend.common.account-code.button-create')
-                                                    @slot('text', '')
-                                                    @slot('size', 'sm')
-                                                    @slot('icon', 'search')
-                                                    @slot('data_target', '#modal_account_code')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    @include('frontend.common.account-code.modal')
+                                    @include('frontend.common.account-code.index')
 
                                     @component('frontend.common.input.hidden')
                                         @slot('id', 'account_code')
                                         @slot('name', 'account_code')
-                                        @slot('value', $vendor->account_code)
                                     @endcomponent
+
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -758,10 +730,10 @@
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
-                                                @component('frontend.common.buttons.submit')
+                                                @component('frontend.common.buttons.update')
                                                     @slot('type','button')
-                                                    @slot('id', 'add-vendor')
-                                                    @slot('class', 'add-vendor')
+                                                    @slot('id', 'edit-vendor')
+                                                    @slot('class', 'edit-vendor')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
@@ -1127,6 +1099,15 @@
         BootstrapSwitch.init()
     });
 </script>
+<script>
+    let vendor_uuid = '{{ $vendor->uuid }}';
+
+    let code = '{{$coa->code}}';
+    let name = '{{$coa->name}}';
+
+    $('.search-journal').html(code + " - " + name);
+</script>
+
 <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/website.js') }}"></script> --}}
 <script src="{{ asset('js/frontend/vendor/edit.js') }}"></script>
