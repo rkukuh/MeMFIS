@@ -39,37 +39,12 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function jobcard()
+    public function attendanceCorrection()
     {
-        $jobcards = JobCard::pluck('number', 'uuid');
+        $attendanceCorrection = Type::ofAttendanceCorrection()
+            ->pluck('name', 'code');
 
-        return json_encode($jobcards);
-
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function jobcardItems($jobcard)
-    {
-        $items = JobCard::where('uuid', $jobcard)
-            ->first();
-
-        return $items->origin_jobcardable_items;
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function defectcard()
-    {
-        $defectcards = DefectCard::pluck('code', 'id');
-
-        return json_encode($defectcards);
+        return json_encode($attendanceCorrection);
 
     }
 
@@ -115,6 +90,46 @@ class FillComboxController extends Controller
         return json_encode($categories);
 
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function defectcard()
+    {
+        $defectcards = DefectCard::pluck('code', 'id');
+
+        return json_encode($defectcards);
+
+    }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jobcard()
+    {
+        $jobcards = JobCard::pluck('number', 'uuid');
+
+        return json_encode($jobcards);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jobcardItems($jobcard)
+    {
+        $items = JobCard::where('uuid', $jobcard)
+            ->first();
+
+        return $items->origin_jobcardable_items;
+    }
+
 
     /**
      * Display a listing of the resource.

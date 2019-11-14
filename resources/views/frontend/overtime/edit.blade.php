@@ -53,7 +53,7 @@
                                 @method("PUT")
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6 form-group{{$errors->has("search-journal-val") ? " has-error" : ""}}">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 form-group{{$errors->has("search-employee-val") ? " has-error" : ""}}">
                                             @hasanyrole('hrd|admin')
                                                 <label class="form-control-label">
                                                     Propose Leave To @include('frontend.common.label.optional')
@@ -61,7 +61,7 @@
                                             
                                                 @include('frontend.common.employee.index')
                                             @endrole
-                                            <small class="text-danger">{{ $errors->first('search-journal-val') }}</small>
+                                            <small class="text-danger">{{ $errors->first('search-employee-val') }}</small>
                                             @hasanyrole('employee')
                                                 <label class="form-control-label">
                                                     Employee Name

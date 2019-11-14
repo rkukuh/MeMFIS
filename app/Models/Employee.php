@@ -71,6 +71,8 @@ class Employee extends MemfisModel implements HasMedia
         return $this->morphMany(Address::class, 'addressable');
     }
 
+    
+
     /**
      * One-Way: An employee may have zero or many AME Licenses (by DGCA).
      *
@@ -91,9 +93,22 @@ class Employee extends MemfisModel implements HasMedia
      * @return mixed
      */
     public function approvals()
-    
     {
         return $this->hasMany(Approval::class);
+    }
+
+
+    /**
+     * One-to-Many: Many attendance corrections proposed by one employee.
+     *
+     * This function will retrieve all the attendance corrections of an employee.
+     * See: AttendanceCorrection's employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function attendance_corrections()
+    {
+        return $this->hasMany(AttendanceCorrection::class);
     }
 
     /**
@@ -241,19 +256,6 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
-     * One-to-Many: An Employee have one or many Workshift or History.
-     *
-     * This function will retrieve Workshift of a given Employee.
-     * See: EmployeeWorkshift employee() method for the inverse
-     *
-     * @return mixed
-     */
-    public function workshift()
-    {
-        return $this->hasMany(EmployeeWorkshift::class);
-    }
-
-    /**
      * One-to-Many: An Employee have one or many benefit.
      *
      * This function will retrieve benefit of a given Employee.
@@ -288,7 +290,7 @@ class Employee extends MemfisModel implements HasMedia
      *
      * @return mixed
      */
-    public function employee_attendace()
+    public function employee_attendance()
     {
         return $this->hasMany(EmployeeAttendance::class);
     }
@@ -539,6 +541,19 @@ class Employee extends MemfisModel implements HasMedia
     public function websites()
     {
         return $this->morphMany(Website::class, 'websiteable');
+    }
+
+    /**
+     * One-to-Many: An Employee have one or many Workshift or History.
+     *
+     * This function will retrieve Workshift of a given Employee.
+     * See: EmployeeWorkshift employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workshift()
+    {
+        return $this->hasMany(EmployeeWorkshift::class);
     }
 
     /**

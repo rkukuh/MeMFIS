@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Vendor;
 
 use App\Models\Fax;
 use App\Models\Bank;
@@ -11,6 +11,7 @@ use App\Models\Vendor;
 use App\Models\Document;
 use App\Models\BankAccount;
 use App\Helpers\DocumentNumber;
+use Directoryxx\Finac\Model\Coa;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\VendorStore;
 use App\Http\Requests\Frontend\VendorUpdate;
@@ -126,6 +127,8 @@ class VendorController extends Controller
                 }
             }
 
+            $vendor->coa()->save(Coa::find($request->account_code));
+
             return response()->json($vendor);
         }
 
@@ -141,7 +144,10 @@ class VendorController extends Controller
      */
     public function show(Vendor $vendor)
     {
-        return view('frontend.vendor.show', $vendor);
+        return view('frontend.vendor.show',[
+            'vendor' => $vendor,
+            'coa' => $vendor->coa->first()
+        ]);
     }
 
     /**
@@ -159,6 +165,7 @@ class VendorController extends Controller
             'vendor' => $vendor,
             'documents' => $documents,
             'attentions' => $attentions,
+            'coa' => $vendor->coa->first()
         ]);
     }
 
@@ -171,9 +178,10 @@ class VendorController extends Controller
      */
     public function update(VendorUpdate $request, Vendor $vendor)
     {
-        $vendor = Vendor::find($vendor);
+        // $vendor = Vendor::find($vendor);
         // $vendor->name = $request->name;
         // $vendor->save();
+        $vendor->coa()->first()->pivot->update(['coa_id'=> Coa::find($request->account_code)->id]);
 
         return response()->json($vendor);
     }
