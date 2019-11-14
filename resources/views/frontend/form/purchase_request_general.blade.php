@@ -112,7 +112,7 @@
                             @if(sizeOf($purchaseRequest->approvals)<>0)
                                 {{$purchaseRequest->approvals->first()->conductedBy->first_name." ".$purchaseRequest->approvals->first()->conductedBy->last_name." ; ".$purchaseRequest->approvals->first()->created_at}}
                             @else
-                            Name ; Timestamp
+                            -
                             @endif
                         </td>
                     </tr>
