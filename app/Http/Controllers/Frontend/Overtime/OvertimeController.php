@@ -49,37 +49,39 @@ class OvertimeController extends Controller
         $is_validated = $request->validated();
         // dd($is_validated);
 
-        $isAdmin = Auth::user()->hasRole("admin");
+        $isAdmin = Auth::user()->hasRole('admin');
         $employee_id = Auth::id();
         if ($isAdmin) {
-            $uuid = $request->input("search-employee-val");
-            $employee_id = Employee::where("uuid",$uuid)->first()->id;
+            $uuid = $request->input('search-employee-val');
+            $employee_id = Employee::where('uuid',$uuid)->first()->id;
         }
-
-        $date = $request->input("date");
-        $start = $request->input("start_time");
-        $end = $request->input("end_time");
-        $start_diff = Carbon::parse($date." ".$start,"Asia/Jakarta");
-        $end_diff = Carbon::parse($date." ".$end,"Asia/Jakarta");
-        $time_diff = $start_diff->diff($end_diff)->format("%H:%I:%S");
-        $desc = $request->input("description");
+        
+        $date = $request->input('date');
+        $attendance =  EmployeeAttendance::whereDate('date', $date)->where('employee_id', $employee_id)->first();
+        $start = $request->input('start_time');
+        $end = $request->input('end_time');
+        $start_diff = Carbon::parse($date.' '.$start,'Asia/Jakarta');
+        $end_diff = Carbon::parse($date.' '.$end,'Asia/Jakarta');
+        $time_diff = $start_diff->diff($end_diff)->format('%H:%I:%S');
+        $desc = $request->input('description');
         $code = DocumentNumber::generate('OVRT-', Overtime::withTrashed()->count()+1);
-        // $timestamp_start = Carbon::parse($date." ".$start,"Asia/Jakarta");
-        // $timestamp_end = Carbon::parse($date." ". $end,"Asia/Jakarta");
-        // ->format("%H:%I:%S")
+        // $timestamp_start = Carbon::parse($date.' '.$start,'Asia/Jakarta');
+        // $timestamp_end = Carbon::parse($date.' '. $end,'Asia/Jakarta');
+        // ->format('%H:%I:%S')
         
         $status = Status::ofOvertime()->where('code','open')->first()->id;
 
         Overtime::create([
-                "uuid" => Str::uuid(),
-                "code" => $code,
-                "employee_id" => $employee_id,
-                "date" => $date,
-                "start" => $start,
-                "end" => $end,
-                "desc" => $desc,
-                "total" => $time_diff,
-                "status_id" => $status
+                'end' => $end,
+                'desc' => $desc,
+                'code' => $code,
+                'date' => $date,
+                'start' => $start,
+                'uuid' => Str::uuid(),
+                'total' => $time_diff,
+                'status_id' => $status,
+                'employee_id' => $employee_id,
+                'attendance_id' => $attendance->id,
             ]
         );
 
