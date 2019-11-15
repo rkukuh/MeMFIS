@@ -31,6 +31,14 @@ $factory->define(InventoryIn::class, function (Faker $faker) {
 
             return factory(GoodsReceived::class)->create()->id;
         },
+        'additional' => function () use ($faker) {
+            $additional = [
+                'ref_no' => 'TC-INT-DUM-' . $faker->unixTime(),
+                'created_by' => Employee::get()->random()->id,
+            ];
+
+            return $faker->randomElement([null, json_encode($additional)]);
+        },
         'section' => null,
         'description' => $faker->randomElement([null, $faker->sentence]),
     ];
