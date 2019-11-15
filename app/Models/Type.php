@@ -583,6 +583,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Tax payment method.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaxPaymentMethod(Builder $query)
+    {
+        return $query->where('of', 'tax-payment-method');
+    }
+
+    /**
      * Scope a query to only include type of Term of Payment.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -919,8 +930,8 @@ class Type extends MemfisModel
     public function websites()
     {
         return $this->hasMany(Website::class);
-    
-    
+
+
     /**
      * One-to-Many: A website may have zero or many type.
      *
