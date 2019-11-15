@@ -13,7 +13,7 @@ class Leave extends MemfisModel
         'employee_id',
         'status_id',
         'attendance_id',
-        'type_id',
+        'leavetype_id',
         'description',
     ];
     
@@ -30,5 +30,18 @@ class Leave extends MemfisModel
     public function attendance()
     {
         return $this->belongsTo(EmployeeAttendance::class);
+    }
+
+    /**
+     * One-to-Many: A leave have one leave type.
+     *
+     * This function will retrieve leave type of a given leave.
+     * See: Leave Type's leave() method for the inverse
+     *
+     * @return mixed
+     */
+    public function leaveType()
+    {
+        return $this->belongsTo(LeaveType::class);
     }
 }

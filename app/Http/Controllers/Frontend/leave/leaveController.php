@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Frontend\leave;
 
 use App\Models\Leave;
+use App\Models\Status;
+use App\Models\Employee;
+use App\Models\LeaveType;
 use App\Models\EmployeeAttendance;
 
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\leaveStore;
 use App\Http\Requests\Frontend\leaveUpdate;
@@ -39,18 +43,22 @@ class leaveController extends Controller
      */
     public function store(leaveStore $request)
     {
-        dd($request->all());
         $leave_type = LeaveType::where('uuid', $request->leave_type)->first();
-        $employee = Employee::where('uuid', $request->search-employee-val)->first();
-        $attendance =  EmployeeAttendance::whereDate('date', $request->date)->where('employee_id', $employee->id)->first();
-        $correction_type = Type::ofAttendanceCorrection()->where('code', $request->attendance_correction_time_type)->first();
-        $code = DocumentNumber::generate('ATCO-', AttendanceCorrection::withTrashed()->count()+1);
+        $employee = Employee::where('uuid', $request->uuid_employee)->first();
+        $attendance =  EmployeeAttendance::whereDate('date', $request->date_start)->where('employee_id', $employee->id)->first();
+        $code = DocumentNumber::generate('LEAV-', Leave::withTrashed()->count()+1);
         $status = Status::ofAttendanceCorrection()->where('code','open')->first();
+        // dump($status);
+        // dump($code);
+        dump($attendance);
+        // dump($employee);
+        // dump($leave_type);
+        dd($request->all());
 
         $leave = Leave::create([
-            'code' => $request,
-            'start_date' => $request,
-            'end_date' => $request,
+            'code' => $code,
+            'start_date' => $request->date_start,
+            'end_date' => $request->date_end,
             'employee_id' => $employee->id,
             'status_id' => $status->id,
             'attendance_id' => $attendance->id,
@@ -59,12 +67,12 @@ class leaveController extends Controller
         ]);
 
         $notification = array(
-            'message' => "Attendance correction has been saved.",
+            'message' => "Leave has been saved.",
             'title' => "Success",
             'alert-type' => "success"
         );
 
-        return redirect()->route('frontend.attendance-correction.index')->with($notification);
+        return redirect()->route('frontend.leave.index')->with($notification);
     }
 
     /**
