@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\Leave;
 
-use App\Models\leave;
+use App\Models\Leave;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

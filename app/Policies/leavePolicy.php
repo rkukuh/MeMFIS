@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\User;
-use App\Models\leave;
+use App\Models\Leave;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class leavePolicy
@@ -14,7 +14,7 @@ class leavePolicy
      * Determine whether the user can view the leave.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\leave  $leave
+     * @param  \App\Models\Leave  $leave
      * @return mixed
      */
     public function view(User $user, leave $leave)
@@ -37,7 +37,7 @@ class leavePolicy
      * Determine whether the user can update the leave.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\leave  $leave
+     * @param  \App\Models\Leave  $leave
      * @return mixed
      */
     public function update(User $user, leave $leave)
@@ -49,7 +49,7 @@ class leavePolicy
      * Determine whether the user can delete the leave.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\leave  $leave
+     * @param  \App\Models\Leave  $leave
      * @return mixed
      */
     public function delete(User $user, leave $leave)
@@ -61,7 +61,7 @@ class leavePolicy
      * Determine whether the user can restore the leave.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\leave  $leave
+     * @param  \App\Models\Leave  $leave
      * @return mixed
      */
     public function restore(User $user, leave $leave)
@@ -73,7 +73,7 @@ class leavePolicy
      * Determine whether the user can permanently delete the leave.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\leave  $leave
+     * @param  \App\Models\Leave  $leave
      * @return mixed
      */
     public function forceDelete(User $user, leave $leave)
