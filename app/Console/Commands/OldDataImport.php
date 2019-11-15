@@ -39,14 +39,20 @@ class OldDataImport extends Command
     public function handle()
     {
         ini_set('memory_limit', '-1');
-                
+          
+        $this->line('Importing: Master Manufacturer');
+        app()->make(OldDataController::class)->manufacturers();
+
+        $this->line('Importing: Master Aircrafts');
+        app()->make(OldDataController::class)->aircrafts();
+
         $this->line('Importing: Customers');
         app()->make(OldDataController::class)->customers();
 
-        $this->line('Importing: Engines');
+        $this->line('Importing: Master Engines');
         app()->make(OldDataController::class)->engines();
 
-        $this->line('Importing: Work Areas');
+        $this->line('Importing: Master Work Areas');
         app()->make(OldDataController::class)->workAreas();
 
         // $this->line('Importing: Materials and Tools');
