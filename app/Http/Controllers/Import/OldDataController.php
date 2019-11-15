@@ -55,7 +55,7 @@ class OldDataController extends Controller
     
     public function taskCardsATR()
     {
-        Excel::import(new TaskCardsATRImport, $this->import_directory . 'taskcard-atr-72.xlsx');
+        Excel::import(new TaskCardsATRImport, $this->import_directory . 'taskcards-atr-72.xlsx');
     }
 
     public function taskCardCNItems()
