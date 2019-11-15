@@ -197,7 +197,7 @@ let Vendor = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/supplier/' + customer_uuid,
+                url: '/supplier/' + vendor_uuid,
                 data: {
                     _token: $('input[name=_token]').val(),
                     // code: code,

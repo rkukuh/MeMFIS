@@ -1,6 +1,6 @@
 let CorrectionTimeSelect2 = {
     init: function () {
-        $('#correction_time, #correction_time_validate').select2({
+        $('#attendance_correction_time_type, #attendance_correction_time_type_validate').select2({
             placeholder: 'Select a Correction Time'
         });
     }
