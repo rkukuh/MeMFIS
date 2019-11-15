@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\MemfisModel;
 
-class leave extends MemfisModel
+class Leave extends MemfisModel
 {
     protected $fillable = [
         'code',
