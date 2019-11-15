@@ -105,6 +105,28 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Coa.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCoa(Builder $query)
+    {
+        return $query->where('of', 'coa');
+    }
+
+    /**
+     * Scope a query to only include type of Coa.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCoaTransaction(Builder $query)
+    {
+        return $query->where('of', 'coa-transaction');
+    }
+
+    /**
      * Scope a query to only include type of Company.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
