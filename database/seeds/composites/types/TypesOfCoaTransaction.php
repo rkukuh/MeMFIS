@@ -12,19 +12,17 @@ class TypesOfCoaTransaction extends Seeder
      */
     public function run()
     {
-		$data = [
-			[
-				'code' => 'inventory',
-				'name' => 'Inventory',
-				'of'   => 'coa-transaction',
-			],
-			[
-				'code' => 'cogs',
-				'name' => 'COGS',
-				'of'   => 'coa-transaction',
-			],
-		];
+        Type::create([
+            'code' => 'inventory',
+            'name' => 'Inventory',
+            'of'   => 'coa-transaction',
+        ]);
 
-		Type::insert($data);
+        Type::create([
+            'code' => 'cogs',
+            'name' => 'COGS',
+            'of'   => 'coa-transaction',
+        ]);
+
     }
 }

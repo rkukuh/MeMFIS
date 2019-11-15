@@ -12,34 +12,34 @@ class TypesOfCoa extends Seeder
      */
     public function run()
     {
-		$data = [
-			[
-				'code' => 'activa',
-				'name' => 'ACTIVA',
-				'of'   => 'coa',
-			],
-			[
-				'code' => 'pasiva',
-				'name' => 'PASIVA',
-				'of'   => 'coa',
-			],
-			[
-				'code' => 'ekuitas',
-				'name' => 'EKUITAS',
-				'of'   => 'coa',
-			],
-			[
-				'code' => 'pendapatan',
-				'name' => 'PENDAPATAN',
-				'of'   => 'coa',
-			],
-			[
-				'code' => 'biaya',
-				'name' => 'BIAYA',
-				'of'   => 'coa',
-			],
-		];
+        Type::create([
+            'code' => 'activa',
+            'name' => 'ACTIVA',
+            'of'   => 'coa',
+        ]);
 
-		Type::insert($data);
+        Type::create([
+            'code' => 'pasiva',
+            'name' => 'PASIVA',
+            'of'   => 'coa',
+        ]);
+
+        Type::create([
+            'code' => 'ekuitas',
+            'name' => 'EKUITAS',
+            'of'   => 'coa',
+        ]);
+
+        Type::create([
+            'code' => 'pendapatan',
+            'name' => 'PENDAPATAN',
+            'of'   => 'coa',
+        ]);
+
+        Type::create([
+            'code' => 'biaya',
+            'name' => 'BIAYA',
+            'of'   => 'coa',
+        ]);
     }
 }
