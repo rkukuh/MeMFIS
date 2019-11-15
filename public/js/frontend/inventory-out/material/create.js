@@ -2,7 +2,7 @@ let InventoryOutCreate = {
     init: function () {
 
         $('.footer').on('click', '.add-inventory-out', function () {
-            let ref_no = $('input[name=ref-no]').val();
+            let ref_no = $('input[name=ref_no]').val();
             let description = $('#remark').val();
             let section_code = $('input[name=section_code]').val();
             let storage_id = $('#item_storage_id').val();

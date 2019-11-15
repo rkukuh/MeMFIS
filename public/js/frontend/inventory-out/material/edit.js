@@ -72,12 +72,12 @@ let InventoryOutCreate = {
                     }
                 },
                 {
-                    field: 'description',
+                    field: 'name',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return t.description
+                        return t.name
                     }
                 },
                 {
@@ -335,7 +335,7 @@ let InventoryOutCreate = {
         });
 
         $('.footer').on('click', '.update-inventory-out', function () {
-            let ref_no = $('input[name=ref-no]').val();
+            let ref_no = $('input[name=ref_no]').val();
             let description = $('#remark').val();
             let section_code = $('input[name=section_code]').val();
             let storage_id = $('#item_storage_id').val();
@@ -391,6 +391,34 @@ $("#material").change(function() {
             $.each(data, function (key, value) {
                 $('select[name="serial_no"]').append(
                     '<option value="' + value + '">' + value + '</option>'
+                );
+            });
+        }
+    });
+
+    $.ajax({
+        url: '/get-expired-date/' + item_uuid,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $("#exp_date").val(data);
+        }
+    });
+
+    $.ajax({
+        url: '/get-item-unit-uuid/' + item_uuid,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $('select[name="unit_id"]').empty();
+
+            $('select[name="unit_id"]').append(
+                '<option value=""> Select a Unit</option>'
+            );
+
+            $.each(data, function (key, value) {
+                $('select[name="unit_id"]').append(
+                    '<option value="' + key + '">' + value + '</option>'
                 );
             });
         }
