@@ -45,15 +45,8 @@ class leaveController extends Controller
     {
         $leave_type = LeaveType::where('uuid', $request->leave_type)->first();
         $employee = Employee::where('uuid', $request->uuid_employee)->first();
-        $attendance =  EmployeeAttendance::whereDate('date', $request->date_start)->where('employee_id', $employee->id)->first();
         $code = DocumentNumber::generate('LEAV-', Leave::withTrashed()->count()+1);
         $status = Status::ofAttendanceCorrection()->where('code','open')->first();
-        // dump($status);
-        // dump($code);
-        dump($attendance);
-        // dump($employee);
-        // dump($leave_type);
-        dd($request->all());
 
         $leave = Leave::create([
             'code' => $code,
@@ -61,14 +54,13 @@ class leaveController extends Controller
             'end_date' => $request->date_end,
             'employee_id' => $employee->id,
             'status_id' => $status->id,
-            'attendance_id' => $attendance->id,
             'leavetype_id' => $leave_type->id,
             'description' => $request->description,
         ]);
 
         $notification = array(
             'message' => "Leave has been saved.",
-            'title' => "Success",
+            'title' => "Success ".$leave->code,
             'alert-type' => "success"
         );
 
