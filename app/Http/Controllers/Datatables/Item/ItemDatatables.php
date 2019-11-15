@@ -136,6 +136,8 @@ class ItemDatatables extends Controller
      */
     public function indexModal()
     {
+        ini_set('memory_limit', '-1');
+
         function filterArray( $array, $allowed = [] ) {
             return array_filter(
                 $array,
