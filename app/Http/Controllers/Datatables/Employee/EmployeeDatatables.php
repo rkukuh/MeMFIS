@@ -207,6 +207,7 @@ class EmployeeDatatables extends Controller
 
         $columnsDefault = [
             'code'     => true,
+            'uuid'     => true,
             'first_name'     => true,
             'Actions'      => true,
         ];

@@ -218,7 +218,7 @@
 
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', 'generate')
+                                            @slot('text',$coa->code.'-'.$coa->name)
                                         @endcomponent
 
                                         @component('frontend.common.input.hidden')

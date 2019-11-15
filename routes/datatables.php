@@ -44,32 +44,11 @@ Route::name('datatables.')->group(function () {
 
         Route::get('/general-license', 'GeneralLicenseDatatables@index')->name('general-license.index');
 
-        /** BENEFIT */
-
-        Route::name('benefit.')->group(function () {
-
-            Route::group([
-
-                'prefix'    => 'benefit',
-                'namespace' => 'Benefit'
-
-            ], function () {
-
-                /** Master Data */
-                Route::get('/', 'BenefitDatatables@index')->name('benefit.index');
-                Route::get('/basecalculation', 'BenefitTypeDatatables@baseCalculation')->name('benefit.base');
-                Route::get('/proratecalculation', 'BenefitTypeDatatables@prorateCalculation')->name('benefit.prorate');
-                /** Polymorph */
-
-            });
-        });
-
         /** TRANSACTION */
 
         Route::get('/price-list-item', 'PriceListDatatables@item')->name('price-list.item');
         Route::get('/price-list-manhour', 'PriceListDatatables@manhour')->name('price-list.manhour');
         Route::get('/price-list-facility', 'PriceListDatatables@facility')->name('price-list.facility');
-
 
         /** AIRCRAFT */
 
@@ -92,6 +71,43 @@ Route::name('datatables.')->group(function () {
 
             });
 
+        });
+
+        /** ATTENDANCE CORRECTION */
+
+        Route::name('attendance-correction.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'attendance-correction',
+                'namespace' => 'AttendanceCorrection'
+
+            ], function () {
+                /** Master Data */
+                Route::get('/', 'AttendanceCorrectionDatatables@index')->name('all');
+
+            });
+
+        });
+
+        /** BENEFIT */
+
+        Route::name('benefit.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'benefit',
+                'namespace' => 'Benefit'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'BenefitDatatables@index')->name('benefit.index');
+                Route::get('/basecalculation', 'BenefitTypeDatatables@baseCalculation')->name('benefit.base');
+                Route::get('/proratecalculation', 'BenefitTypeDatatables@prorateCalculation')->name('benefit.prorate');
+                /** Polymorph */
+
+            });
         });
 
         /** CUSTOMER */

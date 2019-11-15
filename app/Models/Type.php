@@ -50,6 +50,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Address.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfAttendanceCorrection(Builder $query)
+    {
+        return $query->where('of', 'attendance-correction');
+    }
+
+    /**
      * Scope a query to only include type of Aviation School Degree.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -616,6 +627,19 @@ class Type extends MemfisModel
     }
 
     /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: An attendance correction may have zero or many type.
+     *
+     * This function will retrieve all addresses of a type.
+     * See: Address's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function attendance_correction()
+    {
+        return $this->hasMany(AttendanceCorrection::class);
+    }
 
     /**
      * One-to-Many: An address may have zero or many type.
