@@ -79,7 +79,7 @@ let InventoryIn = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'ref_no',
                     title: 'Ref Doc',
                     sortable: 'asc',
                     filterable: !1,
@@ -113,8 +113,8 @@ let InventoryIn = {
                     width: 150
                 },
                 {
-                    field: '',
-                    title: 'Returned By',
+                    field: 'created_by',
+                    title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
