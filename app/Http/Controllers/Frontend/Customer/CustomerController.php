@@ -136,8 +136,9 @@ class CustomerController extends Controller
                         }
                 }
             }
-
-            $customer->coa()->save(Coa::find($request->account_code));
+            if($request->account_code){
+                $customer->coa()->save(Coa::find($request->account_code));
+            }
 
             return response()->json($customer);
         }
@@ -157,12 +158,18 @@ class CustomerController extends Controller
         $documents = Type::ofDocument()->get();
         $websites = Type::ofWebsite()->get();
         $attentions = json_decode($customer->attention);
+        if($customer->coa->first()){
+            $coa = $customer->coa->first()->code.' - '.$customer->coa->first()->name;
+        }else{
+            $coa = 'Search account code';
+        }
+
         return view('frontend.customer.show', [
             'customer' => $customer,
             'attentions' => $attentions,
             'websites' => $websites,
             'documents' => $documents,
-            'coa' => $customer->coa->first()
+            'coa' => $coa
         ]);
     }
 
@@ -178,6 +185,11 @@ class CustomerController extends Controller
         $websites = Type::ofWebsite()->get();
         $attentions = json_decode($customer->attention);
         $levels = Level::where('of','customer')->get();
+        if($customer->coa->first()){
+            $coa = $customer->coa->first()->code.' - '.$customer->coa->first()->name;
+        }else{
+            $coa = 'Search account code';
+        }
 
         return view('frontend.customer.edit', [
             'customer' => $customer,
@@ -185,7 +197,7 @@ class CustomerController extends Controller
             'websites' => $websites,
             'levels' => $levels,
             'documents' => $documents,
-            'coa' => $customer->coa->first()
+            'coa' => $coa
         ]);
     }
 
@@ -284,8 +296,9 @@ class CustomerController extends Controller
                         }
                 }
             }
-            $customer->coa()->first()->pivot->update(['coa_id'=> Coa::find($request->account_code)->id]);
-
+            if($request->account_code){
+                $customer->coa()->first()->pivot->update(['coa_id'=> Coa::find($request->account_code)->id]);
+            }
         }
 
         // TODO: Return error message as JSON

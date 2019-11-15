@@ -127,7 +127,9 @@ class VendorController extends Controller
                 }
             }
 
-            $vendor->coa()->save(Coa::find($request->account_code));
+            if($request->account_code){
+                $vendor->coa()->save(Coa::find($request->account_code));
+            }
 
             return response()->json($vendor);
         }
@@ -144,9 +146,15 @@ class VendorController extends Controller
      */
     public function show(Vendor $vendor)
     {
+        if($vendor->coa->first()){
+            $coa = $vendor->coa->first()->code.' - '.$vendor->coa->first()->name;
+        }else{
+            $coa = 'Search account code';
+        }
+
         return view('frontend.vendor.show',[
             'vendor' => $vendor,
-            'coa' => $vendor->coa->first()
+            'coa' => $coa
         ]);
     }
 
@@ -160,12 +168,17 @@ class VendorController extends Controller
     {
         $documents = Type::ofDocument()->get();
         $attentions = json_decode($vendor->attention);
+        if($vendor->coa->first()){
+            $coa = $vendor->coa->first()->code.' - '.$vendor->coa->first()->name;
+        }else{
+            $coa = 'Search account code';
+        }
 
         return view('frontend.vendor.edit',[
             'vendor' => $vendor,
             'documents' => $documents,
             'attentions' => $attentions,
-            'coa' => $vendor->coa->first()
+            'coa' => $coa
         ]);
     }
 
@@ -181,7 +194,13 @@ class VendorController extends Controller
         // $vendor = Vendor::find($vendor);
         // $vendor->name = $request->name;
         // $vendor->save();
-        $vendor->coa()->first()->pivot->update(['coa_id'=> Coa::find($request->account_code)->id]);
+        if($request->account_code){
+            if($vendor->coa()->first() == null){
+                $vendor->coa()->save(Coa::find($request->account_code));
+            }else{
+                $vendor->coa()->first()->pivot->update(['coa_id'=> Coa::find($request->account_code)->id]);
+            }
+        }
 
         return response()->json($vendor);
     }

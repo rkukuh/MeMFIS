@@ -800,17 +800,9 @@
 
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-8 col-md-8 col-lg-8">
-                                                            @if (isset($customer->journal))
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('padding', '0')
-                                                                @slot('class', 'search-journal')
-                                                                @slot('text', $customer->account_code_and_name)
-                                                            @endcomponent
-                                                            @else
                                                             <div class="search-journal" id="search-journal">
                                                                 Search account code
                                                             </div>
-                                                            @endif
                                                         </div>
 
                                                         <div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding: 0;">
@@ -1203,10 +1195,8 @@
     $('.selectWebsite').select2();
     $('.selectDocument').select2();
 
-        let code = '{{$coa->code}}';
-    let name = '{{$coa->name}}';
+    $('.search-journal').html('{{$coa}}');
 
-    $('.search-journal').html(code + " - " + name);
 
 </script>
 
