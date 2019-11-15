@@ -6,7 +6,7 @@ let ProposeLeave = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/price-list-item',
+                        url: '/datatables/leave/propose-leave',
                         map: function (raw) {
                             let dataSet = raw;
 
