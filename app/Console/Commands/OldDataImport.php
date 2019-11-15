@@ -64,6 +64,9 @@ class OldDataImport extends Command
         $this->line('Importing: Task Cards CPCP for Trigana');
         app()->make(OldDataController::class)->taskCardsCPCPTrigana();
 
+        $this->line('Importing: Task Cards for ATR-72');
+        app()->make(OldDataController::class)->taskCardsATR();
+
         $this->line('Importing: Task Cards for CN');
         app()->make(OldDataController::class)->taskCardsCN();
 

@@ -8,6 +8,7 @@ use App\Imports\AircraftsImport;
 use App\Imports\CustomersImport;
 use App\Imports\WorkAreasImport;
 use App\Imports\TaskCardsCNimport;
+use App\Imports\TaskCardsATRImport;
 use App\Imports\ManufacturersImport;
 use App\Imports\TaskCardsCNItemimport;
 use App\Imports\TaskCardsBoeingImport;
@@ -50,6 +51,11 @@ class OldDataController extends Controller
     {
         Excel::import(new MaterialsAndToolsCNImport, $this->import_directory . 'master-materials-cn.xlsx');
         Excel::import(new MaterialsAndToolsCNImport, $this->import_directory . 'master-tools-cn.xlsx');
+    }
+    
+    public function taskCardsATR()
+    {
+        Excel::import(new TaskCardsATRImport, $this->import_directory . 'taskcard-atr-72.xlsx');
     }
 
     public function taskCardCNItems()

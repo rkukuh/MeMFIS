@@ -85,6 +85,10 @@ class Import extends Command
                 $this->line('Importing: Master data Aircraft');
                 app()->make(OldDataController::class)->manufacturers();
                 break;
+            case 'atr-72':
+                $this->line('Importing: Task Cards data ATR-72');
+                app()->make(OldDataController::class)->taskCardsATR();
+                break;
             default:
                 $this->line('Importing: File not Found');
                 break;
