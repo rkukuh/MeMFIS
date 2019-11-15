@@ -73,10 +73,6 @@ class Import extends Command
                 $this->line('Importing: Task Cards for CN');
                 app()->make(OldDataController::class)->taskCardsCN();
                 break;
-            case 'item-cn':
-                $this->line('Importing: Materials and Tools for CN');
-                app()->make(OldDataController::class)->materialsAndToolsCN();
-                break;
             default:
                 $this->line('Importing: File not Found');
                 break;
