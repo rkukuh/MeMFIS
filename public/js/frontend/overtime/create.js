@@ -1,62 +1,46 @@
-let Employee = {
-    init: function () {
-        $("#m_datatable_journal").DataTable({
-            "dom": '<"top"f>rt<"bottom">pl',
-            responsive: !0,
-            searchDelay: 500,
-            processing: !0,
-            serverSide: !0,
-            lengthMenu: [5, 10, 25, 50 ],
-            pageLength:5,
-            ajax: "/datatables/employee/modal",
-            columns: [
-                {
-                    data: "code"
-                },
-                {
-                    data: "first_name"
-                },
-                {
-                    data: "Actions"
-                }
-            ],
-            columnDefs: [
-                {
-                    targets: -1,
-                    orderable: !1,
-                    render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-first_name="' + t.first_name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
-                    }
-                },
+let maxHours = minHours = 0;
+let outSplitted = [];
 
-            ]
-        })
+$("#date").on("change", function(){
+    let uuid = $("#uuid_employee").val();
+    let date = $("#date").val();
+    $.ajax({
+        url: '/overtime/'+uuid+'/date/'+date,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            if(data.out){
+                outSplitted = data.out.split(":");
+            }
+            $("input[type=number][name=hours]").val(outSplitted[0]- 16);
+            $("input[type=number][name=minutes]").val(outSplitted[1]- 30);
+            $("input[type=number][name=second]").val(outSplitted[2]- 00);
+            $('#end_time').timepicker({
+                timeFormat: 'HH:mm:ss',
+                minuteStep: 1,
+                showSeconds: !1,
+                showMeridian: !1,
+                snapToStep: !0
+            });
+            $('#end_time').timepicker('setTime', data.out);
+        }
+    });
 
-        $('<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left: 60%; color: white;"><span><i class="la la-refresh"></i><span>Reload</span></span> </button>').appendTo('div.dataTables_filter');
-        $('.paging_simple_numbers').addClass('pull-left');
-        $('.dataTables_length').addClass('pull-right');
-        $('.dataTables_info').addClass('pull-left');
-        $('.dataTables_info').addClass('margin-info');
-        $('.paging_simple_numbers').addClass('padding-datatable');
+});
 
-        $('.dataTables_filter').on('click', '.refresh', function () {
-            $('#m_datatable_journal').DataTable().ajax.reload();
-        });
-
-        $('.dataTable').on('click', '.select-account_code', function () {
-            let uuid = $(this).data('uuid');
-            let code = $(this).data('code');
-            let name = $(this).data("first_name");
-
-            // document.getElementById('account_code').value = uuid;
-            document.getElementById('specific_employee').value = uuid;
-
-            $('.search-journal').html(code + " - " + name);
-            $('#modal_account_code').modal('hide');
-        });
-    }
-};
-
-jQuery(document).ready(function () {
-    Employee.init();
+$(document).ready(function(){
+    $('#start_time').timepicker({
+        timeFormat: 'HH:mm:ss',
+        defaultTime: "16:30:00",
+        minuteStep: 1,
+        showSeconds: !1,
+        showMeridian: !1,
+        snapToStep: !0,
+        maxHours: 20,
+    });
+    $('#start_time').timepicker().on('hide.timepicker', function(e) {
+        if(e.time.hours < 17){
+            $('#start_time').timepicker('setTime', '16:30:00');
+        }
+      });
 });

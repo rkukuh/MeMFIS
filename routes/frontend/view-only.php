@@ -141,10 +141,10 @@ Route::group([
 
         /** ATTENDANCE CORRECTION */
 
-        Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
-        Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
-        Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
-        Route::view('/attendance-correction/approve', 'frontend.attendance-correction.approve')->name('attendance-correction.approve');
+        // Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
+        // Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
+        // Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
+        // Route::view('/attendance-correction/approve', 'frontend.attendance-correction.approve')->name('attendance-correction.approve');
 
         /** OVERTIME */
 
@@ -155,9 +155,9 @@ Route::group([
 
         /** PROPOSE LEAVE */
 
-        Route::view('/propose-leave', 'frontend.propose-leave.index')->name('propose-leave.index');
-        Route::view('/propose-leave/create', 'frontend.propose-leave.propose-leave.create')->name('propose-leave.create');
-        Route::view('/propose-leave/edit', 'frontend.propose-leave.propose-leave.edit')->name('propose-leave.edit');
+        // Route::view('/propose-leave', 'frontend.propose-leave.index')->name('propose-leave.index');
+        // Route::view('/propose-leave/create', 'frontend.propose-leave.propose-leave.create')->name('propose-leave.create');
+        // Route::view('/propose-leave/edit', 'frontend.propose-leave.propose-leave.edit')->name('propose-leave.edit');
         Route::view('/propose-leave/approve-type-1', 'frontend.propose-leave.propose-leave.approve-type-1')->name('propose-leave.approve-type-1');
         Route::view('/propose-leave/approve-type-2', 'frontend.propose-leave.propose-leave.approve-type-2')->name('propose-leave.approve-type-2');
 
