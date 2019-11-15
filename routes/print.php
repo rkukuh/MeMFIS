@@ -270,7 +270,7 @@ Route::get('/inventory-out-material', function () {
     return $pdf->stream();
 });
 
-Route::get('/inventory-in', function () {
+Route::get('/inventory-in-docs', function () {
     $pdf = \PDF::loadView('frontend/form/inventory_in');
     $pdf->setPaper('A5', 'potrait');
     return $pdf->stream();

@@ -174,4 +174,12 @@ class Status extends MemfisModel
     {
         return $this->morphTo();
     }
+
+    /**
+     * Get the progress that owns the status.
+     */
+    public function progress()
+    {
+        return $this->hasOne(Progress::class);
+    }
 }

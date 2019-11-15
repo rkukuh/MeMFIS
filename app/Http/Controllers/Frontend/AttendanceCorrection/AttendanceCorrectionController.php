@@ -16,6 +16,7 @@ use App\Models\Type;
 use App\Models\Status;
 use App\Models\Approval;
 use App\Models\Employee;
+use App\Models\EmployeeAttendance;
 use App\Models\AttendanceCorrection;
 
 class AttendanceCorrectionController extends Controller
@@ -49,16 +50,18 @@ class AttendanceCorrectionController extends Controller
      */
     public function store(AttendanceCorrectionStore $request)
     {
-        $employee = Employee::where("uuid", $request->uuid_employee)->first();
-        $correction_type = Type::ofAttendanceCorrection()->where("code", $request->attendance_correction_time_type)->first();
+        $employee = Employee::where('uuid', $request->uuid_employee)->first();
+        $attendance =  EmployeeAttendance::whereDate('date', $request->date)->where('employee_id', $employee->id)->first();
+        $correction_type = Type::ofAttendanceCorrection()->where('code', $request->attendance_correction_time_type)->first();
         $code = DocumentNumber::generate('ATCO-', AttendanceCorrection::withTrashed()->count()+1);
-        $status = Status::ofAttendanceCorrection()->where("code","open")->first();
+        $status = Status::ofAttendanceCorrection()->where('code','open')->first();
 
         $AttendanceCorrection = AttendanceCorrection::create([
             'code' => $code,
             'status_id' => $status->id,
             'employee_id' => $employee->id, 
             'type_id' => $correction_type->id,
+            'attendance_id' => $attendance->id,
             'correction_date' => $request->date, 
             'description' => $request->description,
             'correction_time' => $request->time_correction, 

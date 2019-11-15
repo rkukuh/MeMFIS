@@ -12,6 +12,7 @@ use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
 use App\Models\QuotationHtcrrItem;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\PurchaseRequestItem;
 use App\Models\QuotationWorkPackageTaskCardItem;
 use App\Http\Requests\Frontend\PurchaseRequestStore;
 use App\Http\Requests\Frontend\PurchaseRequestUpdate;
@@ -173,6 +174,24 @@ class ProjectPurchaseRequestController extends Controller
         ]));
 
         return response()->json($purchaseRequest);
+    }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\PurchaseRequest $purchaseRequest
+     * @return \Illuminate\Http\Response
+     */
+    public function print(PurchaseRequest $purchaseRequest)
+    {
+        $pdf = \PDF::loadView('frontend/form/purchase_request_project',[
+                'username' => Auth::user()->name,
+                'purchaseRequest' => $purchaseRequest,
+                'items' => PurchaseRequestItem::where('purchase_request_id',$purchaseRequest->id)->get(),
+                'created_by' => $purchaseRequest->audits->first()->user->name
+                ]);
+
+        return $pdf->stream();
     }
 
 }

@@ -159,4 +159,22 @@ class GoodsReceivedController extends Controller
 
         return response()->json($goodsReceived);
     }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\GoodsReceived $goodsReceived
+     * @return \Illuminate\Http\Response
+     */
+    public function print(GoodsReceived $goodsReceived)
+    {
+        $pdf = \PDF::loadView('frontend/form/goods_received_note',[
+                'username' => Auth::user()->name,
+                'goodsReceived' => $goodsReceived,
+                'created_by' => '$goodsReceived->audits->first()->user->->name'
+                ]);
+
+        return $pdf->stream();
+    }
+
 }

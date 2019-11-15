@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend\leave;
 
 use App\Models\leave;
+use App\Models\EmployeeAttendance;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\leaveStore;
 use App\Http\Requests\Frontend\leaveUpdate;

@@ -960,16 +960,6 @@
                                                             @endif
                                                         </select>
                                                     </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3 hidden">
-                                                        <label class="form-control-label">
-                                                            Extension
-                                                        </label>
-                                                        @component('frontend.common.input.text')
-                                                            @slot('name', 'attn-ext')
-                                                            @slot('text', 'Ext')
-                                                            @slot('value', $attention->ext)
-                                                        @endcomponent
-                                                    </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
