@@ -64,7 +64,7 @@ class ItemGoodsReceivedController extends Controller
                     'already_received_amount'=> 2,// TODO ask whats is it?
                     'unit_id' => $request->unit_id,
                     'quantity_unit' => $quantity_unit,
-                    'price' => $price,
+                    'price' => ($request->quantity/$quantity_unit)*$price,
                     'note' => $request->note,
                     'expired_at' => $request->expired_at,
                     ]
