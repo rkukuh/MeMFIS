@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\leave;
+use App\Models\Leave;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\leaveStore;
 use App\Http\Requests\Admin\leaveUpdate;
@@ -43,7 +43,7 @@ class leaveController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\leave  $leave
+     * @param  \App\Models\Leave  $leave
      * @return \Illuminate\Http\Response
      */
     public function show(leave $leave)
@@ -54,7 +54,7 @@ class leaveController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\leave  $leave
+     * @param  \App\Models\Leave  $leave
      * @return \Illuminate\Http\Response
      */
     public function edit(leave $leave)
@@ -66,7 +66,7 @@ class leaveController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Admin\leaveUpdate  $request
-     * @param  \App\Models\leave  $leave
+     * @param  \App\Models\Leave  $leave
      * @return \Illuminate\Http\Response
      */
     public function update(leaveUpdate $request, leave $leave)
@@ -77,7 +77,7 @@ class leaveController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\leave  $leave
+     * @param  \App\Models\Leave  $leave
      * @return \Illuminate\Http\Response
      */
     public function destroy(leave $leave)
