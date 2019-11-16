@@ -339,7 +339,7 @@
                                                     <i class="fa fa-genderless m--font-danger"></i>
                                                 </div>
                                                 <div class="m-timeline-2__item-text  m--padding-top-5">
-                                                    {{ $progresses->status }}
+                                                    {{ $progresses->status->name }}
                                                 </div>
                                             </div>
                                         @endforeach

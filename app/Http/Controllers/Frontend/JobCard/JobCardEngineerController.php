@@ -147,11 +147,6 @@ class JobCardEngineerController extends Controller
 
         $progresses_groups = $jobcard->progresses->groupBy('progressed_by');
         $employees = Employee::all();
-        foreach($progresses_groups as $progresses_group){
-            foreach($progresses_group as $progress){
-                $progress->status .= Status::where('id',$progress->status_id)->first()->name;
-            }
-        }
 
         $progresses =  $jobcard->progresses->where('progressed_by', Auth::id());
 
