@@ -6,6 +6,7 @@ use App\Models\Unit;
 use App\Models\Branch;
 use App\Models\Storage;
 use App\Models\InventoryIn;
+use App\Models\Employee;
 use App\Models\GoodsReceived;
 use Faker\Generator as Faker;
 

@@ -1,18 +1,68 @@
 let MaterialRequestCreate = {
     init: function () {
+        var tableInit = true;
+
+        function getJobcard() {
+            $.ajax({
+                url: '/get-jobcard/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                    $('select[name="jc_no"]').empty();
+
+                    $('select[name="jc_no"]').append(
+                        '<option value=""> Select a Item</option>'
+                    );
+
+                    $.each(data, function (key, value) {
+                        $('select[name="jc_no"]').append(
+                            '<option value="' + key + '">' + value + '</option>'
+                        );
+                    });
+                }
+            });
+        };
+
+        function getProjects() {
+            $.ajax({
+                url: '/get-projects/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('select[name="project"]').empty();
+
+                    $('select[name="project"]').append(
+                        '<option value=""> Select a Project</option>'
+                    );
+
+                    $.each(data, function (key, value) {
+                        $('select[name="project"]').append(
+                            '<option value="' + key + '">' + value + '</option>'
+                        );
+                    });
+                }
+            });
+        };
 
         $('#jc_ref_no').on('click', function () {
-            $('#ref_project').prop("disabled", true);
+            getJobcard();
+            $('#ref_project').html('').prop("disabled", true);
             $('#ref_jobcard').removeAttr("disabled");
         });
 
         $('#project_ref_no').on('click', function () {
-            $('#ref_jobcard').prop("disabled", true);
+            getProjects();
+            $('#ref_jobcard').html('').prop("disabled", true);
             $('#ref_project').removeAttr("disabled");
         });
 
-        $("#ref_jobcard").change(function () {
-            let jobcard_uuid = $(this).val();   
+        function createTable(type, uuid) {
+            if (type == 'jc') {
+                var url = '/datatables/jobcard/' + uuid + '/materials';
+            } else if (type == 'project') {
+                var url = '/datatables/project/additional/' + uuid + '/materials';
+            }
 
             $('.material_request_project_datatable').mDatatable({
                 data: {
@@ -20,7 +70,7 @@ let MaterialRequestCreate = {
                     source: {
                         read: {
                             method: 'GET',
-                            url: '/datatables/jobcard/'+ jobcard_uuid +'/materials',
+                            url: url,
                             map: function (raw) {
                                 let dataSet = raw;
 
@@ -83,7 +133,7 @@ let MaterialRequestCreate = {
                         width: 150
                     },
                     {
-                        field: 'description',
+                        field: 'name',
                         title: 'Item Description',
                         sortable: 'asc',
                         filterable: !1,
@@ -119,116 +169,40 @@ let MaterialRequestCreate = {
                     }
                 ]
             });
+        }
+
+        $("#ref_jobcard").change(function () {
+            if (tableInit == true) {
+                tableInit = false;
+                let jobcard_uuid = $(this).val();
+                createTable('jc', jobcard_uuid);
+            }
+            else {
+                let jobcard_uuid = $(this).val();
+                let table = $(".material_request_project_datatable").mDatatable();
+                table.destroy();
+                createTable('jc', jobcard_uuid);
+                table = $(".material_request_project_datatable").mDatatable();
+                table.originalDataSet = [];
+                table.reload();
+            }
         });
 
         $('#ref_project').change(function () {
-            let project_uuid = $(this).val();
-
-            $('.material_request_project_datatable').mDatatable({
-                data: {
-                    type: 'remote',
-                    source: {
-                        read: {
-                            method: 'GET',
-                            url: '/datatables/jobcard/' + jobcard_uuid + '/materials',
-                            map: function (raw) {
-                                let dataSet = raw;
-
-                                if (typeof raw.data !== 'undefined') {
-                                    dataSet = raw.data;
-                                }
-
-                                return dataSet;
-                            }
-                        }
-                    },
-                    pageSize: 10,
-                    serverPaging: !0,
-                    serverFiltering: !1,
-                    serverSorting: !0
-                },
-                layout: {
-                    theme: 'default',
-                    class: '',
-                    scroll: false,
-                    footer: !1
-                },
-                sortable: !0,
-                filterable: !1,
-                pagination: !0,
-                search: {
-                    input: $('#generalSearch')
-                },
-                toolbar: {
-                    items: {
-                        pagination: {
-                            pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                        }
-                    }
-                },
-                columns: [
-                    {
-                        field: '#',
-                        title: 'No',
-                        width: '40',
-                        sortable: 'asc',
-                        filterable: !1,
-                        textAlign: 'center',
-                        template: function (row, index, datatable) {
-                            return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
-                        }
-                    },
-                    {
-                        field: 'code',
-                        title: 'Part Number',
-                        sortable: 'asc',
-                        filterable: !1,
-                        width: 150
-                    },
-                    {
-                        field: '',
-                        title: 'Serial Number',
-                        sortable: 'asc',
-                        filterable: !1,
-                        width: 150
-                    },
-                    {
-                        field: 'description',
-                        title: 'Item Description',
-                        sortable: 'asc',
-                        filterable: !1,
-                        width: 150
-                    },
-                    {
-                        field: '',
-                        title: 'Expired Date',
-                        sortable: 'asc',
-                        filterable: !1,
-                        width: 150
-                    },
-                    {
-                        field: 'pivot.quantity',
-                        title: 'Qty',
-                        sortable: 'asc',
-                        filterable: !1,
-                        width: 150
-                    },
-                    {
-                        field: 'unit_name',
-                        title: 'Unit',
-                        sortable: 'asc',
-                        filterable: !1,
-                        width: 150,
-                    },
-                    {
-                        field: 'pivot.note',
-                        title: 'Remark',
-                        sortable: 'asc',
-                        filterable: !1,
-                        width: 150,
-                    }
-                ]
-            });
+            if (tableInit == true) {
+                tableInit = false;
+                let project_uuid = $(this).val();
+                createTable('project', project_uuid);
+            }
+            else {
+                let project_uuid = $(this).val();
+                let table = $(".material_request_project_datatable").mDatatable();
+                table.destroy();
+                createTable('project', project_uuid);
+                table = $(".material_request_project_datatable").mDatatable();
+                table.originalDataSet = [];
+                table.reload();
+            }
         });
 
         $('.footer').on('click', '.add-request', function () {
