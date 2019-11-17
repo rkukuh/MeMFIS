@@ -4,20 +4,31 @@ namespace App\Http\Controllers\Import;
 
 use App\Imports\UsersImport;
 use App\Imports\EnginesImport;
+use App\Imports\AircraftsImport;
 use App\Imports\CustomersImport;
 use App\Imports\WorkAreasImport;
 use App\Imports\TaskCardsCNimport;
+use App\Imports\TaskCardsATRImport;
+use App\Imports\ManufacturersImport;
 use App\Imports\TaskCardsCNItemimport;
+<<<<<<< HEAD
+=======
+use App\Imports\TaskCardsBoeingImport;
+use App\Imports\MaterialsAndToolsImport;
 use App\Imports\MaterialsAndToolsCNImport;
+>>>>>>> Thamrin
 use App\Imports\TaskCardsCPCPTriganaimport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
-use App\Imports\TaskCardsBoeingImport;
-use App\Imports\MaterialsAndToolsImport;
 
 class OldDataController extends Controller
 {
     protected $import_directory = 'import/';
+
+    public function aircrafts()
+    {
+        Excel::import(new AircraftsImport, $this->import_directory . 'master-aircrafts.xlsx');
+    }
 
     public function customers()
     {
@@ -29,15 +40,27 @@ class OldDataController extends Controller
         Excel::import(new EnginesImport, $this->import_directory . 'engines.xlsx');
     }
 
+    public function manufacturers()
+    {
+        Excel::import(new ManufacturersImport, $this->import_directory . 'master-manufacturers.xlsx');
+    }
+
     public function materialsAndTools()
     {
         Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'master-items.xlsx');
     }
 
+<<<<<<< HEAD
+=======
     public function materialsAndToolsCN()
     {
         Excel::import(new MaterialsAndToolsCNImport, $this->import_directory . 'master-materials-cn.xlsx');
         Excel::import(new MaterialsAndToolsCNImport, $this->import_directory . 'master-tools-cn.xlsx');
+    }
+    
+    public function taskCardsATR()
+    {
+        Excel::import(new TaskCardsATRImport, $this->import_directory . 'taskcards-atr-72.xlsx');
     }
 
     public function taskCardCNItems()
@@ -46,6 +69,7 @@ class OldDataController extends Controller
         Excel::import(new TaskCardsCNItemimport, $this->import_directory . 'cn-tool-tc.xlsx');
     }
 
+>>>>>>> Thamrin
     public function taskCardsBoeing()
     {
         // Excel::import(new TaskCardsBoeingImport, $this->import_directory . 'taskcards-boeing-737.xlsx');
@@ -65,7 +89,7 @@ class OldDataController extends Controller
     {
         Excel::import(new UsersImport, $this->import_directory . 'users.xlsx');
     }
-    
+
     public function workAreas()
     {
         Excel::import(new WorkAreasImport, $this->import_directory . 'work-areas.xlsx');

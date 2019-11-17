@@ -121,8 +121,7 @@ class ProjectController extends Controller
                 'title' => $project->number,
                 'alert-type' => "error"
             );
-            array_push($error_messages, $error_message);
-            return response()->json(['error' => $error_messages], '403');
+            return response()->json(['error' => $error_message], '403');
         }
 
         if(in_array(null, $tat->toArray(), true)){
@@ -131,8 +130,7 @@ class ProjectController extends Controller
                 'title' => $project->number,
                 'alert-type' => "error"
             );
-            array_push($error_messages, $error_message);
-            return response()->json(['error' => $error_messages], '403');
+            return response()->json(['error' => $error_message], '403');
         }
 
         $pw_json = $project->workpackages->toJson();
