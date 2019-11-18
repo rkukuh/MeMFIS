@@ -164,7 +164,7 @@
 
     <div id="content2">
         <div class="container">
-            <p style="font-size:12px;">Description :</p>
+            <p style="font-size:12px;">Remark :</p>
             <div class="body">
                 <table width="100%">
                     <tr>
@@ -186,7 +186,7 @@
                     <th valign="middle" align="center" width="15%">Expired Date</th>
                     <th valign="middle" align="center" width="8%">Qty</th>
                     <th valign="middle" align="center" width="8%">Unit</th>
-                    <th valign="middle" align="center" width="16%">Remark</th>
+                    <th valign="middle" align="center" width="16%">Remarks</th>
                 </tr>
                 <tr>
                     <td valign="top" align="center" width="6%">1</td>
