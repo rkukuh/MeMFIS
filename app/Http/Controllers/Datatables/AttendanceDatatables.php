@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 class AttendanceDatatables extends Controller
 {
     public function index(){
+        ini_set('memory_limit', '-1');
+
         $raw_attendance = EmployeeAttendance::all();
         $attendance = [];
 

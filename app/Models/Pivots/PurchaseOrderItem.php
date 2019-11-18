@@ -14,6 +14,18 @@ class PurchaseOrderItem extends Pivot
 
     protected $table = 'item_purchase_order';
 
+    protected $fillable = [
+        'purchase_order_id',
+        'item_id',
+        'quantity',
+        'quantity_unit',
+        'unit_id',
+        'price',
+        'subtotal_before_discount',
+        'subtotal_after_discount',
+        'note',
+    ];
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
