@@ -1,4 +1,5 @@
 <?php
+        use DataTables;
 
 Route::name('testing.')->group(function () {
 
@@ -19,7 +20,7 @@ Route::name('testing.')->group(function () {
 
             $url = $request->getUri();
             // return (string) $request->getUri();
-            
+
             return view('frontend.testing.view-file',[
                 'url' => $url
             ]);
@@ -45,6 +46,25 @@ Route::name('testing.')->group(function () {
             //         ]);
         });
 
+        Route::get('/serverSide', [
+            // 'as'   => 'serverSide',
+            'uses' => function () {
+                ini_set('memory_limit', '-1');
+                $users = App\Models\Item::all();
+                return DataTables::of($users)->make();
+            }
+        ]);
+        Route::get('/server', function () {
+            ini_set('memory_limit', '-1');
+            $tsim_array = App\Models\Item::get();
+            foreach (array_chunk($tsim_array,1000) as $t) {
+                dd($t);
+                // DB::table('tsim')->insert($t);
+
+
+             }
+
+        });
         Route::get('/docnum', function () {
 
             echo App\Helpers\DocumentNumber::generate('TC-', App\Models\TaskCard::count());

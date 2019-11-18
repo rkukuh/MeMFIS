@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\Item;
 
+use DataTables;
 use App\Models\Item;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
@@ -17,11 +18,21 @@ class ItemDatatables extends Controller
     public function index()
     {
         ini_set('memory_limit', '-1');
+        // dd(Item::paginate(10));
+        // return Datatables::of(
+        //     Item::with('unit', 'categories')
+        //                 // ->whereHas('categories', function ($query) {
+        //                 //     $query->where('code','<>','tool');
+        //                 // })
+        //                 ->get()
+        // )->make(true);
+        // return Datatables::of(Item::with('unit')->get())->make(true);
 
         $items = Item::with('unit', 'categories')
                         ->whereHas('categories', function ($query) {
                             $query->where('code','<>','tool');
-                        })->get();
+                        })->take(5000)->get();
+        // dd($items);
 
         $data = $alldata = json_decode($items);
 
@@ -139,6 +150,7 @@ class ItemDatatables extends Controller
         ini_set('memory_limit', '-1');
 
         function filterArray( $array, $allowed = [] ) {
+            ini_set('memory_limit', '-1');
             return array_filter(
                 $array,
                 function ( $val, $key ) use ( $allowed ) { // N.b. $val, $key not $key, $val
@@ -149,6 +161,8 @@ class ItemDatatables extends Controller
         }
 
         function filterKeyword( $data, $search, $field = '' ) {
+            ini_set('memory_limit', '-1');
+
             $filter = '';
             if ( isset( $search['value'] ) ) {
                 $filter = $search['value'];
@@ -177,6 +191,8 @@ class ItemDatatables extends Controller
         }
 
         function filterByDateRange( $data, $filter, $field ) {
+            ini_set('memory_limit', '-1');
+
             // filter by range
             if ( ! empty( $range = array_filter( explode( '|', $filter ) ) ) ) {
                 $filter = $range;
