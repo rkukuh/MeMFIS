@@ -47,6 +47,8 @@ class EmployeeAttendanceController extends Controller
     {
         if(isset($request->document)){
             $last_import = AttendanceFile::orderBy('created_at','DESC')->first();
+            $last_index = 0;
+
             if($last_import){
                 // get file from cloud
                 $s3 = Storage::disk('s3');
@@ -61,19 +63,15 @@ class EmployeeAttendanceController extends Controller
                 $requestS3 = $client->createPresignedRequest($command, '+20 minutes');
         
                 $url = (string) $requestS3->getUri();
-                $last_index = sizeof(file($url));
+                $last_index = sizeof(file($url)) - 1;
             }
-
-            $last_index = 0;
 
             $file = $request->file('document');
 
             $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME);
             $filename = $name.'.'.$file->getClientOriginalExtension();
             
-            //todo to be able import to s3 disk
             $exist = Storage::disk('s3')->url('attendance_files/'.$file->getClientOriginalName());
-            // $exist = "/storage/attendance_files/BRC2190960192_attlog.dat"
         
             if($exist){
                 $random = str_random(5);
@@ -134,8 +132,6 @@ class EmployeeAttendanceController extends Controller
             //Grouping nrp
             $unique_nrp = array_values(array_unique($data_nrp));
 
-            // dd($unique_nrp);
-
             for($i=0;$i < count($unique_nrp); $i++){
                 
                 $x = 0;
@@ -162,7 +158,6 @@ class EmployeeAttendanceController extends Controller
 
             //Next Grouping date
             $unique_date = array_values(array_unique($data_date));
-            // dd($unique_date);
 
             for ($i=0; $i < count($data_grouping); $i++) { 
 
@@ -193,14 +188,12 @@ class EmployeeAttendanceController extends Controller
                     ];
                 }
             }
-            // dd($data_final);
 
             for ($i=0; $i < count($data_final); $i++) { 
                 for ($y=0; $y < count($data_final[$i]['date']); $y++) { 
                     
                     $employee = Employee::where('code',$data_final[$i]['nrp'])->first();
                     if(isset($employee->id)){
-                        // dd($employee);
                         $attendance = $employee->employee_attendance()->where('employee_attendances.date',$data_final[$i]['date'][$y]['date'])->first();
                         if($attendance->created_at == $attendance->updated_at){
                             $in = '00:00:00';
