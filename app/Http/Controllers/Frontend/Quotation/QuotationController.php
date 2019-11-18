@@ -341,7 +341,8 @@ class QuotationController extends Controller
                 'title' => $quotation->number,
                 'alert-type' => "error"
             );
-            return response()->json(['error' => $error_message], '403');
+            array_push($error_messages, $error_message);
+            return response()->json(['error' => $error_messages], '403');
         }
         foreach($scheduled_payment_amounts as $scheduled_payment_amount){
             $amount += $scheduled_payment_amount->amount;
@@ -353,7 +354,8 @@ class QuotationController extends Controller
                 'title' => $quotation->number,
                 'alert-type' => "error"
             );
-            return response()->json(['error' => $error_message], '403');
+            array_push($error_messages, $error_message);
+            return response()->json(['error' => $error_messages], '403');
         }
         // if( max($work_progress) != 100){
 

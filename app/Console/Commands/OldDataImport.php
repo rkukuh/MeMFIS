@@ -39,33 +39,24 @@ class OldDataImport extends Command
     public function handle()
     {
         ini_set('memory_limit', '-1');
-          
-        $this->line('Importing: Master Manufacturer');
-        app()->make(OldDataController::class)->manufacturers();
-
-        $this->line('Importing: Master Aircrafts');
-        app()->make(OldDataController::class)->aircrafts();
 
         $this->line('Importing: Customers');
         app()->make(OldDataController::class)->customers();
 
-        $this->line('Importing: Master Engines');
+        $this->line('Importing: Engines');
         app()->make(OldDataController::class)->engines();
 
-        $this->line('Importing: Master Work Areas');
+        $this->line('Importing: Work Areas');
         app()->make(OldDataController::class)->workAreas();
 
-        // $this->line('Importing: Materials and Tools');
-        // app()->make(OldDataController::class)->materialsAndTools();
+        $this->line('Importing: Materials and Tools');
+        app()->make(OldDataController::class)->materialsAndTools();
 
         $this->line('Importing: Task Cards for Boeing');
         app()->make(OldDataController::class)->taskCardsBoeing();
 
         $this->line('Importing: Task Cards CPCP for Trigana');
         app()->make(OldDataController::class)->taskCardsCPCPTrigana();
-
-        $this->line('Importing: Task Cards for ATR-72');
-        app()->make(OldDataController::class)->taskCardsATR();
 
         $this->line('Importing: Task Cards for CN');
         app()->make(OldDataController::class)->taskCardsCN();

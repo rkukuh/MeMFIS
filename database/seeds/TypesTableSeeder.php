@@ -20,7 +20,6 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfBenefitProrateCalculation::class);
         $this->call(TypesOfCapability::class);
         $this->call(TypesOfCoa::class);
-        $this->call(TypesOfCoaTransaction::class);
         $this->call(TypesOfCompany::class);
         $this->call(TypesOfDefectCardCloseReason::class);
         $this->call(TypesOfDefectCardPauseReason::class);
