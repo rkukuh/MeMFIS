@@ -5,6 +5,7 @@ namespace App\Console;
 use Carbon\Carbon;
 use App\Models\Employee;
 use App\Models\InventoryOut;
+use App\Models\EmployeeAttendance;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -61,7 +62,8 @@ class Kernel extends ConsoleKernel
         $in = '00:00:00';
         $out = '00:00:00';
         foreach($employees as $employee){
-            $employee->employee_attendance()->create([
+                EmployeeAttendance::create([
+                'employee_id' => $employee->id,
                 'date' => Carbon::today(),
                 'in' => $in,
                 'out' => $out
