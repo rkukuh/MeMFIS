@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use Directoryxx\Finac\Model\Coa;
 
 class GoodsReceived extends MemfisModel
 {
@@ -50,6 +51,19 @@ class GoodsReceived extends MemfisModel
     public function branches()
     {
         return $this->morphToMany(Branch::class, 'branchable');
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many coa.
+     *
+     * This function will get all good received's coa.
+     * See: Coa's coa() method for the inverse
+     *
+     * @return mixed
+     */
+    public function coa()
+    {
+        return $this->morphToMany(Coa::class, 'coable');
     }
 
     /**

@@ -124,7 +124,7 @@
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                         <label class="form-control-label">
                                                             Type. @include('frontend.common.label.required')
-                                                        </label> 
+                                                        </label>
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
                                                     </div>
@@ -800,17 +800,9 @@
 
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-8 col-md-8 col-lg-8">
-                                                            @if (isset($customer->journal))
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('padding', '0')
-                                                                @slot('class', 'search-journal')
-                                                                @slot('text', $customer->account_code_and_name)
-                                                            @endcomponent
-                                                            @else
                                                             <div class="search-journal" id="search-journal">
                                                                 Search account code
                                                             </div>
-                                                            @endif
                                                         </div>
 
                                                         <div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding: 0;">
@@ -917,7 +909,7 @@
                 </div>
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
-                        <div class="form-group m-form__group row">                          
+                        <div class="form-group m-form__group row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="repeaterAttention">
                                     @if($attentions)
@@ -1200,30 +1192,13 @@
     let customer_uuid = '{{ $customer->uuid }}';
 
     $('.select').select2();
-        $('.selectWebsite').select2();
-        $('.selectDocument').select2();
+    $('.selectWebsite').select2();
+    $('.selectDocument').select2();
+
+    $('.search-journal').html('{{$coa}}');
+
 
 </script>
-
-{{-- <script>
-    function initMap() {
-        var myLatLng = {
-            lat: -7.265757,
-            lng: 112.734146
-        };
-
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 10,
-            center: myLatLng
-        });
-
-        var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            title: 'Hello World!'
-        });
-    }
-</script> --}}
 
 <script src="{{ asset('js/frontend/common/account-code.js') }}"></script>
 <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Vendor;
 
 use App\Models\Fax;
 use App\Models\Bank;
@@ -11,6 +11,7 @@ use App\Models\Vendor;
 use App\Models\Document;
 use App\Models\BankAccount;
 use App\Helpers\DocumentNumber;
+use Directoryxx\Finac\Model\Coa;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\VendorStore;
 use App\Http\Requests\Frontend\VendorUpdate;
@@ -126,6 +127,10 @@ class VendorController extends Controller
                 }
             }
 
+            if($request->account_code){
+                $vendor->coa()->save(Coa::find($request->account_code));
+            }
+
             return response()->json($vendor);
         }
 
@@ -141,7 +146,16 @@ class VendorController extends Controller
      */
     public function show(Vendor $vendor)
     {
-        return view('frontend.vendor.show', $vendor);
+        if($vendor->coa->first()){
+            $coa = $vendor->coa->first()->code.' - '.$vendor->coa->first()->name;
+        }else{
+            $coa = 'Search account code';
+        }
+
+        return view('frontend.vendor.show',[
+            'vendor' => $vendor,
+            'coa' => $coa
+        ]);
     }
 
     /**
@@ -154,11 +168,17 @@ class VendorController extends Controller
     {
         $documents = Type::ofDocument()->get();
         $attentions = json_decode($vendor->attention);
+        if($vendor->coa->first()){
+            $coa = $vendor->coa->first()->code.' - '.$vendor->coa->first()->name;
+        }else{
+            $coa = 'Search account code';
+        }
 
         return view('frontend.vendor.edit',[
             'vendor' => $vendor,
             'documents' => $documents,
             'attentions' => $attentions,
+            'coa' => $coa
         ]);
     }
 
@@ -171,9 +191,16 @@ class VendorController extends Controller
      */
     public function update(VendorUpdate $request, Vendor $vendor)
     {
-        $vendor = Vendor::find($vendor);
+        // $vendor = Vendor::find($vendor);
         // $vendor->name = $request->name;
         // $vendor->save();
+        if($request->account_code){
+            if($vendor->coa()->first() == null){
+                $vendor->coa()->save(Coa::find($request->account_code));
+            }else{
+                $vendor->coa()->first()->pivot->update(['coa_id'=> Coa::find($request->account_code)->id]);
+            }
+        }
 
         return response()->json($vendor);
     }

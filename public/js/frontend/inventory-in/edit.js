@@ -72,12 +72,12 @@ let InventoryInCreate = {
                     }
                 },
                 {
-                    field: 'description',
+                    field: 'name',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return t.description
+                        return t.name
                     }
                 },
                 {
@@ -109,7 +109,7 @@ let InventoryInCreate = {
                 },
                 {
                     field: "pivot.description",
-                    title: "Remark",
+                    title: "Location",
                     template: function (t) {
                         return t.pivot.description
                     }

@@ -426,6 +426,7 @@ Route::name('datatables.')->group(function () {
 
                 Route::get('/', 'PurchaseOrderDatatables@index')->name('all');
                 Route::get('/modal', 'PurchaseOrderDatatables@purchaseOrderModal')->name('modal.index');
+                Route::get('/modal/item/{purchaseOrder}', 'ItemPurchaseOrderDatatables@itemModal')->name('modal.purchase.order.item');
                 Route::get('/item/{purchaseOrder}', 'ItemPurchaseOrderDatatables@index')->name('purchase.order.item');
 
             });

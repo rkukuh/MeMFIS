@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\GoodsReceived;
 
 use Carbon\Carbon;
+use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Storage;
 use App\Models\PurchaseOrder;
@@ -42,7 +43,10 @@ class ItemGoodsReceivedController extends Controller
      */
     public function store(GoodsReceivedItemStore $request,GoodsReceived $goodsReceived, Item $item)
     {
+        // dd($item);
         $request->merge(['expired_at' => Carbon::parse($request->expired_at)]);
+        $request->merge(['unit_id' =>  Unit::where('uuid',$request->unit_id)->first()->id]);
+
         $exists = $goodsReceived->items()->where('item_id',$item->id)->first();
         if($exists){
             return response()->json(['title' => "Danger"]);
@@ -58,13 +62,13 @@ class ItemGoodsReceivedController extends Controller
                     $quantity_unit = $request->quantity;
                 }
 
-                $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
+                // $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
                 $goodsReceived->items()->attach([$item->id => [
                     'quantity'=> $request->quantity,
                     'already_received_amount'=> 2,// TODO ask whats is it?
                     'unit_id' => $request->unit_id,
                     'quantity_unit' => $quantity_unit,
-                    'price' => $price,
+                    // 'price' => $price,
                     'note' => $request->note,
                     'expired_at' => $request->expired_at,
                     ]

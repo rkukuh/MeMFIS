@@ -36,6 +36,7 @@ Route::name('component.')->group(function () {
         Route::get('get-work-areas', 'FillComboxController@workArea')->name('get-work-areas');
         Route::get('get-facilities', 'FillComboxController@facility')->name('get-facilities');
         Route::get('get-licenses/{id}', 'FillComboxController@licenses')->name('get-licenses');
+        Route::get('get-units/{item}', 'FillComboxController@UnitUuid')->name('get-unit-uuid');
         Route::get('get-defectcard', 'FillComboxController@defectcard')->name('get-defectcard');
         Route::get('get-currencies', 'FillComboxController@currencies')->name('get-currencies');
         Route::get('get-leave-types', 'FillComboxController@leaveType')->name('get-leave-types');
@@ -72,6 +73,7 @@ Route::name('component.')->group(function () {
         Route::get('get-jobcard/{jobcard}/items', 'FillComboxController@jobcardItems')->name('get-jobcard-items');
         Route::get('get-tool-request/{toolRequest}', 'FillComboxController@toolRequest')->name('get-tool-request');
         Route::get('get-serial-number/{item}', 'FillComboxController@itemSerialNumber')->name('get-serial-number');
+        Route::get('get-expired-date/{item}', 'FillComboxController@itemExpiredDate')->name('get-expired-date');
         Route::get('get-po-materials/{purchaseOrder}', 'FillComboxController@poMaterial')->name('get-po-material');
         Route::get('get-project-quotation', 'FillComboxController@projectQuotation')->name('get-project-quotation');
         Route::get('get-category-taskcard', 'FillComboxController@categorieTakcard')->name('get-category-taskcard');

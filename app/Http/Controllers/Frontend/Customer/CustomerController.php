@@ -12,6 +12,7 @@ use App\Models\Website;
 use App\Models\Customer;
 use App\Models\Document;
 use App\Helpers\DocumentNumber;
+use Directoryxx\Finac\Model\Coa;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\CustomerStore;
 use App\Http\Requests\Frontend\CustomerUpdate;
@@ -53,7 +54,6 @@ class CustomerController extends Controller
      */
     public function store(CustomerStore $request)
     {
-
         $attentions = [];
         $level = Level::where('uuid',$request->level)->first();
         for ($person = 0; $person < sizeof($request->attn_name_array); $person++) {
@@ -136,6 +136,9 @@ class CustomerController extends Controller
                         }
                 }
             }
+            if($request->account_code){
+                $customer->coa()->save(Coa::find($request->account_code));
+            }
 
             return response()->json($customer);
         }
@@ -155,11 +158,18 @@ class CustomerController extends Controller
         $documents = Type::ofDocument()->get();
         $websites = Type::ofWebsite()->get();
         $attentions = json_decode($customer->attention);
+        if($customer->coa->first()){
+            $coa = $customer->coa->first()->code.' - '.$customer->coa->first()->name;
+        }else{
+            $coa = 'Search account code';
+        }
+
         return view('frontend.customer.show', [
             'customer' => $customer,
             'attentions' => $attentions,
             'websites' => $websites,
-            'documents' => $documents
+            'documents' => $documents,
+            'coa' => $coa
         ]);
     }
 
@@ -175,13 +185,19 @@ class CustomerController extends Controller
         $websites = Type::ofWebsite()->get();
         $attentions = json_decode($customer->attention);
         $levels = Level::where('of','customer')->get();
+        if($customer->coa->first()){
+            $coa = $customer->coa->first()->code.' - '.$customer->coa->first()->name;
+        }else{
+            $coa = 'Search account code';
+        }
 
         return view('frontend.customer.edit', [
             'customer' => $customer,
             'attentions' => $attentions,
             'websites' => $websites,
             'levels' => $levels,
-            'documents' => $documents
+            'documents' => $documents,
+            'coa' => $coa
         ]);
     }
 
@@ -280,8 +296,11 @@ class CustomerController extends Controller
                         }
                 }
             }
-
+            if($request->account_code){
+                $customer->coa()->first()->pivot->update(['coa_id'=> Coa::find($request->account_code)->id]);
+            }
         }
+
         // TODO: Return error message as JSON
         return response()->json($customer);
         return false;
