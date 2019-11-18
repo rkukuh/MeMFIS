@@ -47,22 +47,24 @@ class EmployeeAttendanceController extends Controller
     {
         if(isset($request->document)){
             $last_import = AttendanceFile::orderBy('created_at','DESC')->first();
+            if($last_import){
+                // get file from cloud
+                $s3 = Storage::disk('s3');
+                $client = $s3->getDriver()->getAdapter()->getClient();
+                $bucket = Config::get('filesystems.disks.s3.bucket');
+
+                $command = $client->getCommand('GetObject', [
+                    'Bucket' => $bucket,
+                    'Key' => $last_import->path
+                ]);
+        
+                $requestS3 = $client->createPresignedRequest($command, '+20 minutes');
+        
+                $url = (string) $requestS3->getUri();
+                $last_index = sizeof(file($url));
+            }
+
             $last_index = 0;
-
-            // get file from cloud
-            $s3 = Storage::disk('s3');
-            $client = $s3->getDriver()->getAdapter()->getClient();
-            $bucket = Config::get('filesystems.disks.s3.bucket');
-
-            $command = $client->getCommand('GetObject', [
-                'Bucket' => $bucket,
-                'Key' => $last_import->path
-            ]);
-    
-            $request = $client->createPresignedRequest($command, '+20 minutes');
-    
-            $url = (string) $request->getUri();
-            $last_index = sizeof(file($url));
 
             $file = $request->file('document');
 
