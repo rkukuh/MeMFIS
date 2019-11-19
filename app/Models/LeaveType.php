@@ -21,4 +21,18 @@ class LeaveType extends MemfisModel
         'description'
     ];
 
+    /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: A leave Type have zero or many leave.
+     *
+     * This function will retrieve leaves of a given leave type.
+     * See: Leave's leaveType() method for the inverse
+     *
+     * @return mixed
+     */
+    public function leave()
+    {
+        return $this->hasMany(Leave::class);
+    }
 }

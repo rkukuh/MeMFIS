@@ -14,6 +14,7 @@ use App\Models\PurchaseRequest;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\PurchaseOrderItem;
+use App\Models\Pivots\PurchaseRequestItem;
 use App\Http\Requests\Frontend\PurchaseOrderStore;
 use App\Http\Requests\Frontend\PurchaseOrderUpdate;
 
@@ -58,24 +59,25 @@ class PurchaseOrderController extends Controller
 
         $purchaseOrder = PurchaseOrder::create($request->all());
 
-        $items = PurchaseRequest::find($request->purchase_request_id)->items;
+        $items = PurchaseRequestItem::where('purchase_request_id',$request->purchase_request_id)->get();
+
 
         $PurchaseOrder = PurchaseOrder::where('purchase_request_id',$request->purchase_request_id)->count();
         if($PurchaseOrder == 1){
             foreach($items as $item){
-                $purchaseOrder->items()->attach([$item->pivot->item_id => [
-                    'quantity'=> $item->pivot->quantity,
-                    'quantity_unit' => $item->pivot->quantity_unit,
-                    'unit_id' => $item->pivot->unit_id
+                $purchaseOrder->items()->attach([$item->item_id => [
+                    'quantity'=> $item->quantity,
+                    'quantity_unit' => $item->quantity_unit,
+                    'unit_id' => $item->unit_id
                     ]
                 ]);
             }
         }else{
             foreach($items as $item){
-                $purchaseOrder->items()->attach([$item->pivot->item_id => [
+                $purchaseOrder->items()->attach([$item->item_id => [
                     'quantity'=> 0,
                     'quantity_unit' => 0,
-                    'unit_id' => $item->pivot->unit_id
+                    'unit_id' => $item->unit_id
                     ]
                 ]);
             }

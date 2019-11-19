@@ -24,6 +24,7 @@ use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Facility;
 use App\Models\TaskCard;
+use App\Models\LeaveType;
 use App\Models\DefectCard;
 use App\Models\ItemRequest;
 use App\Models\InventoryOut;
@@ -208,6 +209,19 @@ class FillComboxController extends Controller
         $storages = Storage::pluck('name', 'uuid');
 
         return json_encode($storages);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function leaveType()
+    {
+        $leave_type = LeaveType::pluck('name', 'uuid');
+
+        return json_encode($leave_type);
 
     }
 
@@ -547,6 +561,20 @@ class FillComboxController extends Controller
     {
         $unit = $item->unit()->pluck('name', 'id');
         $units = $item->units()->pluck('name', 'unit_id');
+        $uom = $unit->toArray() + $units->toArray();
+
+        return json_encode($uom);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function UnitUuid(Item $item)
+    {
+        $unit = $item->unit()->pluck('name', 'uuid');
+        $units = $item->units()->pluck('name', 'uuid');
         $uom = $unit->toArray() + $units->toArray();
 
         return json_encode($uom);
