@@ -35,18 +35,6 @@ class EmployeeAttendance extends MemfisModel
     {
         return $this->hasOne(AttendanceCorrection::class, 'attendance_id');
     }
-    /**
-     * One-to-One: An employee attendance have zero or one leave.
-     *
-     * This function will retrieve leave of a given attendance.
-     * See: leave's attendance() method for the inverse
-     *
-     * @return mixed
-     */
-    public function attendance_leave()
-    {
-        return $this->hasOne(leave::class, 'attendance_id');
-    }
 
     /**
      * One-to-One: An employee attendance have zero or one overtime.
