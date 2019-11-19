@@ -37,7 +37,7 @@
     }
 
     #head{
-        top:85px;
+        top:55px;
         left: 340px;   
         position: absolute;
         color:white;
@@ -54,8 +54,8 @@
 
     #content{
         width:100%;
-        margin-top:112px;
-        margin-bottom:12px;
+        margin-top:78px;
+        margin-bottom:20px;
         z-index: 1;
     }
 
@@ -94,7 +94,7 @@
 <body>
 
     <header>
-        <img src="./img/form/printoutmaterial-request/Header.png" alt=""width="100%">
+        <img src="./img/form/printoutgse-return/Header.png" alt=""width="100%">
         <div id="head">
             <table width="90%">
                 <tr>
@@ -108,12 +108,12 @@
 
     <footer>
         <span style="margin-left:6px;">Printed By : Name ; Timestamp </span>
-        <img src="./img/form/printoutmaterial-request/Footer.png" width="100%" alt="" >
+        <img src="./img/form/printoutgse-return/Footer.png" width="100%" alt="" >
     </footer>
 
     <div id="content">
         <div class="container">
-            <table width="88%">
+            <table width="100%" cellpadding="2">
                 <tr>
                     <td valign="top" width="14%">Date</td>
                     <td valign="top"width="1%">:</td>
@@ -123,7 +123,7 @@
                     <td valign="top" width="25%">Generated</td>
                     <td valign="top" width="18%" rowspan="4">
                         <div class="barcode">
-                            {!!DNS2D::getBarcodeHTML('getbarcode', 'QRCODE',3.4,3.4)!!}
+                            {{-- {!!DNS2D::getBarcodeHTML('getbarcode', 'QRCODE',3.4,3.4)!!} --}}
                         </div>
                     </td>
                 </tr>

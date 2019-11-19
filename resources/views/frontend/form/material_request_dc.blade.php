@@ -37,7 +37,7 @@
     }
 
     #head{
-        top:85px;
+        top:55px;
         left: 340px;   
         position: absolute;
         color:white;
@@ -54,8 +54,8 @@
 
     #content{
         width:100%;
-        margin-top:112px;
-        margin-bottom:12px;
+        margin-top:78px;
+        margin-bottom:15px;
         z-index: 1;
     }
     #content2 .body{
@@ -120,7 +120,7 @@
 
     <div id="content">
         <div class="container">
-            <table width="88%">
+            <table width="100%" cellpadding="2">
                 <tr>
                     <td valign="top" width="14%">Date</td>
                     <td valign="top"width="1%">:</td>
@@ -130,7 +130,7 @@
                     <td valign="top" width="25%">Generated</td>
                     <td valign="top" width="18%" rowspan="4">
                         <div class="barcode">
-                            {!!DNS2D::getBarcodeHTML('getbarcode', 'QRCODE',3.4,3.4)!!}
+                            {{-- {!!DNS2D::getBarcodeHTML('getbarcode', 'QRCODE',3.4,3.4)!!} --}}
                         </div>
                     </td>
                 </tr>
