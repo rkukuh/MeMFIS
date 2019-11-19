@@ -31,7 +31,7 @@ class ItemDatatables extends Controller
         $items = Item::with('unit', 'categories')
                         ->whereHas('categories', function ($query) {
                             $query->where('code','<>','tool');
-                        })->take(5000)->get();
+                        })->take(1000)->get();
         // dd($items);
 
         $data = $alldata = json_decode($items);
