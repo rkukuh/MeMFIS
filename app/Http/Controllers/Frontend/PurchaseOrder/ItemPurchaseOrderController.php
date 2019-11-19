@@ -94,6 +94,13 @@ class ItemPurchaseOrderController extends Controller
         }
 
         $purchaseOrderItem = PurchaseOrderItem::where("item_id", $item->id)->first();
+        $request->merge([
+            'quantity_unit' =>$quantity_unit,
+            'subtotal_before_discount' => $subtotal_before_discount,
+            'subtotal_after_discount' => $subtotal_before_discount - $discount_amount
+
+        ]);
+        $purchaseOrderItem->update($request->all());
 
         $purchaseOrder->items()->updateExistingPivot($item->id,[
                     'unit_id'=>$request->unit_id,
@@ -132,7 +139,7 @@ class ItemPurchaseOrderController extends Controller
             }
         }
 
-        return response()->json($purchaseOrder);
+        return response()->json($purchaseOrderItem);
 
     }
 
@@ -142,7 +149,7 @@ class ItemPurchaseOrderController extends Controller
      * @param  \App\Models\PurchaseOrder  $purchaseOrder
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PurchaseOrder $purchaseOrder, Item $item)
+    public function destroy(PurchaseOrder $purchaseOrder, PurchaseOrderItem $item)
     {
         $purchaseOrder->items()->detach($item->id);
 

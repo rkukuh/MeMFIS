@@ -85,9 +85,13 @@ class OvertimeController extends Controller
             ]
         );
 
-        // return response()->json($overtime_data);
+        $notification = array(
+            'message' => "Overtime has been saved.",
+            'title' => "Success",
+            'alert-type' => "success"
+        );
 
-        return redirect()->route('frontend.overtime.index');
+        return redirect()->route('frontend.overtime.index')->with($notification);
     }
     
 

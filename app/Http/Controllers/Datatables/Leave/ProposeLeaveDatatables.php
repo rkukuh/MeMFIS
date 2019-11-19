@@ -1,34 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\GoodsReceived;
+namespace App\Http\Controllers\Datatables\Leave;
 
-use App\Models\Unit;
-use App\Models\GoodsReceived;
+use App\Models\Leave;
 use App\Models\ListUtil;
-use Illuminate\Http\Order;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ItemGoodsReceivedDatatables extends Controller
+class ProposeLeaveDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(GoodsReceived $goodReceived)
+    public function index()
     {
-        $goodReceiveds = $goodReceived->items;
+        $leaves = Leave::get();
 
-        foreach($goodReceiveds as $GoodReceived){
-            $GoodReceived->unit_name .= Unit::find($GoodReceived->pivot->unit_id)->name;
-            $GoodReceived->qty_pr .=1;
-            // $GoodReceived->qty_pr .= $goodReceived->purchase_order->purchase_request->items->where('id',$GoodReceived->id)->first()->pivot->quantity;
-            $GoodReceived->qty_po .= 1;
-            // $GoodReceived->qty_po .= $goodReceived->purchase_order->items->where('id',$GoodReceived->id)->first()->pivot->quantity;
-
-        }
-
-        $data = $alldata = json_decode($goodReceiveds);
+        $data = $alldata = json_decode($leaves);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -115,7 +105,6 @@ class ItemGoodsReceivedDatatables extends Controller
         ];
 
         echo json_encode($result, JSON_PRETTY_PRINT);
-
     }
 
     /**
