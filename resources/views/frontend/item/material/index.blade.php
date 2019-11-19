@@ -73,7 +73,40 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="item_datatable" id="scrolling_both"></div>
+                            {{-- <div class="item_datatable" id="scrolling_both"></div> --}}
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                        {{-- <table class="datatable22" cellspacing="0"
+                                        width="100%" role="grid"
+                                        style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>UUDID</th>
+                                                <th>NAME</th>
+                                                <th>CODE</th>
+                                                <th>IS STOCK</th>
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table> --}}
+                                    <table class="table table-striped table-bordered table-hover table-checkable" id="basic_datatable">
+                                            <thead>
+                                                <tr>
+                                                        <th>UUDID</th>
+                                                        <th>NAME</th>
+                                                        <th>CODE</th>
+                                                        <th>IS STOCK</th>
+                                                        <th>Created At</th>
+                                                        <th>Updated At</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,6 +115,44 @@
     </div>
 @endsection
 
+@push('header-scripts')
+<link
+	href="https://cdn.datatables.net/1.10.12/css/dataTables.material.min.css"
+	rel="stylesheet">
+<link
+	href="//cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css"
+	rel="stylesheet">
+@endpush
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/item/material/index.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/item/material/index.js') }}"></script> --}}
+    {{-- <script src="//code.jquery.com/jquery-1.11.3.min.js"></script> --}}
+    <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script> --}}
+
+	{{-- <script
+		src="https://cdn.datatables.net/1.10.12/js/dataTables.material.min.js"></script> --}}
+	<script>
+    $(document).ready(function(){
+      $('#basic_datatable').DataTable({
+            processing: true,
+            responsive: true,
+            serverSide: true,
+            ajax: '{{ route('testing.serverSide') }}',
+            columnDefs: [
+                         {
+                             targets: [ 0, 1, 2 ],
+                             className: 'mdl-data-table__cell--non-numeric'
+                         }
+                     ],
+            columns: [
+                {data: 'uuid', name: 'uuid',sWidth:'20%'},
+                {data: 'name', name: 'name',sWidth:'20%'},
+                {data: 'code', name: 'code',sWidth:'20%'},
+                {data: 'unit.name', name: 'unit.name',sWidth:'20%'},
+                {data: 'created_at', name: 'created_at',sWidth:'10%'},
+                {data: 'updated_at', name: 'updated_at',sWidth:'10%'}
+            ]
+        });
+    });
+  </script>
 @endpush

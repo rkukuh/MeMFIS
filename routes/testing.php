@@ -46,14 +46,25 @@ Route::name('testing.')->group(function () {
             //         ]);
         });
 
+        // Route::get('/serverSide', [
+        //     // 'as'   => 'serverSide',
+        //     'uses' => function () {
+        //         ini_set('memory_limit', '-1');
+        //         $users = App\Models\Item::all();
+        //         return DataTables::of($users)->make();
+        //     }
+        // ]);
+
         Route::get('/serverSide', [
-            // 'as'   => 'serverSide',
+            'as'   => 'serverSide',
             'uses' => function () {
                 ini_set('memory_limit', '-1');
-                $users = App\Models\Item::all();
-                return DataTables::of($users)->make();
+
+                $users = App\Models\Item::with('unit');
+                return Datatables::of($users)->make();
             }
         ]);
+
         Route::get('/server', function () {
             ini_set('memory_limit', '-1');
             $tsim_array = App\Models\Item::get();
