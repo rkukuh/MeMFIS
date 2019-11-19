@@ -102,6 +102,7 @@
 
     <header>
         <img src="./img/form/printoutmaterial-request/Header.png" alt=""width="100%">
+        <h1 style="top:-5px;left: 320px;position: absolute;color:white;text-align:center;">Material Request <br> <span style="font-size:12px">(From Jobcard)</span></h1>
         <div id="head">
             <table width="90%">
                 <tr>

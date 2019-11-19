@@ -37,7 +37,7 @@
     }
 
     #head{
-        top:55px;
+        top:3px;
         left: 340px;   
         position: absolute;
         color:white;
@@ -55,7 +55,7 @@
     #content{
         width:100%;
         margin-top:78px;
-        margin-bottom:15px;
+        margin-bottom:20px;
         z-index: 1;
     }
 
@@ -96,11 +96,12 @@
     <header>
         <img src="./img/form/printoutinventory-in/Header.png" alt=""width="100%">
         <div id="head">
+            <h1>INVENTORY IN</h1>
             <table width="90%">
                 <tr>
                     <td width="15%" valign="top"><b>No.</b></td>
                     <td width="2%" valign="top"><b>:</b></td>
-                    <td width="83%" valign="top"><b>Generate</b></td>
+                    <td width="83%" valign="top"><b>Lorem ipsum dolor sit asdsas</b></td>
                 </tr>
             </table>
         </div>

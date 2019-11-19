@@ -95,6 +95,7 @@
 
     <header>
         <img src="./img/form/printoutgse-return/Header.png" alt=""width="100%">
+        <h1 style="top:3px;left: 280px;position: absolute;color:white;">GSE/TOOL RETURNED</h1>
         <div id="head">
             <table width="90%">
                 <tr>

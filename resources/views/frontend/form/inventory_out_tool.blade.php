@@ -102,6 +102,7 @@
 
     <header>
         <img src="./img/form/printoutmaterial-request/Header.png" alt=""width="100%">
+        <h1 style="top:3px;left: 280px;position: absolute;color:white;">Inventory Out (Tool)</h1>
         <div id="head">
             <table width="90%">
                 <tr>
