@@ -180,6 +180,8 @@ let goods_received_note = {
         });
 
         $('.modal-footer').on('click', '.add-item', function () {
+            let qty = $("#quantity").val();
+
             let serial_numbers = [];
             $("input[name^=serial_number]").each(function() {
                 serial_numbers.push(this.value);
@@ -189,10 +191,8 @@ let goods_received_note = {
                 return el != null && el != "";
 
             });
-
             let item_uuid = $("#material").val();
             let exp_date = $('input[name=exp_date2]').val();
-            let qty = $("#quantity").val();
             let unit_id = $("#unit_material").val();
             let note = $("#remark").val();
             if($("#is_serial_number").is(":checked")) {
@@ -417,56 +417,56 @@ $("#is_serial_number_edit").on("change", function () {
     }
 });
 
-$("#material").on("change", function () {
+// $("#material").on("change", function () {
 
-    let item_uuid = $("#material").val();
-    $.ajax({
-        url: '/label/get-good-received/'+grn_uuid+'/item/'+ item_uuid ,
-        type: 'GET',
-        success: function (qty_item) {
-            document.getElementById('item_reciveded').innerText = qty_item;
-        }
-    });
-    $("#quantity").prop("min", 1);
-    $.ajax({
-        url: '/get-item-po-details/'+po_uuid+'/'+item_uuid,
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            $("#quantity").val(parseInt(data.pivot.quantity));
-            $("#quantity").prop("max", data.pivot.quantity);
-            $('.clone').remove();
-            for (let number = 0; number < data.pivot.quantity; number++) {
-                let clone = $(".blueprint").clone();
-                clone.removeClass("blueprint hidden");
-                clone.addClass("clone");
-                $(".serial_number_inputs").after(clone);
-                clone.slideDown("slow",function(){});
-            }
-        }
-    });
-});
+//     let item_uuid = $("#material").val();
+//     $.ajax({
+//         url: '/label/get-good-received/'+grn_uuid+'/item/'+ item_uuid ,
+//         type: 'GET',
+//         success: function (qty_item) {
+//             document.getElementById('item_reciveded').innerText = qty_item;
+//         }
+//     });
+//     $("#quantity").prop("min", 1);
+//     $.ajax({
+//         url: '/get-item-po-details/'+po_uuid+'/'+item_uuid,
+//         type: 'GET',
+//         dataType: 'json',
+//         success: function (data) {
+//             $("#quantity").val(parseInt(data.pivot.quantity));
+//             $("#quantity").prop("max", data.pivot.quantity);
+//             $('.clone').remove();
+//             for (let number = 0; number < data.pivot.quantity; number++) {
+//                 let clone = $(".blueprint").clone();
+//                 clone.removeClass("blueprint hidden");
+//                 clone.addClass("clone");
+//                 $(".serial_number_inputs").after(clone);
+//                 clone.slideDown("slow",function(){});
+//             }
+//         }
+//     });
+// });
 
-$("#quantity").on("change", function () {
-    let qty = parseInt($("#quantity").val());
-    let max = parseInt($("#quantity").attr("max"));
-    $('.clone').remove();
-    if(qty <= max){
-        for (let number = 0; number < qty; number++) {
-            let clone = $(".blueprint").clone();
-            clone.removeClass("blueprint hidden");
-            clone.addClass("clone");
-            $(".serial_number_inputs").after(clone);
-            clone.slideDown("slow",function(){});
-        }
-    }else{
-        $("#quantity").val(max)
-        for (let number = 0; number < max; number++) {
-            let clone = $(".blueprint").clone();
-            clone.removeClass("blueprint hidden");
-            clone.addClass("clone");
-            $(".serial_number_inputs").after(clone);
-            clone.slideDown("slow",function(){});
-        }
-    }
-});
+// $("#quantity").on("change", function () {
+//     let qty = parseInt($("#quantity").val());
+//     let max = parseInt($("#quantity").attr("max"));
+//     $('.clone').remove();
+//     if(qty <= max){
+//         for (let number = 0; number < qty; number++) {
+//             let clone = $(".blueprint").clone();
+//             clone.removeClass("blueprint hidden");
+//             clone.addClass("clone");
+//             $(".serial_number_inputs").after(clone);
+//             clone.slideDown("slow",function(){});
+//         }
+//     }else{
+//         $("#quantity").val(max)
+//         for (let number = 0; number < max; number++) {
+//             let clone = $(".blueprint").clone();
+//             clone.removeClass("blueprint hidden");
+//             clone.addClass("clone");
+//             $(".serial_number_inputs").after(clone);
+//             clone.slideDown("slow",function(){});
+//         }
+//     }
+// });

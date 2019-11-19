@@ -1,5 +1,5 @@
 let ItemDatatables = {
-    init: function () {
+    init: function (url) {
         $("#item_datatable").DataTable({
             "dom": '<"top"f>rt<"bottom">pl',
             responsive: !0,
@@ -8,7 +8,7 @@ let ItemDatatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50 ],
             pageLength:5,
-            ajax: "/datatables/item/modal/",
+            ajax: url,
             columns: [
                 {
                     data: "code"
@@ -31,7 +31,6 @@ let ItemDatatables = {
 
             ]
         })
-
         $('<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left: 60%; color: white;"><span><i class="la la-refresh"></i><span>Reload</span></span> </button>').appendTo('div.dataTables_filter');
         $('.paging_simple_numbers').addClass('pull-left');
         $('.dataTables_length').addClass('pull-right');
@@ -45,7 +44,7 @@ let ItemDatatables = {
 
         $('.dataTable').on('click', '.select-item', function () {
             $.ajax({
-                url: '/get-item-unit-uuid/'+$(this).data('uuid'),
+                url: '/get-units/'+$(this).data('uuid'),
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -77,5 +76,11 @@ let ItemDatatables = {
 };
 
 jQuery(document).ready(function () {
-    ItemDatatables.init();
+    if(typeof url === 'undefined'){
+        url = "/datatables/item/modal/";
+        ItemDatatables.init(url);
+    }else{
+        ItemDatatables.init(url);
+    }
+
 });

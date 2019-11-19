@@ -52,17 +52,17 @@ let PurchaseRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/item/'+t.uuid+'">' + t.code + "</a>"
+                        return '<a href="/item/'+t.item.uuid+'">' + t.item.code + "</a>"
                     }
                 },
                 {
-                    field: 'name',
+                    field: 'item.name',
                     title: 'Material Name',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.quantity',
+                    field: 'quantity',
                     title: 'Quantity',
                     sortable: 'asc',
                     filterable: !1,
