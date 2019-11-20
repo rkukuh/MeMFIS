@@ -121,7 +121,14 @@
 	rel="stylesheet">
 <link
 	href="//cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css"
-	rel="stylesheet">
+    rel="stylesheet">
+
+    <style>
+        .dataTables_paginate a{
+            color: #5867dd !important;
+            padding: 0 10px;
+        }
+    </style>
 @endpush
 @push('footer-scripts')
     {{-- <script src="{{ asset('js/frontend/item/material/index.js') }}"></script> --}}
