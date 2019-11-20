@@ -19,6 +19,19 @@ class Leave extends MemfisModel
     
     /*************************************** RELATIONSHIP ****************************************/
 
+     /**
+     * Polymorphic: An entity can have zero or many approvals.
+     *
+     * This function will get all AttendanceCorrection's approvals.
+     * See: Approvals's approvable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function approvals()
+    {
+        return $this->morphMany(Approval::class, 'approvable');
+    }
+    
     /**
      * One-to-Many: A leave have one leave type.
      *
