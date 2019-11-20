@@ -74,4 +74,22 @@ class EmployeeAttendance extends MemfisModel
     {
         return $this->belongsTo(Status::class);
     }
+
+    // to do accessor 
+    public function getDateLeaveAttribute(){
+        // first filter by $this->employee
+        $leave = Leave::where('employee_id', $this->employee_id)
+        // then filter by $this->date
+            ->whereDate('start_date','<=',$this->date)
+            ->whereDate('end_date', '>=', $this->date)
+        // resulting is there any leave on that day by that person
+            ->first();
+
+        if($leave){
+            $this->status = "On Leave";
+        }
+
+        return $leave->number;
+        // change status value "on leave"
+    }
 }
