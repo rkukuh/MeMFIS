@@ -55,7 +55,7 @@ class Leave extends MemfisModel
      */
     public function leaveType()
     {
-        return $this->belongsTo(LeaveType::class);
+        return $this->belongsTo(LeaveType::class, 'leavetype_id');
     }
 
      /**
