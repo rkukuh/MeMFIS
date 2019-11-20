@@ -108,10 +108,19 @@ let ProposeLeave = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'approval',
                     title: 'Approval',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        if(t.approvals){
+                            return (
+                                t.approvals[t.approvals.length - 1].conducted_by
+                            );
+                        }else{
+                            return ('-');
+                        }
+                    }
                 },
                 {
                     field: 'Actions',
@@ -119,6 +128,9 @@ let ProposeLeave = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
+                        if(t.approvals){
+                            return " ";
+                        }
                         return (
                             '<a href="/leave/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +

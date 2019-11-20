@@ -9,6 +9,7 @@ use App\Models\Employee;
 use App\Models\LeaveType;
 use App\Models\EmployeeAttendance;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
