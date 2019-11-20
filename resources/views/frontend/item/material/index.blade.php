@@ -54,11 +54,11 @@
                                         <div class="form-group m-form__group row align-items-center">
                                             <div class="col-md-4">
                                                 <div class="m-input-icon m-input-icon--left">
-                                                    <input type="text" class="form-control m-input" placeholder="Search..."
+                                                    {{-- <input type="text" class="form-control m-input" placeholder="Search..."
                                                         id="generalSearch">
                                                     <span class="m-input-icon__icon m-input-icon__icon--left">
                                                         <span><i class="la la-search"></i></span>
-                                                    </span>
+                                                    </span> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -95,12 +95,13 @@
                                     <table class="table table-striped table-bordered table-hover table-checkable" id="basic_datatable">
                                             <thead>
                                                 <tr>
-                                                        <th>UUDID</th>
-                                                        <th>NAME</th>
-                                                        <th>CODE</th>
-                                                        <th>IS STOCK</th>
-                                                        <th>Created At</th>
-                                                        <th>Updated At</th>
+                                                        <th>Code</th>
+                                                        <th>Name</th>
+                                                        <th>Category</th>
+                                                        <th>Taxable?</th>
+                                                        <th>Stockable?</th>
+                                                        <th>Account Code</th>
+                                                        <th></th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -145,14 +146,53 @@
                          }
                      ],
             columns: [
-                {data: 'uuid', name: 'uuid',sWidth:'20%'},
-                {data: 'name', name: 'name',sWidth:'20%'},
-                {data: 'code', name: 'code',sWidth:'20%'},
-                {data: 'unit.name', name: 'unit.name',sWidth:'20%'},
-                {data: 'created_at', name: 'created_at',sWidth:'10%'},
-                {data: 'updated_at', name: 'updated_at',sWidth:'10%'}
+                {data: 'code', name: 'code',sWidth:'15%',render:function(data, type, row){
+                    return "<a href='/item/"+ row.uuid +"'>" + row.code + "</a>"
+                }},
+                {data: 'name', name: 'name',sWidth:'15%'},
+                {data: 'caterory', name: 'caterory',sWidth:'15%',render:function(data, type, row){
+                    return row.categories[0].name
+                }},
+                {data: 'unit.name', name: 'unit.name',sWidth:'10%',render:function(data, type, row){
+                    if (row.is_ppn === 1) {
+                        return '<span class="m-badge m-badge--brand m-badge--wide">PPN: ' + row.ppn_amount + '%</span>'
+                    }
+                    else {
+                        return '<span class="m-badge m-badge--warning m-badge--wide">No</span>'
+                    }
+                }},
+                {data: 'unit.name', name: 'unit.name',sWidth:'10%',render:function(data, type, row){
+                    if (row.is_stock) {
+                        var e = {
+                            1: {
+                                title: "Yes",
+                                class: "m-badge--brand"
+                            },
+                            0: {
+                                title: "No",
+                                class: " m-badge--warning"
+                            }
+                        };
+
+                        return '<span class="m-badge ' + e[row.is_stock].class + ' m-badge--wide">' + e[row.is_stock].title + "</span>"
+                        }
+                    return ''
+                }},
+                {data: 'name', name: 'name',sWidth:'15%'},
+                {data: '', name: '',sWidth:'10%',render:function(data, type, row){
+                    return (
+                            '<a href="/item/' + row.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + row.uuid +'">' +
+                                '<i class="la la-pencil"></i>' +
+                            '</a>' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + row.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'
+                        );
+                }},
+                // {data: 'updated_at', name: 'updated_at',sWidth:'10%'}
             ]
         });
+
     });
   </script>
 @endpush

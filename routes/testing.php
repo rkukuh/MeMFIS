@@ -60,7 +60,10 @@ Route::name('testing.')->group(function () {
             'uses' => function () {
                 ini_set('memory_limit', '-1');
 
-                $users = App\Models\Item::with('unit');
+                $users = App\Models\Item::with('unit', 'categories')
+                ->whereHas('categories', function ($query) {
+                    $query->where('code','<>','tool');
+                })->take(1000)->get();
                 return Datatables::of($users)->make();
             }
         ]);
