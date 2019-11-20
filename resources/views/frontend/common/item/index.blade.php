@@ -25,7 +25,17 @@
 {{-- TODO PUT THIS CODE UNDER INCLUDE MODAL --}}
 {{-- @include('frontend.common.item.modal') --}}
 
+@push('header-scripts')
+<link
+	href="https://cdn.datatables.net/1.10.12/css/dataTables.material.min.css"
+	rel="stylesheet">
+<link
+	href="//cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css"
+	rel="stylesheet">
+@endpush
+
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/common/item.js') }}"></script>
-    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script> --}}
 @endpush

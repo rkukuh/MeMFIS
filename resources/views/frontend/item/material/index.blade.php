@@ -134,11 +134,4 @@
 @push('footer-scripts')
     <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('js/frontend/item/material/index.js') }}"></script>
-
-	<script>
-    $(document).ready(function(){
-
-
-    });
-  </script>
 @endpush
