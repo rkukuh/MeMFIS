@@ -46,7 +46,7 @@ class leaveController extends Controller
         $leave_type = LeaveType::where('uuid', $request->leave_type)->first();
         $employee = Employee::where('uuid', $request->uuid_employee)->first();
         $code = DocumentNumber::generate('LEAV-', Leave::withTrashed()->count()+1);
-        $status = Status::ofAttendanceCorrection()->where('code','open')->first();
+        $status = Status::ofLeave()->where('code','open')->first();
 
         $leave = Leave::create([
             'code' => $code,
@@ -120,7 +120,7 @@ class leaveController extends Controller
      */
     public function approve(Leave $leave, Request $request)
     {
-        $status = Status::ofAttendanceCorrection()->where('code', 'approved')->first();
+        $status = Status::ofLeave()->where('code', 'approved')->first();
         
         $leave->approvals()->save(new Approval([
             'is_approved' => 1,
@@ -144,7 +144,7 @@ class leaveController extends Controller
      */
     public function reject(Leave $leave, Request $request)
     {
-        $status = Status::ofAttendanceCorrection()->where('code', 'rejected')->first();
+        $status = Status::ofLeave()->where('code', 'rejected')->first();
 
         $leave->approvals()->save(new Approval([
             'is_approved' => 0,
