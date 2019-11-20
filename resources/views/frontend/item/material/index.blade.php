@@ -92,7 +92,7 @@
                                         <tbody>
                                         </tbody>
                                     </table> --}}
-                                    <table class="table table-striped table-bordered table-hover table-checkable" id="basic_datatable">
+                                    <table class="table table-striped table-bordered table-hover table-checkable item_datatable" id="item_datatable">
                                             <thead>
                                                 <tr>
                                                         <th>Code</th>
@@ -125,73 +125,12 @@
 	rel="stylesheet">
 @endpush
 @push('footer-scripts')
-    {{-- <script src="{{ asset('js/frontend/item/material/index.js') }}"></script> --}}
-    {{-- <script src="//code.jquery.com/jquery-1.11.3.min.js"></script> --}}
     <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
-    {{-- <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script> --}}
+    <script src="{{ asset('js/frontend/item/material/index.js') }}"></script>
 
-	{{-- <script
-		src="https://cdn.datatables.net/1.10.12/js/dataTables.material.min.js"></script> --}}
 	<script>
     $(document).ready(function(){
-      $('#basic_datatable').DataTable({
-            processing: true,
-            responsive: true,
-            serverSide: true,
-            ajax: '{{ route('testing.serverSide') }}',
-            columnDefs: [
-                         {
-                             targets: [ 0, 1, 2 ],
-                             className: 'mdl-data-table__cell--non-numeric'
-                         }
-                     ],
-            columns: [
-                {data: 'code', name: 'code',sWidth:'15%',render:function(data, type, row){
-                    return "<a href='/item/"+ row.uuid +"'>" + row.code + "</a>"
-                }},
-                {data: 'name', name: 'name',sWidth:'15%'},
-                {data: 'caterory', name: 'caterory',sWidth:'15%',render:function(data, type, row){
-                    return row.categories[0].name
-                }},
-                {data: 'unit.name', name: 'unit.name',sWidth:'10%',render:function(data, type, row){
-                    if (row.is_ppn === 1) {
-                        return '<span class="m-badge m-badge--brand m-badge--wide">PPN: ' + row.ppn_amount + '%</span>'
-                    }
-                    else {
-                        return '<span class="m-badge m-badge--warning m-badge--wide">No</span>'
-                    }
-                }},
-                {data: 'unit.name', name: 'unit.name',sWidth:'10%',render:function(data, type, row){
-                    if (row.is_stock) {
-                        var e = {
-                            1: {
-                                title: "Yes",
-                                class: "m-badge--brand"
-                            },
-                            0: {
-                                title: "No",
-                                class: " m-badge--warning"
-                            }
-                        };
 
-                        return '<span class="m-badge ' + e[row.is_stock].class + ' m-badge--wide">' + e[row.is_stock].title + "</span>"
-                        }
-                    return ''
-                }},
-                {data: 'name', name: 'name',sWidth:'15%'},
-                {data: '', name: '',sWidth:'10%',render:function(data, type, row){
-                    return (
-                            '<a href="/item/' + row.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + row.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</a>' +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + row.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                }},
-                // {data: 'updated_at', name: 'updated_at',sWidth:'10%'}
-            ]
-        });
 
     });
   </script>

@@ -1,5 +1,5 @@
 <?php
-        use DataTables;
+        // use DataTables;
 
 Route::name('testing.')->group(function () {
 
@@ -55,18 +55,18 @@ Route::name('testing.')->group(function () {
         //     }
         // ]);
 
-        Route::get('/serverSide', [
-            'as'   => 'serverSide',
-            'uses' => function () {
-                ini_set('memory_limit', '-1');
+        // Route::get('/serverSide', [
+        //     'as'   => 'serverSide',
+        //     'uses' => function () {
+        //         ini_set('memory_limit', '-1');
 
-                $users = App\Models\Item::with('unit', 'categories')
-                ->whereHas('categories', function ($query) {
-                    $query->where('code','<>','tool');
-                })->take(1000)->get();
-                return Datatables::of($users)->make();
-            }
-        ]);
+        //         $users = App\Models\Item::with('unit')->get();
+        //         // ->whereHas('categories', function ($query) {
+        //         //     $query->where('code','<>','tool');
+        //         // })->get();
+        //         return Datatables::of($users)->make();
+        //     }
+        // ]);
 
         Route::get('/server', function () {
             ini_set('memory_limit', '-1');
