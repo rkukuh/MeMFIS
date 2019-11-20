@@ -31,6 +31,19 @@ class Leave extends MemfisModel
     {
         return $this->morphMany(Approval::class, 'approvable');
     }
+
+    /**
+     * One-to-Many: Many leave proposed by one employee.
+     *
+     * This function will retrieve the employee proposed for a leave.
+     * See: Employee's leave() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
     
     /**
      * One-to-Many: A leave have one leave type.
@@ -44,4 +57,18 @@ class Leave extends MemfisModel
     {
         return $this->belongsTo(LeaveType::class);
     }
+
+     /**
+     * One-to-One: An leave have one Status.
+     *
+     * This function will retrieve status of a given leave.
+     * See: Status leave() method for the inverse
+     *
+     * @return mixed
+     */
+    // public function status()
+    // {
+    //     return $this->belongsTo(Status::class);
+    // }
+
 }
