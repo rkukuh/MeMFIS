@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\leave;
+namespace App\Http\Controllers\Frontend\Leave;
 
 use App\Models\Leave;
 use App\Models\Status;
@@ -73,7 +73,7 @@ class leaveController extends Controller
      * @param  \App\Models\Leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function show(leave $leave)
+    public function show(Leave $leave)
     {
         //
     }
@@ -84,7 +84,7 @@ class leaveController extends Controller
      * @param  \App\Models\Leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function edit(leave $leave)
+    public function edit(Leave $leave)
     {
         return view('frontend.propose-leave.propose-leave.edit');
     }
@@ -96,7 +96,7 @@ class leaveController extends Controller
      * @param  \App\Models\Leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function update(leaveUpdate $request, leave $leave)
+    public function update(leaveUpdate $request, Leave $leave)
     {
         //
     }
@@ -107,8 +107,56 @@ class leaveController extends Controller
      * @param  \App\Models\Leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function destroy(leave $leave)
+    public function destroy(Leave $leave)
     {
         //
+    }
+
+    /**
+     * Give approval the specified resource from storage.
+     *
+     * @param  \App\Models\Leave  $leave
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(Leave $leave, Request $request)
+    {
+        $status = Status::ofAttendanceCorrection()->where('code', 'approved')->first();
+        
+        $leave->approvals()->save(new Approval([
+            'is_approved' => 1,
+            'note' => $request->note,
+            'conducted_by' => Auth::id(),
+            'approvable_id' => $leave->id,
+        ]));
+
+        $result = $leave->update([
+            'status_id' => $status->id
+        ]);
+
+        return response()->json($result);
+    }
+
+    /**
+     * Give rejection the specified resource from storage.
+     *
+     * @param  \App\Models\Leave  $leave
+     * @return \Illuminate\Http\Response
+     */
+    public function reject(Leave $leave, Request $request)
+    {
+        $status = Status::ofAttendanceCorrection()->where('code', 'rejected')->first();
+
+        $leave->approvals()->save(new Approval([
+            'is_approved' => 0,
+            'note' => $request->note,
+            'conducted_by' => Auth::id(),
+            'approvable_id' => $leave->id,
+        ]));
+
+        $result = $leave->update([
+            'status_id' => $status->id
+        ]);
+        
+        return response()->json($result);
     }
 }

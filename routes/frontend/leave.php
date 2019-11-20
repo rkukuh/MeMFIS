@@ -9,7 +9,7 @@ Route::name('frontend.')->group(function () {
 
     ], function () {
 
-        Route::namespace('leave')->group(function () {
+        Route::namespace('Leave')->group(function () {
 
             Route::resource('leave', 'leaveController');
 
