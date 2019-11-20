@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Frontend\Leave;
 
 use App\Models\Leave;
 use App\Models\Status;
+use App\Models\Approval;
 use App\Models\Employee;
 use App\Models\LeaveType;
 use App\Models\EmployeeAttendance;
 
+use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\leaveStore;
@@ -116,6 +118,7 @@ class leaveController extends Controller
      * Give approval the specified resource from storage.
      *
      * @param  \App\Models\Leave  $leave
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function approve(Leave $leave, Request $request)
@@ -140,6 +143,7 @@ class leaveController extends Controller
      * Give rejection the specified resource from storage.
      *
      * @param  \App\Models\Leave  $leave
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function reject(Leave $leave, Request $request)
