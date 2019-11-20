@@ -62,13 +62,13 @@ class Leave extends MemfisModel
      * One-to-One: An leave have one Status.
      *
      * This function will retrieve status of a given leave.
-     * See: Status leave() method for the inverse
+     * See: Status's leave() method for the inverse
      *
      * @return mixed
      */
-    // public function status()
-    // {
-    //     return $this->belongsTo(Status::class);
-    // }
+    public function status()
+    {
+        return $this->hasMany(Status::class);
+    }
 
 }

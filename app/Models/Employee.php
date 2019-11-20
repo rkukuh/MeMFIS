@@ -226,7 +226,7 @@ class Employee extends MemfisModel implements HasMedia
      */
     public function leave()
     {
-        return $this->belongsTo(Leave::class);
+        return $this->hasMany(Leave::class);
     }
 
     /**
