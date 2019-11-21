@@ -14,6 +14,7 @@ let Attendance = {
                                 dataSet = raw.data;
                             }
 
+                            console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -55,19 +56,19 @@ let Attendance = {
                     }
                 },
                 {
-                    field: 'nrp',
+                    field: 'employee.code',
                     title: 'NRP',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'employee_name',
+                    field: 'employee.first_name',
                     title: 'Employee Name',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'days',
+                    field: 'day',
                     title: 'Day Name',
                     sortable: 'asc',
                     filterable: !1,
@@ -91,13 +92,13 @@ let Attendance = {
                     filterable: !1,
                 },
                 {
-                    field: 'late_in',
+                    field: 'late',
                     title: 'Late In',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'earlier_out',
+                    field: 'out',
                     title: 'Earlier Out',
                     sortable: 'asc',
                     filterable: !1,
@@ -141,8 +142,8 @@ let Attendance = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        if(t.correction){
-                            return '<a data-toggle="modal" data-target="#modal_transaction_correction" href="#">' + "Transaction No" + "</a>"
+                        if(t.attendance_correction){
+                            return '<a data-toggle="modal" data-target="#modal_transaction_correction" href="#">' + t.attendance_correction.code + "</a>"
                         }else{
                             return "-";
                         }
@@ -150,7 +151,7 @@ let Attendance = {
 
                 },
                 {
-                    field: 'statuses_name',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -173,6 +174,7 @@ jQuery(document).ready(function () {
 });
 
 $(document).ready(function() {
+
     $('.attendance_datatable').on("click",".leave_modal", function() {
         let leave_uuid = $(this).data("uuid");
 
@@ -213,4 +215,5 @@ $(document).ready(function() {
             }
         });
     });
+
 });

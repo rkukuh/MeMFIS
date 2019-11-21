@@ -11,58 +11,26 @@ class AttendanceDatatables extends Controller
     public function index(){
         ini_set('memory_limit', '-1');
         $anam = Employee::where('code','18040060')->first();
-        $raw_attendance = EmployeeAttendance::where('employee_id',$anam->id)->get();
+        $attendances = EmployeeAttendance::where('employee_id',$anam->id)->with('attendance_correction','attendance_overtime','employee','statuses')->get();
 
         $attendance = [];
 
-        foreach($raw_attendance as $i => $ra){
-            $statuses = null;
-
-            // if($leave){
-            //     $ra->statuses_name .= "On Leave";
-            // }
-       
-            $employee_data = $ra->employee()->get();
-            $employee_statuses = $ra->statuses()->get();
-
-            $name = $employee_data[0]->first_name;
-            $nrp = $employee_data[0]->code;
-
-            if($ra->leave){
-                $statuses = "ON LEAVE";
-
-            }elseif(isset($employee_statuses[0])){
-                $statuses = $employee_statuses[0]->name;
-            }
-
-            if($employee_data[0]->first_name != $employee_data[0]->last_name){
-                $name = $employee_data[0]->first_name.' '.$employee_data[0]->last_name;
-            }
-
+        foreach($attendances as $attendance){
             //Time converison from second
-            $late = gmdate('H:i:s',$ra->late_in);
-            $earlier = gmdate('H:i:s',$ra->earlier_out);
-            $overtime = gmdate('H:i:s',$ra->overtime);
-                                                               
+            if($attendance->leave){
+                $attendance->status = "ON LEAVE";
+                $attendance->leave = $attendance->leave;
+            }elseif(isset($attendance->statuses)){
+                $attendance->status = $attendance->statuses->first()->name;
+            }
 
-            $attendance[$i] = [
-                'uuid' => $ra->uuid,
-                'nrp' => $nrp,
-                'employee_name' => $name,
-                'date' => $ra->date,
-                'days' => date('l', strtotime($ra->date)),
-                'in' => $ra->in,
-                'out' => $ra->out,
-                'late_in' => $late,
-                'earlier_out' => $earlier,
-                'overtime' => $overtime,
-                'second' => $ra->overtime,
-                'statuses_name' => $statuses,
-                'leave' => $ra->leave
-            ];
+            $attendance->day = date('D',$attendance->day);
+            $attendance->late = gmdate('H:i:s',$attendance->late_in);
+            $attendance->earlier = gmdate('H:i:s',$attendance->earlier_out);
+            $attendance->overtime = gmdate('H:i:s',$attendance->overtime);
         }
 
-        $data = $alldata = $attendance;
+        $data = $alldata = json_decode($attendances);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
