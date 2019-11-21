@@ -12,10 +12,10 @@ class AttendanceDatatables extends Controller
         ini_set('memory_limit', '-1');
 
         //testing
-        // $anam = Employee::where('code','18040060')->first();
-        // $attendances = EmployeeAttendance::where('employee_id',$anam->id)->with('attendance_correction','attendance_overtime','employee','statuses')->get();
+        $anam = Employee::where('code','18040060')->first();
+        $attendances = EmployeeAttendance::where('employee_id',$anam->id)->with('attendance_correction','attendance_overtime','employee','statuses','parent')->has('parent')->get();
 
-        $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses')->get();
+        // $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses')->get();
 
         foreach($attendances as $attendance){
             //Time converison from second
@@ -23,7 +23,7 @@ class AttendanceDatatables extends Controller
                 $attendance->status = "ON LEAVE";
                 $attendance->leave = $attendance->leave;
             }elseif(isset($attendance->statuses)){
-                $attendance->status = $attendance->statuses->first()->name;
+                $attendance->status = $attendance->statuses()->orderBy('created_at', 'desc')->first()->name;
             }
 
             $attendance->day = date('D',$attendance->day);
