@@ -296,7 +296,7 @@
     <script>
         let grn_uuid = '{{$goodsReceived->uuid}}';
         let po_uuid = '{{$goodsReceived->purchase_order->uuid}}';
-        let url = '/datatables/purchase-order/modal/item/37ad9a5a-1fb7-44a8-9f24-685c02a1175d';
+        let url = '/datatables/purchase-order/modal/item/'+po_uuid;
 
         $(document).ready(function () {
             document.getElementById('search-storage').innerHTML = '{{$goodsReceived->storage->name}}';
