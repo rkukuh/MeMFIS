@@ -5,6 +5,7 @@ namespace App\Console;
 use Carbon\Carbon;
 use App\Models\Employee;
 use App\Models\InventoryOut;
+use App\Models\EmployeeAttendance;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -33,7 +34,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function(){
             $this->createAttendances();
-        })->dailyAt('00:01');
+        })
+        ->everyMinute();
+        // ->dailyAt('00:01');
 
         // $schedule->call(function () { //? Waiting Entity Created
         //     Motation::where('created_at','<',Carbon::now()->subMinutes(10)->toDateTimeString())->doesnthave('approvals')->delete();
@@ -56,16 +59,39 @@ class Kernel extends ConsoleKernel
      * Store a newly created employee attendances in storage.
      */
     public function createAttendances(){
+        // code yang seharusnya dijalankan sehari-hari
+        // $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
+        // // create attendance with null;
+        // $in = '00:00:00';
+        // $out = '00:00:00';
+        // foreach($employees as $employee){
+        //         EmployeeAttendance::create([
+        //         'employee_id' => $employee->id,
+        //         'date' => Carbon::today(),
+        //         'in' => $in,
+        //         'out' => $out
+        //     ]);
+        // }
+
+        // code yang dijalankan untuk trial
         $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
         // create attendance with null;
         $in = '00:00:00';
         $out = '00:00:00';
+        
         foreach($employees as $employee){
-            $employee->employee_attendance()->create([
-                'date' => Carbon::today(),
-                'in' => $in,
-                'out' => $out
-            ]);
+
+            for($day = 1 ; $day <= 31 ; $day++){
+
+                EmployeeAttendance::create([
+                    'employee_id' => $employee->id,
+                    'date' => Carbon::create(2019, 11, $day, 0, 0, 0, 'Asia/Jakarta'),
+                    'in' => $in,
+                    'out' => $out
+                ]);
+
+            }
+
         }
     }
 }

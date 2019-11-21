@@ -17,7 +17,7 @@ class leavePolicy
      * @param  \App\Models\Leave  $leave
      * @return mixed
      */
-    public function view(User $user, leave $leave)
+    public function view(User $user, Leave $leave)
     {
         //
     }
@@ -40,7 +40,7 @@ class leavePolicy
      * @param  \App\Models\Leave  $leave
      * @return mixed
      */
-    public function update(User $user, leave $leave)
+    public function update(User $user, Leave $leave)
     {
         //
     }
@@ -52,7 +52,7 @@ class leavePolicy
      * @param  \App\Models\Leave  $leave
      * @return mixed
      */
-    public function delete(User $user, leave $leave)
+    public function delete(User $user, Leave $leave)
     {
         //
     }
@@ -64,7 +64,7 @@ class leavePolicy
      * @param  \App\Models\Leave  $leave
      * @return mixed
      */
-    public function restore(User $user, leave $leave)
+    public function restore(User $user, Leave $leave)
     {
         //
     }
@@ -76,7 +76,7 @@ class leavePolicy
      * @param  \App\Models\Leave  $leave
      * @return mixed
      */
-    public function forceDelete(User $user, leave $leave)
+    public function forceDelete(User $user, Leave $leave)
     {
         //
     }

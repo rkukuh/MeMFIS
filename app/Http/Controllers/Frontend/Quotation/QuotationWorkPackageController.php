@@ -38,6 +38,7 @@ class QuotationWorkPackageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\QuotationStore  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Quotation $quotation)
@@ -108,6 +109,7 @@ class QuotationWorkPackageController extends Controller
      *
      * @param  \App\Http\Requests\Frontend\QuotationUpdate  $request
      * @param  \App\Models\Quotation  $quotation
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Quotation $quotation, WorkPackage $workPackage)

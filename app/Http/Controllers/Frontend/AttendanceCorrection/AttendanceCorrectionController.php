@@ -126,6 +126,7 @@ class AttendanceCorrectionController extends Controller
      * Attendance correction approval
      * 
      * @param  \App\Models\AttendanceCorrection  $attcor
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function approval(AttendanceCorrection $attcor, Request $request){
@@ -184,6 +185,7 @@ class AttendanceCorrectionController extends Controller
      * Attendance correction reject
      * 
      * @param  \App\Models\AttendanceCorrection  $attcor
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function reject(AttendanceCorrection $attcor, Request $request){
