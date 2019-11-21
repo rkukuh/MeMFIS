@@ -25,11 +25,11 @@
                                                         <td align="center" width="35%">Remark</td>
                                                     </tr>
                                                     <tr class="text-dark">
-                                                        <td valign="top" align="center" width="20%">Transaction No.</td>
-                                                        <td valign="top" align="center" width="15%">Approve</td>
-                                                        <td valign="top" align="center" width="15%">Name;Timestamp</td>
-                                                        <td valign="top" align="center" width="15%">Job Title User approve</td>
-                                                        <td valign="top" align="center" width="35%"></td>
+                                                        <td valign="top" align="center" width="20%" id="leave-code">Transaction No.</td>
+                                                        <td valign="top" align="center" width="15%" id="leave-status">Approve</td>
+                                                        <td valign="top" align="center" width="15%" id="leave-approve">Name;Timestamp</td>
+                                                        <td valign="top" align="center" width="15%" id="leave-job-title">Job Title User approve</td>
+                                                        <td valign="top" align="center" width="35%" id="leave-remark"></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -44,23 +44,23 @@
                                             <table class="table table-striped table-bordered table-hover table-checkable" widtd="100%" cellpadding="4">
                                                 <tr>
                                                     <td width="25%" class="text-primary font-weight-bold">Start Date</td>
-                                                    <td align="center" width="75%">Sunday, 25/08/2019</td>
+                                                    <td align="center" width="75%" id="leave-start-date">Sunday, 25/08/2019</td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="25%" class="text-primary font-weight-bold">Start Date</td>
-                                                    <td align="center" width="75%">Sunday, 25/08/2019</td>
+                                                    <td width="25%" class="text-primary font-weight-bold">Enda Date</td>
+                                                    <td align="center" width="75%" id="leave-end-date">Sunday, 25/08/2019</td>
                                                 </tr>
                                                 <tr>
                                                     <td width="20%" class="text-primary font-weight-bold">Leave Type</td>
-                                                    <td align="center" width="75%">Annual Leave</td>
+                                                    <td align="center" width="75%" id="leave-type">Annual Leave</td>
                                                 </tr>
                                                 <tr>
                                                     <td width="20%" class="text-primary font-weight-bold">Leave Description</td>
-                                                    <td align="center" width="75%">Blabla</td>
+                                                    <td align="center" width="75%" id="leave-type-description">Blabla</td>
                                                 </tr>
                                                 <tr>
                                                     <td width="20%" class="text-primary font-weight-bold">Created</td>
-                                                    <td align="center" width="75%">27/08/2019 Timestamp</td>
+                                                    <td align="center" width="75%" id="leave-created">27/08/2019 Timestamp</td>
                                                 </tr>
                                             </table>
                                         </div>
