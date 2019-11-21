@@ -108,12 +108,12 @@ let ProposeLeave = {
                     filterable: !1,
                 },
                 {
-                    field: 'approval',
+                    field: 'approvals',
                     title: 'Approval',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        if(t.approvals){
+                        if(t.approvals.length > 0){
                             return (
                                 t.approvals[t.approvals.length - 1].conducted_by
                             );
