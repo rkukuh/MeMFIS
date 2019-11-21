@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables;
 
+use App\Models\Employee;
 use App\Models\EmployeeAttendance;
 use App\Http\Controllers\Controller;
 
@@ -9,20 +10,28 @@ class AttendanceDatatables extends Controller
 {
     public function index(){
         ini_set('memory_limit', '-1');
+        $anam = Employee::where('code','18040060')->first();
+        $raw_attendance = EmployeeAttendance::where('employee_id',$anam->id)->get();
 
-        $raw_attendance = EmployeeAttendance::all();
         $attendance = [];
 
-        $i = 0;
-        foreach($raw_attendance as $ra){
+        foreach($raw_attendance as $i => $ra){
             $statuses = null;
+
+            // if($leave){
+            //     $ra->statuses_name .= "On Leave";
+            // }
+       
             $employee_data = $ra->employee()->get();
             $employee_statuses = $ra->statuses()->get();
 
             $name = $employee_data[0]->first_name;
             $nrp = $employee_data[0]->code;
 
-            if(isset($employee_statuses[0])){
+            if($ra->leave){
+                $statuses = "ON LEAVE";
+
+            }elseif(isset($employee_statuses[0])){
                 $statuses = $employee_statuses[0]->name;
             }
 
@@ -49,8 +58,8 @@ class AttendanceDatatables extends Controller
                 'overtime' => $overtime,
                 'second' => $ra->overtime,
                 'statuses_name' => $statuses,
+                'leave' => $ra->leave
             ];
-            $i++;
         }
 
         $data = $alldata = $attendance;

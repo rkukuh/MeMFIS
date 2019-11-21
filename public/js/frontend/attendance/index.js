@@ -189,7 +189,6 @@ $(document).ready(function() {
                 leave_uuid +
                 "/api",
             success: function(data) {
-                console.log(data);
                 $("#leave-code").html(data.code);
                 $("#leave-status").html(data.status.name);
                 $("#leave-approve").html(data.conductedBy.first_name+";"+data.approval.created_at);
