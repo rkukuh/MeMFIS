@@ -44,6 +44,7 @@ class ProjectHMHtcrrController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create(Project $project, Request $request)
@@ -99,6 +100,7 @@ class ProjectHMHtcrrController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Http\Requests\Frontend\ProjectStore  $request
      * @return \Illuminate\Http\Response
      */
@@ -267,6 +269,7 @@ class ProjectHMHtcrrController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      */
     public function engineerTeam(Project $project, Request $request)
     {
@@ -299,6 +302,7 @@ class ProjectHMHtcrrController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param  \Illuminate\Http\Request  $request
      *
      */
     public function manhoursPropotion(Project $project, Request $request)
@@ -333,6 +337,7 @@ class ProjectHMHtcrrController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      */
     public function facilityUsed(Project $project, WorkPackage $workpackage,Request $request)
     {
