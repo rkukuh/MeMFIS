@@ -37,7 +37,7 @@ let ItemDatatables = {
             processing: true,
             responsive: true,
             serverSide: true,
-            ajax: '/datatables/item',
+            ajax: url,
             columnDefs: [
                          {
                              targets: [ 0, 1, 2 ],
