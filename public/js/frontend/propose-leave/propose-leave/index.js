@@ -128,7 +128,7 @@ let ProposeLeave = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if(t.approvals){
+                        if(t.approvals.length > 0){
                             return " ";
                         }
                         return (
