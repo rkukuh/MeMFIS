@@ -5,7 +5,7 @@
             <div class="modal-header">
                 @include('frontend.common.label.create-new')
 
-                <h5 class="modal-title" id="TitleModalItem">
+                <h5 class="modal-title" id="TitleModalItem" style="margin-top:0px">
                     Item
 
                     <small id="item-storage" class="m--font-focus"></small>
