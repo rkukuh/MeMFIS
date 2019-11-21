@@ -328,6 +328,7 @@ class QuotationController extends Controller
      * Quotation approve.
      *
      * @param  \App\Models\Project  $project
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function approve(Quotation $quotation, Request $request)
@@ -565,6 +566,7 @@ class QuotationController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Project  $project
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function discount( Request $request, Quotation $quotation, WorkPackage $workpackage)

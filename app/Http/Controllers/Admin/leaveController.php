@@ -46,7 +46,7 @@ class leaveController extends Controller
      * @param  \App\Models\leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function show(leave $leave)
+    public function show(Leave $leave)
     {
         //
     }
@@ -57,7 +57,7 @@ class leaveController extends Controller
      * @param  \App\Models\leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function edit(leave $leave)
+    public function edit(Leave $leave)
     {
         //
     }
@@ -69,7 +69,7 @@ class leaveController extends Controller
      * @param  \App\Models\leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function update(leaveUpdate $request, leave $leave)
+    public function update(leaveUpdate $request, Leave $leave)
     {
         //
     }
@@ -80,7 +80,7 @@ class leaveController extends Controller
      * @param  \App\Models\leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function destroy(leave $leave)
+    public function destroy(Leave $leave)
     {
         //
     }

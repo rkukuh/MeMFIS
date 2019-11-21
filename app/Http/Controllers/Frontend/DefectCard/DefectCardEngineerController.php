@@ -302,7 +302,8 @@ class DefectCardEngineerController extends Controller
      * Search the specified resource from storage.
      *
      * @param  \App\Models\DefectCard  $DefectCard
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\     
      */
     public function search(Request $request)
     {
@@ -324,6 +325,7 @@ class DefectCardEngineerController extends Controller
      * Add helper for related defect card in storage .
      *
      * @param  \App\Models\DefectCard  $DefectCard
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function add_helper(DefectCard $DefectCard, Request $request)

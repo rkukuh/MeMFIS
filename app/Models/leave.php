@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\MemfisModel;
 
-class leave extends MemfisModel
+class Leave extends MemfisModel
 {
     protected $fillable = [
         'code',
@@ -13,22 +13,62 @@ class leave extends MemfisModel
         'employee_id',
         'status_id',
         'attendance_id',
-        'type_id',
+        'leavetype_id',
         'description',
     ];
     
     /*************************************** RELATIONSHIP ****************************************/
 
-    /**
-     * One-to-One: An employee attendance have zero or one leave.
+     /**
+     * Polymorphic: An entity can have zero or many approvals.
      *
-     * This function will retrieve leave of a given attendance.
-     * See: Employee Attendance's attendance_leave() method for the inverse
+     * This function will get all AttendanceCorrection's approvals.
+     * See: Approvals's approvable() method for the inverse
      *
      * @return mixed
      */
-    public function attendance()
+    public function approvals()
     {
-        return $this->belongsTo(EmployeeAttendance::class);
+        return $this->morphMany(Approval::class, 'approvable');
     }
+
+    /**
+     * One-to-Many: Many leave proposed by one employee.
+     *
+     * This function will retrieve the employee proposed for a leave.
+     * See: Employee's leave() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
+    
+    /**
+     * One-to-Many: A leave have one leave type.
+     *
+     * This function will retrieve leave type of a given leave.
+     * See: Leave Type's leave() method for the inverse
+     *
+     * @return mixed
+     */
+    public function leaveType()
+    {
+        return $this->belongsTo(LeaveType::class, 'leavetype_id');
+    }
+
+     /**
+     * One-to-One: An leave have one Status.
+     *
+     * This function will retrieve status of a given leave.
+     * See: Status's leave() method for the inverse
+     *
+     * @return mixed
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
 }

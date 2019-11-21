@@ -402,7 +402,7 @@ class FillComboxController extends Controller
     public function item()
     {
         $items = Item::with('categories')
-            ->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name', 'id');
+            ->selectRaw('id, CONCAT(code, " | ", name) as name')->take(500)->pluck('name', 'id');
 
         return $items;
     }
@@ -414,7 +414,7 @@ class FillComboxController extends Controller
      */
     public function partNumber()
     {
-        $items = Item::pluck('code', 'uuid');
+        $items = Item::take(500)->pluck('code', 'uuid');
 
         return $items;
     }
@@ -427,7 +427,7 @@ class FillComboxController extends Controller
     public function itemUUID()
     {
         $items = Item::with('categories')
-            ->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name', 'uuid');
+            ->selectRaw('uuid, CONCAT(code, " | ", name) as name')->take(500)->pluck('name', 'uuid');
 
         return $items;
     }
@@ -793,7 +793,7 @@ class FillComboxController extends Controller
         $items = Item::with('categories')
             ->whereHas('categories', function ($query) {
                 $query->where('code', 'tool');
-            })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name', 'id');
+            })->selectRaw('id, CONCAT(code, " | ", name) as name')->take(500)->pluck('name', 'id');
 
         return $items;
     }
@@ -808,7 +808,7 @@ class FillComboxController extends Controller
         $items = Item::with('categories')
             ->whereHas('categories', function ($query) {
                 $query->where('code', 'tool');
-            })->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name', 'uuid');
+            })->selectRaw('uuid, CONCAT(code, " | ", name) as name')->take(500)->pluck('name', 'uuid');
 
         return $items;
     }
@@ -823,7 +823,7 @@ class FillComboxController extends Controller
         $items = Item::with('categories')
             ->whereHas('categories', function ($query) {
                 $query->where('code', 'raw')->orWhere('code', 'cons')->orWhere('code', 'comp')->orWhere('code', 'service')->orWhere('code', 'facility');
-            })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name', 'id');
+            })->selectRaw('id, CONCAT(code, " | ", name) as name')->take(500)->pluck('name', 'id');
 
         return $items;
     }
@@ -838,7 +838,7 @@ class FillComboxController extends Controller
         $items = Item::with('categories')
             ->whereHas('categories', function ($query) {
                 $query->where('code', 'raw')->orWhere('code', 'cons')->orWhere('code', 'comp')->orWhere('code', 'service')->orWhere('code', 'facility');
-            })->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name', 'uuid');
+            })->selectRaw('uuid, CONCAT(code, " | ", name) as name')->take(500)->pluck('name', 'uuid');
 
         return $items;
     }

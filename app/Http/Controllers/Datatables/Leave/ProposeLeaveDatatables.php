@@ -1,59 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Datatables;
+namespace App\Http\Controllers\Datatables\Leave;
 
-use App\Models\EmployeeAttendance;
+use App\Models\Leave;
+use App\Models\ListUtil;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AttendanceDatatables extends Controller
+class ProposeLeaveDatatables extends Controller
 {
-    public function index(){
-        ini_set('memory_limit', '-1');
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $leaves = Leave::with('approvals','employee','leaveType','status')->get();
 
-        $raw_attendance = EmployeeAttendance::all();
-        $attendance = [];
-
-        $i = 0;
-        foreach($raw_attendance as $ra){
-            $statuses = null;
-            $employee_data = $ra->employee()->get();
-            $employee_statuses = $ra->statuses()->get();
-
-            $name = $employee_data[0]->first_name;
-            $nrp = $employee_data[0]->code;
-
-            if(isset($employee_statuses[0])){
-                $statuses = $employee_statuses[0]->name;
-            }
-
-            if($employee_data[0]->first_name != $employee_data[0]->last_name){
-                $name = $employee_data[0]->first_name.' '.$employee_data[0]->last_name;
-            }
-
-            //Time converison from second
-            $late = gmdate('H:i:s',$ra->late_in);
-            $earlier = gmdate('H:i:s',$ra->earlier_out);
-            $overtime = gmdate('H:i:s',$ra->overtime);
-                                                               
-
-            $attendance[$i] = [
-                'uuid' => $ra->uuid,
-                'nrp' => $nrp,
-                'employee_name' => $name,
-                'date' => $ra->date,
-                'days' => date('l', strtotime($ra->date)),
-                'in' => $ra->in,
-                'out' => $ra->out,
-                'late_in' => $late,
-                'earlier_out' => $earlier,
-                'overtime' => $overtime,
-                'second' => $ra->overtime,
-                'statuses_name' => $statuses,
-            ];
-            $i++;
-        }
-
-        $data = $alldata = $attendance;
+        $data = $alldata = json_decode($leaves);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -140,5 +105,22 @@ class AttendanceDatatables extends Controller
         ];
 
         echo json_encode($result, JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * Show data from model with flter on datatable.
+     *
+     * @param $list, $args, $operator
+     * @return \Illuminate\Http\Response
+     */
+    public function list_filter($list, $args = array(), $operator = 'AND')
+    {
+        if (! is_array($list)) {
+            return array();
+        }
+
+        $util = new ListUtil($list);
+
+        return $util->filter($args, $operator);
     }
 }

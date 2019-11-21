@@ -1293,6 +1293,11 @@ class EmployeeController extends Controller
         return response()->json($employee);
     }
 
+    /**
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Employee  $employee
+     * 
+     */
     public function update_file(Employee $employee,Request $request){
         $rules = array(
             'document' => 'image|nullable'
