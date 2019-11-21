@@ -155,7 +155,7 @@ class ItemDatatables extends Controller
         $items = Item::with('unit', 'categories')
                 ->whereHas('categories', function ($query) {
                     $query->where('code','<>','tool');
-                })->get();
+                })->take('100')->get();
 
         $alldata = json_decode( $items, true);
 
