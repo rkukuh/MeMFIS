@@ -199,7 +199,7 @@ $(document).ready(function() {
                 $("#leave-end-date").html(data.end_date);
                 $("#leave-type").html(data.leave_type.name);
                 $("#leave-type-description").html(data.leave_type.description);
-                $("#leave-created").html(data.leave_type.created_at);
+                $("#leave-created").html(data.created_at);
 
             },
             error: function(jqXhr, json, errorThrown) {
