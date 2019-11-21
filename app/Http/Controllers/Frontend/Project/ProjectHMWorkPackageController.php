@@ -59,6 +59,7 @@ class ProjectHMWorkPackageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\ProjectStore  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Project $project)
@@ -104,6 +105,7 @@ class ProjectHMWorkPackageController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Project  $project
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project, WorkPackage $workPackage,Request $request)
@@ -192,6 +194,7 @@ class ProjectHMWorkPackageController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Project  $project
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project, WorkPackage $workPackage,Request $request)
@@ -296,6 +299,7 @@ class ProjectHMWorkPackageController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param  \Illuminate\Http\Request  $request
      *
      */
     public function engineerTeam(Project $project, WorkPackage $workpackage,Request $request)
@@ -334,6 +338,7 @@ class ProjectHMWorkPackageController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param  \Illuminate\Http\Request  $request
      *
      */
     public function manhoursPropotion(Project $project, WorkPackage $workpackage,Request $request)
@@ -356,6 +361,7 @@ class ProjectHMWorkPackageController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param  \Illuminate\Http\Request  $request
      *
      */
     public function facilityUsed(Project $project, WorkPackage $workpackage,Request $request)

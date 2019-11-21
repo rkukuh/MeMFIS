@@ -217,6 +217,19 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
+     * One-to-Many: Many leave proposed by one employee.
+     *
+     * This function will retrieve the employee proposed for a leave.
+     * See: Leave's employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function leave()
+    {
+        return $this->hasMany(Leave::class);
+    }
+
+    /**
      * One-to-One: An Employee have one Position.
      *
      * This function will retrieve Position of a given Employee.

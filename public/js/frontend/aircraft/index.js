@@ -93,7 +93,7 @@ let Aircraft = {
         });
 
         let simpan = $('.modal-footer').on('click', '.add-aircraft', function () {
-            mApp.block(".add-aircraft");
+            mApp.block(".modal-footer");
 
             let name = $('input[name=name]').val();
             let code = $('input[name=code]').val();
@@ -112,7 +112,7 @@ let Aircraft = {
                     manufacturer_id: manufacturer_id
                 },
                 success: function (data) {
-                    mApp.unblock(".add-aircraft");
+                    mApp.unblock(".modal-footer");
 
                     if (data.errors) {
                         if (data.errors.name) {
