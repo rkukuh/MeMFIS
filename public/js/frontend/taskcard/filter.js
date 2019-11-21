@@ -89,7 +89,7 @@ $('.filter').on('change', function () {
                                 );
                             }
                         }
-    
+
                     },
                     {
                         field: 'type.name',
@@ -102,7 +102,7 @@ $('.filter').on('change', function () {
                         title: 'A/C Applicability',
                         sortable: 'asc',
                         filterable: !1,
-    
+
                     },
                     {
                         field: 'skill',
@@ -140,7 +140,7 @@ $('.filter').on('change', function () {
                                     '<p>' + data + '</p>'
                                 );
                             }
-    
+
                             return ''
                         }
                     },
@@ -231,6 +231,19 @@ $(document).ready(function () {
 
     $.ajax({
         url: '/get-takcard-si-types/',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $.each(data, function (key, value) {
+                $('#taskcard_routine_type').append(
+                    '<option value="' + key + '">' + value + '</option>'
+                );
+            });
+        }
+    });
+
+    $.ajax({
+        url: '/get-takcard-preliminary-types/',
         type: 'GET',
         dataType: 'json',
         success: function (data) {
