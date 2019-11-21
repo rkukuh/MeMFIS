@@ -105,6 +105,28 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Coa.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCoa(Builder $query)
+    {
+        return $query->where('of', 'coa');
+    }
+
+    /**
+     * Scope a query to only include type of Coa.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCoaTransaction(Builder $query)
+    {
+        return $query->where('of', 'coa-transaction');
+    }
+
+    /**
      * Scope a query to only include type of Company.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -580,6 +602,17 @@ class Type extends MemfisModel
     public function scopeOfTax(Builder $query)
     {
         return $query->where('of', 'tax');
+    }
+
+    /**
+     * Scope a query to only include type of Tax payment method.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaxPaymentMethod(Builder $query)
+    {
+        return $query->where('of', 'tax-payment-method'); 
     }
 
     /**
