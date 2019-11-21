@@ -50,6 +50,19 @@ class EmployeeAttendance extends MemfisModel
     }
 
     /**
+     * One-to-Many (self-join): An employee attendance may have none or many corrected-attendance.
+     *
+     * This function will retrieve the corrected-attendance of a Employee Attendance, if any.
+     * See: Employee Attendance's parent() method for the inverse
+     *
+     * @return mixed
+     */
+    public function childs()
+    {
+        return $this->hasMany(EmployeeAttendance::class, 'parent_id');
+    }
+
+    /**
      * One-to-Many: An employee may have zero or many attendance.
      *
      * This function will retrieve the employees of a attendance.
@@ -73,6 +86,19 @@ class EmployeeAttendance extends MemfisModel
     public function statuses()
     {
         return $this->belongsTo(Status::class);
+    }
+
+    /**
+     * One-to-Many (self-join): An employee attendance may have none or many corrected-attendance.
+     *
+     * This function will retrieve the parent of a corrected-attendance.
+     * See: Employee Attendance's childs() method for the inverse
+     *
+     * @return mixed
+     */
+    public function parent()
+    {
+        return $this->belongsTo(EmployeeAttendance::class, 'parent_id')->withTrashed();
     }
 
     /*************************************** ACCESSOR ****************************************/
