@@ -612,7 +612,7 @@ class Type extends MemfisModel
      */
     public function scopeOfTaxPaymentMethod(Builder $query)
     {
-        return $query->where('of', 'tax-payment-method');
+        return $query->where('of', 'tax-payment-method'); 
     }
 
     /**
