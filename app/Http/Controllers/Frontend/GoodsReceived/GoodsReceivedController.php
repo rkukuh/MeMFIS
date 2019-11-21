@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Frontend\GoodsReceived;
 
 use Auth;
 use Carbon\Carbon;
+use App\Models\Vendor;
 use App\Models\Storage;
 use App\Models\Employee;
 use App\Models\Approval;
 use App\Models\PurchaseOrder;
 use App\Models\GoodsReceived;
 use App\Helpers\DocumentNumber;
+use Directoryxx\Finac\Model\Coa;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\GoodsReceivedStore;
 use App\Http\Requests\Frontend\GoodsReceivedUpdate;
@@ -59,22 +61,25 @@ class GoodsReceivedController extends Controller
 
         $goodsReceived = GoodsReceived::create($request->all());
 
+        $goodsReceived->coa()->save(Coa::find(Vendor::find(PurchaseOrder::find($request->purchase_order_id)->vendor_id)->coa->first()->id));
+
+
     //     @if(isset(json_decode($jobCard->taskcard->additionals)->internal_number))
     //     {{json_decode($jobCard->taskcard->additionals)->internal_number}}
     // @else
     //     -
     // @endif
 
-        // $items = PurchaseOrder::find($request->purchase_order_id)->items;
+        $items = PurchaseOrder::find($request->purchase_order_id)->items;
 
-        // foreach($items as $item){
-        //     $goodsReceived->items()->attach([$item->pivot->item_id => [
-        //         'quantity'=> $item->pivot->quantity,
-                // 'already_received'=> 2,// TODO ask whats is it?
-        //         'unit_id' => $item->pivot->unit_id
-        //         ]
-        //     ]);
-        // }
+        foreach($items as $item){
+            $goodsReceived->items()->attach([$item->pivot->item_id => [
+                'quantity'=> $item->pivot->quantity,
+                'quantity_unit'=> $item->pivot->quantity,
+                'unit_id' => $item->pivot->unit_id
+                ]
+            ]);
+        }
 
         return response()->json($goodsReceived);
     }
