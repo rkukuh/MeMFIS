@@ -37,5 +37,4 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/common/item.js') }}"></script>
     <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
-    {{-- <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script> --}}
 @endpush

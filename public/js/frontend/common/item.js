@@ -33,6 +33,7 @@ let ItemDatatables = {
         // })
 
         $('#item_datatable').DataTable({
+            "dom": '<"top"f>rt<"bottom">pl',
             processing: true,
             responsive: true,
             serverSide: true,
@@ -52,12 +53,13 @@ let ItemDatatables = {
             ]
         });
 
-        $('<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left: 60%; color: white;"><span><i class="la la-refresh"></i><span>Reload</span></span> </button>').appendTo('div.dataTables_filter');
-        // $('.paging_simple_numbers').addClass('pull-left');
-        // $('.dataTables_length').addClass('pull-right');
-        // $('.dataTables_info').addClass('pull-left');
-        // $('.dataTables_info').addClass('margin-info');
-        // $('.paging_simple_numbers').addClass('padding-datatable');
+        // $('<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left: 60%; color: white;"><span><i class="la la-refresh"></i><span>Reload</span></span> </button>').appendTo('div.dataTables_filter');
+        $('.paging_simple_numbers').addClass('pull-left');
+        $('.dataTables_length').addClass('pull-right');
+        $('.item_datatable_filter').addClass('pull-left');
+        $('.dataTables_info').addClass('pull-left');
+        $('.dataTables_info').addClass('margin-info');
+        $('.paging_simple_numbers').addClass('padding-datatable');
 
         $('.dataTables_filter').on('click', '.refresh', function () {
             $('#item_datatable').DataTable().ajax.reload();
