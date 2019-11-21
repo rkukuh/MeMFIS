@@ -10,10 +10,12 @@ class AttendanceDatatables extends Controller
 {
     public function index(){
         ini_set('memory_limit', '-1');
-        $anam = Employee::where('code','18040060')->first();
-        $attendances = EmployeeAttendance::where('employee_id',$anam->id)->with('attendance_correction','attendance_overtime','employee','statuses')->get();
 
-        $attendance = [];
+        //testing
+        // $anam = Employee::where('code','18040060')->first();
+        // $attendances = EmployeeAttendance::where('employee_id',$anam->id)->with('attendance_correction','attendance_overtime','employee','statuses')->get();
+
+        $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses')->get();
 
         foreach($attendances as $attendance){
             //Time converison from second
