@@ -47,7 +47,7 @@
                                                     <td align="center" width="75%" id="leave-start-date">Sunday, 25/08/2019</td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="25%" class="text-primary font-weight-bold">Enda Date</td>
+                                                    <td width="25%" class="text-primary font-weight-bold">End Date</td>
                                                     <td align="center" width="75%" id="leave-end-date">Sunday, 25/08/2019</td>
                                                 </tr>
                                                 <tr>
