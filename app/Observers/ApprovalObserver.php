@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\FefoIn;
 use App\Models\Approval;
 use App\Models\InventoryIn;
+use App\Models\GoodsReceived;
 use App\Helpers\DocumentNumber;
 use App\Models\InventoryOut;
 use Directoryxx\Finac\Model\TrxJournal;
@@ -23,8 +24,11 @@ class ApprovalObserver
         switch ($approval->approvable_type) {
             case 'App\Models\GoodsReceived':
 
-                // $journal = new TrxJournal();
-                // $journal->insertFromGRN($component,$consumable,$raw_material,$approval->approvable_id);
+                $comp = GoodsReceived::find($approval->approvable_id)->items->load('categories')->where('categories.0.code', 'comp')->count();
+                $cons = GoodsReceived::find($approval->approvable_id)->items->load('categories')->where('categories.0.code', 'cons')->count();
+                $raw = GoodsReceived::find($approval->approvable_id)->items->load('categories')->where('categories.0.code', 'raw')->count();
+                $journal = new TrxJournal();
+                $journal->insertFromGRN($comp,$cons,$raw,$approval->approvable_id);
                 $inv_in = $approval->approvable->inventoryIn()->create([
                     'storage_id' => $approval->approvable->storage_id,
                     'number' => DocumentNumber::generate('INV-IN-', InventoryIn::withTrashed()->count()+1),
