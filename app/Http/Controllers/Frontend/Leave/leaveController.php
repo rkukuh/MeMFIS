@@ -164,4 +164,19 @@ class leaveController extends Controller
         
         return response()->json($result);
     }
+
+    /**
+     * API for ajax request for leave data and informations.
+     *
+     * @param  \App\Models\Leave  $leave
+     * @return \Illuminate\Http\Response
+     */
+    public function leaveInformation(Leave $leave)
+    {
+        $leave->leave_type = $leave->leaveType;
+        $leave->status = $leave->status;
+        $leave->approval = $leave->approvals->last();
+        $leave->conductedBy = $leave->approvals->last()->conductedBy;
+        return response()->json($leave);
+    }
 }

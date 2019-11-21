@@ -109,47 +109,43 @@ let Attendance = {
                     filterable: !1,
                 },
                 {
-                    field: 'title',
+                    field: 'overtime_remark',
                     title: 'Approved Overtime',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        // if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
+                        if(t.overime){
                             return '<a data-toggle="modal" data-target="#modal_transaction_overtime" href="#">' + "Transaction No" + "</a>"
-                        // }
-                        // else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                        //     return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
-                        // }
+                        }else{
+                            return "-";
+                        }
                     }
 
                 },
                 {
-                    field: 'title',
+                    field: 'leave_remark',
                     title: 'Leaves Remark',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        // if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return '<a data-toggle="modal" data-target="#modal_transaction_leave" href="#">' + "Transaction No" + "</a>"
-                        // }
-                        // else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                        //     return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
-                        // }
+                        if(t.leave){
+                            return '<a data-toggle="modal" data-uuid="'+t.leave.uuid+'" href="#" class="leave_modal">' + t.leave.code + "</a>";
+                        }else{
+                            return "-";
+                        }
                     }
-
                 },
                 {
-                    field: 'title',
+                    field: 'correction_remark',
                     title: 'Correction Remark',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        // if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
+                        if(t.correction){
                             return '<a data-toggle="modal" data-target="#modal_transaction_correction" href="#">' + "Transaction No" + "</a>"
-                        // }
-                        // else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            // return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
-                        // }
+                        }else{
+                            return "-";
+                        }
                     }
 
                 },
@@ -174,4 +170,48 @@ let Attendance = {
 
 jQuery(document).ready(function () {
     Attendance.init();
+});
+
+$(document).ready(function() {
+    $('.attendance_datatable').on("click",".leave_modal", function() {
+        let leave_uuid = $(this).data("uuid");
+
+        $("#modal_transaction_leave").modal('show');
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                    "content"
+                )
+            },
+            type: "GET",
+            url:
+                "/leave/" +
+                leave_uuid +
+                "/api",
+            success: function(data) {
+                console.log(data);
+                $("#leave-code").html(data.code);
+                $("#leave-status").html(data.status.name);
+                $("#leave-approve").html(data.conductedBy.first_name+";"+data.approval.created_at);
+                $("#leave-job-title").html(data.conductedBy.job_title_id);
+                $("#leave-remark").html(data.description);
+
+                $("#leave-start-date").html(data.start_date);
+                $("#leave-end-date").html(data.end_date);
+                $("#leave-type").html(data.leave_type.name);
+                $("#leave-type-description").html(data.leave_type.description);
+                $("#leave-created").html(data.leave_type.created_at);
+
+            },
+            error: function(jqXhr, json, errorThrown) {
+                let errors = jqXhr.responseJSON;
+                $.each(errors.error, function(index, value) {
+                    toastr.error(value.message, value.title, {
+                        closeButton: true,
+                        timeOut: "0"
+                    });
+                });
+            }
+        });
+    });
 });
