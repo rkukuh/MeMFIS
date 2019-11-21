@@ -89,31 +89,12 @@ let PurchaseOrder = {
                     filterable: !1,
                 },
                 {
-                    field: '',
-                    title: '2nd Approved By',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if(t.status == "Approved 2"){
+                        if(t.status == "Approved"){
                             return (
-                                '<a href="purchase-order/' +
-                                t.uuid +
-                                '/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' +
-                                t.uuid +
-                                '">' +
-                                '<i class="la la-print"></i>' +
-                                "</a>"
-                            );
-                        }else if(t.status == "Approved 1"){
-                            return (
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid +'">' +
-                                '<i class="la la-check"></i>' +
-                                '</a>' +
                                 '<a href="purchase-order/' +
                                 t.uuid +
                                 '/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' +

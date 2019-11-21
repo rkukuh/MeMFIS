@@ -9,6 +9,7 @@ class Tax extends MemfisModel
     protected $fillable = [
         'taxable_type',
         'taxable_id',
+        'method_type_id',
         'type_id',
         'percent',
         'amount',

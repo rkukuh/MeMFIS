@@ -153,7 +153,8 @@ class PurchaseOrderController extends Controller
         $purchaseOrder->update($request->all());
 
         //todo ppn
-        $tax = Type::ofTax()->where('code', 'exclude')->first();
+        $tax = Type::ofTaxPaymentMethod()->where('code', 'exclude')->first();
+        $tax_type = Type::ofTax()->where('code', 'ppn')->first();
         $subtotal_after_discount = $request->total_before_tax;
         $tax_amount = $tax_percentage = 0;
         if($tax->code == "include"){
@@ -171,7 +172,8 @@ class PurchaseOrderController extends Controller
                 $tax = Tax::where('uuid', $purchaseOrder->taxes->last()->uuid)->update([
                     'taxable_type' => 'App\Models\PurchaseOrder',
                     'taxable_id' => $purchaseOrder->id,
-                    'type_id' => $tax->id,
+                    'type_id' => $tax_type->id,
+                    'method_type_id' => $tax->id,
                     'percent' => $tax_percentage,
                     'amount' => $tax_amount
                 ]);
@@ -180,7 +182,8 @@ class PurchaseOrderController extends Controller
             $purchaseOrder->taxes()->save(new Tax([
                 'taxable_type' => 'App\Models\PurchaseOrder',
                 'taxable_id' => $purchaseOrder->id,
-                'type_id' => $tax->id,
+                'type_id' => $tax_type->id,
+                'method_type_id' => $tax->id,
                 'percent' => $tax_percentage,
                 'amount' => $tax_amount
             ]));
