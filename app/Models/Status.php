@@ -182,4 +182,17 @@ class Status extends MemfisModel
     {
         return $this->hasOne(Progress::class);
     }
+
+    /**
+     * One-to-One: An leave have one Status.
+     *
+     * This function will retrieve status of a given leave.
+     * See: Leave's status() method for the inverse
+     *
+     * @return mixed
+     */
+    public function leave()
+    {
+        return $this->hasMany(Leave::class);
+    }
 }

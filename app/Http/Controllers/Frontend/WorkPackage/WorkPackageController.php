@@ -70,6 +70,7 @@ class WorkPackageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\WorkPackageStore  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function addTaskCard(Request $request, WorkPackage $workPackage)
@@ -90,6 +91,7 @@ class WorkPackageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\WorkPackageStore  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function addInstruction(Request $request, WorkPackage $workPackage)
@@ -154,6 +156,7 @@ class WorkPackageController extends Controller
      *
      * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
      * @param  \App\Models\WorkPackage  $workPackage
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function sequence(Request $request, WorkPackage $workPackage,TaskCard $taskcard)
@@ -169,6 +172,7 @@ class WorkPackageController extends Controller
      *
      * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
      * @param  \App\Models\WorkPackage  $workPackage
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function sequenceInstruction(Request $request, WorkPackage $workPackage,EOInstruction $instruction)
@@ -184,6 +188,7 @@ class WorkPackageController extends Controller
      *
      * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
      * @param  \App\Models\WorkPackage  $workPackage
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function mandatory(Request $request, WorkPackage $workPackage, TaskCard $taskcard)
@@ -199,6 +204,7 @@ class WorkPackageController extends Controller
      *
      * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
      * @param  \App\Models\WorkPackage  $workPackage
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function mandatoryInstruction(Request $request, WorkPackage $workPackage, EOInstruction $instruction)

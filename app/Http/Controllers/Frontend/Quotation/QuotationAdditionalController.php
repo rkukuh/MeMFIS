@@ -190,6 +190,8 @@ class QuotationAdditionalController extends Controller
      *
      * @param  \App\Http\Requests\Frontend\QuotationUpdate  $request
      * @param  \App\Models\Quotation  $quotation
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Quotation $quotation)
@@ -277,6 +279,7 @@ class QuotationAdditionalController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Project  $project
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function approve(Quotation $quotation, Request $request)
@@ -356,6 +359,7 @@ class QuotationAdditionalController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Quotation  $quotation
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function discount(Request $request, Quotation $quotation)

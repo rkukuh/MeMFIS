@@ -35,18 +35,6 @@ class EmployeeAttendance extends MemfisModel
     {
         return $this->hasOne(AttendanceCorrection::class, 'attendance_id');
     }
-    /**
-     * One-to-One: An employee attendance have zero or one leave.
-     *
-     * This function will retrieve leave of a given attendance.
-     * See: leave's attendance() method for the inverse
-     *
-     * @return mixed
-     */
-    public function attendance_leave()
-    {
-        return $this->hasOne(leave::class, 'attendance_id');
-    }
 
     /**
      * One-to-One: An employee attendance have zero or one overtime.
@@ -85,5 +73,27 @@ class EmployeeAttendance extends MemfisModel
     public function statuses()
     {
         return $this->belongsTo(Status::class);
+    }
+
+    /*************************************** ACCESSOR ****************************************/
+
+    // to do accessor 
+    public function getDateLeaveAttribute(){
+        // first filter by $this->employee
+        $leave = Leave::where('employee_id', $this->employee_id)
+        // then filter by $this->date
+            ->whereDate('start_date','<=',$this->date)
+            ->whereDate('end_date', '>=', $this->date)
+        // only approved leave
+            ->whereHas('approvals')
+        // resulting is there any leave on that day by that person
+            ->first();
+
+        if($leave){
+            $this->status = "On Leave";
+        }
+
+        return $leave->number;
+        // change status value "on leave"
     }
 }
