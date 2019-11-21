@@ -4,7 +4,6 @@ let Item = {
 
         $('#item_datatable').DataTable({
             "dom": '<"top"f>rt<"bottom">pil',
-            // pl
             processing: true,
             responsive: true,
             serverSide: true,

@@ -71,20 +71,19 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <table class="table table-striped table-bordered table-hover table-checkable item_datatable" id="item_datatable">
-                                            <thead>
-                                                <tr>
-                                                        <th>Code</th>
-                                                        <th>Name</th>
-                                                        <th>Category</th>
-                                                        <th>Taxable?</th>
-                                                        <th>Stockable?</th>
-                                                        <th>Account Code</th>
-                                                        <th></th>
-                                                </tr>
-                                            </thead>
-                                        </table>
+                                        <thead>
+                                            <tr>
+                                                    <th>Code</th>
+                                                    <th>Name</th>
+                                                    <th>Category</th>
+                                                    <th>Taxable?</th>
+                                                    <th>Stockable?</th>
+                                                    <th>Account Code</th>
+                                                    <th></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
                                 </div>
-
                             </div>
                         </div>
                     </div>
