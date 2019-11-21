@@ -171,7 +171,7 @@ class leaveController extends Controller
      * @param  \App\Models\Leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function leaveInformation(Leave $leave)
+    public function leaveModal(Leave $leave)
     {
         $leave->leave_type = $leave->leaveType;
         $leave->status = $leave->status;

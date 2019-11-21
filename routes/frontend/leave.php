@@ -18,9 +18,9 @@ Route::name('frontend.')->group(function () {
 
                     Route::post('/{leave}/approve', 'leaveController@approve')->name('leave.approve');
                     Route::post('/{leave}/reject', 'leaveController@reject')->name('leave.reject');
-                    Route::get('/{leave}/api', 'leaveController@leaveInformation')->name('leave.leaveInformation');
 
                     /** API */
+                    Route::get('/{leave}/api', 'leaveController@leaveModal')->name('leave.leaveModal');
                     // Route::get('/{employee}/date/{date}', 'leaveController@getAttendance')->name('get.attendance');
 
                 });
