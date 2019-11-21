@@ -204,4 +204,23 @@ class AttendanceCorrectionController extends Controller
         
         return response()->json($result);
     }
+
+     /**
+     * API for ajax request for attendance correction and informations.
+     *
+     * @param  \App\Models\AttendanceCorrection  $attcor
+     * @return \Illuminate\Http\Response
+     */
+    public function attcorModal(AttendanceCorrection $attcor)
+    {
+        $attcor->status = $attcor->status;
+        $attcor->attendance = $attcor->attendance;
+        if(sizeof($attcor->approvals) > 0){
+            $attcor->conductedBy = $attcor->approvals->first()->conductedBy->first_name." ".$attcor->approvals->first()->conductedBy->creted_at;
+        }else{
+            $attcor->conductedBy = "-";
+        }
+        return response()->json($attcor);
+    }
+
 }

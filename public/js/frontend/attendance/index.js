@@ -115,8 +115,8 @@ let Attendance = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        if(t.overime){
-                            return '<a data-toggle="modal" data-target="#modal_transaction_overtime" href="#">' + "Transaction No" + "</a>"
+                        if(t.overtime){
+                            return '<a data-toggle="modal" data-uuid="'+t.overtime.uuid+'" data-target="#modal_transaction_overtime" href="#">' + "Transaction No" + "</a>"
                         }else{
                             return "-";
                         }
@@ -143,7 +143,7 @@ let Attendance = {
                     filterable: !1,
                     template: function (t, e, i) {
                         if(t.attendance_correction){
-                            return '<a data-toggle="modal" data-target="#modal_transaction_correction" href="#">' + t.attendance_correction.code + "</a>"
+                            return '<a data-toggle="modal" data-target="#modal_transaction_correction"  data-uuid="'+t.attendance_correction.uuid+'" href="#" class="attendace_correction_modal">' + t.attendance_correction.code + "</a>"
                         }else{
                             return "-";
                         }
@@ -202,6 +202,48 @@ $(document).ready(function() {
                 $("#leave-type").html(data.leave_type.name);
                 $("#leave-type-description").html(data.leave_type.description);
                 $("#leave-created").html(data.created_at);
+
+            },
+            error: function(jqXhr, json, errorThrown) {
+                let errors = jqXhr.responseJSON;
+                $.each(errors.error, function(index, value) {
+                    toastr.error(value.message, value.title, {
+                        closeButton: true,
+                        timeOut: "0"
+                    });
+                });
+            }
+        });
+    });
+
+    $('.attendance_datatable').on("click",".attendace_correction_modal", function() {
+        let attcor_uuid = $(this).data("uuid");
+        $("#modal_transaction_correction").modal('show');
+
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                    "content"
+                )
+            },
+            type: "GET",
+            url:
+                "/attendance-correction/" +
+                attcor_uuid +
+                "/api",
+            success: function(data) {
+                console.log(data);
+                $("#attcor-code").html(data.code);
+                $("#attcor-status").html(data.status.name);
+                $("#attcor-approve").html(data.conductedBy);
+                $("#attcor-job-title").html(data.conductedBy.job_title_id);
+                $("#attcor-remark").html(data.description);
+
+                $("#attcor-code").html(data.code);
+                $("#attcor-check-in").html(data.attendance.in);
+                $("#attcor-check-out").html(data.attendance.out);
+                $("#attcor-description").html(data.description);
+                $("#attcor-created").html(data.created_at);
 
             },
             error: function(jqXhr, json, errorThrown) {
