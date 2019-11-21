@@ -25,6 +25,11 @@ Route::name('testing.')->group(function () {
                 'url' => $url
             ]);
         });
+
+        Route::get('/grn', function () {
+            $grn = App\Models\GoodsReceived::find(1)->items->load('categories')->where('categories.0.code', 'tool')->count();
+            dd($grn);
+        });
         Route::get('/po', function () {
             // $po = App\Models\PurchaseOrder::find(16);
 
