@@ -465,7 +465,7 @@ class FillComboxController extends Controller
      */
     public function vendor()
     {
-        $vendors = Vendor::pluck('name', 'uuid');
+        $vendors = Vendor::has('coa')->pluck('name', 'uuid');
 
         return json_encode($vendors);
 
