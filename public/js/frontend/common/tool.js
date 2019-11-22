@@ -1,5 +1,5 @@
 let ToolDatatables = {
-    init: function (url) {
+    init: function (urlTool) {
         // $("#tool_datatable").DataTable({
         //     "dom": '<"top"f>rt<"bottom">pl',
         //     responsive: !0,
@@ -37,7 +37,7 @@ let ToolDatatables = {
             processing: true,
             responsive: true,
             serverSide: true,
-            ajax: url,
+            ajax: urlTool,
             columnDefs: [
                          {
                              targets: [ 0, 1, 2 ],
@@ -98,10 +98,10 @@ let ToolDatatables = {
 
 jQuery(document).ready(function () {
     if(typeof url === 'undefined'){
-        url = "/datatables/tool/";
-        ToolDatatables.init(url);
+        urlTool = "/datatables/tool/";
+        ToolDatatables.init(urlTool);
     }else{
-        ToolDatatables.init(url);
+        ToolDatatables.init(urlTool);
     }
 
 });

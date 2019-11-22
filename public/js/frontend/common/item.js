@@ -1,5 +1,5 @@
 let ItemDatatables = {
-    init: function (url) {
+    init: function (urlItem) {
         // $("#item_datatable").DataTable({
         //     "dom": '<"top"f>rt<"bottom">pl',
         //     responsive: !0,
@@ -37,7 +37,7 @@ let ItemDatatables = {
             processing: true,
             responsive: true,
             serverSide: true,
-            ajax: url,
+            ajax: urlItem,
             columnDefs: [
                          {
                              targets: [ 0, 1, 2 ],
@@ -100,10 +100,10 @@ let ItemDatatables = {
 
 jQuery(document).ready(function () {
     if(typeof url === 'undefined'){
-        url = "/datatables/item/";
-        ItemDatatables.init(url);
+        urlItem = "/datatables/item/";
+        ItemDatatables.init(urlItem);
     }else{
-        ItemDatatables.init(url);
+        ItemDatatables.init(urlItem);
     }
 
 });
