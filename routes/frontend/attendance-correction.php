@@ -22,6 +22,7 @@ Route::name('frontend.')->group(function () {
                     Route::post('/{attcor}/reject', 'AttendanceCorrectionController@reject')->name('attendance-correction.reject');
 
                     /** API */
+                    Route::get('/{attcor}/api', 'AttendanceCorrectionController@attcorModal')->name('attcor.leaveModal');
                     // Route::get('/{employee}/date/{date}', 'AttendanceCorrectionController@getAttendance')->name('get.attendance');
 
                 });
