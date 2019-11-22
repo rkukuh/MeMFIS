@@ -131,11 +131,12 @@ class AttendanceCorrectionController extends Controller
      */
     public function approval(AttendanceCorrection $attcor, Request $request){
         $type = $attcor->type;
-        $replica = DB::table('employee_attendances')->where('employee_id', $attcor->employee_id)->where('date', $attcor->correction_date)->whereNull('deleted_at')->first();
+        $replica = DB::table('employee_attendances')->where('employee_id', $attcor->employee_id)->whereDate('date', $attcor->correction_date->format('Y-m-d'))->whereNull('deleted_at')->first();
         $updated = DB::table('employee_attendances')->where('uuid', $replica->uuid)->update(['deleted_at' => Carbon::now()]);
         if($type->code == "check-in"){
                 $inserted = DB::table('employee_attendances')->insert([
                         'uuid' => Str::uuid(),
+                        'parent_id' => $replica->id,
                         'employee_id' => $replica->employee_id, 
                         'date' => $replica->date,
                         'in' => $attcor->correction_time, 
@@ -151,6 +152,7 @@ class AttendanceCorrectionController extends Controller
             }else{
                 $inserted = DB::table('employee_attendances')->insert([
                     'uuid' => Str::uuid(),
+                    'parent_id' => $replica->id,
                     'employee_id' => $replica->employee_id, 
                     'date' => $replica->date,
                     'in' => $replica->in, 
@@ -204,4 +206,23 @@ class AttendanceCorrectionController extends Controller
         
         return response()->json($result);
     }
+
+     /**
+     * API for ajax request for attendance correction and informations.
+     *
+     * @param  \App\Models\AttendanceCorrection  $attcor
+     * @return \Illuminate\Http\Response
+     */
+    public function attcorModal(AttendanceCorrection $attcor)
+    {
+        $attcor->status = $attcor->status;
+        $attcor->attendance = $attcor->attendance;
+        if(sizeof($attcor->approvals) > 0){
+            $attcor->conductedBy = $attcor->approvals->first()->conductedBy->first_name." ".$attcor->approvals->first()->conductedBy->creted_at;
+        }else{
+            $attcor->conductedBy = "-";
+        }
+        return response()->json($attcor);
+    }
+
 }
