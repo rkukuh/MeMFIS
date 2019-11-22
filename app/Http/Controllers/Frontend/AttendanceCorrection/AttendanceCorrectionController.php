@@ -85,7 +85,13 @@ class AttendanceCorrectionController extends Controller
      */
     public function show(AttendanceCorrection $attcor)
     {
-        //
+        $types = Type::ofAttendanceCorrection()->get();
+
+        return view('frontend.attendance-correction.show',[
+            'attcor' => $attcor,
+            'types' => $types,
+            'employee' => $attcor->employee
+        ]);
     }
 
     /**
