@@ -7,7 +7,6 @@ use App\Models\Status;
 use App\Models\Approval;
 use App\Models\Employee;
 use App\Models\LeaveType;
-use App\Models\EmployeeAttendance;
 
 use Auth;
 use Illuminate\Http\Request;
@@ -78,7 +77,10 @@ class leaveController extends Controller
      */
     public function show(Leave $leave)
     {
-        //
+        return view('frontend.propose-leave.propose-leave.show',[
+            'leave' => $leave,
+            'employee' => $leave->employee,
+        ]);
     }
 
     /**
@@ -89,7 +91,13 @@ class leaveController extends Controller
      */
     public function edit(Leave $leave)
     {
-        return view('frontend.propose-leave.propose-leave.edit');
+        $types = LeaveType::get();
+
+        return view('frontend.propose-leave.propose-leave.edit',[
+            'leave' => $leave,
+            'types' => $types,
+            'employee' => $leave->employee,
+        ]);
     }
 
     /**
@@ -101,7 +109,9 @@ class leaveController extends Controller
      */
     public function update(leaveUpdate $request, Leave $leave)
     {
-        //
+        $leave->update([$request->all()]);
+
+        return response()->json($leave);
     }
 
     /**
