@@ -337,8 +337,6 @@ class JobCardEngineerController extends Controller
                     return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
                 }
             }
-<<<<<<< HEAD
-=======
         }elseif($last_action == null){
             if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
                 $jobcard->progresses()->save(new Progress([
@@ -389,7 +387,6 @@ class JobCardEngineerController extends Controller
                     return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
                 }
             }
->>>>>>> version_1
         }else{
             $error_notification = array(
                 'message' => "You can't run this jobcard",
