@@ -100,7 +100,7 @@ let ItemDatatables = {
 
 jQuery(document).ready(function () {
     if(typeof url === 'undefined'){
-        url = "/datatables/item/modal/";
+        url = "/datatables/item/";
         ItemDatatables.init(url);
     }else{
         ItemDatatables.init(url);
