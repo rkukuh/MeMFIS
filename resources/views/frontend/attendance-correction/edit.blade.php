@@ -83,7 +83,7 @@
                                                 @slot('id', 'attendance_correction_time_type')
                                                 @slot('name', 'attendance_correction_time_type')
                                                 @slot('options', $types)
-                                                @slot('value', $attcor->type_id)
+                                                @slot('value', $attcor->type->uuid)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
