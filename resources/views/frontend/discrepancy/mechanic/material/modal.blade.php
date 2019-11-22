@@ -24,12 +24,10 @@
                               <label class="form-control-label">
                                   Material
                               </label>
-                              @component('frontend.common.input.select2')
-                                  @slot('text', 'Material')
-                                  @slot('id_error', 'material')
-                                  @slot('id', 'material')
-                                  @slot('name', 'material')
-                              @endcomponent
+                              @component('frontend.common.item.index')
+                                @slot('name_item','material')
+                                @slot('id_item','material')
+                            @endcomponent
                           </div>
                         </div>
                         <div class="form-group m-form__group row item-info">
