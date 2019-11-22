@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\RIR;
 use Carbon\Carbon;
 use App\Models\RIR;
 use App\Models\Item;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -39,6 +40,8 @@ class ItemRIRController extends Controller
     public function store(Request $request,RIR $rir, Item $item)
     {
         $request->merge(['expired_at' => Carbon::parse($request->expired_at)]);
+        $request->merge(['unit_id' =>  Unit::where('uuid',$request->unit_id)->first()->id]);
+
         $exists = $rir->items()->where('item_id',$item->id)->first();
         if($exists){
             return response()->json(['title' => "Danger"]);

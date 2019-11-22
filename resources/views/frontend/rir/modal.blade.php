@@ -5,7 +5,7 @@
             <div class="modal-header">
                 @include('frontend.common.label.create-new')
 
-                <h5 class="modal-title" id="TitleModalInstruction">
+                <h5 class="modal-title" id="TitleModalInstruction" style="margin-top:0px">
                     RIR
 
                     <small id="instruction" class="m--font-focus"></small>
@@ -23,12 +23,9 @@
                                     Item
                                 </label>
 
-                                @component('frontend.common.input.select2')
-                                    @slot('text', 'Item')
-                                    @slot('id', 'material')
-                                    @slot('name', 'material')
-                                    @slot('id_error', 'item')
-                                    @slot('style', 'width:100%')
+                                @component('frontend.common.item.index')
+                                    @slot('name_item','material')
+                                    @slot('id_item','material')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -60,7 +57,7 @@
                                 </label>
 
                                 @component('frontend.common.input.number')
-                                    @slot('id', 'quantity')
+                                    @slot('id', 'quantity_received')
                                     @slot('text', 'Qty Received')
                                     @slot('name', 'quantity')
                                     @slot('id_error', 'quantity')

@@ -99,7 +99,7 @@ let ItemDatatables = {
 };
 
 jQuery(document).ready(function () {
-    if(typeof url === 'undefined'){
+    if(typeof urlItem === 'undefined'){
         urlItem = "/datatables/item/";
         ItemDatatables.init(urlItem);
     }else{
