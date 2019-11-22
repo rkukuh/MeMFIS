@@ -136,6 +136,7 @@
                                                         @slot('type','button')
                                                         @slot('id', 'edit-propose-leave')
                                                         @slot('class', 'edit-propose-leave')
+                                                        @slot('text', 'Update Leave Proposal')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
