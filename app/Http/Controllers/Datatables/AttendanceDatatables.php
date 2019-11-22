@@ -13,12 +13,18 @@ class AttendanceDatatables extends Controller
 
         //testing
         $anam = Employee::where('code','18040060')->first();
-        $attendances = EmployeeAttendance::where('employee_id',$anam->id)->with('attendance_correction','attendance_overtime','employee','statuses','parent')->has('parent')->get();
+        // $attendances = EmployeeAttendance::where('employee_id',$anam->id)->with('attendance_correction','attendance_overtime','employee','statuses','parent')->has('parent')->get();
 
-        // $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses')->get();
+        $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses')->get();
 
         foreach($attendances as $attendance){
             //Time converison from second
+            if($attendance->parent){
+                $attendance->attendance_correction = $attendance->parent->attendance_correction;
+            }else{
+                $attendance->attendance_correction = $attendance->attendance_correction;
+            }
+
             if($attendance->leave){
                 $attendance->status = "ON LEAVE";
                 $attendance->leave = $attendance->leave;

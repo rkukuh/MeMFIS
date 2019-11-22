@@ -115,10 +115,18 @@ let Attendance = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        if(t.overtime){
-                            return '<a data-toggle="modal" data-uuid="'+t.overtime.uuid+'" data-target="#modal_transaction_overtime" href="#">' + "Transaction No" + "</a>"
+                        if(typeof t.parent === 'undefined' || t.parent === null){
+                            if(t.attendance_overtime){
+                                return '<a data-toggle="modal" data-target="#modal_transaction_overtime"  data-uuid="'+t.attendance_overtime.uuid+'" href="#" class="attendace_correction_modal">' + t.attendance_overtime.code + "</a>"
+                            }else{
+                                return "-";
+                            }
                         }else{
-                            return "-";
+                            if(t.parent.attendance_overtime){
+                                return '<a data-toggle="modal" data-target="#modal_transaction_overtime"  data-uuid="'+t.parent.attendance_overtime.uuid+'" href="#" class="attendace_correction_modal">' + t.parent.attendance_overtime.code + "</a>"
+                            }else{
+                                return "-";
+                            }
                         }
                     }
 
@@ -142,8 +150,7 @@ let Attendance = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        console.log(t.parent);
-                        if(t.parent.isEmptyObject){
+                        if(typeof t.parent === 'undefined' || t.parent === null){
                             if(t.attendance_correction){
                                 return '<a data-toggle="modal" data-target="#modal_transaction_correction"  data-uuid="'+t.attendance_correction.uuid+'" href="#" class="attendace_correction_modal">' + t.attendance_correction.code + "</a>"
                             }else{
@@ -240,6 +247,7 @@ $(document).ready(function() {
                 attcor_uuid +
                 "/api",
             success: function(data) {
+                console.log(data);
                 $("#attcor-code").html(data.code);
                 $("#attcor-status").html(data.status.name);
                 $("#attcor-approve").html(data.conductedBy);

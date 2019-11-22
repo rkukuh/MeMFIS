@@ -33,7 +33,7 @@ class AttendanceCorrection extends MemfisModel
      */
     public function attendance()
     {
-        return $this->belongsTo(EmployeeAttendance::class);
+        return $this->belongsTo(EmployeeAttendance::class)->withTrashed();
     }
 
      /**
