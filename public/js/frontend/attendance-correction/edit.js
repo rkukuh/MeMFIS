@@ -22,7 +22,7 @@ $(document).ready(function(){
     })
     
     function getAttendanceDate(){
-        let uuid = $("#uuid_employee").val();
+        let uuid = $("#search-employee-val").val();
         let date = $("#date").val();
         $.ajax({
             url: '/overtime/'+uuid+'/date/'+date,
@@ -47,12 +47,6 @@ $(document).ready(function(){
         let employee_uuid = $('#search-employee-val').val();
         let time = $('#time').val();
         let description = $('#description').val();
-
-        console.log(attendance_correction_time_type);
-        console.log(date);
-        console.log(employee_uuid);
-        console.log(time);
-        console.log(description);
 
         $.ajax({
             headers: {

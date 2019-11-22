@@ -96,8 +96,12 @@ class AttendanceCorrectionController extends Controller
      */
     public function edit(AttendanceCorrection $attcor)
     {
+        $types = Type::ofAttendanceCorrection()->get();
+
         return view('frontend.attendance-correction.edit',[
-            'attcor' => $attcor
+            'attcor' => $attcor,
+            'types' => $types,
+            'employee' => $attcor->employee
         ]);
     }
 
