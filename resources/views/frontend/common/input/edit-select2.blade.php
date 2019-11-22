@@ -4,7 +4,7 @@
     </option>
     @if($options)
         @foreach($options  as $option)
-            <option value="{{ $option->id}}" @if($option->id == $value) selected @endif >
+            <option value="{{ $option->uuid}}" @if($option->uuid == $value) selected @endif >
                 {{ $option->name}}
             </option>
         @endforeach
