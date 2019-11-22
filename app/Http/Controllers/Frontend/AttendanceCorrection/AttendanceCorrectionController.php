@@ -50,6 +50,7 @@ class AttendanceCorrectionController extends Controller
      */
     public function store(AttendanceCorrectionStore $request)
     {
+        dd("brek");
         $employee = Employee::where('uuid', $request->uuid_employee)->first();
         $attendance =  EmployeeAttendance::whereDate('date', $request->date)->where('employee_id', $employee->id)->first();
         $correction_type = Type::ofAttendanceCorrection()->where('code', $request->attendance_correction_time_type)->first();
@@ -95,7 +96,9 @@ class AttendanceCorrectionController extends Controller
      */
     public function edit(AttendanceCorrection $attcor)
     {
-        return view('frontend.attendance-correction.edit');
+        return view('frontend.attendance-correction.edit',[
+            'attcor' => $attcor
+        ]);
     }
 
     /**
@@ -107,7 +110,9 @@ class AttendanceCorrectionController extends Controller
      */
     public function update(AttendanceCorrectionUpdate $request, AttendanceCorrection $attcor)
     {
-        //
+        $attcor->update([$request->all()]);
+
+        return response()->json($attcor);
     }
 
     /**
