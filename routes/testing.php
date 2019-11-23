@@ -26,6 +26,16 @@ Route::name('testing.')->group(function () {
             ]);
         });
 
+        Route::get('/prr', function () {
+            dd(App\Models\PurchaseRequest::find(5)->items->where('pivot.deleted_at',null));
+            // dd(App\Models\Pivots\PurchaseRequestItem::with('item',)->whereHas('item.categories', function ($query) {
+            //     $query->where('categories.0.code','comp');
+            //     // dump($query);
+        // })->get());
+
+
+            // ->where('item.categories.[0].code','comp')->get()
+        });
         Route::get('/grn', function () {
             $grn = App\Models\GoodsReceived::find(1)->items->load('categories')->where('categories.0.code', 'tool')->count();
             dd($grn);
