@@ -46,7 +46,7 @@ class QuotationWorkPackage extends Pivot
     /**
      * M-M Polymorphic: A promo can be applied to many entities.
      *
-     * This function will get all the promos that are applied to a given PO.
+     * This function will get all the promos that are applied to a given Quotation WorkPackage.
      * See: Promo's quotation_workpackage() method for the inverse
      *
      * @return mixed
