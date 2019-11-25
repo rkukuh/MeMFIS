@@ -179,6 +179,7 @@ Route::group([
 
 
         Route::view('/quotation-workshop/edit/item/create', 'frontend.quotation-workshop.item.create')->name('quotation-workshop.item.create');
+        Route::view('/quotation-workshop/edit/item/show', 'frontend.quotation-workshop.item.show')->name('quotation-workshop.item.show');
         
     });
 

@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.create-new')
+                                @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
                                     Quotation
@@ -53,51 +53,44 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Part Number @include('frontend.common.label.required')
+                                                Part Number   
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Part Number')
-                                                @slot('id', 'part_number')
-                                                @slot('name', 'part_number')
-                                                @slot('id_error', 'part_number')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'Generate')
+                                                @slot('id', 'Generate')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Serial Number @include('frontend.common.label.required')
+                                                Serial Number   
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'Serial Number')
-                                                @slot('id', 'serial_number')
-                                                @slot('name', 'serial_number')
-                                                @slot('id_error', 'serial_number')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'Generate')
+                                                @slot('id', 'Generate')
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Complaint @include('frontend.common.label.required')
+                                                Complaint   
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'Complaint')
-                                                @slot('id', 'complaint')
-                                                @slot('name', 'complaint')
-                                                @slot('id_error', 'complaint')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'Generate')
+                                                @slot('id', 'Generate')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Job Request @include('frontend.common.label.required')
+                                                Job Request   
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'job_request')
-                                                @slot('name', 'job_request')
-                                                @slot('text', 'Job Request')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'Generate')
+                                                @slot('id', 'Generate')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -115,9 +108,9 @@
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
-                                                @include('frontend.quotation-workshop.item.summary.create')
-                                                @include('frontend.quotation-workshop.item.evaluation-cost.create')
-                                                @include('frontend.quotation-workshop.item.full-packages-cost.create')
+                                                @include('frontend.quotation-workshop.item.summary.show')
+                                                @include('frontend.quotation-workshop.item.evaluation-cost.show')
+                                                @include('frontend.quotation-workshop.item.full-packages-cost.show')
                                             </div>
                                         </div>
                                     </div>
@@ -132,20 +125,6 @@
 @endsection
 
 @push('footer-scripts')
-
-    
-    {{-- <script type="text/javascript"> 
-        let dataSet = {!! $quotation->scheduled_payment_amount !!}
-    </script> --}}
-
-    <script src="{{ asset('js/frontend/quotation-workshop/repeater.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/part-number.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/job-request.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/discount-type.js') }}"></script>
-
 
     <script src="{{ asset('js/frontend/quotation-workshop/summary.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/scheduled-payment.js') }}"></script>
