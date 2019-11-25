@@ -176,6 +176,9 @@ Route::group([
         Route::view('/quotation-workshop/create', 'frontend.quotation-workshop.create')->name('quotation-workshop.create');
         Route::view('/quotation-workshop/edit', 'frontend.quotation-workshop.edit')->name('quotation-workshop.edit');
         Route::view('/quotation-workshop/show', 'frontend.quotation-workshop.show')->name('quotation-workshop.show');
+
+
+        Route::view('/quotation-workshop/edit/item/create', 'frontend.quotation-workshop.item.create')->name('quotation-workshop.item.create');
         
     });
 
