@@ -572,8 +572,8 @@ class QuotationController extends Controller
     public function discount( Request $request, Quotation $quotation, WorkPackage $workpackage)
     {
         $promo_type = Promo::where('uuid',$request->discount_type)->first();
-        $quotatinworkpackage = QuotationWorkPackage::where('quotation_id', $quotation->id)->where('workpackage_id', $workpackage->id)->first();
-        $subtotal_before_discount = $quotatinworkpackage->manhour_rate_amount * $quotatinworkpackage->manhour_total;
+        $quotationworkpackage = QuotationWorkPackage::where('quotation_id', $quotation->id)->where('workpackage_id', $workpackage->id)->first();
+        $subtotal_before_discount = $quotationworkpackage->manhour_rate_amount * $quotationworkpackage->manhour_total;
 
         /** Discount */
         if($promo_type){
@@ -585,18 +585,18 @@ class QuotationController extends Controller
                 $discount_percentage = $request->discount_value / $subtotal_before_discount * 100;
             }
 
-            if(sizeof($quotatinworkpackage->promos) > 0){
+            if(sizeof($quotationworkpackage->promos) > 0){
                 $result = DB::table('promoables')
                         ->where('promoable_type', 'App\Models\Pivots\QuotationWorkPackage')
-                        ->where('promoable_id', $quotatinworkpackage->promos->first()->pivot->promoable_id)
-                        ->where('promo_id', $quotatinworkpackage->promos->first()->pivot->promo_id)
+                        ->where('promoable_id', $quotationworkpackage->promos->first()->pivot->promoable_id)
+                        ->where('promo_id', $quotationworkpackage->promos->first()->pivot->promo_id)
                         ->update([
                             'value' => $discount_percentage,
                             'amount' => $discount_amount,
                             'promo_id' => $promo_type->id
                         ]);
             }else{
-                $quotatinworkpackage->promos()->save(Promo::find($promo_type->id), [
+                $quotationworkpackage->promos()->save(Promo::find($promo_type->id), [
                     'value'     => $discount_percentage,
                     'amount'    => $discount_amount
                 ]);
@@ -630,8 +630,13 @@ class QuotationController extends Controller
         foreach($workpackages as $key => $workPackage){
             $workPackage->jobrequest_description = $workPackage->pivot->description;
             $workPackage->jobrequest_manhour_rate_amount = $workPackage->pivot->manhour_rate_amount;
-            $workPackage->jobrequest_discount_value = $workPackage->pivot->discount_value;
-            $workPackage->jobrequest_discount_type = $workPackage->pivot->discount_type;
+
+            /** get discount from promoable */
+            $quotationworkpackage = QuotationWorkPackage::where('quotation_id', $quotation->id)->where('workpackage_id', $workPackage->id)->first();
+            $workPackage->jobrequest_discount_type =  $quotationworkpackage->promos->first()->code;
+            $workPackage->jobrequest_discount_value =  $quotationworkpackage->promos->first()->pivot->amount;
+            $workPackage->jobrequest_discount_percentage =  $quotationworkpackage->promos->first()->pivot->value * 100;
+
             $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
@@ -658,13 +663,13 @@ class QuotationController extends Controller
             }
 
             if($quotation_workpackage){
-                switch($quotation_workpackage->discount_type){
-                    case "amount":
-                        $disc = $quotation_workpackage->discount_value;
+                switch($quotationworkpackage->promos->first()->code){
+                    case "discount-amount":
+                        $disc = $quotationworkpackage->promos->first()->pivot->amount;
                         array_push($discount, $disc);
                         break;
-                    case "percentage":
-                        $disc =  ($manhourPrice[$key] + $totalFacility[$key] + $totalMatTool[$key]) * ($quotation_workpackage->discount_value / 100);
+                    case "discount-percent":
+                        $disc =  $quotationworkpackage->promos->first()->pivot->amount;
                         array_push($discount, $disc);
                         break;
                     default:
@@ -698,11 +703,11 @@ class QuotationController extends Controller
 
             if(isset($data_htcrr["discount_value"])){
                 switch($data_htcrr["discount_type"]){
-                    case "amount":
+                    case "discount-amount":
                         $disc = $data_htcrr["discount_value"];
                         array_push($discount, $disc);
                         break;
-                    case "percentage":
+                    case "discount-percent":
                         $disc =  ($manhourPrice[(sizeof($manhourPrice) - 1)] + $totalFacility[(sizeof($totalFacility) - 1)] + $totalMatTool[(sizeof($totalMatTool) - 1)]) * ($data_htcrr["discount_value"] / 100);
                         array_push($discount, $disc);
                         break;
