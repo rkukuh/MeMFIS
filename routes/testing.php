@@ -26,8 +26,21 @@ Route::name('testing.')->group(function () {
             ]);
         });
 
+        Route::get('/prr2', function () {
+            dd(App\Models\TaskCard::find(730)->tools);
+        });
         Route::get('/prr', function () {
-            dd(App\Models\PurchaseRequest::find(5)->items->where('pivot.deleted_at',null));
+            // dd(App\Models\PurchaseRequest::find(3)->items->where('pivot.deleted_at',null));
+            dd(App\Models\Pivots\PurchaseRequestItem::with('item','item.categories')->where('purchase_request_id',3)->whereHas('item', function ($query) {
+                $query->whereHas('categories', function ($query2) {
+                    // dump($query2->get());
+                    $query2->whereIn('code', ['raw', 'cons', 'comp']);
+                    // dump($query2);
+                    // $query2->where('categories.0.code','comp');
+                });
+                // where('code','MT-DUM-1114616723');
+                // ->where('item.code','MT-DUM-1114616723')->get()
+            })->get());
             // dd(App\Models\Pivots\PurchaseRequestItem::with('item',)->whereHas('item.categories', function ($query) {
             //     $query->where('categories.0.code','comp');
             //     // dump($query);
