@@ -152,7 +152,7 @@ class PurchaseOrderController extends Controller
 
         $purchaseOrder->update($request->all());
 
-        //todo ppn
+        /** Taxes / PPN */
         $tax = Type::ofTax()->where('code', 'exclude')->first();
         $subtotal_after_discount = $request->total_before_tax;
         $tax_amount = $tax_percentage = 0;
@@ -185,6 +185,7 @@ class PurchaseOrderController extends Controller
                 'amount' => $tax_amount
             ]));
         }
+        /** Taxes / PPN */
 
         return response()->json($purchaseOrder);
     }
