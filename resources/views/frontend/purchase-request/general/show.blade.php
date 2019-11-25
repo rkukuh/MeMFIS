@@ -164,7 +164,7 @@
                                                             @include('frontend.common.label.datalist')
 
                                                             <h3 class="m-portlet__head-text">
-                                                                Item
+                                                                Tool
                                                             </h3>
                                                         </div>
                                                     </div>
