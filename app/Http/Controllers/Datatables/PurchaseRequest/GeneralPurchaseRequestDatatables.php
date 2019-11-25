@@ -319,7 +319,11 @@ class GeneralPurchaseRequestDatatables extends Controller
      */
     public function pr_material(PurchaseRequest $purchaseRequest)
     {
-        $items = PurchaseRequestItem::with('item','item.unit')->where('purchase_request_id',$purchaseRequest->id)->get();
+        $items = PurchaseRequestItem::with('item','item.unit', 'item.categories')->where('purchase_request_id',$purchaseRequest->id)->whereHas('item', function ($query) {
+            $query->whereHas('categories', function ($query2) {
+                $query2->whereIn('code', ['raw', 'cons', 'comp']);
+            });
+        })->get();
 
         foreach($items as $item){
             $item->unit_name .= Unit::find($item->unit_id)->name;
@@ -427,7 +431,11 @@ class GeneralPurchaseRequestDatatables extends Controller
      */
     public function pr_tool(PurchaseRequest $purchaseRequest)
     {
-        $items = PurchaseRequestItem::with('item','item.unit')->where('purchase_request_id',$purchaseRequest->id)->get();
+        $items = PurchaseRequestItem::with('item','item.unit', 'item.categories')->where('purchase_request_id',$purchaseRequest->id)->whereHas('item', function ($query) {
+            $query->whereHas('categories', function ($query2) {
+                $query2->where('code','tool');
+            });
+        })->get();
 
         foreach($items as $item){
             $item->unit_name .= Unit::find($item->unit_id)->name;

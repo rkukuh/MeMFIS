@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_general" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modal_general_tool" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -11,17 +11,17 @@
             <div class="modal-body">
 
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="CustomerForm">
-                    <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
+                    <input type="hidden" class="form-control form-control-danger m-input" name="uuid_tool" id="uuid_tool">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
-                                    Item
+                                    Tool
                                 </label>
 
-                                @component('frontend.common.item.index')
-                                    @slot('name_item','material')
-                                    @slot('id_item','material')
+                                @component('frontend.common.tool.index')
+                                    @slot('name_item','tool')
+                                    @slot('id_item','tool')
                                 @endcomponent
                             </div>
                         </div>
@@ -32,9 +32,9 @@
                                 </label>
 
                                 @component('frontend.common.input.number')
-                                    @slot('id', 'qty')
+                                    @slot('id', 'qty_tool')
                                     @slot('text', 'Request Qty')
-                                    @slot('name', 'qty')
+                                    @slot('name', 'qty_tool')
                                     @slot('id_error', 'quantity')
                                 @endcomponent
                             </div>
@@ -44,10 +44,10 @@
                                 </label>
 
                                 @component('frontend.common.input.select2')
-                                    @slot('id', 'unit_material')
+                                    @slot('id', 'unit_tool')
                                     @slot('text', 'Unit')
-                                    @slot('name', 'unit_material')
-                                    @slot('id_error', 'unit_material')
+                                    @slot('name', 'unit_tool')
+                                    @slot('id_error', 'unit_tool')
                                     @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
@@ -59,19 +59,19 @@
                                 </label>
 
                                 @component('frontend.common.input.textarea')
-                                    @slot('id', 'remark')
+                                    @slot('id', 'remark_tool')
                                     @slot('text', 'Remark')
-                                    @slot('name', 'remark')
+                                    @slot('name', 'remark_tool')
                                 @endcomponent
                             </div>
 
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer modal-footer-tool">
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-item')
+                                    @slot('class', 'add-tool')
                                     @slot('type', 'button')
                                 @endcomponent
 
@@ -89,7 +89,7 @@
 </div>
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
     {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material-uom.js') }}"></script> --}}
 
     {{-- <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
