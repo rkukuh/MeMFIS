@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Frontend\Quotation;
 
+use DB;
 use Auth;
 use App\User;
 use App\Models\Tax;
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\HtCrr;
+use App\Models\Promo;
 use App\Models\Status;
 use App\Models\Project;
 use App\Models\JobCard;
@@ -569,8 +571,39 @@ class QuotationController extends Controller
      */
     public function discount( Request $request, Quotation $quotation, WorkPackage $workpackage)
     {
-        $quotation->workpackages()->updateExistingPivot($workpackage, ['discount_type'=>$request->discount_type,'discount_value'=>$request->discount_value]);
+        $promo_type = Promo::where('uuid',$request->discount_type)->first();
+        $quotatinworkpackage = QuotationWorkPackage::where('quotation_id', $quotation->id)->where('workpackage_id', $workpackage->id)->first();
+        $subtotal_before_discount = $quotatinworkpackage->manhour_rate_amount * $quotatinworkpackage->manhour_total;
 
+        /** Discount */
+        if($promo_type){
+            if($promo_type->code == "discount-percent"){
+                $discount_percentage = $request->discount_value;
+                $discount_amount = $subtotal_before_discount * ($discount_percentage / 100);
+            }elseif($promo_type->code == "discount-amount"){
+                $discount_amount = $request->discount_value;
+                $discount_percentage = $request->discount_value / $subtotal_before_discount * 100;
+            }
+
+            if(sizeof($quotatinworkpackage->promos) > 0){
+                $result = DB::table('promoables')
+                        ->where('promoable_type', 'App\Models\Pivots\QuotationWorkPackage')
+                        ->where('promoable_id', $quotatinworkpackage->promos->first()->pivot->promoable_id)
+                        ->where('promo_id', $quotatinworkpackage->promos->first()->pivot->promo_id)
+                        ->update([
+                            'value' => $discount_percentage,
+                            'amount' => $discount_amount,
+                            'promo_id' => $promo_type->id
+                        ]);
+            }else{
+                $quotatinworkpackage->promos()->save(Promo::find($promo_type->id), [
+                    'value'     => $discount_percentage,
+                    'amount'    => $discount_amount
+                ]);
+            }
+        }
+        /** Discount */
+        
         return response()->json($quotation);
 
     }
