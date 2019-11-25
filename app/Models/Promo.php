@@ -45,11 +45,24 @@ class Promo extends MemfisModel
      * M-M Polymorphic: A promo can be applied to many entities.
      *
      * This function will get all the POs that are applied by a given promo.
-     * See: PurchaseOrder's promos() method for the inverse
+     * See: Quotation's promos() method for the inverse
      *
      * @return mixed
      */
-    public function quotation_workpackage()
+    public function quotations()
+    {
+        return $this->morphedByMany(Quotation::class, 'promoable');
+    }
+
+    /**
+     * M-M Polymorphic: A promo can be applied to many entities.
+     *
+     * This function will get all the POs that are applied by a given promo.
+     * See: Quotation WorkPackage's promos() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotation_workpackages()
     {
         return $this->morphedByMany(QuotationWorkPackage::class, 'promoable');
     }

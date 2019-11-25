@@ -157,6 +157,24 @@ class Quotation extends MemfisModel
     }
 
     /**
+     * M-M Polymorphic: A promo can be applied to many entities.
+     *
+     * This function will get all the promos that are applied to a given quotation.
+     * See: Promo's quotations() method for the inverse
+     *
+     * @return mixed
+     */
+    public function promos()
+    {
+        return $this->morphToMany(Promo::class, 'promoable')
+                    ->withPivot(
+                        'value', 
+                        'amount'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * Polymorphic: An entity can have zero or many quotations.
      *
      * This function will get all of the owning quotationable models.
