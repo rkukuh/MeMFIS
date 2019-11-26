@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Frontend\Employee;
 use Config;
-use App\Models\EmployeeAttendance;
-use App\Http\Controllers\Controller;
-use App\Models\Employee;
-use App\Models\WorkshiftSchedule;
-use App\Models\Status;
-use App\Models\AttendanceFile;
-use App\Models\EmployeeWorkshift;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Frontend\EmployeeAttendanceStore;
-use Illuminate\Support\Carbon;
+use App\Http\Controllers\Controller;
+
+use App\Models\Status;
+use App\Models\Employee;
+use App\Models\AttendanceFile;
+use App\Models\WorkshiftSchedule;
+use App\Models\EmployeeWorkshift;
+use App\Models\EmployeeAttendance;
 
 class EmployeeAttendanceController extends Controller
 {
@@ -396,23 +397,24 @@ class EmployeeAttendanceController extends Controller
                 for($day = 1 ; $day <= 31 ; $day++){
                     $date = Carbon::create(2019, 11, $day, 0, 0, 0, 'Asia/Jakarta');
     
-                    $shift = $shifts->where('days', $days[$date->dayOfWeek])->first();
-                    if($shift){
-                        // dd("ada");
-                        $status_id = Status::ofAttendance()->where('code','absence')->first()->id;
-                    }else{
-                        $status_id = null;
-                        // dd('tidak ada di workshift');
-                    }
-
-                    EmployeeAttendance::create([
+                    $attendance = EmployeeAttendance::create([
                         'employee_id' => $employee->id,
                         'date' => $date,
                         'in' => $in,
-                        'out' => $out,
-                        'statuses_id' => $status_id
+                        'out' => $out
                     ]);
     
+                    $shift = $shifts->where('days', $days[$date->dayOfWeek])->first();
+                    if($shift){
+                        // dd("ada");
+                        $status = Status::ofAttendance()->where('code','absence')->first();
+                        $attendance->statuses()->save($status);
+                    }else{
+                        $status = null;
+                        // dd('tidak ada di workshift');
+                    }
+
+
                 }
             }
 

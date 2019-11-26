@@ -76,16 +76,16 @@ class EmployeeAttendance extends MemfisModel
     }
 
     /**
-     * One-to-One: An Employee have one Status Attendance.
+     * Polymorphic: An entity can have zero or many statuses.
      *
-     * This function will retrieve Status Attendance of a given Employee.
-     * See: Status employee() method for the inverse
+     * This function will get all of the jobcard's statuses.
+     * See: Status's statusable() method for the inverse
      *
      * @return mixed
      */
     public function statuses()
     {
-        return $this->belongsTo(Status::class);
+        return $this->morphMany(Status::class, 'statusables');
     }
 
     /**

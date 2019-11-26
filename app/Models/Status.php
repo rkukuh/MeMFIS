@@ -12,6 +12,7 @@ class Status extends MemfisModel
         'name',
         'of',
         'description',
+
     ];
 
     /******************************************* SCOPE *******************************************/
@@ -162,11 +163,25 @@ class Status extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * M-M Polymorphic: A promo can be applied to many entities.
+     *
+     * This function will get all the Employee Attendance that are applied by a given status.
+     * See: Employee Attendance's statuses() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employeeAttendance()
+    {
+        return $this->morphedByMany(EmployeeAttendance::class, 'statusable');
+    }
+
+    /**
      * Polymorphic: An entity can have zero or many statuses.
      *
      * This function will get all of the owning statusable models.
      * See:
      * - JobCard's statuses() method for the inverse
+     * - EmployeeAttendance's statuses() method for the inverse
      *
      * @return mixed
      */
