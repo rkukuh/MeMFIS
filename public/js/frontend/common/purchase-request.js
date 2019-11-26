@@ -10,8 +10,7 @@ let PurchaseRequest = {
                             url:
                             "/datatables/purchase-request/item/" +
                             uuid +
-                            "/general",
-
+                            "/general/material",
                             map: function (raw) {
                                 let dataSet = raw;
 
