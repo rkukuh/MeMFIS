@@ -32,7 +32,7 @@ class WorkshiftsTableSeeder extends Seeder
         array_push($days,$day);
 
         $day = [
-            'day' => 'tueday',
+            'day' => 'tuesday',
             'in' => Carbon::createFromTimeString('06:30:00', 'Asia/Jakarta'),
             'break_in' => Carbon::createFromTimeString('12:00:00', 'Asia/Jakarta'),
             'break_out' => Carbon::createFromTimeString('13:00:00', 'Asia/Jakarta'),
