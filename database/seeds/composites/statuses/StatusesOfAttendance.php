@@ -14,37 +14,43 @@ class StatusesOfAttendance extends Seeder
     {
         Status::create([
             'code' => 'absence',
-            'name' => 'ABSENCE',
+            'name' => 'Absence',
             'of'   => 'attendance',
         ]);
 
         Status::create([
             'code' => 'late',
-            'name' => 'LATE',
+            'name' => 'Late',
             'of'   => 'attendance',
         ]);
 
         Status::create([
             'code' => 'very-late',
-            'name' => 'VERY LATE',
+            'name' => 'Veru Late',
             'of'   => 'attendance',
         ]);
 
         Status::create([
             'code' => 'earlier-leave',
-            'name' => 'EARLIER LEAVE',
+            'name' => 'Earlier Leave',
             'of'   => 'attendance',
         ]);
 
         Status::create([
             'code' => 'normal',
-            'name' => 'NORMAL',
+            'name' => 'Normal',
+            'of'   => 'attendance',
+        ]);
+
+        Status::create([
+            'code' => 'on-leave',
+            'name' => 'On Leave',
             'of'   => 'attendance',
         ]);
 
         Status::create([
             'code' => 'undiscipline',
-            'name' => 'UNDISCIPLINE',
+            'name' => 'Undiscipline',
             'of'   => 'attendance',
         ]);
 
