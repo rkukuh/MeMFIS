@@ -367,17 +367,40 @@ class EmployeeAttendanceController extends Controller
      * Store a newly created employee attendances in storage.
      */
     public function createAttendances(){
-        // get all employees
+        // code yang seharusnya dijalankan sehari-hari
+        // $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
+        // // create attendance with null;
+        // $in = '00:00:00';
+        // $out = '00:00:00';
+        // foreach($employees as $employee){
+        //         EmployeeAttendance::create([
+        //         'employee_id' => $employee->id,
+        //         'date' => Carbon::today(),
+        //         'in' => $in,
+        //         'out' => $out
+        //     ]);
+        // }
+
+        // code yang dijalankan untuk trial
         $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
         // create attendance with null;
         $in = '00:00:00';
         $out = '00:00:00';
+        
         foreach($employees as $employee){
-            $employee->employee_attendance()->create([
-                'date' => Carbon::today(),
-                'in' => $in,
-                'out' => $out
-            ]);
+
+            for($day = 1 ; $day <= 31 ; $day++){
+
+                EmployeeAttendance::create([
+                    'employee_id' => $employee->id,
+                    'date' => Carbon::create(2019, 11, $day, 0, 0, 0, 'Asia/Jakarta'),
+                    'in' => $in,
+                    'out' => $out,
+                    'statuses_id' => Status::ofAttendance()->where('code','absence')->first()->id
+                ]);
+
+            }
+
         }
     }
 }
