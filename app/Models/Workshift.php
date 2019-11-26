@@ -21,7 +21,7 @@ class Workshift extends MemfisModel
      *
      * @return mixed
      */
-    public function employee()
+    public function employees()
     {
         return $this->belongsToMany(Employee::class);
     }

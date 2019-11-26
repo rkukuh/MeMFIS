@@ -564,7 +564,7 @@ class Employee extends MemfisModel implements HasMedia
      *
      * @return mixed
      */
-    public function workshift()
+    public function workshifts()
     {
         return $this->belongsToMany(Workshift::class);
     }
