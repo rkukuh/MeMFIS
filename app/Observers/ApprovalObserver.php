@@ -27,8 +27,8 @@ class ApprovalObserver
                 $comp = GoodsReceived::find($approval->approvable_id)->items->load('categories')->where('categories.0.code', 'comp')->count();
                 $cons = GoodsReceived::find($approval->approvable_id)->items->load('categories')->where('categories.0.code', 'cons')->count();
                 $raw = GoodsReceived::find($approval->approvable_id)->items->load('categories')->where('categories.0.code', 'raw')->count();
-                $journal = new TrxJournal();
-                $journal->insertFromGRN($comp,$cons,$raw,$approval->approvable_id);
+                // $journal = new TrxJournal();
+                // $journal->insertFromGRN($comp,$cons,$raw,$approval->approvable_id);
                 $inv_in = $approval->approvable->inventoryIn()->create([
                     'storage_id' => $approval->approvable->storage_id,
                     'number' => DocumentNumber::generate('INV-IN-', InventoryIn::withTrashed()->count()+1),
@@ -36,12 +36,11 @@ class ApprovalObserver
                 ]);
 
                 foreach($approval->approvable->items as $item){
-                    $qty_uom = $item->units->where('uom.unit_id',$item->pivot->unit_id)->first()->uom->quantity;
                     $inv_in->items()->attach($item->pivot->item_id, [
                         'unit_id' => $item->pivot->unit_id,
                         'serial_number' => $item->pivot->serial_number,
                         'quantity' => $item->pivot->quantity,
-                        'quantity_in_primary_unit' => $qty_uom*$item->pivot->quantity,
+                        'quantity_in_primary_unit' => $item->pivot->quantity_unit,
                         'purchased_price' => $item->pivot->price,
                         'total' => 1*$item->pivot->price,
                         'description' => $item->pivot->note,
@@ -52,7 +51,7 @@ class ApprovalObserver
                         'item_id' => $item->pivot->item_id,
                         'storage_id' =>  $approval->approvable->storage_id,
                         'fefoin_at' =>  $approval->approvable->received_at,
-                        'quantity' => $qty_uom*$item->pivot->quantity,
+                        'quantity' => $item->pivot->quantity_unit,
                         'serial_number' => $item->pivot->serial_number,
                         'grn_id' => $approval->approvable->id,
                         'price' => $item->pivot->price,
