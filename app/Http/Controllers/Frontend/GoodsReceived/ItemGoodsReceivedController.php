@@ -43,7 +43,6 @@ class ItemGoodsReceivedController extends Controller
      */
     public function store(GoodsReceivedItemStore $request,GoodsReceived $goodsReceived, Item $item)
     {
-        // dd($item);
         $request->merge(['expired_at' => Carbon::parse($request->expired_at)]);
         $request->merge(['unit_id' =>  Unit::where('uuid',$request->unit_id)->first()->id]);
 
@@ -62,12 +61,11 @@ class ItemGoodsReceivedController extends Controller
                     $quantity_unit = $request->quantity;
                 }
 
-                // $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
                 $goodsReceived->items()->attach([$item->id => [
                     'quantity'=> $request->quantity,
                     'unit_id' => $request->unit_id,
                     'quantity_unit' => $quantity_unit,
-                    // 'price' => $price,
+                    'price' => ($request->quantity/$quantity_unit)*$price,,
                     'note' => $request->note,
                     'expired_at' => $request->expired_at,
                     ]
@@ -79,9 +77,9 @@ class ItemGoodsReceivedController extends Controller
                     $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
                     $goodsReceived->items()->attach([$item->id => [
                         'serial_number'=> $serial_number,
-                        'quantity'=> 2,
+                        'quantity'=> 1,
                         'unit_id' => $item->unit_id,
-                        'quantity_unit' => 2,
+                        'quantity_unit' => 1,
                         'price' => $price,
                         'note' => $request->note,
                         'expired_at' => $request->expired_at,
