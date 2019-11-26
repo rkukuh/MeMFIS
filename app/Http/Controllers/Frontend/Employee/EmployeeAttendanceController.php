@@ -367,6 +367,7 @@ class EmployeeAttendanceController extends Controller
      * Store a newly created employee attendances in storage.
      */
     public function createAttendances(){
+        $days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
         // code yang seharusnya dijalankan sehari-hari
         // $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
         // // create attendance with null;
@@ -388,17 +389,31 @@ class EmployeeAttendanceController extends Controller
         $out = '00:00:00';
         
         foreach($employees as $employee){
+            if(sizeof($employee->workshifts) > 0){
+                $workshift = $employee->workshifts->first();
+                $shifts = $workshift->workshift_schedules;
+                
+                for($day = 1 ; $day <= 31 ; $day++){
+                    $date = Carbon::create(2019, 11, $day, 0, 0, 0, 'Asia/Jakarta');
+    
+                    $shift = $shifts->where('days', $days[$date->dayOfWeek])->first();
+                    if($shift){
+                        // dd("ada");
+                        $status_id = Status::ofAttendance()->where('code','absence')->first()->id;
+                    }else{
+                        $status_id = null;
+                        // dd('tidak ada di workshift');
+                    }
 
-            for($day = 1 ; $day <= 31 ; $day++){
-
-                EmployeeAttendance::create([
-                    'employee_id' => $employee->id,
-                    'date' => Carbon::create(2019, 11, $day, 0, 0, 0, 'Asia/Jakarta'),
-                    'in' => $in,
-                    'out' => $out,
-                    'statuses_id' => Status::ofAttendance()->where('code','absence')->first()->id
-                ]);
-
+                    EmployeeAttendance::create([
+                        'employee_id' => $employee->id,
+                        'date' => $date,
+                        'in' => $in,
+                        'out' => $out,
+                        'statuses_id' => $status_id
+                    ]);
+    
+                }
             }
 
         }
