@@ -65,7 +65,6 @@ class ItemGoodsReceivedController extends Controller
                 // $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
                 $goodsReceived->items()->attach([$item->id => [
                     'quantity'=> $request->quantity,
-                    'already_received_amount'=> 2,// TODO ask whats is it?
                     'unit_id' => $request->unit_id,
                     'quantity_unit' => $quantity_unit,
                     // 'price' => $price,
@@ -80,10 +79,9 @@ class ItemGoodsReceivedController extends Controller
                     $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
                     $goodsReceived->items()->attach([$item->id => [
                         'serial_number'=> $serial_number,
-                        'quantity'=> 1,
-                        'already_received_amount'=> 2,// TODO ask whats is it?
+                        'quantity'=> 2,
                         'unit_id' => $item->unit_id,
-                        'quantity_unit' => 1,
+                        'quantity_unit' => 2,
                         'price' => $price,
                         'note' => $request->note,
                         'expired_at' => $request->expired_at,
@@ -126,10 +124,21 @@ class ItemGoodsReceivedController extends Controller
      */
     public function update(GoodsReceivedItemUpdate $request, GoodsReceived $goodsReceived, Item $item)
     {
+        $item = Item::find($item->id);
+        if($request->unit_id <> $item->unit_id){
+            $quantity = $request->quantity;
+            $qty_uom = $item->units->where('uom.unit_id',$request->unit_id)->first()->uom->quantity;
+            $quantity_unit = $qty_uom*$quantity;
+        }
+        else{
+            $quantity_unit = $request->quantity;
+        }
+
         $request->merge(['expired_at' => Carbon::parse($request->exp_date)]);
         $goodsReceived->items()->updateExistingPivot($item->id,
         ['unit_id'=>$request->unit_id,
         'quantity'=> $request->quantity,
+        'quantity_unit'=> $quantity_unit,
         'note' => $request->note,
         'expired_at' => $request->expired_at]);
 
