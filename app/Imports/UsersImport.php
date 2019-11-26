@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\User;
+use App\Models\Workshift;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -61,5 +62,11 @@ class UsersImport implements ToModel, WithHeadingRow
             'joined_date' => Carbon::now()->toDateString(),
             'updated_at' => null
         ]);
+
+        $employee = $user->employee;
+
+        $workshift = Workshift::first(); 
+
+        $employee->workshift()->attach($workshift->id);
     }
 }
