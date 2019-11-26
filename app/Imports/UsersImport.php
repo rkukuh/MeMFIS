@@ -67,6 +67,9 @@ class UsersImport implements ToModel, WithHeadingRow
 
         $workshift = Workshift::first(); 
 
-        $employee->workshift()->attach($workshift->id);
+        $employee->workshift()->attach($workshift->id, [
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ]);
     }
 }
