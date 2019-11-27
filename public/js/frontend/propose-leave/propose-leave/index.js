@@ -6,14 +6,14 @@ let ProposeLeave = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/price-list-item',
+                        url: '/datatables/leave/propose-leave',
                         map: function (raw) {
                             let dataSet = raw;
 
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
-                            
+
                             console.log(dataSet);
                             return dataSet;
                         }
@@ -51,7 +51,7 @@ let ProposeLeave = {
                     sortable: 'asc',
                     filterable: !1,
                     textAlign: 'center',
-                    template: function (row, index, datatable) {   
+                    template: function (row, index, datatable) {
                         return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
                     }
                 },
@@ -82,7 +82,7 @@ let ProposeLeave = {
                     sortable: 'asc',
                     filterable: !1,
                 },
-               
+
                 {
                     field: 'leave_type.name',
                     title: 'Leave Type',
@@ -145,7 +145,7 @@ let ProposeLeave = {
                     }
                 }
             ]
-        });     
+        });
 
     }
 };
