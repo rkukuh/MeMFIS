@@ -1,4 +1,5 @@
 <?php
+        // use DataTables;
 
 Route::name('testing.')->group(function () {
 
@@ -19,10 +20,38 @@ Route::name('testing.')->group(function () {
 
             $url = $request->getUri();
             // return (string) $request->getUri();
-            
+
             return view('frontend.testing.view-file',[
                 'url' => $url
             ]);
+        });
+
+        Route::get('/prr2', function () {
+            dd(App\Models\TaskCard::find(730)->tools);
+        });
+        Route::get('/prr', function () {
+            // dd(App\Models\PurchaseRequest::find(3)->items->where('pivot.deleted_at',null));
+            dd(App\Models\Pivots\PurchaseRequestItem::with('item','item.categories')->where('purchase_request_id',3)->whereHas('item', function ($query) {
+                $query->whereHas('categories', function ($query2) {
+                    // dump($query2->get());
+                    $query2->whereIn('code', ['raw', 'cons', 'comp']);
+                    // dump($query2);
+                    // $query2->where('categories.0.code','comp');
+                });
+                // where('code','MT-DUM-1114616723');
+                // ->where('item.code','MT-DUM-1114616723')->get()
+            })->get());
+            // dd(App\Models\Pivots\PurchaseRequestItem::with('item',)->whereHas('item.categories', function ($query) {
+            //     $query->where('categories.0.code','comp');
+            //     // dump($query);
+        // })->get());
+
+
+            // ->where('item.categories.[0].code','comp')->get()
+        });
+        Route::get('/grn', function () {
+            $grn = App\Models\GoodsReceived::find(1)->items->load('categories')->where('categories.0.code', 'tool')->count();
+            dd($grn);
         });
         Route::get('/po', function () {
             // $po = App\Models\PurchaseOrder::find(16);
@@ -45,6 +74,39 @@ Route::name('testing.')->group(function () {
             //         ]);
         });
 
+        // Route::get('/serverSide', [
+        //     // 'as'   => 'serverSide',
+        //     'uses' => function () {
+        //         ini_set('memory_limit', '-1');
+        //         $users = App\Models\Item::all();
+        //         return DataTables::of($users)->make();
+        //     }
+        // ]);
+
+        // Route::get('/serverSide', [
+        //     'as'   => 'serverSide',
+        //     'uses' => function () {
+        //         ini_set('memory_limit', '-1');
+
+        //         $users = App\Models\Item::with('unit')->get();
+        //         // ->whereHas('categories', function ($query) {
+        //         //     $query->where('code','<>','tool');
+        //         // })->get();
+        //         return Datatables::of($users)->make();
+        //     }
+        // ]);
+
+        Route::get('/server', function () {
+            ini_set('memory_limit', '-1');
+            $tsim_array = App\Models\Item::get();
+            foreach (array_chunk($tsim_array,1000) as $t) {
+                dd($t);
+                // DB::table('tsim')->insert($t);
+
+
+             }
+
+        });
         Route::get('/docnum', function () {
 
             echo App\Helpers\DocumentNumber::generate('TC-', App\Models\TaskCard::count());

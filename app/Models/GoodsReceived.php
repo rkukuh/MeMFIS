@@ -56,7 +56,7 @@ class GoodsReceived extends MemfisModel
     /**
      * Polymorphic: An entity can have zero or many coa.
      *
-     * This function will get all good received's coa.
+     * This function will get all customer's coa.
      * See: Coa's coa() method for the inverse
      *
      * @return mixed

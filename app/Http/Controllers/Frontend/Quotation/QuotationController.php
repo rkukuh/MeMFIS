@@ -246,7 +246,7 @@ class QuotationController extends Controller
     public function update(QuotationUpdate $request, Quotation $quotation)
     {
         $attention = $scheduled_payment_amount = [];
-        
+
         $request->scheduled_payment_amount = json_decode($request->scheduled_payment_amount);
         if(sizeof($request->scheduled_payment_amount) > 0){
             foreach ($request->scheduled_payment_amount as $value) {
@@ -287,14 +287,16 @@ class QuotationController extends Controller
             $tax = Tax::where('uuid', $quotation->taxes->last()->uuid)->update([
                 'taxable_type' => 'App\Models\Quotation',
                 'taxable_id' => $quotation->id,
-                'type_id' => Type::ofTax()->where('code', $request->tax_type)->first()->id,
+                'type_id' => Type::ofTax()->where('code', 'ppn')->first()->id,
+                'method_type_id' => Type::ofTaxPaymentMethod()->where('code', $request->tax_type)->first()->id,
                 'percent' => $request->tax_percentage,
                 'amount' => $request->ppn
             ]);
         }else{
             $quotation->taxes()->save(new Tax(['taxable_type' => 'App\Models\Quotation',
                 'taxable_id' => $quotation->id,
-                'type_id' => Type::ofTax()->where('code', $request->tax_type)->first()->id,
+                'type_id' => Type::ofTax()->where('code', 'ppn')->first()->id,
+                'method_type_id' => Type::ofTaxPaymentMethod()->where('code', $request->tax_type)->first()->id,
                 'percent' => $request->tax_percentage,
                 'amount' => $request->ppn
             ]));
@@ -344,7 +346,8 @@ class QuotationController extends Controller
                 'title' => $quotation->number,
                 'alert-type' => "error"
             );
-            return response()->json(['error' => $error_message], '403');
+            array_push($error_messages, $error_message);
+            return response()->json(['error' => $error_messages], '403');
         }
         foreach($scheduled_payment_amounts as $scheduled_payment_amount){
             $amount += $scheduled_payment_amount->amount;
@@ -356,7 +359,8 @@ class QuotationController extends Controller
                 'title' => $quotation->number,
                 'alert-type' => "error"
             );
-            return response()->json(['error' => $error_message], '403');
+            array_push($error_messages, $error_message);
+            return response()->json(['error' => $error_messages], '403');
         }
         // if( max($work_progress) != 100){
 

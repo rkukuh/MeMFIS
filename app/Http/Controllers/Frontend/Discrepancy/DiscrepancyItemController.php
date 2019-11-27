@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Discrepancy;
 
+use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\DefectCard;
@@ -41,6 +42,9 @@ class DiscrepancyItemController extends Controller
      */
     public function store(DiscrepancyItemStore $request,DefectCard $discrepancy)
     {
+        $request->merge(['item_id' => Item::where('uuid',$request->item_id)->first()->id]);
+        $request->merge(['unit_id' => Unit::where('uuid',$request->unit_id)->first()->id]);
+
         $discrepancy->items()->attach($discrepancy->id, [
             'item_id' => $request->item_id,
             'unit_id' => $request->unit_id,

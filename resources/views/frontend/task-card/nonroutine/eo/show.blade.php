@@ -378,7 +378,7 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <div class="threshold_datatable" id="item_datatable"></div>
+                            <div class="threshold_datatable" id="threshold_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -400,7 +400,7 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <div class="repeat_datatable" id="item_datatable"></div>
+                            <div class="repeat_datatable" id="repeat_datatable"></div>
                         </div>
                     </div>
                 </div>

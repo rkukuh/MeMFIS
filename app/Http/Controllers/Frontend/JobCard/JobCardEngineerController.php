@@ -147,6 +147,11 @@ class JobCardEngineerController extends Controller
 
         $progresses_groups = $jobcard->progresses->groupBy('progressed_by');
         $employees = Employee::all();
+        foreach($progresses_groups as $progresses_group){
+            foreach($progresses_group as $progress){
+                $progress->status .= Status::where('id',$progress->status_id)->first()->name;
+            }
+        }
 
         $progresses =  $jobcard->progresses->where('progressed_by', Auth::id());
 
@@ -237,12 +242,12 @@ class JobCardEngineerController extends Controller
                         'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                         'progressed_by' => Auth::id()
                     ]));
-        
+
                     if($request->helper){
                         $helpers = Employee::whereIn('code',$request->helper)->pluck('id');
                         $jobcard->helpers()->sync($helpers);
                     }
-        
+
                     return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
                 }
                 if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
@@ -252,17 +257,17 @@ class JobCardEngineerController extends Controller
                         'reason_text' =>  $request->reason,
                         'progressed_by' => Auth::id()
                     ]));
-        
+
                     return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
                 }
                 if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
-        
+
                     foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
                         if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
                             return redirect()->route('frontend.jobcard.index')->with($this->error_notification);
                         }
                     }
-        
+
                     foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
                         if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "closed" and $this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "open"){
                             $jobcard->progresses()->save(new Progress([
@@ -273,7 +278,7 @@ class JobCardEngineerController extends Controller
                             ]));
                         }
                     }
-        
+
                     if($request->discrepancy == 1){
                         return redirect()->route('frontend.discrepancy.jobcard.engineer.discrepancy',$jobcard->uuid);
                     }
@@ -288,12 +293,12 @@ class JobCardEngineerController extends Controller
                     'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                     'progressed_by' => Auth::id()
                 ]));
-    
+
                 if($request->helper){
                     $helpers = Employee::whereIn('code',$request->helper)->pluck('id');
                     $jobcard->helpers()->sync($helpers);
                 }
-    
+
                 return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
             }
             if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
@@ -303,17 +308,17 @@ class JobCardEngineerController extends Controller
                     'reason_text' =>  $request->reason,
                     'progressed_by' => Auth::id()
                 ]));
-    
+
                 return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
             }
             if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
-    
+
                 foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
                     if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
                         return redirect()->route('frontend.jobcard.index')->with($this->error_notification);
                     }
                 }
-    
+
                 foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
                     if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "closed" and $this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "open"){
                         $jobcard->progresses()->save(new Progress([
@@ -324,7 +329,7 @@ class JobCardEngineerController extends Controller
                         ]));
                     }
                 }
-    
+
                 if($request->discrepancy == 1){
                     return redirect()->route('frontend.discrepancy.jobcard.engineer.discrepancy',$jobcard->uuid);
                 }
@@ -338,12 +343,12 @@ class JobCardEngineerController extends Controller
                     'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                     'progressed_by' => Auth::id()
                 ]));
-    
+
                 if($request->helper){
                     $helpers = Employee::whereIn('code',$request->helper)->pluck('id');
                     $jobcard->helpers()->sync($helpers);
                 }
-    
+
                 return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
             }
             if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
@@ -353,17 +358,17 @@ class JobCardEngineerController extends Controller
                     'reason_text' =>  $request->reason,
                     'progressed_by' => Auth::id()
                 ]));
-    
+
                 return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
             }
             if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
-    
+
                 foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
                     if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
                         return redirect()->route('frontend.jobcard.index')->with($this->error_notification);
                     }
                 }
-    
+
                 foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
                     if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "closed" and $this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "open"){
                         $jobcard->progresses()->save(new Progress([
@@ -374,7 +379,7 @@ class JobCardEngineerController extends Controller
                         ]));
                     }
                 }
-    
+
                 if($request->discrepancy == 1){
                     return redirect()->route('frontend.discrepancy.jobcard.engineer.discrepancy',$jobcard->uuid);
                 }

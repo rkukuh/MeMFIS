@@ -9,6 +9,7 @@ class Tax extends MemfisModel
     protected $fillable = [
         'taxable_type',
         'taxable_id',
+        'method_type_id',
         'type_id',
         'percent',
         'amount',
@@ -41,17 +42,5 @@ class Tax extends MemfisModel
     public function type()
     {
         return $this->belongsTo(Type::class);
-    }
-
-    /**
-     * One-Way: A tax may have zero or many type.
-     *
-     * This function will retrieve the type of a tax.
-     *
-     * @return mixed
-     */
-    public function TaxPaymentMethod()
-    {
-        return $this->belongsTo(Type::class,'method_type_id');
     }
 }

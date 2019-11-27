@@ -213,23 +213,6 @@ Route::name('datatables.')->group(function () {
 
         });
 
-        /** LEAVE */
-
-        Route::name('leave.')->group(function () {
-
-            Route::group([
-
-                'prefix'    => 'leave',
-                'namespace' => 'Leave'
-
-            ], function () {
-
-                /** Master Data */
-                Route::get('/propose-leave', 'ProposeLeaveDatatables@index')->name('propose-leave.index');
-            });
-
-        });
-
         /** Receiving Inspection Report */
 
         Route::name('rir.')->group(function () {
@@ -449,8 +432,10 @@ Route::name('datatables.')->group(function () {
                 Route::get('/project/item/{project}', 'ProjectPurchaseRequestDatatables@projectItem')->name('item.project');
                 Route::get('/modal/general', 'GeneralPurchaseRequestDatatables@purchaseRequestModal')->name('modal.general.index');
                 Route::get('/modal/project', 'ProjectPurchaseRequestDatatables@purchaseRequestModal')->name('modal.project.index');
-                Route::get('/item/{purchaseRequest}/general', 'GeneralPurchaseRequestDatatables@pr_item')->name('pr.general.item');
-                Route::get('/item/{purchaseRequest}/project', 'ProjectPurchaseRequestDatatables@pr_item')->name('pr.project.item');
+                Route::get('/item/{purchaseRequest}/general/material', 'GeneralPurchaseRequestDatatables@pr_material')->name('pr.general.material');
+                Route::get('/item/{purchaseRequest}/project/material', 'ProjectPurchaseRequestDatatables@pr_material')->name('pr.project.material');
+                Route::get('/item/{purchaseRequest}/general/tool', 'GeneralPurchaseRequestDatatables@pr_tool')->name('pr.general.tool');
+                Route::get('/item/{purchaseRequest}/project/tool', 'ProjectPurchaseRequestDatatables@pr_tool')->name('pr.project.tool');
                 Route::get('/{purchase_request}/purchase-request', 'PurchaseRequestDatatables@item')->name('purchase-request');
                 Route::get('/modal', 'PurchaseRequestDatatables@modal')->name('purchase-request.modal');
 
