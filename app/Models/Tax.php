@@ -43,4 +43,16 @@ class Tax extends MemfisModel
     {
         return $this->belongsTo(Type::class);
     }
+
+    /**
+     * One-Way: A tax may have zero or many type.
+     *
+     * This function will retrieve the type of a tax.
+     *
+     * @return mixed
+     */
+    public function TaxPaymentMethod()
+    {
+        return $this->belongsTo(Type::class,'method_type_id');
+    }
 }
