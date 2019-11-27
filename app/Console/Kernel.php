@@ -3,7 +3,9 @@
 namespace App\Console;
 
 use Carbon\Carbon;
+use App\Models\Employee;
 use App\Models\InventoryOut;
+use App\Models\EmployeeAttendance;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -29,6 +31,11 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             InventoryOut::where('created_at','<',Carbon::now()->subMinutes(10)->toDateTimeString())->doesnthave('approvals')->delete();
         })->everyMinute();
+
+        $schedule->call('App\Http\Controllers\Frontend\Employee\EmployeeAttendanceController@createAttendances')
+        ->everyMinute();
+        // ->dailyAt('00:01');
+
         // $schedule->call(function () { //? Waiting Entity Created
         //     Motation::where('created_at','<',Carbon::now()->subMinutes(10)->toDateTimeString())->doesnthave('approvals')->delete();
         // })->everyMinute();

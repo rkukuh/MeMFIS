@@ -50,7 +50,7 @@ let goods_received_note_show = {
                     sortable: 'asc',
                     filterable: !1,
                     textAlign: 'center',
-                    template: function (row, index, datatable) {   
+                    template: function (row, index, datatable) {
                         return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
                     }
                 },
@@ -69,14 +69,14 @@ let goods_received_note_show = {
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'qty_pr',
                     title: 'Qty PR',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'qty_po',
                     title: 'Qty PO',
                     sortable: 'asc',
                     filterable: !1,

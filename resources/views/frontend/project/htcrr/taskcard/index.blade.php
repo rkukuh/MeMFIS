@@ -7,3 +7,5 @@
     @include('frontend.project.htcrr.modal.material.modal')
     @include('frontend.project.htcrr.modal.tool.htcrr')
     @include('frontend.project.htcrr.modal.tool.modal')
+    @include('frontend.common.item.modal')
+    @include('frontend.common.tool.modal')

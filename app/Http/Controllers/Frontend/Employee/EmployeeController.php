@@ -514,8 +514,8 @@ class EmployeeController extends Controller
         
         //EMPLOYEE WORKSHIFT CURRENT
         $workshift_current = [];
-        if(isset($employee->workshift()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id)){
-            $data_workshift = Workshift::find($employee->workshift()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id);
+        if(isset($employee->workshifts()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id)){
+            $data_workshift = Workshift::find($employee->workshifts()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id);
             $workshift_current = [
                 'name' => $data_workshift->name,
                 'data' => $data_workshift->workshift_schedules()->get()
@@ -525,7 +525,7 @@ class EmployeeController extends Controller
         //EMPLOYEE WORKSHIFT HISTORY
         $workshift_history = [];
         
-        $data_workshift_history = $employee->workshift()->whereNotNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->orderBy('created_at','DESC')->get();
+        $data_workshift_history = $employee->workshifts()->whereNotNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->orderBy('created_at','DESC')->get();
 
         $l = 0;
         foreach($data_workshift_history as $dwh){
@@ -1004,8 +1004,8 @@ class EmployeeController extends Controller
       
         //EMPLOYEE WORKSHIFT CURRENT
         $workshift_current = [];
-        if(isset($employee->workshift()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id)){
-            $data_workshift = Workshift::find($employee->workshift()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id);
+        if(isset($employee->workshifts()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id)){
+            $data_workshift = Workshift::find($employee->workshifts()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id);
             $workshift_current = [
                 'name' => $data_workshift->name,
                 'data' => $data_workshift->workshift_schedules()->get()
@@ -1015,7 +1015,7 @@ class EmployeeController extends Controller
         //EMPLOYEE WORKSHIFT HISTORY
         $workshift_history = [];
         
-        $data_workshift_history = $employee->workshift()->whereNotNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->orderBy('created_at','DESC')->get();
+        $data_workshift_history = $employee->workshifts()->whereNotNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->orderBy('created_at','DESC')->get();
 
         $l = 0;
         foreach($data_workshift_history as $dwh){
@@ -1293,6 +1293,11 @@ class EmployeeController extends Controller
         return response()->json($employee);
     }
 
+    /**
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Employee  $employee
+     * 
+     */
     public function update_file(Employee $employee,Request $request){
         $rules = array(
             'document' => 'image|nullable'

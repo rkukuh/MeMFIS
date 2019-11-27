@@ -507,7 +507,7 @@ let TaskCard = {
                         // document.getElementById('uom_quantity').value = '';
 
                         // $('#item_unit_id').select2('val', 'All');
-                        
+
                         $('#modal_tool').on('hidden.bs.modal', function (e) {
                             $(this)
                             .find("input,textarea")

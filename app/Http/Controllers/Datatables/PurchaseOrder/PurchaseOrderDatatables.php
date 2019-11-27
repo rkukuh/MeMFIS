@@ -19,11 +19,10 @@ class PurchaseOrderDatatables extends Controller
         $PurchaseOrders = PurchaseOrder::with('vendor')->get();
 
         foreach($PurchaseOrders as $PurchaseOrder){
-            
+
             if($PurchaseOrder->deleted_at <> null){
                 $PurchaseOrder->status .= 'Void';
-            }
-            else if(!empty($PurchaseOrder->approvals->toArray())){
+            }else if(sizeOf($PurchaseOrder->approvals->toArray()) == 1){
                 $PurchaseOrder->status .= 'Approved';
             }else{
                 $PurchaseOrder->status .= '';

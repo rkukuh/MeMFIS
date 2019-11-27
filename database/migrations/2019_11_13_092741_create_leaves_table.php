@@ -15,6 +15,7 @@ class CreateLeavesTable extends Migration
     {
         Schema::create('leaves', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
             $table->date('start_date');
             $table->date('end_date');

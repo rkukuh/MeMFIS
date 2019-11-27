@@ -43,10 +43,10 @@ class leaveController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Leave  $leave
+     * @param  \App\Models\leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function show(leave $leave)
+    public function show(Leave $leave)
     {
         //
     }
@@ -54,10 +54,10 @@ class leaveController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Leave  $leave
+     * @param  \App\Models\leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function edit(leave $leave)
+    public function edit(Leave $leave)
     {
         //
     }
@@ -66,10 +66,10 @@ class leaveController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Admin\leaveUpdate  $request
-     * @param  \App\Models\Leave  $leave
+     * @param  \App\Models\leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function update(leaveUpdate $request, leave $leave)
+    public function update(leaveUpdate $request, Leave $leave)
     {
         //
     }
@@ -77,10 +77,10 @@ class leaveController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Leave  $leave
+     * @param  \App\Models\leave  $leave
      * @return \Illuminate\Http\Response
      */
-    public function destroy(leave $leave)
+    public function destroy(Leave $leave)
     {
         //
     }

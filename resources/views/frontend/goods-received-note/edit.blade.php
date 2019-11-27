@@ -255,6 +255,7 @@
 
                                                                 @include('frontend.goods-received-note.modal')
                                                                 @include('frontend.goods-received-note.modal-edit')
+                                                                @include('frontend.common.item.modal')
 
                                                             </div>
                                                         </div>
@@ -295,6 +296,7 @@
     <script>
         let grn_uuid = '{{$goodsReceived->uuid}}';
         let po_uuid = '{{$goodsReceived->purchase_order->uuid}}';
+        let urlItem = '/datatables/purchase-order/modal/item/'+po_uuid;
 
         $(document).ready(function () {
             document.getElementById('search-storage').innerHTML = '{{$goodsReceived->storage->name}}';
@@ -303,11 +305,11 @@
     </script>
     <script src="{{ asset('js/frontend/functions/select2/employee.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/material-po.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material-po.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>

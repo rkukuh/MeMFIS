@@ -369,6 +369,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Quotation Item.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfQuotationItemCost(Builder $query)
+    {
+        return $query->where('of', 'quotation-item-cost');
+    }
+
+    /**
      * Scope a query to only include type of Regulator.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -952,15 +963,5 @@ class Type extends MemfisModel
     public function websites()
     {
         return $this->hasMany(Website::class);
-
-
-    /**
-     * One-to-Many: A website may have zero or many type.
-     *
-     * This function will retrieve all websites of a type.
-     * See: Website's type() method for the inverse
-     *
-     * @return mixed
-     */
-}
+    }
 }

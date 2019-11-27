@@ -35,18 +35,6 @@ class EmployeeAttendance extends MemfisModel
     {
         return $this->hasOne(AttendanceCorrection::class, 'attendance_id');
     }
-    /**
-     * One-to-One: An employee attendance have zero or one leave.
-     *
-     * This function will retrieve leave of a given attendance.
-     * See: leave's attendance() method for the inverse
-     *
-     * @return mixed
-     */
-    public function attendance_leave()
-    {
-        return $this->hasOne(leave::class, 'attendance_id');
-    }
 
     /**
      * One-to-One: An employee attendance have zero or one overtime.
@@ -59,6 +47,19 @@ class EmployeeAttendance extends MemfisModel
     public function attendance_overtime()
     {
         return $this->hasOne(Overtime::class, 'attendance_id');
+    }
+
+    /**
+     * One-to-Many (self-join): An employee attendance may have none or many corrected-attendance.
+     *
+     * This function will retrieve the corrected-attendance of a Employee Attendance, if any.
+     * See: Employee Attendance's parent() method for the inverse
+     *
+     * @return mixed
+     */
+    public function childs()
+    {
+        return $this->hasMany(EmployeeAttendance::class, 'parent_id');
     }
 
     /**
@@ -75,15 +76,46 @@ class EmployeeAttendance extends MemfisModel
     }
 
     /**
-     * One-to-One: An Employee have one Status Attendance.
+     * One-to-Many: A Project's WorkPackages may have one or many engineer.
      *
-     * This function will retrieve Status Attendance of a given Employee.
-     * See: Status employee() method for the inverse
+     * This function will retrieve all the engineer of a project's workpackages.
+     * See: Project WorkPackage Engineer's header() method for the inverse
      *
      * @return mixed
      */
     public function statuses()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsToMany(Status::class, 'employee_attendance_statuses', 'employee_attendance_id', 'status_id')->withTimestamps();
+    }
+
+    /**
+     * One-to-Many (self-join): An employee attendance may have none or many corrected-attendance.
+     *
+     * This function will retrieve the parent of a corrected-attendance.
+     * See: Employee Attendance's childs() method for the inverse
+     *
+     * @return mixed
+     */
+    public function parent()
+    {
+        return $this->belongsTo(EmployeeAttendance::class, 'parent_id')->withTrashed();
+    }
+
+    /*************************************** ACCESSOR ****************************************/
+
+    // to do accessor 
+    public function getLeaveAttribute(){
+        // first filter by $this->employee
+        $leave = Leave::where('employee_id', $this->employee_id)
+        // then filter by $this->date
+            ->whereDate('start_date','<=',$this->date)
+            ->whereDate('end_date', '>=', $this->date)
+        // only approved leave
+            ->whereHas('approvals')
+        // resulting is there any leave on that day by that person
+            ->first();
+
+        return $leave;
+        // change status value "on leave"
     }
 }

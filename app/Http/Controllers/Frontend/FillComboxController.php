@@ -104,7 +104,7 @@ class FillComboxController extends Controller
         return json_encode($defectcards);
 
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -416,7 +416,7 @@ class FillComboxController extends Controller
     public function item()
     {
         $items = Item::with('categories')
-            ->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name', 'id');
+            ->selectRaw('id, CONCAT(code, " | ", name) as name')->take(500)->pluck('name', 'id');
 
         return $items;
     }
@@ -428,7 +428,7 @@ class FillComboxController extends Controller
      */
     public function partNumber()
     {
-        $items = Item::pluck('code', 'uuid');
+        $items = Item::take(500)->pluck('code', 'uuid');
 
         return $items;
     }
@@ -441,7 +441,7 @@ class FillComboxController extends Controller
     public function itemUUID()
     {
         $items = Item::with('categories')
-            ->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name', 'uuid');
+            ->selectRaw('uuid, CONCAT(code, " | ", name) as name')->take(500)->pluck('name', 'uuid');
 
         return $items;
     }
@@ -479,7 +479,7 @@ class FillComboxController extends Controller
      */
     public function vendor()
     {
-        $vendors = Vendor::pluck('name', 'uuid');
+        $vendors = Vendor::has('coa')->pluck('name', 'uuid');
 
         return json_encode($vendors);
 
@@ -561,6 +561,20 @@ class FillComboxController extends Controller
     {
         $unit = $item->unit()->pluck('name', 'id');
         $units = $item->units()->pluck('name', 'unit_id');
+        $uom = $unit->toArray() + $units->toArray();
+
+        return json_encode($uom);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function UnitUuid(Item $item)
+    {
+        $unit = $item->unit()->pluck('name', 'uuid');
+        $units = $item->units()->pluck('name', 'uuid');
         $uom = $unit->toArray() + $units->toArray();
 
         return json_encode($uom);
@@ -793,7 +807,7 @@ class FillComboxController extends Controller
         $items = Item::with('categories')
             ->whereHas('categories', function ($query) {
                 $query->where('code', 'tool');
-            })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name', 'id');
+            })->selectRaw('id, CONCAT(code, " | ", name) as name')->take(500)->pluck('name', 'id');
 
         return $items;
     }
@@ -808,7 +822,7 @@ class FillComboxController extends Controller
         $items = Item::with('categories')
             ->whereHas('categories', function ($query) {
                 $query->where('code', 'tool');
-            })->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name', 'uuid');
+            })->selectRaw('uuid, CONCAT(code, " | ", name) as name')->take(500)->pluck('name', 'uuid');
 
         return $items;
     }
@@ -823,7 +837,7 @@ class FillComboxController extends Controller
         $items = Item::with('categories')
             ->whereHas('categories', function ($query) {
                 $query->where('code', 'raw')->orWhere('code', 'cons')->orWhere('code', 'comp')->orWhere('code', 'service')->orWhere('code', 'facility');
-            })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name', 'id');
+            })->selectRaw('id, CONCAT(code, " | ", name) as name')->take(500)->pluck('name', 'id');
 
         return $items;
     }
@@ -838,7 +852,7 @@ class FillComboxController extends Controller
         $items = Item::with('categories')
             ->whereHas('categories', function ($query) {
                 $query->where('code', 'raw')->orWhere('code', 'cons')->orWhere('code', 'comp')->orWhere('code', 'service')->orWhere('code', 'facility');
-            })->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name', 'uuid');
+            })->selectRaw('uuid, CONCAT(code, " | ", name) as name')->take(500)->pluck('name', 'uuid');
 
         return $items;
     }
@@ -1050,7 +1064,7 @@ class FillComboxController extends Controller
      */
     public function taxation()
     {
-        $taxation = Type::ofTax()->pluck('name', 'uuid');
+        $taxation = Type::ofTaxPaymentMethod()->pluck('name', 'uuid');
 
         return json_encode($taxation);
 

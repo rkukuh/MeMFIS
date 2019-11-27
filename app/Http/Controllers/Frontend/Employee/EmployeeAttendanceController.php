@@ -1,18 +1,20 @@
 <?php
 
 namespace App\Http\Controllers\Frontend\Employee;
-
-use App\Models\Frontend\EmployeeAttendance;
-use App\Http\Controllers\Controller;
-use App\Models\Employee;
-use App\Models\WorkshiftSchedule;
-use App\Models\Status;
-use App\Models\AttendanceFile;
-use App\Models\EmployeeWorkshift;
+use Config;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Frontend\EmployeeAttendanceStore;
+use App\Http\Controllers\Controller;
+
+use App\Models\Status;
+use App\Models\Employee;
+use App\Models\AttendanceFile;
+use App\Models\WorkshiftSchedule;
+use App\Models\EmployeeWorkshift;
+use App\Models\EmployeeAttendance;
 
 class EmployeeAttendanceController extends Controller
 {
@@ -45,13 +47,32 @@ class EmployeeAttendanceController extends Controller
     public function store(EmployeeAttendanceStore $request)
     {
         if(isset($request->document)){
+            $last_import = AttendanceFile::orderBy('created_at','DESC')->first();
+            $last_index = 0;
+
+            if($last_import){
+                // get file from cloud
+                $s3 = Storage::disk('s3');
+                $client = $s3->getDriver()->getAdapter()->getClient();
+                $bucket = Config::get('filesystems.disks.s3.bucket');
+
+                $command = $client->getCommand('GetObject', [
+                    'Bucket' => $bucket,
+                    'Key' => $last_import->path
+                ]);
+        
+                $requestS3 = $client->createPresignedRequest($command, '+20 minutes');
+        
+                $url = (string) $requestS3->getUri();
+                $last_index = sizeof(file($url)) - 1;
+            }
+
             $file = $request->file('document');
+
             $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME);
             $filename = $name.'.'.$file->getClientOriginalExtension();
             
-            //todo to be able import to s3 disk
-            $exist = Storage::disk('local')->url('attendance_files/'.$file->getClientOriginalName());
-            // $exist = "/storage/attendance_files/BRC2190960192_attlog.dat"
+            $exist = Storage::disk('s3')->url('attendance_files/'.$file->getClientOriginalName());
         
             if($exist){
                 $random = str_random(5);
@@ -59,13 +80,15 @@ class EmployeeAttendanceController extends Controller
                 $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME).'_'.$random;
             }
 
-            $path = $file->storeAs(
-                'attendance_files',$filename
-            );
+            // local
+            // $path = $file->storeAs(
+            //     'attendance_files',$filename
+            // );
 
-            $storagePath = Storage::disk('local')->path($path);
-            // $storagePath = "/home/smartaircraft-dev/Projects/MeMFIS/storage/app/attendance_files/BRC2190960192_attlog_jZ4Yb.dat"
-            AttendanceFile::create([
+            $destination = 'attendance_files';
+            $storagePath = Storage::disk('s3')->putFileAs($destination,$file, $filename);
+
+            $attenddanceFile = AttendanceFile::create([
                 'uuid' => Str::uuid(),
                 'name' => $name,
                 'filename' => $filename,
@@ -80,9 +103,14 @@ class EmployeeAttendanceController extends Controller
             $data_all = [];
             $data_nrp = [];
             $data_date = [];
-            
 
             $index = 0;
+            
+            // slice unneded data rows from last time import.
+            if($last_index){
+                $lines = array_slice($lines,$last_index);
+            }
+
             foreach ($lines as $line) {
                 $data = explode('\t', trim($line));
                 $split_line = array_shift($data);
@@ -112,18 +140,18 @@ class EmployeeAttendanceController extends Controller
 
                 for($j=0;$j < count($data_all); $j++){
                         
-                if($unique_nrp[$i] == $data_all[$j]['nrp']){
-                    $data_grouping_nrp[$x] = [
-                        'date' => $data_all[$j]['date'],
-                        'time' => $data_all[$j]['time']
-                    ];
-                
-                    $data_grouping[$i] = [
-                        'nrp' => $unique_nrp[$i],
-                        $unique_nrp[$i] => $data_grouping_nrp
-                    ];
-                    $x++;
-                }
+                    if($unique_nrp[$i] == $data_all[$j]['nrp']){
+                        $data_grouping_nrp[$x] = [
+                            'date' => $data_all[$j]['date'],
+                            'time' => $data_all[$j]['time']
+                        ];
+                    
+                        $data_grouping[$i] = [
+                            'nrp' => $unique_nrp[$i],
+                            $unique_nrp[$i] => $data_grouping_nrp
+                        ];
+                        $x++;
+                    }
 
                 }
 
@@ -166,13 +194,14 @@ class EmployeeAttendanceController extends Controller
                 for ($y=0; $y < count($data_final[$i]['date']); $y++) { 
                     
                     $employee = Employee::where('code',$data_final[$i]['nrp'])->first();
+                    $statuses = [];
                     if(isset($employee->id)){
-
-                        if(!$employee->employee_attendance()->where('employee_attendances.date',$data_final[$i]['date'][$y]['date'])->first()){
+                        $attendance = EmployeeAttendance::where('employee_id',$employee->id)->whereDate('date',$data_final[$i]['date'][$y]['date'])->first();
+                        if($attendance->created_at == $attendance->updated_at){
                             $in = '00:00:00';
                             $out = '00:00:00';
-                            $status = Status::where('code','normal')->first()->id;
-
+                            $status = Status::where('code','normal')->first();
+                            array_push($statuses, $status->id);
                             //IN & OUT
                             if(reset($data_final[$i]['date'][$y]['time'])){
                                 $in = reset($data_final[$i]['date'][$y]['time']);
@@ -191,7 +220,6 @@ class EmployeeAttendanceController extends Controller
 
                             if(isset($employee_workshift->workshift_id)){
                                 $employee_schedule = WorkshiftSchedule::where('workshift_id',$employee_workshift->workshift_id)->get()->toArray();
-
                                 for ($v=0; $v < count($employee_schedule); $v++) { 
                                     if(strtolower($data_final[$i]['date'][$y]['days']) == $employee_schedule[$v]['days']){
                                         
@@ -199,7 +227,8 @@ class EmployeeAttendanceController extends Controller
                                         if(strtotime($in) > strtotime($employee_schedule[$v]['in'])){
                                             if($in != '00:00:00' && $employee_schedule[$v]['in'] != '00:00:00'){
                                                 $late = abs(strtotime($in) - strtotime($employee_schedule[$v]['in']));
-                                                $status = Status::where('code','undiscipline')->first()->id;
+                                                $status = Status::where('code','undiscipline')->first();
+                                                array_push($statuses, $status->id);
                                             }
                                         };
 
@@ -207,7 +236,8 @@ class EmployeeAttendanceController extends Controller
                                         if(strtotime($out) < strtotime($employee_schedule[$v]['out'])){
                                             if($out != '00:00:00' && $employee_schedule[$v]['out'] != '00:00:00'){
                                                 $earlier_out = abs(strtotime($employee_schedule[$v]['out']) - strtotime($out));
-                                                $status = Status::where('code','undiscipline')->first()->id;
+                                                $status = Status::where('code','undiscipline')->first();
+                                                array_push($statuses, $status->id);
                                             }
                                         };
 
@@ -215,7 +245,8 @@ class EmployeeAttendanceController extends Controller
                                         if(strtotime($out) > strtotime($employee_schedule[$v]['out'])){
                                             if($out != '00:00:00' && $employee_schedule[$v]['out'] != '00:00:00'){
                                                 $overtime = abs(strtotime($out) - strtotime($employee_schedule[$v]['out']));
-                                                $status = Status::where('code','normal')->first()->id;
+                                                $status = Status::where('code','normal')->first();
+                                                array_push($statuses, $status->id);
                                             }
                                         };
 
@@ -228,38 +259,41 @@ class EmployeeAttendanceController extends Controller
                                 if(strtolower($data_final[$i]['date'][$y]['days']) == 'saturday' || strtolower($data_final[$i]['date'][$y]['days']) == 'sunday'){
                                     $status = null;
                                 }else{
-                                //LATE
-                                if(strtotime($in) > strtotime('07:30:00')){
-                                    if($in != '00:00:00'){
-                                        $late = abs(strtotime($in) - strtotime('07:30:00'));
-                                        $status = Status::where('code','undiscipline')->first()->id;
-                                    }
-                                };
+                                    //LATE
+                                    if(strtotime($in) > strtotime('07:30:00')){
+                                        if($in != '00:00:00'){
+                                            $late = abs(strtotime($in) - strtotime('07:30:00'));
+                                            $status = Status::where('code','undiscipline')->first();
+                                            array_push($statuses, $status->id);
+                                        }
+                                    };
 
-                                //EARLIER OUT
-                                if(strtotime($out) < strtotime(strtotime('16:30:00'))){
-                                    if($out != '00:00:00'){
-                                        $earlier_out = abs(strtotime('16:30:00') - strtotime($out));
-                                        $status = Status::where('code','undiscipline')->first()->id;
-                                    }
-                                };
+                                    //EARLIER OUT
+                                    if(strtotime($out) < strtotime(strtotime('16:30:00'))){
+                                        if($out != '00:00:00'){
+                                            $earlier_out = abs(strtotime('16:30:00') - strtotime($out));
+                                            $status = Status::where('code','undiscipline')->first();
+                                            array_push($statuses, $status->id);
+                                        }
+                                    };
 
-                                //OVERTIME
-                                if(strtotime($out) > strtotime('16:30:00')){
-                                    if($out != '00:00:00'){
-                                        $overtime = abs(strtotime($out) - strtotime('16:30:00'));
-                                        $status = Status::where('code','normal')->first()->id;
-                                    }
-                                };
+                                    //OVERTIME
+                                    if(strtotime($out) > strtotime('16:30:00')){
+                                        if($out != '00:00:00'){
+                                            $overtime = abs(strtotime($out) - strtotime('16:30:00'));
+                                            $status = Status::where('code','normal')->first();
+                                            array_push($statuses, $status->id);
+                                        }
+                                    };
 
-                                //CHECK ABSENCE
-                                if(!$data_final[$i]['date'][$y]['time'] && !$data_final[$i]['date'][$y]['time']){
-                                    $status = Status::where('code','absence')->first()->id;
+                                    //CHECK ABSENCE
+                                    if(!$data_final[$i]['date'][$y]['time'] && !$data_final[$i]['date'][$y]['time']){
+                                        $status = Status::where('code','absence')->first();
+                                        array_push($statuses, $status->id);
+                                    }
                                 }
                             }
-                            }
                             
-
                             //IN & OUT II
                             if($data_final[$i]['date'][$y]['time']){
                                 if($in == $out){
@@ -267,22 +301,26 @@ class EmployeeAttendanceController extends Controller
                                     $late = 0;
                                     $earlier_out = 0;
                                     $overtime = 0;
-                                    $status = Status::where('code','undiscipline')->first()->id;
+                                    $status = Status::where('code','undiscipline')->first();
+                                    array_push($statuses, $status->id);
                                 }
                             }
 
-                            $employee->employee_attendance()->create([
-                                'uuid' => Str::uuid(),
-                                'date' => $data_final[$i]['date'][$y]['date'],
-                                'in' => $in,
-                                'out' => $out,
-                                'late_in' => $late,
-                                'earlier_out' => $earlier_out,
-                                'overtime' => $overtime,
-                                'statuses_id' => $status
-                            ]);
-                        }
+                            $attendance_to_update = EmployeeAttendance::where('employee_id',$employee->id)->whereDate('date',$data_final[$i]['date'][$y]['date'])->first();
+                            if($attendance_to_update){
+                                $attendance_to_update->update([
+                                    'employee_id' => $employee->id,
+                                    'in' => $in,
+                                    'out' => $out,
+                                    'late_in' => $late,
+                                    'earlier_out' => $earlier_out,
+                                    'overtime' => $overtime
+                                ]);
+                                $statuses = array_unique($statuses);
+                                $attendance->statuses()->attach($statuses);
 
+                            }
+                        }
                     }
 
                 }
@@ -335,5 +373,60 @@ class EmployeeAttendanceController extends Controller
     public function destroy(EmployeeAttendance $employeeAttendance)
     {
         //
+    }
+
+    /**
+     * Store a newly created employee attendances in storage.
+     */
+    public function createAttendances(){
+        $days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        // code yang seharusnya dijalankan sehari-hari
+        // $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
+        // // create attendance with null;
+        // $in = '00:00:00';
+        // $out = '00:00:00';
+        // foreach($employees as $employee){
+        //         EmployeeAttendance::create([
+        //         'employee_id' => $employee->id,
+        //         'date' => Carbon::today(),
+        //         'in' => $in,
+        //         'out' => $out
+        //     ]);
+        // }
+
+        // code yang dijalankan untuk trial
+        $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
+        // create attendance with null;
+        $in = '00:00:00';
+        $out = '00:00:00';
+        
+        foreach($employees as $employee){
+            if(sizeof($employee->workshifts) > 0){
+                $workshift = $employee->workshifts->first();
+                $shifts = $workshift->workshift_schedules;
+                
+                for($day = 1 ; $day <= 31 ; $day++){
+                    $date = Carbon::create(2019, 11, $day, 0, 0, 0, 'Asia/Jakarta');
+    
+                    $attendance = EmployeeAttendance::create([
+                        'employee_id' => $employee->id,
+                        'date' => $date,
+                        'in' => $in,
+                        'out' => $out
+                    ]);
+    
+                    $shift = $shifts->where('days', $days[$date->dayOfWeek])->first();
+                    if($shift){
+                        $status = Status::ofAttendance()->where('code','absence')->first();
+                        $attendance->statuses()->attach($status->id);
+                    }else{
+                        $status = null;
+                    }
+
+
+                }
+            }
+
+        }
     }
 }

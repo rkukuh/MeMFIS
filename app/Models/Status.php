@@ -12,6 +12,7 @@ class Status extends MemfisModel
         'name',
         'of',
         'description',
+
     ];
 
     /******************************************* SCOPE *******************************************/
@@ -162,11 +163,25 @@ class Status extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * One-to-Many: A project's workpackage may have one or many engineer.
+     *
+     * This function will retrieve the header of a project's workpackage.
+     * See: Project WorkPackage's engineers() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_attendance()
+    {
+        return $this->belongsToMany(EmployeeAttendance::class, 'employee_attendance_statuses', 'status_id', 'employee_attendance_id')->withTimestamps();
+    }
+
+    /**
      * Polymorphic: An entity can have zero or many statuses.
      *
      * This function will get all of the owning statusable models.
      * See:
      * - JobCard's statuses() method for the inverse
+     * - EmployeeAttendance's statuses() method for the inverse
      *
      * @return mixed
      */
@@ -181,5 +196,18 @@ class Status extends MemfisModel
     public function progress()
     {
         return $this->hasOne(Progress::class);
+    }
+
+    /**
+     * One-to-One: An leave have one Status.
+     *
+     * This function will retrieve status of a given leave.
+     * See: Leave's status() method for the inverse
+     *
+     * @return mixed
+     */
+    public function leave()
+    {
+        return $this->hasMany(Leave::class);
     }
 }

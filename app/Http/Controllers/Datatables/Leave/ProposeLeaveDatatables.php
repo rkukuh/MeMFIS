@@ -16,7 +16,7 @@ class ProposeLeaveDatatables extends Controller
      */
     public function index()
     {
-        $leaves = Leave::get();
+        $leaves = Leave::with('approvals','employee','leaveType','status')->get();
 
         $data = $alldata = json_decode($leaves);
 

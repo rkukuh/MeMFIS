@@ -232,7 +232,7 @@ class DefectCardMechanicController extends Controller
     /**
      * Search the specified resource from storage.
      *
-     * @param  \App\Models\JobCard  $jobCard
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function search(Request $request)

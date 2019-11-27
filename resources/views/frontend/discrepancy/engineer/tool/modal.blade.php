@@ -24,12 +24,10 @@
                               <label class="form-control-label">
                                   Tool
                               </label>
-                              @component('frontend.common.input.select2')
-                                  @slot('text', 'Tool')
-                                  @slot('id_error', 'tool')
-                                  @slot('id', 'tool')
-                                  @slot('name', 'tool')
-                              @endcomponent
+                              @component('frontend.common.tool.index')
+                                @slot('name_tool','tool')
+                                @slot('id_tool','tool')
+                            @endcomponent
                           </div>
                         </div>
                         <div class="form-group m-form__group row item-info">

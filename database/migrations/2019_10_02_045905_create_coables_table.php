@@ -16,7 +16,7 @@ class CreateCoablesTable extends Migration
         Schema::create('coables', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('coa_id');
-            $table->unsignedBigInteger('type_id');
+            $table->unsignedBigInteger('type_id')->nullable();
             $table->morphs('coable');
             $table->timestamps();
             $table->softDeletes();

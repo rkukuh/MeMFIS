@@ -30,7 +30,7 @@
 
     <div class="propose_leave_datatable" id="scrolling_both"></div>
 
-    @include('frontend.propose-leave.modal-approve')
-    @include('frontend.propose-leave.modal-reject')
+    <!-- @include('frontend.propose-leave.modal-approve') -->
+    <!-- @include('frontend.propose-leave.modal-reject') -->
     @include('frontend.propose-leave.propose-leave.transaction-view')
 </div>

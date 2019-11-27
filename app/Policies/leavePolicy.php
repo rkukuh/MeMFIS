@@ -14,10 +14,10 @@ class leavePolicy
      * Determine whether the user can view the leave.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\Leave  $leave
+     * @param  \App\Models\leave  $leave
      * @return mixed
      */
-    public function view(User $user, leave $leave)
+    public function view(User $user, Leave $leave)
     {
         //
     }
@@ -37,10 +37,10 @@ class leavePolicy
      * Determine whether the user can update the leave.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\Leave  $leave
+     * @param  \App\Models\leave  $leave
      * @return mixed
      */
-    public function update(User $user, leave $leave)
+    public function update(User $user, Leave $leave)
     {
         //
     }
@@ -49,10 +49,10 @@ class leavePolicy
      * Determine whether the user can delete the leave.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\Leave  $leave
+     * @param  \App\Models\leave  $leave
      * @return mixed
      */
-    public function delete(User $user, leave $leave)
+    public function delete(User $user, Leave $leave)
     {
         //
     }
@@ -61,10 +61,10 @@ class leavePolicy
      * Determine whether the user can restore the leave.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\Leave  $leave
+     * @param  \App\Models\leave  $leave
      * @return mixed
      */
-    public function restore(User $user, leave $leave)
+    public function restore(User $user, Leave $leave)
     {
         //
     }
@@ -73,10 +73,10 @@ class leavePolicy
      * Determine whether the user can permanently delete the leave.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\Leave  $leave
+     * @param  \App\Models\leave  $leave
      * @return mixed
      */
-    public function forceDelete(User $user, leave $leave)
+    public function forceDelete(User $user, Leave $leave)
     {
         //
     }
