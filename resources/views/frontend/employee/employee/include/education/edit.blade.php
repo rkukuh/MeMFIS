@@ -36,5 +36,5 @@
 <script src="{{ asset('js/frontend/employee/education/index.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/qualification.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/datepicker/graduation-date.js')}}"></script>
-<script src="{{ asset('js/frontend/employee/employee/create_education.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/education/create.js') }}"></script>
 @endpush

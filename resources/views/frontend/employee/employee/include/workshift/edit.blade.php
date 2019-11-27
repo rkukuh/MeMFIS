@@ -126,6 +126,6 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/workshift.js') }}"></script>
-    <script src="{{ asset('js/frontend/employee/employee/create_workshift.js') }}"></script>
-    <script src="{{ asset('js/frontend/employee/employee/edit_workshift.js') }}"></script>
+    <script src="{{ asset('js/frontend/employee/workshift/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/employee/workshift/edit.js') }}"></script>
 @endpush
