@@ -26,8 +26,9 @@ class AttendanceDatatables extends Controller
                 $attendance->attendance_correction = $attendance->attendance_correction;
             }
 
-            if(isset($attendance->statuses)){
-                $attendance->status = $attendance->statuses()->orderBy('created_at', 'desc')->first()->name;
+            if(sizeof($attendance->statuses) > 0){
+                $statuses =  $attendance->statuses()->pluck('name')->toArray();
+                $attendance->status = join(',', $statuses);
             }
 
             $date = Carbon::createFromFormat('Y-m-d', $attendance->date);
