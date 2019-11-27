@@ -408,7 +408,7 @@ class EmployeeAttendanceController extends Controller
                     if($shift){
                         // dd("ada");
                         $status = Status::ofAttendance()->where('code','absence')->first();
-                        $attendance->statuses()->save($status);
+                        $attendance->statuses()->attach($status->id);
                     }else{
                         $status = null;
                         // dd('tidak ada di workshift');
