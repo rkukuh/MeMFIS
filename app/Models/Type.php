@@ -612,7 +612,7 @@ class Type extends MemfisModel
      */
     public function scopeOfTaxPaymentMethod(Builder $query)
     {
-        return $query->where('of', 'tax-payment-method'); 
+        return $query->where('of', 'tax-payment-method');
     }
 
     /**
@@ -952,15 +952,5 @@ class Type extends MemfisModel
     public function websites()
     {
         return $this->hasMany(Website::class);
-    
-    
-    /**
-     * One-to-Many: A website may have zero or many type.
-     *
-     * This function will retrieve all websites of a type.
-     * See: Website's type() method for the inverse
-     *
-     * @return mixed
-     */
-}
+    }
 }
