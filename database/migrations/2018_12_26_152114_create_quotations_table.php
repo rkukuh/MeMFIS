@@ -20,7 +20,7 @@ class CreateQuotationsTable extends Migration
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('title')->nullable();
             $table->string('no_wo')->nullable();
-            $table->morphs('quotationable');
+            $table->nullableMorphs('quotationable');
             $table->json('attention')->nullable();
             $table->timestamp('requested_at')->nullable();
             $table->timestamp('valid_until')->nullable();
