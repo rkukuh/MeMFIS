@@ -93,7 +93,7 @@ class RIR extends MemfisModel
      *
      * @return mixed
      */
-    public function packing_condition()
+    public function packingCondition()
     {
         return $this->belongsTo(Type::class, 'packing_condition');
     }
@@ -105,7 +105,7 @@ class RIR extends MemfisModel
      *
      * @return mixed
      */
-    public function packing_type()
+    public function packingType()
     {
         return $this->belongsTo(Type::class, 'packing_type');
     }
@@ -117,7 +117,7 @@ class RIR extends MemfisModel
      *
      * @return mixed
      */
-    public function preservation_check()
+    public function preservationCheck()
     {
         return $this->belongsTo(Type::class, 'preservation_check');
     }
