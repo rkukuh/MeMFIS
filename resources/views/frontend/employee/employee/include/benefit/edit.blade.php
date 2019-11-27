@@ -247,7 +247,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-3">
-            <legend class="w-auto"><b>Lately & Absences</b></legend>
+            <legend class="w-auto"><b>Tardiness & Absences</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -581,7 +581,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-3">
-            <legend class="w-auto"><b>Lately & Absences</b></legend>
+            <legend class="w-auto"><b>Tardiness & Absences</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -1062,7 +1062,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-3">
-            <legend class="w-auto"><b>Lately & Absences</b></legend>
+            <legend class="w-auto"><b>Tardiness & Absences</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
