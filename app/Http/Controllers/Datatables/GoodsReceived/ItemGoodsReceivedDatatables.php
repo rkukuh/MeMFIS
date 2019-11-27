@@ -21,7 +21,7 @@ class ItemGoodsReceivedDatatables extends Controller
 
         foreach($goodReceiveds as $GoodReceived){
             $GoodReceived->unit_name .= Unit::find($GoodReceived->pivot->unit_id)->name;
-            $GoodReceived->qty_pr .=$goodReceived->purchase_order->purchase_request->items->where('id',$GoodReceived->id)->first()->pivot->quantity_unit." ".Unit::find($GoodReceived->unit_id)->name;
+            $GoodReceived->qty_pr .= $goodReceived->purchase_order->purchase_request->items->where('id',$GoodReceived->id)->first()->pivot->quantity_unit." ".Unit::find($GoodReceived->unit_id)->name;
             $GoodReceived->qty_po .= $goodReceived->purchase_order->items->where('id',$GoodReceived->id)->first()->pivot->quantity_unit." ".Unit::find($GoodReceived->unit_id)->name;
         }
 

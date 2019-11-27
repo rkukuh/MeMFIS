@@ -65,7 +65,7 @@ class ItemGoodsReceivedController extends Controller
                     'quantity'=> $request->quantity,
                     'unit_id' => $request->unit_id,
                     'quantity_unit' => $quantity_unit,
-                    'price' => ($request->quantity/$quantity_unit)*$price,,
+                    'price' => ($request->quantity/$quantity_unit)*$price,
                     'note' => $request->note,
                     'expired_at' => $request->expired_at,
                     ]
