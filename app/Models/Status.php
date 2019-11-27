@@ -163,16 +163,16 @@ class Status extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * M-M Polymorphic: A promo can be applied to many entities.
+     * One-to-Many: A project's workpackage may have one or many engineer.
      *
-     * This function will get all the Employee Attendance that are applied by a given status.
-     * See: Employee Attendance's statuses() method for the inverse
+     * This function will retrieve the header of a project's workpackage.
+     * See: Project WorkPackage's engineers() method for the inverse
      *
      * @return mixed
      */
-    public function employeeAttendance()
+    public function employee_attendance()
     {
-        return $this->morphedByMany(EmployeeAttendance::class, 'statusable');
+        return $this->belongsToMany(EmployeeAttendance::class, 'employee_attendance_statuses', 'status_id', 'employee_attendance_id')->withTimestamps();
     }
 
     /**

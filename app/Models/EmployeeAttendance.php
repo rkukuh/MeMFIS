@@ -76,16 +76,16 @@ class EmployeeAttendance extends MemfisModel
     }
 
     /**
-     * Polymorphic: An entity can have zero or many statuses.
+     * One-to-Many: A Project's WorkPackages may have one or many engineer.
      *
-     * This function will get all of the jobcard's statuses.
-     * See: Status's statusable() method for the inverse
+     * This function will retrieve all the engineer of a project's workpackages.
+     * See: Project WorkPackage Engineer's header() method for the inverse
      *
      * @return mixed
      */
     public function statuses()
     {
-        return $this->morphMany(Status::class, 'statusables');
+        return $this->belongsToMany(Status::class, 'employee_attendance_statuses', 'employee_attendance_id', 'status_id')->withTimestamps();
     }
 
     /**
