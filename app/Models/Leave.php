@@ -5,7 +5,7 @@ namespace App\Models;
 use App\MemfisModel;
 
 class Leave extends MemfisModel
-{
+{ 
     protected $fillable = [
         'code',
         'start_date',
@@ -16,7 +16,7 @@ class Leave extends MemfisModel
         'leavetype_id',
         'description',
     ];
-    
+
     /*************************************** RELATIONSHIP ****************************************/
 
      /**
@@ -44,7 +44,7 @@ class Leave extends MemfisModel
     {
         return $this->belongsTo(Employee::class);
     }
-    
+
     /**
      * One-to-Many: A leave have one leave type.
      *

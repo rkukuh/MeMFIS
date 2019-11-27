@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\leave;
+use App\Models\Leave;
 use Illuminate\Database\Seeder;
 
 class leaves extends Seeder

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\MemfisModel;
 use App\Scopes\OrderByColumn;
+use Directoryxx\Finac\Model\Coa;
 use Illuminate\Database\Eloquent\Builder;
 
 class Category extends MemfisModel
@@ -55,6 +56,19 @@ class Category extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * Polymorphic: An entity can have zero or many coa.
+     *
+     * This function will get all category's coa.
+     * See: Coa's coa() method for the inverse
+     *
+     * @return mixed
+     */
+    public function coa()
+    {
+        return $this->morphToMany(Coa::class, 'coable')->withPivot('type_id');
+    }
+
+    /**
      * M-M Polymorphic: An item can have zero or many categories.
      *
      * This function will get all of the items that are assigned to this category.
@@ -80,5 +94,5 @@ class Category extends MemfisModel
         return $this->hasMany(TaskCard::class);
     }
 
-    
+
 }
