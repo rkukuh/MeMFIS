@@ -1238,8 +1238,8 @@
 @endpush
 
 @push('footer-scripts')
-<script src="{{ asset('js/frontend/employee/employee/approval_benefit.js') }}"></script>
-<script src="{{ asset('js/frontend/employee/employee/reject_benefit.js') }}"></script>
-<script src="{{ asset('js/frontend/employee/employee/create_benefit.js') }}"></script>
-<script src="{{ asset('js/frontend/employee/employee/edit_benefit.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/benefit/approval.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/benefit/reject.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/benefit/create.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/benefit/edit.js') }}"></script>
 @endpush
