@@ -27,9 +27,9 @@ class DatabaseSeeder extends Seeder
         $this->call(StatusesTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(CurrenciesTableSeeder::class);
-        
+
         /** MASTER */
-        
+
         $this->call(TaxesTableSeeder::class);
         $this->call(BanksTableSeeder::class);
         $this->call(StoragesTableSeeder::class);
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FacilitiesTableSeeder::class);
         $this->call(ManhoursTableSeeder::class);
         $this->call(PromosTableSeeder::class);
-        
+
         $this->call(DepartmentsTableSeeder::class);
         $this->call(BenefitsTableSeeder::class);
         $this->call(PositionsTableSeeder::class);
@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LeaveTypesTableSeeder::class);
         $this->call(HolidaysTableSeeder::class);
         $this->call(WorkshiftsTableSeeder::class);
-        
+
         $this->call(BankAccountsTableSeeder::class);
         $this->call(OvertimesTableSeeder::class);
 
@@ -113,7 +113,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RTSTableSeeder::class);
         $this->call(MutationsTableSeeder::class);
         $this->call(ItemRequestsTableSeeder::class);
-        
+        $this->call(WorkshopsTableSeeder::class);
+
         /** PROJECT'S WORKPACKAGEs */
 
         $this->call(ProjectWorkPackagesTableSeeder::class);
@@ -141,7 +142,7 @@ class DatabaseSeeder extends Seeder
         $this->call(QuotationWorkPackageItemsTableSeeder::class);
 
         /** QUOTATION's WORKPACKAGE's TASKCARDs */
-        
+
         $this->call(QuotationWorkPackageTaskCardItemsTableSeeder::class);
 
         /** QUOTATION's HT/CRRs */
