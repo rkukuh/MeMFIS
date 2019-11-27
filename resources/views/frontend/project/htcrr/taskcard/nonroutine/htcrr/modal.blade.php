@@ -22,7 +22,7 @@
                         @slot('id_error', 'cri')
                         @endcomponent
                     </div>
-                    {{--  --}}
+
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <label class="form-control-label">
                             Position @include('frontend.common.label.required')
@@ -44,11 +44,9 @@
                             P/N @include('frontend.common.label.required')
                         </label>
 
-                        @component('frontend.common.input.select2')
-                        @slot('text', 'Part Number')
-                        @slot('id', 'item')
-                        @slot('name', 'item')
-                        @slot('id_error', 'item')
+                        @component('frontend.common.item.index')
+                            @slot('name_item','item')
+                            @slot('id_item','item')
                         @endcomponent
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -231,6 +229,4 @@
 @push('footer-scripts')
 <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/item-uuid.js') }}"></script>
 @endpush

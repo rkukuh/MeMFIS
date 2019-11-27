@@ -223,7 +223,7 @@
                                                         <label class="form-control-label">
                                                             Documents library @include('frontend.common.label.optional')
                                                         </label>
-            
+
                                                         <select id="document-library" name="document-library" class="form-control m-select2" multiple style="width:100%">
                                                             <option value="">
                                                                 &mdash; Select a Document Library &mdash;
@@ -590,7 +590,7 @@
 
                             @include('frontend.task-card.routine.threshold.modal')
 
-                            <div class="threshold_datatable" id="item_datatable"></div>
+                            <div class="threshold_datatable" id="threshold_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -628,7 +628,7 @@
 
                             @include('frontend.task-card.routine.repeat.modal')
 
-                            <div class="repeat_datatable" id="item_datatable"></div>
+                            <div class="repeat_datatable" id="repeat_datatable"></div>
                         </div>
                     </div>
                 </div>
@@ -671,8 +671,10 @@
                             @include('frontend.task-card.nonroutine.eo.instruction.modal')
                             @include('frontend.task-card.nonroutine.eo.tool.index')
                             @include('frontend.task-card.nonroutine.eo.tool.modal')
+                            @include('frontend.common.tool.modal')
                             @include('frontend.task-card.nonroutine.eo.item.index')
                             @include('frontend.task-card.nonroutine.eo.item.modal')
+                            @include('frontend.common.item.modal')
 
                             <div class="instruction_datatable" id="instruction_datatable"></div>
                         </div>
@@ -876,10 +878,6 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool-uom.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/item/index.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/tool/index.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/edit.js') }}"></script>

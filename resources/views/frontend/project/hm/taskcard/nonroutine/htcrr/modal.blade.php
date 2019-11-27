@@ -27,12 +27,11 @@
                             P/N @include('frontend.common.label.required')
                         </label>
 
-                        @component('frontend.common.input.select2')
-                            @slot('text', 'Part Number')
-                            @slot('id', 'item')
-                            @slot('name', 'item')
-                            @slot('id_error', 'item')
+                        @component('frontend.common.item.index')
+                            @slot('name_item','item')
+                            @slot('id_item','item')
                         @endcomponent
+
                     </div>
                 </div>
                 <div class="form-group m-form__group row ">
@@ -191,6 +190,4 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
 @endpush

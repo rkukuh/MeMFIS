@@ -24,7 +24,6 @@ use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Facility;
 use App\Models\TaskCard;
-use App\Models\LeaveType;
 use App\Models\DefectCard;
 use App\Models\ItemRequest;
 use App\Models\InventoryOut;
@@ -104,7 +103,7 @@ class FillComboxController extends Controller
         return json_encode($defectcards);
 
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -209,19 +208,6 @@ class FillComboxController extends Controller
         $storages = Storage::pluck('name', 'uuid');
 
         return json_encode($storages);
-
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function leaveType()
-    {
-        $leave_type = LeaveType::pluck('name', 'uuid');
-
-        return json_encode($leave_type);
 
     }
 
@@ -479,7 +465,7 @@ class FillComboxController extends Controller
      */
     public function vendor()
     {
-        $vendors = Vendor::pluck('name', 'uuid');
+        $vendors = Vendor::has('coa')->pluck('name', 'uuid');
 
         return json_encode($vendors);
 
@@ -1064,7 +1050,7 @@ class FillComboxController extends Controller
      */
     public function taxation()
     {
-        $taxation = Type::ofTax()->pluck('name', 'uuid');
+        $taxation = Type::ofTaxPaymentMethod()->pluck('name', 'uuid');
 
         return json_encode($taxation);
 

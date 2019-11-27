@@ -1,51 +1,46 @@
-<div class="modal fade" id="modal_tool" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_general_tool" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                @include('frontend.common.label.create-new')
-
-                <h5 class="modal-title" id="TitleModalTool">
-                    Tools
-
-                    <small id="tool-storage" class="m--font-focus"></small>
-                </h5>
+                <h5 class="modal-title" id="TitleModalCustomer">Item</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
 
-                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id=TtoolForm">
-                    <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
+                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="CustomerForm">
+                    <input type="hidden" class="form-control form-control-danger m-input" name="uuid_tool" id="uuid_tool">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
-                                    Tool @include('frontend.common.label.required')
+                                    Tool
                                 </label>
 
                                 @component('frontend.common.tool.index')
-                                @slot('name_tool','tool')
-                                @slot('id_tool','tool')
-                                @endcomponent
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    Quantity @include('frontend.common.label.required')
-                                </label>
-
-                                @component('frontend.common.input.number')
-                                    @slot('text', 'Quantity')
-                                    @slot('name', 'quantity')
-                                    @slot('id', 'quantity')
-                                    @slot('id_error', 'quantity')
+                                    @slot('name_item','tool')
+                                    @slot('id_item','tool')
                                 @endcomponent
                             </div>
                         </div>
-                        <div class="form-group m-form__group row ">
+                        <div class="form-group m-form__group row">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Unit @include('frontend.common.label.required')
+                                    Request Qty
+                                </label>
+
+                                @component('frontend.common.input.number')
+                                    @slot('id', 'qty_tool')
+                                    @slot('text', 'Request Qty')
+                                    @slot('name', 'qty_tool')
+                                    @slot('id_error', 'quantity')
+                                @endcomponent
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Unit
                                 </label>
 
                                 @component('frontend.common.input.select2')
@@ -53,32 +48,35 @@
                                     @slot('text', 'Unit')
                                     @slot('name', 'unit_tool')
                                     @slot('id_error', 'unit_tool')
-                                @endcomponent
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <label class="form-control-label">
-                                    Remark @include('frontend.common.label.optional')
-                                </label>
-
-                                @component('frontend.common.input.textarea')
-                                    @slot('rows', '5')
-                                    @slot('id', 'remark_tool')
-                                    @slot('name', 'remark_tool')
-                                    @slot('text', 'Remark')
+                                    @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
                         </div>
+                        <div class="form-group m-form__group row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <label class="form-control-label">
+                                    Remark
+                                </label>
+
+                                @component('frontend.common.input.textarea')
+                                    @slot('id', 'remark_tool')
+                                    @slot('text', 'Remark')
+                                    @slot('name', 'remark_tool')
+                                @endcomponent
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer modal-footer-tool">
                         <div class="flex">
                             <div class="action-buttons">
-                                    @component('frontend.common.buttons.submit')
-                                        @slot('class', 'add-tool')
-                                        @slot('type', 'button')
-                                    @endcomponent
-                                    @component('frontend.common.buttons.reset')
-                                        @slot('class', 'reset-item')
-                                    @endcomponent
+                                @component('frontend.common.buttons.submit')
+                                    @slot('class', 'add-tool')
+                                    @slot('type', 'button')
+                                @endcomponent
+
+                                @include('frontend.common.buttons.reset')
+
                                 @include('frontend.common.buttons.close')
                             </div>
                         </div>
@@ -89,3 +87,13 @@
         </div>
     </div>
 </div>
+
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material-uom.js') }}"></script> --}}
+
+    {{-- <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/item-uuid.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-uom.js') }}"></script> --}}
+@endpush
