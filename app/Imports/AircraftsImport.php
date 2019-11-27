@@ -23,6 +23,6 @@ class AircraftsImport implements ToModel, WithHeadingRow
             'manufacturer_id' => $manufacturer->id,
         ]);
 
-        $aircraft->save();
+        $aircraft->save(); 
     }
 }
