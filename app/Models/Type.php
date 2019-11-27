@@ -369,6 +369,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Quotation Item.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfQuotationItemCost(Builder $query)
+    {
+        return $query->where('of', 'quotation-item-cost');
+    }
+
+    /**
      * Scope a query to only include type of Regulator.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
