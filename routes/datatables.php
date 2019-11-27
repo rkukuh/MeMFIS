@@ -213,6 +213,23 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** LEAVE */
+
+        Route::name('leave.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'leave',
+                'namespace' => 'Leave'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/propose-leave', 'ProposeLeaveDatatables@index')->name('propose-leave.index');
+            });
+
+        });
+
         /** Receiving Inspection Report */
 
         Route::name('rir.')->group(function () {

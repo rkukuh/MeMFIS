@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Datatables;
-
+use Carbon\Carbon;
 use App\Models\Employee;
 use App\Models\EmployeeAttendance;
 use App\Http\Controllers\Controller;
@@ -10,12 +10,13 @@ class AttendanceDatatables extends Controller
 {
     public function index(){
         ini_set('memory_limit', '-1');
+        $days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
         //testing
         $anam = Employee::where('code','18040060')->first();
-        // $attendances = EmployeeAttendance::where('employee_id',$anam->id)->with('attendance_correction','attendance_overtime','employee','statuses','parent')->has('parent')->get();
+        $attendances = EmployeeAttendance::where('employee_id',$anam->id)->with('attendance_correction','attendance_overtime','employee','statuses','parent')->get();
 
-        $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses')->get();
+        // $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses')->get();
 
         foreach($attendances as $attendance){
             //Time converison from second
@@ -25,14 +26,13 @@ class AttendanceDatatables extends Controller
                 $attendance->attendance_correction = $attendance->attendance_correction;
             }
 
-            if($attendance->leave){
-                $attendance->status = "ON LEAVE";
-                $attendance->leave = $attendance->leave;
-            }elseif(isset($attendance->statuses)){
-                $attendance->status = $attendance->statuses()->orderBy('created_at', 'desc')->first()->name;
+            if(sizeof($attendance->statuses) > 0){
+                $statuses =  $attendance->statuses()->pluck('name')->toArray();
+                $attendance->status = join(',', $statuses);
             }
 
-            $attendance->day = date('D',$attendance->day);
+            $date = Carbon::createFromFormat('Y-m-d', $attendance->date);
+            $attendance->day = $days[$date->dayOfWeek];
             $attendance->late = gmdate('H:i:s',$attendance->late_in);
             $attendance->earlier = gmdate('H:i:s',$attendance->earlier_out);
             $attendance->overtime = gmdate('H:i:s',$attendance->overtime);

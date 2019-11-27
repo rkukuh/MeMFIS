@@ -2,6 +2,11 @@
 
 namespace App\Http\Requests\Frontend;
 
+use App\Models\Leave;
+use App\Models\Status;
+use App\Models\Employee;
+use App\Models\LeaveType;
+use App\Helpers\DocumentNumber;
 use Illuminate\Foundation\Http\FormRequest;
 
 class leaveStore extends FormRequest
@@ -13,7 +18,7 @@ class leaveStore extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,5 +31,23 @@ class leaveStore extends FormRequest
         return [
             //
         ];
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $this->merge([
+                'employee_id' => optional(Employee::where('uuid', $this->employee_uuid)->first())->id,
+                'leavetype_id' => optional(LeaveType::where('uuid', $this->leave_type)->first())->id,
+                'code' => DocumentNumber::generate('LEAV-', Leave::withTrashed()->count()+1),
+                'status_id' => optional(Status::ofLeave()->where('code','open')->first())->id,
+                ]);
+        });
     }
 }

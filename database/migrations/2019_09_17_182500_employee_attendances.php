@@ -24,7 +24,6 @@ class EmployeeAttendances extends Migration
             $table->bigInteger('late_in')->nullable();
             $table->bigInteger('earlier_out')->nullable();
             $table->bigInteger('overtime')->nullable();
-            $table->unsignedBigInteger('statuses_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -35,11 +34,6 @@ class EmployeeAttendances extends Migration
 
             $table->foreign('employee_id')
                     ->references('id')->on('employees')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('statuses_id')
-                    ->references('id')->on('statuses')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });

@@ -71,7 +71,6 @@ class AttendanceCorrectionController extends Controller
      */
     public function update(AttendanceCorrectionUpdate $request, AttendanceCorrection $attendanceCorrection)
     {
-        //
     }
 
     /**

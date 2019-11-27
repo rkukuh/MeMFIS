@@ -42,7 +42,7 @@ class EmployeeWorkshiftController extends Controller
     {
         $workshift = Workshift::where('uuid',$request->workshift)->first()->id;
 
-        $employee->workshift()->create([
+        $employee->workshifts()->create([
             'workshift_id' => $workshift,
             'updated_at' => null,
         ]);
@@ -85,11 +85,11 @@ class EmployeeWorkshiftController extends Controller
         
         $time = Carbon::now();
 
-        $employee->workshift()->whereNull('employee_workshift.updated_at')->update([
+        $employee->workshifts()->whereNull('employee_workshift.updated_at')->update([
             'updated_at' => $time,
         ]);
         
-        $employee->workshift()->create([
+        $employee->workshifts()->create([
             'workshift_id' => $workshift,
             'created_at' => $time,
             'updated_at' => null,
