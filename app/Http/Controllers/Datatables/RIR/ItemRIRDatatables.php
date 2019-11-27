@@ -21,8 +21,8 @@ class ItemRIRDatatables extends Controller
 
         foreach($rirs as $Rir){
             $Rir->unit_name .= Unit::find($Rir->pivot->unit_id)->name;
-            $Rir->qty_pr .= $rir->purchase_order->purchase_request->items->where('id',$Rir->id)->first()->pivot->quantity;
-            $Rir->qty_po .= $rir->purchase_order->items->where('id',$Rir->id)->first()->pivot->quantity;
+            $Rir->qty_pr .= $rir->purchase_order->purchase_request->items->where('id',$Rir->id)->first()->pivot->quantity." ".Unit::find($Rir->unit_id)->name;
+            $Rir->qty_po .= $rir->purchase_order->items->where('id',$Rir->id)->first()->pivot->quantity." ".Unit::find($Rir->unit_id)->name;
         }
 
         $data = $alldata = json_decode($rirs);
