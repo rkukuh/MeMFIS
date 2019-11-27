@@ -176,7 +176,7 @@ class GoodsReceivedController extends Controller
         $pdf = \PDF::loadView('frontend/form/goods_received_note',[
                 'username' => Auth::user()->name,
                 'goodsReceived' => $goodsReceived,
-                'created_by' => '$goodsReceived->audits->first()->user->->name'
+                'created_by' => $goodsReceived->audits->first()->user->name
                 ]);
 
         return $pdf->stream();

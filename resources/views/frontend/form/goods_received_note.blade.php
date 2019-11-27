@@ -155,7 +155,7 @@
                     <tr>
                         <td valign="top" width="13%"><b>Ref. DO No</b></td>
                         <td valign="top"width="1%">:</td>
-                        <td valign="top" width="54%"></td>
+                        <td valign="top" width="54%">{{$goodsReceived->delivery_order_number}}</td>
                     </tr>
                     <tr>
                         <td valign="top" width="13%"><b></b></td>
@@ -222,7 +222,7 @@
                             <td valign="top" align="center" width="7%">{{$item->pivot->quantity}}</td>
                             <td valign="top" align="center" width="7%">{{$item->pivot->unit_id}}</td>
                             <td valign="top" align="center" width="14%">{{$item->pivot->expired_at}}</td>
-                            <td valign="top" align="center" width="11%"></td>
+                            <td valign="top" align="center" width="11%">{{$item->pivot->location}}</td>
                         </tr>
                     @endforeach
                 </table>
@@ -234,7 +234,7 @@
                 <div class="body">
                     <table width="100%">
                         <tr>
-                            <td>{{$goodsReceived->note}}</td>
+                            <td>{{$goodsReceived->description}}</td>
                         </tr>
                     </table>
                 </div>
