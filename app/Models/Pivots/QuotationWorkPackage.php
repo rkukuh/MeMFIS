@@ -44,6 +44,24 @@ class QuotationWorkPackage extends Pivot
     }
 
     /**
+     * M-M Polymorphic: A promo can be applied to many entities.
+     *
+     * This function will get all the promos that are applied to a given Quotation WorkPackage.
+     * See: Promo's quotation_workpackage() method for the inverse
+     *
+     * @return mixed
+     */
+    public function promos()
+    {
+        return $this->morphToMany('App\Models\Promo', 'promoable')
+                    ->withPivot(
+                        'value', 
+                        'amount'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * One-Way: A Quotation's WorkPackages must have a quotation owning to.
      *
      * @return mixed

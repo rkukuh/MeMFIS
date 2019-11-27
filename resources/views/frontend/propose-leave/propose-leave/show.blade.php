@@ -52,23 +52,10 @@
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            @hasanyrole('hrd|admin')
-                                                <label class="form-control-label">
-                                                    Propose Leave To @include('frontend.common.label.optional')
-                                                </label>
-                                            
-                                                @include('frontend.common.employee.index')
-                                            @endrole
-                                            @hasanyrole('employee')
-                                                <label class="form-control-label">
-                                                    Employee Name 
-                                                </label>
-
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('id', 'employee')
-                                                    @slot('text', 'generate from user login')
-                                                @endcomponent
-                                            @endrole
+                                            @component('frontend.common.label.data-info')
+                                                @slot('id', 'employee')
+                                                @slot('text', $leave->employee->full_name)
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -77,10 +64,9 @@
                                                 Leave Types @include('frontend.common.label.required')
                                             </label>
                                             
-                                            @component('frontend.common.input.edit-select2')
+                                            @component('frontend.common.label.data-info')
                                                 @slot('name', 'leave_type')
-                                                @slot('options', $types)
-                                                @slot('value', $leave->leaveType->uuid)
+                                                @slot('text', $leave->leaveType->name)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6 mt-5">
@@ -93,10 +79,10 @@
                                                 Date Start @include('frontend.common.label.required')
                                             </label>
                                          
-                                            @component('frontend.common.input.datepicker')
+                                            @component('frontend.common.label.data-info')
                                                 @slot('id', 'start_date')
                                                 @slot('name', 'start_date')
-                                                @slot('value', $leave->start_date)
+                                                @slot('text', $leave->start_date)
                                                 @slot('id_error','start_date')
                                             @endcomponent
                                         </div>
@@ -105,11 +91,10 @@
                                                 Date End @include('frontend.common.label.required')
                                             </label>
                                          
-                                            @component('frontend.common.input.datepicker')
+                                            @component('frontend.common.label.data-info')
                                                 @slot('id', 'exp_date')
-                                                @slot('text', 'Date End')
                                                 @slot('name', 'exp_date')
-                                                @slot('value', $leave->end_date)
+                                                @slot('text', $leave->end_date)
                                                 @slot('id_error','exp_date')
                                             @endcomponent
                                         </div>
@@ -120,11 +105,11 @@
                                                 Description
                                             </label>
 
-                                            @component('frontend.common.input.textarea')
+                                            @component('frontend.common.label.data-info')
                                                 @slot('rows', '5')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
-                                                @slot('value', 'Description')
+                                                @slot('text', 'Description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -132,14 +117,6 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
-                                                        @slot('id', 'edit-propose-leave')
-                                                        @slot('class', 'edit-propose-leave')
-                                                        @slot('text', 'Update Leave Proposal')
-                                                    @endcomponent
-
-                                                    @include('frontend.common.buttons.reset')
 
                                                     @include('frontend.common.buttons.back')
                                                 </div>
@@ -161,9 +138,5 @@
     <script> 
         let url = "{{ route('frontend.leave.update', ['leave' => $leave->uuid]) }}"
     </script>
-    <script src="{{ asset('js/frontend/propose-leave/propose-leave/edit.js')}}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/edit-select2.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
 @endpush

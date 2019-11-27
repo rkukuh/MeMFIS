@@ -57,19 +57,17 @@
                                                 Employee Name @include('frontend.common.label.required')
                                             </label>
                                          
-                                            @include('frontend.common.employee.index')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $employee->code.' - '.$employee->full_name)
+                                            @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Correction Date @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.datepicker')
-                                                @slot('id', 'date')
-                                                @slot('text', 'Date')
-                                                @slot('name', 'date')
-                                                @slot('value', $attcor->correction_date)
-                                                @slot('id_error','date')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $attcor->correction_date)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -79,11 +77,8 @@
                                                 Correction Time @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.edit-select2')
-                                                @slot('id', 'attendance_correction_time_type')
-                                                @slot('name', 'attendance_correction_time_type')
-                                                @slot('options', $types)
-                                                @slot('value', $attcor->type->uuid)
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $attcor->type->name)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -91,10 +86,8 @@
                                                 Time 
                                             </label>
 
-                                            @component('frontend.common.input.timepicker')
-                                                @slot('id', 'time')
-                                                @slot('value', $attcor->correction_time)
-                                                @slot('class','m_timepicker_1 text-center')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $attcor->correction_time)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -104,12 +97,9 @@
                                                 Description 
                                             </label>
 
-                                            @component('frontend.common.input.textarea')
+                                            @component('frontend.common.label.data-info')
                                                 @slot('rows', '5')
-                                                @slot('id', 'description')
-                                                @slot('name', 'description')
-                                                @slot('value', $attcor->description)
-                                                @slot('text', 'Description')
+                                                @slot('text', $attcor->description)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -117,16 +107,7 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('id', 'edit-attendance-correction')
-                                                        @slot('class', 'edit-attendance-correction')
-                                                        @slot('type', 'button')
-                                                    @endcomponent
-
-                                                    @include('frontend.common.buttons.reset')
-
                                                     @include('frontend.common.buttons.back')
-
                                                 </div>
                                             </div>
                                         </div>

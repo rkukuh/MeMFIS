@@ -76,16 +76,16 @@ class EmployeeAttendance extends MemfisModel
     }
 
     /**
-     * One-to-One: An Employee have one Status Attendance.
+     * One-to-Many: A Project's WorkPackages may have one or many engineer.
      *
-     * This function will retrieve Status Attendance of a given Employee.
-     * See: Status employee() method for the inverse
+     * This function will retrieve all the engineer of a project's workpackages.
+     * See: Project WorkPackage Engineer's header() method for the inverse
      *
      * @return mixed
      */
     public function statuses()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsToMany(Status::class, 'employee_attendance_statuses', 'employee_attendance_id', 'status_id')->withTimestamps();
     }
 
     /**
