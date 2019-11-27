@@ -80,11 +80,6 @@ class EmployeeAttendanceController extends Controller
                 $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME).'_'.$random;
             }
 
-            // local
-            // $path = $file->storeAs(
-            //     'attendance_files',$filename
-            // );
-
             $destination = 'attendance_files';
             $storagePath = Storage::disk('s3')->putFileAs($destination,$file, $filename);
 
@@ -107,9 +102,9 @@ class EmployeeAttendanceController extends Controller
             $index = 0;
             
             // slice unneded data rows from last time import.
-            if($last_index){
-                $lines = array_slice($lines,$last_index);
-            }
+            // if($last_index){
+            //     $lines = array_slice($lines,$last_index);
+            // }
 
             foreach ($lines as $line) {
                 $data = explode('\t', trim($line));
@@ -190,141 +185,233 @@ class EmployeeAttendanceController extends Controller
                 }
             }
 
-            for ($i=0; $i < count($data_final); $i++) { 
-                for ($y=0; $y < count($data_final[$i]['date']); $y++) { 
-                    
-                    $employee = Employee::where('code',$data_final[$i]['nrp'])->first();
-                    $statuses = [];
-                    if(isset($employee->id)){
-                        $attendance = EmployeeAttendance::where('employee_id',$employee->id)->whereDate('date',$data_final[$i]['date'][$y]['date'])->first();
-                        if($attendance->created_at == $attendance->updated_at){
-                            $in = '00:00:00';
-                            $out = '00:00:00';
-                            $status = Status::where('code','normal')->first();
-                            array_push($statuses, $status->id);
-                            //IN & OUT
-                            if(reset($data_final[$i]['date'][$y]['time'])){
-                                $in = reset($data_final[$i]['date'][$y]['time']);
+            $timezone = 'Asia/Jakarta';
+            /** For now use default value of late tolerance time = 30 minutes  */
+            $late_tolerance_time = Carbon::createFromTimeString('07:00:00', $timezone);
+
+            foreach($data_final as $attendances){
+                $statuses = [];
+                $employee = Employee::where('code',$attendances['nrp'])->first();
+                $workshifts = $employee->workshifts()->first();
+                
+                if($workshifts){
+                    $schedules = $workshifts->workshift_schedules;
+                    foreach($attendances['date'] as $attendance){
+                        /** get shift for that day  */ 
+                        $shift = $schedules->where('days', strtolower($attendance['days']) )->first();
+
+                        /** check if scan day on workshift or not */
+                        if($shift){
+          
+                            /** if true, proceed updating attendances */
+
+                            /** set all the time from string into carbon, so it can be calculated for later purpose */ 
+                            $shift->in = Carbon::createFromTimeString($shift->in, $timezone);
+                            $shift->out = Carbon::createFromTimeString($shift->out, $timezone);
+                            $shift->break_in = Carbon::createFromTimeString($shift->break_in, $timezone);
+                            $shift->break_out = Carbon::createFromTimeString($shift->break_out, $timezone);
+
+                            /** 
+                             *  use from workshift instead of manually input, but still using 30. 
+                             *  TODO: get time tolerance from table  
+                             */
+                            $late_tolerance_time = $shift->in->addMinutes(30);
+
+                            /** counting user finger scan time on given day */
+                            $count_timestamps = sizeof($attendance['time']);
+
+                            /** give default value */
+                            $check_in   = Carbon::createFromTimeString('00:00:00', $timezone);
+                            $check_out  = Carbon::createFromTimeString('00:00:00', $timezone);
+
+                            /** giving statuses depends on scan timestamps on that day */
+                            switch($count_timestamps){
+                                case 0:
+                                    $status = Status::where('code','absence')->first();
+                                    array_push($statuses, $status->name);
+                                break;
+                                case 1:
+                                    $status = Status::where('code','undisicpline')->first();
+                                    array_push($statuses, $status->name);
+
+                                    /** TODO: identify which scan is missed, check in or check out */
+                                    $check_in = Carbon::createFromTimeString($attendance['time'][0], $timezone);
+                                    dump($check_in);
+                                break;
+                                case 2:
+                                    dump("maybe normal");
+                                    $check_in   = Carbon::createFromTimeString($attendance['time'][0], $timezone);
+                                    $check_out  = Carbon::createFromTimeString($attendance['time'][1], $timezone);
+                                    $late_tolerance = $late_tolerance_time->diffInMinutes($check_in);
+
+                                    dump($late_tolerance);
+                                break;
                             }
 
-                            if(end($data_final[$i]['date'][$y]['time'])){
-                                $out = end($data_final[$i]['date'][$y]['time']);
-                            }
+                            dump($shift);
+                        }else{
+                            /** TODO : if false, check for overtime */
 
-                            //CHECK LATE,EARLIER OR OVERTIME
-                            $employee_workshift = EmployeeWorkshift::where('employee_id', $employee->id)->first();
-                            
-                            $late = 0;
-                            $earlier_out = 0;
-                            $overtime = 0;
-
-                            if(isset($employee_workshift->workshift_id)){
-                                $employee_schedule = WorkshiftSchedule::where('workshift_id',$employee_workshift->workshift_id)->get()->toArray();
-                                for ($v=0; $v < count($employee_schedule); $v++) { 
-                                    if(strtolower($data_final[$i]['date'][$y]['days']) == $employee_schedule[$v]['days']){
-                                        
-                                        //LATE
-                                        if(strtotime($in) > strtotime($employee_schedule[$v]['in'])){
-                                            if($in != '00:00:00' && $employee_schedule[$v]['in'] != '00:00:00'){
-                                                $late = abs(strtotime($in) - strtotime($employee_schedule[$v]['in']));
-                                                $status = Status::where('code','undiscipline')->first();
-                                                array_push($statuses, $status->id);
-                                            }
-                                        };
-
-                                        //EARLIER OUT
-                                        if(strtotime($out) < strtotime($employee_schedule[$v]['out'])){
-                                            if($out != '00:00:00' && $employee_schedule[$v]['out'] != '00:00:00'){
-                                                $earlier_out = abs(strtotime($employee_schedule[$v]['out']) - strtotime($out));
-                                                $status = Status::where('code','undiscipline')->first();
-                                                array_push($statuses, $status->id);
-                                            }
-                                        };
-
-                                        //OVERTIME
-                                        if(strtotime($out) > strtotime($employee_schedule[$v]['out'])){
-                                            if($out != '00:00:00' && $employee_schedule[$v]['out'] != '00:00:00'){
-                                                $overtime = abs(strtotime($out) - strtotime($employee_schedule[$v]['out']));
-                                                $status = Status::where('code','normal')->first();
-                                                array_push($statuses, $status->id);
-                                            }
-                                        };
-
-                                    }else{
-                                        //CHECK ABSENCE
-                                        $status = null;
-                                    }  
-                                }
-                            }else{
-                                if(strtolower($data_final[$i]['date'][$y]['days']) == 'saturday' || strtolower($data_final[$i]['date'][$y]['days']) == 'sunday'){
-                                    $status = null;
-                                }else{
-                                    //LATE
-                                    if(strtotime($in) > strtotime('07:30:00')){
-                                        if($in != '00:00:00'){
-                                            $late = abs(strtotime($in) - strtotime('07:30:00'));
-                                            $status = Status::where('code','undiscipline')->first();
-                                            array_push($statuses, $status->id);
-                                        }
-                                    };
-
-                                    //EARLIER OUT
-                                    if(strtotime($out) < strtotime(strtotime('16:30:00'))){
-                                        if($out != '00:00:00'){
-                                            $earlier_out = abs(strtotime('16:30:00') - strtotime($out));
-                                            $status = Status::where('code','undiscipline')->first();
-                                            array_push($statuses, $status->id);
-                                        }
-                                    };
-
-                                    //OVERTIME
-                                    if(strtotime($out) > strtotime('16:30:00')){
-                                        if($out != '00:00:00'){
-                                            $overtime = abs(strtotime($out) - strtotime('16:30:00'));
-                                            $status = Status::where('code','normal')->first();
-                                            array_push($statuses, $status->id);
-                                        }
-                                    };
-
-                                    //CHECK ABSENCE
-                                    if(!$data_final[$i]['date'][$y]['time'] && !$data_final[$i]['date'][$y]['time']){
-                                        $status = Status::where('code','absence')->first();
-                                        array_push($statuses, $status->id);
-                                    }
-                                }
-                            }
-                            
-                            //IN & OUT II
-                            if($data_final[$i]['date'][$y]['time']){
-                                if($in == $out){
-                                    $out = '00:00:00';
-                                    $late = 0;
-                                    $earlier_out = 0;
-                                    $overtime = 0;
-                                    $status = Status::where('code','undiscipline')->first();
-                                    array_push($statuses, $status->id);
-                                }
-                            }
-
-                            $attendance_to_update = EmployeeAttendance::where('employee_id',$employee->id)->whereDate('date',$data_final[$i]['date'][$y]['date'])->first();
-                            if($attendance_to_update){
-                                $attendance_to_update->update([
-                                    'employee_id' => $employee->id,
-                                    'in' => $in,
-                                    'out' => $out,
-                                    'late_in' => $late,
-                                    'earlier_out' => $earlier_out,
-                                    'overtime' => $overtime
-                                ]);
-                                $statuses = array_unique($statuses);
-                                $attendance->statuses()->attach($statuses);
-
-                            }
+                            dump($attendance['days']);
                         }
-                    }
 
+                        
+                        // dump($attendance);
+                    }
+                }else{
+                    //  giving default value like days, shift in & out, tolerances, etc.
                 }
+                // updating selected date
+                
+                // dump($employee->first_name);
+            }
+            dd("break");
+
+            for ($i=0; $i < count($data_final); $i++) { 
+                // dump($data_final[$i]);
+                // for ($y=0; $y < count($data_final[$i]['date']); $y++) { 
+                    
+                //     $employee = Employee::where('code',$data_final[$i]['nrp'])->first();
+                //     $statuses = [];
+                //     if(isset($employee->id)){
+                //         $attendance = EmployeeAttendance::where('employee_id',$employee->id)->whereDate('date',$data_final[$i]['date'][$y]['date'])->first();
+                //         if($attendance->created_at == $attendance->updated_at){
+                //             $in = '00:00:00';
+                //             $out = '00:00:00';
+                //             $status = Status::where('code','normal')->first();
+                //             array_push($statuses, $status->name);
+                //             dd($data_final);
+                //             //IN & OUT
+                //             if(reset($data_final[$i]['date'][$y]['time'])){
+                //                 $in = reset($data_final[$i]['date'][$y]['time']);
+                //             }
+
+                //             if(end($data_final[$i]['date'][$y]['time'])){
+                //                 $out = end($data_final[$i]['date'][$y]['time']);
+                //             }
+
+                //             //CHECK LATE,EARLIER OR OVERTIME
+                //             // $employee_workshift = EmployeeWorkshift::where('employee_id', $employee->id)->first();
+                //             $employee_workshift = $employee->workshifts()->first();
+                //             $late = 0;
+                //             $earlier_out = 0;
+                //             $overtime = 0;
+
+                //             if($employee_workshift){
+                //                 // $employee_schedule = WorkshiftSchedule::where('workshift_id',$employee_workshift->workshift_id)->get()->toArray();
+                //                 $employee_schedule = $employee_workshift->workshift_schedules->toArray();
+                //                 for ($v=0; $v < count($employee_schedule); $v++) { 
+                //                     if(strtolower($data_final[$i]['date'][$y]['days']) == $employee_schedule[$v]['days']){
+                //                         dump($in);
+                //                         dump($out);
+                //                         dump($employee_schedule[$v]);
+                //                         // LATE
+                //                         if(strtotime($in) > strtotime($employee_schedule[$v]['in'])){
+                //                             if($in != '00:00:00' && $employee_schedule[$v]['in'] != '00:00:00'){
+                //                                 $late = abs(strtotime($in) - strtotime($employee_schedule[$v]['in']));
+                //                                 $status = Status::where('code','undiscipline')->first();
+                //                                 array_push($statuses, $status->name);
+                //                             }
+                //                         };
+
+                //                         // EARLIER OUT
+                //                         if(strtotime($out) < strtotime($employee_schedule[$v]['out'])){
+                //                             if($out != '00:00:00' && $employee_schedule[$v]['out'] != '00:00:00'){
+                //                                 $earlier_out = abs(strtotime($employee_schedule[$v]['out']) - strtotime($out));
+                //                                 $status = Status::where('code','undiscipline')->first();
+                //                                 array_push($statuses, $status->name);
+                //                             }
+                //                         };
+
+                //                         // OVERTIME
+                //                         if(strtotime($out) > strtotime($employee_schedule[$v]['out'])){
+                //                             if($out != '00:00:00' && $employee_schedule[$v]['out'] != '00:00:00'){
+                //                                 $overtime = abs(strtotime($out) - strtotime($employee_schedule[$v]['out']));
+                //                                 $status = Status::where('code','normal')->first();
+                //                                 array_push($statuses, $status->name);
+                //                             }
+                //                         };
+                //                     dd("understanding");
+                //                     }else{
+                //                         // CHECK ABSENCE
+                //                         $status = null;
+                //                     }  
+                //                 }
+                //                 dd($statuses);
+                //             }else{
+                //                 if(strtolower($data_final[$i]['date'][$y]['days']) == 'saturday' || strtolower($data_final[$i]['date'][$y]['days']) == 'sunday'){
+                //                     $status = null;
+                //                 }else{
+                //                     // LATE
+                //                     if(strtotime($in) > strtotime('07:30:00')){
+                //                         if($in != '00:00:00'){
+                //                             $late = abs(strtotime($in) - strtotime('07:30:00'));
+                //                             $status = Status::where('code','undiscipline')->first();
+                //                             array_push($statuses, $status->name);
+                //                         }
+                //                     };
+
+                //                     // EARLIER OUT
+                //                     if(strtotime($out) < strtotime(strtotime('16:30:00'))){
+                //                         if($out != '00:00:00'){
+                //                             $earlier_out = abs(strtotime('16:30:00') - strtotime($out));
+                //                             $status = Status::where('code','undiscipline')->first();
+                //                             array_push($statuses, $status->name);
+                //                         }
+                //                     };
+
+                //                     // OVERTIME
+                //                     if(strtotime($out) > strtotime('16:30:00')){
+                //                         if($out != '00:00:00'){
+                //                             $overtime = abs(strtotime($out) - strtotime('16:30:00'));
+                //                             $status = Status::where('code','normal')->first();
+                //                             array_push($statuses, $status->name);
+                //                         }
+                //                     };
+
+                //                     // CHECK ABSENCE
+                //                     if(!$data_final[$i]['date'][$y]['time'] && !$data_final[$i]['date'][$y]['time']){
+                //                         $status = Status::where('code','absence')->first();
+                //                         array_push($statuses, $status->name);
+                //                     }
+                //                 }
+                //             }
+                            
+                //             //IN & OUT II
+                //             if($data_final[$i]['date'][$y]['time']){
+                //                 if($in == $out){
+                //                     $out = '00:00:00';
+                //                     $late = 0;
+                //                     $earlier_out = 0;
+                //                     $overtime = 0;
+                //                     $status = Status::where('code','undiscipline')->first();
+                //                     array_push($statuses, $status->name);
+                //                 }
+                //             }
+
+                //             $statuses = array_unique($statuses);
+                //             dump($statuses);
+
+                //             // $attendance_to_update = EmployeeAttendance::where('employee_id',$employee->id)->whereDate('date',$data_final[$i]['date'][$y]['date'])->first();
+                //             // if($attendance_to_update){
+                //             //     $attendance_to_update->update([
+                //             //         'employee_id' => $employee->id,
+                //             //         'in' => $in,
+                //             //         'out' => $out,
+                //             //         'late_in' => $late,
+                //             //         'earlier_out' => $earlier_out,
+                //             //         'overtime' => $overtime
+                //             //     ]);
+                //             //     $attendance->statuses()->attach($statuses);
+
+                //             // }
+                //         }
+                //     }
+
+                // }
             } 
+
+            dd("break");
 
             return redirect('import-fingerprint');
         }
@@ -428,5 +515,19 @@ class EmployeeAttendanceController extends Controller
             }
 
         }
+    }
+
+    /** 
+     * function for checking employee check-in scan time tardiness / lateness
+     */
+    public function check_in($time){
+        //
+    }
+
+    /** 
+     * function for checking employee check-out scan time tardiness / lateness
+     */
+    public function check_out($time){
+        //
     }
 }
