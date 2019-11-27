@@ -126,7 +126,7 @@ class Item extends MemfisModel implements HasMedia
                         'quantity_unit',
                         'unit_id',
                         'price',
-                        'already_received_amount',
+                        'location',
                         'note'
                     )
                     ->withTimestamps();

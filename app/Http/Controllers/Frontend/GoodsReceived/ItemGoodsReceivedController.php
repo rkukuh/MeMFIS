@@ -60,7 +60,7 @@ class ItemGoodsReceivedController extends Controller
                 else{
                     $quantity_unit = $request->quantity;
                 }
-
+                $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
                 $goodsReceived->items()->attach([$item->id => [
                     'quantity'=> $request->quantity,
                     'unit_id' => $request->unit_id,
