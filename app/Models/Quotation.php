@@ -104,15 +104,12 @@ class Quotation extends MemfisModel
      *
      * @return mixed
      */
-    public function items()
+    public function workshop()
     {
         return $this->belongsToMany(Item::class)
                     ->withPivot(
-                        'taskcard_id',
-                        'pricelist_unit_id',
-                        'pricelist_price',
-                        'subtotal',
-                        'note'
+                        'serial_number',
+                        'complaint',
                     )
                     ->withTimestamps();
     }
@@ -168,7 +165,7 @@ class Quotation extends MemfisModel
     {
         return $this->morphToMany(Promo::class, 'promoable')
                     ->withPivot(
-                        'value', 
+                        'value',
                         'amount'
                     )
                     ->withTimestamps();
