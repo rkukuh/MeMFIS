@@ -37,7 +37,24 @@ class WorkshopController extends Controller
      */
     public function store(WorkshopStore $request)
     {
-        //
+        $contact = $scheduled_payment_amount = [];
+
+        $contact['name']     = $request->attention_name;
+        $contact['phone'] = $request->attention_phone;
+        $contact['address'] = $request->attention_address;
+        $contact['fax'] = $request->attention_fax;
+        $contact['email'] = $request->attention_email;
+
+        $request->merge(['number' => DocumentNumber::generate('QWOR-', Quotation::withTrashed()->count() + 1)]);
+        $request->merge(['attention' => json_encode($contact)]);
+        $request->merge(['quotationable_type' => 'App\Models\Workshop']);
+        $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
+        $request->merge(['scheduled_payment_amount' => json_encode($scheduled_payment_amount)]);
+        $request->merge(['quotationable_id' => Project::where('uuid', $request->project_id)->first()->id]);
+
+        $quotation = Quotation::create($request->all());
+        
+        return response()->json($quotation);
     }
 
     /**
