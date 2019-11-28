@@ -87,13 +87,27 @@ class RIR extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A RIR may have zero or many genereal document.
+     *
+     * This function will retrieve all the items of a RIR.
+     * See: General_document's rir() method for the inverse
+     *
+     * @return mixed
+     */
+    public function general_documents()
+    {
+        return $this->belongsToMany(Type::class, 'rir_general_documents','rir_id','general_document')
+                    ->withTimestamps();
+    }
+
+    /**
      * One-Way: An RIR may have one packing condition.
      *
      * This function will retrieve the packing condition of an RIR.
      *
      * @return mixed
      */
-    public function packing_condition()
+    public function packingCondition()
     {
         return $this->belongsTo(Type::class, 'packing_condition');
     }
@@ -105,7 +119,7 @@ class RIR extends MemfisModel
      *
      * @return mixed
      */
-    public function packing_type()
+    public function packingType()
     {
         return $this->belongsTo(Type::class, 'packing_type');
     }
@@ -117,7 +131,7 @@ class RIR extends MemfisModel
      *
      * @return mixed
      */
-    public function preservation_check()
+    public function preservationCheck()
     {
         return $this->belongsTo(Type::class, 'preservation_check');
     }
@@ -156,6 +170,20 @@ class RIR extends MemfisModel
     public function status()
     {
         return $this->belongsTo(Status::class);
+    }
+
+    /**
+     * Many-to-Many: A RIR may have zero or many technical document.
+     *
+     * This function will retrieve all the items of a RIR.
+     * See: Technical_document's rir() method for the inverse
+     *
+     * @return mixed
+     */
+    public function technical_documents()
+    {
+        return $this->belongsToMany(Type::class, 'rir_technical_documents','rir_id','technical_document')
+                    ->withTimestamps();
     }
 
     /**

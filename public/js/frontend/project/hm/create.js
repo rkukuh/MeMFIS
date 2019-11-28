@@ -1,7 +1,7 @@
 let Project = {
     init: function () {
         $('.add-project').on('click', function () {
-            mApp.block(".add-project");
+            mApp.block(".action-buttons");
 
             let data = new FormData();
             data.append("title", $('#project_title').val());
@@ -23,7 +23,7 @@ let Project = {
                 cache: false,
                 data:data,
                 success: function (data) {
-                    mApp.unblock(".add-project");
+                    mApp.unblock(".action-buttons");
 
                     if (data.errors) {
                         if (data.errors.customer_id) {

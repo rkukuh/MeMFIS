@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\MemfisModel;
-use Directoryxx\Finac\Model\Coa;
 use App\Scopes\OrderByColumn;
+use Directoryxx\Finac\Model\Coa;
 use Illuminate\Database\Eloquent\Builder;
 
 class Category extends MemfisModel
@@ -54,7 +54,6 @@ class Category extends MemfisModel
     }
 
     /*************************************** RELATIONSHIP ****************************************/
-
 
     /**
      * Polymorphic: An entity can have zero or many coa.

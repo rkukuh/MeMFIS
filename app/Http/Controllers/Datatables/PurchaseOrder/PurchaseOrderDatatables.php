@@ -23,9 +23,7 @@ class PurchaseOrderDatatables extends Controller
             if($PurchaseOrder->deleted_at <> null){
                 $PurchaseOrder->status .= 'Void';
             }else if(sizeOf($PurchaseOrder->approvals->toArray()) == 1){
-                $PurchaseOrder->status .= 'Approved 1';
-            }else if(sizeOf($PurchaseOrder->approvals->toArray()) == 2){
-                $PurchaseOrder->status .= 'Approved 2';
+                $PurchaseOrder->status .= 'Approved';
             }else{
                 $PurchaseOrder->status .= '';
 

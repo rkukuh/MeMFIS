@@ -4,6 +4,7 @@ namespace App\Http\Requests\Frontend;
 
 use App\Models\Item;
 use App\Models\Unit;
+use App\Models\Pivots\PurchaseRequestItem;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -42,12 +43,12 @@ class ItemProjectPurchaseRequestUpdate extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            if (Unit::where('uuid', $this->unit_id)->first() == null) {
+            if (Unit::find($this->unit_id) == null) {
                 $validator->errors()->add('quantity', 'Unit not found');
             } else {
-                $unit_id = Unit::where('uuid', $this->unit_id)->first()->id;
+                $unit_id = Unit::find($this->unit_id)->id;
 
-                $item = Item::where('uuid', $this->item_id)->first();
+                $item = Item::find(PurchaseRequestItem::find($this->route('item'))->item_id);
                 if ($unit_id == "" . $item->unit_id . "") {
                     //
                 } else {

@@ -220,10 +220,12 @@
                                     </div>
                                 </div>
                                 <div class="rir_datatable" id="scrolling_both"></div>
+
                                 <hr>
 
                                 @include('frontend.rir.modal')
                                 @include('frontend.rir.modal-edit')
+                                @include('frontend.common.item.modal')
 
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -670,6 +672,7 @@
         let uuid = '{{$receivingInspectionReport->uuid}}';
         let po_uuid = '{{$receivingInspectionReport->purchase_order->uuid}}';
         let rir_uuid = '{{$receivingInspectionReport->uuid}}';
+        let urlItem = '/datatables/purchase-order/modal/item/'+po_uuid;
 
     </script>
 
@@ -677,9 +680,6 @@
     <script src="{{ asset('js/frontend/functions/select2/vendor.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/material-po.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>

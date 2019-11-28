@@ -18,8 +18,8 @@ class ManufacturersImport implements ToModel, WithHeadingRow
         $manufacturer = new Manufacturer([
             'code' => $row['code'],
             'name' => $row['name'],
-        ]);
+        ]); 
 
-        $manufacturer->save();
+        $manufacturer->save(); 
     }
 }

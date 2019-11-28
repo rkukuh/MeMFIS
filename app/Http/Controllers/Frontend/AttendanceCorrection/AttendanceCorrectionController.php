@@ -50,6 +50,7 @@ class AttendanceCorrectionController extends Controller
      */
     public function store(AttendanceCorrectionStore $request)
     {
+        dd("brek");
         $employee = Employee::where('uuid', $request->uuid_employee)->first();
         $attendance =  EmployeeAttendance::whereDate('date', $request->date)->where('employee_id', $employee->id)->first();
         $correction_type = Type::ofAttendanceCorrection()->where('code', $request->attendance_correction_time_type)->first();
@@ -84,7 +85,13 @@ class AttendanceCorrectionController extends Controller
      */
     public function show(AttendanceCorrection $attcor)
     {
-        //
+        $types = Type::ofAttendanceCorrection()->get();
+
+        return view('frontend.attendance-correction.show',[
+            'attcor' => $attcor,
+            'types' => $types,
+            'employee' => $attcor->employee
+        ]);
     }
 
     /**
@@ -95,7 +102,13 @@ class AttendanceCorrectionController extends Controller
      */
     public function edit(AttendanceCorrection $attcor)
     {
-        return view('frontend.attendance-correction.edit');
+        $types = Type::ofAttendanceCorrection()->get();
+
+        return view('frontend.attendance-correction.edit',[
+            'attcor' => $attcor,
+            'types' => $types,
+            'employee' => $attcor->employee
+        ]);
     }
 
     /**
@@ -107,7 +120,9 @@ class AttendanceCorrectionController extends Controller
      */
     public function update(AttendanceCorrectionUpdate $request, AttendanceCorrection $attcor)
     {
-        //
+        $attcor->update([$request->all()]);
+
+        return response()->json($attcor);
     }
 
     /**
@@ -131,11 +146,12 @@ class AttendanceCorrectionController extends Controller
      */
     public function approval(AttendanceCorrection $attcor, Request $request){
         $type = $attcor->type;
-        $replica = DB::table('employee_attendances')->where('employee_id', $attcor->employee_id)->where('date', $attcor->correction_date)->whereNull('deleted_at')->first();
+        $replica = DB::table('employee_attendances')->where('employee_id', $attcor->employee_id)->whereDate('date', $attcor->correction_date->format('Y-m-d'))->whereNull('deleted_at')->first();
         $updated = DB::table('employee_attendances')->where('uuid', $replica->uuid)->update(['deleted_at' => Carbon::now()]);
         if($type->code == "check-in"){
                 $inserted = DB::table('employee_attendances')->insert([
                         'uuid' => Str::uuid(),
+                        'parent_id' => $replica->id,
                         'employee_id' => $replica->employee_id, 
                         'date' => $replica->date,
                         'in' => $attcor->correction_time, 
@@ -151,6 +167,7 @@ class AttendanceCorrectionController extends Controller
             }else{
                 $inserted = DB::table('employee_attendances')->insert([
                     'uuid' => Str::uuid(),
+                    'parent_id' => $replica->id,
                     'employee_id' => $replica->employee_id, 
                     'date' => $replica->date,
                     'in' => $replica->in, 
@@ -204,4 +221,23 @@ class AttendanceCorrectionController extends Controller
         
         return response()->json($result);
     }
+
+     /**
+     * API for ajax request for attendance correction and informations.
+     *
+     * @param  \App\Models\AttendanceCorrection  $attcor
+     * @return \Illuminate\Http\Response
+     */
+    public function attcorModal(AttendanceCorrection $attcor)
+    {
+        $attcor->status = $attcor->status;
+        $attcor->attendance = $attcor->attendance;
+        if(sizeof($attcor->approvals) > 0){
+            $attcor->conductedBy = $attcor->approvals->first()->conductedBy->first_name." ".$attcor->approvals->first()->conductedBy->creted_at;
+        }else{
+            $attcor->conductedBy = "-";
+        }
+        return response()->json($attcor);
+    }
+
 }
