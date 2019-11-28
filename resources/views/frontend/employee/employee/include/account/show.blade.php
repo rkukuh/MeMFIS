@@ -168,7 +168,7 @@
 
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/employee/employee/create_account.js') }}"></script>
+    <script src="{{ asset('js/frontend/employee/bank-account/create.js') }}"></script>
     <script>
     
     var BootstrapSwitch = {
