@@ -25,11 +25,11 @@
                                                     <td align="center" width="35%">Remark</td>
                                                 </tr>
                                                 <tr class="text-dark">
-                                                    <td valign="top" align="center" width="20%">Transaction No.</td>
-                                                    <td valign="top" align="center" width="15%">Approve</td>
-                                                    <td valign="top" align="center" width="15%">Name;Timestamp</td>
-                                                    <td valign="top" align="center" width="15%">Job Title User approve</td>
-                                                    <td valign="top" align="center" width="35%"></td>
+                                                    <td valign="top" align="center" width="20%" id="attcor-code">Transaction No.</td>
+                                                    <td valign="top" align="center" width="15%" id="attcor-status">Approve</td>
+                                                    <td valign="top" align="center" width="15%" id="attcor-approve">Name;Timestamp</td>
+                                                    <td valign="top" align="center" width="15%" id="attcor-job-title">Job Title User approve</td>
+                                                    <td valign="top" align="center" width="35%" id="attcor-remark"></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -44,23 +44,23 @@
                                         <table class="table table-striped table-bordered table-hover table-checkable" widtd="100%" cellpadding="4">
                                             <tr>
                                                 <td width="25%" class="text-primary font-weight-bold">Correction No.</td>
-                                                <td align="center" width="75%">Sunday, 25/08/2019</td>
+                                                <td align="center" width="75%" id="attcor-code">Sunday, 25/08/2019</td>
                                             </tr>
                                             <tr>
-                                                <td width="20%" class="text-primary font-weight-bold">Check-In</td>
-                                                <td align="center" width="75%">16:31:59</td>
+                                                <td width="20%" class="text-primary font-weight-bold">Check-In</td>                                                   
+                                                <td align="center" width="75%" id="attcor-check-in">Sunday, 25/08/2019</td>
                                             </tr>
                                             <tr>
-                                                <td width="20%" class="text-primary font-weight-bold">Check-Out</td>
-                                                <td align="center" width="75%"></td>
+                                                <td width="20%" class="text-primary font-weight-bold">Check-Out</td>                                                   
+                                                <td align="center" width="75%" id="attcor-check-out">Annual Leave</td>
                                             </tr>
                                             <tr>
                                                 <td width="20%" class="text-primary font-weight-bold">Decription</td>
-                                                <td align="center" width="75%">Blabla</td>
+                                                <td align="center" width="75%" id="attcor-description">Blabla</td>
                                             </tr>
                                             <tr>
-                                                <td width="20%" class="text-primary font-weight-bold">Created Date</td>
-                                                <td align="center" width="75%">27/08/2019 Timestamp</td>
+                                                <td width="20%" class="text-primary font-weight-bold">Created Date</td>                                              
+                                                <td align="center" width="75%" id="attcor-created">27/08/2019 Timestamp</td>
                                             </tr>
                                         </table>
                                     </div>

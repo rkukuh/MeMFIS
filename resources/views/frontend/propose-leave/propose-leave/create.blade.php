@@ -48,8 +48,7 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <form id="leaveForm" name="leaveForm" method="POST" action="{{ route('frontend.leave.store') }}">
-                            @csrf
+                            <form id="leaveForm" name="leaveForm" >
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -87,9 +86,6 @@
                                                 @slot('name', 'leave_type')
                                                 @slot('id_error', 'leave_type')
                                             @endcomponent
-                                            {{-- Casual Leave(if setting daily based) = 3 Days Remaining 
-                                            Annual Leave = 10 Days Remaining
-                                            Sick  --}}
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6 mt-5">
                                            <span id="note_remaining" class="text-danger mt-5">10 Days Remaining</span>
@@ -104,8 +100,8 @@
                                             @component('frontend.common.input.datepicker')
                                                 @slot('id', 'date')
                                                 @slot('text', 'Date')
-                                                @slot('name', 'date_start')
-                                                @slot('id_error','date_start')
+                                                @slot('name', 'start_date')
+                                                @slot('id_error','start_date')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -116,8 +112,8 @@
                                             @component('frontend.common.input.datepicker')
                                                 @slot('id', 'exp_date')
                                                 @slot('text', 'Date End')
-                                                @slot('name', 'date_end')
-                                                @slot('id_error','date_end')
+                                                @slot('name', 'end_date')
+                                                @slot('id_error','end_date')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -142,6 +138,7 @@
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('id', 'add-propose-leave')
                                                         @slot('class', 'add-propose-leave')
+                                                        @slot('type', 'button')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -163,6 +160,9 @@
 @endsection
 
 @push('footer-scripts')
+    <script> let url = "{{ route('frontend.leave.store') }}"</script>
+    <script src="{{ asset('js/frontend/propose-leave/propose-leave/create.js')}}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/leave-type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/leave-type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>

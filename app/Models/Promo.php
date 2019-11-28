@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\MemfisModel;
 use App\Models\Pivots\PurchaseOrderItem;
+use App\Models\Pivots\QuotationWorkPackage;
 
 class Promo extends MemfisModel
 {
@@ -38,5 +39,31 @@ class Promo extends MemfisModel
     public function purchase_order_items()
     {
         return $this->morphedByMany(PurchaseOrderItem::class, 'promoable');
+    }
+
+    /**
+     * M-M Polymorphic: A promo can be applied to many entities.
+     *
+     * This function will get all the POs that are applied by a given promo.
+     * See: Quotation's promos() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotations()
+    {
+        return $this->morphedByMany(Quotation::class, 'promoable');
+    }
+
+    /**
+     * M-M Polymorphic: A promo can be applied to many entities.
+     *
+     * This function will get all the POs that are applied by a given promo.
+     * See: Quotation WorkPackage's promos() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotation_workpackages()
+    {
+        return $this->morphedByMany(QuotationWorkPackage::class, 'promoable');
     }
 }

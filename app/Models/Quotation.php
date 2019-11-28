@@ -104,15 +104,12 @@ class Quotation extends MemfisModel
      *
      * @return mixed
      */
-    public function items()
+    public function workshop()
     {
         return $this->belongsToMany(Item::class)
                     ->withPivot(
-                        'taskcard_id',
-                        'pricelist_unit_id',
-                        'pricelist_price',
-                        'subtotal',
-                        'note'
+                        'serial_number',
+                        'complaint',
                     )
                     ->withTimestamps();
     }
@@ -154,6 +151,24 @@ class Quotation extends MemfisModel
     public function progresses()
     {
         return $this->morphMany(Progress::class, 'progressable');
+    }
+
+    /**
+     * M-M Polymorphic: A promo can be applied to many entities.
+     *
+     * This function will get all the promos that are applied to a given quotation.
+     * See: Promo's quotations() method for the inverse
+     *
+     * @return mixed
+     */
+    public function promos()
+    {
+        return $this->morphToMany(Promo::class, 'promoable')
+                    ->withPivot(
+                        'value',
+                        'amount'
+                    )
+                    ->withTimestamps();
     }
 
     /**

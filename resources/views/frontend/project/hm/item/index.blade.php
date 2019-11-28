@@ -76,7 +76,7 @@
                     </div>
                 </div>
                 <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                    
+
                     <strong> Total : {{ $toolCount }} tool(s) </strong>
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
@@ -106,7 +106,7 @@
                     </div>
                 </div>
                 <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-                    
+
                     <strong> Total : {{ $materialCount }} material(s) </strong>
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
@@ -123,8 +123,4 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/') }}"></script>
 @endpush
