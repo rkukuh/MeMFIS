@@ -85,7 +85,11 @@ class EmployeeAttendance extends MemfisModel
      */
     public function statuses()
     {
-        return $this->belongsToMany(Status::class, 'employee_attendance_statuses', 'employee_attendance_id', 'status_id')->withTimestamps();
+        return $this->belongsToMany(Status::class, 'employee_attendance_statuses', 'employee_attendance_id', 'status_id')
+                        ->withTimestamps()
+                        ->withPivot('deleted_at')
+                        /** https://laracasts.com/discuss/channels/eloquent/query-where-pivot-not-null?page=1 */
+                        ->wherePivot('deleted_at', null);
     }
 
     /**

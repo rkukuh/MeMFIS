@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Import;
 
 use App\Imports\UsersImport;
+use App\Imports\FEFOINImport;
 use App\Imports\EnginesImport;
 use App\Imports\AircraftsImport;
 use App\Imports\CustomersImport;
@@ -10,7 +11,6 @@ use App\Imports\WorkAreasImport;
 use App\Imports\TaskCardsCNimport;
 use App\Imports\TaskCardsATRImport;
 use App\Imports\ManufacturersImport;
-use App\Imports\TaskCardsCNItemimport;
 use App\Imports\TaskCardsBoeingImport;
 use App\Imports\MaterialsAndToolsImport;
 use App\Imports\TaskCardsCPCPTriganaimport;
@@ -34,6 +34,11 @@ class OldDataController extends Controller
     public function engines()
     {
         Excel::import(new EnginesImport, $this->import_directory . 'engines.xlsx');
+    }
+
+    public function fefoin()
+    {
+        Excel::import(new FEFOINImport, $this->import_directory . 'fefoin.xlsx');
     }
 
     public function manufacturers()

@@ -191,8 +191,20 @@
                         <td valign="top" align="center" width="7%">{{$item->unit->name}}</td>
                         <td valign="top" align="center" width="7%">{{$item->price}}</td>
                         <td valign="top" align="center" width="14%">{{$item->quantity*$item->price}}</td>
-                        <td valign="top" align="center" width="11%">??</td>
-                        <td valign="top" align="center" width="14%">??</td>
+                        <td valign="top" align="center" width="11%">
+                            @if(sizeOf($item->promos) > 0)
+                                {{$item->promos->first()->pivot->amount}}
+                            @else
+                                0
+                            @endif
+                        </td>
+                        <td valign="top" align="center" width="14%">
+                            @if(sizeOf($item->promos) > 0)
+                                {{($item->quantity*$item->price)-$item->promos->first()->pivot->amount}}
+                            @else
+                                {{($item->quantity*$item->price)}}
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </table>
@@ -250,18 +262,16 @@
                 <tr>
                     <td align="center" valign="bottom" height="70" width="30%">
                         <b>
-                        @if(sizeOf($purchaseOrder->approvals)>=1)
-                            {{$purchaseOrder->approvals->get(0)->conductedBy->first_name." ".$purchaseOrder->approvals->first()->conductedBy->last_name." ; ".$purchaseOrder->approvals->get(0)->created_at}}
-                        @else
-                        -
-                        @endif
+                            (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
                         </b><br>
-                        <span>jabatan(link with HR)</span>
+                        <span>&nbsp;</span>
                     </td>
                     <td align="center" valign="bottom" height="70" width="33%">
                         <b>
-                        @if(sizeOf($purchaseOrder->approvals)>=2)
-                            {{$purchaseOrder->approvals->get(1)->conductedBy->first_name." ".$purchaseOrder->approvals->first()->conductedBy->last_name." ; ".$purchaseOrder->approvals->get(1)->created_at}}
+                        @if(sizeOf($purchaseOrder->approvals)>=1)
+                            {{$purchaseOrder->approvals->get(0)->conductedBy->first_name." ".$purchaseOrder->approvals->first()->conductedBy->last_name." ; ".$purchaseOrder->approvals->get(0)->created_at}}
                         @else
                         -
                         @endif
