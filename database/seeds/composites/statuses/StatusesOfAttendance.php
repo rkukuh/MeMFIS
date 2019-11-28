@@ -19,20 +19,22 @@ class StatusesOfAttendance extends Seeder
         ]);
 
         Status::create([
-            'code' => 'late',
-            'name' => 'Late',
-            'of'   => 'attendance',
-        ]);
-
-        Status::create([
-            'code' => 'very-late',
-            'name' => 'Veru Late',
-            'of'   => 'attendance',
-        ]);
-
-        Status::create([
             'code' => 'earlier-leave',
             'name' => 'Earlier Leave',
+            'of'   => 'attendance',
+        ]);
+
+        /** https://dictionary.cambridge.org/dictionary/english/indiscipline */
+
+        Status::create([
+            'code' => 'indiscipline',
+            'name' => 'Indiscipline',
+            'of'   => 'attendance',
+        ]);
+
+        Status::create([
+            'code' => 'late',
+            'name' => 'Late',
             'of'   => 'attendance',
         ]);
 
@@ -49,10 +51,15 @@ class StatusesOfAttendance extends Seeder
         ]);
 
         Status::create([
-            'code' => 'undiscipline',
-            'name' => 'Undiscipline',
+            'code' => 'overtime',
+            'name' => 'Overtime',
             'of'   => 'attendance',
         ]);
 
+        Status::create([
+            'code' => 'very-late',
+            'name' => 'Very Late',
+            'of'   => 'attendance',
+        ]);
     }
 }
