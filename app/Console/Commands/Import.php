@@ -89,6 +89,10 @@ class Import extends Command
                 $this->line('Importing: Task Cards data ATR-72');
                 app()->make(OldDataController::class)->taskCardsATR();
                 break;
+           case 'fefoin':
+                $this->line('Importing: First In First Out In');
+                app()->make(OldDataController::class)->fefoin();
+                break;
             default:
                 $this->line('Importing: File not Found');
                 break;

@@ -18,18 +18,22 @@ class ItemPurchaseOrderDatatables extends Controller
      */
     public function index(PurchaseOrder $purchaseOrder)
     {
-        $purchaseOrders = $purchaseOrder->items;
+        $items = PurchaseOrderItem::with('item','item.unit', 'item.categories')->where('purchase_order_id',$purchaseOrder->id)->whereHas('item', function ($query) {
+            $query->whereHas('categories', function ($query2) {
+                $query2->whereIn('code', ['raw', 'cons', 'comp']);
+            });
+        })->get();
 
-        foreach($purchaseOrders as $purchaseOrder){
-            $purchaseOrder->unit_name .= Unit::find($purchaseOrder->pivot->unit_id)->name;
-            $discount = PurchaseOrderItem::where('purchase_order_id', $purchaseOrder->pivot->purchase_order_id)->where('item_id', $purchaseOrder->pivot->item_id)->first()->promos->first();
+        foreach($items as $purchaseOrder){
+            $purchaseOrder->unit_name .= Unit::find($purchaseOrder->unit_id)->name;
+            $discount = $purchaseOrder->where('item_id', $purchaseOrder->item_id)->first()->promos->first();
             if($discount){
                 $purchaseOrder->discount_amount = $discount->pivot->amount;
                 $purchaseOrder->discount_percentage = $discount->pivot->value."%";
             }
         }
 
-        $data = $alldata = json_decode($purchaseOrders);
+        $data = $alldata = json_decode($items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

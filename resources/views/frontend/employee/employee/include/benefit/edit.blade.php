@@ -247,7 +247,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-3">
-            <legend class="w-auto"><b>Lately & Absences</b></legend>
+            <legend class="w-auto"><b>Tardiness & Absences</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -581,7 +581,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-3">
-            <legend class="w-auto"><b>Lately & Absences</b></legend>
+            <legend class="w-auto"><b>Tardiness & Absences</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -1062,7 +1062,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-3">
-            <legend class="w-auto"><b>Lately & Absences</b></legend>
+            <legend class="w-auto"><b>Tardiness & Absences</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -1238,8 +1238,8 @@
 @endpush
 
 @push('footer-scripts')
-<script src="{{ asset('js/frontend/employee/employee/approval_benefit.js') }}"></script>
-<script src="{{ asset('js/frontend/employee/employee/reject_benefit.js') }}"></script>
-<script src="{{ asset('js/frontend/employee/employee/create_benefit.js') }}"></script>
-<script src="{{ asset('js/frontend/employee/employee/edit_benefit.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/benefit/approval.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/benefit/reject.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/benefit/create.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/benefit/edit.js') }}"></script>
 @endpush

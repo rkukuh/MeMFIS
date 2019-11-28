@@ -155,7 +155,20 @@
                     <tr>
                         <td valign="top" width="13%"><b>Ref. DO No</b></td>
                         <td valign="top"width="1%">:</td>
-                        <td valign="top" width="54%">{{$goodsReceived->delivery_order_number}}</td>
+                        <td valign="top" width="54%">
+                            @if(isset($additionals))
+                                {{$additionals->SupplierRefNo}}
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top" width="13%"><b>DO Date</b></td>
+                        <td valign="top"width="1%">:</td>
+                        <td valign="top" width="54%">
+                            @if(isset($additionals))
+                                {{$additionals->SupplierRefDate}}
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <td valign="top" width="13%"><b></b></td>

@@ -257,10 +257,16 @@ class PurchaseOrderController extends Controller
      */
     public function print(PurchaseOrder $purchaseOrder)
     {
+        $items = PurchaseOrderItem::with('item','item.unit', 'item.categories')->where('purchase_order_id',$purchaseOrder->id)->whereHas('item', function ($query) {
+            $query->whereHas('categories', function ($query2) {
+                $query2->whereIn('code', ['raw', 'cons', 'comp']);
+            });
+        })->get();
+
         $pdf = \PDF::loadView('frontend/form/purchase_order',[
                 'username' => Auth::user()->name,
                 'purchaseOrder' => $purchaseOrder,
-                'items' => PurchaseOrderItem::where('purchase_order_id',$purchaseOrder->id)->get(),
+                'items' => $items,
                 'created_by' => $purchaseOrder->audits->first()->user->name
                 ]);
 

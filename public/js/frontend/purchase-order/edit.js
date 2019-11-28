@@ -20,12 +20,12 @@ let PurchaseOrder = {
 
                             let subtotal = discount = grandtotal = 0;
                             $.each(dataSet, function( index, data ) {
-                                if(data.subtotal_before_discount){
+                                if(data.discount_amount){
                                     discount += parseFloat(data.discount_amount);
                                 }
-                                subtotal += parseFloat(data.pivot.subtotal_before_discount);
-                                grandtotal += parseFloat(data.pivot.subtotal_before_discount);
-                        });
+                                subtotal += parseFloat(data.subtotal_before_discount);
+                                grandtotal += parseFloat(data.subtotal_before_discount);
+                            });
 
                             grandtotal -= discount;
                             $("#sub_total").html(ForeignFormatter.format(subtotal));
@@ -69,17 +69,17 @@ let PurchaseOrder = {
                 sortable: 'asc',
                 filterable: !1,
                 template: function (t) {
-                    return '<a href="/item/'+t.uuid+'">' + t.code + "</a>"
+                    return '<a href="/item/'+t.item.uuid+'">' + t.item.code + "</a>"
                 }
             },
             {
-                field: 'name',
+                field: 'item.name',
                 title: 'Material Name',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: 'pivot.quantity',
+                field: 'quantity',
                 title: 'Quantity',
                 sortable: 'asc',
                 filterable: !1,
@@ -91,13 +91,13 @@ let PurchaseOrder = {
                 filterable: !1,
             },
             {
-                field: 'pivot.price',
+                field: 'price',
                 title: 'Price',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: 'pivot.subtotal_before_discount',
+                field: 'subtotal_before_discount',
                 title: 'Sub Total',
                 sortable: 'asc',
                 filterable: !1,
@@ -115,13 +115,13 @@ let PurchaseOrder = {
                 filterable: !1,
             },
             {
-                field: 'pivot.subtotal_before_discount',
+                field: 'subtotal_before_discount',
                 title: 'Total',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: "pivot.note",
+                field: "note",
                 title: "Note",
             },
             {
@@ -132,10 +132,10 @@ let PurchaseOrder = {
                 template: function (t, e, i) {
                     return (
                         '<button data-toggle="modal" data-target="#modal_check" type="button" href="#" class="m-badge m-badge--brand m-badge--wide check-stock" title="Edit" data-uuid=' +
-                        t.uuid +
+                        t.item.uuid +
                         '>\t\t\t\t\t\t\tCheck\t\t\t\t\t\t</button>\t\t\t\t\t\t'+
 
-                        '<button data-toggle="modal" data-target="#modal_po" type="button" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Edit" data-uuid="' + t.uuid +'">' +
+                        '<button data-toggle="modal" data-target="#modal_po" type="button" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Edit" data-uuid="' + t.item.uuid +'">' +
                             '<i class="la la-pencil"></i>' +
                         '</button>'
                         // '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
@@ -253,8 +253,34 @@ let PurchaseOrder = {
                         }
                     });
 
-                    $('select[name="discount-type"]').empty();
+                    $.ajax({
+                        url: '/get-promos/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data3) {
 
+                            $('select[name^="promo-type"]').empty();
+
+                            $('select[name^="promo-type"]').append(
+                                '<option value=""> Select a Discount Type </option>'
+                            );
+
+                            $.each(data3, function (key, value) {
+                                if (key == data.discount_type) {
+                                    $('select[name^="promo-type"]').append(
+                                        '<option value="' + key + '" selected>' + value + '</option>'
+                                    );
+                                } else {
+                                    $('select[name^="promo-type"]').append(
+                                        '<option value="' + key + '">' + value + '</option>'
+                                    );
+                                }
+                                // $('select[name^="promo-type"]').append(
+                                //     '<option value="' + key + '">' + value + '</option>'
+                                // );
+                            });
+                        }
+                    });
                     // if(data.pivot.discount_type == "percentage"){
                     //     $('select[name^="discount-type"]').append(
                     //         '<option value="amount">Amount</option>',
@@ -270,6 +296,7 @@ let PurchaseOrder = {
                     document.getElementById('item_name').innerText = data.name;
                     document.getElementById('uuid').value = data.uuid;
                     document.getElementById('qty').value = data.pivot.quantity;
+                    document.getElementById('promo').value = data.discount_amount;
                     document.getElementById('price').value = data.pivot.price;
                     // document.getElementById('discount').value = data.pivot.discount_value;
                     document.getElementById('remark_material').value = data.pivot.note;
@@ -329,7 +356,7 @@ let PurchaseOrder = {
                         let subtotal = discount = 0;
                         let dataSet = table.originalDataSet;
                         $.each(dataSet, function( index, data ) {
-                            subtotal += parseInt(data.pivot.subtotal_after_discount);
+                            subtotal += parseInt(data.subtotal_after_discount);
                             discount += parseInt(data.discount);
                         });
                         $("#sub_total").html(subtotal);

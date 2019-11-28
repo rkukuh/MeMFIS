@@ -176,6 +176,7 @@ class GoodsReceivedController extends Controller
         $pdf = \PDF::loadView('frontend/form/goods_received_note',[
                 'username' => Auth::user()->name,
                 'goodsReceived' => $goodsReceived,
+                'additionals' => json_decode($goodsReceived->additionals),
                 'created_by' => $goodsReceived->audits->first()->user->name
                 ]);
 
