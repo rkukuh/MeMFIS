@@ -77,6 +77,10 @@ class Import extends Command
                 $this->line('Importing: Materials and Tools for CN');
                 app()->make(OldDataController::class)->materialsAndToolsCN();
                 break;
+            case 'fefoin':
+                $this->line('Importing: First In First Out In');
+                app()->make(OldDataController::class)->fefoin();
+                break;
             default:
                 $this->line('Importing: File not Found');
                 break;
