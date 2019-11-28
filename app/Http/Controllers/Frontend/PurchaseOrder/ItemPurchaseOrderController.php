@@ -67,7 +67,15 @@ class ItemPurchaseOrderController extends Controller
      */
     public function edit(PurchaseOrder $purchaseOrder, Item $item)
     {
-        return response()->json($purchaseOrder->items->where('pivot.item_id',$item->id)->first());
+        $item_po = $purchaseOrder->items->where('pivot.item_id',$item->id)->first();
+        if(sizeOf(PurchaseOrderItem::where('purchase_order_id',$purchaseOrder->id)->where('item_id',$item->id)->first()->promos) > 0){
+            $item_po->discount_amount .= PurchaseOrderItem::where('purchase_order_id',$purchaseOrder->id)->where('item_id',$item->id)->first()->promos->first()->pivot->amount;
+            $item_po->discount_type .= Promo::find(PurchaseOrderItem::where('purchase_order_id',$purchaseOrder->id)->where('item_id',$item->id)->first()->promos->first()->id)->uuid;
+        }else{
+            $item_po->discount_amount .= null;
+            $item_po->discount_type .= null;
+        }
+        return response()->json($item_po);
     }
 
     /**
