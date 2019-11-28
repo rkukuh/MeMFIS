@@ -6,7 +6,7 @@ use App\MemfisModel;
 
 class LeaveType extends MemfisModel
 {
-    
+
     protected $table = 'leavetypes';
 
     protected $fillable = [

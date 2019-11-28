@@ -15,7 +15,8 @@ class GoodsReceived extends MemfisModel
         'received_by',
         'received_at',
         'vehicle_no',
-        'container_no',
+        'delivery_order_number',
+        'delivery_document_at',
         'storage_id',
         'description',
         'additionals',
@@ -96,7 +97,7 @@ class GoodsReceived extends MemfisModel
                         'quantity_unit',
                         'unit_id',
                         'price',
-                        'already_received_amount',
+                        'location',
                         'note',
                         'expired_at'
                     )

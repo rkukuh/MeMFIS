@@ -169,6 +169,18 @@ Route::group([
         Route::view('/waiting-rii', 'frontend.defect-card.progress.waiting-rii')->name('progress.waiting-rii');
         Route::view('/release', 'frontend.defect-card.progress.release')->name('progress.release');
 
+
+        /** QUOTATION WORKSHOP */
+
+        Route::view('/quotation-workshop', 'frontend.quotation-workshop.index')->name('quotation-workshop.index');
+        Route::view('/quotation-workshop/create', 'frontend.quotation-workshop.create')->name('quotation-workshop.create');
+        Route::view('/quotation-workshop/edit', 'frontend.quotation-workshop.edit')->name('quotation-workshop.edit');
+        Route::view('/quotation-workshop/show', 'frontend.quotation-workshop.show')->name('quotation-workshop.show');
+
+
+        Route::view('/quotation-workshop/edit/item/create', 'frontend.quotation-workshop.item.create')->name('quotation-workshop.item.create');
+        Route::view('/quotation-workshop/edit/item/show', 'frontend.quotation-workshop.item.show')->name('quotation-workshop.item.show');
+        
     });
 
 });

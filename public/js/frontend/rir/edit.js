@@ -217,7 +217,7 @@ let receiving_inspection_report = {
 
             let item_uuid = $("#material").val();
             let exp_date = $('input[name=exp_date2]').val();
-            let qty = $("#quantity").val();
+            let qty = $("#quantity_received").val();
             let unit_id = $("#unit_material").val();
             let note = $("#remark").val();
             if($("#is_serial_number").is(":checked")) {

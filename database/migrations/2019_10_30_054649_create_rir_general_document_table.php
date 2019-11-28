@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRirDocumentChecksTable extends Migration
+class CreateRirGeneralDocumentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateRirDocumentChecksTable extends Migration
      */
     public function up()
     {
-        Schema::create('rir_document_checks', function (Blueprint $table) {
+        Schema::create('rir_general_documents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('rir_id')->nullable();
             $table->unsignedBigInteger('general_document')->nullable();
-            $table->unsignedBigInteger('technical_document')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -28,11 +27,6 @@ class CreateRirDocumentChecksTable extends Migration
                 ->onDelete('restrict');
 
             $table->foreign('general_document')
-                ->references('id')->on('types')
-                ->onUpdate('cascade')
-                ->onDelete('restrict');
-
-            $table->foreign('technical_document')
                 ->references('id')->on('types')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');

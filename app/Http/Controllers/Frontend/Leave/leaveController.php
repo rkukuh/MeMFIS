@@ -7,7 +7,6 @@ use App\Models\Status;
 use App\Models\Approval;
 use App\Models\Employee;
 use App\Models\LeaveType;
-use App\Models\EmployeeAttendance;
 
 use Auth;
 use Illuminate\Http\Request;
@@ -46,28 +45,22 @@ class leaveController extends Controller
      */
     public function store(leaveStore $request)
     {
-        $leave_type = LeaveType::where('uuid', $request->leave_type)->first();
-        $employee = Employee::where('uuid', $request->uuid_employee)->first();
-        $code = DocumentNumber::generate('LEAV-', Leave::withTrashed()->count()+1);
-        $status = Status::ofLeave()->where('code','open')->first();
+        // dd($request->all());
 
-        $leave = Leave::create([
-            'code' => $code,
-            'start_date' => $request->date_start,
-            'end_date' => $request->date_end,
-            'employee_id' => $employee->id,
-            'status_id' => $status->id,
-            'leavetype_id' => $leave_type->id,
-            'description' => $request->description,
-        ]);
-
+        $leave = Leave::create($request->all());
+        
+        $redirect = route('frontend.leave.edit', ['leave' => $leave->uuid]);
         $notification = array(
             'message' => "Leave has been saved.",
             'title' => "Success ".$leave->code,
-            'alert-type' => "success"
+            'alert-type' => "success",
+            'redirect' => $redirect
         );
 
-        return redirect()->route('frontend.leave.index')->with($notification);
+        
+        return response()->json($notification);
+
+        // return redirect()->route('frontend.leave.index')->with($notification);
     }
 
     /**
@@ -78,7 +71,10 @@ class leaveController extends Controller
      */
     public function show(Leave $leave)
     {
-        //
+        return view('frontend.propose-leave.propose-leave.show',[
+            'leave' => $leave,
+            'employee' => $leave->employee,
+        ]);
     }
 
     /**
@@ -89,7 +85,13 @@ class leaveController extends Controller
      */
     public function edit(Leave $leave)
     {
-        return view('frontend.propose-leave.propose-leave.edit');
+        $types = LeaveType::get();
+
+        return view('frontend.propose-leave.propose-leave.edit',[
+            'leave' => $leave,
+            'types' => $types,
+            'employee' => $leave->employee,
+        ]);
     }
 
     /**
@@ -101,7 +103,9 @@ class leaveController extends Controller
      */
     public function update(leaveUpdate $request, Leave $leave)
     {
-        //
+        $leave->update([$request->all()]);
+
+        return response()->json($leave);
     }
 
     /**
@@ -163,5 +167,20 @@ class leaveController extends Controller
         ]);
         
         return response()->json($result);
+    }
+
+    /**
+     * API for ajax request for leave data and informations.
+     *
+     * @param  \App\Models\Leave  $leave
+     * @return \Illuminate\Http\Response
+     */
+    public function leaveModal(Leave $leave)
+    {
+        $leave->leave_type = $leave->leaveType;
+        $leave->status = $leave->status;
+        $leave->approval = $leave->approvals->last();
+        $leave->conductedBy = $leave->approvals->last()->conductedBy;
+        return response()->json($leave);
     }
 }

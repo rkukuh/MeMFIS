@@ -48,14 +48,14 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <form id="itemform" name="itemform">
+                        <form id="attendanceCorrectionEdotForm" name="attendanceCorrectionEdotForm" >
+                                    @csrf
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Employee Name @include('frontend.common.label.required')
                                             </label>
-                                         
                                          
                                             @include('frontend.common.employee.index')
                                         </div>
@@ -68,6 +68,7 @@
                                                 @slot('id', 'date')
                                                 @slot('text', 'Date')
                                                 @slot('name', 'date')
+                                                @slot('value', $attcor->correction_date)
                                                 @slot('id_error','date')
                                             @endcomponent
                                         </div>
@@ -78,29 +79,24 @@
                                                 Correction Time @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Correction Time')
-                                                @slot('id', 'correction_time')
-                                                @slot('name', 'correction_time')
-                                                @slot('id_error', 'correction_time')
+                                            @component('frontend.common.input.edit-select2')
+                                                @slot('id', 'attendance_correction_time_type')
+                                                @slot('name', 'attendance_correction_time_type')
+                                                @slot('options', $types)
+                                                @slot('value', $attcor->type->uuid)
                                             @endcomponent
-
-                                            {{-- Check-In
-                                            Check-Out --}}
-
                                         </div>
-                                        @if("checkin" == "checkin")
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Time 
-                                                </label>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Time 
+                                            </label>
 
-                                                @component('frontend.common.input.timepicker')
-                                                    @slot('id', 'time')
-                                                    @slot('class','m_timepicker_1 text-center')
-                                                @endcomponent
-                                            </div>
-                                        @endif
+                                            @component('frontend.common.input.timepicker')
+                                                @slot('id', 'time')
+                                                @slot('value', $attcor->correction_time)
+                                                @slot('class','m_timepicker_1 text-center')
+                                            @endcomponent
+                                        </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -112,6 +108,7 @@
                                                 @slot('rows', '5')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
+                                                @slot('value', $attcor->description)
                                                 @slot('text', 'Description')
                                             @endcomponent
                                         </div>
@@ -121,9 +118,9 @@
                                             <div class="flex">
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
-                                                        @slot('id', 'add-attendance')
-                                                        @slot('class', 'add-attendance')
+                                                        @slot('id', 'edit-attendance-correction')
+                                                        @slot('class', 'edit-attendance-correction')
+                                                        @slot('type', 'button')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -146,7 +143,14 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/correction-time.js') }}"></script>
+<script>
+    let url = '{{route('frontend.attendance-correction.update',['attcor' => $attcor->uuid])}}';
+    console.log( $('select[name="attendance_correction_time_type"]').val());
+
+</script>
+    <script src="{{ asset('js/frontend/attendance-correction/edit.js')}}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/edit-select2.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/timepicker.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 @endpush

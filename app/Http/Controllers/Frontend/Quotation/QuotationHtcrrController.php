@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\frontend\Quotation;
 
-use App\Models\Quotation;
+use DB;
+use App\Models\Promo;
 use App\Models\Manhour;
+use App\Models\Quotation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -110,23 +112,41 @@ class QuotationHtcrrController extends Controller
      */
     public function discount(Request $request, Quotation $quotation)
     {
-        if(empty($quotation->data_htcrr)){
-            $data_json = [];
-            $data_json["discount_value"] = $request->discount_value;
-            $data_json["discount_type"] = $request->discount_type;
+        // dd($request->all());
+        $promo_type = Promo::where('uuid',$request->discount_type)->first();
+        $htcrr = json_decode($quotation->data_htcrr);
+        $subtotal_before_discount = (float) $htcrr->manhour_rate_amount * (float) $htcrr->total_manhours_with_performance_factor;
 
-            $data_json = json_encode($data_json, true);
-            $quotation->update(['data_htcrr' => $data_json]);
-        }else{
-            $data_json = json_decode($quotation->data_htcrr, true);
-            $data_json["discount_value"] = $request->discount_value;
-            $data_json["discount_type"] = $request->discount_type;
+        /** Discount */
+        if($promo_type){
+            if($promo_type->code == "discount-percent"){
+                $discount_percentage = $request->discount_value;
+                $discount_amount = $subtotal_before_discount * ($discount_percentage / 100);
+            }elseif($promo_type->code == "discount-amount"){
+                $discount_amount = $request->discount_value;
+                $discount_percentage = $request->discount_value / $subtotal_before_discount * 100;
+            }
 
-            $data_json = json_encode($data_json, true);
-            $quotation->update(['data_htcrr' => $data_json]);
+            if(sizeof($quotation->promos) > 0){
+                $result = DB::table('promoables')
+                        ->where('promoable_type', 'App\Models\Quotation')
+                        ->where('promoable_id', $quotation->promos->first()->pivot->promoable_id)
+                        ->where('promo_id', $quotation->promos->first()->pivot->promo_id)
+                        ->update([
+                            'value' => $discount_percentage,
+                            'amount' => $discount_amount,
+                            'promo_id' => $promo_type->id
+                        ]);
+            }else{
+                $quotation->promos()->save(Promo::find($promo_type->id), [
+                    'value'     => $discount_percentage,
+                    'amount'    => $discount_amount
+                ]);
+            }
         }
-
-        return response()->json($data_json);
+        /** Discount */
+        
+        return response()->json($quotation);
     }
 
     /**

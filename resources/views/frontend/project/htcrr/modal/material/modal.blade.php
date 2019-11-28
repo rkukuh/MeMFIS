@@ -5,7 +5,7 @@
             <div class="modal-header">
                 @include('frontend.common.label.create-new')
 
-                <h5 class="modal-title" id="TitleModalItem">
+                <h5 class="modal-title" id="TitleModalItem" style="margin-top:0px">
                     Materials
 
                     <small id="item-storage" class="m--font-focus"></small>
@@ -25,12 +25,11 @@
                                                 Item @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'material')
-                                                @slot('text', 'Material')
-                                                @slot('name', 'material')
-                                                @slot('id_error', 'material')
+                                            @component('frontend.common.item.index')
+                                                @slot('name_item','material')
+                                                @slot('id_item','material')
                                             @endcomponent
+
                                     </div>
                             </div>
                             <div class="form-group m-form__group row ">
@@ -100,7 +99,4 @@
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material-uom.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
 @endpush

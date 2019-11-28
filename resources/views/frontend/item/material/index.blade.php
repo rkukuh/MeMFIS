@@ -54,11 +54,6 @@
                                         <div class="form-group m-form__group row align-items-center">
                                             <div class="col-md-4">
                                                 <div class="m-input-icon m-input-icon--left">
-                                                    <input type="text" class="form-control m-input" placeholder="Search..."
-                                                        id="generalSearch">
-                                                    <span class="m-input-icon__icon m-input-icon__icon--left">
-                                                        <span><i class="la la-search"></i></span>
-                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -73,7 +68,23 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="item_datatable" id="scrolling_both"></div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <table class="table table-striped table-bordered table-hover table-checkable item_datatable" id="item_datatable">
+                                        <thead>
+                                            <tr>
+                                                    <th>Code</th>
+                                                    <th>Name</th>
+                                                    <th>Category</th>
+                                                    <th>Taxable?</th>
+                                                    <th>Stockable?</th>
+                                                    <th>Account Code</th>
+                                                    <th></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,6 +93,33 @@
     </div>
 @endsection
 
+@push('header-scripts')
+<link
+	href="https://cdn.datatables.net/1.10.12/css/dataTables.material.min.css"
+	rel="stylesheet">
+<link
+	href="//cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css"
+    rel="stylesheet">
+
+    <style>
+        .dataTables_paginate a{
+            color: #5867dd !important;
+            padding: 0 10px;
+        }
+        .dataTables_info{
+            margin-top:-10px;
+            margin-left:10px;
+        }
+        .dataTables_length{
+            margin-top:-30px;
+            visibility: hidden;
+        }
+        .dataTables_length select{
+            visibility: visible;
+        }
+    </style>
+@endpush
 @push('footer-scripts')
+    <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('js/frontend/item/material/index.js') }}"></script>
 @endpush

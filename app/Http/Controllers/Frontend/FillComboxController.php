@@ -104,7 +104,7 @@ class FillComboxController extends Controller
         return json_encode($defectcards);
 
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -479,7 +479,7 @@ class FillComboxController extends Controller
      */
     public function vendor()
     {
-        $vendors = Vendor::pluck('name', 'uuid');
+        $vendors = Vendor::has('coa')->pluck('name', 'uuid');
 
         return json_encode($vendors);
 
@@ -1064,7 +1064,7 @@ class FillComboxController extends Controller
      */
     public function taxation()
     {
-        $taxation = Type::ofTax()->pluck('name', 'uuid');
+        $taxation = Type::ofTaxPaymentMethod()->pluck('name', 'uuid');
 
         return json_encode($taxation);
 

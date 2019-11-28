@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Frontend;
 
+use App\Models\Type;
+use App\Models\Employee;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AttendanceCorrectionUpdate extends FormRequest
@@ -13,7 +15,7 @@ class AttendanceCorrectionUpdate extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,4 +29,21 @@ class AttendanceCorrectionUpdate extends FormRequest
             //
         ];
     }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $this->merge([
+                'employee_id' => optional(Employee::where('uuid', $this->employee_uuid)->first())->id,
+                'type_id' => optional(Type::ofAttendanceCorrection()->where('code', $this->attendance_correction_time_type)->first())->id
+                ]);
+        });
+    }
 }
+
