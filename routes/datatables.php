@@ -1091,6 +1091,21 @@ Route::name('datatables.')->group(function () {
             });
         });
 
+        /** Workshop */
+
+        Route::name('workshop')->group(function() {
+
+            Route::group([
+
+                'prefix'    => 'workshop',
+                'namespace' => 'Workshop'
+
+            ], function () {
+
+                Route::get('/', 'WorkshopDatatables@index');
+            });
+        });
+
         Route::get('/testing', 'UnitDatatables@index')->name('testing.index');
 
 

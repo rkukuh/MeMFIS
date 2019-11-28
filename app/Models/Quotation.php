@@ -109,7 +109,7 @@ class Quotation extends MemfisModel
         return $this->belongsToMany(Item::class)
                     ->withPivot(
                         'serial_number',
-                        'complaint',
+                        'complaint'
                     )
                     ->withTimestamps();
     }

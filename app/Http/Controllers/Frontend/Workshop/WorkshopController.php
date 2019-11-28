@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Workshop;
 
 use App\Models\Workshop;
 use App\Http\Controllers\Controller;
@@ -16,7 +16,7 @@ class WorkshopController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.quotation-workshop.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class WorkshopController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.quotation-workshop.create');
     }
 
     /**
@@ -48,7 +48,7 @@ class WorkshopController extends Controller
      */
     public function show(Workshop $workshop)
     {
-        //
+        return view('frontend.quotation-workshop.show');
     }
 
     /**
@@ -59,7 +59,7 @@ class WorkshopController extends Controller
      */
     public function edit(Workshop $workshop)
     {
-        //
+        return view('frontend.quotation-workshop.edit');
     }
 
     /**
