@@ -191,8 +191,20 @@
                         <td valign="top" align="center" width="7%">{{$item->unit->name}}</td>
                         <td valign="top" align="center" width="7%">{{$item->price}}</td>
                         <td valign="top" align="center" width="14%">{{$item->quantity*$item->price}}</td>
-                        <td valign="top" align="center" width="11%">??</td>
-                        <td valign="top" align="center" width="14%">??</td>
+                        <td valign="top" align="center" width="11%">
+                            @if(sizeOf($item->promos) > 0)
+                                {{$item->promos->first()->pivot->amount}}
+                            @else
+                                0
+                            @endif
+                        </td>
+                        <td valign="top" align="center" width="14%">
+                            @if(sizeOf($item->promos) > 0)
+                                {{($item->quantity*$item->price)-$item->promos->first()->pivot->amount}}
+                            @else
+                                {{($item->quantity*$item->price)}}
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </table>
