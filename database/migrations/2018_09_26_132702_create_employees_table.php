@@ -44,6 +44,7 @@ class CreateEmployeesTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
 
+            $table->index('code');
             $table->index('first_name');
             $table->index('last_name');
         });
