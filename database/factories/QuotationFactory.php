@@ -20,7 +20,7 @@ use Faker\Generator as Faker;
 $factory->define(Quotation::class, function (Faker $faker) {
 
     $number = $faker->unixTime();
-
+ 
     return [
         'number' => 'QTN-DUM-' . $number,
         'parent_id' => null,
