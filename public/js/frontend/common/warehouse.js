@@ -41,7 +41,7 @@ let Warehouse = {
 
         $('.dataTables_filter').on('click', '.refresh', function () {
             $('#warehouse_datatable').DataTable().ajax.reload();
-            $('#purhcase_order_datatable').DataTable().ajax.reload();
+            $('#purchase_order_datatable').DataTable().ajax.reload();
 
         });
 
