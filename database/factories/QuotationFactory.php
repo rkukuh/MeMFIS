@@ -20,7 +20,7 @@ use Faker\Generator as Faker;
 $factory->define(Quotation::class, function (Faker $faker) {
 
     $number = $faker->unixTime();
- 
+
     return [
         'number' => 'QTN-DUM-' . $number,
         'parent_id' => null,
@@ -141,10 +141,10 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
                 $unit = factory(Unit::class)->create();
             }
 
-            $quotation->workshop()->save($item, [
-                'serial_number' => 'serial_number',
-                'complaint' => $faker->randomElement([null, $faker->sentence]),
-            ]);
+            // $quotation->workshop()->save($item, [
+            //     'serial_number' => 'serial_number',
+            //     'complaint' => $faker->randomElement([null, $faker->sentence]),
+            // ]);
         }
     }
 

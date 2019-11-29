@@ -15,7 +15,6 @@ class CreateRirTechnicalDocumentTable extends Migration
     {
         Schema::create('rir_technical_documents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('rir_id')->nullable();
             $table->unsignedBigInteger('technical_document')->nullable();
             $table->timestamps();
