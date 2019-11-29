@@ -180,6 +180,14 @@ Route::group([
 
         Route::view('/quotation-workshop/edit/item/create', 'frontend.quotation-workshop.item.create')->name('quotation-workshop.item.create');
         Route::view('/quotation-workshop/edit/item/show', 'frontend.quotation-workshop.item.show')->name('quotation-workshop.item.show');
+
+
+        /** JOB SCOPE */
+
+        Route::view('/job-scope', 'frontend.job-scope.index')->name('job-scope.index');
+        Route::view('/job-scope/create', 'frontend.job-scope.create')->name('job-scope.create');
+        Route::view('/job-scope/edit', 'frontend.job-scope.edit')->name('job-scope.edit');
+        Route::view('/job-scope/show', 'frontend.job-scope.show')->name('job-scope.show');
         
     });
 
