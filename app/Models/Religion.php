@@ -12,5 +12,5 @@ class Religion extends MemfisModel
         'code',
         'number',
         'description'
-    ]
+    ];
 }

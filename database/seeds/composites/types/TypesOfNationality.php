@@ -15,7 +15,7 @@ class TypesOfNationality extends Seeder
         Type::create([
             'code' => 'indonesian',
             'name' => 'Indonesian',
-            'of'  => 'Nationality',
+            'of'  => 'nationality',
         ]);
     }
 }

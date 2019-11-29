@@ -325,6 +325,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Aircraft Maintenance Cycle.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfNationality(Builder $query)
+    {
+        return $query->where('of', 'nationality');
+    }
+
+    /**
      * Scope a query to only include type of Phone.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -377,6 +388,17 @@ class Type extends MemfisModel
     public function scopeOfRegulator(Builder $query)
     {
         return $query->where('of', 'regulator');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's General Document.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfGender(Builder $query)
+    {
+        return $query->where('of', 'gender');
     }
 
     /**

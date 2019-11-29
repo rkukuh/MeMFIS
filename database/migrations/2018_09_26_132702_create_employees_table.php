@@ -22,14 +22,14 @@ class CreateEmployeesTable extends Migration
             $table->string('last_name');
             $table->date('dob')->nullable();
             $table->string('dob_place')->nullable();
-            $table->string('country')->nullable();
-            $table->string('city')->nullable();
-            $table->string('zip')->nullable();
-            $table->timestamp('joined_date');
             $table->unsignedBigInteger('gender_id')->nullable();
             $table->unsignedBigInteger('religion_id')->nullable();
             $table->unsignedBigInteger('marital_id')->nullable();
             $table->unsignedBigInteger('nationality_id')->nullable();
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zip')->nullable();
+            $table->timestamp('joined_date');
             $table->unsignedBigInteger('job_tittle_id')->nullable();
             $table->unsignedBigInteger('position_id')->nullable();
             $table->unsignedBigInteger('statuses_id')->nullable();

@@ -3,6 +3,9 @@
 namespace App\Imports;
 
 use App\User;
+use App\Models\Type;
+use App\Models\Status;
+use App\Models\Religion;
 use App\Models\Workshift;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
@@ -53,10 +56,10 @@ class UsersImport implements ToModel, WithHeadingRow
             'last_name' => ucwords(strtolower($row['nama'])),
             'dob' => Carbon::now()->subYear(rand(20, 50)),
             'dob_place' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
-            'gender' => $faker->randomElement(['m', 'f']),
-            'religion' => $faker->randomElement(['islam','khonghucu','budha','kristen','hindu']),
-            'marital_status' => $faker->randomElement(['s','m']),
-            'nationality' => $faker->randomElement(['Indonesia','Japan','Zimbabwe','South Africa']),
+            'gender' => Type::ofGender()->where('code', $faker->randomElement(['male','female']))->first()->id,
+            'religion' => Religion::where('code', $faker->randomElement(['christian-protestant','islam','kong-hu-cu','buddha','catholic','hindu']))->first()->id,
+            'marital_status' => Status::ofMarital()->where('code', $faker->randomElement(['married','single','cerai-hidup','cerai-mati']))->first()->id,
+            'nationality' => Type::ofNationality()->where('code', $faker->randomElement(['indonesian']))->first()->id,
             'country' => 'indonesia',
             'city' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
             'joined_date' => Carbon::now()->toDateString(),
