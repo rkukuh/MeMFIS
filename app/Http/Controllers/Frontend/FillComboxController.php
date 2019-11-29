@@ -23,6 +23,7 @@ use App\Models\Currency;
 use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Facility;
+use App\Models\Religion;
 use App\Models\TaskCard;
 use App\Models\DefectCard;
 use App\Models\ItemRequest;
@@ -344,6 +345,19 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function religions()
+    {
+        $religions = Religion::pluck('name', 'uuid');
+
+        return json_encode($religions);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function repeatType()
     {
         $repeat_types = Type::ofMaintenanceCycle()
@@ -631,6 +645,19 @@ class FillComboxController extends Controller
         $manufacturer = Manufacturer::pluck('name', 'id');
 
         return json_encode($manufacturer);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function maritalStatus()
+    {
+        $maritalStatus = Status::ofMarital()
+                            ->pluck('name', 'uuid');
+
+        return json_encode($maritalStatus);
     }
 
     /**

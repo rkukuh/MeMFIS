@@ -22,14 +22,14 @@ class CreateEmployeesTable extends Migration
             $table->string('last_name');
             $table->date('dob')->nullable();
             $table->string('dob_place')->nullable();
-            $table->enum('gender', ['f', 'm'])->nullable();
-            $table->string('religion')->nullable();
-            $table->string('marital_status')->nullable();
-            $table->string('nationality')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->string('zip')->nullable();
             $table->timestamp('joined_date');
+            $table->unsignedBigInteger('gender_id')->nullable();
+            $table->unsignedBigInteger('religion_id')->nullable();
+            $table->unsignedBigInteger('marital_id')->nullable();
+            $table->unsignedBigInteger('nationality_id')->nullable();
             $table->unsignedBigInteger('job_tittle_id')->nullable();
             $table->unsignedBigInteger('position_id')->nullable();
             $table->unsignedBigInteger('statuses_id')->nullable();
@@ -38,9 +38,29 @@ class CreateEmployeesTable extends Migration
             $table->unsignedBigInteger('supervisor_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
+            
             $table->foreign('user_id')
                 ->references('id')->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('religion_id')
+                ->references('id')->on('religions')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('marital_id')
+                ->references('id')->on('statuses')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('nationality_id')
+                ->references('id')->on('types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('gender_id')
+                ->references('id')->on('types')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
 

@@ -11,5 +11,6 @@ class Religion extends MemfisModel
     protected $fillable = [
         'code',
         'number',
-        'description',
+        'description'
+    ]
 }

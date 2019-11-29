@@ -6,9 +6,13 @@ let Employee = {
 
             let code = $('input[name=code]').val()
             let code_uppercase = code.toUpperCase()
-            let gender = $('#gender option:selected').val()
             let job_tittle = $('#job_title option:selected').val()
-
+            let dob = $('input[name="dob"]').val();
+            let dob_place = $('input[name="dob_place"]').val();
+            let first_name = $('input[name="first_name"]').val();
+            let last_name = $('input[name="last_name"]').val();
+            let card_number = $('input[name="card_number"]').val();
+            let gender = $('#gender option:selected').val()
             if(gender == 'Male'){
                 gender = 'm'
             }else if(gender == 'Female'){
@@ -16,6 +20,26 @@ let Employee = {
             }else{
                 gender = '';
             }
+            let nationality = $('input[name="nationality"]').val();
+            let religion = $('input[name="religion"]').val();
+            let marital_status = $('input[name="marital_status"]').val();
+            let address_line_1 = $('input[name="address_line_1"]').val();
+            let country = $('input[name="country"]').val();
+            let city = $('input[name="first_name"]').val();
+            let zip_code = $('input[name="zip_code"]').val();
+            let home_phone = $('input[name="home_phone"]').val();
+            let mobile_phone = $('input[name="mobile_phone"]').val();
+            let work_phone = $('input[name="work_phone"]').val();
+            let other_phone = $('input[name="other_phone"]').val();
+            let email_1 = $('input[name="email_1"]').val();
+            let email_2 = $('input[name="email_2"]').val();
+            let joined_date = $('input[name="joined_date"]').val();
+            let job_title = $('input[name="job_title"]').val();
+            let job_position = $('input[name="job_position"]').val();
+            let employee_status = $('input[name="employee_status"]').val();
+            let department = $('input[name="department"]').val();
+            let inderect_supervisor = $('input[name="inderect_supervisor"]').val();
+            let supervisor = $('input[name="supervisor"]').val();
 
             formData = new FormData($('#employee_create_form')[0])
     
