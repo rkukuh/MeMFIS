@@ -111,12 +111,19 @@ let goods_received_note = {
                     width: 150,
                 },
                 {
+                    field: 'pivot.location',
+                    title: 'Location',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_grn" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-expred='+t.pivot.expired_at+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_grn" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-location='+t.pivot.location+' data-unit='+t.pivot.unit_id+' data-expred='+t.pivot.expired_at+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
@@ -193,6 +200,7 @@ let goods_received_note = {
             });
             let item_uuid = $("#material").val();
             let exp_date = $('input[name=exp_date2]').val();
+            let location = $('input[name=location]').val();
             let unit_id = $("#unit_material").val();
             let note = $("#remark").val();
             if($("#is_serial_number").is(":checked")) {
@@ -218,6 +226,7 @@ let goods_received_note = {
                 data: {
                     exp_date: exp_date,
                     quantity: qty,
+                    location: location,
                     unit_id: unit_id,
                     note: note,
                     serial_numbers: serial_numbers,
@@ -296,6 +305,7 @@ let goods_received_note = {
             document.getElementById('qty').value = $(this).data('quantity');
             document.getElementById('exp_date').value = $(this).data('expred');
             document.getElementById('note').value = $(this).data('note');
+            document.getElementById('item-location').value = $(this).data('location');
 
             document.getElementById('uuid').value = $(this).data('uuid');
         });
@@ -304,6 +314,7 @@ let goods_received_note = {
             let uuid = $("input[name=uuid]").val();
             let exp_date = $("#exp_date").val();
             let qty = $("#qty").val();
+            let location = $("#item-location").val();
             let unit_id = $("#unit_id").val();
             let note = $("#note").val();
 
@@ -316,6 +327,7 @@ let goods_received_note = {
                 data: {
                     exp_date: exp_date,
                     quantity: qty,
+                    location: location,
                     unit_id: unit_id,
                     note: note,
                 },
