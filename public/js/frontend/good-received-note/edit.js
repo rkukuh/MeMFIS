@@ -1,6 +1,6 @@
 let goods_received_note = {
     init: function () {
-        $('.purchase_order_datatable').mDatatable({
+        $('.item_purchase_order_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -258,7 +258,7 @@ let goods_received_note = {
                                 }
                             );
 
-                            let table = $(".purchase_order_datatable").mDatatable();
+                            let table = $(".item_purchase_order_datatable").mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -267,7 +267,7 @@ let goods_received_note = {
                 }
             });
         });
-        $('.purchase_order_datatable').on('click', '.edit-item', function () {
+        $('.item_purchase_order_datatable').on('click', '.edit-item', function () {
             let description = "";
             document.getElementById('item-label').innerText = $(this).data('item');
             if($(this).data('description') != null){
@@ -349,7 +349,7 @@ let goods_received_note = {
                             }
                         );
 
-                        let table = $(".purchase_order_datatable").mDatatable();
+                        let table = $(".item_purchase_order_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -358,7 +358,7 @@ let goods_received_note = {
                 }
             });
         });
-        $('.purchase_order_datatable').on('click', '.delete', function () {
+        $('.item_purchase_order_datatable').on('click', '.delete', function () {
 
             swal({
                 title: 'Sure want to remove?',
@@ -384,7 +384,7 @@ let goods_received_note = {
                                 }
                             );
 
-                            let table = $('.purchase_order_datatable').mDatatable();
+                            let table = $('.item_purchase_order_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
