@@ -262,18 +262,16 @@
                 <tr>
                     <td align="center" valign="bottom" height="70" width="30%">
                         <b>
-                        @if(sizeOf($purchaseOrder->approvals)>=1)
-                            {{$purchaseOrder->approvals->get(0)->conductedBy->first_name." ".$purchaseOrder->approvals->first()->conductedBy->last_name." ; ".$purchaseOrder->approvals->get(0)->created_at}}
-                        @else
-                        -
-                        @endif
+                            (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
                         </b><br>
-                        <span>jabatan(link with HR)</span>
+                        <span>&nbsp;</span>
                     </td>
                     <td align="center" valign="bottom" height="70" width="33%">
                         <b>
-                        @if(sizeOf($purchaseOrder->approvals)>=2)
-                            {{$purchaseOrder->approvals->get(1)->conductedBy->first_name." ".$purchaseOrder->approvals->first()->conductedBy->last_name." ; ".$purchaseOrder->approvals->get(1)->created_at}}
+                        @if(sizeOf($purchaseOrder->approvals)>=1)
+                            {{$purchaseOrder->approvals->get(0)->conductedBy->first_name." ".$purchaseOrder->approvals->first()->conductedBy->last_name." ; ".$purchaseOrder->approvals->get(0)->created_at}}
                         @else
                         -
                         @endif

@@ -36,8 +36,6 @@ $factory->define(GoodsReceived::class, function (Faker $faker) {
         },
         'received_at' => Carbon::now(),
         'vehicle_no' => $plate_no,
-        'delivery_order_number' => 'DON-' . $faker->numberBetween(1000, 9999),
-        'delivery_document_at' => Carbon::now(),
         'storage_id' => function () {
             if (Storage::count()) {
                 return Storage::get()->random()->id;

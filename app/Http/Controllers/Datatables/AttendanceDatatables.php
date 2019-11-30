@@ -13,10 +13,10 @@ class AttendanceDatatables extends Controller
         $days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
         //testing
-        $anam = Employee::where('code','18040060')->first();
-        $attendances = EmployeeAttendance::where('employee_id',$anam->id)->with('attendance_correction','attendance_overtime','employee','statuses','parent')->get();
+        // $anam = Employee::where('id',50)->first();
+        // $attendances = EmployeeAttendance::where('employee_id',$anam->id)->with('attendance_correction','attendance_overtime','employee','statuses','parent')->get();
 
-        // $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses')->get();
+        $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses','parent')->get();
 
         foreach($attendances as $attendance){
             //Time converison from second
@@ -28,7 +28,7 @@ class AttendanceDatatables extends Controller
 
             if(sizeof($attendance->statuses) > 0){
                 $statuses =  $attendance->statuses()->pluck('name')->toArray();
-                $attendance->status = join(',', $statuses);
+                $attendance->status = join(', ', $statuses);
             }
 
             $date = Carbon::createFromFormat('Y-m-d', $attendance->date);
