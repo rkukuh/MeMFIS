@@ -18,28 +18,28 @@ class ItemRequestToolDatatables extends Controller
      */
     public function index()
     {
-        $inventories = InventoryOut::with('items', 'approvals')->get();
-        foreach ($inventories as $inventory) {
-            if (!empty($inventory->approvals->first())) {
-                $inventory->status .= 'Approved';
+        $items = ItemRequest::with('storage', 'approvals')->get();
+        foreach ($items as $item) {
+            if (!empty($item->approvals->first())) {
+                $item->status .= 'Approved';
 
-                if (isset($inventory->approvals)) {
-                    $conducted_by  = User::find($inventory->approvals->first()->conducted_by);
-                    $inventory->conducted_by .= $conducted_by->name;
+                if (isset($item->approvals)) {
+                    $conducted_by  = User::find($item->approvals->first()->conducted_by);
+                    $item->conducted_by .= $conducted_by->name;
                 } else {
-                    $inventory->conducted_by .= '';
+                    $item->conducted_by .= '';
                 }
             }
         }
-        $data = $alldata = json_decode($inventories);
+        $data = $alldata = json_decode($items);
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
-                    ? $datatable['query']['generalSearch'] : '';
+            ? $datatable['query']['generalSearch'] : '';
 
-        if (! empty($filter)) {
+        if (!empty($filter)) {
             $data = array_filter($data, function ($a) use ($filter) {
-                return (boolean)preg_grep("/$filter/i", (array)$a);
+                return (bool) preg_grep("/$filter/i", (array) $a);
             });
 
             unset($datatable['query']['generalSearch']);
@@ -55,18 +55,18 @@ class ItemRequestToolDatatables extends Controller
             }
         }
 
-        $sort  = ! empty($datatable['sort']['sort']) ? $datatable['sort']['sort'] : 'asc';
-        $field = ! empty($datatable['sort']['field']) ? $datatable['sort']['field'] : 'RecordID';
+        $sort  = !empty($datatable['sort']['sort']) ? $datatable['sort']['sort'] : 'asc';
+        $field = !empty($datatable['sort']['field']) ? $datatable['sort']['field'] : 'RecordID';
 
         $meta    = [];
-        $page    = ! empty($datatable['pagination']['page']) ? (int)$datatable['pagination']['page'] : 1;
-        $perpage = ! empty($datatable['pagination']['perpage']) ? (int)$datatable['pagination']['perpage'] : -1;
+        $page    = !empty($datatable['pagination']['page']) ? (int) $datatable['pagination']['page'] : 1;
+        $perpage = !empty($datatable['pagination']['perpage']) ? (int) $datatable['pagination']['perpage'] : -1;
 
         $pages = 1;
         $total = count($data);
 
         usort($data, function ($a, $b) use ($sort, $field) {
-            if (! isset($a->$field) || ! isset($b->$field)) {
+            if (!isset($a->$field) || !isset($b->$field)) {
                 return false;
             }
 
@@ -110,25 +110,25 @@ class ItemRequestToolDatatables extends Controller
 
         $result = [
             'meta' => $meta + [
-                    'sort'  => $sort,
-                    'field' => $field,
-                ],
+                'sort'  => $sort,
+                'field' => $field,
+            ],
             'data' => $data,
         ];
 
         echo json_encode($result, JSON_PRETTY_PRINT);
     }
 
-    public function getItemsByInventoryOut(InventoryOut $inventoryOut)
+    public function getItemsByItemRequest(ItemRequest $itemRequest)
     {
-        $inventoryOuts = $inventoryOut->items;
+        $items = $itemRequest->items;
 
-        foreach ($inventoryOuts as $inventoryOut) {
-            $inventoryOut->unit_uuid .= Unit::find($inventoryOut->pivot->unit_id)->uuid;
-            $inventoryOut->unit_name .= Unit::find($inventoryOut->pivot->unit_id)->name;
+        foreach ($items as $item) {
+            $item->unit_uuid = Unit::find($item->pivot->unit_id)->uuid;
+            $item->unit_name = Unit::find($item->pivot->unit_id)->name;
         }
 
-        $data = $alldata = json_decode($inventoryOuts);
+        $data = $alldata = json_decode($items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
