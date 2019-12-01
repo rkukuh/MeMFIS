@@ -13,6 +13,8 @@ use App\Http\Requests\Frontend\ItemRequestStore;
 use App\Http\Requests\Frontend\ItemRequestUpdate;
 use App\Helpers\DocumentNumber;
 use App\Models\JobCard;
+use App\Models\DefectCard;
+use App\Models\Project;
 use App\Models\Type;
 
 class MaterialRequestController extends Controller
@@ -49,16 +51,39 @@ class MaterialRequestController extends Controller
             ->where('of', 'item-request')
             ->pluck('id')
             ->first();
+        
+        $ref = 'App\Models\JobCard';
+        if (empty($request->jc_no)) {
+            $ref = 'App\Models\Project';
+        }
 
         $request->merge(['number' => DocumentNumber::generate('MTRQ-', ItemRequest::withTrashed()->count() + 1)]);
         $request->merge(['type_id' => $type]);
-        $request->merge(['requestable_type' => 'App\Models\ItemRequest']);
+        $request->merge(['requestable_type' => $ref]);
         $request->merge(['requestable_id' => ItemRequest::withTrashed()->count() + 1]);
 
         $itemRequest = ItemRequest::create($request->all());
 
         $jobcard = JobCard::where('uuid', $request->jc_no)->first();
-        $items = $jobcard->jobcardable->materials;
+
+        if (!$jobcard) {
+            $project = Project::where('uuid', $request->project_no)->first();
+            $defectcards = DefectCard::where('project_additional_id', $project->id)->get();
+        }
+
+        $items = [];
+        
+        if ($jobcard) {
+            $items = $jobcard->jobcardable->materials;
+        }
+
+        if ($defectcards) {
+            foreach ($defectcards as $defectcard) {
+                foreach ($defectcard->materials as $item) {
+                    array_push($items, $item);
+                }
+            }
+        }
 
         foreach ($items as $item) {
             $itemRequest->items()->attach([

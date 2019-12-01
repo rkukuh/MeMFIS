@@ -182,7 +182,7 @@ let MaterialRequestCreate = {
                     type: 'GET',
                     success: function (response) {
                         $("#project_number").empty().html(response.code);
-                        $("#actype").empty().html(response.aircraft_sn);
+                        $("#actype").empty().html(response.aircraft.name);
                         $("#acreg").empty().html(response.aircraft_register);
                     }
                 });
@@ -232,6 +232,7 @@ let MaterialRequestCreate = {
             let date = $('input[name=date]').val();
             let received_by = $('#received-by').val();
             let jc_no = $("#ref_jobcard").val();
+            let project_no = $("#ref_project").val();
 
             $.ajax({
                 headers: {
@@ -241,6 +242,7 @@ let MaterialRequestCreate = {
                 type: 'POST',
                 data: {
                     jc_no : jc_no,
+                    project_no : project_no,
                     storage_id: storage_id,
                     requested_at: date,
                     note: note,

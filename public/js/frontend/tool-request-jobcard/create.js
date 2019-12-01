@@ -171,6 +171,24 @@ let ToolRequestCreate = {
             });
         }
 
+        function generate(type, uuid) {
+            if (type == 'jc') {
+                var url = '/datatables/jobcard/' + uuid + '/materials';
+            } else if (type == 'project') {
+                var url = '/project/' + uuid;
+
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (response) {
+                        $("#project_number").empty().html(response.code);
+                        $("#actype").empty().html(response.aircraft.name);
+                        $("#acreg").empty().html(response.aircraft_register);
+                    }
+                });
+            }
+        }
+
         $("#ref_jobcard").change(function () {
             if (tableInit == true) {
                 tableInit = false;
@@ -192,11 +210,13 @@ let ToolRequestCreate = {
             if (tableInit == true) {
                 tableInit = false;
                 let project_uuid = $(this).val();
+                generate('project', project_uuid);
                 createTable('project', project_uuid);
             }
             else {
                 let project_uuid = $(this).val();
                 let table = $(".tool_request_project_datatable").mDatatable();
+                generate('project', project_uuid);
                 table.destroy();
                 createTable('project', project_uuid);
                 table = $(".tool_request_project_datatable").mDatatable();

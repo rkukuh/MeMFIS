@@ -1066,6 +1066,7 @@ Route::name('datatables.')->group(function () {
                 /** Material Request */
                 Route::get('/material', 'ItemRequestMaterialDatatables@index')->name('material.all');
                 Route::get('/material/{itemRequest}/items', 'ItemRequestMaterialDatatables@getItemsByItemRequest')->name('material.items');
+                Route::get('/material/{uuid}/materials', 'ItemRequestMaterialDatatables@findMaterials')->name('material.find');
 
                 /** Tool Request */
                 Route::get('/tool', 'ItemRequestToolDatatables@index')->name('tools.all');

@@ -58,7 +58,7 @@ class ProjectController extends Controller
      */
     public function show($project)
     {
-        $project = Project::with('customer')->where('uuid',$project)->first();
+        $project = Project::with('customer', 'aircraft')->where('uuid',$project)->first();
 
         return response()->json($project);
     }
