@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped table-bordered table-hover table-checkable" id="purhcase_order_datatable">
+                <table class="table table-striped table-bordered table-hover table-checkable" id="purchase_order_datatable">
                     <thead>
                         <tr>
                             <th>Date</th>

@@ -68,6 +68,7 @@ class ItemGoodsReceivedController extends Controller
                     'price' => ($request->quantity/$quantity_unit)*$price,
                     'note' => $request->note,
                     'expired_at' => $request->expired_at,
+                    'location' => $request->location,
                     ]
                 ]);
             }else{
@@ -83,6 +84,7 @@ class ItemGoodsReceivedController extends Controller
                         'price' => $price,
                         'note' => $request->note,
                         'expired_at' => $request->expired_at,
+                        'location' => $request->location,
                         ]
                     ]);
                 }
@@ -138,7 +140,9 @@ class ItemGoodsReceivedController extends Controller
         'quantity'=> $request->quantity,
         'quantity_unit'=> $quantity_unit,
         'note' => $request->note,
-        'expired_at' => $request->expired_at]);
+        'expired_at' => $request->expired_at,
+        'location' => $request->location,
+        ]);
 
         return response()->json($goodsReceived);
     }

@@ -91,6 +91,17 @@ class RIRController extends Controller
         }else{
             $material_identification = null;
         }
+
+        $general_decument = array();
+        foreach($rir->general_documents as $i => $rir1){
+            $general_decument[$i] =  $rir1->code;
+        }
+
+        $technical_decument = array();
+        foreach($rir->technical_documents as $i2 => $rir2){
+            $technical_decument[$i2] =  $rir2->code;
+        }
+
         return view('frontend.rir.show', [
             'receivingInspectionReport' => $rir,
             'packing_type' => $packing_type,
@@ -98,7 +109,9 @@ class RIRController extends Controller
             'preservation_check' => $preservation_check,
             'material_condition' => $material_condition,
             'material_quality' => $material_quality,
-            'material_identification' => $material_identification
+            'material_identification' => $material_identification,
+            'general_decument' => $general_decument,
+            'technical_decument' => $technical_decument
         ]);
     }
 
@@ -141,6 +154,16 @@ class RIRController extends Controller
             $material_identification = null;
         }
 
+        $general_decument = array();
+        foreach($rir->general_documents as $i => $rir1){
+            $general_decument[$i] =  $rir1->code;
+        }
+
+        $technical_decument = array();
+        foreach($rir->technical_documents as $i2 => $rir2){
+            $technical_decument[$i2] =  $rir2->code;
+        }
+
         return view('frontend.rir.edit', [
             'receivingInspectionReport' => $rir,
             'rir_status' => Status::find($rir->status_id)->code,
@@ -151,7 +174,9 @@ class RIRController extends Controller
             'preservation_check' => $preservation_check,
             'material_condition' => $material_condition,
             'material_quality' => $material_quality,
-            'material_identification' => $material_identification
+            'material_identification' => $material_identification,
+            'general_decument' => $general_decument,
+            'technical_decument' => $technical_decument
         ]);
     }
 
@@ -174,6 +199,26 @@ class RIRController extends Controller
         $request->merge(['material_quality' => Type::ofRIRMaterialCheckQuality()->where('code',$request->material_quality)->first()->id]);
         $request->merge(['material_identification' => Type::ofRIRMaterialCheckIdentification()->where('code',$request->material_identification)->first()->id]);
         $rir->update($request->all());
+
+        $rir->general_documents()->detach();
+        $rir->technical_documents()->detach();
+        // dd($request->technical_document);
+        if($request->general_document){
+            foreach($request->general_document as $general_document ){
+                $generalDocument = Type::ofRIRGeneralDocument()->where('code',$general_document)->first()->id;
+                // dump($generalDocument);
+                    $rir->general_documents()->attach($generalDocument);
+            }
+        }
+        if($request->technical_document){
+            foreach($request->technical_document as $technical_document ){
+                $technical_document = Type::ofRIRTechnicalDocument()->where('code',$technical_document)->first()->id;
+                // dump($technical_document);
+                    $rir->technical_documents()->attach($technical_document);
+            }
+        }
+
+        // dd('s');
 
 
         // if(sizeOf($request->general_document) <> 0){

@@ -15,7 +15,6 @@ class CreateRirGeneralDocumentTable extends Migration
     {
         Schema::create('rir_general_documents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('rir_id')->nullable();
             $table->unsignedBigInteger('general_document')->nullable();
             $table->timestamps();
