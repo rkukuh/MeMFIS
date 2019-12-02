@@ -314,6 +314,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of leave type based on.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfLeaveType(Builder $query)
+    {
+        return $query->where('of', 'leave-type');
+    }
+
+    /**
      * Scope a query to only include type of Aircraft Maintenance Cycle.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
