@@ -7,6 +7,7 @@ use App\Models\Type;
 use App\Models\Status;
 use App\Models\Religion;
 use App\Models\Workshift;
+use App\Models\Nationality;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -59,7 +60,6 @@ class UsersImport implements ToModel, WithHeadingRow
             'gender' => Type::ofGender()->where('code', $faker->randomElement(['male','female']))->first()->id,
             'religion' => Religion::where('code', $faker->randomElement(['christian-protestant','islam','kong-hu-cu','buddha','catholic','hindu']))->first()->id,
             'marital_status' => Status::ofMarital()->where('code', $faker->randomElement(['married','single','cerai-hidup','cerai-mati']))->first()->id,
-            'nationality' => Type::ofNationality()->where('code', 'indonesian')->first()->id,
             'country' => 'indonesia',
             'city' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
             'joined_date' => Carbon::now()->toDateString(),
@@ -71,6 +71,11 @@ class UsersImport implements ToModel, WithHeadingRow
         $workshift = Workshift::find($faker->randomElement([1,2])); 
 
         $employee->workshifts()->attach($workshift->id, [
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ]);
+        
+        $employee->nationalities()->attach(Nationality::first()->id, [
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
             ]);

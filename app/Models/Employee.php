@@ -26,7 +26,6 @@ class Employee extends MemfisModel implements HasMedia
         'gender_id',
         'religion_id',
         'marital_id',
-        'nationality_id',
         'country',
         'city',
         'zip',
@@ -227,6 +226,20 @@ class Employee extends MemfisModel implements HasMedia
     public function leave()
     {
         return $this->hasMany(Leave::class);
+    }
+
+    /**
+     * Many-to-Many: An employee may have zero or many nationalities.
+     *
+     * This function will retrieve all the nationalities of an employee.
+     * See: Nationality's employees() method for the inverse
+     *
+     * @return mixed
+     */
+    public function nationalities()
+    {
+        return $this->belongsToMany(Nationality::class)
+                    ->withTimestamps();
     }
 
     /**
