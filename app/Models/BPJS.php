@@ -17,8 +17,6 @@ class BPJS extends MemfisModel
         'company_paid',
         'company_min_value',
         'company__max_value',
-        'created_at',
-        'updated_at'
     ];
 
     /**

@@ -13,6 +13,12 @@ class TypesOfGender extends Seeder
     public function run()
     {
         Type::create([
+            'code' => 'all',
+            'name' => 'All',
+            'of'   => 'gender',
+        ]);
+
+        Type::create([
             'code' => 'male',
             'name' => 'Male',
             'of'   => 'gender',
