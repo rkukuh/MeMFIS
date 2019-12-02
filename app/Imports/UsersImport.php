@@ -59,7 +59,7 @@ class UsersImport implements ToModel, WithHeadingRow
             'gender' => Type::ofGender()->where('code', $faker->randomElement(['male','female']))->first()->id,
             'religion' => Religion::where('code', $faker->randomElement(['christian-protestant','islam','kong-hu-cu','buddha','catholic','hindu']))->first()->id,
             'marital_status' => Status::ofMarital()->where('code', $faker->randomElement(['married','single','cerai-hidup','cerai-mati']))->first()->id,
-            'nationality' => Type::ofNationality()->where('code', $faker->randomElement(['indonesian']))->first()->id,
+            'nationality' => Type::ofNationality()->where('code', 'indonesian')->first()->id,
             'country' => 'indonesia',
             'city' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
             'joined_date' => Carbon::now()->toDateString(),
@@ -68,7 +68,7 @@ class UsersImport implements ToModel, WithHeadingRow
 
         $employee = $user->employee;
 
-        $workshift = Workshift::first(); 
+        $workshift = Workshift::find($faker->randomElement([1,2])); 
 
         $employee->workshifts()->attach($workshift->id, [
             'created_at' => Carbon::now(),
