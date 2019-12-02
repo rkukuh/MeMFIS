@@ -12,8 +12,8 @@ class LeaveType extends MemfisModel
     protected $fillable = [
         'code',
         'name',
-        'gender',
-        'based',
+        'gender_id',
+        'type_id',
         'leave_period',
         'prorate_leave',
         'distribute_evently',
