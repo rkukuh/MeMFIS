@@ -159,4 +159,10 @@ let Employee = {
 
 jQuery(document).ready(function () {
     Employee.init();
+
+});
+
+$(document).ready(function () {
+    /** remove "ALL" from options */
+    $('#gender option:selected').find('option').get(0).remove();
 });
