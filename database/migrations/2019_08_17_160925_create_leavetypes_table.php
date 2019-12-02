@@ -20,7 +20,7 @@ class CreateLeavetypesTable extends Migration
             $table->string('name');           
             $table->unsignedBigInteger('gender_id')->nullable();
             $table->unsignedBigInteger('type_id')->nullable();
-            // $table->enum('based',['multi','daily'])->nullable();
+            $table->unsignedBigInteger('benefit_id')->nullable();
             $table->integer('leave_period');
             $table->boolean('prorate_leave')->nullable();
             $table->boolean('distribute_evently')->nullable();
@@ -36,6 +36,11 @@ class CreateLeavetypesTable extends Migration
                 
             $table->foreign('type_id')
                     ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+                
+            $table->foreign('benefit_id')
+                    ->references('id')->on('benefits')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
