@@ -30,6 +30,8 @@ class DatabaseSeeder extends Seeder
         
         /** MASTER */
         
+        $this->call(CountriesTableSeeder::class);
+        $this->call(NationalitiesTableSeeder::class);
         $this->call(ReligionsTableSeeder::class);
         $this->call(TaxesTableSeeder::class);
         $this->call(BanksTableSeeder::class);
