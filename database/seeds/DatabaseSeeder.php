@@ -166,8 +166,5 @@ class DatabaseSeeder extends Seeder
         $this->call(FefoInsTableSeeder::class);
         $this->call(FefoOutsTableSeeder::class);
 
-        /** RIR's Document Check */
-
-        $this->call(RIRDocumentChecksTableSeeder::class);
     }
 }
