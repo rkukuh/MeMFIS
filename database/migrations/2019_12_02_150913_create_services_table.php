@@ -14,8 +14,26 @@ class CreateServicesTable extends Migration
     public function up()
     {
         Schema::create('services', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
+            $table->char('uuid', 36)->unique();
+            $table->string('code');
+            $table->string('name');
+            $table->unsignedBigInteger('unit_id');
+            $table->string('barcode')->nullable();
+            $table->boolean('is_ppn')->nullable();
+            $table->integer('ppn_amount')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('unit_id')
+                    ->references('id')->on('units')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->index('code');
+            $table->index('name');
+            $table->index('barcode');
         });
     }
 
