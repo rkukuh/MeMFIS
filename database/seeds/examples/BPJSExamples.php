@@ -21,7 +21,7 @@ class BPJSExamples extends Seeder
             'employee_max_value' => 80000,
             'company_paid' => 4,
             'company_min_value' => 50000,
-            'company__max_value' => 250000,
+            'company_max_value' => 250000,
         ]);
 
         BPJS::create([
@@ -32,7 +32,7 @@ class BPJSExamples extends Seeder
             'employee_max_value' => 80000,
             'company_paid' => 4,
             'company_min_value' => 50000,
-            'company__max_value' => 250000,
+            'company_max_value' => 250000,
         ]);
         
     }
