@@ -25,7 +25,6 @@ class CreateEmployeesTable extends Migration
             $table->unsignedBigInteger('gender_id')->nullable();
             $table->unsignedBigInteger('religion_id')->nullable();
             $table->unsignedBigInteger('marital_id')->nullable();
-            $table->unsignedBigInteger('nationality_id')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->string('zip')->nullable();
@@ -51,11 +50,6 @@ class CreateEmployeesTable extends Migration
 
             $table->foreign('marital_id')
                 ->references('id')->on('statuses')
-                ->onUpdate('cascade')
-                ->onDelete('restrict');
-
-            $table->foreign('nationality_id')
-                ->references('id')->on('types')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
 
