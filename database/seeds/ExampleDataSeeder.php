@@ -19,5 +19,6 @@ class ExampleDataSeeder extends Seeder
         $this->call(LeaveTypeExamples::class);
         $this->call(BPJSExamples::class);
         $this->call(BenefitExamples::class);
+        $this->call(CompanyStructureExamples::class);
     }
 }
