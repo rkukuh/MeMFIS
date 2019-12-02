@@ -747,6 +747,19 @@ class Type extends MemfisModel
     }
 
     /**
+     * One-to-Mant: A gender have zero or many Employees.
+     *
+     * This function will retrieve Project of a given RTS.
+     * See: Employee's gender() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_gender()
+    {
+        return $this->hasMany(Employee::class, 'gender_id');
+    }
+
+    /**
      * One-to-Many: A fax may have zero or many type.
      *
      * This function will retrieve all faxes of a type.
