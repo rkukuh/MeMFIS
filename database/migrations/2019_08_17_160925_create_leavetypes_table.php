@@ -17,9 +17,10 @@ class CreateLeavetypesTable extends Migration
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
-            $table->string('name');
-            $table->enum('gender',['m','f','all']);
-            $table->enum('based',['multi','daily'])->nullable() ;
+            $table->string('name');           
+            $table->unsignedBigInteger('gender_id')->nullable();
+            $table->unsignedBigInteger('type_id')->nullable();
+            // $table->enum('based',['multi','daily'])->nullable();
             $table->integer('leave_period');
             $table->boolean('prorate_leave')->nullable();
             $table->boolean('distribute_evently')->nullable();
@@ -27,6 +28,16 @@ class CreateLeavetypesTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('gender_id')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+                
+            $table->foreign('type_id')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->index('code');
             $table->index('name');
