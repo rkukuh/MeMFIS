@@ -12,6 +12,7 @@ use App\Models\Promo;
 use App\Models\Access;
 use App\Models\FefoIn;
 use App\Models\Vendor;
+use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\License;
 use App\Models\Project;
@@ -658,6 +659,19 @@ class FillComboxController extends Controller
                             ->pluck('name', 'uuid');
 
         return json_encode($maritalStatus);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function nationalities()
+    {
+        $nationalities = Type::ofNationality()
+                            ->pluck('name', 'uuid');
+
+        return json_encode($nationalities);
     }
 
     /**
