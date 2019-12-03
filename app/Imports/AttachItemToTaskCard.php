@@ -55,7 +55,6 @@ class AttachItemToTaskCard implements ToModel, WithHeadingRow
                 'unit_id' => $unit->id,
                 'quantity' => $row['qty']
             ]);
-            dump($result);
 
         }
     }
