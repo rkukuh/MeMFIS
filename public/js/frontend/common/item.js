@@ -99,7 +99,7 @@ let ItemDatatables = {
             $('#item_datatable_filter input').bind('keyup', function(e) {
                 if (e.keyCode === 13) {
                     let table = $('#item_datatable').DataTable();
-                    table.search(this.value).draw();
+                    table.search(this.value).draw();  
                 }
             });
         });

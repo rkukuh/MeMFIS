@@ -213,6 +213,7 @@ let Item = {
             if (e.keyCode === 13) {
                 let table = $('#item_datatable').DataTable();
                 table.search(this.value).draw();
+
             }
         });
         $('.item_datatable').on('click', '.delete', function () {
