@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class RIRDocumentCheckTest extends TestCase
+class ServiceTest extends TestCase
 {
     /**
      * A basic test example.

@@ -332,6 +332,28 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** SERVICE */
+
+        Route::name('service.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'service',
+                'namespace' => 'Service'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'ServiceDatatables@index')->name('all');
+                // Route::get('/modal', 'ItemDatatables@indexModal')->name('modal.index');
+                // Route::get('/categories', 'CategoryItemDatatables@index')->name('categories.index');
+
+                /** Transaction */
+
+            });
+
+        });
+
         /** INTERCHANGE */
 
         Route::name('interchange.')->group(function () {

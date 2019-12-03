@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\RIRDocumentCheck;
+use App\Models\Service;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\RIRDocumentCheckStore;
-use App\Http\Requests\Frontend\RIRDocumentCheckUpdate;
+use App\Http\Requests\Admin\ServiceStore;
+use App\Http\Requests\Admin\ServiceUpdate;
 
-class RIRDocumentCheckController extends Controller
+class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class RIRDocumentCheckController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\RIRDocumentCheckStore  $request
+     * @param  \App\Http\Requests\Admin\ServiceStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RIRDocumentCheckStore $request)
+    public function store(ServiceStore $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class RIRDocumentCheckController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\RIRDocumentCheck  $rIRDocumentCheck
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function show(RIRDocumentCheck $rIRDocumentCheck)
+    public function show(Service $service)
     {
         //
     }
@@ -54,10 +54,10 @@ class RIRDocumentCheckController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\RIRDocumentCheck  $rIRDocumentCheck
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function edit(RIRDocumentCheck $rIRDocumentCheck)
+    public function edit(Service $service)
     {
         //
     }
@@ -65,11 +65,11 @@ class RIRDocumentCheckController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\RIRDocumentCheckUpdate  $request
-     * @param  \App\Models\RIRDocumentCheck  $rIRDocumentCheck
+     * @param  \App\Http\Requests\Admin\ServiceUpdate  $request
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(RIRDocumentCheckUpdate $request, RIRDocumentCheck $rIRDocumentCheck)
+    public function update(ServiceUpdate $request, Service $service)
     {
         //
     }
@@ -77,10 +77,10 @@ class RIRDocumentCheckController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\RIRDocumentCheck  $rIRDocumentCheck
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RIRDocumentCheck $rIRDocumentCheck)
+    public function destroy(Service $service)
     {
         //
     }

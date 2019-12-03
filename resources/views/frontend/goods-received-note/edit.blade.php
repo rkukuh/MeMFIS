@@ -251,7 +251,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="purchase_order_datatable" id="purchase_order_datatable"></div>
+                                                                <div class="item_purchase_order_datatable" id="item_purchase_order_datatable"></div>
 
                                                                 @include('frontend.goods-received-note.modal')
                                                                 @include('frontend.goods-received-note.modal-edit')

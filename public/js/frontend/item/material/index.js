@@ -2,7 +2,7 @@ let Item = {
     init: function () {
 
 
-        $('#item_datatable').DataTable({
+        var oTable = $('#item_datatable').DataTable({
             "dom": '<"top"f>rt<"bottom">pil',
             processing: true,
             responsive: true,
@@ -19,11 +19,11 @@ let Item = {
                     return "<a href='/item/"+ row.uuid +"'>" + row.code + "</a>"
                 }},
                 {data: 'name', name: 'name',sWidth:'15%'},
-                {data: 'caterory', name: 'caterory',sWidth:'15%',render:function(data, type, row){
+                {data: 'caterory', name: 'caterory',sWidth:'15%','searchable': false ,render:function(data, type, row){
                     // return row.categories[0].name //model
                     return row.category_name //query builder
                 }},
-                {data: 'unit.name', name: 'unit.name',sWidth:'10%',render:function(data, type, row){
+                {data: 'unit.name', name: 'unit.name',sWidth:'10%','searchable': false ,render:function(data, type, row){
                     if (row.is_ppn === 1) {
                         return '<span class="m-badge m-badge--brand m-badge--wide">PPN: ' + row.ppn_amount + '%</span>'
                     }
@@ -31,7 +31,7 @@ let Item = {
                         return '<span class="m-badge m-badge--warning m-badge--wide">No</span>'
                     }
                 }},
-                {data: 'unit.name', name: 'unit.name',sWidth:'10%',render:function(data, type, row){
+                {data: 'unit.name', name: 'unit.name',sWidth:'10%','searchable': false ,render:function(data, type, row){
                     if (row.is_stock) {
                         var e = {
                             1: {
@@ -48,8 +48,8 @@ let Item = {
                         }
                     return ''
                 }},
-                {data: 'name', name: 'name',sWidth:'15%'},
-                {data: '', name: '',sWidth:'10%',render:function(data, type, row){
+                {data: 'name', name: 'name',sWidth:'15%','searchable': false },
+                {data: '', name: '',sWidth:'10%','searchable': false ,render:function(data, type, row){
                     return (
                             '<a href="/item/' + row.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + row.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
@@ -71,6 +71,13 @@ let Item = {
         $('.dataTables_info').addClass('margin-info');
         $('.paging_simple_numbers').addClass('padding-datatable');
 
+        $('#item_datatable_filter input').unbind();
+        $('#item_datatable_filter input').bind('keyup', function(e) {
+            if (e.keyCode === 13) {
+                let table = $('.item_datatable').DataTable();
+                table.search(this.value).draw();
+            }
+        });
 
         $('.item_datatable').on('click', '.delete', function () {
             let item_uuid = $(this).data('id');
