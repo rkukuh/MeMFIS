@@ -51,25 +51,22 @@ class UsersImport implements ToModel, WithHeadingRow
             );
         }
 
-        dump('Country    = '.Country::first()->id);
-        dump('Religion   = '.Religion::where('code', $faker->randomElement(['christian-protestant','islam','kong-hu-cu','buddha','catholic','hindu']))->first()->id);
-        dump('Gender     = '.Type::ofGender()->where('code', $faker->randomElement(['male','female']))->first()->id);
-        dump('Status     = '.Status::ofMarital()->where('code', $faker->randomElement(['married','single','cerai-hidup','cerai-mati']))->first()->id);
-
-        $user->employee()->create([
+        $employee = [
             'code' => $row['nrp'],
             'first_name' => ucwords(strtolower($row['nama'])),
             'last_name' => ucwords(strtolower($row['nama'])),
             'dob' => Carbon::now()->subYear(rand(20, 50)),
             'dob_place' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
-            'gender' => Type::ofGender()->where('code', $faker->randomElement(['male','female']))->first()->id,
-            'religion' => Religion::where('code', $faker->randomElement(['christian-protestant','islam','kong-hu-cu','buddha','catholic','hindu']))->first()->id,
-            'marital_status' => Status::ofMarital()->where('code', $faker->randomElement(['married','single','cerai-hidup','cerai-mati']))->first()->id,
-            'country' => Country::first()->id,
+            'gender_id' => Type::ofGender()->where('code', $faker->randomElement(['male','female']))->first()->id,
+            'religion_id' => Religion::where('code', $faker->randomElement(['christian-protestant','islam','kong-hu-cu','buddha','catholic','hindu']))->first()->id,
+            'marital_id' => Status::ofMarital()->where('code', $faker->randomElement(['married','single','cerai-hidup','cerai-mati']))->first()->id,
+            'country_id' => Country::first()->id,
             'city' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
             'joined_date' => Carbon::now()->toDateString(),
             'updated_at' => null
-        ]);
+        ]; 
+
+        $user->employee()->create($employee);
 
         $employee = $user->employee;
 
