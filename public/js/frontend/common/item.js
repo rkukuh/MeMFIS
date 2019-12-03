@@ -37,6 +37,7 @@ let ItemDatatables = {
             processing: true,
             responsive: true,
             serverSide: true,
+            deferLoading: 0,
             ajax: urlItem,
             columnDefs: [
                          {
@@ -99,7 +100,7 @@ let ItemDatatables = {
             $('#item_datatable_filter input').bind('keyup', function(e) {
                 if (e.keyCode === 13) {
                     let table = $('#item_datatable').DataTable();
-                    table.search(this.value).draw();  
+                    table.search(this.value).draw();
                 }
             });
         });
