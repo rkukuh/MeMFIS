@@ -591,6 +591,16 @@
                                     </span>
                                 </a>
                             </li>
+                            <li class="m-menu__item" aria-haspopup="true">
+                                <a href="{{ route('frontend.service.index') }}" class="m-menu__link">
+                                    <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="m-menu__link-text">
+                                        Services
+                                    </span>
+                                </a>
+                            </li>
                             <li class="m-menu__item" aria-haspopup="true" style="display: none;">
                                 <a href="{{ route('frontend.category-item.index') }}" class="m-menu__link">
                                     <i class="m-menu__link-bullet m-menu__link-bullet--dot">

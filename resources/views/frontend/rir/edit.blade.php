@@ -432,6 +432,9 @@
                                                                         @slot('size','12')
                                                                         @slot('text', 'Invoice')
                                                                         @slot('value', 'invoice')
+                                                                        @if(in_array('invoice',$general_decument))
+                                                                            @slot('checked', 'checked')
+                                                                        @endif
                                                                     @endcomponent
                                                                     @component('frontend.common.input.checkbox')
                                                                         @slot('id', 'airway_bill')
@@ -440,6 +443,9 @@
                                                                         @slot('size','12')
                                                                         @slot('text', 'Airway Bill')
                                                                         @slot('value', 'airway-bill')
+                                                                        @if(in_array('airway-bill',$general_decument))
+                                                                            @slot('checked', 'checked')
+                                                                        @endif
                                                                     @endcomponent
                                                                     @component('frontend.common.input.checkbox')
                                                                         @slot('id', 'shipping_document')
@@ -448,6 +454,9 @@
                                                                         @slot('size','12')
                                                                         @slot('text', 'Shipping Document')
                                                                         @slot('value', 'shipping-document')
+                                                                        @if(in_array('shipping-document',$general_decument))
+                                                                            @slot('checked', 'checked')
+                                                                        @endif
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -462,6 +471,9 @@
                                                                         @slot('value', 'comformity-certificate')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Certificate of Conformity')
+                                                                        @if(in_array('comformity-certificate',$technical_decument))
+                                                                            @slot('checked', 'checked')
+                                                                        @endif
                                                                     @endcomponent
                                                                     @component('frontend.common.input.checkbox')
                                                                         @slot('id', 'arc_aat')
@@ -470,6 +482,9 @@
                                                                         @slot('value', 'arc-aat')
                                                                         @slot('size','12')
                                                                         @slot('text', 'ARC/AAT')
+                                                                        @if(in_array('arc-aat',$technical_decument))
+                                                                            @slot('checked', 'checked')
+                                                                        @endif
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
