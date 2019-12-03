@@ -86,11 +86,12 @@ class ProjectHMController extends Controller
      */
     public function edit(Project $project)
     {
-        if($project->approvals()->latest()->first()){
-            return redirect()->route('frontend.project-hm.show', [
-                'project' => $project->uuid
-            ]);
-        }
+        dd($project);
+        // if($project->approvals()->latest()->first()){
+        //     return redirect()->route('frontend.project-hm.show', [
+        //         'project' => $project->uuid
+        //     ]);
+        // }
         $attention = $project->quotations;
         return view('frontend.project.hm.edit',[
             'project' => $project,
