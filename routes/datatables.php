@@ -344,7 +344,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 /** Master Data */
-                // Route::get('/', 'ServiceDatatables@index')->name('all');
+                Route::get('/', 'ServiceDatatables@index')->name('all');
                 // Route::get('/modal', 'ItemDatatables@indexModal')->name('modal.index');
                 // Route::get('/categories', 'CategoryItemDatatables@index')->name('categories.index');
 
