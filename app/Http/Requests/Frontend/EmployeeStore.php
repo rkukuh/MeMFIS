@@ -2,6 +2,13 @@
 
 namespace App\Http\Requests\Frontend;
 
+use Carbon\Carbon;
+use App\Models\Type;
+use App\Models\Status;
+use App\Models\Employee;
+use App\Models\Position;
+use App\Models\JobTittle;
+use App\Models\Department;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -29,7 +36,7 @@ class EmployeeStore extends FormRequest
             'code' => 'required|unique:employees',
             'first_name' => 'required',
             'last_name' => 'required',
-            'joined_name' => 'required',
+            'joined_date' => 'required',
             'gender' => 'required',
             'nationality' => 'required',
             'religion' => 'required',
@@ -39,7 +46,7 @@ class EmployeeStore extends FormRequest
             'city' => 'required',
             'mobile_phone' => 'required',
             'email_1' => 'required',
-            'job_title' => 'required',
+            // 'job_title' => 'required',
             'job_position' => 'required',
             'employee_status' => 'required',
             'department' => 'required',
@@ -48,5 +55,28 @@ class EmployeeStore extends FormRequest
 
     protected function failedValidation(Validator $validator) {
         throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $this->merge([
+                'indirect_supervisor_id' =>  optional(Employee::where('uuid', $this->indirect_supervisor)->first())->id,
+                'supervisor_id' => optional(Employee::where('uuid', $this->indirect_supervisor)->first())->id,
+                'job_title_id' => optional(JobTittle::where('uuid', $this->job_title)->first())->id,
+                'position_id' => optional(Position::where('uuid', $this->job_position)->first())->id,
+                'statuses_id' =>  optional(Status::where('uuid', $this->employee_status)->first())->id,
+                'department_id' =>  optional(Department::where('uuid', $this->department)->first())->id,
+                'employee_id' => optional(Employee::where('uuid', $this->employee_uuid)->first())->id,
+                'type_id' => optional(Type::ofAttendanceCorrection()->where('code', $this->attendance_correction_time_type)->first())->id,
+                'created_at' => Carbon::now()
+                ]);
+        });
     }
 }
