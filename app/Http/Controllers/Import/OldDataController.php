@@ -17,6 +17,7 @@ use App\Imports\TaskcardDecemberImport;
 use App\Imports\MaterialsAndToolsImport;
 use App\Imports\MasterItemDesemberImport;
 use App\Imports\TaskCardsCPCPTriganaimport;
+use App\Imports\MaterialsAndToolsImportDecember;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 
@@ -51,7 +52,8 @@ class OldDataController extends Controller
 
     public function materialsAndTools()
     {
-        Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'master-items.xlsx');
+        // Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'master-items.xlsx');
+        Excel::import(new MaterialsAndToolsImportDecember, $this->import_directory . 'master-items-4000.xlsx');
     }
 
     public function taskCardsATR()
