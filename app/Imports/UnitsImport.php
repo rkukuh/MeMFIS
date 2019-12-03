@@ -20,9 +20,7 @@ class UnitsImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        dump($row['type']);
         $type = Type::ofUnit()->where('name', $row['type'])->first()->id;
-        dump($type);
         $unit = new Unit([
             'name' => $row['nama'],
             'symbol' => $row['symbol'],

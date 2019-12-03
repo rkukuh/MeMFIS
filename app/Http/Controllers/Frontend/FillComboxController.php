@@ -18,6 +18,7 @@ use App\Models\License;
 use App\Models\Project;
 use App\Models\Station;
 use App\Models\Storage;
+use App\Models\JobTitle;
 use App\Models\Aircraft;
 use App\Models\Category;
 use App\Models\Currency;
@@ -133,6 +134,18 @@ class FillComboxController extends Controller
         return $items->origin_jobcardable_items;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jobtitles()
+    {
+        $jobtitles = JobTitle::pluck('name', 'uuid');
+
+        return json_encode($jobtitles);
+
+    }
 
     /**
      * Display a listing of the resource.

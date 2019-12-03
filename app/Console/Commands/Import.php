@@ -93,6 +93,10 @@ class Import extends Command
                 $this->line('Importing: First In First Out In');
                 app()->make(OldDataController::class)->fefoin();
                 break;
+            case 'sim-dec':
+                $this->line('Importing: data for simulation on december 2019');
+                app()->make(OldDataController::class)->decemberSimulation();
+                break;
             default:
                 $this->line('Importing: File not Found');
                 break;
