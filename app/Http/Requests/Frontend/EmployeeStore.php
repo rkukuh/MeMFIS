@@ -7,7 +7,7 @@ use App\Models\Type;
 use App\Models\Status;
 use App\Models\Employee;
 use App\Models\Position;
-use App\Models\JobTittle;
+use App\Models\JobTitle;
 use App\Models\Department;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
@@ -67,15 +67,15 @@ class EmployeeStore extends FormRequest
     {
         $validator->after(function ($validator) {
             $this->merge([
-                'indirect_supervisor_id' =>  optional(Employee::where('uuid', $this->indirect_supervisor)->first())->id,
-                'supervisor_id' => optional(Employee::where('uuid', $this->indirect_supervisor)->first())->id,
-                'job_title_id' => optional(JobTittle::where('uuid', $this->job_title)->first())->id,
+                'created_at' => Carbon::now(),
+                'job_title_id' => optional(JobTitle::where('uuid', $this->job_title)->first())->id,
                 'position_id' => optional(Position::where('uuid', $this->job_position)->first())->id,
+                'employee_id' => optional(Employee::where('uuid', $this->employee_uuid)->first())->id,
                 'statuses_id' =>  optional(Status::where('uuid', $this->employee_status)->first())->id,
                 'department_id' =>  optional(Department::where('uuid', $this->department)->first())->id,
-                'employee_id' => optional(Employee::where('uuid', $this->employee_uuid)->first())->id,
+                'supervisor_id' => optional(Employee::where('uuid', $this->indirect_supervisor)->first())->id,
+                'indirect_supervisor_id' =>  optional(Employee::where('uuid', $this->indirect_supervisor)->first())->id,
                 'type_id' => optional(Type::ofAttendanceCorrection()->where('code', $this->attendance_correction_time_type)->first())->id,
-                'created_at' => Carbon::now()
                 ]);
         });
     }

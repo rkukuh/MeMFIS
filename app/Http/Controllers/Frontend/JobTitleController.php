@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\JobTittle;
+use App\Models\JobTitle;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\JobTittleStore;
-use App\Http\Requests\Frontend\JobTittleUpdate;
+use App\Http\Requests\Frontend\JobTitleStore;
+use App\Http\Requests\Frontend\JobTitleUpdate;
 
-class JobTittleController extends Controller
+class JobTitleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,67 +32,67 @@ class JobTittleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\JobTittleStore  $request
+     * @param  \App\Http\Requests\Frontend\JobTitleStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JobTittleStore $request)
+    public function store(JobTitleStore $request)
     {
-        $jobtittle = JobTittle::create($request->all());
+        $jobtitle = JobTitle::create($request->all());
 
         // TODO: Return error message as JSON
-        return response()->json($jobtittle);
+        return response()->json($jobtitle);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\JobTittle  $jobTittle
+     * @param  \App\Models\JobTitle  $jobTitle
      * @return \Illuminate\Http\Response
      */
-    public function show(JobTittle $jobTittle)
+    public function show(JobTitle $jobTitle)
     {
         // TODO: Return error message as JSON
-        return response()->json($jobTittle);
+        return response()->json($jobTitle);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\JobTittle  $jobTittle
+     * @param  \App\Models\JobTitle  $jobTitle
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobTittle $jobTittle)
+    public function edit(JobTitle $jobTitle)
     {
         // TODO: Return error message as JSON
-        return response()->json($jobTittle);
+        return response()->json($jobTitle);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\JobTittleUpdate  $request
-     * @param  \App\Models\JobTittle  $jobTittle
+     * @param  \App\Http\Requests\Frontend\JobTitleUpdate  $request
+     * @param  \App\Models\JobTitle  $jobTitle
      * @return \Illuminate\Http\Response
      */
-    public function update(JobTittleUpdate $request, JobTittle $jobTittle)
+    public function update(JobTitleUpdate $request, JobTitle $jobTitle)
     {
-        $jobTittle->update($request->all());
+        $jobTitle->update($request->all());
 
         // TODO: Return error message as JSON
-        return response()->json($jobTittle);
+        return response()->json($jobTitle);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\JobTittle  $jobTittle
+     * @param  \App\Models\JobTitle  $jobTitle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobTittle $jobTittle)
+    public function destroy(JobTitle $jobTitle)
     {
-        $jobTittle->delete();
+        $jobTitle->delete();
 
         // TODO: Return error message as JSON
-        return response()->json($jobTittle);
+        return response()->json($jobTitle);
     }
 }

@@ -66,7 +66,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Position::class => Policies\PositionPolicy::class,
         Models\Overtime::class => Policies\OvertimePolicy::class,
         Models\Mutation::class => Policies\MutationPolicy::class,
-        Models\JobTittle::class => Policies\JobTittlePolicy::class,
+        Models\JobTitle::class => Policies\JobTitlePolicy::class,
         Models\LeaveType::class => Policies\LeaveTypePolicy::class,
         Models\Workshift::class => Policies\WorkshiftPolicy::class,
         Models\Quotation::class => Policies\QuotationPolicy::class,

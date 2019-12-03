@@ -6,7 +6,7 @@ let Employee = {
 
             let code = $('input[name=code]').val()
             let code_uppercase = code.toUpperCase()
-            let job_tittle = $('#job_title option:selected').val()
+            let job_title = $('#job_title option:selected').val()
             let dob = $('input[name="dob"]').val();
             let dob_place = $('input[name="dob_place"]').val();
             let first_name = $('input[name="first_name"]').val();
@@ -45,7 +45,7 @@ let Employee = {
     
                    formData.set('code', code_uppercase)
                    formData.set('gender', gender)
-                   formData.set('job_tittle', job_tittle)
+                   formData.set('job_title', job_title)
                    if($("#document")[0].files[0]){
                     formData.set('document',$("#document")[0].files[0])
                    }
@@ -106,8 +106,8 @@ let Employee = {
                                 $('#mobile_phone-error').html('');
                             }
 
-                            if (data.errors.job_tittle) {
-                                $('#job_title-error').html(data.errors.job_tittle[0]);
+                            if (data.errors.job_title) {
+                                $('#job_title-error').html(data.errors.job_title[0]);
                             }else{
                                 $('#job_title-error').html('');
                             }
@@ -148,7 +148,7 @@ let Employee = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/employee/'+data.uuid+'/edit';
+                        // window.location.href = '/employee/'+data.uuid+'/edit';
 
                     }
                 }

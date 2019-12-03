@@ -227,16 +227,16 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
-     * One-to-One: An Employee have one Jobtittle.
+     * One-to-One: An Employee have one Jobtitle.
      *
-     * This function will retrieve Job Tittle of a given Employee.
-     * See: Jobtittle employee() method for the inverse
+     * This function will retrieve Job Title of a given Employee.
+     * See: Jobtitle employee() method for the inverse
      *
      * @return mixed
      */
-    public function job_tittle()
+    public function job_title()
     {
-        return $this->belongsTo(JobTittle::class);
+        return $this->belongsTo(JobTitle::class);
     }
 
     /**

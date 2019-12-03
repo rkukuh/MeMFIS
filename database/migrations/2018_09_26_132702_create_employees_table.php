@@ -29,7 +29,7 @@ class CreateEmployeesTable extends Migration
             $table->string('city')->nullable();
             $table->string('zip')->nullable();
             $table->timestamp('joined_date');
-            $table->unsignedBigInteger('job_tittle_id')->nullable();
+            $table->unsignedBigInteger('job_title_id')->nullable();
             $table->unsignedBigInteger('position_id')->nullable();
             $table->unsignedBigInteger('statuses_id')->nullable();
             $table->unsignedBigInteger('department_id')->nullable();
