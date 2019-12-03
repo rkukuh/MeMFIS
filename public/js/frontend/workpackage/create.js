@@ -45,7 +45,7 @@ let Workpackage2 = {
             columns: [
                 {
                     field: 'title',
-                    title: 'Tittle',
+                    title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150

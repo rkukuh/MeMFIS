@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\JobTittle;
+use App\Models\JobTitle;
 use Faker\Generator as Faker;
 
-$factory->define(JobTittle::class, function (Faker $faker) {
+$factory->define(JobTitle::class, function (Faker $faker) {
 
     $number = $faker->unixTime();
 

@@ -73,7 +73,7 @@ return [
         'leave_periods' => 20,
         'workpackages' => 20,
         'BPJSS' => 20,
-        'jobtittles' => 20,
+        'jobtitles' => 20,
         'leavetypes' => 20,
         'holidays' => 20,
         'workshifts' => 20,

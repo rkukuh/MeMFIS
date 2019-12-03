@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Datatables;
 
-use App\Models\JobTittle;
+use App\Models\JobTitle;
 use App\Http\Controllers\Controller;
 
-class JobTittleDatatables extends Controller
+class JobTitleDatatables extends Controller
 {
     
 
     public function index(){
-        $JobTittle = JobTittle::All();
+        $JobTitle = JobTitle::All();
 
-        $data = $alldata = json_decode($JobTittle);
+        $data = $alldata = json_decode($JobTitle);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\JobTittle;
+use App\Models\Religion;
 use Illuminate\Database\Seeder;
 
-class JobTittles extends Seeder
+class Religions extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class JobTittles extends Seeder
      */
     public function run()
     {
-        factory(JobTittle::class, config('memfis.dummies.jobtittles'))->create();
+        //
     }
 }
