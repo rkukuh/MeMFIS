@@ -99,6 +99,7 @@ let ToolDatatables = {
                 if (e.keyCode === 13) {
                     let table = $('#tool_datatable').DataTable();
                     table.search(this.value).draw();
+
                 }
             });
         });
