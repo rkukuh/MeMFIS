@@ -35,6 +35,18 @@ class OldDataController extends Controller
         Excel::import(new CustomersImport, $this->import_directory . 'customer.xlsx');
     }
 
+    public function decemberSimulation()
+    {
+        Excel::import(new MasterItemDesemberImport, $this->import_directory . 'sim-master-material.xlsx');
+        Excel::import(new MasterItemDesemberImport, $this->import_directory . 'sim-master-tool.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-si.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-basic.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-cpcp.xlsx');
+        Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-tool-to-tc.xlsx');
+        Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-material-to-tc.xlsx');
+        Excel::import(new SimulationsUsersImport, $this->import_directory . 'sim-attach-material-to-tc.xlsx');
+    }
+
     public function engines()
     {
         Excel::import(new EnginesImport, $this->import_directory . 'engines.xlsx');
@@ -84,16 +96,5 @@ class OldDataController extends Controller
     public function workAreas()
     {
         Excel::import(new WorkAreasImport, $this->import_directory . 'work-areas.xlsx');
-    }
-
-    public function decemberSimulation()
-    {
-        Excel::import(new MasterItemDesemberImport, $this->import_directory . 'sim-master-material.xlsx');
-        Excel::import(new MasterItemDesemberImport, $this->import_directory . 'sim-master-tool.xlsx');
-        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-si.xlsx');
-        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-basic.xlsx');
-        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-cpcp.xlsx');
-        Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-tool-to-tc.xlsx');
-        Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-material-to-tc.xlsx');
     }
 }
