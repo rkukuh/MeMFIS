@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Import;
 use App\Imports\UsersImport;
 use App\Imports\FEFOINImport;
 use App\Imports\EnginesImport;
+use App\Imports\SimUserImport;
 use App\Imports\AircraftsImport;
 use App\Imports\CustomersImport;
 use App\Imports\WorkAreasImport;
@@ -95,5 +96,7 @@ class OldDataController extends Controller
         Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-cpcp.xlsx');
         Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-tool-to-tc.xlsx');
         Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-material-to-tc.xlsx');
+        Excel::import(new SimUserImport, $this->import_directory . 'sim-user.xlsx');
+        
     }
 }
