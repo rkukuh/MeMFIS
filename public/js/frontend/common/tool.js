@@ -37,6 +37,7 @@ let ToolDatatables = {
             processing: true,
             responsive: true,
             serverSide: true,
+            deferLoading: 0,
             ajax: urlTool,
             columnDefs: [
                          {
