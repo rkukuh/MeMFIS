@@ -4,9 +4,9 @@ namespace App\Models;
 
 use App\MemfisModel;
 
-class JobTittle extends MemfisModel
+class JobTitle extends MemfisModel
 {
-    protected $table = 'jobtittles';
+    protected $table = 'jobtitles';
 
     protected $fillable = [
         'code',

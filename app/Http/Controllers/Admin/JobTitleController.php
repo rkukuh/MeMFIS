@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\JobTittle;
+use App\Models\JobTitle;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\JobTittleStore;
-use App\Http\Requests\Admin\JobTittleUpdate;
+use App\Http\Requests\Admin\JobTitleStore;
+use App\Http\Requests\Admin\JobTitleUpdate;
 
-class JobTittleController extends Controller
+class JobTitleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class JobTittleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\JobTittleStore  $request
+     * @param  \App\Http\Requests\Admin\JobTitleStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JobTittleStore $request)
+    public function store(JobTitleStore $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class JobTittleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\JobTittle  $jobTittle
+     * @param  \App\Models\JobTitle  $jobTitle
      * @return \Illuminate\Http\Response
      */
-    public function show(JobTittle $jobTittle)
+    public function show(JobTitle $jobTitle)
     {
         //
     }
@@ -54,10 +54,10 @@ class JobTittleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\JobTittle  $jobTittle
+     * @param  \App\Models\JobTitle  $jobTitle
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobTittle $jobTittle)
+    public function edit(JobTitle $jobTitle)
     {
         //
     }
@@ -65,11 +65,11 @@ class JobTittleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\JobTittleUpdate  $request
-     * @param  \App\Models\JobTittle  $jobTittle
+     * @param  \App\Http\Requests\Admin\JobTitleUpdate  $request
+     * @param  \App\Models\JobTitle  $jobTitle
      * @return \Illuminate\Http\Response
      */
-    public function update(JobTittleUpdate $request, JobTittle $jobTittle)
+    public function update(JobTitleUpdate $request, JobTitle $jobTitle)
     {
         //
     }
@@ -77,10 +77,10 @@ class JobTittleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\JobTittle  $jobTittle
+     * @param  \App\Models\JobTitle  $jobTitle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobTittle $jobTittle)
+    public function destroy(JobTitle $jobTitle)
     {
         //
     }

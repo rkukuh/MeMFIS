@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <div id="tittleModal">
+                <div id="titleModal">
                     @include('frontend.common.label.create-new',['class' => "labelModal"])
                 </div>
                 <h5 class="modal-title" id="TitleModalEmployee">Employment Status</h5>
