@@ -77,8 +77,8 @@
                                 <h1 class="display-5">{{ $name }}, <span>{{ $age }}</span></h1>
                                     <div class="row">
                                         <div class="col-sm-2 col-md-2 col-lg-2">
-                                        @if (isset($employee->job_tittle->name))
-                                        <h6>{{ $employee->job_tittle->name }}</h6>
+                                        @if (isset($employee->job_title->name))
+                                        <h6>{{ $employee->job_title->name }}</h6>
                                         @else
                                         <h6>None</h6>
                                         @endif

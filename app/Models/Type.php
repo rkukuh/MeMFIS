@@ -314,6 +314,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of leave type based on.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfLeaveType(Builder $query)
+    {
+        return $query->where('of', 'leave-type');
+    }
+
+    /**
      * Scope a query to only include type of Aircraft Maintenance Cycle.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -322,6 +333,17 @@ class Type extends MemfisModel
     public function scopeOfMaintenanceCycle(Builder $query)
     {
         return $query->where('of', 'maintenance-cycle');
+    }
+
+    /**
+     * Scope a query to only include type of Aircraft Maintenance Cycle.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfNationality(Builder $query)
+    {
+        return $query->where('of', 'nationality');
     }
 
     /**
@@ -388,6 +410,17 @@ class Type extends MemfisModel
     public function scopeOfRegulator(Builder $query)
     {
         return $query->where('of', 'regulator');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's General Document.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfGender(Builder $query)
+    {
+        return $query->where('of', 'gender');
     }
 
     /**
@@ -722,6 +755,19 @@ class Type extends MemfisModel
     public function emails()
     {
         return $this->hasMany(Email::class);
+    }
+
+    /**
+     * One-to-Mant: A gender have zero or many Employees.
+     *
+     * This function will retrieve Project of a given RTS.
+     * See: Employee's gender() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_gender()
+    {
+        return $this->hasMany(Employee::class, 'gender_id');
     }
 
     /**

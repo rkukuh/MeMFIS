@@ -35,5 +35,17 @@ class StatusesOfMarital extends Seeder
             'name' => 'Duda',
             'of'   => 'marital',
         ]);
+
+        Status::create([
+            'code' => 'cerai-hidup',
+            'name' => 'Cerai Hidup',
+            'of'   => 'marital',
+        ]);
+
+        Status::create([
+            'code' => 'cerai-mati',
+            'name' => 'Cerai Mati',
+            'of'   => 'marital',
+        ]);
     }
 }

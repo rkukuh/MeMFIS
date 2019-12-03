@@ -337,13 +337,13 @@
                 <div class="form-group m-form__group row">
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <label class="form-control-label">
-                            Job Tittle 
+                            Job Title 
                         </label>
     
                         @php
-                             $jobTittle  = null;
-                             if(isset($jobDetails['job_tittle'])){
-                                $jobTittle = $jobDetails['job_tittle'];
+                             $jobTitle  = null;
+                             if(isset($jobDetails['job_title'])){
+                                $jobTitle = $jobDetails['job_title'];
                              }
                              
                              $position  = null;
@@ -372,7 +372,7 @@
                              }
                         @endphp
                         @component('frontend.common.label.data-info')
-                            @slot('text', $jobTittle)
+                            @slot('text', $jobTitle)
                         @endcomponent
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6">

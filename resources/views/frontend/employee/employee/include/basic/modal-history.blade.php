@@ -130,9 +130,9 @@
                                             <fieldset class="border p-2 mt-2">
                                                 <legend class="w-auto"><b>Job Details</b></legend>
                                                 @php
-                                                $jobTittle  = null;
-                                                if(isset($jobDetails['job_tittle'])){
-                                                    $jobTittle = $jobDetails['job_tittle'];
+                                                $jobTitle  = null;
+                                                if(isset($jobDetails['job_title'])){
+                                                    $jobTitle = $jobDetails['job_title'];
                                                     }
                                                     
                                                 $position  = null;
@@ -167,7 +167,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Job Title</b></td>
-                                                    <td valign="top" align="center">{{ $jobTittle }}</td>
+                                                    <td valign="top" align="center">{{ $jobTitle }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Job Position</b></td>
@@ -312,7 +312,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td valign="top"><b>Job Title</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['job_tittle'] }}</td>
+                                                            <td valign="top" align="center">{{ $history[$i]['job_title'] }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td valign="top"><b>Job Position</b></td>

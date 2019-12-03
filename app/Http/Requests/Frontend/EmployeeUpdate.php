@@ -41,7 +41,7 @@ class EmployeeUpdate extends FormRequest
             'mobile_phone' => 'required',
             'email_1' => 'required',
             'joined_date' => 'required|before_or_equal:'.Carbon::now()->toDateString(),
-            'job_tittle' => 'required',
+            'job_title' => 'required',
             'job_position' => 'required',
             'employee_status' => 'required',
             'department' => 'required',
