@@ -248,8 +248,6 @@ class TaskcardDecemberImport implements ToModel, WithHeadingRow
             'additionals' => $additionals
         ];
 
-        dump($tc);
-
         $taskcard =  new TaskCard($tc);
 
         $taskcard->save();
@@ -315,7 +313,6 @@ class TaskcardDecemberImport implements ToModel, WithHeadingRow
         $threshold_types = explode(';', $row['threshold_type']);
         foreach($thresholds as $key => $threshold){
             if($row['threshold_type'] !== '-' && $threshold){
-                dump($threshold_types[$key]);
                 $threshold_type = Type::ofMaintenanceCycle()->where('name', 'like', '%' . $threshold_types[$key] . '%')->first()->id;
                 $taskcard->thresholds()->save(new Threshold([
                     'amount' => $threshold,
