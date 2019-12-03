@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Datatables\PurchaseOrder;
 
+use DB;
+use DataTables;
 use App\Models\PurchaseOrder;
 use App\Models\Unit;
 use App\Models\ListUtil;
@@ -303,176 +305,189 @@ class ItemPurchaseOrderDatatables extends Controller
      */
     public function itemModal(PurchaseOrder $purchaseOrder)
     {
-        {
-            function filterArray( $array, $allowed = [] ) {
-                return array_filter(
-                    $array,
-                    function ( $val, $key ) use ( $allowed ) { // N.b. $val, $key not $key, $val
-                        return isset( $allowed[ $key ] ) && ( $allowed[ $key ] === true || $allowed[ $key ] === $val );
-                    },
-                    ARRAY_FILTER_USE_BOTH
-                );
-            }
+        $items =  DB::table('purchase_orders')
+        ->join('item_purchase_order', 'item_purchase_order.purchase_order_id', '=', 'purchase_orders.id')
+        ->join('items', 'item_purchase_order.item_id', '=', 'items.id')
+        ->join('categorizables', 'categorizables.categorizable_id', '=', 'items.id')
+        ->join('categories','categories.id', '=', 'categorizables.category_id')
+        ->where('purchase_orders.id',$purchaseOrder->id)
+        ->where('categorizables.categorizable_type','App\Models\Item')
+        ->where('categories.name','<>','tool')
+        ->WhereNull('items.deleted_at')
+        ->select('items.*')->take(10)
+        ->get();
 
-            function filterKeyword( $data, $search, $field = '' ) {
-                $filter = '';
-                if ( isset( $search['value'] ) ) {
-                    $filter = $search['value'];
-                }
-                if ( ! empty( $filter ) ) {
-                    if ( ! empty( $field ) ) {
-                        if ( strpos( strtolower( $field ), 'date' ) !== false ) {
-                            // filter by date range
-                            $data = filterByDateRange( $data, $filter, $field );
-                        } else {
-                            // filter by column
-                            $data = array_filter( $data, function ( $a ) use ( $field, $filter ) {
-                                return (boolean) preg_match( "/$filter/i", $a[ $field ] );
-                            } );
-                        }
+        return Datatables::of($items)->make();
+        // {
+        //     function filterArray( $array, $allowed = [] ) {
+        //         return array_filter(
+        //             $array,
+        //             function ( $val, $key ) use ( $allowed ) { // N.b. $val, $key not $key, $val
+        //                 return isset( $allowed[ $key ] ) && ( $allowed[ $key ] === true || $allowed[ $key ] === $val );
+        //             },
+        //             ARRAY_FILTER_USE_BOTH
+        //         );
+        //     }
 
-                    } else {
-                        // general filter
-                        $data = array_filter( $data, function ( $a ) use ( $filter ) {
-                            return (boolean) preg_grep( "/$filter/i", (array) $a );
-                        } );
-                    }
-                }
+        //     function filterKeyword( $data, $search, $field = '' ) {
+        //         $filter = '';
+        //         if ( isset( $search['value'] ) ) {
+        //             $filter = $search['value'];
+        //         }
+        //         if ( ! empty( $filter ) ) {
+        //             if ( ! empty( $field ) ) {
+        //                 if ( strpos( strtolower( $field ), 'date' ) !== false ) {
+        //                     // filter by date range
+        //                     $data = filterByDateRange( $data, $filter, $field );
+        //                 } else {
+        //                     // filter by column
+        //                     $data = array_filter( $data, function ( $a ) use ( $field, $filter ) {
+        //                         return (boolean) preg_match( "/$filter/i", $a[ $field ] );
+        //                     } );
+        //                 }
 
-                return $data;
-            }
+        //             } else {
+        //                 // general filter
+        //                 $data = array_filter( $data, function ( $a ) use ( $filter ) {
+        //                     return (boolean) preg_grep( "/$filter/i", (array) $a );
+        //                 } );
+        //             }
+        //         }
 
-            function filterByDateRange( $data, $filter, $field ) {
-                // filter by range
-                if ( ! empty( $range = array_filter( explode( '|', $filter ) ) ) ) {
-                    $filter = $range;
-                }
+        //         return $data;
+        //     }
 
-                if ( is_array( $filter ) ) {
-                    foreach ( $filter as &$date ) {
-                        // hardcoded date format
-                        $date = date_create_from_format( 'm/d/Y', stripcslashes( $date ) );
-                    }
-                    // filter by date range
-                    $data = array_filter( $data, function ( $a ) use ( $field, $filter ) {
-                        // hardcoded date format
-                        $current = date_create_from_format( 'm/d/Y', $a[ $field ] );
-                        $from    = $filter[0];
-                        $to      = $filter[1];
-                        if ( $from <= $current && $to >= $current ) {
-                            return true;
-                        }
+        //     function filterByDateRange( $data, $filter, $field ) {
+        //         // filter by range
+        //         if ( ! empty( $range = array_filter( explode( '|', $filter ) ) ) ) {
+        //             $filter = $range;
+        //         }
 
-                        return false;
-                    } );
-                }
+        //         if ( is_array( $filter ) ) {
+        //             foreach ( $filter as &$date ) {
+        //                 // hardcoded date format
+        //                 $date = date_create_from_format( 'm/d/Y', stripcslashes( $date ) );
+        //             }
+        //             // filter by date range
+        //             $data = array_filter( $data, function ( $a ) use ( $field, $filter ) {
+        //                 // hardcoded date format
+        //                 $current = date_create_from_format( 'm/d/Y', $a[ $field ] );
+        //                 $from    = $filter[0];
+        //                 $to      = $filter[1];
+        //                 if ( $from <= $current && $to >= $current ) {
+        //                     return true;
+        //                 }
 
-                return $data;
-            }
+        //                 return false;
+        //             } );
+        //         }
 
-            $columnsDefault = [
-                'code'     => true,
-                'name'     => true,
-                'description'    => true,
-                'uuid'     => true,
-                'Actions'      => true,
-                    ];
+        //         return $data;
+        //     }
 
-            if ( isset( $_REQUEST['columnsDef'] ) && is_array( $_REQUEST['columnsDef'] ) ) {
-                $columnsDefault = [];
-                foreach ( $_REQUEST['columnsDef'] as $field ) {
-                    $columnsDefault[ $field ] = true;
-                }
-            }
+        //     $columnsDefault = [
+        //         'code'     => true,
+        //         'name'     => true,
+        //         'description'    => true,
+        //         'uuid'     => true,
+        //         'Actions'      => true,
+        //             ];
 
-            // get all raw data
-            $purchase_requests = PurchaseOrderItem::with('item')->where('purchase_order_id',$purchaseOrder->id)->get();
-            foreach ($purchase_requests as $purchase_request){
+        //     if ( isset( $_REQUEST['columnsDef'] ) && is_array( $_REQUEST['columnsDef'] ) ) {
+        //         $columnsDefault = [];
+        //         foreach ( $_REQUEST['columnsDef'] as $field ) {
+        //             $columnsDefault[ $field ] = true;
+        //         }
+        //     }
 
-                $purchase_request->code .= $purchase_request->item->code;
-                $purchase_request->name .= $purchase_request->item->name;
-                $purchase_request->description .= $purchase_request->item->description;
-                $purchase_request->uuid .= $purchase_request->item->uuid;
-            }
+        //     // get all raw data
+        //     $purchase_requests = PurchaseOrderItem::with('item')->where('purchase_order_id',$purchaseOrder->id)->get();
+        //     foreach ($purchase_requests as $purchase_request){
 
-            $alldata = json_decode( $purchase_requests, true);
+        //         $purchase_request->code .= $purchase_request->item->code;
+        //         $purchase_request->name .= $purchase_request->item->name;
+        //         $purchase_request->description .= $purchase_request->item->description;
+        //         $purchase_request->uuid .= $purchase_request->item->uuid;
+        //     }
 
-            $data = [];
-            // internal use; filter selected columns only from raw data
-            foreach ( $alldata as $d ) {
-                $data[] = filterArray( $d, $columnsDefault );
-            }
+        //     $alldata = json_decode( $purchase_requests, true);
 
-            // count data
-            $totalRecords = $totalDisplay = count( $data );
+        //     $data = [];
+        //     // internal use; filter selected columns only from raw data
+        //     foreach ( $alldata as $d ) {
+        //         $data[] = filterArray( $d, $columnsDefault );
+        //     }
 
-            // filter by general search keyword
-            if ( isset( $_REQUEST['search'] ) ) {
-                $data         = filterKeyword( $data, $_REQUEST['search'] );
-                $totalDisplay = count( $data );
-            }
+        //     // count data
+        //     $totalRecords = $totalDisplay = count( $data );
 
-            if ( isset( $_REQUEST['columns'] ) && is_array( $_REQUEST['columns'] ) ) {
-                foreach ( $_REQUEST['columns'] as $column ) {
-                    if ( isset( $column['search'] ) ) {
-                        $data         = filterKeyword( $data, $column['search'], $column['data'] );
-                        $totalDisplay = count( $data );
-                    }
-                }
-            }
+        //     // filter by general search keyword
+        //     if ( isset( $_REQUEST['search'] ) ) {
+        //         $data         = filterKeyword( $data, $_REQUEST['search'] );
+        //         $totalDisplay = count( $data );
+        //     }
 
-            // sort
-            if ( isset( $_REQUEST['order'][0]['column'] ) && $_REQUEST['order'][0]['dir'] ) {
-                $column = $_REQUEST['order'][0]['column'];
-                $dir    = $_REQUEST['order'][0]['dir'];
-                usort( $data, function ( $a, $b ) use ( $column, $dir ) {
-                    $a = array_slice( $a, $column, 1 );
-                    $b = array_slice( $b, $column, 1 );
-                    $a = array_pop( $a );
-                    $b = array_pop( $b );
+        //     if ( isset( $_REQUEST['columns'] ) && is_array( $_REQUEST['columns'] ) ) {
+        //         foreach ( $_REQUEST['columns'] as $column ) {
+        //             if ( isset( $column['search'] ) ) {
+        //                 $data         = filterKeyword( $data, $column['search'], $column['data'] );
+        //                 $totalDisplay = count( $data );
+        //             }
+        //         }
+        //     }
 
-                    if ( $dir === 'asc' ) {
-                        return $a > $b ? true : false;
-                    }
+        //     // sort
+        //     if ( isset( $_REQUEST['order'][0]['column'] ) && $_REQUEST['order'][0]['dir'] ) {
+        //         $column = $_REQUEST['order'][0]['column'];
+        //         $dir    = $_REQUEST['order'][0]['dir'];
+        //         usort( $data, function ( $a, $b ) use ( $column, $dir ) {
+        //             $a = array_slice( $a, $column, 1 );
+        //             $b = array_slice( $b, $column, 1 );
+        //             $a = array_pop( $a );
+        //             $b = array_pop( $b );
 
-                    return $a < $b ? true : false;
-                } );
-            }
+        //             if ( $dir === 'asc' ) {
+        //                 return $a > $b ? true : false;
+        //             }
 
-            // pagination length
-            if ( isset( $_REQUEST['length'] ) ) {
-                $data = array_splice( $data, $_REQUEST['start'], $_REQUEST['length'] );
-            }
+        //             return $a < $b ? true : false;
+        //         } );
+        //     }
 
-            // return array values only without the keys
-            if ( isset( $_REQUEST['array_values'] ) && $_REQUEST['array_values'] ) {
-                $tmp  = $data;
-                $data = [];
-                foreach ( $tmp as $d ) {
-                    $data[] = array_values( $d );
-                }
-            }
+        //     // pagination length
+        //     if ( isset( $_REQUEST['length'] ) ) {
+        //         $data = array_splice( $data, $_REQUEST['start'], $_REQUEST['length'] );
+        //     }
 
-            $secho = 0;
-            if ( isset( $_REQUEST['sEcho'] ) ) {
-                $secho = intval( $_REQUEST['sEcho'] );
-            }
+        //     // return array values only without the keys
+        //     if ( isset( $_REQUEST['array_values'] ) && $_REQUEST['array_values'] ) {
+        //         $tmp  = $data;
+        //         $data = [];
+        //         foreach ( $tmp as $d ) {
+        //             $data[] = array_values( $d );
+        //         }
+        //     }
 
-            $result = [
-                'iTotalRecords'        => $totalRecords,
-                'iTotalDisplayRecords' => $totalDisplay,
-                'sEcho'                => $secho,
-                'sColumns'             => '',
-                'aaData'               => $data,
-            ];
+        //     $secho = 0;
+        //     if ( isset( $_REQUEST['sEcho'] ) ) {
+        //         $secho = intval( $_REQUEST['sEcho'] );
+        //     }
 
-            header('Content-Type: application/json');
-            header('Access-Control-Allow-Origin: *');
-            header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-            header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+        //     $result = [
+        //         'iTotalRecords'        => $totalRecords,
+        //         'iTotalDisplayRecords' => $totalDisplay,
+        //         'sEcho'                => $secho,
+        //         'sColumns'             => '',
+        //         'aaData'               => $data,
+        //     ];
 
-            echo json_encode( $result, JSON_PRETTY_PRINT );
-        }
+        //     header('Content-Type: application/json');
+        //     header('Access-Control-Allow-Origin: *');
+        //     header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+        //     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+        //     echo json_encode( $result, JSON_PRETTY_PRINT );
+        // }
     }
 
     /**

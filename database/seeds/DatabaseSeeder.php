@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SchoolsTableSeeder::class);
         $this->call(EmployeesTableSeeder::class);
         $this->call(ItemsTableSeeder::class);
+        $this->call(ServicesTableSeeder::class);
         $this->call(LicensesTableSeeder::class);
         $this->call(CertificationsTableSeeder::class);
         $this->call(CustomersTableSeeder::class);
@@ -169,8 +170,5 @@ class DatabaseSeeder extends Seeder
         $this->call(FefoInsTableSeeder::class);
         $this->call(FefoOutsTableSeeder::class);
 
-        /** RIR's Document Check */
-
-        $this->call(RIRDocumentChecksTableSeeder::class);
     }
 }

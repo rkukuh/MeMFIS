@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Frontend;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RIRDocumentCheckUpdate extends FormRequest
+class ServiceUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

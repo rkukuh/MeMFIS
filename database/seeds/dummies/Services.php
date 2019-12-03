@@ -1,8 +1,9 @@
 <?php
 
+use App\Models\Service;
 use Illuminate\Database\Seeder;
 
-class RIRDocumentChecksTableSeeder extends Seeder
+class Services extends Seeder
 {
     /**
      * Run the database seeds.

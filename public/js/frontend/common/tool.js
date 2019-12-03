@@ -47,7 +47,7 @@ let ToolDatatables = {
             columns: [
                 {data: 'code', name: 'code',sWidth:'45%'},
                 {data: 'name', name: 'name',sWidth:'45%'},
-                {data: '', name: '',sWidth:'10%',render:function(data, type, t){
+                {data: '', name: '',sWidth:'10%','searchable': false ,render:function(data, type, t){
                     return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-tool" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                 }},
             ]
@@ -92,6 +92,15 @@ let ToolDatatables = {
 
             $('.search-tool').html(code + " - " + name);
             $('#modal_tool_search').modal('hide');
+
+
+            $('#tool_datatable_filter input').unbind();
+            $('#tool_datatable_filter input').bind('keyup', function(e) {
+                if (e.keyCode === 13) {
+                    let table = $('#tool_datatable').DataTable();
+                    table.search(this.value).draw();
+                }
+            });
         });
     }
 };
