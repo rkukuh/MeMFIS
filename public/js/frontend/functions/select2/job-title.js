@@ -6,7 +6,7 @@ let JobTitleSelect2 = {
 
         $.ajax({
             type: 'GET', 
-            url: '/datatables/job-tittle', 
+            url: '/datatables/job-title', 
             dataType: 'JSON',
             success: function (data) {
                 var select = document.getElementById('job_title');

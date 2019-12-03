@@ -12,6 +12,7 @@ use App\Models\Promo;
 use App\Models\Access;
 use App\Models\FefoIn;
 use App\Models\Vendor;
+use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\License;
 use App\Models\Project;
@@ -23,6 +24,7 @@ use App\Models\Currency;
 use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Facility;
+use App\Models\Religion;
 use App\Models\TaskCard;
 use App\Models\LeaveType;
 use App\Models\DefectCard;
@@ -358,6 +360,19 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function religions()
+    {
+        $religions = Religion::pluck('name', 'uuid');
+
+        return json_encode($religions);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function repeatType()
     {
         $repeat_types = Type::ofMaintenanceCycle()
@@ -645,6 +660,32 @@ class FillComboxController extends Controller
         $manufacturer = Manufacturer::pluck('name', 'id');
 
         return json_encode($manufacturer);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function maritalStatus()
+    {
+        $maritalStatus = Status::ofMarital()
+                            ->pluck('name', 'uuid');
+
+        return json_encode($maritalStatus);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function nationalities()
+    {
+        $nationalities = Type::ofNationality()
+                            ->pluck('name', 'uuid');
+
+        return json_encode($nationalities);
     }
 
     /**

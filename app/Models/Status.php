@@ -163,10 +163,10 @@ class Status extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A project's workpackage may have one or many engineer.
+     * One-to-Many: An employee may have one or many Attendance.
      *
-     * This function will retrieve the header of a project's workpackage.
-     * See: Project WorkPackage's engineers() method for the inverse
+     * This function will retrieve employee of given Attendance.
+     * See: Employee's employee_attendance() method for the inverse
      *
      * @return mixed
      */
@@ -176,6 +176,19 @@ class Status extends MemfisModel
                         ->withTimestamps()
                         ->withPivot('deleted_at')
                         ->wherePivot('deleted_at', null);
+    }
+
+    /**
+     * One-to-Many: A marital status have zero or many Employees.
+     *
+     * This function will retrieve employees of a given Marital Status.
+     * See: employee_marital's employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_marital()
+    {
+        return $this->hasMany(Employee::class, 'marital_id');
     }
 
     /**
