@@ -11,9 +11,13 @@ use App\Imports\WorkAreasImport;
 use App\Imports\TaskCardsCNimport;
 use App\Imports\TaskCardsATRImport;
 use App\Imports\ManufacturersImport;
+use App\Imports\AttachItemToTaskCard;
 use App\Imports\TaskCardsBoeingImport;
+use App\Imports\TaskcardDecemberImport;
 use App\Imports\MaterialsAndToolsImport;
+use App\Imports\MasterItemDesemberImport;
 use App\Imports\TaskCardsCPCPTriganaimport;
+use App\Imports\MaterialsAndToolsImportDecember;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 
@@ -29,6 +33,18 @@ class OldDataController extends Controller
     public function customers()
     {
         Excel::import(new CustomersImport, $this->import_directory . 'customer.xlsx');
+    }
+
+    public function decemberSimulation()
+    {
+        Excel::import(new MasterItemDesemberImport, $this->import_directory . 'sim-master-material.xlsx');
+        Excel::import(new MasterItemDesemberImport, $this->import_directory . 'sim-master-tool.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-si.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-basic.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-cpcp.xlsx');
+        Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-tool-to-tc.xlsx');
+        Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-material-to-tc.xlsx');
+        Excel::import(new SimulationsUsersImport, $this->import_directory . 'sim-attach-material-to-tc.xlsx');
     }
 
     public function engines()
@@ -48,7 +64,8 @@ class OldDataController extends Controller
 
     public function materialsAndTools()
     {
-        Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'master-items.xlsx');
+        // Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'master-items.xlsx');
+        Excel::import(new MaterialsAndToolsImportDecember, $this->import_directory . 'master-items-4000.xlsx');
     }
 
     public function taskCardsATR()
