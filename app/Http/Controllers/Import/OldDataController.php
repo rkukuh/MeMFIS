@@ -11,8 +11,11 @@ use App\Imports\WorkAreasImport;
 use App\Imports\TaskCardsCNimport;
 use App\Imports\TaskCardsATRImport;
 use App\Imports\ManufacturersImport;
+use App\Imports\AttachItemToTaskCard;
 use App\Imports\TaskCardsBoeingImport;
+use App\Imports\TaskcardDecemberImport;
 use App\Imports\MaterialsAndToolsImport;
+use App\Imports\MasterItemDesemberImport;
 use App\Imports\TaskCardsCPCPTriganaimport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
@@ -79,5 +82,16 @@ class OldDataController extends Controller
     public function workAreas()
     {
         Excel::import(new WorkAreasImport, $this->import_directory . 'work-areas.xlsx');
+    }
+
+    public function decemberSimulation()
+    {
+        Excel::import(new MasterItemDesemberImport, $this->import_directory . 'sim-master-material.xlsx');
+        Excel::import(new MasterItemDesemberImport, $this->import_directory . 'sim-master-tool.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-si.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-basic.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-cpcp.xlsx');
+        Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-tool-to-tc.xlsx');
+        Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-material-to-tc.xlsx');
     }
 }
