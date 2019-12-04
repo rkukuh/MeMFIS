@@ -272,7 +272,7 @@ class FillComboxController extends Controller
      */
     public function supervisors()
     {
-        $supervisors = Employee::pluck('first_name', 'last_name', 'uuid');
+        $supervisors = Employee::pluck('first_name', 'uuid');
 
         return json_encode($supervisors);
     }
