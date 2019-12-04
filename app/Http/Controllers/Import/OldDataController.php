@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Import;
 use App\Imports\UsersImport;
 use App\Imports\FEFOINImport;
 use App\Imports\EnginesImport;
+use App\Imports\SimUserImport;
 use App\Imports\AircraftsImport;
 use App\Imports\CustomersImport;
 use App\Imports\WorkAreasImport;
@@ -33,18 +34,6 @@ class OldDataController extends Controller
     public function customers()
     {
         Excel::import(new CustomersImport, $this->import_directory . 'customer.xlsx');
-    }
-
-    public function decemberSimulation()
-    {
-        Excel::import(new MasterItemDesemberImport, $this->import_directory . 'sim-master-material.xlsx');
-        Excel::import(new MasterItemDesemberImport, $this->import_directory . 'sim-master-tool.xlsx');
-        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-si.xlsx');
-        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-basic.xlsx');
-        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-cpcp.xlsx');
-        Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-tool-to-tc.xlsx');
-        Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-material-to-tc.xlsx');
-        Excel::import(new SimulationsUsersImport, $this->import_directory . 'sim-attach-material-to-tc.xlsx');
     }
 
     public function engines()
@@ -96,5 +85,18 @@ class OldDataController extends Controller
     public function workAreas()
     {
         Excel::import(new WorkAreasImport, $this->import_directory . 'work-areas.xlsx');
+    }
+
+    public function decemberSimulation()
+    {
+        Excel::import(new MasterItemDesemberImport, $this->import_directory . 'sim-master-material.xlsx');
+        Excel::import(new MasterItemDesemberImport, $this->import_directory . 'sim-master-tool.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-si.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-basic.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-cpcp.xlsx');
+        Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-tool-to-tc.xlsx');
+        Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-material-to-tc.xlsx');
+        Excel::import(new SimUserImport, $this->import_directory . 'sim-user.xlsx');
+        
     }
 }
