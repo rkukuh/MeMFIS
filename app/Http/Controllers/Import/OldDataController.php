@@ -54,7 +54,7 @@ class OldDataController extends Controller
 
     public function fefoin()
     {
-        Excel::import(new FEFOINImport, $this->import_directory . 'fefoin.xlsx');
+        Excel::import(new FEFOINImport, $this->import_directory . 'fefo-in.xlsx');
     }
 
     public function manufacturers()
