@@ -1,7 +1,7 @@
 let Quotation = {
     init: function () {
 
-        let workpackage_datatables_init = true;
+        // let workpackage_datatables_init = true;
         $('select[name="currency"]').on('change', function () {
             let exchange_id = this.options[this.selectedIndex].innerHTML;
             let exchange_rate = $('input[name=exchange]');
@@ -100,18 +100,18 @@ let Quotation = {
                             
                         }
                     });
-                    if (workpackage_datatables_init == true) {
-                        workpackage_datatables_init = false;
-                        workpackage(data.uuid);
-                    }
-                    else {
-                        let table = $('.workpackage_datatable').mDatatable();
-                        table.destroy();
-                        workpackage(data.uuid);
-                        table = $('.workpackage_datatable').mDatatable();
-                        table.originalDataSet = [];
-                        table.reload();
-                    }
+                    // if (workpackage_datatables_init == true) {
+                    //     workpackage_datatables_init = false;
+                    //     workpackage(data.uuid);
+                    // }
+                    // else {
+                    //     let table = $('.workpackage_datatable').mDatatable();
+                    //     table.destroy();
+                    //     workpackage(data.uuid);
+                    //     table = $('.workpackage_datatable').mDatatable();
+                    //     table.originalDataSet = [];
+                    //     table.reload();
+                    // }
                 }
             });
 
@@ -188,7 +188,7 @@ let Quotation = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: 'post',
-                url: '/quotation',
+                url: '/quotation-workshop',
                 processData: false,
                 contentType: false,
                 data: data,
@@ -228,7 +228,7 @@ let Quotation = {
                         document.getElementById("name").value = name;
                     } else {
 
-                        toastr.success('Quotation has been created.', 'Success', {
+                        toastr.success('Quotation workshop has been created.', 'Success', {
                             timeOut: 5000
                         });
 

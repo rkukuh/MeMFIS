@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Frontend\Workshop;
 
 use App\Models\Workshop;
+use App\Models\Quotation;
+use App\Models\Type;
+use App\Models\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\WorkshopStore;
 use App\Http\Requests\Frontend\WorkshopUpdate;
+use App\Helpers\DocumentNumber;
 
 class WorkshopController extends Controller
 {

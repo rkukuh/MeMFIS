@@ -22,9 +22,10 @@ Route::name('frontend.')->group(function () {
             //     Route::view('/quotation-workshop/edit', 'frontend.quotation-workshop.edit')->name('edit');
             //     Route::view('/quotation-workshop/show', 'frontend.quotation-workshop.show')->name('show');
 
-
+            Route::name('quotation-workshop.')->group(function() {
                 Route::view('/quotation-workshop/edit/item/create', 'frontend.quotation-workshop.item.create')->name('item.create');
                 Route::view('/quotation-workshop/edit/item/show', 'frontend.quotation-workshop.item.show')->name('item.show');
+            });
             // });
 
         });
