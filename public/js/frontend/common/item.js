@@ -66,6 +66,13 @@ let ItemDatatables = {
             $('#item_datatable').DataTable().ajax.reload();
         });
 
+        $('#item_datatable_filter input').unbind();
+        $('#item_datatable_filter input').bind('keyup', function(e) {
+            if (e.keyCode === 13) {
+                let table = $('#item_datatable').DataTable();
+                table.search(this.value).draw();
+            }
+        });
         $('.dataTable').on('click', '.select-item', function () {
             $.ajax({
                 url: '/get-units/'+$(this).data('uuid'),
@@ -95,14 +102,6 @@ let ItemDatatables = {
 
             $('.search-item').html(code + " - " + name);
             $('#modal_item_search').modal('hide');
-
-            $('#item_datatable_filter input').unbind();
-            $('#item_datatable_filter input').bind('keyup', function(e) {
-                if (e.keyCode === 13) {
-                    let table = $('#item_datatable').DataTable();
-                    table.search(this.value).draw();
-                }
-            });
         });
     }
 };
