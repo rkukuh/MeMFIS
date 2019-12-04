@@ -89,9 +89,10 @@
                                                                                 Name @include('frontend.common.label.required')
                                                                             </label>
 
-                                                                            @component('frontend.common.input.select2')
+                                                                            @component('frontend.common.label.data-info')
                                                                             @slot('id', 'customer')
                                                                             @slot('name', 'customer')
+                                                                            @slot('text', $quotation->quotationable->customer->name)
                                                                             @endcomponent
                                                                         </div>
                                                                     </div>
@@ -396,7 +397,7 @@
 
 <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 
-<script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script> -->
 <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
 <!-- <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script> -->
 <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
