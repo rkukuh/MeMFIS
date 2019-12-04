@@ -422,6 +422,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/gender.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/job-position.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/employment-status.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/department.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/marital-status.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/religion.js') }}"></script>

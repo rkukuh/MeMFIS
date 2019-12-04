@@ -29,6 +29,7 @@ use App\Models\Religion;
 use App\Models\TaskCard;
 use App\Models\Position;
 use App\Models\LeaveType;
+use App\Models\Department;
 use App\Models\DefectCard;
 use App\Models\ItemRequest;
 use App\Models\InventoryOut;
@@ -50,7 +51,6 @@ class FillComboxController extends Controller
             ->pluck('name', 'code');
 
         return json_encode($attendanceCorrection);
-
     }
 
     /**
@@ -64,7 +64,6 @@ class FillComboxController extends Controller
             ->pluck('name', 'id');
 
         return json_encode($categories);
-
     }
 
     /**
@@ -79,7 +78,6 @@ class FillComboxController extends Controller
             ->pluck('name', 'id');
 
         return json_encode($categories);
-
     }
 
     /**
@@ -106,6 +104,19 @@ class FillComboxController extends Controller
         $defectcards = DefectCard::pluck('code', 'id');
 
         return json_encode($defectcards);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function departments()
+    {
+        $departments = Department::pluck('name', 'uuid');
+
+        return json_encode($departments);
 
     }
 
@@ -709,11 +720,11 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function manufacturer()
+    public function manufacturers()
     {
-        $manufacturer = Manufacturer::pluck('name', 'id');
+        $manufacturers = Manufacturer::pluck('name', 'id');
 
-        return json_encode($manufacturer);
+        return json_encode($manufacturers);
     }
 
     /**
