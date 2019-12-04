@@ -212,7 +212,7 @@ class Employee extends MemfisModel implements HasMedia
      */
     public function gender()
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsTo(Type::class, 'gender_id', 'id');
     }
 
     /**

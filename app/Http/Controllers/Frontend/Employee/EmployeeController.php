@@ -12,9 +12,12 @@ use App\Models\Benefit;
 use App\Models\Employee;
 use App\Models\Position;
 use App\Models\JobTitle;
+use App\Models\Religion;
 use App\Models\Workshift;
 use App\Models\Department;
+use App\Models\Nationality;
 use App\Models\EmployeeProvisions;
+
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -148,6 +151,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
+
         //Basic Information
         $dateOfBirth = $employee->dob;
         $age = Carbon::parse($dateOfBirth)->age;
@@ -584,6 +588,19 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
+        dd($employee);
+        /** Master data for populating select2 edit */
+            $genders = Type::ofGender()->select('name', 'uuid')->where('name','!=', 'All')->get();
+            $nationalities = Nationality::select('nationality', 'uuid')->get();
+            $religions = Religion::select('name', 'uuid')->get();
+            $jobtitles = JobTitle::select('name', 'uuid')->get();
+            $maritalstatuses = Status::ofMarital()->select('name', 'uuid')->get();
+            $jobpositions = Position::select('name', 'uuid')->get();
+            $employmentstatuses = Status::ofEmployment()->select('name', 'uuid')->get();
+            $departments = Department::select('name', 'uuid')->get();
+            $supervisors = Employee::select('first_name', 'uuid')->get();
+        /** End master data for populating select2 edit */
+
         //Basic Information
         $dateOfBirth = $employee->dob;
         $age = Carbon::parse($dateOfBirth)->age;
@@ -1042,28 +1059,39 @@ class EmployeeController extends Controller
             $photo_profile['active'] = $employee->getFirstMedia('photo_profile_active')->getUrl(); 
         }
 
+        dd($employee);
         return view('frontend.employee.employee.edit',[
-        'employee' => $employee,
-        'age' => $age,
-        'documents' => $documents,
-        'emails' => $emails,
-        'addresses' => $addreses,
-        'phones' => $phones,
-        'jobDetails' => $jobDetails,
-        'history' => $history,
-        'file' => $file,
-        'employee_benefit' => $employee_benefit,
-        'employee_bpjs' => $employee_bpjs_data,
-        'button_parameter' => $button_parameter,
-        'current' => $current,
-        'employee_benefit_history' =>  $employee_benefit_history,
-        'approve' => $approve,
-        'workshift_current' => $workshift_current,
-        'workshift_history' => $workshift_history,
-        'account' => $account,
-        'bank' => $bank,
-        'bank_history' => $bank_history,
-        'photo_profile' => $photo_profile
+            'employee' => $employee,
+            'age' => $age,
+            'documents' => $documents,
+            'emails' => $emails,
+            'addresses' => $addreses,
+            'phones' => $phones,
+            'jobDetails' => $jobDetails,
+            'history' => $history,
+            'file' => $file,
+            'employee_benefit' => $employee_benefit,
+            'employee_bpjs' => $employee_bpjs_data,
+            'button_parameter' => $button_parameter,
+            'current' => $current,
+            'employee_benefit_history' =>  $employee_benefit_history,
+            'approve' => $approve,
+            'workshift_current' => $workshift_current,
+            'workshift_history' => $workshift_history,
+            'account' => $account,
+            'bank' => $bank,
+            'bank_history' => $bank_history,
+            'photo_profile' => $photo_profile,
+            'genders' => $genders,
+            'nationalities' => $nationalities,
+            'religions' => $religions,
+            'jobtitles' => $jobtitles,
+            'maritalstatuses' => $maritalstatuses,
+            'jobpositions' => $jobpositions,
+            'employmentstatuses' => $employmentstatuses,
+            'departments' => $departments,
+            'supervisors' => $supervisors,
+
         ]);
     }
 
