@@ -12,17 +12,20 @@ use App\Models\Promo;
 use App\Models\Access;
 use App\Models\FefoIn;
 use App\Models\Vendor;
+use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\License;
 use App\Models\Project;
 use App\Models\Station;
 use App\Models\Storage;
+use App\Models\JobTitle;
 use App\Models\Aircraft;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Facility;
+use App\Models\Religion;
 use App\Models\TaskCard;
 use App\Models\LeaveType;
 use App\Models\DefectCard;
@@ -131,6 +134,18 @@ class FillComboxController extends Controller
         return $items->origin_jobcardable_items;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jobtitles()
+    {
+        $jobtitles = JobTitle::pluck('name', 'uuid');
+
+        return json_encode($jobtitles);
+
+    }
 
     /**
      * Display a listing of the resource.
@@ -350,6 +365,19 @@ class FillComboxController extends Controller
             ->pluck('name', 'id');
 
         return json_encode($threshold_types);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function religions()
+    {
+        $religions = Religion::pluck('name', 'uuid');
+
+        return json_encode($religions);
 
     }
 
@@ -645,6 +673,32 @@ class FillComboxController extends Controller
         $manufacturer = Manufacturer::pluck('name', 'id');
 
         return json_encode($manufacturer);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function maritalStatus()
+    {
+        $maritalStatus = Status::ofMarital()
+                            ->pluck('name', 'uuid');
+
+        return json_encode($maritalStatus);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function nationalities()
+    {
+        $nationalities = Type::ofNationality()
+                            ->pluck('name', 'uuid');
+
+        return json_encode($nationalities);
     }
 
     /**
@@ -972,21 +1026,26 @@ class FillComboxController extends Controller
      */
     public function workOrder()
     {
-        $projects = Project::with('approvals', 'quotations')->whereHas('approvals')->get();
-        $work_orders = $result = [];
+        //TODO CHeck Cod because on server error
+        // $projects = Project::with('approvals', 'quotations')->whereHas('approvals')->get();
+        // $work_orders = $result = [];
 
-        foreach ($projects as $key => $project) {
-            if (sizeof($project->quotations) > 0) {
-                foreach ($project->quotations as $quotation) {
-                    if (sizeof($quotation->approvals) > 0) {
-                        $projects[$key] = "";
-                    }
-                };
-            }
-        }
+        // foreach ($projects as $key => $project) {
 
-        $work_orders = $projects->pluck('no_wo', 'uuid');
-        $work_orders = array_filter($work_orders->toArray());
+        //     if (sizeof($project->quotations) > 0) {
+        //         foreach ($project->quotations as $quotation) {
+        //             if (sizeof($quotation->approvals) > 0) {
+        //                 $projects[$key] = "";
+        //             }
+        //         };
+        //     }
+        // }
+
+        // $work_orders = $projects->pluck('no_wo', 'uuid');
+        // $work_orders = array_filter($work_orders->toArray());
+
+        $work_orders = Project::with('approvals')->whereHas('approvals')->pluck('no_wo','uuid');
+
         return json_encode($work_orders);
     }
 

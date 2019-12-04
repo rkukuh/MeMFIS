@@ -29,7 +29,7 @@ let Employee_edit_basic = {
             let email_1 = $('input[name=email_1]').val()
             let email_2 = $('input[name=email_2]').val()
             let joined_date = $('input[name=joined_date]').val()
-            let job_tittle = $('#job_title option:selected').val()
+            let job_title = $('#job_title option:selected').val()
             let job_position = $('#job_position option:selected').val()
             let employee_status = $('#employee_status option:selected').val()
             let department = $('#department option:selected').val()
@@ -79,7 +79,7 @@ let Employee_edit_basic = {
                  email_1: email_1,
                  email_2: email_2,
                  joined_date: joined_date,
-                 job_tittle: job_tittle,
+                 job_title: job_title,
                  job_position: job_position,
                  employee_status: employee_status,
                  department: department,
@@ -132,8 +132,8 @@ let Employee_edit_basic = {
                                     $('#joined_date-error').html('');
                                 }
     
-                                if (data.errors.job_tittle) {
-                                    $('#job_title-error').html(data.errors.job_tittle[0]);
+                                if (data.errors.job_title) {
+                                    $('#job_title-error').html(data.errors.job_title[0]);
                                 }else{
                                     $('#job_title-error').html('');
                                 }

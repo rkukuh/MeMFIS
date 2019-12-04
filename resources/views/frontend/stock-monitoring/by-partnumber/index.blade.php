@@ -6,14 +6,14 @@
                     <div class="m-input-icon m-input-icon--left">
                     </div>
                 </div>
-                    @component('frontend.common.input.select2')
-                        @slot('text', 'Part Number')
-                        @slot('id', 'part_number')
-                        @slot('name', 'part_number')
-                        @slot('id_error', 'part_number')
+                    @component('frontend.common.item.index')
+                        @slot('name_item','part_number')
+                        @slot('id_item','part_number')
                     @endcomponent
             </div>
         </div>
+        @include('frontend.common.item.modal')
+
         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
             <div class="m-separator m-separator--dashed d-xl-none"></div>
         </div>
@@ -21,3 +21,4 @@
 
     <div class="m_datatable_by_partnumber" id="scrolling_both"></div>
 </div>
+

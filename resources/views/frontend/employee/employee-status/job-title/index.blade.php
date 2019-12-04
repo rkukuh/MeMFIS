@@ -16,8 +16,8 @@
                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                     @component('frontend.common.buttons.create-new')
                         @slot('text', 'Job Title')
-                        @slot('id', 'add-job-tittle')
-                        @slot('data_target', '#modal_job_tittle')
+                        @slot('id', 'add-job-title')
+                        @slot('data_target', '#modal_job_title')
                     @endcomponent
 
                     <div class="m-separator m-separator--dashed d-xl-none"></div>

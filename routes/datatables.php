@@ -29,7 +29,7 @@ Route::name('datatables.')->group(function () {
         Route::get('/certification', 'CertificationDatatables@index')->name('certification.index');
         Route::get('/leave-period', 'LeavePeriodDatatables@index')->name('leaveperiod.index');
         Route::get('/bpjs', 'BPJSDatatables@index')->name('bpjs.index');
-        Route::get('/job-tittle', 'JobTittleDatatables@index')->name('bpjs.index');
+        Route::get('/job-title', 'JobTitleDatatables@index')->name('bpjs.index');
         Route::get('/leave-type', 'LeaveTypeDatatables@index')->name('leavetype.index');
         Route::get('/holiday', 'HolidayDatatables@index')->name('holiday.index');
         Route::get('/workshift', 'WorkshiftDatatables@index')->name('workshift.index');
@@ -327,6 +327,28 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{item}/units', 'ItemUnitDatatables@index')->name('units.index');
                 Route::get('/{item}/prices', 'ItemPriceDatatables@index')->name('prices.index');
                 Route::get('/{item}/storages', 'ItemStorageDatatables@index')->name('storages.index');
+
+            });
+
+        });
+
+        /** SERVICE */
+
+        Route::name('service.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'service',
+                'namespace' => 'Service'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'ServiceDatatables@index')->name('all');
+                // Route::get('/modal', 'ItemDatatables@indexModal')->name('modal.index');
+                // Route::get('/categories', 'CategoryItemDatatables@index')->name('categories.index');
+
+                /** Transaction */
 
             });
 

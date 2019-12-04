@@ -16,8 +16,8 @@ class HolidaysTableSeeder extends Seeder
         $year = 2019; $month = 8; $day = 17; $tz = 'Asia/Jakarta';
 
         for($i = 75; $i <= 100; $i++){
-            $day = 17; $month = 8;
 
+            $day = 17; $month = 8;
             $createMidnightDate = Carbon::createMidnightDate($year, $month, $day, $tz);
             Holiday::create([
                 'code' => 'kemederkaan-'.$i,
@@ -28,6 +28,7 @@ class HolidaysTableSeeder extends Seeder
             ]);
 
             $day = 10;  $month = 10;
+            $createMidnightDate = Carbon::createMidnightDate($year, $month, $day, $tz);
             Holiday::create([
                 'code' => 'hari-pahlawan',
                 'name' => 'Hari Pahlawan',
@@ -37,6 +38,7 @@ class HolidaysTableSeeder extends Seeder
             ]);
 
             $day = 1;  $month = 6;
+            $createMidnightDate = Carbon::createMidnightDate($year, $month, $day, $tz);
             Holiday::create([
                 'code' => 'hari-pancasila',
                 'name' => 'Hari Pancasila',
@@ -46,6 +48,7 @@ class HolidaysTableSeeder extends Seeder
             ]);
 
             $day = 24;  $month = 12;
+            $createMidnightDate = Carbon::createMidnightDate($year, $month, $day, $tz);
             Holiday::create([
                 'code' => 'hari-cuti-natal',
                 'name' => 'Hari Cuti Natal',
@@ -55,6 +58,7 @@ class HolidaysTableSeeder extends Seeder
             ]);
 
             $day = 25;  $month = 12;
+            $createMidnightDate = Carbon::createMidnightDate($year, $month, $day, $tz);
             Holiday::create([
                 'code' => 'hari-natal',
                 'name' => 'Hari Natal',
@@ -64,6 +68,7 @@ class HolidaysTableSeeder extends Seeder
             ]);
 
             $day = 1;  $month = 1;
+            $createMidnightDate = Carbon::createMidnightDate($year, $month, $day, $tz);
             Holiday::create([
                 'code' => 'tahun-baru-masehi',
                 'name' => 'Tahun Baru Masehi',
@@ -73,12 +78,23 @@ class HolidaysTableSeeder extends Seeder
             ]);
 
             $day = 1;  $month = 5;
+            $createMidnightDate = Carbon::createMidnightDate($year, $month, $day, $tz);
             Holiday::create([
                 'code' => 'hari-buruh',
                 'name' => 'Hari Buruh',
                 'start_date' => $createMidnightDate,
                 'end_date' => $createMidnightDate,
                 'description' => 'Hari Buruh'
+            ]);
+
+            $day = 1;  $month = 12;
+            $createMidnightDate = Carbon::createMidnightDate($year, $month, $day, $tz);
+            Holiday::create([
+                'code' => 'dec-01',
+                'name' => 'Libur MMF',
+                'start_date' => $createMidnightDate,
+                'end_date' => $createMidnightDate,
+                'description' => 'Libur MMF'
             ]);
 
             $year++;

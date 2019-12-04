@@ -126,6 +126,7 @@ class StockMonitoringDatatables extends Controller
      */
     public function storage(Storage $storage)
     {
+        ini_set('memory_limit', '-1');
         $StockMonitoring = FefoIn::with('item','storage','good_received.purchase_order.purchase_request.purchase_requestable','item.categories')->where('storage_id',$storage->id)->get();
 
         foreach($StockMonitoring as $stock){
@@ -133,8 +134,8 @@ class StockMonitoringDatatables extends Controller
                 $stock->category .= $stock->item->categories->first()->name;
             }
             $stock->unit = $stock->item->unit->name;
-            $stock->min = $stock->item->storages->where('pivot.storage_id',$storage->id)->first()->pivot->min;
-            $stock->max = $stock->item->storages->where('pivot.storage_id',$storage->id)->first()->pivot->max;
+            // $stock->min = $stock->item->storages->where('pivot.storage_id',$storage->id)->first()->pivot->min;
+            // $stock->max = $stock->item->storages->where('pivot.storage_id',$storage->id)->first()->pivot->max;
         }
 
         $data = $alldata = json_decode($StockMonitoring);

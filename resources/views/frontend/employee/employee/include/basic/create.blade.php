@@ -111,7 +111,7 @@
                                 Nationality @include('frontend.common.label.required')
                             </label>
         
-                            @component('frontend.common.input.text')
+                            @component('frontend.common.input.select2')
                                 @slot('id', 'nationality')
                                 @slot('name', 'nationality')
                                 @slot('id_error', 'nationality')
@@ -411,6 +411,12 @@
 </form>
 
 @push('footer-scripts')
+
+    <script src="{{ asset('js/frontend/functions/fill-combobox/marital-status.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/religion.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/job-title.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/nationality.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/gender.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/religion.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/marital-status.js') }}"></script>
@@ -420,6 +426,7 @@
     <script src="{{ asset('js/frontend/functions/select2/department.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/indirect-supervisor.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/supervisor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/nationality.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/period-start.js')}}"></script>

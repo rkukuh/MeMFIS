@@ -137,7 +137,7 @@
                                                     </table>
                                                 </fieldset>
                                                 <fieldset class="border p-2 mt-2">
-                                                    <legend class="w-auto"><b>Tardiness & Absence</b></legend>
+                                                    <legend class="w-auto"><b>Lateness & Absence</b></legend>
                                                     <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
                                                         <tr>
                                                             <td align="center" width="33%"><b>Late Tolerance</b></td>
@@ -303,7 +303,7 @@
                                                     </table>
                                                 </fieldset>
                                                 <fieldset class="border p-2 mt-2">
-                                                    <legend class="w-auto"><b>Tardiness & Absence</b></legend>
+                                                    <legend class="w-auto"><b>Lateness & Absence</b></legend>
                                                     <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
                                                         <tr>
                                                             <td align="center" width="33%"><b>Late Tolerance</b></td>

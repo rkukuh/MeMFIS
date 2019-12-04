@@ -91,7 +91,6 @@ class ProjectHMController extends Controller
                 'project' => $project->uuid
             ]);
         }
-        $attention = $project->quotations;
         return view('frontend.project.hm.edit',[
             'project' => $project,
             'aircrafts' => $this->aircrafts,

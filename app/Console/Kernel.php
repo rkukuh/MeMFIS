@@ -33,8 +33,7 @@ class Kernel extends ConsoleKernel
         })->everyMinute();
 
         $schedule->call('App\Http\Controllers\Frontend\Employee\EmployeeAttendanceController@createAttendances')
-        ->everyMinute();
-        // ->dailyAt('00:01');
+        ->dailyAt('00:00');
 
         // $schedule->call(function () { //? Waiting Entity Created
         //     Motation::where('created_at','<',Carbon::now()->subMinutes(10)->toDateTimeString())->doesnthave('approvals')->delete();
