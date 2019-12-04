@@ -132,11 +132,12 @@
                                 Gender @include('frontend.common.label.required')
                             </label>
                             
-                            @component('frontend.common.input.select2')
+                            @component('frontend.common.input.edit-select2')
                                 @slot('id', 'gender')
                                 @slot('name', 'gender')
-                                @slot('id_error', 'gender')
-                            @endcomponent    
+                                @slot('options', $types)
+                                @slot('value', $employee->gender->uuid)
+                            @endcomponent
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6">
                             <label class="form-control-label">
