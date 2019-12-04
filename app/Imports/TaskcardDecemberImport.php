@@ -6,6 +6,7 @@ use App\Models\Type;
 use App\Models\Zone;
 use App\Models\Access;
 use App\Models\Repeat;
+use App\Models\Station;
 use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\Threshold;
@@ -200,7 +201,7 @@ class TaskcardDecemberImport implements ToModel, WithHeadingRow
 
         $additionals = [];
         $additionals["internal_number"] = "";
-        $additionals["document_library"] = [$row['document_library']];
+        // $additionals["document_library"] = [$row['document_library']];
         if( $row['company_task']) {
             $additionals["internal_number"] = $row['company_task'];
         }
@@ -231,7 +232,6 @@ class TaskcardDecemberImport implements ToModel, WithHeadingRow
             'title' => substr($row['title'],0,255),
             'type_id' => $taskcard_type, // TODO: Import appropriate value
             'task_id' => $task_type, // TODO: Import appropriate value
-            'skill_id' => null, // TODO: Import appropriate value
             'work_area' => $work_area, // TODO: Import appropriate value
             'estimation_manhour' => $row['manhours'],
             'is_rii' => false,
@@ -250,14 +250,12 @@ class TaskcardDecemberImport implements ToModel, WithHeadingRow
 
         $taskcard =  new TaskCard($tc);
 
-        $taskcard->save();
-
+        $result = $taskcard->save();
 
         // TODO: M-M values:
         // - Table: aircraft_taskcard
         $ac = explode(';', $row['ac']);
-        $airplanes = Aircraft::whereIn('name',$ac)->get();
-
+        $airplanes = Aircraft::whereIn('code',$ac)->get();
         foreach($airplanes as $airplane){
             $taskcard->aircrafts()->attach($airplane->id);
         }
@@ -338,7 +336,7 @@ class TaskcardDecemberImport implements ToModel, WithHeadingRow
             foreach ($airplanes as $airplane) {
                 if($row['station'] !== '-'){
                     $station = Station::firstOrCreate(
-                        ['name' => $station, 'stationable_id' => $airplane, 'stationable_type' => 'App\Models\Aircraft']
+                        ['name' => $row['station'], 'stationable_id' => $airplane, 'stationable_type' => 'App\Models\Aircraft']
                     );
                     $taskcard->stations()->attach($station);
                 }

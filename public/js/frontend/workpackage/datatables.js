@@ -8,6 +8,7 @@ let Datatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 5,
+            // deferLoading: 0,
             ajax: "/datatables/taskcard-routine/basic/modal",
             columns: [
                 {
@@ -40,6 +41,15 @@ let Datatables = {
                 }
             ]
         });
+
+        // $('#basic_datatable_filter input').unbind();
+        // $('#basic_datatable_filter input').bind('keyup', function(e) {
+        //     if (e.keyCode === 13) {
+        //         let table = $('#basic_datatable').DataTable();
+        //         table.search(this.value).draw();
+        //     }
+        // });
+
         $("#sip_datatable").DataTable({
             dom: '<"top"f>rt<"bottom">pl',
             responsive: !0,
