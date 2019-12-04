@@ -72,7 +72,7 @@ class MaterialRequestController extends Controller
         }
 
         $items = [];
-        
+
         if ($jobcard) {
             $items = $jobcard->jobcardable->materials;
         }

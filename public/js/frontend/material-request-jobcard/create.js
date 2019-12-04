@@ -193,11 +193,17 @@ let MaterialRequestCreate = {
             if (tableInit == true) {
                 tableInit = false;
                 let jobcard_uuid = $(this).val();
+                $("#project_number").empty();
+                $("#actype").empty();
+                $("#acreg").empty();
                 createTable('jc', jobcard_uuid);
             }
             else {
                 let jobcard_uuid = $(this).val();
                 let table = $(".material_request_project_datatable").mDatatable();
+                $("#project_number").empty();
+                $("#actype").empty();
+                $("#acreg").empty();
                 table.destroy();
                 createTable('jc', jobcard_uuid);
                 table = $(".material_request_project_datatable").mDatatable();

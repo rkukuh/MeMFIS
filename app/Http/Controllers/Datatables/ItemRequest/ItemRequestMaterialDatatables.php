@@ -125,29 +125,20 @@ class ItemRequestMaterialDatatables extends Controller
     {
         $jobcard = JobCard::where('uuid', $uuid)->first();
         $project = null;
-        $defectcards = null;
+        $items = [];
 
         if (!$jobcard) {
             $project = Project::where('uuid', $uuid)->first();
-            $defectcards = DefectCard::where('project_additional_id', $project->id)->get();
-            
-        }
-
-        $items = [];
-
-        if ($jobcard) {
+            $items = json_decode($project->items);
+            foreach ($project->items as $item) {
+                //
+            }
+        } else {
             $items = $jobcard->jobcardable->materials;
         }
 
-        if ($defectcards) {
-            foreach ($defectcards as $defectcard) {
-                foreach ($defectcard->materials as $item) {
-                    array_push($items, $item);
-                }
-            }
-        }
-
         $data = $alldata = $items;
+
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
