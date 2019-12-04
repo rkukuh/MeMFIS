@@ -138,6 +138,19 @@ class JobCard extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many requests.
+     *
+     * This function will get all Jobcard's requests.
+     * See: requests's requestable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function requests()
+    {
+        return $this->morphMany(ItemRequest::class, 'requestable');
+    }
+
+    /**
      * One-to-Many: A jobcard may related to an A/C station
      *
      * This function will retrieve the A/C station of a jobcard.
@@ -230,8 +243,8 @@ class JobCard extends MemfisModel
     public function getStatusNameAttribute()
     {
         $status = Status::ofJobCard()->find($this->progresses->last()->status_id);
-        
+
         return $status->name;
     }
-    
+
 }

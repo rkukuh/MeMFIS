@@ -392,7 +392,7 @@
                                                 Documents library @include('frontend.common.label.optional')
                                             </label><br>
 
-                                            @if (sizeof($additionals->document_library) == 0)
+                                            {{-- @if (sizeof($additionals->document_library) == 0)
                                                 @include('frontend.common.label.data-info-nodata')
                                             @else
                                                 @if(isset($additionals))
@@ -402,7 +402,7 @@
                                                         @endcomponent
                                                     @endforeach
                                                 @endif
-                                            @endif
+                                            @endif --}}
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -705,7 +705,7 @@
 @push('footer-scripts')
     <script>
         let taskcard_uuid = '{{ $taskcard->uuid }}';
-        let taskcard_routine_type = "{{ $taskcard->type->name }}"; 
+        let taskcard_routine_type = "{{ $taskcard->type->name }}";
         if (taskcard_routine_type.trim() == "CPCP") {
         $("#station_div").removeClass("hidden");
         $("#stringer_div").removeClass("hidden");
