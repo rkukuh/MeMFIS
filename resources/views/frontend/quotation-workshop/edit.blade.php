@@ -90,7 +90,6 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                            @slot('text', 'Customer Name')
                                                                             @slot('id', 'customer')
                                                                             @slot('name', 'customer')
                                                                             @endcomponent
@@ -103,7 +102,6 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                            @slot('text', 'Customer Name')
                                                                             @slot('id', 'attention')
                                                                             @slot('name', 'attention')
                                                                             @endcomponent
@@ -130,7 +128,6 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                            @slot('text', 'Customer Phone')
                                                                             @slot('id', 'phone')
                                                                             @slot('name', 'phone')
                                                                             @endcomponent
@@ -142,7 +139,6 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                            @slot('text', 'Customer Fax')
                                                                             @slot('id', 'fax')
                                                                             @slot('name', 'fax')
                                                                             @endcomponent
@@ -155,7 +151,6 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                            @slot('text', 'example@email.com')
                                                                             @slot('id', 'email')
                                                                             @slot('name', 'email')
                                                                             @endcomponent
@@ -173,7 +168,6 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                            @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, nulla odio consequuntur obcaecati eos error recusandae minima eveniet dolor sed tempora! Ut quidem illum accusantium expedita nulla eos reprehenderit officiis?')
                                                                             @slot('id', 'address')
                                                                             @slot('name', 'address')
                                                                             @endcomponent
@@ -221,6 +215,7 @@
                                                         @slot('text', 'Date')
                                                         @slot('name', 'date')
                                                         @slot('id_error','requested_at')
+                                                        @slot('value', $quotation->requested_at)
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -233,6 +228,7 @@
                                                         @slot('text', 'Valid Until')
                                                         @slot('name', 'valid_until')
                                                         @slot('id_error','valid_until')
+                                                        @slot('value', $quotation->valid_until)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -246,12 +242,13 @@
                                                             Currency @include('frontend.common.label.required')
                                                         </label>
 
-                                                        @component('frontend.common.input.select2')
-                                                        @slot('id', 'currency')
-                                                        @slot('text', 'Currency')
-                                                        @slot('name', 'currency')
-                                                        @slot('id_error', 'currency')
-                                                        @endcomponent
+                                                        <select id="currency" name="currency" class="form-control m-select2">
+                                                            @foreach ($currencies as $currency)
+                                                            <option value="{{ $currency->id }}" @if ($currency->id == $quotation->currency_id) selected @endif>
+                                                                {{ $currency->name }} ({{ $currency->symbol }})
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
@@ -263,6 +260,7 @@
                                                         @slot('name', 'exchange')
                                                         @slot('id_error', 'exchange')
                                                         @slot('id', 'exchange')
+                                                        @slot('value', $quotation->exchange_rate)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -280,10 +278,11 @@
                                         @slot('rows', '5')
                                         @slot('id', 'title')
                                         @slot('name', 'title')
-                                        @slot('text', 'Title')
                                         @slot('id_error', 'title')
+                                        @slot('value', $quotation->title)
                                         @endcomponent
                                     </div>
+                                    <input type="hidden" id="customer_id" name="customer_id" value="{{ $quotation->quotationable->customer->uuid }}">
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -296,6 +295,7 @@
                                         @slot('id', 'term_and_condition')
                                         @slot('name', 'term_and_condition')
                                         @slot('text', 'Term and Condition')
+                                        @slot('value', $quotation->term_of_condition)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -311,6 +311,7 @@
                                         @slot('name', 'description')
                                         @slot('text', 'Description')
                                         @slot('id_error', 'description')
+                                        @slot('value', $quotation->description)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -393,41 +394,7 @@
 
 @push('footer-scripts')
 
-<script type="text/javascript">
-    $("#type_website").on('change', function() {
-
-    });
-    let simpan = $('.tes').on('click', '.save', function() {
-        var usertype = [];
-        $("select[name=project]").each(function() {
-            usertype.push($(this).val());
-            // alert($(this).val());
-        });
-        var ajaxdata = {
-            "UserType": usertype
-        };
-
-    });
-</script>
-{{-- <script>
-        function initMap() {
-            var myLatLng = {lat: -7.265757, lng: 112.734146};
-
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom    : 10,
-                center  : myLatLng
-            });
-
-            var marker = new google.maps.Marker({
-                position    : myLatLng,
-                map         : map,
-                title       : 'Hello World!'
-            });
-        }
-    </script> --}}
 <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
-
-{{-- <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script> --}}
 
 <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>

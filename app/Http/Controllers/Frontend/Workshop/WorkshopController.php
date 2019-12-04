@@ -44,7 +44,7 @@ class WorkshopController extends Controller
     {
         $contact = $scheduled_payment_amount = [];
 
-        $contact['name']     = $request->attention_name;
+        $contact['name'] = $request->attention_name;
         $contact['phone'] = $request->attention_phone;
         $contact['address'] = $request->attention_address;
         $contact['fax'] = $request->attention_fax;
@@ -56,6 +56,7 @@ class WorkshopController extends Controller
         $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
         $request->merge(['scheduled_payment_amount' => json_encode($scheduled_payment_amount)]);
         $request->merge(['quotationable_id' => Project::where('uuid', $request->project_id)->first()->id]);
+        $request->merge(['no_wo' => Project::where('uuid', $request->project_id)->first()->no_wo]);
 
         $quotation = Quotation::create($request->all());
         
