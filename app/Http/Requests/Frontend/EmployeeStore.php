@@ -46,7 +46,7 @@ class EmployeeStore extends FormRequest
             'city' => 'required',
             'mobile_phone' => 'required',
             'email_1' => 'required',
-            // 'job_title' => 'required',
+            'job_title' => 'required',
             'job_position' => 'required',
             'employee_status' => 'required',
             'department' => 'required',
