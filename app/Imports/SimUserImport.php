@@ -25,7 +25,7 @@ class SimUserImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        $user = User::where('email', $row['enmail'])->first();
+        $user = User::where('email', $row['email'])->first();
 
         if(empty($user)){
             $faker = Faker\Factory::create();
