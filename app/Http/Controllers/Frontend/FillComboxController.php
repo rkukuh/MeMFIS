@@ -27,6 +27,7 @@ use App\Models\Employee;
 use App\Models\Facility;
 use App\Models\Religion;
 use App\Models\TaskCard;
+use App\Models\Position;
 use App\Models\LeaveType;
 use App\Models\DefectCard;
 use App\Models\ItemRequest;
@@ -145,6 +146,19 @@ class FillComboxController extends Controller
             ->first();
 
         return $items->origin_jobcardable_items;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jobpositions()
+    {
+        $jobpositions = Position::pluck('name', 'uuid');
+
+        return json_encode($jobpositions);
+
     }
 
     /**
