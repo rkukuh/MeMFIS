@@ -169,11 +169,6 @@ let TaskCard = {
             data.append("section", JSON.stringify(sections));
             data.append("fileInput", document.getElementById('taskcard').files[0]);
 
-            for (let value of data.values()) {
-                console.log(value); 
-                }
-                mApp.unblock(".add-taskcard");
-
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -252,7 +247,7 @@ let TaskCard = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/taskcard-routine/' + response.uuid + '/edit';
+                        window.location.href = '/taskcard-routine/' + response.uuid + '/edit';
                     }
                 },
                 error: function (jqXhr, json, errorThrown) {
