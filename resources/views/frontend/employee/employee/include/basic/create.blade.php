@@ -411,11 +411,15 @@
 </form>
 
 @push('footer-scripts')
+    <script>
+        let needAll = false;
+    </script>
 
     <script src="{{ asset('js/frontend/functions/fill-combobox/marital-status.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/religion.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/job-title.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/nationality.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/gender.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/gender.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/religion.js') }}"></script>

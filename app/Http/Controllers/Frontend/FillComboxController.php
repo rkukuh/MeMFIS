@@ -109,6 +109,19 @@ class FillComboxController extends Controller
     }
 
     /**
+     * Display a listing of gender from resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function gender()
+    {
+        $genders = Type::ofGender()->pluck('name', 'uuid');
+
+        return json_encode($genders);
+
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
