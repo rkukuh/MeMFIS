@@ -21,7 +21,7 @@ class WorkshopController extends Controller
      */
     public function index()
     {
-        return view('frontend.quotation-workshop.index');
+        // 
     }
 
     /**
@@ -29,9 +29,9 @@ class WorkshopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Quotation $quotation)
     {
-        return view('frontend.quotation-workshop.create');
+        return view('frontend.quotation-workshop.item.create');
     }
 
     /**
@@ -42,24 +42,24 @@ class WorkshopController extends Controller
      */
     public function store(WorkshopStore $request)
     {
-        $contact = $scheduled_payment_amount = [];
+        // $contact = $scheduled_payment_amount = [];
 
-        $contact['name']     = $request->attention_name;
-        $contact['phone'] = $request->attention_phone;
-        $contact['address'] = $request->attention_address;
-        $contact['fax'] = $request->attention_fax;
-        $contact['email'] = $request->attention_email;
+        // $contact['name']     = $request->attention_name;
+        // $contact['phone'] = $request->attention_phone;
+        // $contact['address'] = $request->attention_address;
+        // $contact['fax'] = $request->attention_fax;
+        // $contact['email'] = $request->attention_email;
 
-        $request->merge(['number' => DocumentNumber::generate('QWOR-', Quotation::withTrashed()->count() + 1)]);
-        $request->merge(['attention' => json_encode($contact)]);
-        $request->merge(['quotationable_type' => 'App\Models\Project']);
-        $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
-        $request->merge(['scheduled_payment_amount' => json_encode($scheduled_payment_amount)]);
-        $request->merge(['quotationable_id' => Project::where('uuid', $request->project_id)->first()->id]);
+        // $request->merge(['number' => DocumentNumber::generate('QWOR-', Quotation::withTrashed()->count() + 1)]);
+        // $request->merge(['attention' => json_encode($contact)]);
+        // $request->merge(['quotationable_type' => 'App\Models\Project']);
+        // $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
+        // $request->merge(['scheduled_payment_amount' => json_encode($scheduled_payment_amount)]);
+        // $request->merge(['quotationable_id' => Project::where('uuid', $request->project_id)->first()->id]);
 
-        $quotation = Quotation::create($request->all());
+        // $quotation = Quotation::create($request->all());
         
-        return response()->json($quotation);
+        // return response()->json($quotation);
     }
 
     /**
@@ -70,7 +70,7 @@ class WorkshopController extends Controller
      */
     public function show(Workshop $workshop)
     {
-        return view('frontend.quotation-workshop.show');
+        return view('frontend.quotation-workshop.item.show');
     }
 
     /**

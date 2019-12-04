@@ -11,7 +11,8 @@ Route::name('frontend.')->group(function () {
 
         Route::namespace('Workshop')->group(function () {
 
-            Route::resource('quotation-workshop', 'WorkshopController');
+            Route::resource('quotation-workshop', 'WorkshopController')->except('edit');
+            Route::get('quotation-workshop/{quotation}/edit', 'WorkshopController@edit')->name('quotation-workshop.edit');
 
             Route::prefix('quotation-workshop')->group(function() {
 
@@ -23,8 +24,8 @@ Route::name('frontend.')->group(function () {
             //     Route::view('/quotation-workshop/show', 'frontend.quotation-workshop.show')->name('show');
 
             Route::name('quotation-workshop.')->group(function() {
-                Route::view('/quotation-workshop/edit/item/create', 'frontend.quotation-workshop.item.create')->name('item.create');
-                Route::view('/quotation-workshop/edit/item/show', 'frontend.quotation-workshop.item.show')->name('item.show');
+                Route::view('/quotation-workshop/{quotation}/item/create', 'frontend.quotation-workshop.item.create')->name('item.create');
+                Route::view('/quotation-workshop/{quotation}/item/show', 'frontend.quotation-workshop.item.show')->name('item.show');
             });
             // });
 
