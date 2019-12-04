@@ -28,6 +28,7 @@ class SimUserImport implements ToModel, WithHeadingRow
         $user = User::where('email', $row['email'])->first();
 
         if(empty($user)){
+                
             $faker = Faker\Factory::create();
 
             $name = $row['first_name'].' '.$row['last_name'];
@@ -45,7 +46,7 @@ class SimUserImport implements ToModel, WithHeadingRow
             $user->assignRole($role);
 
             $employee = [
-                'code' => $faker->randomNumber($nbDigits = NULL, $strict = false),
+                'code' => $row['nrp'],//$faker->randomNumber($nbDigits = NULL, $strict = false),
                 'first_name' => ucwords(strtolower($row['first_name'])),
                 'last_name' => ucwords(strtolower($row['last_name'])),
                 'dob' => Carbon::now()->subYear(rand(20, 50)),
@@ -57,25 +58,23 @@ class SimUserImport implements ToModel, WithHeadingRow
                 'city' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
                 'joined_date' => Carbon::now()->toDateString(),
                 'updated_at' => null
-            ];
+            ]; 
 
             $user->employee()->create($employee);
 
             $employee = $user->employee;
 
-            $workshift = Workshift::find($faker->randomElement([1,2]));
+            $workshift = Workshift::find($faker->randomElement([1,2])); 
 
             $employee->workshifts()->attach($workshift->id, [
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 ]);
-
+            
             $employee->nationalities()->attach(Nationality::first()->id, [
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 ]);
         }
-
-
     }
 }
