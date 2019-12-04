@@ -265,6 +265,18 @@ class FillComboxController extends Controller
 
     }
 
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function supervisors()
+    {
+        $supervisors = Employee::pluck('first_name', 'last_name', 'uuid');
+
+        return json_encode($supervisors);
+    }
+
     /**
      * Display a listing of the resource.
      *
