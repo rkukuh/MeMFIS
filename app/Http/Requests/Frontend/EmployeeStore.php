@@ -70,7 +70,6 @@ class EmployeeStore extends FormRequest
                 'created_at' => Carbon::now(),
                 'job_title_id' => optional(JobTitle::where('uuid', $this->job_title)->first())->id,
                 'position_id' => optional(Position::where('uuid', $this->job_position)->first())->id,
-                'employee_id' => optional(Employee::where('uuid', $this->employee_uuid)->first())->id,
                 'statuses_id' =>  optional(Status::where('uuid', $this->employee_status)->first())->id,
                 'department_id' =>  optional(Department::where('uuid', $this->department)->first())->id,
                 'supervisor_id' => optional(Employee::where('uuid', $this->supervisor)->first())->id,

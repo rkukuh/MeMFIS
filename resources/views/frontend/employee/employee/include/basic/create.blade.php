@@ -369,9 +369,9 @@
                     </label>
 
                     @component('frontend.common.input.select2')
-                        @slot('id', 'inderect_supervisor')
-                        @slot('name', 'inderect_supervisor')
-                        @slot('id_error', 'inderect_supervisor')
+                        @slot('id', 'indirect_supervisor')
+                        @slot('name', 'indirect_supervisor')
+                        @slot('id_error', 'indirect_supervisor')
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -424,6 +424,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/employment-status.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/department.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/indirect-supervisor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/supervisor.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/marital-status.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/religion.js') }}"></script>
@@ -434,8 +435,8 @@
     <script src="{{ asset('js/frontend/functions/select2/employment-status.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/department.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/indirect-supervisor.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/supervisor.js') }}"></script>
+
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/period-start.js')}}"></script>

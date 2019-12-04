@@ -52,8 +52,6 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeStore $request)
     {
-        dd($request->all());
-
         $time = Carbon::now();
 
         $employee = Employee::create($request->all());

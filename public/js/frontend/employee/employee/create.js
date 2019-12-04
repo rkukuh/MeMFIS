@@ -8,17 +8,17 @@ let Employee = {
 
             let code = $('input[name=code]').val()
             let code_uppercase = code.toUpperCase()
-            let job_title = $('#job_title option:selected').val()
+            let job_title = $('select[name="job_title"]').val()
             let dob = $('input[name="dob"]').val();
             let dob_place = $('input[name="dob_place"]').val();
 
             let first_name = $('input[name="first_name"]').val();
             let last_name = $('input[name="last_name"]').val();
             let card_number = $('input[name="card_number"]').val();
-            let gender = $('#gender option:selected').val()
-            let nationality = $('input[name="nationality"]').val();
-            let religion = $('input[name="religion"]').val();
-            let marital_status = $('input[name="marital_status"]').val();
+            let gender = $('select[name="gender"]').val()
+            let nationality = $('select[name="nationality"]').val();
+            let religion = $('select[name="religion"]').val();
+            let marital_status = $('select[name="marital_status"]').val();
             let address_line_1 = $('input[name="address_line_1"]').val();
             let country = $('input[name="country"]').val();
 
@@ -32,12 +32,12 @@ let Employee = {
             let email_1 = $('input[name="email_1"]').val();
             let email_2 = $('input[name="email_2"]').val();
             let joined_date = $('input[name="joined_date"]').val();
-            let job_position = $('input[name="job_position"]').val();
+            let job_position = $('select[name="job_position"]').val();
             
-            let employee_status = $('input[name="employee_status"]').val();
-            let department = $('input[name="department"]').val();
-            let inderect_supervisor = $('input[name="inderect_supervisor"]').val();
-            let supervisor = $('input[name="supervisor"]').val();
+            let employee_status = $('select[name="employee_status"]').val();
+            let department = $('select[name="department"]').val();
+            let indirect_supervisor = $('select[name="indirect_supervisor"]').val();
+            let supervisor = $('select[name="supervisor"]').val();
 
             formData = new FormData($('#employee_create_form')[0])
     
@@ -69,14 +69,14 @@ let Employee = {
                 formData.append('job_position', job_position);
                 formData.append('employee_status', employee_status);
                 formData.append('department', department);
-                formData.append('inderect_supervisor', inderect_supervisor);
+                formData.append('indirect_supervisor', indirect_supervisor);
                 formData.append('supervisor', supervisor);
 
-            for (let value of formData.values()) {
-                console.log(value); 
-                }
+            // for (let value of formData.values()) {
+            //     console.log(value); 
+            // }
 
-                return ;
+            // return ;
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -175,7 +175,7 @@ let Employee = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/employee/'+data.uuid+'/edit';
+                        window.location.href = '/employee/'+data.uuid+'/edit';n
 
                     }
                 }
