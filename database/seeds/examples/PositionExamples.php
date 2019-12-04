@@ -33,12 +33,12 @@ class PositionExamples extends Seeder
         ]);
 
         Role::create([
-            'name' => 'manager',
+            'name' => 'manager-finance',
         ]);
 
         Position::create([
             'code' => strtolower('MGR01'),
-            'name' => 'Manager',
+            'name' => 'Manager Finance',
         ]);
 
         Role::create([
@@ -47,7 +47,7 @@ class PositionExamples extends Seeder
 
         Position::create([
             'code' => strtolower('MGR02'),
-            'name' => 'Manager',
+            'name' => 'Manager Production',
         ]);
 
         Role::create([
@@ -56,7 +56,7 @@ class PositionExamples extends Seeder
 
         Position::create([
             'code' => strtolower('MGR03'),
-            'name' => 'Manager',
+            'name' => 'Manager Marketing',
         ]);
 
         Role::create([
