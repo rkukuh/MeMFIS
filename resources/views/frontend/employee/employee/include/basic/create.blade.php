@@ -421,6 +421,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/nationality.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/gender.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/job-position.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/employment-status.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/marital-status.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/religion.js') }}"></script>
@@ -428,8 +429,8 @@
     <script src="{{ asset('js/frontend/functions/select2/nationality.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/gender.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/job-position.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/employment-status.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/employee-status.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/department.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/indirect-supervisor.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/supervisor.js') }}"></script>

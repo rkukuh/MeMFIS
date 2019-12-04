@@ -302,6 +302,20 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function employmentStatuses()
+    {
+        $employmentStatuses = Status::ofEmployment()
+            ->pluck('name', 'uuid');
+
+        return json_encode($employmentStatuses);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function employeeUuid()
     {
         $employees = Employee::selectRaw('uuid, CONCAT(first_name, " ", last_name) as name')
