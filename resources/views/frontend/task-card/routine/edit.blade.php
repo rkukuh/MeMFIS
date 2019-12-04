@@ -208,12 +208,12 @@
                                                     &mdash; Select a Skill &mdash;
                                                 </option>
 
-                                                {{-- @foreach ($skills as $skill)
+                                                @foreach ($skills as $skill)
                                                     <option value="{{ $skill->id }}"
                                                         @if ($skill->name == "ERI" && sizeof($taskcard->skills) == 3) selected @elseif($skill->id == $taskcard->skills[0]->id) selected @endif>
                                                         {{ $skill->name }}
                                                     </option>
-                                                @endforeach --}}
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>

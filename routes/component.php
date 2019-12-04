@@ -20,6 +20,7 @@ Route::name('component.')->group(function () {
         Route::get('get-units', 'FillComboxController@units')->name('get-units');
         Route::get('get-promos', 'FillComboxController@promo')->name('get-promos');
         Route::get('get-vendors', 'FillComboxController@vendor')->name('get-vendor');
+        Route::get('get-genders', 'FillComboxController@gender')->name('get-genders');
         Route::get('get-jobcard', 'FillComboxController@jobcard')->name('get-jobcard');
         Route::get('get-projects', 'FillComboxController@project')->name('get-project');
         Route::get('get-accesses', 'FillComboxController@access')->name('get-accesses');
@@ -45,8 +46,8 @@ Route::name('component.')->group(function () {
         Route::get('get-work-orders', 'FillComboxController@workOrder')->name('get-work-orders');
         Route::get('get-part-number', 'FillComboxController@partNumber')->name('get-part-number');
         Route::get('get-recurrences', 'FillComboxController@recurrence')->name('get-recurrences');
-        Route::get('get-storages-combobox', 'FillComboxController@storages')->name('get-storages');
         Route::get('get-storages', 'FillComboxController@storageUUID')->name('get-storages-uuid');
+        Route::get('get-storages-combobox', 'FillComboxController@storages')->name('get-storages');
         Route::get('get-repeat-types', 'FillComboxController@repeatType')->name('get-repeat-types');
         Route::get('get-categories-item', 'FillComboxController@categories')->name('get-categories');
         Route::get('get-inventory-in', 'FillComboxController@inventoryIn')->name('get-inventory-in');
@@ -57,6 +58,7 @@ Route::name('component.')->group(function () {
         Route::get('get-website-types', 'FillComboxController@websiteType')->name('get-website-types');
         Route::get('get-employees-data', 'FillComboxController@employees')->name('get-employees-data');
         Route::get('get-address-types', 'FillComboxController@addressType')->name('get-address-types');
+        Route::get('get-job-positions', 'FillComboxController@jobpositions')->name('get-job-positions');
         Route::get('get-manufacturers', 'FillComboxController@manufacturer')->name('get-manufacturers');
         Route::get('get-marital-status', 'FillComboxController@maritalStatus')->name('get-marital-status');
         Route::get('get-inventory-out', 'FillComboxController@inventoryOut')->name('get-inventory-out');
