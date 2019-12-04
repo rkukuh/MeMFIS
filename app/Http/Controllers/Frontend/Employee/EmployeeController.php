@@ -57,7 +57,26 @@ class EmployeeController extends Controller
     {
         $time = Carbon::now();
 
-        $employee = Employee::create($request->all());
+        $name = $request->first_name.' '.$request->last_name;
+    
+        $user = new User([
+            'name' => ucwords(strtolower($name)),
+            'email' => !empty($request->email) ? strtolower($request->email) : str_slug(strtolower($request->nama)) . '@example.org',
+            'password' => Hash::make('employee'),
+            'is_active' => 1
+        ]);
+
+        $user->save();
+
+        $role = Role::where('name', 'staff')->first();
+
+        $user->assignRole($role);
+
+        $user->employee()->create($employee);
+
+        $employee = $user->employee;
+
+        /** WIP atas */
 
         $employee->addresses()->create([
             'address' => $request->address_line_1,
