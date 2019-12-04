@@ -36,7 +36,8 @@ class EmployeeStore extends FormRequest
             'code' => 'required|unique:employees',
             'first_name' => 'required',
             'last_name' => 'required',
-            'joined_date' => 'required',
+            'dob' => 'required|before:'.Carbon::now(),
+            'joined_date' => 'required|before_or_equal:'.Carbon::now()->toDateString(),
             'gender' => 'required',
             'nationality' => 'required',
             'religion' => 'required',
@@ -50,6 +51,7 @@ class EmployeeStore extends FormRequest
             'job_position' => 'required',
             'employee_status' => 'required',
             'department' => 'required',
+            'document' => 'nullable|image'
         ];
     }
 

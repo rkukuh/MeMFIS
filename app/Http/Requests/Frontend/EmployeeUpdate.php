@@ -52,4 +52,25 @@ class EmployeeUpdate extends FormRequest
     protected function failedValidation(Validator $validator) {
         throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $this->merge([
+                'created_at' => Carbon::now(),
+                'job_title_id' => optional(JobTitle::where('uuid', $this->job_title)->first())->id,
+                'position_id' => optional(Position::where('uuid', $this->job_position)->first())->id,
+                'statuses_id' =>  optional(Status::where('uuid', $this->employee_status)->first())->id,
+                'department_id' =>  optional(Department::where('uuid', $this->department)->first())->id,
+                'supervisor_id' => optional(Employee::where('uuid', $this->supervisor)->first())->id,
+                'indirect_supervisor_id' =>  optional(Employee::where('uuid', $this->indirect_supervisor)->first())->id,
+                ]);
+        });
+    }
 }
