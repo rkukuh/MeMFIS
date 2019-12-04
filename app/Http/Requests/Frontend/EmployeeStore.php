@@ -73,9 +73,8 @@ class EmployeeStore extends FormRequest
                 'employee_id' => optional(Employee::where('uuid', $this->employee_uuid)->first())->id,
                 'statuses_id' =>  optional(Status::where('uuid', $this->employee_status)->first())->id,
                 'department_id' =>  optional(Department::where('uuid', $this->department)->first())->id,
-                'supervisor_id' => optional(Employee::where('uuid', $this->indirect_supervisor)->first())->id,
+                'supervisor_id' => optional(Employee::where('uuid', $this->supervisor)->first())->id,
                 'indirect_supervisor_id' =>  optional(Employee::where('uuid', $this->indirect_supervisor)->first())->id,
-                'type_id' => optional(Type::ofAttendanceCorrection()->where('code', $this->attendance_correction_time_type)->first())->id,
                 ]);
         });
     }

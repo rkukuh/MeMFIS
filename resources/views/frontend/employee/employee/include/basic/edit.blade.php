@@ -457,9 +457,9 @@
                     </label>
 
                     @component('frontend.common.input.select2')
-                        @slot('id', 'inderect_supervisor')
-                        @slot('name', 'inderect_supervisor')
-                        @slot('id_error', 'inderect_supervisor')
+                        @slot('id', 'indirect_supervisor')
+                        @slot('name', 'indirect_supervisor')
+                        @slot('id_error', 'indirect_supervisor')
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">

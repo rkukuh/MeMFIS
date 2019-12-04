@@ -52,7 +52,7 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeStore $request)
     {
-        // dd($request->all());
+        dd($request->all());
 
         $time = Carbon::now();
 

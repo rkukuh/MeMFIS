@@ -33,7 +33,7 @@ let Employee_edit_basic = {
             let job_position = $('#job_position option:selected').val()
             let employee_status = $('#employee_status option:selected').val()
             let department = $('#department option:selected').val()
-            let indirect_supervisor = $('#inderect_supervisor option:selected').val()
+            let indirect_supervisor = $('#indirect_supervisor option:selected').val()
             let supervisor = $('#supervisor option:selected').val()
             
             

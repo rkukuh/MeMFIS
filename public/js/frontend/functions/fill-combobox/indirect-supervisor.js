@@ -1,18 +1,18 @@
 $(document).ready(function () {
-    InderectSupervisor = function () {
+    indirectSupervisor = function () {
         $.ajax({
             url: '/get-supervisors/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                $('select[name="inderect_supervisor"]').empty();
+                $('select[name="indirect_supervisor"]').empty();
 
-                $('select[name="inderect_supervisor"]').append(
-                    '<option value=""> Select an Inderect Supervisor </option>'
+                $('select[name="indirect_supervisor"]').append(
+                    '<option value=""> Select an indirect Supervisor </option>'
                 );
 
                 $.each(data, function (key, value) {
-                    $('select[name="inderect_supervisor"]').append(
+                    $('select[name="indirect_supervisor"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );
                 });
@@ -20,5 +20,5 @@ $(document).ready(function () {
         });
     };
 
-    InderectSupervisor();
+    indirectSupervisor();
 });
