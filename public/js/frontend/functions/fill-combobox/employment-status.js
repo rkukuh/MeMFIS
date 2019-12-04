@@ -8,7 +8,7 @@ $(document).ready(function () {
                 $('select[name="employee_status"]').empty();
 
                 $('select[name="employee_status"]').append(
-                    '<option value=""> Select a Job Position</option>'
+                    '<option value=""> Select an Employment Status</option>'
                 );
 
                 $.each(data, function (key, value) {
