@@ -1,10 +1,6 @@
 @if ($button_parameter == 'create')
 {{-- FORM CREATE --}}
-@component('frontend.common.input.hidden')
-        @slot('id', 'employee_uuid')
-        @slot('name', 'employee_uuid')
-        @slot('value', $employee->uuid)
-@endcomponent
+
 
 <div class="jumbotron p-3" style="background:#294294;">
     <div class="row">
@@ -304,11 +300,6 @@
 </div>
 @elseif($button_parameter == 'approvals')
 {{-- FORM APPROVAL --}}
-@component('frontend.common.input.hidden')
-        @slot('id', 'employee_uuid')
-        @slot('name', 'employee_uuid')
-        @slot('value', $employee->uuid)
-@endcomponent
 
 <div class="jumbotron p-3" style="background:#294294;">
     <div class="row">
@@ -664,11 +655,6 @@
 </div>
 @else
 {{-- FORM EDIT --}}
-@component('frontend.common.input.hidden')
-        @slot('id', 'employee_uuid')
-        @slot('name', 'employee_uuid')
-        @slot('value', $employee->uuid)
-@endcomponent
 
 <div class="jumbotron p-3" style="background:#294294;">
     <div class="row">

@@ -1,9 +1,5 @@
 
-        @component('frontend.common.input.hidden')
-        @slot('id', 'employee_uuid')
-        @slot('name', 'employee_uuid')
-        @slot('value', $employee->uuid)
-        @endcomponent
+
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">
@@ -67,15 +63,8 @@
                         Last Name @include('frontend.common.label.required')
                     </label>
 
-                    @php
-
-                        $lastName = null;
-                        if($employee->last_name != $employee->first_name){
-                            $lastName = $employee->last_name;
-                        }
-                    @endphp
                     @component('frontend.common.input.text')
-                        @slot('value', $lastName)
+                        @slot('value', $employee->last_name)
                         @slot('id', 'last_name')
                         @slot('name', 'last_name')
                         @slot('id_error', 'last_name')
@@ -135,7 +124,7 @@
                             @component('frontend.common.input.edit-select2')
                                 @slot('id', 'gender')
                                 @slot('name', 'gender')
-                                @slot('options', $types)
+                                @slot('options', $genders)
                                 @slot('value', $employee->gender->uuid)
                             @endcomponent
                         </div>
@@ -144,11 +133,11 @@
                                 Nationality @include('frontend.common.label.required')
                             </label>
         
-                            @component('frontend.common.input.text')
-                                @slot('value', $employee->nationality)
+                            @component('frontend.common.input.edit-select2')
                                 @slot('id', 'nationality')
                                 @slot('name', 'nationality')
-                                @slot('id_error', 'nationality')
+                                @slot('options', $nationalities)
+                                @slot('value', $employee->nationalities->first()->uuid)
                             @endcomponent
                         </div>
                     </div>
@@ -160,10 +149,11 @@
                         Religion @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'religion')
                         @slot('name', 'religion')
-                        @slot('id_error', 'religion')
+                        @slot('options', $religions)
+                        @slot('value', $employee->religion->first()->uuid)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -230,7 +220,7 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('value', $employee->country)
+                        @slot('value', $employee->country->name)
                         @slot('id', 'country')
                         @slot('name', 'country')
                         @slot('id_error', 'country')
@@ -512,12 +502,13 @@
 </div>
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/gender.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/religion.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/marital-status.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/religion.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/job-title.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/nationality.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/gender.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/job-position.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/employee-status.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/employment-status.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/department.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/indirect-supervisor.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/supervisor.js') }}"></script>
