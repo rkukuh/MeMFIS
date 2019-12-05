@@ -55,28 +55,20 @@
                                                     <td valign="top" align="center">{{ $employee->dob.' & '.$employee->dob_place }}</td>
                                                     </tr>
                                                     <tr>
-                                                        @php
-                                                            $gender = null;
-                                                            if($employee->gender == 'f'){
-                                                            $gender = 'Female';
-                                                            }else if($employee->gender == 'm'){
-                                                            $gender = 'Male';
-                                                            }
-                                                        @endphp
                                                         <td valign="top"><b>Gender</b></td>
-                                                        <td valign="top" align="center">{{ $gender }}</td>
+                                                        <td valign="top" align="center">{{ $employee->gender->name }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Nationality</b></td>
-                                                    <td valign="top" align="center">{{ $employee->nationality }}</td>
+                                                    <td valign="top" align="center">{{ $employee->nationalities->first()->nationality }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Religion</b></td>
-                                                    <td valign="top" align="center">{{ $employee->religion }}</td>
+                                                    <td valign="top" align="center">{{ $employee->religion->name }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Martial Status</b></td>
-                                                    <td valign="top" align="center">{{ $employee->marital_status }}</td>
+                                                    <td valign="top" align="center">{{ $employee->marital_status->name }}</td>
                                                     </tr>
                                                 </table>
                                             </fieldset>
@@ -103,7 +95,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Country</b></td>
-                                                    <td valign="top" align="center">{{ $employee->country }}</td>
+                                                    <td valign="top" align="center">{{ $employee->country->name }}</td>
                                                     </tr>
                                                     <tr>
                                                             @php
