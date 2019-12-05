@@ -83,7 +83,9 @@
                                     @slot('class','button-education')
                                 @endcomponent
 
-                                @include('frontend.common.buttons.reset')
+                                @component('frontend.common.buttons.reset')
+                                    @slot('id', 'education-reset')
+                                @endcomponent
                                   
                                 @include('frontend.common.buttons.close')
                             </div>
