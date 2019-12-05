@@ -184,7 +184,9 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('value', $addresses['primary'])
+                        @if(array_key_exists('primary', $addresses))
+                            @slot('value', $addresses['primary'])
+                        @endif
                         @slot('id', 'address_line_1')
                         @slot('name', 'address_line_1')
                         @slot('id_error', 'address_line_1')
@@ -196,7 +198,9 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('value', $addresses['secondary'])
+                        @if(array_key_exists('secondary', $addresses))
+                            @slot('value', $addresses['secondary'])
+                        @endif
                         @slot('id', 'address_line_2')
                         @slot('name', 'address_line_2')
                         @slot('id_error', 'address_line_2')
@@ -392,7 +396,11 @@
                         @slot('id', 'job_title')
                         @slot('name', 'job_title')
                         @slot('options', $jobtitles)
-                        @slot('value', $employee->job_title->uuid)
+                        @if($employee->job_title)
+                            @slot('value', $employee->job_title->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -404,7 +412,11 @@
                         @slot('id', 'job_position')
                         @slot('name', 'job_position')
                         @slot('options', $jobpositions)
-                        @slot('value', $employee->position->uuid)
+                        @if($employee->position)
+                            @slot('value', $employee->position->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
             </div>
@@ -418,7 +430,11 @@
                         @slot('id', 'employee_status')
                         @slot('name', 'employee_status')
                         @slot('options', $employmentstatuses)
-                        @slot('value', $employee->statuses->uuid)
+                        @if($employee->statuses)
+                            @slot('value', $employee->statuses->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -430,7 +446,11 @@
                         @slot('id', 'department')
                         @slot('name', 'department')
                         @slot('options', $departments)
-                        @slot('value', $employee->department->uuid)
+                        @if($employee->department)
+                            @slot('value', $employee->department->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
             </div>
@@ -444,7 +464,11 @@
                         @slot('id', 'indirect_supervisor')
                         @slot('name', 'indirect_supervisor')
                         @slot('options', $supervisors)
-                        @slot('value', $employee->indirect_supervisor->uuid)
+                        @if($employee->indirect_supervisor)
+                            @slot('value', $employee->indirect_supervisor->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -456,7 +480,11 @@
                         @slot('id', 'supervisor')
                         @slot('name', 'supervisor')
                         @slot('options', $supervisors)
-                        @slot('value', $employee->supervisor->uuid)
+                        @if($employee->supervisor)
+                            @slot('value', $employee->supervisor->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
             </div>
