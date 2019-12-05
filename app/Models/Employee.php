@@ -378,9 +378,9 @@ class Employee extends MemfisModel implements HasMedia
      *
      * @return mixed
      */
-    public function employee_marital()
+    public function marital_status()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(Status::class, 'marital_id');
     }
 
     /**
