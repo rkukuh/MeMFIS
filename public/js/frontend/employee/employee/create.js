@@ -175,7 +175,7 @@ let Employee = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/employee/'+data.uuid+'/edit';
+                        window.location.href = '/employee/'+data.uuid+'/edit';
 
                     }
                 }
