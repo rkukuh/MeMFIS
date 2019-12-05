@@ -280,6 +280,19 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
+     * One-to-Many: An Employee have one Religion.
+     *
+     * This function will retrieve Religion of a given Employee.
+     * See: Position employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function religion()
+    {
+        return $this->belongsTo(Religion::class);
+    }
+
+    /**
      * One-to-One: An Employee have one Status.
      *
      * This function will retrieve Status of a given Employee.
