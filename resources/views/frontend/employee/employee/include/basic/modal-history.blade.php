@@ -117,13 +117,13 @@
                                                     </tr>
                                                     <tr>
                                                             @php
-                                                            $email_1 = null;
-                                                            if(isset($emails['email_1'])){
-                                                                $email_1 = $emails['email_1'];
+                                                            $primary = null;
+                                                            if(isset($emails['primary'])){
+                                                                $primary = $emails['primary'];
                                                             }
                                                             @endphp
-                                                        <td valign="top"><b>Email 1</b></td>
-                                                        <td valign="top" align="center">{{ $email_1 }}</td>
+                                                        <td valign="top"><b>Primary</b></td>
+                                                        <td valign="top" align="center">{{ $primary }}</td>
                                                     </tr>
                                                 </table>
                                             </fieldset>
@@ -298,8 +298,8 @@
                                                             <td valign="top" align="center">{{ $history[$i]['mobile_phone'] }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top"><b>Email 1</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['email_1'] }}</td>
+                                                            <td valign="top"><b>Primary</b></td>
+                                                            <td valign="top" align="center">{{ $history[$i]['primary'] }}</td>
                                                         </tr>
                                                     </table>
                                                 </fieldset>

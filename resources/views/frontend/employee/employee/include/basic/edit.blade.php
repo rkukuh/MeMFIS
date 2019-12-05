@@ -321,38 +321,38 @@
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
-                        Email 1 @include('frontend.common.label.required')
+                        Primary @include('frontend.common.label.required')
                     </label>
 
                     @php
-                        $email_1 = null;
-                        if(isset($emails['email_1'])){
-                            $email_1 = $emails['email_1'];
+                        $primary = null;
+                        if(isset($emails['primary'])){
+                            $primary = $emails['primary'];
                         }
 
-                        $email_2 = null;
-                        if(isset($emails['email_2'])){
-                            $email_2 = $emails['email_2'];
+                        $secondary = null;
+                        if(isset($emails['secondary'])){
+                            $secondary = $emails['secondary'];
                         }
 
                     @endphp
                     @component('frontend.common.input.email')
-                        @slot('value',$email_1)
-                        @slot('id', 'email_1')
-                        @slot('name', 'email_1')
-                        @slot('id_error', 'email_1')
+                        @slot('value',$primary)
+                        @slot('id', 'primary')
+                        @slot('name', 'primary')
+                        @slot('id_error', 'primary')
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
-                        Email 2
+                        Secondary
                     </label>
 
                     @component('frontend.common.input.email')
-                        @slot('value', $email_2)
-                        @slot('id', 'email_2')
-                        @slot('name', 'email_2')
-                        @slot('id_error', 'email_2')
+                        @slot('value', $secondary)
+                        @slot('id', 'secondary')
+                        @slot('name', 'secondary')
+                        @slot('id_error', 'secondary')
                     @endcomponent
                 </div>
             </div>

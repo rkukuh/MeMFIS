@@ -91,9 +91,9 @@
                                         @endif
                                         </div>
                                         <div class="col-sm-7 col-md-7 col-lg-7">
-                                        @if (isset($emails['email_1']))
+                                        @if (isset($emails['primary']))
                                                 <span>
-                                                <h6><i class="la la-envelope-o"></i>&nbsp;&nbsp; {{ $emails['email_1'] }}</h6>
+                                                <h6><i class="la la-envelope-o"></i>&nbsp;&nbsp; {{ $emails['primary'] }}</h6>
                                                 </span>
                                         @else
                                                 <span>

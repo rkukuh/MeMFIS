@@ -49,7 +49,7 @@ class EmployeeStore extends FormRequest
             'country' => 'required',
             'city' => 'required',
             'mobile_phone' => 'required',
-            'email_1' => 'required',
+            'primary' => 'required',
             'job_title' => 'required',
             'job_position' => 'required',
             'employee_status' => 'required',

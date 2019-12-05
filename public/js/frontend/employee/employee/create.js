@@ -29,8 +29,8 @@ let Employee = {
             let work_phone = $('input[name="work_phone"]').val();
 
             let other_phone = $('input[name="other_phone"]').val();
-            let email_1 = $('input[name="email_1"]').val();
-            let email_2 = $('input[name="email_2"]').val();
+            let primary = $('input[name="primary"]').val();
+            let secondary = $('input[name="secondary"]').val();
             let joined_date = $('input[name="joined_date"]').val();
             let job_position = $('select[name="job_position"]').val();
             
@@ -63,8 +63,8 @@ let Employee = {
                 formData.append('mobile_phone', mobile_phone);
                 formData.append('work_phone', work_phone);
                 formData.append('other_phone', other_phone);
-                formData.append('email_1', email_1);
-                formData.append('email_2', email_2);
+                formData.append('primary', primary);
+                formData.append('secondary', secondary);
                 formData.append('joined_date', joined_date);
                 formData.append('job_position', job_position);
                 formData.append('employee_status', employee_status);
@@ -163,10 +163,10 @@ let Employee = {
                                 $('#department-error').html('');
                             }
 
-                            if (data.errors.email_1) {
-                                $('#email_1-error').html(data.errors.email_1[0]);
+                            if (data.errors.primary) {
+                                $('#primary-error').html(data.errors.primary[0]);
                             }else{
-                                $('#email_1-error').html('');
+                                $('#primary-error').html('');
                             }
                         });
                     } else {
