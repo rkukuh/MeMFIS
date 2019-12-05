@@ -32,6 +32,7 @@ Route::name('component.')->group(function () {
         Route::get('get-taskcards', 'FillComboxController@taskcard')->name('get-taskcards');
         Route::get('get-religions', 'FillComboxController@religions')->name('get-religions');
         Route::get('get-tools-uuid', 'FillComboxController@toolUuid')->name('get-tool-uuid');
+        Route::get('get-countries', 'FillComboxController@countries')->name('get-countries');
         Route::get('get-items-uuid', 'FillComboxController@itemUUID')->name('get-items-uuid');
         Route::get('get-task-types', 'FillComboxController@taskType')->name('get-task-types');
         Route::get('get-unit-types', 'FillComboxController@unitType')->name('get-unit-types');

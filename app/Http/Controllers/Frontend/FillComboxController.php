@@ -15,6 +15,7 @@ use App\Models\Vendor;
 use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\License;
+use App\Models\Country;
 use App\Models\Project;
 use App\Models\Station;
 use App\Models\Storage;
@@ -91,6 +92,19 @@ class FillComboxController extends Controller
             ->pluck('name', 'id');
 
         return json_encode($categories);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function countries()
+    {
+        $countries = Country::pluck('name', 'uuid');
+
+        return json_encode($countries);
 
     }
 
@@ -759,8 +773,7 @@ class FillComboxController extends Controller
      */
     public function nationalities()
     {
-        $nationalities = Type::ofNationality()
-                            ->pluck('name', 'uuid');
+        $nationalities = Nationality::pluck('nationality', 'uuid');
 
         return json_encode($nationalities);
     }
