@@ -132,7 +132,7 @@
                                             Zone
                                         </label>
 
-                                        @if ($discrepancy->zones->isEmpty())
+                                        @if (sizeOf($discrepancy->zones) == 0)
                                         @include('frontend.common.label.data-info-nodata')
                                         @else
                                         @foreach ($discrepancy->zones as $zone)
