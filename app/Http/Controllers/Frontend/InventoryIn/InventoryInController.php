@@ -100,6 +100,8 @@ class InventoryInController extends Controller
      */
     public function update(InventoryInUpdate $request, InventoryIn $inventoryIn)
     {
+        $request->merge(['inventoried_at' => Carbon::parse($request->inventoried_at.'00:00:00')]);
+
         $additionals = json_decode($inventoryIn->additional);
         $additionals->ref_no = $request->ref_no;
         $request->merge(['additional' => json_encode($additionals)]);
