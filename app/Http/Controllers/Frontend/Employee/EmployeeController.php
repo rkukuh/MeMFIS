@@ -132,15 +132,15 @@ class EmployeeController extends Controller
         }
 
         $employee->emails()->create([
-            'address' => $request->primary,
+            'address' => $request->primary_email,
             'type_id' => Type::where('of','email')->where('code','primary')->first()->id,
             'created_at' => $time,
             'updated_at' => null
         ]);
 
-        if($request->secondary){
+        if($request->secondary_email){
         $employee->emails()->create([
-            'address' => $request->secondary,
+            'address' => $request->secondary_email,
             'type_id' => Type::where('of','email')->where('code','secondary')->first()->id,
             'created_at' => $time,
             'updated_at' => null
@@ -1256,15 +1256,15 @@ class EmployeeController extends Controller
         }
 
         $employee->emails()->create([
-            'address' => $request->primary,
+            'address' => $request->primary_email,
             'type_id' => Type::where('of','email')->where('code','primary')->first()->id,
             'created_at' => $time_update,
             'updated_at' => null
         ]);
 
-        if($request->secondary){
+        if($request->secondary_email){
         $employee->emails()->create([
-            'address' => $request->secondary,
+            'address' => $request->secondary_email,
             'type_id' => Type::where('of','email')->where('code','secondary')->first()->id,
             'created_at' => $time_update,
             'updated_at' => null

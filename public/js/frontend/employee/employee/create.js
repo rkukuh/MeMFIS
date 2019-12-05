@@ -20,6 +20,7 @@ let Employee = {
             let religion = $('select[name="religion"]').val();
             let marital_status = $('select[name="marital_status"]').val();
             let address_line_1 = $('input[name="address_line_1"]').val();
+            let address_line_2 = $('input[name="address_line_2"]').val();
             let country = $('select[name="country"]').val();
 
             let city = $('input[name="first_name"]').val();
@@ -29,8 +30,8 @@ let Employee = {
             let work_phone = $('input[name="work_phone"]').val();
 
             let other_phone = $('input[name="other_phone"]').val();
-            let primary = $('input[name="primary"]').val();
-            let secondary = $('input[name="secondary"]').val();
+            let primary_email = $('input[name="primary_email"]').val();
+            let secondary_email = $('input[name="secondary_email"]').val();
             let joined_date = $('input[name="joined_date"]').val();
             let job_position = $('select[name="job_position"]').val();
             
@@ -56,15 +57,16 @@ let Employee = {
                 formData.append('religion', religion);
                 formData.append('marital_status', marital_status);
                 formData.append('address_line_1', address_line_1);
+                formData.append('address_line_2', address_line_2);
                 formData.append('country', country);
                 formData.append('city', city);
-                formData.append('zip_code', zip_code);
+                formData.append('zip', zip_code);
                 formData.append('home_phone', home_phone);
                 formData.append('mobile_phone', mobile_phone);
                 formData.append('work_phone', work_phone);
                 formData.append('other_phone', other_phone);
-                formData.append('primary', primary);
-                formData.append('secondary', secondary);
+                formData.append('primary_email', primary_email);
+                formData.append('secondary_email', secondary_email);
                 formData.append('joined_date', joined_date);
                 formData.append('job_position', job_position);
                 formData.append('employee_status', employee_status);
@@ -163,10 +165,10 @@ let Employee = {
                                 $('#department-error').html('');
                             }
 
-                            if (data.errors.primary) {
-                                $('#primary-error').html(data.errors.primary[0]);
+                            if (data.errors.primary_email) {
+                                $('#primary_email-error').html(data.errors.primary_email[0]);
                             }else{
-                                $('#primary-error').html('');
+                                $('#primary_email-error').html('');
                             }
                         });
                     } else {

@@ -271,9 +271,9 @@
                     </label>
 
                     @component('frontend.common.input.email')
-                        @slot('id', 'primary')
-                        @slot('name', 'primary')
-                        @slot('id_error', 'primary')
+                        @slot('id', 'primary_email')
+                        @slot('name', 'primary_email')
+                        @slot('id_error', 'primary_email')
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -282,9 +282,9 @@
                     </label>
 
                     @component('frontend.common.input.email')
-                        @slot('id', 'secondary')
-                        @slot('name', 'secondary')
-                        @slot('id_error', 'secondary')
+                        @slot('id', 'secondary_email')
+                        @slot('name', 'secondary_email')
+                        @slot('id_error', 'secondary_email')
                     @endcomponent
                 </div>
             </div>
