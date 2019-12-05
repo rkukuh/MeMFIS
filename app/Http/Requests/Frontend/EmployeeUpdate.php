@@ -2,10 +2,19 @@
 
 namespace App\Http\Requests\Frontend;
 
+use Carbon\Carbon;
+use App\Models\Type;
+use App\Models\Status;
+use App\Models\Country;
+use App\Models\Employee;
+use App\Models\Position;
+use App\Models\Religion;
+use App\Models\JobTitle;
+use App\Models\Department;
+use App\Models\Nationality;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Carbon\Carbon;
 
 class EmployeeUpdate extends FormRequest
 {
@@ -70,6 +79,11 @@ class EmployeeUpdate extends FormRequest
                 'department_id' =>  optional(Department::where('uuid', $this->department)->first())->id,
                 'supervisor_id' => optional(Employee::where('uuid', $this->supervisor)->first())->id,
                 'indirect_supervisor_id' =>  optional(Employee::where('uuid', $this->indirect_supervisor)->first())->id,
+                'gender_id' => optional(Type::ofGender()->where('uuid', $this->gender)->first())->id,
+                'religion_id' => optional(Religion::where('uuid', $this->religion)->first())->id,
+                'marital_id' => optional(Status::ofMarital()->where('uuid', $this->marital_status)->first())->id,
+                'country_id' => optional(Country::where('uuid', $this->country)->first())->id,
+                'nationality_id' => optional(Nationality::where('uuid', $this->nationality)->first())->id,
                 ]);
         });
     }
