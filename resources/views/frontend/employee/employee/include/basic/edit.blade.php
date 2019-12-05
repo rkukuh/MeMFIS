@@ -388,10 +388,11 @@
                         Job Title @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'job_title')
                         @slot('name', 'job_title')
-                        @slot('id_error', 'job_title')
+                        @slot('options', $jobtitles)
+                        @slot('value', $employee->job_title->uuid)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -399,11 +400,11 @@
                         Job Position @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'job_position')
-                        @slot('class', 'job_position')
                         @slot('name', 'job_position')
-                        @slot('id_error', 'job_position')
+                        @slot('options', $jobpositions)
+                        @slot('value', $employee->position->uuid)
                     @endcomponent
                 </div>
             </div>
@@ -413,10 +414,11 @@
                         Employee Status @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'employee_status')
                         @slot('name', 'employee_status')
-                        @slot('id_error', 'employee_status')
+                        @slot('options', $employmentstatuses)
+                        @slot('value', $employee->statuses->uuid)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -424,10 +426,11 @@
                         Department @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'department')
                         @slot('name', 'department')
-                        @slot('id_error', 'department')
+                        @slot('options', $departments)
+                        @slot('value', $employee->department->uuid)
                     @endcomponent
                 </div>
             </div>
@@ -437,10 +440,11 @@
                         Indirect Supervisor
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'indirect_supervisor')
                         @slot('name', 'indirect_supervisor')
-                        @slot('id_error', 'indirect_supervisor')
+                        @slot('options', $supervisors)
+                        @slot('value', $employee->indirect_supervisor->uuid)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -448,10 +452,11 @@
                         Supervisor 
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'supervisor')
                         @slot('name', 'supervisor')
-                        @slot('id_error', 'supervisor')
+                        @slot('options', $supervisors)
+                        @slot('value', $employee->supervisor->uuid)
                     @endcomponent
                 </div>
             </div>

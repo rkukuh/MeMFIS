@@ -293,7 +293,7 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
-     * One-to-One: An Employee have one Status.
+     * One-to-One: An Employee have one employement Status.
      *
      * This function will retrieve Status of a given Employee.
      * See: Status employee() method for the inverse
