@@ -66,15 +66,8 @@
                             <div class="row">
                                 <div class="col-sm-2 col-md-2 col-lg-2"></div>
                                 <div class="col-sm-10 col-md-10 col-lg-10 text-white">
-                                        @php
-                                        $name = null;
-                                        if($employee->last_name == $employee->first_name){
-                                            $name = $employee->first_name;
-                                        }else{
-                                            $name = $employee->first_name.' '.$employee->last_name;
-                                        }
-                                        @endphp
-                                <h1 class="display-5">{{ $name }}, <span>{{ $age }}</span></h1>
+                                      
+                                <h1 class="display-5">{{ $employee->full_name }}, <span>{{ $age }}</span></h1>
                                     <div class="row">
                                         <div class="col-sm-2 col-md-2 col-lg-2">
                                         @if (isset($employee->job_title->name))
