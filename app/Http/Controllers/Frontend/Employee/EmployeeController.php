@@ -83,7 +83,7 @@ class EmployeeController extends Controller
 
         $employee->addresses()->create([
             'address' => $request->address_line_1,
-            'type_id' => Type::where('of','address')->where('code','address_1')->first()->id,
+            'type_id' => Type::where('of','address')->where('code','primary')->first()->id,
             'created_at' => $time,
             'updated_at' => null
         ]);
@@ -91,7 +91,7 @@ class EmployeeController extends Controller
         if($request->address_line_2){
             $employee->addresses()->create([
                 'address' => $request->address_line_2,
-                'type_id' => Type::where('of','address')->where('code','address_2')->first()->id,
+                'type_id' => Type::where('of','address')->where('code','secondary')->first()->id,
                 'created_at' => $time,
                 'updated_at' => null
             ]);
@@ -278,7 +278,7 @@ class EmployeeController extends Controller
             $phones_history = null;
             $emails_history = null;
 
-            $addresses_history_data = $employee->addresses()->where('type_id',Type::where('code','address_1')->first()->id)->where('addresses.created_at',$ht->created_at)->whereNotNull('addresses.updated_at')->first();
+            $addresses_history_data = $employee->addresses()->where('type_id',Type::where('code','primary')->first()->id)->where('addresses.created_at',$ht->created_at)->whereNotNull('addresses.updated_at')->first();
             $phones_history_data = $employee->phones()->where('type_id',Type::where('code','mobile')->first()->id)->where('phones.created_at',$ht->created_at)->whereNotNull('phones.updated_at')->first();
             $emails_history_data = $employee->emails()->where('type_id',Type::where('code','email_1')->first()->id)->where('emails.created_at',$ht->created_at)->whereNotNull('emails.updated_at')->first();
 
@@ -361,7 +361,7 @@ class EmployeeController extends Controller
                 'nationality' => $ht->nationality,
                 'religion' => $ht->religion,
                 'martial_status' => $ht->marital_status,
-                'address_1' => $addresses_history,
+                'primary' => $addresses_history,
                 'city' => $ht->city,
                 'country' => $ht->country,
                 'mobile_phone' => $phones_history,
@@ -728,7 +728,7 @@ class EmployeeController extends Controller
             $phones_history = null;
             $emails_history = null;
 
-            $addresses_history_data = $employee->addresses()->where('type_id',Type::where('code','address_1')->first()->id)->where('addresses.created_at',$ht->created_at)->whereNotNull('addresses.updated_at')->first();
+            $addresses_history_data = $employee->addresses()->where('type_id',Type::where('code','primary')->first()->id)->where('addresses.created_at',$ht->created_at)->whereNotNull('addresses.updated_at')->first();
             $phones_history_data = $employee->phones()->where('type_id',Type::where('code','mobile')->first()->id)->where('phones.created_at',$ht->created_at)->whereNotNull('phones.updated_at')->first();
             $emails_history_data = $employee->emails()->where('type_id',Type::where('code','email_1')->first()->id)->where('emails.created_at',$ht->created_at)->whereNotNull('emails.updated_at')->first();
 
@@ -810,7 +810,7 @@ class EmployeeController extends Controller
                 'nationality' => $ht->nationality,
                 'religion' => $ht->religion,
                 'martial_status' => $ht->marital_status,
-                'address_1' => $addresses_history,
+                'primary' => $addresses_history,
                 'city' => $ht->city,
                 'country' => $ht->country,
                 'mobile_phone' => $phones_history,
@@ -1207,7 +1207,7 @@ class EmployeeController extends Controller
 
         $employee->addresses()->create([
             'address' => $request->address_line_1,
-            'type_id' => Type::where('of','address')->where('code','address_1')->first()->id,
+            'type_id' => Type::where('of','address')->where('code','primary')->first()->id,
             'created_at' => $time_update,
             'updated_at' => null
         ]);
@@ -1215,7 +1215,7 @@ class EmployeeController extends Controller
         if($request->address_line_2){
             $employee->addresses()->create([
                 'address' => $request->address_line_2,
-                'type_id' => Type::where('of','address')->where('code','address_2')->first()->id,
+                'type_id' => Type::where('of','address')->where('code','secondary')->first()->id,
                 'created_at' => $time_update,
                 'updated_at' => null
             ]);

@@ -184,7 +184,7 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('value', $addresses['address_1'])
+                        @slot('value', $addresses['primary'])
                         @slot('id', 'address_line_1')
                         @slot('name', 'address_line_1')
                         @slot('id_error', 'address_line_1')
@@ -196,7 +196,7 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('value', $addresses['address_2'])
+                        @slot('value', $addresses['secondary'])
                         @slot('id', 'address_line_2')
                         @slot('name', 'address_line_2')
                         @slot('id_error', 'address_line_2')

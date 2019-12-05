@@ -83,9 +83,9 @@
                                             <fieldset class="border p-2 mt-2">
                                                 <legend class="w-auto"><b>Contact Information Details</b></legend>
                                                 @php
-                                                $address_1 = null;
-                                                if(isset($addresses['address_1'])){
-                                                $address_1 = $addresses['address_1'];
+                                                $primary = null;
+                                                if(isset($addresses['primary'])){
+                                                $primary = $addresses['primary'];
                                                 }
                                                 @endphp
                                                 <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
@@ -95,7 +95,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Address Line 1</b></td>
-                                                    <td valign="top" align="center">{{ $address_1 }}</td>
+                                                    <td valign="top" align="center">{{ $primary }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>City</b></td>
@@ -283,7 +283,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td valign="top"><b>Address Line 1</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['address_1'] }}</td>
+                                                            <td valign="top" align="center">{{ $history[$i]['primary'] }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td valign="top"><b>City</b></td>

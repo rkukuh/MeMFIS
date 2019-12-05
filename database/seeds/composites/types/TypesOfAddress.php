@@ -37,14 +37,14 @@ class TypesOfAddress extends Seeder
         ]);
 
         Type::create([
-            'code' => 'address_1',
-            'name' => 'Address 1',
+            'code' => 'primary',
+            'name' => 'Primary',
             'of'   => 'address',
         ]);
 
         Type::create([
-            'code' => 'address_2',
-            'name' => 'Address 2',
+            'code' => 'secondary',
+            'name' => 'Secondary',
             'of'   => 'address',
         ]);
     }
