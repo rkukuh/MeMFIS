@@ -84,15 +84,7 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage-uuid.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/part-number.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/part-number.js') }}"></script>
 
     <script src="{{ asset('js/frontend/stock-monitoring/by-partnumber/index.js')}}"></script>
     <script src="{{ asset('js/frontend/stock-monitoring/by-storage/index.js')}}"></script>
-    <script>
-    // select-item
-    // $('.select-item').on('click',  function () {
-    //     alert('sss');
-    // };)
-    </script>
 @endpush

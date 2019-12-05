@@ -52,14 +52,14 @@ class JobCardDatatables extends Controller
                 $taskcard->status .= 'Released';
             }
             elseif($taskcard->is_rii == 1 and $taskcard->approvals->count()==1){
-                if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
+                // if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
                     $taskcard->status .= 'Waiting for RII';
-                }
+                // }
             }
             elseif($taskcard->is_rii == 0 and sizeof($taskcard->approvals)==1){
-                if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
+                // if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
                     $taskcard->status .= 'Released';
-                }
+                // }
             }
             elseif($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
                 $taskcard->status .= 'Closed';
