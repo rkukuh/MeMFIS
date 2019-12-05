@@ -33,6 +33,7 @@ use App\Models\LeaveType;
 use App\Models\Department;
 use App\Models\DefectCard;
 use App\Models\ItemRequest;
+use App\Models\Nationality;
 use App\Models\InventoryOut;
 use App\Models\Manufacturer;
 use App\Models\PurchaseOrder;
