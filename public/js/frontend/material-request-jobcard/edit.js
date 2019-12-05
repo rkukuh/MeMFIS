@@ -189,6 +189,7 @@ let MaterialRequestEdit = {
             });
 
             document.getElementById('qty_request').value = $(this).data('quantity');
+            $("qty_request").prop('max', $(this).data('quantity'));
             document.getElementById('uuid').value = $(this).data('uuid');
             let remark = $(this).data('remark');
 

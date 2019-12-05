@@ -129,10 +129,8 @@ class ItemRequestMaterialDatatables extends Controller
 
         if (!$jobcard) {
             $project = Project::where('uuid', $uuid)->first();
-            $items = json_decode($project->items);
-            foreach ($project->items as $item) {
-                //
-            }
+            // $items = json_decode($project->items);
+            dd(Project::find(9)->requests);
         } else {
             $items = $jobcard->jobcardable->materials;
         }
