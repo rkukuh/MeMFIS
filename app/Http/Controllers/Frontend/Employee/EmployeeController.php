@@ -17,11 +17,13 @@ use App\Models\Workshift;
 use App\Models\Department;
 use App\Models\Nationality;
 use App\Models\EmployeeProvisions;
+use Spatie\Permission\Models\Role;
 
 use DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Frontend\EmployeeStore;
 use App\Http\Requests\Frontend\EmployeeUpdate;
 
@@ -55,24 +57,26 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeStore $request)
     {
+        dd($request->all());
         $time = Carbon::now();
 
         $name = $request->first_name.' '.$request->last_name;
     
         $user = new User([
             'name' => ucwords(strtolower($name)),
-            'email' => !empty($request->email) ? strtolower($request->email) : str_slug(strtolower($request->nama)) . '@example.org',
+            'email' => !empty($request->email) ? strtolower($request->email) : str_slug(strtolower($name)) . '@example.org',
             'password' => Hash::make('employee'),
             'is_active' => 1
         ]);
 
         $user->save();
 
-        $role = Role::where('name', 'staff')->first();
+        // set to respected position? department? or job_title? to roles? or all of them? i think all of them
+        $role = Role::where('name', 'admin')->first();
 
         $user->assignRole($role);
 
-        $user->employee()->create($employee);
+        $user->employee()->create($request->all());
 
         $employee = $user->employee;
 
@@ -93,7 +97,6 @@ class EmployeeController extends Controller
                 'updated_at' => null
             ]);
         }
-
 
         if($request->home_phone){
         $employee->phones()->create([
@@ -157,6 +160,11 @@ class EmployeeController extends Controller
         if($request->document){
             $employee->addMedia($request->document)->toMediaCollection('id_card');
         }
+
+        $employee->nationalities()->attach($request->nationality_id, [
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ]);
         
         // TODO: Return error message as JSON
         return response()->json($employee);
@@ -607,17 +615,17 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        dd($employee);
+        // dd($employee->gender->uuid);
         /** Master data for populating select2 edit */
-            $genders = Type::ofGender()->select('name', 'uuid')->where('name','!=', 'All')->get();
-            $nationalities = Nationality::select('nationality', 'uuid')->get();
-            $religions = Religion::select('name', 'uuid')->get();
-            $jobtitles = JobTitle::select('name', 'uuid')->get();
-            $maritalstatuses = Status::ofMarital()->select('name', 'uuid')->get();
-            $jobpositions = Position::select('name', 'uuid')->get();
-            $employmentstatuses = Status::ofEmployment()->select('name', 'uuid')->get();
-            $departments = Department::select('name', 'uuid')->get();
-            $supervisors = Employee::select('first_name', 'uuid')->get();
+            $genders = Type::ofGender()->where('name','!=', 'All')->pluck('name', 'uuid');
+            $nationalities = Nationality::pluck('nationality', 'uuid');
+            $religions = Religion::pluck('name', 'uuid');
+            $jobtitles = JobTitle::pluck('name', 'uuid');
+            $maritalstatuses = Status::ofMarital()->pluck('name', 'uuid');
+            $jobpositions = Position::pluck('name', 'uuid');
+            $employmentstatuses = Status::ofEmployment()->pluck('name', 'uuid');
+            $departments = Department::pluck('name', 'uuid');
+            $supervisors = Employee::pluck('first_name', 'uuid');
         /** End master data for populating select2 edit */
 
         //Basic Information
@@ -785,7 +793,6 @@ class EmployeeController extends Controller
             $history[$i] = [
                 'created_at' => $ht->created_at,
                 'updated_at' => $ht->updated_at,
-                'name' => $name,
                 'code' => $ht->code,
                 'dobdata' => $ht->dob.' & '.$ht->dob_place,
                 'gender' => $gender,
@@ -1015,15 +1022,14 @@ class EmployeeController extends Controller
         
         $data_workshift_history = $employee->workshifts()->whereNotNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->orderBy('created_at','DESC')->get();
 
-        $l = 0;
-        foreach($data_workshift_history as $dwh){
-            $workshift_history[$l] = [
+        foreach($data_workshift_history as $key => $dwh){
+            $workshift_history[$key] = [
                 'created_at' => $dwh->created_at,
                 'updated_at' => $dwh->updated_at,
-                'name' => Workshift::find($dwh->workshift_id)->name
+                'name' => Workshift::find($dwh->id)->name
             ];
 
-            $l++;
+            $key;
         }
 
         //EMPLOYEE ACCOUNT
@@ -1078,7 +1084,15 @@ class EmployeeController extends Controller
             $photo_profile['active'] = $employee->getFirstMedia('photo_profile_active')->getUrl(); 
         }
 
-        dd($employee);
+        // foreach($nationalities  as $key => $option){
+        //      dump($key) ;
+        //      dd($option) ;
+        // }
+        // dd($nationalities);
+        dd($employee->nationalities);
+
+        // dd( $nationalities[0]->uuid == $employee->nationalities->first()->uuid );
+
         return view('frontend.employee.employee.edit',[
             'employee' => $employee,
             'age' => $age,

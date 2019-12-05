@@ -5,10 +5,13 @@ namespace App\Http\Requests\Frontend;
 use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\Status;
+use App\Models\Country;
 use App\Models\Employee;
 use App\Models\Position;
+use App\Models\Religion;
 use App\Models\JobTitle;
 use App\Models\Department;
+use App\Models\Nationality;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -80,6 +83,7 @@ class EmployeeStore extends FormRequest
                 'religion_id' => optional(Religion::where('uuid', $this->religion)->first())->id,
                 'marital_id' => optional(Status::ofMarital()->where('uuid', $this->marital_status)->first())->id,
                 'country_id' => optional(Country::where('uuid', $this->marital_status)->first())->id,
+                'nationality_id' => optional(Nationality::where('uuid', $this->nationality)->first())->id,
                 ]);
         });
     }
