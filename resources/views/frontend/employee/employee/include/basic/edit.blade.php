@@ -153,7 +153,7 @@
                         @slot('id', 'religion')
                         @slot('name', 'religion')
                         @slot('options', $religions)
-                        @slot('value', $employee->religion->first()->uuid)
+                        @slot('value', $employee->religion->uuid)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -161,10 +161,11 @@
                         Marital Status @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'marital_status')
                         @slot('name', 'marital_status')
-                        @slot('id_error', 'marital_status')
+                        @slot('options', $maritalstatuses)
+                        @slot('value', $employee->marital_status->uuid)
                     @endcomponent
                 </div>
             </div>
@@ -182,19 +183,8 @@
                         Address Line 1 @include('frontend.common.label.required')
                     </label>
 
-                    @php
-                        $address_1 = null;
-                        if(isset($addresses['address_1'])){
-                            $address_1 = $addresses['address_1'];
-                        }
-
-                        $address_2 = null;
-                        if(isset($addresses['address_2'])){
-                            $address_2 = $addresses['address_1'];
-                        }
-                    @endphp
                     @component('frontend.common.input.text')
-                        @slot('value', $address_1)
+                        @slot('value', $addresses['address_1'])
                         @slot('id', 'address_line_1')
                         @slot('name', 'address_line_1')
                         @slot('id_error', 'address_line_1')
@@ -206,7 +196,7 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('value', $address_2)
+                        @slot('value', $addresses['address_2'])
                         @slot('id', 'address_line_2')
                         @slot('name', 'address_line_2')
                         @slot('id_error', 'address_line_2')
