@@ -637,6 +637,7 @@ class EmployeeController extends Controller
             $employmentstatuses = Status::ofEmployment()->pluck('name', 'uuid');
             $departments = Department::pluck('name', 'uuid');
             $supervisors = Employee::pluck('first_name', 'uuid');
+            $workshifts = Workshift::pluck('name', 'uuid');
         /** End master data for populating select2 edit */
 
         //Basic Information
@@ -1135,6 +1136,7 @@ class EmployeeController extends Controller
             'employmentstatuses' => $employmentstatuses,
             'departments' => $departments,
             'supervisors' => $supervisors,
+            'workshifts' => $workshifts,
 
         ]);
     }
