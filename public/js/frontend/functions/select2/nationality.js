@@ -1,6 +1,6 @@
 let NationaltitySelect2 = {
     init: function () {
-        $('#nationality, #nationality_validate').select2({
+        $('select[name="nationality"], #nationality_validate').select2({
             placeholder: 'Select a Nationality',
             tags: true
         });

@@ -1,6 +1,6 @@
 let SupervisorSelect2 = {
     init: function () {
-        $('#supervisor, #supervisor_validate').select2({
+        $('select[name="supervisor"], #supervisor_validate').select2({
             placeholder: 'Select a Supervisor'
         });
     }

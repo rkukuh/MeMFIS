@@ -1,6 +1,6 @@
 let JobTitleSelect2 = {
     init: function () {
-        $('#job_title, #job_title_validate').select2({
+        $('select[name="job_title"], #job_title_validate').select2({
             placeholder: 'Select a Job Title'
         });
     }

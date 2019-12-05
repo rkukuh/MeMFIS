@@ -1,6 +1,6 @@
 let DepartmentSelect2 = {
     init: function () {
-        $('#department, #department_validate').select2({
+        $('select[name="department"], #department_validate').select2({
             placeholder: 'Select a Department'
         });
     }

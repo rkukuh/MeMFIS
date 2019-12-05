@@ -1,6 +1,6 @@
 let MaritalStatusSelect2 = {
     init: function () {
-        $('#marital_status, #marital_status_validate').select2({
+        $('select[name="marital_status"], #marital_status_validate').select2({
             placeholder: 'Select a Marital Status'
         });
     }
