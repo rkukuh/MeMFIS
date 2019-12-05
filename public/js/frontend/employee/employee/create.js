@@ -23,7 +23,7 @@ let Employee = {
             let address_line_2 = $('input[name="address_line_2"]').val();
             let country = $('select[name="country"]').val();
 
-            let city = $('input[name="first_name"]').val();
+            let city = $('input[name="city"]').val();
             let zip_code = $('input[name="zip_code"]').val();
             let home_phone = $('input[name="home_phone"]').val();
             let mobile_phone = $('input[name="mobile_phone"]').val();
@@ -74,11 +74,6 @@ let Employee = {
                 formData.append('indirect_supervisor', indirect_supervisor);
                 formData.append('supervisor', supervisor);
 
-            // for (let value of formData.values()) {
-            //     console.log(value); 
-            // }
-
-            // return ;
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
