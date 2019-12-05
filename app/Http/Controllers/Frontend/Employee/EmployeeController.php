@@ -57,7 +57,6 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeStore $request)
     {
-        dd($request->all());
         $time = Carbon::now();
 
         $name = $request->first_name.' '.$request->last_name;
@@ -161,10 +160,22 @@ class EmployeeController extends Controller
             $employee->addMedia($request->document)->toMediaCollection('id_card');
         }
 
-        $employee->nationalities()->attach($request->nationality_id, [
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-            ]);
+        if($request->nationality_id){
+            $employee->nationalities()->attach($request->nationality_id, [
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                ]);
+        }else{
+            $country = optional(Country::where('id', $request->nationality)->first())->id;
+            $nationality = Nationality::create([
+                'nationality' => $request->nationality,
+                'country' => $country
+                ]);
+            $employee->nationalities()->attach($nationality->id, [
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                ]);
+        }
         
         // TODO: Return error message as JSON
         return response()->json($employee);
@@ -1089,7 +1100,7 @@ class EmployeeController extends Controller
         //      dd($option) ;
         // }
         // dd($nationalities);
-        dd($employee->nationalities);
+        // dd($employee->religion);
 
         // dd( $nationalities[0]->uuid == $employee->nationalities->first()->uuid );
 

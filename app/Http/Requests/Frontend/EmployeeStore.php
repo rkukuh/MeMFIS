@@ -82,7 +82,7 @@ class EmployeeStore extends FormRequest
                 'gender_id' => optional(Type::ofGender()->where('uuid', $this->gender)->first())->id,
                 'religion_id' => optional(Religion::where('uuid', $this->religion)->first())->id,
                 'marital_id' => optional(Status::ofMarital()->where('uuid', $this->marital_status)->first())->id,
-                'country_id' => optional(Country::where('uuid', $this->marital_status)->first())->id,
+                'country_id' => optional(Country::where('uuid', $this->country)->first())->id,
                 'nationality_id' => optional(Nationality::where('uuid', $this->nationality)->first())->id,
                 ]);
         });

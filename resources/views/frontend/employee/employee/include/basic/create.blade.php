@@ -182,7 +182,7 @@
                         Country @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.text')
+                    @component('frontend.common.input.select2')
                         @slot('id', 'country')
                         @slot('name', 'country')
                         @slot('id_error', 'country')
@@ -425,6 +425,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/department.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/indirect-supervisor.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/supervisor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/country.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/marital-status.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/religion.js') }}"></script>
@@ -436,6 +437,7 @@
     <script src="{{ asset('js/frontend/functions/select2/department.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/indirect-supervisor.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/supervisor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/country.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>

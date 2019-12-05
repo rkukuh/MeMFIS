@@ -20,7 +20,7 @@ let Employee = {
             let religion = $('select[name="religion"]').val();
             let marital_status = $('select[name="marital_status"]').val();
             let address_line_1 = $('input[name="address_line_1"]').val();
-            let country = $('input[name="country"]').val();
+            let country = $('select[name="country"]').val();
 
             let city = $('input[name="first_name"]').val();
             let zip_code = $('input[name="zip_code"]').val();
@@ -175,7 +175,7 @@ let Employee = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/employee/'+data.uuid+'/edit';n
+                        // window.location.href = '/employee/'+data.uuid+'/edit';
 
                     }
                 }
