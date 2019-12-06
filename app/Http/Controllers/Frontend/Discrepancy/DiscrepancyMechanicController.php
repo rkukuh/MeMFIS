@@ -127,12 +127,13 @@ class DiscrepancyMechanicController extends Controller
             $propose_correction_text =  $defectcard->pivot->propose_correction_text;
         }
 
+        $zone_discrepancies = array();
         foreach($discrepancy->zones as $i => $zone_taskcard){
             $zone_discrepancies[$i] =  $zone_taskcard->id;
         }
 
         $skill = Type::ofTaskCardSkill()->get();
-        
+
         return view('frontend.discrepancy.mechanic.show', [
             'discrepancy' => $discrepancy,
             'skills' => $skill,
@@ -161,12 +162,13 @@ class DiscrepancyMechanicController extends Controller
             $propose_correction_text =  $defectcard->pivot->propose_correction_text;
         }
 
+        $zone_discrepancies = array();
         if(sizeof($discrepancy->zones)){
             foreach($discrepancy->zones as $i => $zone_taskcard){
                 $zone_discrepancies[$i] =  $zone_taskcard->id;
             }
         }
-        
+
         $skill = Type::ofTaskCardSkill()->get();
 
         return view('frontend.discrepancy.mechanic.edit', [
