@@ -81,10 +81,10 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $tool)
+    public function show(Service $service)
     {
-        return view('frontend.service.tool.show', [
-            'item' => $tool,
+        return view('frontend.service.show', [
+            'item' => $service,
             'units' => $this->units,
             'categories' => $this->categories,
             'manufacturers' => $this->manufacturers,
@@ -98,15 +98,15 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function edit(Service $tool)
+    public function edit(Service $service)
     {
         $tags = array();
-        foreach($tool->tags as $i => $service_tag){
+        foreach($service->tags as $i => $service_tag){
             $tags[$i] =  $service_tag->name;
         }
 
-        return view('frontend.service.tool.edit', [
-            'item' => $tool,
+        return view('frontend.service.edit', [
+            'item' => $service,
             'item_tags' => $tags,
             'tags' => $this->tags,
             'units' => $this->units,
@@ -122,15 +122,16 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(ServiceUpdate $request, Service $tool)
+    public function update(ServiceUpdate $request, Service $service)
     {
         $tags = [];
-        foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags, 'item'));}
-        if ($tool->update($request->all())) {
-            $tool->categories()->sync($request->category);
-            $tool->syncTags($tags);
+        if($request->selectedtags){
+            foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags, 'service'));}
+        }
+        if ($service->update($request->all())) {
+            $service->syncTags($tags);
 
-            return response()->json($tool);
+            return response()->json($service);
         }
 
         // TODO: Return error message as JSON
@@ -143,10 +144,10 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $tool)
+    public function destroy(Service $service)
     {
-        $tool->delete();
+        $service->delete();
 
-        return response()->json($tool);
+        return response()->json($service);
     }
 }

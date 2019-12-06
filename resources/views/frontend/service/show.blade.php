@@ -159,18 +159,6 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                                @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'is_stock')
-                                                    @slot('name', 'is_stock')
-                                                    @slot('text', 'Stockable?')
-                                                    @slot('disabled', 'disabled')
-
-                                                    @if ($item->is_stock == 1)
-                                                        @slot('checked', 'checked')
-                                                    @endif
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <div class="checkbox">
                                                     @component('frontend.common.input.checkbox')
                                                         @slot('id', 'is_ppn')

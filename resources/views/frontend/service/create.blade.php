@@ -244,7 +244,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/manufacturer.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-service.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/category-material.js') }}"></script>

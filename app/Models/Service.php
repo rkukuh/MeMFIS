@@ -79,6 +79,18 @@ class Service extends MemfisModel implements HasMedia
         return $this->morphMany(Price::class, 'priceable');
     }
 
+    /**
+     * One-Way 1-1: An service must have initial unit.
+     *
+     * This function will get a unit of a given service.
+     *
+     * @return mixed
+     */
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
+
     /***************************************** ACCESSOR ******************************************/
 
     /**

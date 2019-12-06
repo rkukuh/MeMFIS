@@ -13,13 +13,13 @@ let Item = {
                          }
                      ],
             columns: [
-                {data: 'code', name: 'code',sWidth:'15%',render:function(data, type, row){
+                {data: 'code', name: 'code',sWidth:'20%',render:function(data, type, row){
                     return "<a href='/service/"+ row.uuid +"'>" + row.code + "</a>"
                 }},
-                {data: 'name', name: 'name',sWidth:'15%'},
+                {data: 'name', name: 'name',sWidth:'20%'},
                 {data: 'caterory', name: 'caterory',sWidth:'15%','searchable': false ,render:function(data, type, row){
                     // return row.categories[0].name //model
-                    return row.category_name //query builder
+                    return 'Service' //query builder
                 }},
                 {data: 'unit.name', name: 'unit.name',sWidth:'10%','searchable': false ,render:function(data, type, row){
                     if (row.is_ppn === 1) {
@@ -28,23 +28,6 @@ let Item = {
                     else {
                         return '<span class="m-badge m-badge--warning m-badge--wide">No</span>'
                     }
-                }},
-                {data: 'unit.name', name: 'unit.name',sWidth:'10%','searchable': false ,render:function(data, type, row){
-                    if (row.is_stock) {
-                        var e = {
-                            1: {
-                                title: "Yes",
-                                class: "m-badge--brand"
-                            },
-                            0: {
-                                title: "No",
-                                class: " m-badge--warning"
-                            }
-                        };
-
-                        return '<span class="m-badge ' + e[row.is_stock].class + ' m-badge--wide">' + e[row.is_stock].title + "</span>"
-                        }
-                    return ''
                 }},
                 {data: 'name', name: 'name',sWidth:'15%','searchable': false },
                 {data: '', name: '',sWidth:'10%','searchable': false ,render:function(data, type, row){

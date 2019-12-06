@@ -250,12 +250,6 @@ let Item = {
             }
 
 
-            if (document.getElementById("is_stock").checked) {
-                is_stock = 1;
-            } else {
-                is_stock = 0;
-            }
-
             if (document.getElementById("is_ppn").checked) {
                 is_ppn = 1;
             } else {
@@ -268,7 +262,6 @@ let Item = {
             let description = $('#description').val();
             let barcode = $('input[name=barcode]').val();
             let unit_id = $('#unit_id').val();
-            let category = $('#category').val();
             let manufacturer_id = $('#manufacturer_id').val();
             let ppn_amount = $('input[name=ppn_amount]').val();
             let account_code = $('#account_code').val();
@@ -278,16 +271,14 @@ let Item = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'PUT',
-                url: '/item/' + item_uuid + '/',
+                url: '/service/' + item_uuid + '/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     code: code,
                     name: name,
                     description: description,
                     unit_id: unit_id,
-                    category: category,
                     manufacturer_id: manufacturer_id,
-                    is_stock: is_stock,
                     is_ppn: is_ppn,
                     ppn_amount: ppn_amount,
                     account_code: account_code,

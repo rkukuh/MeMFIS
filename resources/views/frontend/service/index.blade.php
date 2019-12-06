@@ -77,7 +77,6 @@
                                                     <th>Name</th>
                                                     <th>Category</th>
                                                     <th>Taxable?</th>
-                                                    <th>Stockable?</th>
                                                     <th>Account Code</th>
                                                     <th></th>
                                             </tr>

@@ -101,7 +101,7 @@ let Item = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/service/' + data.uuid + '/edit';
+                        window.location.href = '/service/' + data.uuid + '/edit';
                     }
                 }
             });

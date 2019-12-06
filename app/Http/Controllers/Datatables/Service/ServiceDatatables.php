@@ -28,12 +28,8 @@ class ServiceDatatables extends Controller
 
         //6-10s
         $items =  DB::table('services')
-                    ->join('categorizables', 'categorizables.categorizable_id', '=', 'services.id')
-                    ->join('categories','categories.id', '=', 'categorizables.category_id')
-                    ->where('categories.name','tool')
-                    ->where('categorizables.categorizable_type','App\Models\Item')
                     ->WhereNull('services.deleted_at')
-                    ->select('services.*', 'categories.name as category_name')
+                    ->select('services.*')
                     ->get();
 
         return Datatables::of($items)->make();
