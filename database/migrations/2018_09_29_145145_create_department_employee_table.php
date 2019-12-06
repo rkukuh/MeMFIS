@@ -18,6 +18,9 @@ class CreateDepartmentEmployeeTable extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->timestamp('joined_at')->nullable();
             $table->timestamp('left_at')->nullable();
+            $table->timestamp('maximum_overtime_period')->nullable();
+            $table->timestamp('overtime_thershold')->nullable();
+            $table->double('overtime_allowance')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
