@@ -207,8 +207,25 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function units()
+    public function unitItem()
     {
+        $type = Type::ofUnit()->where('code','service')->first()->id;
+        $units = Unit::where('type_id','<>',$type)->selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
+            ->pluck('name', 'id');
+
+        return json_encode($units);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function unitService()
+    {
+        // $type = Type::ofUnit()->where('code','service')->first()->id;
+        // $units = Unit::where('type_id',$type)->selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
         $units = Unit::selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
             ->pluck('name', 'id');
 
