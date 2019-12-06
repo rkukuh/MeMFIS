@@ -55,13 +55,7 @@ class Department extends MemfisModel
      */
     public function employees()
     {
-        return $this->hasMany(Employee::class)->withPivot(
-            'joined_at',
-            'left_at',
-            'maximum_overtime_period',
-            'overtime_thershold',
-            'overtime_allowance'
-        )->withTimestamps();
+        return $this->hasMany(Employee::class);
     }
 
 
