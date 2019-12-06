@@ -141,7 +141,7 @@
                                             </label>
 
                                             <select id="zone" name="zone" class="form-control m-select2" multiple style="width:100%">
-                                                @if (sizeOf($discrepancy->zones) == 0)
+                                                @if (sizeOf(toArray($discrepancy->zones)) == 0)
                                                     @foreach ($zones as $zone)
                                                         <option value="{{ $zone->name }}">
                                                             {{ $zone->name }}
