@@ -61,7 +61,7 @@
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create')
                                             @slot('text', 'Service')
-                                            @slot('href', route('frontend.item.create') )
+                                            @slot('href', route('frontend.service.create') )
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>

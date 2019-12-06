@@ -19,7 +19,6 @@ class Service extends MemfisModel implements HasMedia
         'name',
         'description',
         'unit_id',
-        'manufacturer_id',
         'barcode',
         'is_ppn',
         'ppn_amount',
@@ -53,6 +52,31 @@ class Service extends MemfisModel implements HasMedia
     public function categories()
     {
         return $this->morphToMany(Category::class, 'categorizable');
+    }
+
+    /**
+     * One-to-Many: A manufacturer can create zero or many items.
+     *
+     * This function will get a manufacturer of an item.
+     *
+     * @return mixed
+     */
+    public function manufacturer()
+    {
+        return $this->belongsTo(Manufacturer::class);
+    }
+
+    /**
+     * Polymorphic: An item can have zero or many prices.
+     *
+     * This function will get all of the item's prices.
+     * See: Price's priceable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function prices()
+    {
+        return $this->morphMany(Price::class, 'priceable');
     }
 
     /***************************************** ACCESSOR ******************************************/

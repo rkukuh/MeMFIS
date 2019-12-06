@@ -13,7 +13,8 @@ Route::name('component.')->group(function () {
 
     ], function () {
 
-        Route::get('get-tags', 'FillComboxController@tags')->name('get-tags');
+        Route::get('get-tags', 'FillComboxController@tagItem')->name('get-tags');
+        Route::get('get-tags-service', 'FillComboxController@tagService')->name('get-tags-service');
         Route::get('get-tools', 'FillComboxController@tool')->name('get-tool');
         Route::get('get-zones', 'FillComboxController@zone')->name('get-zones');
         Route::get('get-items', 'FillComboxController@item')->name('get-items');
