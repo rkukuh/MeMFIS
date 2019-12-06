@@ -11,10 +11,10 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('value', $employee->code)
                         @slot('id', 'code')
                         @slot('name', 'code')
                         @slot('id_error', 'code')
+                        @slot('value', $employee->code)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -26,8 +26,9 @@
 
                             @component('frontend.common.input.datepicker')
                                 @slot('id', 'date')
-                                @slot('value', $employee->dob)
                                 @slot('name', 'dob')
+                                @slot('id_error', 'dob')
+                                @slot('value', $employee->dob)
                             @endcomponent
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -36,10 +37,10 @@
                             </label>
         
                             @component('frontend.common.input.text')
+                                @slot('id', 'dob_place')
+                                @slot('name', 'dob_place')
+                                @slot('id_error', 'dob_place')
                                 @slot('value', $employee->dob_place)
-                                @slot('id', 'birthplace')
-                                @slot('name', 'birthplace')
-                                @slot('id_error', 'birthplace')
                             @endcomponent
                         </div>
                     </div>
@@ -52,10 +53,10 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('value', $employee->first_name)
                         @slot('id', 'first_name')
                         @slot('name', 'first_name')
                         @slot('id_error', 'first_name')
+                        @slot('value', $employee->first_name)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -64,10 +65,10 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('value', $employee->last_name)
                         @slot('id', 'last_name')
                         @slot('name', 'last_name')
                         @slot('id_error', 'last_name')
+                        @slot('value', $employee->last_name)
                     @endcomponent
                 </div>
             </div>
@@ -107,7 +108,7 @@
                             @component('frontend.common.input.upload')
                                 @slot('label', 'document')
                                 @slot('name', 'document')
-                                @slot('id','id_card_photo')
+                                @slot('id','document')
                                 @slot('text', $files)
                                 @slot('help_text','File must be image or not be stored!')
                             @endcomponent
@@ -213,11 +214,15 @@
                         Country @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.text')
-                        @slot('value', $employee->country->name)
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'country')
                         @slot('name', 'country')
-                        @slot('id_error', 'country')
+                        @slot('options', $countries)
+                        @if($employee->country)
+                            @slot('value', $employee->country->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -325,7 +330,7 @@
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
-                        Primary @include('frontend.common.label.required')
+                        Primary Email @include('frontend.common.label.required')
                     </label>
 
                     @php
@@ -341,22 +346,22 @@
 
                     @endphp
                     @component('frontend.common.input.email')
+                        @slot('id', 'primary_email')
+                        @slot('name', 'primary_email')
+                        @slot('id_error', 'primary_email')
                         @slot('value',$primary)
-                        @slot('id', 'primary')
-                        @slot('name', 'primary')
-                        @slot('id_error', 'primary')
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
-                        Secondary
+                        Secondary Email
                     </label>
 
                     @component('frontend.common.input.email')
+                        @slot('id', 'secondary_email')
+                        @slot('name', 'secondary_email')
+                        @slot('id_error', 'secondary_email')
                         @slot('value', $secondary)
-                        @slot('id', 'secondary')
-                        @slot('name', 'secondary')
-                        @slot('id_error', 'secondary')
                     @endcomponent
                 </div>
             </div>
@@ -377,10 +382,10 @@
                             </label>
         
                             @component('frontend.common.input.datepicker')
-                                @slot('value', $employee->joined_date)
                                 @slot('id', 'period_start_date')
                                 @slot('name', 'joined_date')
                                 @slot('id_error','joined_date')
+                                @slot('value', $employee->joined_date)
                             @endcomponent
                         </div>
                     </div>
@@ -535,6 +540,7 @@
     <script src="{{ asset('js/frontend/functions/select2/department.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/indirect-supervisor.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/supervisor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/country.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/period-start.js')}}"></script>

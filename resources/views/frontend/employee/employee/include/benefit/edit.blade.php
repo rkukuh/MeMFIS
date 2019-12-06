@@ -1131,33 +1131,33 @@
 
                 @if ($button_parameter == 'create')
                     @component('frontend.common.buttons.submit')
-                    @slot('type','button')
-                    @slot('id', 'create-benefit')
-                    @slot('class', 'create-benefit')
+                        @slot('type','button')
+                        @slot('id', 'create-benefit')
+                        @slot('class', 'create-benefit')
                     @endcomponent 
 
                     @include('frontend.common.buttons.reset')
                 @elseif ($button_parameter == 'approvals')
                     @component('frontend.common.buttons.submit')     
-                    @slot('type','button')
-                    @slot('text','Approve')
-                    @slot('icon','fa-check')
-                    @slot('id', 'approve_benefit')
-                    @slot('class', 'approve_benefit')
+                        @slot('type','button')
+                        @slot('text','Approve')
+                        @slot('icon','fa-check')
+                        @slot('id', 'approve_benefit')
+                        @slot('class', 'approve_benefit')
                     @endcomponent
 
                     @component('frontend.common.buttons.submit')     
-                    @slot('type','button')
-                    @slot('text','Reject')
-                    @slot('id', 'reject_benefit')
-                    @slot('icon','fa fa-times-circle')
-                    @slot('class', 'bg-warning text-dark')
+                        @slot('type','button')
+                        @slot('text','Reject')
+                        @slot('id', 'reject_benefit')
+                        @slot('icon','fa fa-times-circle')
+                        @slot('class', 'bg-warning text-dark')
                     @endcomponent
                 @else
                     @component('frontend.common.buttons.submit')
-                    @slot('type','button')
-                    @slot('id', 'edit-benefit')
-                    @slot('class', 'edit-benefit')
+                        @slot('type','button')
+                        @slot('id', 'edit-benefit')
+                        @slot('class', 'edit-benefit')
                     @endcomponent
 
                     @include('frontend.common.buttons.reset')

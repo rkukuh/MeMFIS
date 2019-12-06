@@ -109,7 +109,7 @@
                                                         </label>
                         
                                                         @component('frontend.common.input.number')
-                                                            @slot('value', $bpjs->min_employee)
+                                                            @slot('value', $bpjs->employee_min_value)
                                                             @slot('id', 'min_employee')
                                                             @slot('name', 'min_employee')
                                                             @slot('id_error', 'min_employee')
@@ -122,7 +122,7 @@
                                                         </label>
                         
                                                         @component('frontend.common.input.number')
-                                                            @slot('value', $bpjs->max_employee)
+                                                            @slot('value', $bpjs->employee_max_value)
                                                             @slot('id', 'max_employee')
                                                             @slot('name', 'max_employee')
                                                             @slot('id_error', 'max_employee')
@@ -158,7 +158,7 @@
                                                         </label>
                         
                                                         @component('frontend.common.input.number')
-                                                            @slot('value', $bpjs->min_company)
+                                                            @slot('value', $bpjs->company_min_value)
                                                             @slot('id', 'min_company')
                                                             @slot('name', 'min_company')
                                                             @slot('id_error', 'min_company')
@@ -171,7 +171,7 @@
                                                         </label>
                         
                                                         @component('frontend.common.input.number')
-                                                            @slot('value', $bpjs->max_company)
+                                                            @slot('value', $bpjs->company_max_value)
                                                             @slot('id', 'max_company')
                                                             @slot('name', 'max_company')
                                                             @slot('id_error', 'max_company')
