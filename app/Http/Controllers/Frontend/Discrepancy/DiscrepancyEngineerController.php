@@ -136,6 +136,7 @@ class DiscrepancyEngineerController extends Controller
             $propose_correction_text =  $defectcard->pivot->propose_correction_text;
         }
 
+        $zone_discrepancies = array();
         foreach($discrepancy->zones as $i => $zone_taskcard){
             $zone_discrepancies[$i] =  $zone_taskcard->id;
         }
@@ -167,6 +168,7 @@ class DiscrepancyEngineerController extends Controller
             $propose_correction_text =  $defectcard->pivot->propose_correction_text;
         }
 
+        $zone_discrepancies = array();
         foreach($discrepancy->zones as $i => $zone_taskcard){
             $zone_discrepancies[$i] =  $zone_taskcard->id;
         }
@@ -255,7 +257,7 @@ class DiscrepancyEngineerController extends Controller
                 'is_approved' => 1
             ]));
         }
-        
+
 
         return response()->json($discrepancy);
     }
