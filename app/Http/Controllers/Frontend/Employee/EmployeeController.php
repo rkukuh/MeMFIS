@@ -8,6 +8,7 @@ use App\Models\Bank;
 use App\Models\Type;
 use App\Models\BPJS;
 use App\Models\Status;
+use App\Models\Country;
 use App\Models\Benefit;
 use App\Models\Employee;
 use App\Models\Position;
@@ -638,6 +639,7 @@ class EmployeeController extends Controller
             $departments = Department::pluck('name', 'uuid');
             $supervisors = Employee::pluck('first_name', 'uuid');
             $workshifts = Workshift::pluck('name', 'uuid');
+            $countries = Country::pluck('name', 'uuid');
         /** End master data for populating select2 edit */
 
         //Basic Information
@@ -752,12 +754,32 @@ class EmployeeController extends Controller
                 $name = $ht->first_name.' '.$ht->last_name;
             }
 
-            if($ht->gender == 'f'){
-                $gender = 'Female';
-            }else if($ht->gender == 'm'){
-                $gender = 'Male';
+            $temp = json_decode($ht->religion);
+            if(isset($temp)){
+                $religion = json_decode($ht->religion)->name;
+            }else{
+                $religion = null;
+            }
+
+            $temp = json_decode($ht->gender);
+            if(isset($temp)){
+                $gender = json_decode($ht->gender)->name;
             }else{
                 $gender = null;
+            }
+
+            $temp = json_decode($ht->country);
+            if(isset($temp)){
+                $country = json_decode($ht->country)->name;
+            }else{
+                $country = null;
+            }
+
+            $temp = json_decode($ht->marital_status);
+            if(isset($temp)){
+                $marital_status = json_decode($ht->marital_status)->name;
+            }else{
+                $marital_status = null;
             }
 
             $job_title = null;
@@ -805,15 +827,16 @@ class EmployeeController extends Controller
             $history[$i] = [
                 'created_at' => $ht->created_at,
                 'updated_at' => $ht->updated_at,
+                'name' => $name,
                 'code' => $ht->code,
                 'dobdata' => $ht->dob.' & '.$ht->dob_place,
                 'gender' => $gender,
                 'nationality' => $ht->nationality,
-                'religion' => $ht->religion,
-                'martial_status' => $ht->marital_status,
+                'religion' => $religion,
+                'martial_status' => $marital_status,
                 'primary' => $addresses_history,
                 'city' => $ht->city,
-                'country' => $ht->country,
+                'country' => $country,
                 'mobile_phone' => $phones_history,
                 'primary' => $emails_history,
                 'job_title' => $job_title,
@@ -1096,15 +1119,8 @@ class EmployeeController extends Controller
             $photo_profile['active'] = $employee->getFirstMedia('photo_profile_active')->getUrl(); 
         }
 
-        // foreach($nationalities  as $key => $option){
-        //      dump($key) ;
-        //      dd($option) ;
-        // }
-        // dd($nationalities);
-        // dd($employee->religion);
 
-        // dd( $nationalities[0]->uuid == $employee->nationalities->first()->uuid );
-
+        // dd($history);
         return view('frontend.employee.employee.edit',[
             'employee' => $employee,
             'age' => $age,
@@ -1137,7 +1153,7 @@ class EmployeeController extends Controller
             'departments' => $departments,
             'supervisors' => $supervisors,
             'workshifts' => $workshifts,
-
+            'countries' => $countries,
         ]);
     }
 
@@ -1150,20 +1166,6 @@ class EmployeeController extends Controller
      */
     public function update(EmployeeUpdate $request, Employee $employee)
     {
-        $job_title = JobTitle::where('uuid', $request->job_title)->first()->id;
-        $position = Position::where('uuid', $request->job_position)->first()->id;
-        $statuses = Status::where('uuid', $request->employee_status)->first()->id;
-        $department = Department::where('uuid', $request->department)->first()->id;
-
-        $indirect = null;
-        if($request->indirect_supervisor){
-            $indirect = Employee::where('uuid', $request->indirect_supervisor)->first()->id;   
-        }
-
-        $supervisor = null;
-        if($request->supervisor){
-        $supervisor = Employee::where('uuid', $request->supervisor)->first()->id;
-        }
 
         $time_update = Carbon::now();
 

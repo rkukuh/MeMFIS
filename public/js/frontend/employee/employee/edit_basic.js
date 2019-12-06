@@ -2,10 +2,7 @@ let Employee_edit_basic = {
     init: function() {
         $("#id_card_photo").attr("accept", "image/*");
 
-        let update_basic = $(".footer").on(
-            "click",
-            ".edit-basic-information",
-            function() {
+        let update_basic = $(".footer").on("click", ".edit-basic-information", function() {
                 let code = $("input[name=code]").val();
                 let code_uppercase = code.toUpperCase();
                 let job_title = $('select[name="job_title"]').val();
@@ -75,16 +72,21 @@ let Employee_edit_basic = {
                 formData.append('department', department);
                 formData.append('indirect_supervisor', indirect_supervisor);
                 formData.append('supervisor', supervisor);
+                formData.append('_method', 'PUT');
 
+                for (var pair of formData.entries()) {
+                    console.log(pair[0]+ ', ' + pair[1]); 
+                }
+                
                 $.ajax({
                     headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                            "content"
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                            'content'
                         )
                     },
-                    enctype: "multipart/form-data",
-                    type: "PUT",
-                    url: "/employee/" + uuid,
+                    enctype: 'multipart/form-data',
+                    type: 'POST',
+                    url: '/employee/' + uuid,
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -203,11 +205,11 @@ let Employee_edit_basic = {
                                 }
                             });
                         } else {
-                            if ($("#id_card_photo")[0].files[0]) {
+                            if ($("#document")[0].files[0]) {
                                 formData = new FormData();
                                 formData.append(
                                     "document",
-                                    $("#id_card_photo")[0].files[0]
+                                    $("#document")[0].files[0]
                                 );
                                 let uuid = $("input[name=employee_uuid]").val();
                                 $.ajax({
@@ -230,14 +232,14 @@ let Employee_edit_basic = {
                                         } else {
                                             toastr.success("Data has been saved.","Sukses",{timeOut: 5000});
 
-                                            location.reload();
+                                            // location.reload();
                                         }
                                     }
                                 });
                             } else {
                                 toastr.success("Data has been saved.","Sukses",{timeOut: 5000});
 
-                                location.reload();
+                                // location.reload();
                             }
                         }
                     }
