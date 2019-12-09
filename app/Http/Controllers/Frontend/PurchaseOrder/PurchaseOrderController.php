@@ -80,10 +80,6 @@ class PurchaseOrderController extends Controller
                     $items_pr = PurchaseRequestItem::where('purchase_request_id',$request->purchase_request_id)->where('item_id',$item->item_id)->get();
                     $count_item_pr = PurchaseRequestItem::where('purchase_request_id',$request->purchase_request_id)->where('item_id',$item->item_id)->sum('quantity_unit');
 
-                    // foreach($items_pr as $item_pr){
-                    //     $count_item_pr = $count_item_pr + $item->quantity_unit;
-                    // }
-
                     $purchaseOrder->items()->attach([$item->item_id => [
                         'quantity'=> $count_item_pr,
                         'quantity_unit' => $count_item_pr,
@@ -93,18 +89,13 @@ class PurchaseOrderController extends Controller
 
                 }
             }else{
-                // dd($purchaseOrder);
-                // $quantity_unit_PurchaseOrders = PurchaseOrder::where('purchase_order_id',$PurchaseOrder->id)->where('item_id',$item->item_id)->wherehas('approvals')->sum('quantity_unit');
-                // dd($PurchaseOrder->purchase_request_id);
                 $quantity_unit_PurchaseOrders = PurchaseOrder::where('purchase_request_id',$request->purchase_request_id)->wherehas('approvals')->get();
                 $quantity_item_po = 0;
 
                     foreach($quantity_unit_PurchaseOrders as $quantity_unit_PurchaseOrder){
 
-                        // dump($quantity_unit_PurchaseOrder->items()->first());
                         $quantity_item_po = $quantity_item_po + $quantity_unit_PurchaseOrder->items()->find($item->item_id)->pivot->quantity_unit;
                     }
-                    // dd('sss');
                 $count = PurchaseRequestItem::where('purchase_request_id',$request->purchase_request_id)->where('item_id',$item->item_id)->count();
                 if($count == 0){
                     $purchaseOrder->items()->attach([$item->item_id => [
@@ -118,11 +109,6 @@ class PurchaseOrderController extends Controller
                     $items_pr = PurchaseRequestItem::where('purchase_request_id',$request->purchase_request_id)->where('item_id',$item->item_id)->get();
                     $count_item_pr = PurchaseRequestItem::where('purchase_request_id',$request->purchase_request_id)->where('item_id',$item->item_id)->sum('quantity_unit');
 
-                    // $primary_unit_item = Item::find($item->item_id)->unit_id;
-                    // foreach($items_pr as $item_pr){
-                    //     $count_item_pr = $count_item_pr + $item->quantity_unit;
-                    // }
-
                     $purchaseOrder->items()->attach([$item->item_id => [
                         'quantity'=> $count_item_pr-$quantity_item_po,
                         'quantity_unit' => $count_item_pr-$quantity_item_po,
@@ -132,36 +118,9 @@ class PurchaseOrderController extends Controller
 
                 }
 
-                // $quantity_item_po = 0;
-
-                // foreach($PurchaseOrders as $PurchaseOrder){
-                //     $quantity_item_po = $quantity_item_po + $PurchaseOrder->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
-                // }
-
             }
 
         }
-        // $PurchaseOrder = PurchaseOrder::where('purchase_request_id',$request->purchase_request_id)->count();
-        // if($PurchaseOrder == 1){
-        //     foreach($items as $item){
-        //         $purchaseOrder->items()->attach([$item->item_id => [
-        //             'quantity'=> $item->quantity,
-        //             'quantity_unit' => $item->quantity_unit,
-        //             'unit_id' => $item->unit_id
-        //             ]
-        //         ]);
-        //     }
-        // }else{
-        //     foreach($items as $item){
-        //         $purchaseOrder->items()->attach([$item->item_id => [
-        //             'quantity'=> 0,
-        //             'quantity_unit' => 0,
-        //             'unit_id' => $item->unit_id
-        //             ]
-        //         ]);
-        //     }
-        // }
-
 
         return response()->json($purchaseOrder);
     }
