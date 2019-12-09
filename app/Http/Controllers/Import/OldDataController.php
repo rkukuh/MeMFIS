@@ -5,15 +5,20 @@ namespace App\Http\Controllers\Import;
 use App\Imports\UsersImport;
 use App\Imports\FEFOINImport;
 use App\Imports\EnginesImport;
+use App\Imports\SimUserImport;
 use App\Imports\AircraftsImport;
 use App\Imports\CustomersImport;
 use App\Imports\WorkAreasImport;
 use App\Imports\TaskCardsCNimport;
 use App\Imports\TaskCardsATRImport;
 use App\Imports\ManufacturersImport;
+use App\Imports\AttachItemToTaskCard;
 use App\Imports\TaskCardsBoeingImport;
+use App\Imports\TaskcardDecemberImport;
 use App\Imports\MaterialsAndToolsImport;
+use App\Imports\MasterItemDesemberImport;
 use App\Imports\TaskCardsCPCPTriganaimport;
+use App\Imports\MaterialsAndToolsImportDecember;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 
@@ -38,7 +43,7 @@ class OldDataController extends Controller
 
     public function fefoin()
     {
-        Excel::import(new FEFOINImport, $this->import_directory . 'fefoin.xlsx');
+        Excel::import(new FEFOINImport, $this->import_directory . 'fefo-in.xlsx');
     }
 
     public function manufacturers()
@@ -48,7 +53,8 @@ class OldDataController extends Controller
 
     public function materialsAndTools()
     {
-        Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'master-items.xlsx');
+        // Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'master-items.xlsx');
+        Excel::import(new MaterialsAndToolsImportDecember, $this->import_directory . 'master-items-4000.xlsx');
     }
 
     public function taskCardsATR()
@@ -58,7 +64,7 @@ class OldDataController extends Controller
 
     public function taskCardsBoeing()
     {
-        // Excel::import(new TaskCardsBoeingImport, $this->import_directory . 'taskcards-boeing-737.xlsx');
+        Excel::import(new TaskCardsBoeingImport, $this->import_directory . 'taskcards-boeing-737.xlsx');
     }
 
     public function taskCardsCPCPTrigana()
@@ -79,5 +85,18 @@ class OldDataController extends Controller
     public function workAreas()
     {
         Excel::import(new WorkAreasImport, $this->import_directory . 'work-areas.xlsx');
+    }
+
+    public function decemberSimulation()
+    {
+        Excel::import(new MasterItemDesemberImport, $this->import_directory . 'sim-master-material.xlsx');
+        Excel::import(new MasterItemDesemberImport, $this->import_directory . 'sim-master-tool.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-si.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-basic.xlsx');
+        Excel::import(new TaskcardDecemberImport, $this->import_directory . 'sim-cpcp.xlsx');
+        Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-tool-to-tc.xlsx');
+        Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-material-to-tc.xlsx');
+        Excel::import(new SimUserImport, $this->import_directory . 'sim-user.xlsx');
+        
     }
 }

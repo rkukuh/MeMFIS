@@ -77,9 +77,25 @@ class Import extends Command
                 $this->line('Importing: Materials and Tools for CN');
                 app()->make(OldDataController::class)->materialsAndToolsCN();
                 break;
-            case 'fefoin':
+            case 'master-manufacturer':
+                $this->line('Importing: Master data manufacturer');
+                app()->make(OldDataController::class)->aircrafts();
+                break;
+            case 'master-aircraft':
+                $this->line('Importing: Master data Aircraft');
+                app()->make(OldDataController::class)->manufacturers();
+                break;
+            case 'atr-72':
+                $this->line('Importing: Task Cards data ATR-72');
+                app()->make(OldDataController::class)->taskCardsATR();
+                break;
+           case 'fefoin':
                 $this->line('Importing: First In First Out In');
                 app()->make(OldDataController::class)->fefoin();
+                break;
+            case 'sim-dec':
+                $this->line('Importing: data for simulation on december 2019');
+                app()->make(OldDataController::class)->decemberSimulation();
                 break;
             default:
                 $this->line('Importing: File not Found');

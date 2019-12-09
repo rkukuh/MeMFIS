@@ -66,7 +66,7 @@ Route::name('admin.')->group(function () {
         Route::resource('facility', 'FacilityController');
         Route::resource('overtime', 'OvertimeController');
         Route::resource('workshift', 'WorkshiftController');
-        Route::resource('job-tittle', 'JobTittleController');
+        Route::resource('job-title', 'JobTitleController');
         Route::resource('leave-type', 'LeaveTypeController');
         Route::resource('department', 'DepartmentController');
         Route::resource('leave-period','LeavePeriodController');

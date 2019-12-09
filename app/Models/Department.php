@@ -46,6 +46,20 @@ class Department extends MemfisModel
     }
 
     /**
+     * One-to-Many: A Deparment may have one or many employees.
+     *
+     * This function will retrieve the employee of a given Department.
+     * See: Employee's departments() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
+
+
+    /**
      * One-to-Many (self-join): A Department may have none or many sub-Department.
      *
      * This function will retrieve the parent of a sub-Department.

@@ -161,18 +161,18 @@
                         </label>
     
                         @php
-                            $address_1 = null;
-                            if(isset($addresses['address_1'])){
-                                $address_1 = $addresses['address_1'];
+                            $primary = null;
+                            if(isset($addresses['primary'])){
+                                $primary = $addresses['primary'];
                             }
     
-                            $address_2 = null;
-                            if(isset($addresses['address_2'])){
-                                $address_2 = $addresses['address_1'];
+                            $secondary = null;
+                            if(isset($addresses['secondary'])){
+                                $secondary = $addresses['primary'];
                             }
                         @endphp
                         @component('frontend.common.label.data-info')
-                            @slot('text', $address_1)
+                            @slot('text', $primary)
                         @endcomponent
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -181,7 +181,7 @@
                         </label>
     
                         @component('frontend.common.label.data-info')
-                            @slot('text', $address_2)
+                            @slot('text', $secondary)
                         @endcomponent
                     </div>
                 </div>
@@ -282,32 +282,32 @@
                 <div class="form-group m-form__group row">
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <label class="form-control-label">
-                            Email 1 
+                            Primary 
                         </label>
     
                         @php
-                            $email_1 = null;
-                            if(isset($emails['email_1'])){
-                                $email_1 = $emails['email_1'];
+                            $primary = null;
+                            if(isset($emails['primary'])){
+                                $primary = $emails['primary'];
                             }
     
-                            $email_2 = null;
-                            if(isset($emails['email_2'])){
-                                $email_2 = $emails['email_2'];
+                            $secondary = null;
+                            if(isset($emails['secondary'])){
+                                $secondary = $emails['secondary'];
                             }
     
                         @endphp
                         @component('frontend.common.label.data-info')
-                            @slot('text', $email_1)
+                            @slot('text', $primary)
                         @endcomponent
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <label class="form-control-label">
-                            Email 2
+                            Secondary
                         </label>
     
                         @component('frontend.common.label.data-info')
-                            @slot('text', $email_2)
+                            @slot('text', $secondary)
                         @endcomponent
                     </div>
                 </div>
@@ -337,13 +337,13 @@
                 <div class="form-group m-form__group row">
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <label class="form-control-label">
-                            Job Tittle 
+                            Job Title 
                         </label>
     
                         @php
-                             $jobTittle  = null;
-                             if(isset($jobDetails['job_tittle'])){
-                                $jobTittle = $jobDetails['job_tittle'];
+                             $jobTitle  = null;
+                             if(isset($jobDetails['job_title'])){
+                                $jobTitle = $jobDetails['job_title'];
                              }
                              
                              $position  = null;
@@ -372,7 +372,7 @@
                              }
                         @endphp
                         @component('frontend.common.label.data-info')
-                            @slot('text', $jobTittle)
+                            @slot('text', $jobTitle)
                         @endcomponent
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6">

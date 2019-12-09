@@ -25,14 +25,14 @@ class TypesOfEmail extends Seeder
         ]);
 
         Type::create([
-            'code' => 'email_1',
-            'name' => 'Email 1',
+            'code' => 'primary',
+            'name' => 'Primary',
             'of'   => 'email',
         ]);
 
         Type::create([
-            'code' => 'email_2',
-            'name' => 'Email 2',
+            'code' => 'secondary',
+            'name' => 'Secondary',
             'of'   => 'email',
         ]);
     }

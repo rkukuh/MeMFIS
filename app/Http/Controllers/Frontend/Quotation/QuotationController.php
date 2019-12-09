@@ -346,7 +346,6 @@ class QuotationController extends Controller
                 'title' => $quotation->number,
                 'alert-type' => "error"
             );
-            array_push($error_messages, $error_message);
             return response()->json(['error' => $error_messages], '403');
         }
         foreach($scheduled_payment_amounts as $scheduled_payment_amount){
@@ -607,7 +606,7 @@ class QuotationController extends Controller
             }
         }
         /** Discount */
-        
+
         return response()->json($quotation);
 
     }
@@ -661,7 +660,7 @@ class QuotationController extends Controller
                         array_push($discount, 0);
                 }
             }
-            
+
             $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
@@ -687,7 +686,7 @@ class QuotationController extends Controller
                 array_push($totalMatTool, $workPackage->mat_tool_price);
             }
 
-           
+
         }
 
         $htcrrs = HtCrr::where('project_id',$quotation->quotationable->id)->whereNull('parent_id')->get();

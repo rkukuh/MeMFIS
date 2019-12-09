@@ -60,7 +60,7 @@ class ItemGoodsReceivedController extends Controller
                 else{
                     $quantity_unit = $request->quantity;
                 }
-
+                $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
                 $goodsReceived->items()->attach([$item->id => [
                     'quantity'=> $request->quantity,
                     'unit_id' => $request->unit_id,
@@ -68,6 +68,7 @@ class ItemGoodsReceivedController extends Controller
                     'price' => ($request->quantity/$quantity_unit)*$price,
                     'note' => $request->note,
                     'expired_at' => $request->expired_at,
+                    'location' => $request->location,
                     ]
                 ]);
             }else{
@@ -83,6 +84,7 @@ class ItemGoodsReceivedController extends Controller
                         'price' => $price,
                         'note' => $request->note,
                         'expired_at' => $request->expired_at,
+                        'location' => $request->location,
                         ]
                     ]);
                 }
@@ -138,7 +140,9 @@ class ItemGoodsReceivedController extends Controller
         'quantity'=> $request->quantity,
         'quantity_unit'=> $quantity_unit,
         'note' => $request->note,
-        'expired_at' => $request->expired_at]);
+        'expired_at' => $request->expired_at,
+        'location' => $request->location,
+        ]);
 
         return response()->json($goodsReceived);
     }

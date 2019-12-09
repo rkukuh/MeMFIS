@@ -12,11 +12,14 @@ use App\Models\Promo;
 use App\Models\Access;
 use App\Models\FefoIn;
 use App\Models\Vendor;
+use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\License;
+use App\Models\Country;
 use App\Models\Project;
 use App\Models\Station;
 use App\Models\Storage;
+use App\Models\JobTitle;
 use App\Models\Aircraft;
 use App\Models\Category;
 use App\Models\Currency;
@@ -25,8 +28,12 @@ use App\Models\Employee;
 use App\Models\Facility;
 use App\Models\Religion;
 use App\Models\TaskCard;
+use App\Models\Position;
+use App\Models\LeaveType;
+use App\Models\Department;
 use App\Models\DefectCard;
 use App\Models\ItemRequest;
+use App\Models\Nationality;
 use App\Models\InventoryOut;
 use App\Models\Manufacturer;
 use App\Models\PurchaseOrder;
@@ -46,7 +53,6 @@ class FillComboxController extends Controller
             ->pluck('name', 'code');
 
         return json_encode($attendanceCorrection);
-
     }
 
     /**
@@ -60,7 +66,6 @@ class FillComboxController extends Controller
             ->pluck('name', 'id');
 
         return json_encode($categories);
-
     }
 
     /**
@@ -75,7 +80,6 @@ class FillComboxController extends Controller
             ->pluck('name', 'id');
 
         return json_encode($categories);
-
     }
 
     /**
@@ -97,11 +101,50 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function countries()
+    {
+        $countries = Country::pluck('name', 'uuid');
+
+        return json_encode($countries);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function defectcard()
     {
         $defectcards = DefectCard::pluck('code', 'id');
 
         return json_encode($defectcards);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function departments()
+    {
+        $departments = Department::pluck('name', 'uuid');
+
+        return json_encode($departments);
+
+    }
+
+    /**
+     * Display a listing of gender from resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function gender()
+    {
+        $genders = Type::ofGender()->pluck('name', 'uuid');
+
+        return json_encode($genders);
 
     }
 
@@ -131,6 +174,31 @@ class FillComboxController extends Controller
         return $items->origin_jobcardable_items;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jobpositions()
+    {
+        $jobpositions = Position::pluck('name', 'uuid');
+
+        return json_encode($jobpositions);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jobtitles()
+    {
+        $jobtitles = JobTitle::pluck('name', 'uuid');
+
+        return json_encode($jobtitles);
+
+    }
 
     /**
      * Display a listing of the resource.
@@ -212,6 +280,31 @@ class FillComboxController extends Controller
 
     }
 
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function supervisors()
+    {
+        $supervisors = Employee::pluck('first_name', 'uuid');
+
+        return json_encode($supervisors);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function leaveType()
+    {
+        $leave_type = LeaveType::pluck('name', 'uuid');
+
+        return json_encode($leave_type);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -239,6 +332,20 @@ class FillComboxController extends Controller
             ->pluck('name', 'id');
 
         return json_encode($employees);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function employmentStatuses()
+    {
+        $employmentStatuses = Status::ofEmployment()
+            ->pluck('name', 'uuid');
+
+        return json_encode($employmentStatuses);
 
     }
 
@@ -640,11 +747,11 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function manufacturer()
+    public function manufacturers()
     {
-        $manufacturer = Manufacturer::pluck('name', 'id');
+        $manufacturers = Manufacturer::pluck('name', 'id');
 
-        return json_encode($manufacturer);
+        return json_encode($manufacturers);
     }
 
     /**
@@ -658,6 +765,18 @@ class FillComboxController extends Controller
                             ->pluck('name', 'uuid');
 
         return json_encode($maritalStatus);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function nationalities()
+    {
+        $nationalities = Nationality::pluck('nationality', 'uuid');
+
+        return json_encode($nationalities);
     }
 
     /**

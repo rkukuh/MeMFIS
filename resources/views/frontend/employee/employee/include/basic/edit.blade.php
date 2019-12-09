@@ -1,9 +1,5 @@
 
-        @component('frontend.common.input.hidden')
-        @slot('id', 'employee_uuid')
-        @slot('name', 'employee_uuid')
-        @slot('value', $employee->uuid)
-        @endcomponent
+
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">
@@ -15,10 +11,10 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('value', $employee->code)
                         @slot('id', 'code')
                         @slot('name', 'code')
                         @slot('id_error', 'code')
+                        @slot('value', $employee->code)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -30,8 +26,9 @@
 
                             @component('frontend.common.input.datepicker')
                                 @slot('id', 'date')
-                                @slot('value', $employee->dob)
                                 @slot('name', 'dob')
+                                @slot('id_error', 'dob')
+                                @slot('value', $employee->dob)
                             @endcomponent
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -40,10 +37,10 @@
                             </label>
         
                             @component('frontend.common.input.text')
+                                @slot('id', 'dob_place')
+                                @slot('name', 'dob_place')
+                                @slot('id_error', 'dob_place')
                                 @slot('value', $employee->dob_place)
-                                @slot('id', 'birthplace')
-                                @slot('name', 'birthplace')
-                                @slot('id_error', 'birthplace')
                             @endcomponent
                         </div>
                     </div>
@@ -56,10 +53,10 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('value', $employee->first_name)
                         @slot('id', 'first_name')
                         @slot('name', 'first_name')
                         @slot('id_error', 'first_name')
+                        @slot('value', $employee->first_name)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -67,18 +64,11 @@
                         Last Name @include('frontend.common.label.required')
                     </label>
 
-                    @php
-
-                        $lastName = null;
-                        if($employee->last_name != $employee->first_name){
-                            $lastName = $employee->last_name;
-                        }
-                    @endphp
                     @component('frontend.common.input.text')
-                        @slot('value', $lastName)
                         @slot('id', 'last_name')
                         @slot('name', 'last_name')
                         @slot('id_error', 'last_name')
+                        @slot('value', $employee->last_name)
                     @endcomponent
                 </div>
             </div>
@@ -118,7 +108,7 @@
                             @component('frontend.common.input.upload')
                                 @slot('label', 'document')
                                 @slot('name', 'document')
-                                @slot('id','id_card_photo')
+                                @slot('id','document')
                                 @slot('text', $files)
                                 @slot('help_text','File must be image or not be stored!')
                             @endcomponent
@@ -132,22 +122,23 @@
                                 Gender @include('frontend.common.label.required')
                             </label>
                             
-                            @component('frontend.common.input.select2')
+                            @component('frontend.common.input.edit-select2')
                                 @slot('id', 'gender')
                                 @slot('name', 'gender')
-                                @slot('id_error', 'gender')
-                            @endcomponent    
+                                @slot('options', $genders)
+                                @slot('value', $employee->gender->uuid)
+                            @endcomponent
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6">
                             <label class="form-control-label">
                                 Nationality @include('frontend.common.label.required')
                             </label>
         
-                            @component('frontend.common.input.text')
-                                @slot('value', $employee->nationality)
+                            @component('frontend.common.input.edit-select2')
                                 @slot('id', 'nationality')
                                 @slot('name', 'nationality')
-                                @slot('id_error', 'nationality')
+                                @slot('options', $nationalities)
+                                @slot('value', $employee->nationalities->first()->uuid)
                             @endcomponent
                         </div>
                     </div>
@@ -159,10 +150,11 @@
                         Religion @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'religion')
                         @slot('name', 'religion')
-                        @slot('id_error', 'religion')
+                        @slot('options', $religions)
+                        @slot('value', $employee->religion->uuid)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -170,10 +162,11 @@
                         Marital Status @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'marital_status')
                         @slot('name', 'marital_status')
-                        @slot('id_error', 'marital_status')
+                        @slot('options', $maritalstatuses)
+                        @slot('value', $employee->marital_status->uuid)
                     @endcomponent
                 </div>
             </div>
@@ -191,19 +184,10 @@
                         Address Line 1 @include('frontend.common.label.required')
                     </label>
 
-                    @php
-                        $address_1 = null;
-                        if(isset($addresses['address_1'])){
-                            $address_1 = $addresses['address_1'];
-                        }
-
-                        $address_2 = null;
-                        if(isset($addresses['address_2'])){
-                            $address_2 = $addresses['address_1'];
-                        }
-                    @endphp
                     @component('frontend.common.input.text')
-                        @slot('value', $address_1)
+                        @if(array_key_exists('primary', $addresses))
+                            @slot('value', $addresses['primary'])
+                        @endif
                         @slot('id', 'address_line_1')
                         @slot('name', 'address_line_1')
                         @slot('id_error', 'address_line_1')
@@ -215,7 +199,9 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('value', $address_2)
+                        @if(array_key_exists('secondary', $addresses))
+                            @slot('value', $addresses['secondary'])
+                        @endif
                         @slot('id', 'address_line_2')
                         @slot('name', 'address_line_2')
                         @slot('id_error', 'address_line_2')
@@ -228,11 +214,15 @@
                         Country @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.text')
-                        @slot('value', $employee->country)
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'country')
                         @slot('name', 'country')
-                        @slot('id_error', 'country')
+                        @slot('options', $countries)
+                        @if($employee->country)
+                            @slot('value', $employee->country->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -340,38 +330,38 @@
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
-                        Email 1 @include('frontend.common.label.required')
+                        Primary Email @include('frontend.common.label.required')
                     </label>
 
                     @php
-                        $email_1 = null;
-                        if(isset($emails['email_1'])){
-                            $email_1 = $emails['email_1'];
+                        $primary = null;
+                        if(isset($emails['primary'])){
+                            $primary = $emails['primary'];
                         }
 
-                        $email_2 = null;
-                        if(isset($emails['email_2'])){
-                            $email_2 = $emails['email_2'];
+                        $secondary = null;
+                        if(isset($emails['secondary'])){
+                            $secondary = $emails['secondary'];
                         }
 
                     @endphp
                     @component('frontend.common.input.email')
-                        @slot('value',$email_1)
-                        @slot('id', 'email_1')
-                        @slot('name', 'email_1')
-                        @slot('id_error', 'email_1')
+                        @slot('id', 'primary_email')
+                        @slot('name', 'primary_email')
+                        @slot('id_error', 'primary_email')
+                        @slot('value',$primary)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
-                        Email 2
+                        Secondary Email
                     </label>
 
                     @component('frontend.common.input.email')
-                        @slot('value', $email_2)
-                        @slot('id', 'email_2')
-                        @slot('name', 'email_2')
-                        @slot('id_error', 'email_2')
+                        @slot('id', 'secondary_email')
+                        @slot('name', 'secondary_email')
+                        @slot('id_error', 'secondary_email')
+                        @slot('value', $secondary)
                     @endcomponent
                 </div>
             </div>
@@ -392,10 +382,10 @@
                             </label>
         
                             @component('frontend.common.input.datepicker')
-                                @slot('value', $employee->joined_date)
                                 @slot('id', 'period_start_date')
                                 @slot('name', 'joined_date')
                                 @slot('id_error','joined_date')
+                                @slot('value', $employee->joined_date)
                             @endcomponent
                         </div>
                     </div>
@@ -407,10 +397,15 @@
                         Job Title @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'job_title')
                         @slot('name', 'job_title')
-                        @slot('id_error', 'job_title')
+                        @slot('options', $jobtitles)
+                        @if($employee->job_title)
+                            @slot('value', $employee->job_title->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -418,11 +413,15 @@
                         Job Position @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'job_position')
-                        @slot('class', 'job_position')
                         @slot('name', 'job_position')
-                        @slot('id_error', 'job_position')
+                        @slot('options', $jobpositions)
+                        @if($employee->position)
+                            @slot('value', $employee->position->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
             </div>
@@ -432,10 +431,15 @@
                         Employee Status @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'employee_status')
                         @slot('name', 'employee_status')
-                        @slot('id_error', 'employee_status')
+                        @slot('options', $employmentstatuses)
+                        @if($employee->statuses)
+                            @slot('value', $employee->statuses->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -443,10 +447,15 @@
                         Department @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'department')
                         @slot('name', 'department')
-                        @slot('id_error', 'department')
+                        @slot('options', $departments)
+                        @if($employee->department)
+                            @slot('value', $employee->department->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
             </div>
@@ -456,10 +465,15 @@
                         Indirect Supervisor
                     </label>
 
-                    @component('frontend.common.input.select2')
-                        @slot('id', 'inderect_supervisor')
-                        @slot('name', 'inderect_supervisor')
-                        @slot('id_error', 'inderect_supervisor')
+                    @component('frontend.common.input.edit-select2')
+                        @slot('id', 'indirect_supervisor')
+                        @slot('name', 'indirect_supervisor')
+                        @slot('options', $supervisors)
+                        @if($employee->indirect_supervisor)
+                            @slot('value', $employee->indirect_supervisor->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -467,10 +481,15 @@
                         Supervisor 
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'supervisor')
                         @slot('name', 'supervisor')
-                        @slot('id_error', 'supervisor')
+                        @slot('options', $supervisors)
+                        @if($employee->supervisor)
+                            @slot('value', $employee->supervisor->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
             </div>
@@ -511,15 +530,17 @@
 </div>
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/gender.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/religion.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/marital-status.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/religion.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/job-title.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/nationality.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/gender.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/job-position.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/employee-status.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/employment-status.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/department.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/indirect-supervisor.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/supervisor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/country.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/period-start.js')}}"></script>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\leave;
+use App\Models\Leave;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\leaveStore;
 use App\Http\Requests\Admin\leaveUpdate;

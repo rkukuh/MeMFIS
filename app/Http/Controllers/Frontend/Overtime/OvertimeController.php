@@ -55,7 +55,7 @@ class OvertimeController extends Controller
             $uuid = $request->input('search-employee-val');
             $employee_id = Employee::where('uuid',$uuid)->first()->id;
         }
-        
+
         $date = $request->input('date');
         $attendance =  EmployeeAttendance::whereDate('date', $date)->where('employee_id', $employee_id)->first();
         $start = $request->input('start_time');
@@ -68,7 +68,7 @@ class OvertimeController extends Controller
         // $timestamp_start = Carbon::parse($date.' '.$start,'Asia/Jakarta');
         // $timestamp_end = Carbon::parse($date.' '. $end,'Asia/Jakarta');
         // ->format('%H:%I:%S')
-        
+
         $status = Status::ofOvertime()->where('code','open')->first()->id;
 
         Overtime::create([
@@ -85,11 +85,14 @@ class OvertimeController extends Controller
             ]
         );
 
-        // return response()->json($overtime_data);
+        $notification = array(
+            'message' => "Overtime has been saved.",
+            'title' => "Success",
+            'alert-type' => "success"
+        );
 
-        return redirect()->route('frontend.overtime.index');
-    }
-    
+        return redirect()->route('frontend.overtime.index')->with($notification);    }
+
 
     /**
      * Display the specified resource.
@@ -126,7 +129,7 @@ class OvertimeController extends Controller
     {
         $overtime_data = Overtime::findOrFail($overtime->id);
         $validated = $request->validated();
-        
+
         $isAdmin = Auth::user()->hasRole("admin");
         $employee_id = Auth::id();
         if ($isAdmin) {
@@ -141,7 +144,7 @@ class OvertimeController extends Controller
         $end_diff = Carbon::parse($date." ".$end,"Asia/Jakarta");
         $time_diff = $start_diff->diff($end_diff)->format("%H:%I:%S");
         $desc = $validated["description"];
-        
+
         $status = $overtime->status_id;
 
         $data = [
@@ -176,7 +179,7 @@ class OvertimeController extends Controller
 
     /**
      * Overtime approval
-     * 
+     *
      * @param  \App\Models\Overtime  $Overtime
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -184,7 +187,7 @@ class OvertimeController extends Controller
     public function approve(Overtime $Overtime, Request $request)
     {
         $status = Status::ofOvertime()->where('code', 'approved')->first();
-        
+
         $Overtime->approvals()->save(new Approval([
             'is_approved' => 1,
             'note' => $request->note,
@@ -201,7 +204,7 @@ class OvertimeController extends Controller
 
     /**
      * Attendance correction reject
-     * 
+     *
      * @param  \App\Models\Overtime  $Overtime
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -220,17 +223,17 @@ class OvertimeController extends Controller
         $result = $Overtime->update([
             'status_id' => $status->id
         ]);
-        
+
         return response()->json($result);
     }
 
     /**
      * API for getting attendance for certain employee on that date
-     * 
+     *
      * @param \App\Models\Employee  $employee
-     * @param $date 
+     * @param $date
      * @return \Illuminate\Http\Response
-     * 
+     *
      */
     public function getAttendance(Employee $employee, $date){
         $attendances = EmployeeAttendance::where('employee_id',$employee->id)->whereDate('date', $date)->first();

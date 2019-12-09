@@ -13,9 +13,8 @@ class CreateRirGeneralDocumentTable extends Migration
      */
     public function up()
     {
-        Schema::create('rir_general_document', function (Blueprint $table) {
+        Schema::create('rir_general_documents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('rir_id')->nullable();
             $table->unsignedBigInteger('general_document')->nullable();
             $table->timestamps();

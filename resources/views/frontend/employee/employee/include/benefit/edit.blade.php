@@ -1,10 +1,6 @@
 @if ($button_parameter == 'create')
 {{-- FORM CREATE --}}
-@component('frontend.common.input.hidden')
-        @slot('id', 'employee_uuid')
-        @slot('name', 'employee_uuid')
-        @slot('value', $employee->uuid)
-@endcomponent
+
 
 <div class="jumbotron p-3" style="background:#294294;">
     <div class="row">
@@ -247,7 +243,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-3">
-            <legend class="w-auto"><b>Tardiness & Absences</b></legend>
+            <legend class="w-auto"><b>Lateness & Absences</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -304,11 +300,6 @@
 </div>
 @elseif($button_parameter == 'approvals')
 {{-- FORM APPROVAL --}}
-@component('frontend.common.input.hidden')
-        @slot('id', 'employee_uuid')
-        @slot('name', 'employee_uuid')
-        @slot('value', $employee->uuid)
-@endcomponent
 
 <div class="jumbotron p-3" style="background:#294294;">
     <div class="row">
@@ -581,7 +572,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-3">
-            <legend class="w-auto"><b>Tardiness & Absences</b></legend>
+            <legend class="w-auto"><b>Lateness & Absences</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -664,11 +655,6 @@
 </div>
 @else
 {{-- FORM EDIT --}}
-@component('frontend.common.input.hidden')
-        @slot('id', 'employee_uuid')
-        @slot('name', 'employee_uuid')
-        @slot('value', $employee->uuid)
-@endcomponent
 
 <div class="jumbotron p-3" style="background:#294294;">
     <div class="row">
@@ -1062,7 +1048,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-3">
-            <legend class="w-auto"><b>Tardiness & Absences</b></legend>
+            <legend class="w-auto"><b>Lateness & Absences</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -1145,33 +1131,33 @@
 
                 @if ($button_parameter == 'create')
                     @component('frontend.common.buttons.submit')
-                    @slot('type','button')
-                    @slot('id', 'create-benefit')
-                    @slot('class', 'create-benefit')
+                        @slot('type','button')
+                        @slot('id', 'create-benefit')
+                        @slot('class', 'create-benefit')
                     @endcomponent 
 
                     @include('frontend.common.buttons.reset')
                 @elseif ($button_parameter == 'approvals')
                     @component('frontend.common.buttons.submit')     
-                    @slot('type','button')
-                    @slot('text','Approve')
-                    @slot('icon','fa-check')
-                    @slot('id', 'approve_benefit')
-                    @slot('class', 'approve_benefit')
+                        @slot('type','button')
+                        @slot('text','Approve')
+                        @slot('icon','fa-check')
+                        @slot('id', 'approve_benefit')
+                        @slot('class', 'approve_benefit')
                     @endcomponent
 
                     @component('frontend.common.buttons.submit')     
-                    @slot('type','button')
-                    @slot('text','Reject')
-                    @slot('id', 'reject_benefit')
-                    @slot('icon','fa fa-times-circle')
-                    @slot('class', 'bg-warning text-dark')
+                        @slot('type','button')
+                        @slot('text','Reject')
+                        @slot('id', 'reject_benefit')
+                        @slot('icon','fa fa-times-circle')
+                        @slot('class', 'bg-warning text-dark')
                     @endcomponent
                 @else
                     @component('frontend.common.buttons.submit')
-                    @slot('type','button')
-                    @slot('id', 'edit-benefit')
-                    @slot('class', 'edit-benefit')
+                        @slot('type','button')
+                        @slot('id', 'edit-benefit')
+                        @slot('class', 'edit-benefit')
                     @endcomponent
 
                     @include('frontend.common.buttons.reset')

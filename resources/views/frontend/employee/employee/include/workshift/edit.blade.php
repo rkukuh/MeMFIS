@@ -8,11 +8,11 @@
                         Workshift Name @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
-                        @slot('text', 'Workshift Name')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'job_position_workshift')
                         @slot('name', 'job_position_workshift')
-                        @slot('id_error', 'job_position_workshift')
+                        @slot('options', $workshifts)
+                        @slot('value', $employee->workshifts->first()->uuid)
                     @endcomponent
                 </div>
             </div>

@@ -77,8 +77,8 @@
                                 <h1 class="display-5">{{ $name }}, <span>{{ $age }}</span></h1>
                                     <div class="row">
                                         <div class="col-sm-2 col-md-2 col-lg-2">
-                                        @if (isset($employee->job_tittle->name))
-                                        <h6>{{ $employee->job_tittle->name }}</h6>
+                                        @if (isset($employee->job_title->name))
+                                        <h6>{{ $employee->job_title->name }}</h6>
                                         @else
                                         <h6>None</h6>
                                         @endif
@@ -91,9 +91,9 @@
                                         @endif
                                         </div>
                                         <div class="col-sm-7 col-md-7 col-lg-7">
-                                        @if (isset($emails['email_1']))
+                                        @if (isset($emails['primary']))
                                                 <span>
-                                                <h6><i class="la la-envelope-o"></i>&nbsp;&nbsp; {{ $emails['email_1'] }}</h6>
+                                                <h6><i class="la la-envelope-o"></i>&nbsp;&nbsp; {{ $emails['primary'] }}</h6>
                                                 </span>
                                         @else
                                                 <span>

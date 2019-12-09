@@ -314,14 +314,14 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of Aircraft Maintenance Cycle.
+     * Scope a query to only include type of leave type based on.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOfMaintenanceCycle(Builder $query)
+    public function scopeOfLeaveType(Builder $query)
     {
-        return $query->where('of', 'maintenance-cycle');
+        return $query->where('of', 'leave-type');
     }
 
     /**
@@ -330,9 +330,9 @@ class Type extends MemfisModel
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOfNationality(Builder $query)
+    public function scopeOfMaintenanceCycle(Builder $query)
     {
-        return $query->where('of', 'nationality');
+        return $query->where('of', 'maintenance-cycle');
     }
 
     /**
@@ -377,6 +377,17 @@ class Type extends MemfisModel
     public function scopeOfPurchaseRequest(Builder $query)
     {
         return $query->where('of', 'purchase-request');
+    }
+
+    /**
+     * Scope a query to only include type of Quotation Item.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfQuotationItemCost(Builder $query)
+    {
+        return $query->where('of', 'quotation-item-cost');
     }
 
     /**
@@ -634,7 +645,7 @@ class Type extends MemfisModel
      */
     public function scopeOfTaxPaymentMethod(Builder $query)
     {
-        return $query->where('of', 'tax-payment-method'); 
+        return $query->where('of', 'tax-payment-method');
     }
 
     /**
@@ -733,6 +744,19 @@ class Type extends MemfisModel
     public function emails()
     {
         return $this->hasMany(Email::class);
+    }
+
+    /**
+     * One-to-Mant: A gender have zero or many Employees.
+     *
+     * This function will retrieve Project of a given RTS.
+     * See: Employee's gender() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_gender()
+    {
+        return $this->hasMany(Employee::class, 'gender_id');
     }
 
     /**
@@ -974,15 +998,5 @@ class Type extends MemfisModel
     public function websites()
     {
         return $this->hasMany(Website::class);
-    
-    
-    /**
-     * One-to-Many: A website may have zero or many type.
-     *
-     * This function will retrieve all websites of a type.
-     * See: Website's type() method for the inverse
-     *
-     * @return mixed
-     */
-}
+    }
 }
