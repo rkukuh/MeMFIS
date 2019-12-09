@@ -227,15 +227,28 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
-     * One-to-Many Polymorphic : An Employee may have zero or many histories
+     * One-to-Many Polymorphic : An Employee may have zero or many personal data histories
      * 
      * This function will get all of the histories from given employee.
      * See:
      * - Employee's histories() method for the inverse
      */
-    public function histories()
+    public function data_histories()
     {
         return $this->morphMany(History::class, 'historiable');
+    }
+
+    /**
+     * One-to-Many: An employee may have zero or more histories.
+     *
+     * This function will retrieve all histories conducted by given employee.
+     * See: History's approvedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function histories()
+    {
+        return $this->hasMany(History::class);
     }
 
     /**
