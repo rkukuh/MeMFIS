@@ -17,22 +17,24 @@ class PriceListDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function item() 
+    public function item()
     // item , manhour, facility = prices
     {
+        ini_set('memory_limit', '-1');
+
         $items = Item::with('unit', 'prices')->get();
-        
+
         foreach($items as $item){
             $item->unit_name    .= $item->unit->name;
             $item->last_update  .= $item->updated_at;
-                    
+
             if($item->first()->audits->first()->user_id == 0){
-                
+
                 $item->updated_by .= 'System';
-            
+
             }else{
-                
-                $item->updated_by .= $item->first()->audits->first()->user_id;
+
+                $item->updated_by .= $item->first()->audits->last()->user_id;
             }
         }
 
@@ -127,15 +129,15 @@ class PriceListDatatables extends Controller
         echo json_encode($result, JSON_PRETTY_PRINT);
     }
 
-    public function manhour() 
+    public function manhour()
     // item , manhour, facility = prices
     {
-        
+
         $manhours = Manhour::all();
-       
+
         $data = $alldata = json_decode($manhours);
-        
-        
+
+
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
@@ -224,11 +226,11 @@ class PriceListDatatables extends Controller
     }
 
 
-    public function facility() 
+    public function facility()
     // item , manhour, facility = prices
     {
         $items = Facility::with('prices')->get();
-        
+
         $data = $alldata = json_decode($items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
