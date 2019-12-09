@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\InventoryInStore;
 use App\Http\Requests\Frontend\InventoryInUpdate;
 use App\Models\Item;
+use App\Models\Unit;
 
 class ItemInventoryInController extends Controller
 {
@@ -40,6 +41,7 @@ class ItemInventoryInController extends Controller
      */
     public function store(InventoryInStore $request, InventoryIn $inventoryIn, Item $item)
     {
+        $request->merge(['unit_id' => Unit::where('uuid', $request->unit_id)->first()->id]);
         $exists = $inventoryIn->items()->where('item_id', $item->id)->first();
 
         if ($exists) {

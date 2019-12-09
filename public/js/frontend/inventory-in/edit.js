@@ -144,10 +144,10 @@ let InventoryInCreate = {
 
             });
 
-            let item = $("#item").val();
+            let item = $("#material").val();
             let quantity = $("input[name=qty]").val();
             let exp_date = $("#exp_date").val();
-            let unit = $("#unit_id").val();
+            let unit = $("#unit_material").val();
             let remark = $("#item_remark").val();
             if ($("#is_serial_number").is(":checked")) {
                 if (serial_numbers.length < quantity) {
@@ -228,7 +228,7 @@ let InventoryInCreate = {
                     });
                 }
             });
-            $("#item").attr('disabled', true);
+            $("#material").attr('disabled', true);
 
             $.ajax({
                 url: '/get-item-unit-uuid/' + $(this).data('item'),
@@ -236,15 +236,15 @@ let InventoryInCreate = {
                 dataType: 'json',
                 success: function (data) {
 
-                    $('select[name="unit_id"]').empty();
+                    $('select[name="unit_material"]').empty();
 
                     $.each(data, function (key, value) {
                         if (key == unit_id) {
-                            $('select[name="unit_id"]').append(
+                            $('select[name="unit_material"]').append(
                                 '<option value="' + key + '" selected>' + value + '</option>'
                             );
                         } else {
-                            $('select[name="unit_id"]').append(
+                            $('select[name="unit_material"]').append(
                                 '<option value="' + key + '">' + value + '</option>'
                             );
                         }
@@ -263,10 +263,10 @@ let InventoryInCreate = {
         });
 
         $(".modal-footer").on("click", ".update-item", function () {
-            let item = $("#item").val();
+            let item = $("#material").val();
             let quantity = $("input[name=qty]").val();
             let exp_date = $("#exp_date").val();
-            let unit = $("#unit_id").val();
+            let unit = $("#unit_material").val();
             let remark = $("#item_remark").val();
             let serial_no = $("#serial_no").val();
 
@@ -397,27 +397,27 @@ jQuery(document).ready(function () {
 $("#is_serial_number").on("change", function () {
     if ($(this).is(":checked")) {
         $('.serial_numbers').removeClass("hidden");
-        $('#unit_id').prop('disabled', true);
+        $('#unit_material').prop('disabled', true);
     } else {
         $('.serial_numbers').addClass("hidden");
         $('.serial_number_inputs').html('');
-        $('#unit_id').prop('disabled', false);
+        $('#unit_material').prop('disabled', false);
     }
 });
 $("#is_serial_number_edit").on("change", function () {
     if ($(this).is(":checked")) {
         // $('.serial_numbers').removeClass("hidden");
-        $('#unit_id').prop('disabled', true);
+        $('#unit_material').prop('disabled', true);
     } else {
         // $('.serial_numbers').addClass("hidden");
         // $('.serial_number_inputs').html('');
-        $('#unit_id').prop('disabled', false);
+        $('#unit_material').prop('disabled', false);
     }
 });
 
-$("#item").on("change", function () {
-    let item_uuid = $("#item").val();
-
+$("#search-item").on("change", function () {
+    let item_uuid = $("#material").val();
+    console.log(item_uuid);
     $.ajax({
         url: '/get-item-unit-uuid/' + item_uuid,
         type: 'GET',
