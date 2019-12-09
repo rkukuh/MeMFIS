@@ -1013,7 +1013,7 @@ class FillComboxController extends Controller
      */
     public function projectPurchaseRequest()
     {
-        $projects = Project::has('quotations')->whereDoesntHave('purchase_requests')->pluck('title', 'uuid');
+        $projects = Project::has('quotations')->whereDoesntHave('purchase_requests')->pluck('code', 'uuid');
 
         return json_encode($projects);
     }
