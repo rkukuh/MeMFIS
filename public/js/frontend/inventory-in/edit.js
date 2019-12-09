@@ -122,7 +122,7 @@ let InventoryInCreate = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_item" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Edit" data-item=' + 
-                            t.uuid + ' data-date='+ t.pivot.expired_at +' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-remark=' + t.pivot.description +' data-serial='+ t.pivot.serial_number +'>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            t.uuid + ' data-date=' + t.pivot.expired_at +' data-item_code='+ t.code +' data-item_name='+ t.name +' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-remark=' + t.pivot.description +' data-serial='+ t.pivot.serial_number +'>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
                             '</a>'
@@ -178,26 +178,38 @@ let InventoryInCreate = {
                     remark: remark,
                 },
                 success: function (response) {
-                    $('#modal_item').modal('hide');
+                    if (response.errors) {
+                        if (response.errors.quantity) {
+                            $('#quantity-error').html(response.errors.quantity[0]);
+                        }
+                    } else {
+                        if (response.title == "Danger") {
+                            toastr.error("Item already exists!", "Error", {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $('#modal_item').modal('hide');
 
-                    $('#modal_item').on('hidden.bs.modal', function (e) {
-                        $(this)
-                            .find("input,textarea")
-                            .val('')
-                            .end()
-                            .find("select")
-                            .select2('val', 'All')
-                            .end();
-                    });
+                            $('#modal_item').on('hidden.bs.modal', function (e) {
+                                $(this)
+                                    .find("input,textarea")
+                                    .val('')
+                                    .end()
+                                    .find("select")
+                                    .select2('val', 'All')
+                                    .end();
+                            });
 
-                    toastr.success("Item has been added.", "Success", {
-                        timeOut: 5000
-                    });
+                            toastr.success("Item has been added.", "Success", {
+                                timeOut: 5000
+                            });
 
-                    let table = $(".item_datatable").mDatatable();
+                            let table = $(".item_datatable").mDatatable();
 
-                    table.originalDataSet = [];
-                    table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
+                    }
                 }
             });
         });
@@ -205,6 +217,14 @@ let InventoryInCreate = {
         $('.item_datatable').on('click', '.edit-item', function () {
             let item_uuid = $(this).data('item');
             let unit_id = $(this).data('unit');
+            let code = $(this).data('item_code');
+            let name = $(this).data('item_name');
+
+            $('.input-item-uuid').val($(this).data('item'));
+
+            $('.search-item').html(code + " - " + name);
+
+            $("#item").attr('disabled', true);
 
             $.ajax({
                 url: '/get-items-uuid/',
