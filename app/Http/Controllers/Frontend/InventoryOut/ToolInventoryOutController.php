@@ -178,7 +178,7 @@ class ToolInventoryOutController extends Controller
 
         if ($request->unit_id != $item->unit_id) {
             $quantity = $request->quantity;
-            $qty_uom = $item->units->where('uom.unit_id', $item->unit_id)->first()->uom->quantity;
+            // $qty_uom = $item->units->where('uom.unit_id', $item->unit_id)->first()->uom->quantity;
 
             if (!is_null($request->unit_id)) {
                 $qty_uom = $item->units->where('uom.unit_id', $request->unit_id)->first()->uom->quantity;
