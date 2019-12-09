@@ -121,6 +121,7 @@ class MaterialRequestController extends Controller
      */
     public function edit(ItemRequest $itemRequest)
     {
+        $project = $itemRequest->requestable;
         $storages = Storage::get();
         $employees = Employee::get();
 
@@ -128,6 +129,7 @@ class MaterialRequestController extends Controller
             'storages' => $storages,
             'employees' => $employees,
             'itemRequest' => $itemRequest,
+            'project' => $project,
         ]);
     }
 

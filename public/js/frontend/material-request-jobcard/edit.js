@@ -1,15 +1,37 @@
 let MaterialRequestEdit = {
     init: function () {
 
-        $('#jc_ref_no').on('click', function () {
-            $('#ref_project').prop("disabled", true);
-            $('#ref_jobcard').removeAttr("disabled");
-        });
+        // $('#jc_ref_no').on('click', function () {
+        //     $('#ref_project').prop("disabled", true);
+        //     $('#ref_jobcard').removeAttr("disabled");
+        // });
 
-        $('#project_ref_no').on('click', function () {
-            $('#ref_jobcard').prop("disabled", true);
-            $('#ref_project').removeAttr("disabled");
-        });
+        // $('#project_ref_no').on('click', function () {
+        //     $('#ref_jobcard').prop("disabled", true);
+        //     $('#ref_project').removeAttr("disabled");
+        // });
+
+        $('#ref_project').text(project_code);
+
+        function generate(type, uuid) {
+            if (type == 'jc') {
+                var url = '/datatables/jobcard/' + uuid + '/materials';
+            } else if (type == 'project') {
+                var url = '/project/' + uuid;
+
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (response) {
+                        $("#project_number").empty().html(response.code);
+                        $("#actype").empty().html(response.aircraft.name);
+                        $("#acreg").empty().html(response.aircraft_register);
+                    }
+                });
+            }
+        }
+
+        generate('project', project_uuid);
 
         $('.material_request_project_datatable').mDatatable({
             data: {
