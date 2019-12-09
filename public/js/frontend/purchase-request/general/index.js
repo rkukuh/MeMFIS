@@ -109,13 +109,14 @@ let PurchaseRequest = {
                     template: function (t, e, i) {
                         if(t.status == "Approved"){
                             return (
-                                '<a href="purchase-request/' +
+                                '<a href="/purchase-request/' +
                                 t.uuid +
                                 '/general/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' +
                                 t.uuid +
                                 '">' +
                                 '<i class="la la-print"></i>' +
                                 "</a>"
+
                             );
                     }else{
                             return (
