@@ -37,6 +37,9 @@ let Employee_edit_basic = {
                 let indirect_supervisor = $('select[name="indirect_supervisor"]').val();
                 let supervisor = $('select[name="supervisor"]').val();
 
+                let maximum_overtime = $('input[name=maximum_overtime]').val();
+                let minimum_overtime = $('input[name=minimum_overtime]').val();
+                let holiday_overtime = $('input[name=holiday_overtime]').val();
                 let uuid = $("input[name=employee_uuid]").val();
 
                 formData = new FormData($('#employee_create_form')[0])
@@ -72,6 +75,9 @@ let Employee_edit_basic = {
                 formData.append('department', department);
                 formData.append('indirect_supervisor', indirect_supervisor);
                 formData.append('supervisor', supervisor);
+                formData.append('maximum_overtime', maximum_overtime);
+                formData.append('minimum_overtime', minimum_overtime);
+                formData.append('holiday_overtime', holiday_overtime);
                 formData.append('_method', 'PUT');
 
                 for (var pair of formData.entries()) {

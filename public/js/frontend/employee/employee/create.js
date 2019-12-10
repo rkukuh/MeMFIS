@@ -40,6 +40,19 @@ let Employee = {
             let indirect_supervisor = $('select[name="indirect_supervisor"]').val();
             let supervisor = $('select[name="supervisor"]').val();
 
+            let maximum_overtime = null;
+            if( $('input[name=maximum_overtime]').val() != '' ){
+                maximum_overtime = $('input[name=maximum_overtime]').val();
+            }
+            let minimum_overtime = 6;
+            if( $('input[name=minimum_overtime]').val() != '' ){
+                minimum_overtime = $('input[name=minimum_overtime]').val();
+            }
+            let holiday_overtime = 10000;
+            if( $('input[name=holiday_overtime]').val() != '' ){
+                holiday_overtime = $('input[name=holiday_overtime]').val();
+            }
+            
             formData = new FormData($('#employee_create_form')[0])
     
                 formData.append('code', code_uppercase);
@@ -73,6 +86,9 @@ let Employee = {
                 formData.append('department', department);
                 formData.append('indirect_supervisor', indirect_supervisor);
                 formData.append('supervisor', supervisor);
+                formData.append('maximum_overtime', maximum_overtime);
+                formData.append('minimum_overtime', minimum_overtime);
+                formData.append('holiday_overtime', holiday_overtime);
 
             $.ajax({
                 headers: {
