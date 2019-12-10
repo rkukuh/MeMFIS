@@ -97,6 +97,6 @@ class OldDataController extends Controller
         Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-tool-to-tc.xlsx');
         Excel::import(new AttachItemToTaskCard, $this->import_directory . 'sim-attach-material-to-tc.xlsx');
         Excel::import(new SimUserImport, $this->import_directory . 'sim-user.xlsx');
-        
+
     }
 }
