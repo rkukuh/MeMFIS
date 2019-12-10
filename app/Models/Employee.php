@@ -33,7 +33,6 @@ class Employee extends MemfisModel implements HasMedia
         'job_title_id',
         'position_id',
         'statuses_id',
-        'department_id',
         'indirect_supervisor_id',
         'supervisor_id',
         'created_at',
@@ -346,8 +345,10 @@ class Employee extends MemfisModel implements HasMedia
                             'left_at',
                             'maximum_overtime_period',
                             'overtime_threshold',
-                            'overtime_allowance'
+                            'overtime_allowance',
+                            'deleted_at'
                             )
+                        ->wherePivot('deleted_at', null)
                         ->withTimestamps();
     }
 

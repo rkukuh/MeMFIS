@@ -61,8 +61,10 @@ class Department extends MemfisModel
                             'left_at',
                             'maximum_overtime_period',
                             'overtime_threshold',
-                            'overtime_allowance'
+                            'overtime_allowance',
+                            'deleted_at'
                             )
+                        ->wherePivot('deleted_at', null)
                         ->withTimestamps();
     }
 
