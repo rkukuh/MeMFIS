@@ -231,11 +231,8 @@ class TaskCardRoutineController extends Controller
         $accesses = $zones = $additionals = [];
         
         $additionals["internal_number"] = $request->additionals->internal_number;
-        dump($request->document_library);
         $additionals["document_library"] = $request->document_library;
-        dump($additionals["document_library"]);
         $request->merge(['additionals' => json_encode($additionals, true)]);
-        dd( json_encode($additionals, true));
 
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
