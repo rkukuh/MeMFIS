@@ -19,6 +19,8 @@ class DepartmentsTableSeeder extends Seeder
             'code' => 'production',
             'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Production',
+            'maximum_period' => 60,
+            'maximum_holiday' => 100000,
         ]);
 
         Department::create([
@@ -26,6 +28,8 @@ class DepartmentsTableSeeder extends Seeder
             'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Heavy Maintenance',
             'parent_id' => $production->id,
+            'maximum_period' => 60,
+            'maximum_holiday' => 100000,
         ]);
 
         Department::create([
@@ -33,6 +37,8 @@ class DepartmentsTableSeeder extends Seeder
             'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Special Service',
             'parent_id' => $production->id,
+            'maximum_period' => 60,
+            'maximum_holiday' => 100000,
         ]);
 
         /** PRODUCTION > WORKSHOP */
@@ -42,6 +48,8 @@ class DepartmentsTableSeeder extends Seeder
             'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Workshop',
             'parent_id' => $production->id,
+            'maximum_period' => 60,
+            'maximum_holiday' => 100000,
         ]);
 
         Department::create([
@@ -49,6 +57,8 @@ class DepartmentsTableSeeder extends Seeder
             'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Instrument Shop',
             'parent_id' => $workshop->id,
+            'maximum_period' => 60,
+            'maximum_holiday' => 100000,
         ]);
 
         // TODO: Continue input workshops. See: Landing page.
@@ -59,6 +69,8 @@ class DepartmentsTableSeeder extends Seeder
             'code' => 'supporting',
             'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Supporting',
+            'maximum_period' => 60,
+            'maximum_holiday' => 100000,
         ]);
 
         /** FINANCE */
@@ -67,6 +79,8 @@ class DepartmentsTableSeeder extends Seeder
             'code' => 'finance',
             'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Finance',
+            'maximum_period' => 60,
+            'maximum_holiday' => 100000,
         ]);
 
         /** ACCOUNTING */
@@ -75,6 +89,8 @@ class DepartmentsTableSeeder extends Seeder
             'code' => 'accounting',
             'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Accounting',
+            'maximum_period' => 60,
+            'maximum_holiday' => 100000,
         ]);
 
         /** MARKETING */
@@ -83,6 +99,8 @@ class DepartmentsTableSeeder extends Seeder
             'code' => 'marketing',
             'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Marketing',
+            'maximum_period' => 60,
+            'maximum_holiday' => 100000,
         ]);
 
         /** MATERIAL */
@@ -91,6 +109,8 @@ class DepartmentsTableSeeder extends Seeder
             'code' => 'material',
             'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Material Planning',
+            'maximum_period' => 60,
+            'maximum_holiday' => 100000,
         ]);
 
         /** QUALITY */
@@ -99,6 +119,8 @@ class DepartmentsTableSeeder extends Seeder
             'code' => 'quality',
             'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Quality',
+            'maximum_period' => 60,
+            'maximum_holiday' => 100000,
         ]);
     }
 }

@@ -1,6 +1,6 @@
 let GenderSelect2 = {
     init: function () {
-        $('#gender, #gender_validate').select2({
+        $('select[name="gender"], #gender_validate').select2({
             placeholder: 'Select a Gender'
         });
     }

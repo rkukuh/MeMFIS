@@ -14,7 +14,7 @@ class JobTitlesTableSeeder extends Seeder
     {
         JobTitle::create([
             'code' => 'dirut',
-            'name' => 'Direktu Utama',
+            'name' => 'Direktur Utama',
             'description' => 'Direktur utama PT. Merpati Maintenance Facility',
             'specification' => 'Orang yang membawa perusahaan menuju kesuksesan'
         ]);

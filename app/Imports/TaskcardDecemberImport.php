@@ -200,31 +200,59 @@ class TaskcardDecemberImport implements ToModel, WithHeadingRow
         }
 
         $additionals = [];
+        $document_lib = [];
+
+        if($row['document_library'] && $row['document_library'] !== '-'){
+            $document_lib = explode(';', $row['document_library']);
+        }
+
         $additionals["internal_number"] = "";
-        // $additionals["document_library"] = [$row['document_library']];
-        if( $row['company_task']) {
+        $additionals["document_library"] = $document_lib;
+        if(array_key_exists('company_task', $row) &&  $row['company_task']) {
             $additionals["internal_number"] = $row['company_task'];
         }
         $additionals =  json_encode($additionals, true);
 
-        if(isset($row['source'])){
+        if(array_key_exists('source', $row) && isset($row['source'])){
             $source = join(',', explode(';', $row['source']));
         }else{
             $source = null;
         }
 
-        if(isset($row['reference'])){
+        if(array_key_exists('reference', $row) && isset($row['reference'])){
             $reference = $row['reference'];
         }else{
             $reference = null;
         }
 
-        if(isset($row['description'])){
+        if(array_key_exists('description', $row) && isset($row['description'])){
             $description = $row['description'];
         }elseif(isset($row['instruction'])){
             $description = $row['instruction'];
         }else{
             $description = null;
+        }
+
+        $version_json = [];
+        if(array_key_exists('version', $row)){
+            $versions =  explode(';',$row['version']);
+    
+            foreach($versions as $version){
+                if($version !== '-'){
+                    array_push($version_json, $version);
+                }
+            }
+        }
+        
+        $section_json = [];
+        if(array_key_exists('section', $row)){
+            $sections =  explode(';',$row['section']);
+    
+            foreach($sections as $section){
+                if($section !== '-'){
+                    array_push($section_json, $section);
+                }
+            }
         }
 
         $tc = [
@@ -242,13 +270,13 @@ class TaskcardDecemberImport implements ToModel, WithHeadingRow
             'effectivity' => $row['effectivity'],
             'ata' => $row['ata'],
             'reference' => $reference,
-            'version' => json_encode(explode(';',$row['version'])),
+            'version' => json_encode($version_json, true),
             'description' => $description,
-            'section' => json_encode([]),
+            'section' => json_encode($section_json, true),
             'additionals' => $additionals
         ];
 
-        $taskcard =  new TaskCard($tc);
+        $taskcard = new TaskCard($tc);
 
         $result = $taskcard->save();
 
@@ -266,10 +294,12 @@ class TaskcardDecemberImport implements ToModel, WithHeadingRow
             foreach (explode(';',$row['zone']) as $zone_name ) {
                 foreach ($airplanes as $airplane) {
                     if(isset($zone_name)){
+                        if($zone_name !== '-'){
                             $zone = Zone::firstOrCreate(
                                 ['name' => $zone_name, 'zoneable_id' => $airplane->id, 'zoneable_type' => 'App\Models\Aircraft']
                             );
-                        array_push($zones, $zone->id);
+                            array_push($zones, $zone->id);
+                        }
                     }
                 }
             }
@@ -283,11 +313,12 @@ class TaskcardDecemberImport implements ToModel, WithHeadingRow
             foreach (explode(';',$row['access']) as $access_name ) {
                 foreach ($airplanes as $airplane) {
                     if(isset($access_name)){
-
-                        $access = Access::firstOrCreate(
-                            ['name' => $access_name, 'accessable_id' => $airplane->id, 'accessable_type' => 'App\Models\Aircraft']
-                        );
-                        array_push($accesses, $access->id);
+                        if($access_name !== '-'){
+                            $access = Access::firstOrCreate(
+                                ['name' => $access_name, 'accessable_id' => $airplane->id, 'accessable_type' => 'App\Models\Aircraft']
+                            );
+                            array_push($accesses, $access->id);
+                        }
                     }
                 }
             }

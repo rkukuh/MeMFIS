@@ -4,7 +4,7 @@ let Employee_create_workshift = {
     let create_workshift = $('.footer').on('click', '.create-workshift', function () {
 
         
-        let  workshift = $('#job_position_workshift option:selected').val()
+        let  workshift = $('select[name="job_position_workshift"] option:selected').val()
         let uuid = $('input[name=employee_uuid]').val()
 
             $.ajax({

@@ -13,7 +13,7 @@ $(document).ready(function () {
 
                 $.each(data, function (key, value) {
                     $('#religion').append(
-                        '<option value="' + value + '">' + value + '</option>'
+                        '<option value="' + key + '">' + value + '</option>'
                     );
                 });
             }

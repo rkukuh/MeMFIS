@@ -1,6 +1,6 @@
 let JobPositionWorkShiftSelect2 = {
     init: function () {
-        $('#job_position_workshift, #job_position_workshift_validate').select2({
+        $('select[name="job_position_workshift"], select[name="job_position_workshift"]_validate').select2({
             placeholder: 'Select a Job Position'
         });
     }

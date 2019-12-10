@@ -1,10 +1,6 @@
 @if ($button_parameter == 'create')
 {{-- FORM CREATE --}}
-@component('frontend.common.input.hidden')
-        @slot('id', 'employee_uuid')
-        @slot('name', 'employee_uuid')
-        @slot('value', $employee->uuid)
-@endcomponent
+
 
 <div class="jumbotron p-3" style="background:#294294;">
     <div class="row">
@@ -32,6 +28,33 @@
                     </div>
                     <div>
                         <table width="100%" cellpadding="7">
+                            @foreach($employee_benefit as $key => $benefit)
+                            <tr>
+                                <td align="left" width="30%">{{ $benefit->name }}</td>
+                                    <td align="center" width="25%">
+                                        @component('frontend.common.input.number')
+                                            @slot('min', $benefit->pivot->min)
+                                            @slot('max', $benefit->pivot->max)
+                                            @slot('name', $benefit->uuid.'_amount')
+                                            @slot('id', $benefit->uuid.'_amount')
+                                            @slot('id_error', $benefit->uuid)
+                                        @endcomponent                    
+                                    </td>
+                                    <td  width="30%">
+                                    <p>Min~Max = {{ number_format($benefit->pivot->min, 2) }} - {{ number_format($benefit->pivot->max, 2) }} <br> Calculation Refrence: {{ $benefit->base_calculation }}<br> Pro-rate Base Calculation:  {{ $benefit->prorate_calculation }}</p>
+                                    </td>
+                                    <td align="center" width="15%">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', $benefit->benefit_uuid)
+                                            @slot('name', 'check_benefit')
+                                            @slot('value', $benefit->benefit_uuid)
+                                            @slot('onclik', 'checkboxFunction(this.id)')
+                                            @slot('size', '')
+                                            @slot('style','width:20px;')
+                                        @endcomponent
+                                    </td>
+                                </tr>
+                            @endforeach
                             
                             @for ($i = 0; $i < count($employee_benefit); $i++)
                                 
@@ -84,6 +107,7 @@
                     @component('frontend.common.input.text')
                         @slot('id', 'duration')
                         @slot('name', 'maximum_overtime')
+                        @slot('value', $maximum_overtime)
                         @slot('id_error', 'maximum_overtime')
                     @endcomponent
 
@@ -97,6 +121,7 @@
                     @component('frontend.common.input.text')
                         @slot('id', 'duration_1')
                         @slot('name', 'minimum_overtime')
+                        @slot('value', $minimum_overtime)
                         @slot('id_error', 'minimum_overtime')
                     @endcomponent
 
@@ -113,9 +138,11 @@
                         @slot('id', 'holiday_overtime')
                         @slot('name', 'holiday_overtime')
                         @slot('id_error', 'holiday_overtime')
+                        @slot('value', $employee->department->first()->pivot->overtime_allowance)
                         @slot('input_append','IDR per Day')
                     @endcomponent
                 </div>
+
             </div>
         </fieldset>
     </div>
@@ -304,11 +331,6 @@
 </div>
 @elseif($button_parameter == 'approvals')
 {{-- FORM APPROVAL --}}
-@component('frontend.common.input.hidden')
-        @slot('id', 'employee_uuid')
-        @slot('name', 'employee_uuid')
-        @slot('value', $employee->uuid)
-@endcomponent
 
 <div class="jumbotron p-3" style="background:#294294;">
     <div class="row">
@@ -664,11 +686,6 @@
 </div>
 @else
 {{-- FORM EDIT --}}
-@component('frontend.common.input.hidden')
-        @slot('id', 'employee_uuid')
-        @slot('name', 'employee_uuid')
-        @slot('value', $employee->uuid)
-@endcomponent
 
 <div class="jumbotron p-3" style="background:#294294;">
     <div class="row">
@@ -1145,33 +1162,33 @@
 
                 @if ($button_parameter == 'create')
                     @component('frontend.common.buttons.submit')
-                    @slot('type','button')
-                    @slot('id', 'create-benefit')
-                    @slot('class', 'create-benefit')
+                        @slot('type','button')
+                        @slot('id', 'create-benefit')
+                        @slot('class', 'create-benefit')
                     @endcomponent 
 
                     @include('frontend.common.buttons.reset')
                 @elseif ($button_parameter == 'approvals')
                     @component('frontend.common.buttons.submit')     
-                    @slot('type','button')
-                    @slot('text','Approve')
-                    @slot('icon','fa-check')
-                    @slot('id', 'approve_benefit')
-                    @slot('class', 'approve_benefit')
+                        @slot('type','button')
+                        @slot('text','Approve')
+                        @slot('icon','fa-check')
+                        @slot('id', 'approve_benefit')
+                        @slot('class', 'approve_benefit')
                     @endcomponent
 
                     @component('frontend.common.buttons.submit')     
-                    @slot('type','button')
-                    @slot('text','Reject')
-                    @slot('id', 'reject_benefit')
-                    @slot('icon','fa fa-times-circle')
-                    @slot('class', 'bg-warning text-dark')
+                        @slot('type','button')
+                        @slot('text','Reject')
+                        @slot('id', 'reject_benefit')
+                        @slot('icon','fa fa-times-circle')
+                        @slot('class', 'bg-warning text-dark')
                     @endcomponent
                 @else
                     @component('frontend.common.buttons.submit')
-                    @slot('type','button')
-                    @slot('id', 'edit-benefit')
-                    @slot('class', 'edit-benefit')
+                        @slot('type','button')
+                        @slot('id', 'edit-benefit')
+                        @slot('class', 'edit-benefit')
                     @endcomponent
 
                     @include('frontend.common.buttons.reset')

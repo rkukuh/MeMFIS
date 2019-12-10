@@ -182,13 +182,13 @@ class Status extends MemfisModel
      * One-to-Many: A marital status have zero or many Employees.
      *
      * This function will retrieve employees of a given Marital Status.
-     * See: employee_marital's employee() method for the inverse
+     * See: employee_marital's marital_status() method for the inverse
      *
      * @return mixed
      */
     public function employee_marital()
     {
-        return $this->hasMany(Employee::class, 'marital_id');
+        return $this->hasMany(Employee::class);
     }
 
     /**

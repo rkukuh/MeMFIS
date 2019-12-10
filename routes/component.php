@@ -34,6 +34,7 @@ Route::name('component.')->group(function () {
         Route::get('get-taskcards', 'FillComboxController@taskcard')->name('get-taskcards');
         Route::get('get-religions', 'FillComboxController@religions')->name('get-religions');
         Route::get('get-tools-uuid', 'FillComboxController@toolUuid')->name('get-tool-uuid');
+        Route::get('get-countries', 'FillComboxController@countries')->name('get-countries');
         Route::get('get-items-uuid', 'FillComboxController@itemUUID')->name('get-items-uuid');
         Route::get('get-task-types', 'FillComboxController@taskType')->name('get-task-types');
         Route::get('get-unit-types', 'FillComboxController@unitType')->name('get-unit-types');
@@ -49,7 +50,9 @@ Route::name('component.')->group(function () {
         Route::get('get-part-number', 'FillComboxController@partNumber')->name('get-part-number');
         Route::get('get-recurrences', 'FillComboxController@recurrence')->name('get-recurrences');
         Route::get('get-storages', 'FillComboxController@storageUUID')->name('get-storages-uuid');
+        Route::get('get-supervisors', 'FillComboxController@supervisors')->name('get-supervisors');
         Route::get('get-storages-combobox', 'FillComboxController@storages')->name('get-storages');
+        Route::get('get-departments', 'FillComboxController@departments')->name('get-departments');
         Route::get('get-repeat-types', 'FillComboxController@repeatType')->name('get-repeat-types');
         Route::get('get-categories-item', 'FillComboxController@categories')->name('get-categories');
         Route::get('get-inventory-in', 'FillComboxController@inventoryIn')->name('get-inventory-in');
@@ -61,14 +64,14 @@ Route::name('component.')->group(function () {
         Route::get('get-employees-data', 'FillComboxController@employees')->name('get-employees-data');
         Route::get('get-address-types', 'FillComboxController@addressType')->name('get-address-types');
         Route::get('get-job-positions', 'FillComboxController@jobpositions')->name('get-job-positions');
-        Route::get('get-manufacturers', 'FillComboxController@manufacturer')->name('get-manufacturers');
-        Route::get('get-marital-status', 'FillComboxController@maritalStatus')->name('get-marital-status');
+        Route::get('get-manufacturers', 'FillComboxController@manufacturers')->name('get-manufacturers');
         Route::get('get-inventory-out', 'FillComboxController@inventoryOut')->name('get-inventory-out');
         Route::get('get-takcard-types', 'FillComboxController@taskcardType')->name('get-takcard-types');
         Route::get('get-nationalities', 'FillComboxController@nationalities')->name('get-nationalities');
         Route::get('get-iterchanges/{item}', 'FillComboxController@iterchange')->name('get-iterchanges');
         Route::get('get-materials-uuid', 'FillComboxController@materialUuid')->name('get-material-uuid');
         Route::get('get-employees-uuid', 'FillComboxController@employeeUuid')->name('get-employees-uuid');
+        Route::get('get-marital-status', 'FillComboxController@maritalStatus')->name('get-marital-status');
         Route::get('get-purchase-order', 'FillComboxController@purchaseOrder')->name('get-purchase-order');
         Route::get('get-customer-level', 'FillComboxController@customerLevel')->name('get-customer-level');
         Route::get('get-threshold-types', 'FillComboxController@thresholdType')->name('get-threshold-types');
@@ -90,6 +93,7 @@ Route::name('component.')->group(function () {
         Route::get('get-aircraft-taskcards', 'FillComboxController@aircraftTaskcard')->name('get-aircraft-taskcards');
         Route::get('get-project-additionals', 'FillComboxController@projectAdditional')->name('get-project-additional');
         Route::get('get-categories-material', 'FillComboxController@categoriesMaterial')->name('get-categoriesMaterial');
+        Route::get('get-employment-statuses', 'FillComboxController@employmentStatuses')->name('get-employment-statuses');
         Route::get('get-scheduled-priorities', 'FillComboxController@scheduledPriority')->name('get-scheduled-priorities');
         Route::get('get-tool-request-jobcard', 'FillComboxController@toolRequestJobCard')->name('get-tool-request-jobcard');
         Route::get('get-tool-request-workshop', 'FillComboxController@toolRequestWorkshop')->name('get-tool-request-workshop');
