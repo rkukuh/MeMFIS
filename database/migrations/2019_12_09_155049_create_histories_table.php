@@ -15,10 +15,12 @@ class CreateHistoriesTable extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
             $table->morphs('historiable');
             $table->json('data')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->timestamps();
+            $table->timestamps();       
+            $table->softDeletes();
             
             $table->foreign('user_id')
                 ->references('id')->on('users')
