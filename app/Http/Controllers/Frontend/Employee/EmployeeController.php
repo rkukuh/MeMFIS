@@ -1133,7 +1133,8 @@ class EmployeeController extends Controller
 
         $minimum_overtime = Carbon::createFromTimeString($employee->department->first()->pivot->overtime_threshold)->secondsSinceMidnight();
         $maximum_overtime = ($employee->department->first()->pivot->maximum_overtime_period * 3600);
-        // dd($minimum_overtime);
+        $employee_benefit = $employee->position->benefits;
+        // dd($employee->position->benefits->first()->pivot->min);
         return view('frontend.employee.employee.edit',[
             'employee' => $employee,
             'age' => $age,

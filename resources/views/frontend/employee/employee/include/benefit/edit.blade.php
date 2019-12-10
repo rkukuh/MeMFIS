@@ -28,6 +28,33 @@
                     </div>
                     <div>
                         <table width="100%" cellpadding="7">
+                            @foreach($employee_benefit as $key => $benefit)
+                            <tr>
+                                <td align="left" width="30%">{{ $benefit->name }}</td>
+                                    <td align="center" width="25%">
+                                        @component('frontend.common.input.number')
+                                            @slot('min', $benefit->pivot->min)
+                                            @slot('max', $benefit->pivot->max)
+                                            @slot('name', $benefit->uuid.'_amount')
+                                            @slot('id', $benefit->uuid.'_amount')
+                                            @slot('id_error', $benefit->uuid)
+                                        @endcomponent                    
+                                    </td>
+                                    <td  width="30%">
+                                    <p>Min~Max = {{ number_format($benefit->pivot->min, 2) }} - {{ number_format($benefit->pivot->max, 2) }} <br> Calculation Refrence: {{ $benefit->base_calculation }}<br> Pro-rate Base Calculation:  {{ $benefit->prorate_calculation }}</p>
+                                    </td>
+                                    <td align="center" width="15%">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', $benefit->benefit_uuid)
+                                            @slot('name', 'check_benefit')
+                                            @slot('value', $benefit->benefit_uuid)
+                                            @slot('onclik', 'checkboxFunction(this.id)')
+                                            @slot('size', '')
+                                            @slot('style','width:20px;')
+                                        @endcomponent
+                                    </td>
+                                </tr>
+                            @endforeach
                             
                             @for ($i = 0; $i < count($employee_benefit); $i++)
                                 
