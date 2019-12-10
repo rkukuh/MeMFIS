@@ -23,6 +23,7 @@ use Spatie\Permission\Models\Role;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Frontend\EmployeeStore;
@@ -1182,34 +1183,6 @@ class EmployeeController extends Controller
     {
         $time_update = Carbon::now();
 
-        $history_data = [
-            'code' => $employee->code,
-            'first_name' => $employee->first_name,
-            'last_name' => $employee->last_name,
-            'dob' => $employee->dob,
-            'dob_place' => $employee->dob_place,
-            'gender' => $employee->gender,
-            'religion' => $employee->religion,
-            'marital_status' => $employee->marital_status,
-            'nationality' => $employee->nationality,
-            'country' => $employee->country,
-            'city' => $employee->city,
-            'zip' => $employee->zip,
-            'joined_date' => $employee->joined_date,
-            'job_title_id' => $employee->job_title_id,
-            'position_id' => $employee->position_id,
-            'department' => $employee->department->first(),
-            'statuses_id' => $employee->statuses,
-            'indirect_supervisor_id' => $employee->indirect_supervisor,
-            'supervisor_id' => $employee->supervisor,
-            'created_at' => $employee->created_at->toDateTimeString(),
-            'updated_at' => $time_update,
-        ];
-
-        /** todo checking history data */
-        // dd($history_data);
-
-
         $employee->addresses()->whereNull('addresses.updated_at')->update([
             'updated_at' => $time_update
         ]);
@@ -1225,6 +1198,9 @@ class EmployeeController extends Controller
         $employee->documents()->whereNull('documents.updated_at')->update([
             'updated_at' => $time_update
         ]);
+
+        $employee->update($request->all());
+
 
         $employee->history()->create([
             'code' => $employee->code,
@@ -1248,7 +1224,7 @@ class EmployeeController extends Controller
             'created_at' => $employee->created_at->toDateTimeString(),
             'updated_at' => $time_update,
         ]);
-
+        
         $history_data = [[
             'code' => $employee->code,
             'first_name' => $employee->first_name,
@@ -1258,22 +1234,25 @@ class EmployeeController extends Controller
             'gender' => $employee->gender,
             'religion' => $employee->religion,
             'marital_status' => $employee->marital_status,
-            'nationality' => $employee->nationality,
+            'nationality' => $employee->nationalities->first(),
             'country' => $employee->country,
             'city' => $employee->city,
-            'zip' => $employee->zip_code,
+            'zip' => $employee->zip,
             'joined_date' => $employee->joined_date,
-            'job_title_id' => $employee->job_title_id,
-            'position_id' => $employee->position_id,
+            'job_title' => $employee->job_title,
+            'position' => $employee->position,
             'depatment' => $employee->department->first(),
-            'statuses_id' => $employee->statuses_id,
-            'indirect_supervisor_id' => $employee->indirect_supervisor_id,
-            'supervisor_id' => $employee->supervisor_id,
+            'statuses' => $employee->statuses,
+            'indirect_supervisor' => $employee->indirect_supervisor,
+            'supervisor' => $employee->supervisor,
             'created_at' => $employee->created_at->toDateTimeString(),
             'updated_at' => $time_update,
         ]];
 
-        $employee->data_histories()->create();
+        $employee->data_histories()->create([
+            'user_id' => Auth::id(),
+            'data' => json_encode($history_data)
+        ]);
 
         $employee->addresses()->create([
             'address' => $request->address_line_1,
@@ -1350,7 +1329,7 @@ class EmployeeController extends Controller
             ]);
         }
 
-            $employee->update([
+        $employee->update([
             'code' => $request->code,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -1364,11 +1343,6 @@ class EmployeeController extends Controller
             'city' => $request->city,
             'zip' => $request->zip_code,
             'joined_date' => $request->joined_date,
-            'job_title_id' => $job_title,
-            'position_id' => $position,
-            'statuses_id' => $statuses,
-            'indirect_supervisor_id' => $indirect,
-            'supervisor_id' => $supervisor,
             'created_at' => $time_update,
             'updated_at' => $time_update,
         ]);
@@ -1377,10 +1351,14 @@ class EmployeeController extends Controller
             $employee->addMedia($request->document)->toMediaCollection('id_card');
         }
 
-        $current_department = $employee->department->first()->id;
-        $employee->department()->updateExistingPivot($current_department, ['deleted_at' => Carbon::now()   ]);
-
+        $current_department = null;
+        if(sizeof($employee->department) > 0){
+            $current_department = $employee->department->first()->id;
+        }
+        
+        
         if($current_department <> $request->department_id){
+            $employee->department()->updateExistingPivot($current_department, ['deleted_at' => Carbon::now()]);
             $employee->department()->attach($request->department_id, [
                 'joined_at' => $time_update,
                 'left_at' => $request->left_at,
@@ -1388,7 +1366,17 @@ class EmployeeController extends Controller
                 'overtime_threshold' => Carbon::createMidnightDate($time_update->year, $time_update->month, $time_update->day)->addHours($request->minimum_overtime),
                 'overtime_allowance' => $request->holiday_overtime
             ]);
-        }else{
+        }elseif(empty($current_department)){
+            $department = Department::where('id',$request->department_id)->first();
+            $employee->department()->attach($request->department_id, [
+                'joined_at' => $time_update,
+                'left_at' => $request->left_at,
+                'maximum_overtime_period' => $department->maximum_overtime,
+                'overtime_threshold' => Carbon::createMidnightDate($time_update->year, $time_update->month, $time_update->day)->addHours(6),
+                'overtime_allowance' => $department->holiday_overtime
+            ]);
+        }
+        else{
             $employee->department()->updateExistingPivot($request->department_id, [
                 'joined_at' => $time_update,
                 'left_at' => $request->left_at,
