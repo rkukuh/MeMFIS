@@ -340,7 +340,15 @@ class Employee extends MemfisModel implements HasMedia
      */
     public function department()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsToMany(Department::class)
+                        ->withPivot(
+                            'joined_at',
+                            'left_at',
+                            'maximum_overtime_period',
+                            'overtime_threshold',
+                            'overtime_allowance'
+                            )
+                        ->withTimestamps();
     }
 
     /**
