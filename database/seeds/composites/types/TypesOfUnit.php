@@ -29,5 +29,11 @@ class TypesOfUnit extends Seeder
             'name' => 'Weight',
             'of'   => 'unit',
         ]);
+
+        Type::create([
+            'code' => 'service',
+            'name' => 'Service',
+            'of'   => 'unit',
+        ]);
     }
 }

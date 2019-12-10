@@ -31,7 +31,25 @@
 	rel="stylesheet">
 <link
 	href="//cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css"
-	rel="stylesheet">
+    rel="stylesheet">
+    <style>
+        .dataTables_paginate a{
+            color: #5867dd !important;
+            padding: 0 10px;
+        }
+        .dataTables_info{
+            margin-top:-10px;
+            margin-left:10px;
+        }
+        .dataTables_length{
+            margin-top:-30px;
+            visibility: hidden;
+        }
+        .dataTables_length select{
+            margin-top:30px;
+            visibility: visible;
+        }
+    </style>
 @endpush
 
 @push('footer-scripts')

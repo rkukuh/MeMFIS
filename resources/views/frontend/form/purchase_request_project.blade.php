@@ -169,7 +169,7 @@
                     <tr>
                         <td valign="top" align="center" width="6%">{{$i++}}</td>
                         <td valign="top" align="center" width="21%">{{$item->item->code}}</td>
-                        <td valign="top" width="31%">{{$item->item->description}} </th>
+                        <td valign="top" width="31%">{{$item->item->name}} </th>
                         <td valign="top" align="center" width="8%">{{$item->quantity}}</td>
                         <td valign="top" align="center" width="8%">{{$item->unit->name}}</td>
                         <td valign="top" width="26%">{{$item->note}}</td>

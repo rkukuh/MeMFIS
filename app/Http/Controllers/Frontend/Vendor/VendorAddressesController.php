@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Vendor;
 
-use App\Models\Service;
+use App\Models\Vendor;
+use App\Models\Address;
+use App\Models\Type;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\ServiceStore;
-use App\Http\Requests\Frontend\ServiceUpdate;
 
-class ServiceController extends Controller
+class VendorAddressesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,21 +33,26 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ServiceStore  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ServiceStore $request)
+    public function store(Vendor $vendor, Request $request)
     {
-        //
+        $address_type = Type::where('of','address')->where('name','Company')->first();
+        $vendor->addresses()->save(new Address([
+            'address' => $request->address,
+            'type_id' => $address_type->id
+        ]));
+        return response()->json($request);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $service)
+    public function show(Vendor $vendor)
     {
         //
     }
@@ -54,10 +60,10 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Service $service)
+    public function edit(Vendor $vendor)
     {
         //
     }
@@ -65,11 +71,11 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ServiceUpdate  $request
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Vendor  $vendor
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(ServiceUpdate $request, Service $service)
+    public function update(Request $request, Vendor $vendor)
     {
         //
     }
@@ -77,10 +83,10 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy(Vendor $vendor)
     {
         //
     }

@@ -61,6 +61,7 @@ class FillComboxController extends Controller
     public function categories()
     {
         $categories = Category::ofItem()
+            ->where('code', '<>', 'service')
             ->pluck('name', 'id');
 
         return json_encode($categories);
@@ -76,6 +77,7 @@ class FillComboxController extends Controller
     {
         $categories = Category::ofItem()
             ->where('code', '<>', 'tool')
+            ->where('code', '<>', 'service')
             ->pluck('name', 'id');
 
         return json_encode($categories);
@@ -179,7 +181,7 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tags()
+    public function tagItem()
     {
         $tags = Tag::get()->pluck('name', 'id');
 
@@ -192,8 +194,38 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function units()
+    public function tagService()
     {
+        $tags = Tag::where('type','service')->get()->pluck('name', 'id');
+
+        return json_encode($tags);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function unitItem()
+    {
+        $type = Type::ofUnit()->where('code','service')->first()->id;
+        $units = Unit::where('type_id','<>',$type)->selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
+            ->pluck('name', 'id');
+
+        return json_encode($units);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function unitService()
+    {
+        // $type = Type::ofUnit()->where('code','service')->first()->id;
+        // $units = Unit::where('type_id',$type)->selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
         $units = Unit::selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
             ->pluck('name', 'id');
 
@@ -981,7 +1013,7 @@ class FillComboxController extends Controller
      */
     public function projectPurchaseRequest()
     {
-        $projects = Project::has('quotations')->whereDoesntHave('purchase_requests')->pluck('title', 'uuid');
+        $projects = Project::has('quotations')->whereDoesntHave('purchase_requests')->pluck('code', 'uuid');
 
         return json_encode($projects);
     }

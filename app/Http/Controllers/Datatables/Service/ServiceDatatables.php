@@ -27,13 +27,9 @@ class ServiceDatatables extends Controller
         //                 })->get();
 
         //6-10s
-        $items =  DB::table('items')
-                    ->join('categorizables', 'categorizables.categorizable_id', '=', 'items.id')
-                    ->join('categories','categories.id', '=', 'categorizables.category_id')
-                    ->where('categories.name','tool')
-                    ->where('categorizables.categorizable_type','App\Models\Item')
-                    ->WhereNull('items.deleted_at')
-                    ->select('items.*', 'categories.name as category_name')
+        $items =  DB::table('services')
+                    ->WhereNull('services.deleted_at')
+                    ->select('services.*')
                     ->get();
 
         return Datatables::of($items)->make();
@@ -145,9 +141,9 @@ class ServiceDatatables extends Controller
         }
 
         // get all raw data
-        $items = Item::with('unit', 'categories')
+        $items = Service::with('unit', 'categories')
                 ->whereHas('categories', function ($query) {
-                    $query->where('code', 'tool');
+                    $query->where('code', 'service');
                 })->take('100')->get();
 
         $alldata = json_decode( $items, true);

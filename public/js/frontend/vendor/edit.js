@@ -6,7 +6,7 @@ let Vendor = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '',
+                        url: '/datatables/vendor/'+ vendor_uuid +'/addresses',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -264,7 +264,7 @@ let Vendor = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'POST',
-                url: '/customer/' + customer_uuid + '/addresses',data: {
+                url: '/vendor/' + vendor_uuid + '/addresses',data: {
                     _token: $('input[name=_token]').val(),
                     address:address,
                     address_type: address_type
@@ -282,12 +282,12 @@ let Vendor = {
                     } else {
                         $('#modal_address').modal('hide');
 
-                        let table = $('.customer_address_datatable').mDatatable();
+                        let table = $('.vendor_address_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success("Vendor's Address has been created.", 'Success', {
                             timeOut: 5000
                         });
                     }

@@ -39,6 +39,7 @@ require('frontend/rii.php');
 require('frontend/rir.php');
 require('frontend/rts.php');
 require('frontend/stock-monitoring.php');
+require('frontend/service.php');
 require('frontend/task-release.php');
 require('frontend/taskcard.php');
 require('frontend/view-only.php');
