@@ -10,8 +10,8 @@ class DocumentNumber
         $date = Carbon::now()->format('Y/m');
 
         $number = '00000' . $count;
-        
-        $doc_number = $date . '/' . substr($number, strlen($number - 1));
+
+        $doc_number = $date . '/' . substr($number, strlen($count));
 
         return $doc_number;
     }

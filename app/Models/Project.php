@@ -224,4 +224,17 @@ class Project extends MemfisModel
                     ->wherePivot('deleted_at', null)
                     ->withTimestamps();
     }
+
+    /**
+     * Polymorphic: An entity can have zero or many requests.
+     *
+     * This function will get all Jobcard's requests.
+     * See: requests's requestable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function requests()
+    {
+        return $this->morphMany(ItemRequest::class, 'requestable');
+    }
 }

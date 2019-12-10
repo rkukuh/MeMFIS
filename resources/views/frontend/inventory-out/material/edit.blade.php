@@ -202,7 +202,7 @@
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
-
+                                                @include('frontend.common.item.modal')
                                                 @include('frontend.common.buttons.back')
 
                                             </div>

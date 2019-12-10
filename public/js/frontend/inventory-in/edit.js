@@ -122,7 +122,7 @@ let InventoryInCreate = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_item" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Edit" data-item=' + 
-                            t.uuid + ' data-date='+ t.pivot.expired_at +' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-remark=' + t.pivot.description +' data-serial='+ t.pivot.serial_number +'>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            t.uuid + ' data-date=' + t.pivot.expired_at +' data-item_code='+ t.code +' data-item_name='+ t.name +' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-remark=' + t.pivot.description +' data-serial='+ t.pivot.serial_number +'>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
                             '</a>'
@@ -144,10 +144,10 @@ let InventoryInCreate = {
 
             });
 
-            let item = $("#item").val();
+            let item = $("#material").val();
             let quantity = $("input[name=qty]").val();
             let exp_date = $("#exp_date").val();
-            let unit = $("#unit_id").val();
+            let unit = $("#unit_material").val();
             let remark = $("#item_remark").val();
             if ($("#is_serial_number").is(":checked")) {
                 if (serial_numbers.length < quantity) {
@@ -178,26 +178,38 @@ let InventoryInCreate = {
                     remark: remark,
                 },
                 success: function (response) {
-                    $('#modal_item').modal('hide');
+                    if (response.errors) {
+                        if (response.errors.quantity) {
+                            $('#quantity-error').html(response.errors.quantity[0]);
+                        }
+                    } else {
+                        if (response.title == "Danger") {
+                            toastr.error("Item already exists!", "Error", {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $('#modal_item').modal('hide');
 
-                    $('#modal_item').on('hidden.bs.modal', function (e) {
-                        $(this)
-                            .find("input,textarea")
-                            .val('')
-                            .end()
-                            .find("select")
-                            .select2('val', 'All')
-                            .end();
-                    });
+                            $('#modal_item').on('hidden.bs.modal', function (e) {
+                                $(this)
+                                    .find("input,textarea")
+                                    .val('')
+                                    .end()
+                                    .find("select")
+                                    .select2('val', 'All')
+                                    .end();
+                            });
 
-                    toastr.success("Item has been added.", "Success", {
-                        timeOut: 5000
-                    });
+                            toastr.success("Item has been added.", "Success", {
+                                timeOut: 5000
+                            });
 
-                    let table = $(".item_datatable").mDatatable();
+                            let table = $(".item_datatable").mDatatable();
 
-                    table.originalDataSet = [];
-                    table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
+                    }
                 }
             });
         });
@@ -205,6 +217,14 @@ let InventoryInCreate = {
         $('.item_datatable').on('click', '.edit-item', function () {
             let item_uuid = $(this).data('item');
             let unit_id = $(this).data('unit');
+            let code = $(this).data('item_code');
+            let name = $(this).data('item_name');
+
+            $('.input-item-uuid').val($(this).data('item'));
+
+            $('.search-item').html(code + " - " + name);
+
+            $("#item").attr('disabled', true);
 
             $.ajax({
                 url: '/get-items-uuid/',
@@ -228,7 +248,7 @@ let InventoryInCreate = {
                     });
                 }
             });
-            $("#item").attr('disabled', true);
+            $("#material").attr('disabled', true);
 
             $.ajax({
                 url: '/get-item-unit-uuid/' + $(this).data('item'),
@@ -236,15 +256,15 @@ let InventoryInCreate = {
                 dataType: 'json',
                 success: function (data) {
 
-                    $('select[name="unit_id"]').empty();
+                    $('select[name="unit_material"]').empty();
 
                     $.each(data, function (key, value) {
                         if (key == unit_id) {
-                            $('select[name="unit_id"]').append(
+                            $('select[name="unit_material"]').append(
                                 '<option value="' + key + '" selected>' + value + '</option>'
                             );
                         } else {
-                            $('select[name="unit_id"]').append(
+                            $('select[name="unit_material"]').append(
                                 '<option value="' + key + '">' + value + '</option>'
                             );
                         }
@@ -263,10 +283,10 @@ let InventoryInCreate = {
         });
 
         $(".modal-footer").on("click", ".update-item", function () {
-            let item = $("#item").val();
+            let item = $("#material").val();
             let quantity = $("input[name=qty]").val();
             let exp_date = $("#exp_date").val();
-            let unit = $("#unit_id").val();
+            let unit = $("#unit_material").val();
             let remark = $("#item_remark").val();
             let serial_no = $("#serial_no").val();
 
@@ -397,27 +417,27 @@ jQuery(document).ready(function () {
 $("#is_serial_number").on("change", function () {
     if ($(this).is(":checked")) {
         $('.serial_numbers').removeClass("hidden");
-        $('#unit_id').prop('disabled', true);
+        $('#unit_material').prop('disabled', true);
     } else {
         $('.serial_numbers').addClass("hidden");
         $('.serial_number_inputs').html('');
-        $('#unit_id').prop('disabled', false);
+        $('#unit_material').prop('disabled', false);
     }
 });
 $("#is_serial_number_edit").on("change", function () {
     if ($(this).is(":checked")) {
         // $('.serial_numbers').removeClass("hidden");
-        $('#unit_id').prop('disabled', true);
+        $('#unit_material').prop('disabled', true);
     } else {
         // $('.serial_numbers').addClass("hidden");
         // $('.serial_number_inputs').html('');
-        $('#unit_id').prop('disabled', false);
+        $('#unit_material').prop('disabled', false);
     }
 });
 
-$("#item").on("change", function () {
-    let item_uuid = $("#item").val();
-
+$("#search-item").on("change", function () {
+    let item_uuid = $("#material").val();
+    console.log(item_uuid);
     $.ajax({
         url: '/get-item-unit-uuid/' + item_uuid,
         type: 'GET',

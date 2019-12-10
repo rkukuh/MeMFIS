@@ -122,7 +122,7 @@ let InventoryOutCreate = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_item" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Edit" data-item=' +
-                            t.uuid + ' data-date=' + t.pivot.expired_at + ' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-serial=' + t.pivot.serial_number + ' data-remark=' + t.pivot.description + '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            t.uuid + ' data-item_code='+ t.code +' data-item_name='+ t.name +' data-date=' + t.pivot.expired_at + ' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-serial=' + t.pivot.serial_number + ' data-remark=' + t.pivot.description + '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                             '<i class="la la-trash"></i>' +
                             '</a>'
@@ -137,8 +137,8 @@ let InventoryOutCreate = {
             let tool = $("#tool").val();
             let quantity = $("input[name=qty_request]").val();
             let exp_date = $("#exp_date").val();
-            let unit = $("#unit_id").val();
-            let remark = $("#remark").val();
+            let unit = $("#unit_tool").val();
+            let remark = $("#item_remark").val();
             let serial_no = $("#serial_no").val();
 
             $.ajax({
@@ -156,26 +156,38 @@ let InventoryOutCreate = {
                     remark: remark,
                 },
                 success: function (response) {
-                    $('#modal_item').modal('hide');
+                    if (response.errors) {
+                        if (response.errors.quantity) {
+                            $('#quantity-error').html(response.errors.quantity[0]);
+                        }
+                    } else {
+                        if (response.title == "Danger") {
+                            toastr.error("Item already exists!", "Error", {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $('#modal_item').modal('hide');
 
-                    $('#modal_item').on('hidden.bs.modal', function (e) {
-                        $(this)
-                            .find("input,textarea")
-                            .val('')
-                            .end()
-                            .find("select")
-                            .select2('val', 'All')
-                            .end();
-                    });
+                            $('#modal_item').on('hidden.bs.modal', function (e) {
+                                $(this)
+                                    .find("input,textarea")
+                                    .val('')
+                                    .end()
+                                    .find("select")
+                                    .select2('val', 'All')
+                                    .end();
+                            });
 
-                    toastr.success("Item has been added.", "Success", {
-                        timeOut: 5000
-                    });
+                            toastr.success("Item has been added.", "Success", {
+                                timeOut: 5000
+                            });
 
-                    let table = $(".item_datatable").mDatatable();
+                            let table = $(".item_datatable").mDatatable();
 
-                    table.originalDataSet = [];
-                    table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
+                    }
                 }
             });
         });
@@ -183,29 +195,13 @@ let InventoryOutCreate = {
         $('.item_datatable').on('click', '.edit-item', function () {
             let item_uuid = $(this).data('item');
             let unit_id = $(this).data('unit');
+            let code = $(this).data('item_code');
+            let name = $(this).data('item_name');
 
-            $.ajax({
-                url: '/get-tools-uuid/',
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
+            $('.input-tool-uuid').val($(this).data('item'));
 
-                    $('select[name="tool"]').empty();
+            $('.search-tool').html(code + " - " + name);
 
-                    $.each(data, function (key, value) {
-                        if (key == item_uuid) {
-                            $('select[name="tool"]').append(
-                                '<option value="' + key + '" selected>' + value + '</option>'
-                            );
-                        } else {
-                            $('select[name="tool"]').append(
-                                '<option value="' + key + '">' + value + '</option>'
-                            );
-                        }
-
-                    });
-                }
-            });
             $("#tool").attr('disabled', true);
 
             $.ajax({
@@ -218,11 +214,11 @@ let InventoryOutCreate = {
 
                     $.each(data, function (key, value) {
                         if (key == unit_id) {
-                            $('select[name="unit_id"]').append(
+                            $('select[name="unit_tool"]').append(
                                 '<option value="' + key + '" selected>' + value + '</option>'
                             );
                         } else {
-                            $('select[name="unit_id"]').append(
+                            $('select[name="unit_tool"]').append(
                                 '<option value="' + key + '">' + value + '</option>'
                             );
                         }
@@ -245,8 +241,8 @@ let InventoryOutCreate = {
             let tool = $("#tool").val();
             let quantity = $("input[name=qty_request]").val();
             let exp_date = $("#exp_date").val();
-            let unit = $("#unit_id").val();
-            let remark = $("#remark").val();
+            let unit = $("#unit_tool").val();
+            let remark = $("#item_remark").val();
             let serial_no = $("#serial_no").val();
 
             $.ajax({
@@ -336,7 +332,7 @@ let InventoryOutCreate = {
 
         $('.footer').on('click', '.update-inventory-out', function () {
             let ref_no = $('input[name=ref_no]').val();
-            let description = $('#remark').val();
+            let description = $('#item_remark').val();
             let section_code = $('input[name=section_code]').val();
             let storage_id = $('#item_storage_id').val();
             let date = $('input[name=date]').val();
@@ -404,34 +400,15 @@ $("#tool").change(function () {
             $("#exp_date").val(data);
         }
     });
-
-    $.ajax({
-        url: '/get-item-unit-uuid/' + item_uuid,
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            $('select[name="unit_id"]').empty();
-
-            $('select[name="unit_id"]').append(
-                '<option value=""> Select a Unit</option>'
-            );
-
-            $.each(data, function (key, value) {
-                $('select[name="unit_id"]').append(
-                    '<option value="' + key + '">' + value + '</option>'
-                );
-            });
-        }
-    });
 });
 
 $("#serial_no").change(function () {
     if ($("#serial_no").val() !== '') {
         $("input[name=qty_request]").val(1);
         $("input[name=qty_request]").prop('disabled', true);
-        $('#unit_id').prop('disabled', true);
+        $('#unit_tool').prop('disabled', true);
     } else {
         $("input[name=qty_request]").prop('disabled', false);
-        $('#unit_id').prop('disabled', false);
+        $('#unit_tool').prop('disabled', false);
     }
 });
