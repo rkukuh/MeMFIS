@@ -11,7 +11,11 @@ let MaterialRequestEdit = {
         //     $('#ref_project').removeAttr("disabled");
         // });
 
-        $('#ref_project').text(project_code);
+        if (jobcard_number == '') {
+            $('#ref_project').text(project_code);
+        }
+
+        $('#ref_jobcard').text(jobcard_number);
 
         function generate(type, uuid) {
             if (type == 'jc') {

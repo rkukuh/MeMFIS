@@ -304,6 +304,8 @@
     let request_uuid = '{{ $itemRequest->uuid }}';
     let project_code = '{{ $project->code }}';
     let project_uuid = '{{ $project->uuid }}';
+    let jobcard_number = '{{ $jobcard->number ?? null }}';
+    let jobcard_uuid = '{{ $jobcard->uuid ?? null }}';
 </script>
 
 <script src="{{ asset('js/frontend/material-request-jobcard/edit.js') }}"></script>

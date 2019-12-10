@@ -54,18 +54,21 @@ class MaterialRequestController extends Controller
             ->first();
         
         $ref = 'App\Models\JobCard';
+        $jobcard = JobCard::where('uuid', $request->jc_no)->first();
+        $refId = $jobcard->id;
+
         if (empty($request->jc_no)) {
             $ref = 'App\Models\Project';
+            $refId = Project::where('uuid', $request->project_no)->first()->id;
         }
 
         $request->merge(['number' => DocumentNumber::generate('MTRQ-', ItemRequest::withTrashed()->count() + 1)]);
         $request->merge(['type_id' => $type]);
         $request->merge(['requestable_type' => $ref]);
-        $request->merge(['requestable_id' => ItemRequest::withTrashed()->count() + 1]);
+        $request->merge(['requestable_id' => $refId]);
 
         $itemRequest = ItemRequest::create($request->all());
-
-        $jobcard = JobCard::where('uuid', $request->jc_no)->first();
+        $defectcards = [];
 
         if (!$jobcard) {
             $project = Project::where('uuid', $request->project_no)->first();
@@ -122,10 +125,15 @@ class MaterialRequestController extends Controller
      */
     public function edit(ItemRequest $itemRequest)
     {
-        $id = JobCard::where('uuid', '5e25fd15-d47f-4700-8356-5643a0de7872')->first()->quotation_id;
-        $quo = Quotation::where('id', $id)->first();
-        dd($quo->quotationable->code);
         $project = $itemRequest->requestable;
+        $quo = Quotation::where('id', $project->quotation_id)->first();
+        $jobcard = null;
+
+        if ($quo) {
+            $jobcard = $project;
+            $project = $quo->quotationable;
+        }
+
         $storages = Storage::get();
         $employees = Employee::get();
 
@@ -134,6 +142,7 @@ class MaterialRequestController extends Controller
             'employees' => $employees,
             'itemRequest' => $itemRequest,
             'project' => $project,
+            'jobcard' => $jobcard,
         ]);
     }
 
