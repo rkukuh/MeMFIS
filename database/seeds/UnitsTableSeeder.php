@@ -156,7 +156,7 @@ class UnitsTableSeeder extends Seeder
             'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
         ]);
 
-    
+
         /** WEIGHT / VOLUME */
 
         Unit::create([
@@ -206,6 +206,39 @@ class UnitsTableSeeder extends Seeder
             'symbol' => 'ons',
             'type_id' => Type::ofUnit()->where('code', 'weight')->first()->id,
         ]);
-       
+
+
+        /** SERVICE */
+
+        Unit::create([
+            'name' => 'Trip',
+            'symbol' => 'trip',
+            'type_id' => Type::ofUnit()->where('code', 'service')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Days',
+            'symbol' => 'days',
+            'type_id' => Type::ofUnit()->where('code', 'service')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Hours',
+            'symbol' => 'hours',
+            'type_id' => Type::ofUnit()->where('code', 'service')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Works',
+            'symbol' => 'works',
+            'type_id' => Type::ofUnit()->where('code', 'service')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Packages',
+            'symbol' => 'packages',
+            'type_id' => Type::ofUnit()->where('code', 'service')->first()->id,
+        ]);
+
     }
 }

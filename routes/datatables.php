@@ -19,7 +19,9 @@ Route::name('datatables.')->group(function () {
 
         /** MASTER */
 
-        Route::get('/vendor', 'VendorDatatables@index')->name('vendor.index');
+        Route::get('/vendor', 'Vendor\VendorDatatables@index')->name('vendor.index');
+        Route::get('/vendor/{vendor}/addresses', 'Vendor\VendorAddressesDatatables@index')->name('vendor.addresses.index');
+
         Route::get('/aircraft', 'AircraftDatatables@index')->name('aircraft.index');
         Route::get('/language', 'LanguageDatatables@index')->name('language.index');
         Route::get('/currency', 'CurrencyDatatables@index')->name('currency.index');

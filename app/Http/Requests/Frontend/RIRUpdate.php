@@ -24,7 +24,13 @@ class RIRUpdate extends FormRequest
     public function rules()
     {
         return [
-            //
+            'packing_type' => 'required',
+            'packing_condition' => 'required',
+            'preservation_check' => 'required',
+            'material_condition' => 'required',
+            'material_quality' => 'required',
+            'material_identification' => 'required',
+
         ];
     }
 }

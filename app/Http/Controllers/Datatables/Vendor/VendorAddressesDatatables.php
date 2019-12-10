@@ -1,22 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Datatables;
+namespace App\Http\Controllers\Datatables\Vendor;
 
+use App\Models\Address;
 use App\Models\Vendor;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class VendorDatatables extends Controller
+class VendorAddressesDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Vendor $vendor)
     {
-        $data = $alldata = json_decode(Vendor::all());
+        $addresses = Address::with('type')->where('addressable_id', $vendor->id)->get();
+
+        $data = $alldata = json_decode($addresses);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

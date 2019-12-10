@@ -93,16 +93,20 @@ let Vendor = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/customer/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="/supplier/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
-                            '</a>'
+                            '</a>'+
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
+                            t.uuid +
+                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+
                         );
                     }
                 }
             ]
         });
 
-        let remove = $('.customer_datatable').on('click', '.delete', function () {
+        let remove = $('.vendor_datatable').on('click', '.delete', function () {
             let triggerid = $(this).data('id');
 
             swal({
@@ -121,13 +125,13 @@ let Vendor = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/customer/' + triggerid + '',
+                        url: '/supplier/' + triggerid + '',
                         success: function (data) {
-                            toastr.success('Material has been deleted.', 'Deleted', {
+                            toastr.success('Vendir has been deleted.', 'Deleted', {
                                 timeOut: 5000
                             }
                         );
-                        let table = $('.customer_datatable').mDatatable();
+                        let table = $('.vendor_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();

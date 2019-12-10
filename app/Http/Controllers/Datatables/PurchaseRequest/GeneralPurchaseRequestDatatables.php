@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\PurchaseRequest;
 
+use App\User;
 use App\Models\PurchaseRequest;
 use App\Models\Type;
 use App\Models\Unit;
@@ -28,10 +29,26 @@ class GeneralPurchaseRequestDatatables extends Controller
             }
             else if(!empty($purchaseRequest->approvals->toArray())){
                 $purchaseRequest->status .= 'Approved';
+
+
+                if(sizeof($purchaseRequest->approvals->toArray()) > 0){
+                    // dump("here");
+                    $conducted_by  = User::find($purchaseRequest->approvals->first()->conducted_by);
+                    $purchaseRequest->conducted_by .= $conducted_by->name;
+                    $purchaseRequest->conducted_at .= $purchaseRequest->approvals->first()->created_at;
+                }
+
             }else{
-                $purchaseRequest->status .= '';
+                $purchaseRequest->status .= 'Not Approved';
 
             }
+            if($purchaseRequest->audits->first()->user_id ==  null){
+                $purchaseRequest->created_by.= "System";
+
+            }else{
+                $purchaseRequest->created_by.= User::find($purchaseRequest->audits->first()->user_id)->name;
+            }
+
         }
 
         $data = $alldata = json_decode($purchaseRequests);

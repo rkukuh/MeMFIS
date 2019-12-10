@@ -13,11 +13,13 @@ Route::name('component.')->group(function () {
 
     ], function () {
 
-        Route::get('get-tags', 'FillComboxController@tags')->name('get-tags');
+        Route::get('get-tags', 'FillComboxController@tagItem')->name('get-tags');
+        Route::get('get-tags-service', 'FillComboxController@tagService')->name('get-tags-service');
         Route::get('get-tools', 'FillComboxController@tool')->name('get-tool');
         Route::get('get-zones', 'FillComboxController@zone')->name('get-zones');
         Route::get('get-items', 'FillComboxController@item')->name('get-items');
-        Route::get('get-units', 'FillComboxController@units')->name('get-units');
+        Route::get('get-units', 'FillComboxController@unitItem')->name('get-units');
+        Route::get('get-unit-service', 'FillComboxController@unitService')->name('get-unit-service');
         Route::get('get-promos', 'FillComboxController@promo')->name('get-promos');
         Route::get('get-vendors', 'FillComboxController@vendor')->name('get-vendor');
         Route::get('get-genders', 'FillComboxController@gender')->name('get-genders');

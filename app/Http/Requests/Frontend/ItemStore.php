@@ -28,7 +28,7 @@ class ItemStore extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required',
+            'code' => 'required|unique:items',
             'name' => 'required',
             'category' => [
                 'required',
@@ -61,7 +61,7 @@ class ItemStore extends FormRequest
      */
     public function withValidator($validator)
     {
-        // 
+        //
     }
 
     protected function failedValidation(Validator $validator) {

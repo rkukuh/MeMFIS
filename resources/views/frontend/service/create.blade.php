@@ -29,7 +29,7 @@
     </div>
     <div class="m-content">
         <div class="row">
-            <div class="col-lg-7">
+            <div class="col-lg-12">
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -122,31 +122,6 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Category @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'category')
-                                                @slot('text', 'Category')
-                                                @slot('name', 'category')
-                                                @slot('id_error', 'category')
-                                            @endcomponent
-                                            <div class="hidden">
-                                                @component('frontend.common.buttons.create-new')
-                                                    @slot('size', 'sm')
-                                                    @slot('text', 'category')
-                                                    @slot('style', 'margin-top: 10px;')
-                                                    @slot('data_target', '#modal_category')
-                                                @endcomponent
-                                            </div>
-
-                                            @include('frontend.category.modal')
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 Tagging @include('frontend.common.label.optional')
                                             </label>
 
@@ -158,6 +133,9 @@
                                                 @slot('id_error', 'tag')
                                             @endcomponent
                                         </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Manufacturer @include('frontend.common.label.optional')
@@ -179,18 +157,7 @@
 
                                             @include('frontend.manufacturer.modal')
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'is_stock')
-                                                    @slot('name', 'is_stock')
-                                                    @slot('text', 'Stockable?')
-                                                    @slot('checked', 'checked')
-                                                @endcomponent
-                                            </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <div class="checkbox">
                                                     @component('frontend.common.input.checkbox')
@@ -213,6 +180,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <hr>
                                     <div class="form-group m-form__group row hidden">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -276,13 +244,13 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/manufacturer.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-service.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/category.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/category-material.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/tag.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tag.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tag-service.js') }}"></script>
 
     <script src="{{ asset('js/frontend/service/create.js') }}"></script>
     <script src="{{ asset('js/frontend/service/form-reset.js') }}"></script>

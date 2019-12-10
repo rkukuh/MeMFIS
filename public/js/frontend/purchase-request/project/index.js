@@ -49,8 +49,14 @@ let PurchaseRequest = {
                 }
             },
             columns: [{
-                    field: 'number',
+                    field: 'created_at',
                     title: 'Date.',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'number',
+                    title: 'PR Number',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
@@ -59,12 +65,6 @@ let PurchaseRequest = {
                 },
                 {
                     field: 'type.name',
-                    title: 'PR Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'aircraft.name',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
@@ -91,13 +91,13 @@ let PurchaseRequest = {
                     filterable: !1,
                 },
                 {
-                    field: 'required_at',
+                    field: 'created_by',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'conducted_by',
                     title: 'Approve By',
                     sortable: 'asc',
                     filterable: !1,
@@ -109,10 +109,14 @@ let PurchaseRequest = {
                     template: function (t, e, i) {
                         if(t.status == "Approved"){
                             return (
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
+                                '<a href="/purchase-request/' +
+                                t.uuid +
+                                '/project/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' +
+                                t.uuid +
+                                '">' +
+                                '<i class="la la-print"></i>' +
+                                "</a>"
+                        );
                         }else{
                             return (
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid +'">' +
@@ -123,7 +127,14 @@ let PurchaseRequest = {
                                 '</a>' +
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-trash"></i>' +
-                                '</a>'
+                                '</a>'+
+                                '<a href="/purchase-request/' +
+                                t.uuid +
+                                '/project/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' +
+                                t.uuid +
+                                '">' +
+                                '<i class="la la-print"></i>' +
+                                "</a>"
                             );
                         }
                     }

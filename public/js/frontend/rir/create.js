@@ -45,14 +45,14 @@ let receiving_inspection_report = {
                 },
                 columns: [
                     {
-                        field: "code",
+                        field: "item.code",
                         title: "P/N",
                         sortable: "asc",
                         filterable: !1,
                         width: 150
                     },
                     {
-                        field: "name",
+                        field: "item.name",
                         title: "Item Description",
                         sortable: "asc",
                         filterable: !1,
@@ -66,7 +66,7 @@ let receiving_inspection_report = {
                         width: 150
                     },
                     {
-                        field: "pivot.quantity",
+                        field: "quantity",
                         title: "Qty PO",
                         sortable: "asc",
                         filterable: !1,
