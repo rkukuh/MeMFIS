@@ -23,6 +23,7 @@ class ItemRequestMaterialDatatables extends Controller
         $items = ItemRequest::with('storage', 'approvals')->get();
 
         foreach ($items as $item) {
+            $item->jc_no = $item->requestable->number ?? '';
             $item->status = 'Open';
 
             if (!empty($item->approvals->first())) {

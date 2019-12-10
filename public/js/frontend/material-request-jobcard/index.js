@@ -73,7 +73,7 @@ let MaterialRequest = {
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'jc_no',
                     title: 'JC No.',
                     sortable: 'asc',
                     filterable: !1,
