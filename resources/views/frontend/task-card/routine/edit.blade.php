@@ -448,13 +448,13 @@
                                                     &mdash; Select a Document Library &mdash;
                                                 </option>
 
-                                                {{-- @if (sizeof($additionals->document_library) > 0)
+                                                @if (sizeof($additionals->document_library) > 0)
                                                     @foreach ($additionals->document_library as $document)
                                                         <option selected>
                                                             {{ $document }}
                                                         </option>
                                                     @endforeach
-                                                @endif --}}
+                                                @endif
                                             </select>
                                         </div>
                                     </div>

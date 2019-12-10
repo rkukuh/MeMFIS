@@ -1,6 +1,6 @@
 let ReligionSelect2 = {
     init: function () {
-        $('#religion, #religion_validate').select2({
+        $('select[name="religion"], #religion_validate').select2({
             placeholder: 'Select a Religion'
         });
     }

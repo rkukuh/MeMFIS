@@ -1,5 +1,5 @@
 @component('frontend.common.input.hidden')
-        @slot('id', 'employee_uuid')
+        
         @slot('name', 'employee_uuid')
         @slot('value', $employee->uuid)
 @endcomponent

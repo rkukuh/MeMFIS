@@ -8,37 +8,51 @@ let Employee = {
 
             let code = $('input[name=code]').val()
             let code_uppercase = code.toUpperCase()
-            let job_title = $('#job_title option:selected').val()
+            let job_title = $('select[name="job_title"]').val()
             let dob = $('input[name="dob"]').val();
             let dob_place = $('input[name="dob_place"]').val();
 
             let first_name = $('input[name="first_name"]').val();
             let last_name = $('input[name="last_name"]').val();
             let card_number = $('input[name="card_number"]').val();
-            let gender = $('#gender option:selected').val()
-            let nationality = $('input[name="nationality"]').val();
-            let religion = $('input[name="religion"]').val();
-            let marital_status = $('input[name="marital_status"]').val();
+            let gender = $('select[name="gender"]').val()
+            let nationality = $('select[name="nationality"]').val();
+            let religion = $('select[name="religion"]').val();
+            let marital_status = $('select[name="marital_status"]').val();
             let address_line_1 = $('input[name="address_line_1"]').val();
-            let country = $('input[name="country"]').val();
+            let address_line_2 = $('input[name="address_line_2"]').val();
+            let country = $('select[name="country"]').val();
 
-            let city = $('input[name="first_name"]').val();
+            let city = $('input[name="city"]').val();
             let zip_code = $('input[name="zip_code"]').val();
             let home_phone = $('input[name="home_phone"]').val();
             let mobile_phone = $('input[name="mobile_phone"]').val();
             let work_phone = $('input[name="work_phone"]').val();
 
             let other_phone = $('input[name="other_phone"]').val();
-            let email_1 = $('input[name="email_1"]').val();
-            let email_2 = $('input[name="email_2"]').val();
+            let primary_email = $('input[name="primary_email"]').val();
+            let secondary_email = $('input[name="secondary_email"]').val();
             let joined_date = $('input[name="joined_date"]').val();
-            let job_position = $('input[name="job_position"]').val();
+            let job_position = $('select[name="job_position"]').val();
             
-            let employee_status = $('input[name="employee_status"]').val();
-            let department = $('input[name="department"]').val();
-            let inderect_supervisor = $('input[name="inderect_supervisor"]').val();
-            let supervisor = $('input[name="supervisor"]').val();
+            let employee_status = $('select[name="employee_status"]').val();
+            let department = $('select[name="department"]').val();
+            let indirect_supervisor = $('select[name="indirect_supervisor"]').val();
+            let supervisor = $('select[name="supervisor"]').val();
 
+            let maximum_overtime = null;
+            if( $('input[name=maximum_overtime]').val() != '' ){
+                maximum_overtime = $('input[name=maximum_overtime]').val();
+            }
+            let minimum_overtime = 6;
+            if( $('input[name=minimum_overtime]').val() != '' ){
+                minimum_overtime = $('input[name=minimum_overtime]').val();
+            }
+            let holiday_overtime = 10000;
+            if( $('input[name=holiday_overtime]').val() != '' ){
+                holiday_overtime = $('input[name=holiday_overtime]').val();
+            }
+            
             formData = new FormData($('#employee_create_form')[0])
     
                 formData.append('code', code_uppercase);
@@ -56,128 +70,129 @@ let Employee = {
                 formData.append('religion', religion);
                 formData.append('marital_status', marital_status);
                 formData.append('address_line_1', address_line_1);
+                formData.append('address_line_2', address_line_2);
                 formData.append('country', country);
                 formData.append('city', city);
-                formData.append('zip_code', zip_code);
+                formData.append('zip', zip_code);
                 formData.append('home_phone', home_phone);
                 formData.append('mobile_phone', mobile_phone);
                 formData.append('work_phone', work_phone);
                 formData.append('other_phone', other_phone);
-                formData.append('email_1', email_1);
-                formData.append('email_2', email_2);
+                formData.append('primary_email', primary_email);
+                formData.append('secondary_email', secondary_email);
                 formData.append('joined_date', joined_date);
                 formData.append('job_position', job_position);
                 formData.append('employee_status', employee_status);
                 formData.append('department', department);
-                formData.append('inderect_supervisor', inderect_supervisor);
+                formData.append('indirect_supervisor', indirect_supervisor);
                 formData.append('supervisor', supervisor);
+                formData.append('maximum_overtime', maximum_overtime);
+                formData.append('minimum_overtime', minimum_overtime);
+                formData.append('holiday_overtime', holiday_overtime);
 
-            for (let value of formData.values()) {
-                console.log(value); 
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                enctype: 'multipart/form-data',
+                type: 'post',
+                url: '/employee',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.errors) {
+                        $.each(data.errors, function (key, value) {
+                            var name = $("input[name='"+key+"']");
+                            if(key.indexOf(".") != -1){
+                              var arr = key.split(".");
+                              name = $("input[name='"+arr[0]+"']:eq("+arr[1]+")");
+                            }
+                            name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
+                            
+                            if (data.errors.dob) {
+                                $('#dob-error').html(data.errors.dob[0]);
+                            }else{
+                                $('#dob-error').html('');
+                            }
+
+                            if (data.errors.gender) {
+                                $('#gender-error').html(data.errors.gender[0]);
+                            }else{
+                                $('#gender-error').html('');
+                            }
+
+                            if (data.errors.marital_status) {
+                                $('#marital_status-error').html(data.errors.marital_status[0]);
+                            }else{
+                                $('#marital_status-error').html('');
+                            }
+
+                            if (data.errors.religion) {
+                                $('#religion-error').html(data.errors.religion[0]);
+                            }else{
+                                $('#religion-error').html('');
+                            }
+
+                            if (data.errors.mobile_phone) {
+                                $('#mobile_phone-error').html(data.errors.mobile_phone[0]);
+                            }else{
+                                $('#mobile_phone-error').html('');
+                            }
+
+                            if (data.errors.joined_date) {
+                                $('#joined_date-error').html(data.errors.joined_date[0]);
+                            }else{
+                                $('#mobile_phone-error').html('');
+                            }
+
+                            if (data.errors.job_title) {
+                                $('#job_title-error').html(data.errors.job_title[0]);
+                            }else{
+                                $('#job_title-error').html('');
+                            }
+                            
+                            if (data.errors.mobile_phone) {
+                                $('#mobile_phone-error').html(data.errors.mobile_phone[0]);
+                            }else{
+                                $('#mobile_phone-error').html('');
+                            }
+
+                            if (data.errors.job_position) {
+                                $('#job_position-error').html(data.errors.job_position[0]);
+                            }else{
+                                $('#job_position-error').html('');
+                            }
+
+                            if (data.errors.employee_status) {
+                                $('#employee_status-error').html(data.errors.employee_status[0]);
+                            }else{
+                                $('#employee_status-error').html('');
+                            }
+
+                            if (data.errors.department) {
+                                $('#department-error').html(data.errors.department[0]);
+                            }else{
+                                $('#department-error').html('');
+                            }
+
+                            if (data.errors.primary_email) {
+                                $('#primary_email-error').html(data.errors.primary_email[0]);
+                            }else{
+                                $('#primary_email-error').html('');
+                            }
+                        });
+                    } else {
+
+                        toastr.success('Data has been saved.', 'Sukses', {
+                            timeOut: 5000
+                        });
+
+                        window.location.href = '/employee/'+data.uuid+'/edit';
+
+                    }
                 }
-            // $.ajax({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     },
-            //     enctype: 'multipart/form-data',
-            //     type: 'post',
-            //     url: '/employee',
-            //     data: formData,
-            //     processData: false,
-            //     contentType: false,
-            //     success: function (data) {
-            //         if (data.errors) {
-            //             $.each(data.errors, function (key, value) {
-            //                 var name = $("input[name='"+key+"']");
-            //                 if(key.indexOf(".") != -1){
-            //                   var arr = key.split(".");
-            //                   name = $("input[name='"+arr[0]+"']:eq("+arr[1]+")");
-            //                 }
-            //                 name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
-                            
-            //                 if (data.errors.dob) {
-            //                     $('#dob-error').html(data.errors.dob[0]);
-            //                 }else{
-            //                     $('#dob-error').html('');
-            //                 }
-
-            //                 if (data.errors.gender) {
-            //                     $('#gender-error').html(data.errors.gender[0]);
-            //                 }else{
-            //                     $('#gender-error').html('');
-            //                 }
-
-            //                 if (data.errors.marital_status) {
-            //                     $('#marital_status-error').html(data.errors.marital_status[0]);
-            //                 }else{
-            //                     $('#marital_status-error').html('');
-            //                 }
-
-            //                 if (data.errors.religion) {
-            //                     $('#religion-error').html(data.errors.religion[0]);
-            //                 }else{
-            //                     $('#religion-error').html('');
-            //                 }
-
-            //                 if (data.errors.mobile_phone) {
-            //                     $('#mobile_phone-error').html(data.errors.mobile_phone[0]);
-            //                 }else{
-            //                     $('#mobile_phone-error').html('');
-            //                 }
-
-            //                 if (data.errors.joined_date) {
-            //                     $('#joined_date-error').html(data.errors.joined_date[0]);
-            //                 }else{
-            //                     $('#mobile_phone-error').html('');
-            //                 }
-
-            //                 if (data.errors.job_title) {
-            //                     $('#job_title-error').html(data.errors.job_title[0]);
-            //                 }else{
-            //                     $('#job_title-error').html('');
-            //                 }
-                            
-            //                 if (data.errors.mobile_phone) {
-            //                     $('#mobile_phone-error').html(data.errors.mobile_phone[0]);
-            //                 }else{
-            //                     $('#mobile_phone-error').html('');
-            //                 }
-
-            //                 if (data.errors.job_position) {
-            //                     $('#job_position-error').html(data.errors.job_position[0]);
-            //                 }else{
-            //                     $('#job_position-error').html('');
-            //                 }
-
-            //                 if (data.errors.employee_status) {
-            //                     $('#employee_status-error').html(data.errors.employee_status[0]);
-            //                 }else{
-            //                     $('#employee_status-error').html('');
-            //                 }
-
-            //                 if (data.errors.department) {
-            //                     $('#department-error').html(data.errors.department[0]);
-            //                 }else{
-            //                     $('#department-error').html('');
-            //                 }
-
-            //                 if (data.errors.email_1) {
-            //                     $('#email_1-error').html(data.errors.email_1[0]);
-            //                 }else{
-            //                     $('#email_1-error').html('');
-            //                 }
-            //             });
-            //         } else {
-
-            //             toastr.success('Data has been saved.', 'Sukses', {
-            //                 timeOut: 5000
-            //             });
-
-            //             window.location.href = '/employee/'+data.uuid+'/edit';
-
-            //         }
-            //     }
-            // });
+            });
 
             mApp.unblock(".modal-footer");
 

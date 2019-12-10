@@ -80,7 +80,6 @@ class BPJSController extends Controller
      */
     public function update(BPJSUpdate $request, BPJS $bpj)
     {
-
         $id = BPJS::where('uuid',$bpj->uuid)->first()->id;
         $data = BPJS::where('uuid',$bpj->uuid)->first();
         $time_now = Carbon::now();
@@ -89,7 +88,7 @@ class BPJSController extends Controller
             'bpjs_id' => $id,
             'code' => $data->code,
             'name' => $data->name,
-            'employee_paid' => $data->emoployee_paid,
+            'employee_paid' => $data->employee_paid,
             'employee_min_value' => $data->employee_min_value,
             'employee_max_value' => $data->employee_max_value,
             'company_paid' => $data->company_paid,

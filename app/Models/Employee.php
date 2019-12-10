@@ -33,7 +33,6 @@ class Employee extends MemfisModel implements HasMedia
         'job_title_id',
         'position_id',
         'statuses_id',
-        'department_id',
         'indirect_supervisor_id',
         'supervisor_id',
         'created_at',
@@ -212,7 +211,7 @@ class Employee extends MemfisModel implements HasMedia
      */
     public function gender()
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsTo(Type::class, 'gender_id', 'id');
     }
 
     /**
@@ -224,6 +223,31 @@ class Employee extends MemfisModel implements HasMedia
     {
         return $this->hasMany(EmployeeLicense::class)
                     ->where('license_id', License::ofGeneralLicense()->first()->id);
+    }
+
+    /**
+     * One-to-Many Polymorphic : An Employee may have zero or many personal data histories
+     * 
+     * This function will get all of the histories from given employee.
+     * See:
+     * - Employee's histories() method for the inverse
+     */
+    public function data_histories()
+    {
+        return $this->morphMany(History::class, 'historiable');
+    }
+
+    /**
+     * One-to-Many: An employee may have zero or more histories.
+     *
+     * This function will retrieve all histories conducted by given employee.
+     * See: History's approvedBy() method for the inverse
+     *
+     * @return mixed
+     */
+    public function histories()
+    {
+        return $this->hasMany(History::class);
     }
 
     /**
@@ -280,7 +304,20 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
-     * One-to-One: An Employee have one Status.
+     * One-to-Many: An Employee have one Religion.
+     *
+     * This function will retrieve Religion of a given Employee.
+     * See: Position employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function religion()
+    {
+        return $this->belongsTo(Religion::class);
+    }
+
+    /**
+     * One-to-One: An Employee have one employement Status.
      *
      * This function will retrieve Status of a given Employee.
      * See: Status employee() method for the inverse
@@ -302,7 +339,17 @@ class Employee extends MemfisModel implements HasMedia
      */
     public function department()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsToMany(Department::class)
+                        ->withPivot(
+                            'joined_at',
+                            'left_at',
+                            'maximum_overtime_period',
+                            'overtime_threshold',
+                            'overtime_allowance',
+                            'deleted_at'
+                            )
+                        ->wherePivot('deleted_at', null)
+                        ->withTimestamps();
     }
 
     /**
@@ -365,9 +412,9 @@ class Employee extends MemfisModel implements HasMedia
      *
      * @return mixed
      */
-    public function employee_marital()
+    public function marital_status()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(Status::class, 'marital_id');
     }
 
     /**

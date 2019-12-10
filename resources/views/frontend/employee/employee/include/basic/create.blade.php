@@ -182,7 +182,7 @@
                         Country @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.text')
+                    @component('frontend.common.input.select2')
                         @slot('id', 'country')
                         @slot('name', 'country')
                         @slot('id_error', 'country')
@@ -267,24 +267,24 @@
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
-                        Email 1 @include('frontend.common.label.required')
+                        Primary @include('frontend.common.label.required')
                     </label>
 
                     @component('frontend.common.input.email')
-                        @slot('id', 'email_1')
-                        @slot('name', 'email_1')
-                        @slot('id_error', 'email_1')
+                        @slot('id', 'primary_email')
+                        @slot('name', 'primary_email')
+                        @slot('id_error', 'primary_email')
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
-                        Email 2
+                        Secondary
                     </label>
 
                     @component('frontend.common.input.email')
-                        @slot('id', 'email_2')
-                        @slot('name', 'email_2')
-                        @slot('id_error', 'email_2')
+                        @slot('id', 'secondary_email')
+                        @slot('name', 'secondary_email')
+                        @slot('id_error', 'secondary_email')
                     @endcomponent
                 </div>
             </div>
@@ -369,9 +369,9 @@
                     </label>
 
                     @component('frontend.common.input.select2')
-                        @slot('id', 'inderect_supervisor')
-                        @slot('name', 'inderect_supervisor')
-                        @slot('id_error', 'inderect_supervisor')
+                        @slot('id', 'indirect_supervisor')
+                        @slot('name', 'indirect_supervisor')
+                        @slot('id_error', 'indirect_supervisor')
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -421,6 +421,11 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/nationality.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/gender.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/job-position.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/employment-status.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/department.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/indirect-supervisor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/supervisor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/country.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/marital-status.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/religion.js') }}"></script>
@@ -428,11 +433,12 @@
     <script src="{{ asset('js/frontend/functions/select2/nationality.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/gender.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/job-position.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/employee-status.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/employment-status.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/department.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/indirect-supervisor.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/supervisor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/country.js') }}"></script>
+
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/period-start.js')}}"></script>
