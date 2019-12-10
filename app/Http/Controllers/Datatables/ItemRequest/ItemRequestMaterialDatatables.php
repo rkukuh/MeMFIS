@@ -21,9 +21,12 @@ class ItemRequestMaterialDatatables extends Controller
     public function index()
     {
         $items = ItemRequest::with('storage', 'approvals')->get();
+
         foreach ($items as $item) {
+            $item->status = 'Open';
+
             if (!empty($item->approvals->first())) {
-                $item->status .= 'Approved';
+                $item->status = 'Approved';
 
                 if (isset($item->approvals)) {
                     $conducted_by  = User::find($item->approvals->first()->conducted_by);
