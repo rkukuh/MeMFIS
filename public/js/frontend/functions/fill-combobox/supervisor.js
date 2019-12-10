@@ -1,23 +1,25 @@
 $(document).ready(function () {
-    JobPosition = function () {
+    Supervisor = function () {
         $.ajax({
-            url: '/get-job-positions',
+            url: '/get-supervisors/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                $('select[name="job_position"]').empty();
 
-                $('select[name="job_position"]').append(
-                    '<option value=""> Select a Job Position</option>'
+                $('select[name="supervisor"]').empty();
+
+                $('select[name="supervisor"]').append(
+                    '<option value=""> Select an Employee </option>'
                 );
 
                 $.each(data, function (key, value) {
-                    $('select[name="job_position"]').append(
+                    $('select[name="supervisor"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );
                 });
             }
         });
     };
-    JobPosition();
+
+    Supervisor();
 });

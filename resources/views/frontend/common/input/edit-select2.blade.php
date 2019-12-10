@@ -3,9 +3,9 @@
         &mdash; Select {{ $OptionText or 'Option'}} &mdash;
     </option>
     @if($options)
-        @foreach($options  as $option)
-            <option value="{{ $option->uuid}}" @if($option->uuid == $value) selected @endif >
-                {{ $option->name}}
+        @foreach($options  as $key => $option)
+            <option value="{{ $key }}" @if($key == $value) selected @endif >
+                {{ $option}}
             </option>
         @endforeach
     @endif

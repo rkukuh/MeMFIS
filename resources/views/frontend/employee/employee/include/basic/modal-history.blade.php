@@ -55,37 +55,29 @@
                                                     <td valign="top" align="center">{{ $employee->dob.' & '.$employee->dob_place }}</td>
                                                     </tr>
                                                     <tr>
-                                                        @php
-                                                            $gender = null;
-                                                            if($employee->gender == 'f'){
-                                                            $gender = 'Female';
-                                                            }else if($employee->gender == 'm'){
-                                                            $gender = 'Male';
-                                                            }
-                                                        @endphp
                                                         <td valign="top"><b>Gender</b></td>
-                                                        <td valign="top" align="center">{{ $gender }}</td>
+                                                        <td valign="top" align="center">{{ $employee->gender->name }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Nationality</b></td>
-                                                    <td valign="top" align="center">{{ $employee->nationality }}</td>
+                                                    <td valign="top" align="center">{{ $employee->nationalities->first()->nationality }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Religion</b></td>
-                                                    <td valign="top" align="center">{{ $employee->religion }}</td>
+                                                    <td valign="top" align="center">{{ $employee->religion->name }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Martial Status</b></td>
-                                                    <td valign="top" align="center">{{ $employee->marital_status }}</td>
+                                                    <td valign="top" align="center">{{ $employee->marital_status->name }}</td>
                                                     </tr>
                                                 </table>
                                             </fieldset>
                                             <fieldset class="border p-2 mt-2">
                                                 <legend class="w-auto"><b>Contact Information Details</b></legend>
                                                 @php
-                                                $address_1 = null;
-                                                if(isset($addresses['address_1'])){
-                                                $address_1 = $addresses['address_1'];
+                                                $primary = null;
+                                                if(isset($addresses['primary'])){
+                                                $primary = $addresses['primary'];
                                                 }
                                                 @endphp
                                                 <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
@@ -95,7 +87,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Address Line 1</b></td>
-                                                    <td valign="top" align="center">{{ $address_1 }}</td>
+                                                    <td valign="top" align="center">{{ $primary }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>City</b></td>
@@ -103,7 +95,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Country</b></td>
-                                                    <td valign="top" align="center">{{ $employee->country }}</td>
+                                                    <td valign="top" align="center">{{ $employee->country->name }}</td>
                                                     </tr>
                                                     <tr>
                                                             @php
@@ -117,13 +109,13 @@
                                                     </tr>
                                                     <tr>
                                                             @php
-                                                            $email_1 = null;
-                                                            if(isset($emails['email_1'])){
-                                                                $email_1 = $emails['email_1'];
+                                                            $primary = null;
+                                                            if(isset($emails['primary'])){
+                                                                $primary = $emails['primary'];
                                                             }
                                                             @endphp
-                                                        <td valign="top"><b>Email 1</b></td>
-                                                        <td valign="top" align="center">{{ $email_1 }}</td>
+                                                        <td valign="top"><b>Primary</b></td>
+                                                        <td valign="top" align="center">{{ $primary }}</td>
                                                     </tr>
                                                 </table>
                                             </fieldset>
@@ -283,7 +275,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td valign="top"><b>Address Line 1</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['address_1'] }}</td>
+                                                            <td valign="top" align="center">{{ $history[$i]['primary'] }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td valign="top"><b>City</b></td>
@@ -298,8 +290,8 @@
                                                             <td valign="top" align="center">{{ $history[$i]['mobile_phone'] }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top"><b>Email 1</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['email_1'] }}</td>
+                                                            <td valign="top"><b>Primary</b></td>
+                                                            <td valign="top" align="center">{{ $history[$i]['primary'] }}</td>
                                                         </tr>
                                                     </table>
                                                 </fieldset>

@@ -20,5 +20,6 @@ class ExampleDataSeeder extends Seeder
         $this->call(BPJSExamples::class);
         $this->call(BenefitExamples::class);
         $this->call(CompanyStructureExamples::class);
+        $this->call(BenefitPositionExample::class);
     }
 }
