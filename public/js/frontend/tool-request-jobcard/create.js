@@ -173,33 +173,35 @@ let ToolRequestCreate = {
 
         function generate(type, uuid) {
             if (type == 'jc') {
-                var url = '/datatables/jobcard/' + uuid + '/materials';
+                var url = '/get-jobcard/' + uuid + '/project';
             } else if (type == 'project') {
                 var url = '/project/' + uuid;
-
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    success: function (response) {
-                        $("#project_number").empty().html(response.code);
-                        $("#actype").empty().html(response.aircraft.name);
-                        $("#acreg").empty().html(response.aircraft_register);
-                    }
-                });
             }
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (response) {
+                    $("#project_number").empty().html(response.code);
+                    $("#actype").empty().html(response.aircraft.name);
+                    $("#acreg").empty().html(response.aircraft_register);
+                }
+            });
         }
 
-        $("#ref_jobcard").change(function () {
+        $('#ref_jobcard').change(function () {
             if (tableInit == true) {
                 tableInit = false;
-                let jobcard_uuid = $(this).val();
-                createTable('jc', jobcard_uuid);
+                let project_uuid = $(this).val();
+                generate('jc', project_uuid);
+                createTable('jc', project_uuid);
             }
             else {
-                let jobcard_uuid = $(this).val();
+                let project_uuid = $(this).val();
                 let table = $(".tool_request_project_datatable").mDatatable();
+                generate('jc', project_uuid);
                 table.destroy();
-                createTable('jc', jobcard_uuid);
+                createTable('jc', project_uuid);
                 table = $(".tool_request_project_datatable").mDatatable();
                 table.originalDataSet = [];
                 table.reload();
@@ -230,8 +232,9 @@ let ToolRequestCreate = {
             let section_code = $('input[name=section_code]').val();
             let storage_id = $('#item_storage_id').val();
             let date = $('input[name=date]').val();
-            let received_by = $('#received-by').val();
+            let received_by = $('#loaned').val();
             let jc_no = $("#ref_jobcard").val();
+            let project_no = $("#ref_project").val();
 
             $.ajax({
                 headers: {
@@ -241,6 +244,7 @@ let ToolRequestCreate = {
                 type: 'POST',
                 data: {
                     jc_no: jc_no,
+                    project_no: project_no,
                     storage_id: storage_id,
                     requested_at: date,
                     note: note,
@@ -255,7 +259,7 @@ let ToolRequestCreate = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/item-request/tool-request-jobcard/' + response.uuid + '/edit';
+                        // window.location.href = '/item-request/tool-request-jobcard/' + response.uuid + '/edit';
                     }
                 }
             });
