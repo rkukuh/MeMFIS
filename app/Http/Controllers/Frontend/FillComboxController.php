@@ -651,7 +651,7 @@ class FillComboxController extends Controller
             ->first()
             ->toArray();
 
-        return json_encode($expDate);
+        return json_encode(date('d-m-Y', strtotime($expDate['formatted'])));
     }
 
     /**

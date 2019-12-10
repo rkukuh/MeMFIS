@@ -192,6 +192,34 @@ let MaterialRequestEdit = {
             $("#material").attr('disabled', true);
 
             $.ajax({
+                url: '/get-serial-number/' + item_uuid,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('select[name="serial_no"]').empty();
+
+                    $('select[name="serial_no"]').append(
+                        '<option value=""> Select a Serial Number</option>'
+                    );
+
+                    $.each(data, function (key, value) {
+                        $('select[name="serial_no"]').append(
+                            '<option value="' + value + '">' + value + '</option>'
+                        );
+                    });
+                }
+            });
+
+            $.ajax({
+                url: '/get-expired-date/' + item_uuid,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $("#exp_date").text(data);
+                }
+            });
+
+            $.ajax({
                 url: '/get-item-unit-uuid/' + $(this).data('item'),
                 type: 'GET',
                 dataType: 'json',
