@@ -76,6 +76,7 @@ Route::name('component.')->group(function () {
         Route::get('get-item-unit-uuid/{item}', 'FillComboxController@itemUnitUuid')->name('get-item-unit-uuid');
         Route::get('get-expired-date/{item}', 'FillComboxController@itemExpiredDate')->name('get-expired-date');
         Route::get('get-jobcard/{jobcard}/items', 'FillComboxController@jobcardItems')->name('get-jobcard-items');
+        Route::get('get-jobcard/{jobcard}/project', 'FillComboxController@jobcardProject')->name('get-jobcard-project');
         Route::get('get-tool-request/{toolRequest}', 'FillComboxController@toolRequest')->name('get-tool-request');
         Route::get('get-serial-number/{item}', 'FillComboxController@itemSerialNumber')->name('get-serial-number');
         Route::get('get-po-materials/{purchaseOrder}', 'FillComboxController@poMaterial')->name('get-po-material');

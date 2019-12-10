@@ -16,6 +16,7 @@ use App\Models\JobCard;
 use App\Models\DefectCard;
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Quotation;
 
 class MaterialRequestController extends Controller
 {
@@ -121,6 +122,9 @@ class MaterialRequestController extends Controller
      */
     public function edit(ItemRequest $itemRequest)
     {
+        $id = JobCard::where('uuid', '5e25fd15-d47f-4700-8356-5643a0de7872')->first()->quotation_id;
+        $quo = Quotation::where('id', $id)->first();
+        dd($quo->quotationable->code);
         $project = $itemRequest->requestable;
         $storages = Storage::get();
         $employees = Employee::get();

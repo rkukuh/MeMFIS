@@ -173,39 +173,35 @@ let MaterialRequestCreate = {
 
         function generate(type, uuid) {
             if (type == 'jc') {
-                var url = '/datatables/jobcard/' + uuid + '/materials';
+                var url = '/get-jobcard/' + uuid + '/project';
             } else if (type == 'project') {
                 var url = '/project/' + uuid;
-
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    success: function (response) {
-                        $("#project_number").empty().html(response.code);
-                        $("#actype").empty().html(response.aircraft.name);
-                        $("#acreg").empty().html(response.aircraft_register);
-                    }
-                });
             }
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (response) {
+                    $("#project_number").empty().html(response.code);
+                    $("#actype").empty().html(response.aircraft.name);
+                    $("#acreg").empty().html(response.aircraft_register);
+                }
+            });
         }
 
-        $("#ref_jobcard").change(function () {
+        $('#ref_jobcard').change(function () {
             if (tableInit == true) {
                 tableInit = false;
-                let jobcard_uuid = $(this).val();
-                $("#project_number").empty();
-                $("#actype").empty();
-                $("#acreg").empty();
-                createTable('jc', jobcard_uuid);
+                let project_uuid = $(this).val();
+                generate('jc', project_uuid);
+                createTable('jc', project_uuid);
             }
             else {
-                let jobcard_uuid = $(this).val();
+                let project_uuid = $(this).val();
                 let table = $(".material_request_project_datatable").mDatatable();
-                $("#project_number").empty();
-                $("#actype").empty();
-                $("#acreg").empty();
+                generate('jc', project_uuid);
                 table.destroy();
-                createTable('jc', jobcard_uuid);
+                createTable('jc', project_uuid);
                 table = $(".material_request_project_datatable").mDatatable();
                 table.originalDataSet = [];
                 table.reload();
