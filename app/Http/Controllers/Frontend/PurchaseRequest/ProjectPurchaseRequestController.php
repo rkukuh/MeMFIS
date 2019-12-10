@@ -47,7 +47,7 @@ class ProjectPurchaseRequestController extends Controller
      */
     public function store(PurchaseRequestStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('PR-', PurchaseRequest::withTrashed()->count()+1)]);
+        $request->merge(['number' => DocumentNumber::generate('PRPJ-', PurchaseRequest::withTrashed()->count()+1)]);
         $request->merge(['purchase_requestable_type' => 'App\Models\Project']);
         $request->merge(['purchase_requestable_id' =>Project::where('uuid',$request->project_id)->first()->id ]);
         $request->merge(['type_id' => Type::where('of','purchase-request')->where('name','Project')->first()->id ]);
