@@ -54,7 +54,7 @@ class WorkPackageController extends Controller
      */
     public function store(WorkPackageStore $request)
     {
-        $request->merge(['code' => DocumentNumber::generate('WPCK-', WorkPackage::withTrashed()->count()+1)]);
+        $request->merge(['code' => DocumentNumber::generate('WPCK-', WorkPackage::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
 
         $workpackage = WorkPackage::create($request->all());
 
@@ -365,7 +365,7 @@ class WorkPackageController extends Controller
                     $query->where('code', 'si');
                 })
                 ->count();
-        
+
         $preliminary = $workPackage->taskcards->load('type')->where('type.code', 'preliminary')->count('uuid');
 
 

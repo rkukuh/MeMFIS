@@ -1,113 +1,64 @@
 let Unit = {
     init: function () {
-        $('.price_list_datatable-item').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/price-list-item',
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-                            
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !1,
-                serverSorting: !1
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
+        $('#price_list_datatable-item').DataTable({
+            "dom": '<"top"f>rt<"bottom">pil',
+            processing: true,
+            responsive: true,
+            serverSide: true,
+            ajax: '/datatables/price-list-item',
+            columnDefs: [
+                         {
+                             targets: [ 0, 1, 2 ],
+                             className: 'mdl-data-table__cell--non-numeric'
+                         }
+                     ],
             columns: [
-                {
-                    field: 'code',
-                    title: 'Code / Part Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<a href="" class="show-price" data-toggle="modal" data-target="#modal_price_list_show"'+
-                        'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
-                        t.uuid + '>' + t.code + "</a>"
-                    }
-                },
-                {
-                    field: 'name',
-                    title: 'Name',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'unit_name',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                // {
-                //     field: '',
-                //     title: 'Remark',
-                //     sortable: 'asc',
-                //     filterable: !1,
-                // },
-                {
-                    field: 'last_update',
-                    title: 'Last Update',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'updated_by',
-                    title: 'Updated By',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_pricelist_item_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-item" title="Edit"'+
-                            'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                {data: 'code', name: 'code',sWidth:'15%',render:function(data, type, row){
+                    return "<a href='/item/"+ row.uuid +"'>" + row.code + "</a>"
+                }},
+                {data: 'name', name: 'name',sWidth:'15%'},
+                {data: 'unit_name', name: 'unit_name',sWidth:'10%','searchable': false} ,
+                {data: 'updated_by', name: 'updated_by',sWidth:'10%','searchable': false} ,
+                {data: 'last_update', name: 'last_update',sWidth:'10%','searchable': false} ,
+                {data: '', name: '',sWidth:'10%','searchable': false ,render:function(data, type, row){
+                    return (
+                            '<a href="/item/' + row.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + row.uuid +'">' +
+                                '<i class="la la-pencil"></i>' +
+                            '</a>' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + row.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'
                         );
-                    }
-                }
+                }},
             ]
         });
-       
+        // $('<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left: 60%; color: white;"><span><i class="la la-refresh"></i><span>Reload</span></span> </button>').appendTo('div.dataTables_filter');
+
+        $('.dataTables_length select').addClass('form-control m-input');
+        $('.dataTables_filter').addClass('pull-left');
+        $('.paging_simple_numbers').addClass('pull-left');
+        $('.dataTables_length').addClass('pull-right');
+        $('.dataTables_info').addClass('pull-right');
+        $('.dataTables_info').addClass('margin-info');
+        $('.paging_simple_numbers').addClass('padding-datatable');
+
+        $('#price_list_datatable-item_filter input').unbind();
+        $('#price_list_datatable-item_filter input').bind('keyup', function(e) {
+            if (e.keyCode === 13) {
+                let table = $('#price_list_datatable-item').DataTable();
+                table.search(this.value).draw();
+
+            }
+        });
+
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
         });
 
         let simpan = $('.modal-footer').on('click', '.update-price-item', function () {
-            
-            let price_array = [];            
-            let price_uuid_array = [];            
+
+            let price_array = [];
+            let price_uuid_array = [];
             let level_array = [
                 1,2,3,4,5
             ];
@@ -120,7 +71,7 @@ let Unit = {
             });
 
             let item = $('#uuid-item').val();
-            
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -204,7 +155,7 @@ let Facility = {
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
-                            
+
                             return dataSet;
                         }
                     }
@@ -250,7 +201,7 @@ let Facility = {
                     title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
-                    
+
                 },
                 {
                     field: 'prices',
@@ -280,15 +231,15 @@ let Facility = {
                 }
             ]
         });
-       
+
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
         });
 
         let updateFacility = $('.modal-footer').on('click', '.update-price-facility', function () {
-            
-            let price_array = [];            
-            let price_uuid_array = [];            
+
+            let price_array = [];
+            let price_uuid_array = [];
             let level_array = [
                 1,2,3,4,5
             ];
@@ -301,7 +252,7 @@ let Facility = {
             });
 
             let facility = $('#uuid-facility').val();
-            
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -315,7 +266,7 @@ let Facility = {
                     uuid: price_uuid_array
                 },
                 success: function (data) {
-                   
+
                     $('#modal_pricelist_facility_edit').modal('hide');
 
                     toastr.success('Price List has been updated.', 'Success', {
@@ -334,7 +285,7 @@ let Facility = {
             let uuid = $(this).data('uuid');
             document.getElementById("uuid-facility").value = uuid;
             document.getElementById("facility").innerHTML = $(this).data('name');
-            
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -368,7 +319,7 @@ let Manhours = {
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
-                            
+
                             return dataSet;
                         }
                     }
@@ -403,7 +354,7 @@ let Manhours = {
                     title: 'Level',
                     sortable: 'asc',
                     filterable: !1,
-                    
+
                 },
                 {
                     field: 'rate',
@@ -426,7 +377,7 @@ let Manhours = {
                 }
             ]
         });
-       
+
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
         });
@@ -435,7 +386,7 @@ let Manhours = {
                 let manhour = $('#uuid-manhour').val();
                 let rate = $("#rate-manhour").val();
                 let level = $("#level-manhour").val();
-            
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -448,7 +399,7 @@ let Manhours = {
                     level: level,
                 },
                 success: function (data) {
-                   
+
                     $('#modal_pricelist_manhour_edit').modal('hide');
 
                     toastr.success('Price List has been updated.', 'Success', {

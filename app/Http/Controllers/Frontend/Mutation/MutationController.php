@@ -42,7 +42,7 @@ class MutationController extends Controller
      */
     public function store(MutationStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('MTRF-', Mutation::withTrashed()->count() + 1)]);
+        $request->merge(['number' => DocumentNumber::generate('MTRF-', Mutation::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $mutation = Mutation::create($request->all());
 
         return response()->json($mutation);

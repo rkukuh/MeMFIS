@@ -49,7 +49,7 @@ class PurchaseOrderController extends Controller
      */
     public function store(PurchaseOrderStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('PO-', PurchaseOrder::withTrashed()->count()+1)]);
+        $request->merge(['number' => DocumentNumber::generate('PO-', PurchaseOrder::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['purchase_request_id' => PurchaseRequest::where('uuid',$request->purchase_request_id)->first()->id]);
         $request->merge(['vendor_id' => Vendor::where('uuid',$request->vendor_id)->first()->id]);
         $request->merge(['ordered_at' => Carbon::parse($request->ordered_at)]);

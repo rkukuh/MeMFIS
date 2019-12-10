@@ -61,19 +61,19 @@ let Vendor = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'phone',
                     title: 'Phone',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'address',
                     title: 'Address',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'email',
                     title: 'Email',
                     sortable: 'asc',
                     filterable: !1,

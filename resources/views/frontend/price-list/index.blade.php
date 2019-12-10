@@ -52,13 +52,6 @@
                                 <div class="col-xl-8 order-2 order-xl-1">
                                     <div class="form-group m-form__group row align-items-center">
                                         <div class="col-md-4">
-                                            <div class="m-input-icon m-input-icon--left">
-                                                <input type="text" class="form-control m-input" placeholder="Search..."
-                                                    id="generalSearch">
-                                                <span class="m-input-icon__icon m-input-icon__icon--left">
-                                                    <span><i class="la la-search"></i></span>
-                                                </span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +68,18 @@
 
                             <div class="col-lg-12">
                             </div>
-                            <div class="price_list_datatable-item" id="price_list_datatable-item"></div>
+                            <table class="table table-striped table-bordered table-hover table-checkable price_list_datatable-item" id="price_list_datatable-item">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th>Unit</th>
+                                        <th>Last Update</th>
+                                        <th>Updated By</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -188,11 +192,37 @@
     </div>
 @endsection
 
+@push('header-scripts')
+<link
+	href="https://cdn.datatables.net/1.10.12/css/dataTables.material.min.css"
+	rel="stylesheet">
+<link
+	href="//cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css"
+    rel="stylesheet">
+    <style>
+        .dataTables_paginate a{
+            color: #5867dd !important;
+            padding: 0 10px;
+        }
+        .dataTables_info{
+            margin-top:-10px;
+            margin-left:10px;
+        }
+        .dataTables_length{
+            margin-top:-30px;
+            visibility: hidden;
+        }
+        .dataTables_length select{
+            visibility: visible;
+        }
+    </style>
+@endpush
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/action-botton/unit-type.js')}}"></script>
     <script src="{{ asset('js/frontend/price-list/index.js')}}"></script>
-    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script> --}}
 
 @endpush

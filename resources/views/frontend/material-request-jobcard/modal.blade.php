@@ -51,7 +51,7 @@
                                 </label>
 
                                 @component('frontend.common.label.data-info')
-                                @slot('text', 'generate')
+                                @slot('id', 'exp_date')
                                 @endcomponent
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                                 </label>
 
                                 @component('frontend.common.label.data-info')
-                                @slot('text', 'generate')
+                                @slot('id', 'jc_qty')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">

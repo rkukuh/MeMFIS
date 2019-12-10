@@ -68,7 +68,7 @@ class CustomerController extends Controller
         }
 
         $request->merge(['attention' => json_encode($attentions)]);
-        $request->merge(['code' => DocumentNumber::generate('CUS-', Customer::withTrashed()->count()+1)]);
+        $request->merge(['code' => DocumentNumber::generate('CUS-', Customer::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         if ($customer = Customer::create($request->all())) {
             $customer->levels()->attach($level);
 
