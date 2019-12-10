@@ -46,7 +46,7 @@ class GoodsReceivedController extends Controller
      */
     public function store(GoodsReceivedStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('GRN-', GoodsReceived::withTrashed()->count()+1)]);
+        $request->merge(['number' => DocumentNumber::generate('GRN-', GoodsReceived::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['purchase_order_id' => PurchaseOrder::where('uuid',$request->purchase_order_id)->first()->id]);
         $request->merge(['storage_id' => Storage::where('uuid',$request->storage_id)->first()->id]);
         $request->merge(['received_at' => Carbon::parse($request->received_at)]);

@@ -178,7 +178,7 @@ class FillComboxController extends Controller
 
         return $project;
     }
-    
+
     /**
      * Display a listing of the resource.
      *

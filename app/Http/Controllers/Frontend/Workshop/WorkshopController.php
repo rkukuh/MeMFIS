@@ -50,7 +50,7 @@ class WorkshopController extends Controller
         $contact['fax'] = $request->attention_fax;
         $contact['email'] = $request->attention_email;
 
-        $request->merge(['number' => DocumentNumber::generate('QWOR-', Quotation::withTrashed()->count() + 1)]);
+        $request->merge(['number' => DocumentNumber::generate('QWOR-', Quotation::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['quotationable_type' => 'App\Models\Project']);
         $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
@@ -59,7 +59,7 @@ class WorkshopController extends Controller
         $request->merge(['no_wo' => Project::where('uuid', $request->project_id)->first()->no_wo]);
 
         $quotation = Quotation::create($request->all());
-        
+
         return response()->json($quotation);
     }
 

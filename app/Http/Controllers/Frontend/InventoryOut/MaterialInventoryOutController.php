@@ -45,7 +45,7 @@ class MaterialInventoryOutController extends Controller
      */
     public function store(InventoryOutStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('IOUT-', InventoryOut::withTrashed()->count() + 1)]);
+        $request->merge(['number' => DocumentNumber::generate('IOUT-', InventoryOut::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['inventoryoutable_type' => 'App\Models\InventoryOut']);
         $request->merge(['inventoryoutable_id' => InventoryOut::withTrashed()->count() + 1]);
 

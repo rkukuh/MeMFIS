@@ -42,7 +42,7 @@ class InventoryInController extends Controller
      */
     public function store(InventoryInStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('ININ-', InventoryIn::withTrashed()->count() + 1)]);
+        $request->merge(['number' => DocumentNumber::generate('ININ-', InventoryIn::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['inventoried_at' => Carbon::parse($request->inventoried_at.'00:00:00')]);
         $request->merge(['inventoryinable_type' => 'App\Models\InventoryIn']);
         $request->merge(['inventoryinable_id' => InventoryIn::withTrashed()->count()+1]);

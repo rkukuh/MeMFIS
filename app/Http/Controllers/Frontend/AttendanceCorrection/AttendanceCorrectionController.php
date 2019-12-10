@@ -54,18 +54,18 @@ class AttendanceCorrectionController extends Controller
         $employee = Employee::where('uuid', $request->uuid_employee)->first();
         $attendance =  EmployeeAttendance::whereDate('date', $request->date)->where('employee_id', $employee->id)->first();
         $correction_type = Type::ofAttendanceCorrection()->where('code', $request->attendance_correction_time_type)->first();
-        $code = DocumentNumber::generate('ATCO-', AttendanceCorrection::withTrashed()->count()+1);
+        $code = DocumentNumber::generate('ATCO-', AttendanceCorrection::withTrashed()->whereYear('created_at', date("Y"))->count()+1);
         $status = Status::ofAttendanceCorrection()->where('code','open')->first();
 
         $AttendanceCorrection = AttendanceCorrection::create([
             'code' => $code,
             'status_id' => $status->id,
-            'employee_id' => $employee->id, 
+            'employee_id' => $employee->id,
             'type_id' => $correction_type->id,
             'attendance_id' => $attendance->id,
-            'correction_date' => $request->date, 
+            'correction_date' => $request->date,
             'description' => $request->description,
-            'correction_time' => $request->time_correction, 
+            'correction_time' => $request->time_correction,
         ]);
 
         $notification = array(
@@ -139,7 +139,7 @@ class AttendanceCorrectionController extends Controller
 
     /**
      * Attendance correction approval
-     * 
+     *
      * @param  \App\Models\AttendanceCorrection  $attcor
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -152,38 +152,38 @@ class AttendanceCorrectionController extends Controller
                 $inserted = DB::table('employee_attendances')->insert([
                         'uuid' => Str::uuid(),
                         'parent_id' => $replica->id,
-                        'employee_id' => $replica->employee_id, 
+                        'employee_id' => $replica->employee_id,
                         'date' => $replica->date,
-                        'in' => $attcor->correction_time, 
+                        'in' => $attcor->correction_time,
                         'out' => $replica->out,
-                        'late_in' => $replica->late_in, 
+                        'late_in' => $replica->late_in,
                         'earlier_out' => $replica->earlier_out,
-                        'overtime' => $replica->overtime, 
+                        'overtime' => $replica->overtime,
                         'statuses_id' => $replica->statuses_id,
                         'created_at' => $replica->created_at,
-                        'updated_at' => $replica->updated_at, 
+                        'updated_at' => $replica->updated_at,
                         'deleted_at' => null,
                     ]);
             }else{
                 $inserted = DB::table('employee_attendances')->insert([
                     'uuid' => Str::uuid(),
                     'parent_id' => $replica->id,
-                    'employee_id' => $replica->employee_id, 
+                    'employee_id' => $replica->employee_id,
                     'date' => $replica->date,
-                    'in' => $replica->in, 
+                    'in' => $replica->in,
                     'out' => $attcor->correction_time,
-                    'late_in' => $replica->late_in, 
+                    'late_in' => $replica->late_in,
                     'earlier_out' => $replica->earlier_out,
-                    'overtime' => $replica->overtime, 
+                    'overtime' => $replica->overtime,
                     'statuses_id' => $replica->statuses_id,
                     'created_at' => $replica->created_at,
-                    'updated_at' => $replica->updated_at, 
+                    'updated_at' => $replica->updated_at,
                     'deleted_at' => null,
                 ]);
             }
 
         $status = Status::ofAttendanceCorrection()->where('code', 'approved')->first();
-        
+
         $attcor->approvals()->save(new Approval([
             'is_approved' => 1,
             'note' => $request->note,
@@ -200,7 +200,7 @@ class AttendanceCorrectionController extends Controller
 
     /**
      * Attendance correction reject
-     * 
+     *
      * @param  \App\Models\AttendanceCorrection  $attcor
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -218,7 +218,7 @@ class AttendanceCorrectionController extends Controller
         $result = $attcor->update([
             'status_id' => $status->id
         ]);
-        
+
         return response()->json($result);
     }
 

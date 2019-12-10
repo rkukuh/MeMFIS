@@ -31,7 +31,7 @@ class ApprovalObserver
                 // $journal->insertFromGRN($comp,$cons,$raw,$approval->approvable_id);
                 $inv_in = $approval->approvable->inventoryIn()->create([
                     'storage_id' => $approval->approvable->storage_id,
-                    'number' => DocumentNumber::generate('INV-IN-', InventoryIn::withTrashed()->count()+1),
+                    'number' => DocumentNumber::generate('INV-IN-', InventoryIn::withTrashed()->whereYear('created_at', date("Y"))->count()+1),
                     'inventoried_at' => $approval->approvable->received_at,
                 ]);
 
@@ -77,7 +77,7 @@ class ApprovalObserver
             case 'App\Models\Mutation': // TODO WIP
                 $mutation = $approval->approvable->inventoryOut()->create([
                     'storage_id' => $approval->approvable->storage_id,
-                    'number' => DocumentNumber::generate('INV-OUT-', InventoryIn::withTrashed()->count()+1),
+                    'number' => DocumentNumber::generate('INV-OUT-', InventoryIn::withTrashed()->whereYear('created_at', date("Y"))->count()+1),
                     'inventoried_at' => $approval->approvable->mutation_at,
                 ]);
 
@@ -151,7 +151,7 @@ class ApprovalObserver
                 break;
             case 'App\Models\ItemRequest': // TODO WIP
                 $inv_out = InventoryOut::create([
-                    'number' => DocumentNumber::generate('IOUT-', InventoryOut::withTrashed()->count() + 1),
+                    'number' => DocumentNumber::generate('IOUT-', InventoryOut::withTrashed()->whereYear('created_at', date("Y"))->count()+1),
                     'storage_id' => $approval->approvable->storage_id,
                     'inventoried_at' => $approval->approvable->received_at,
                     'inventoryoutable_type' => 'App\Models\ItemRequest',

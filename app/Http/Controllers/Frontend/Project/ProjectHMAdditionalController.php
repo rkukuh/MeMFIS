@@ -69,7 +69,7 @@ class ProjectHMAdditionalController extends Controller
         $project->parent_id = $parent_id;
         $project->title = $request->title;
         $project->data_defectcard = $data_defectcard;
-        $project->code = DocumentNumber::generate('PJAD-', Project::withTrashed()->count()+1);
+        $project->code = DocumentNumber::generate('PJAD-', Project::withTrashed()->whereYear('created_at', date("Y"))->count()+1);
         $project->save();
         $defectcard_uuids = explode(",",$request->defectcard_uuid);
 

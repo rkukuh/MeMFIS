@@ -84,7 +84,7 @@ class QuotationController extends Controller
         $contact['fax'] = $request->attention_fax;
         $contact['email'] = $request->attention_email;
 
-        $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::withTrashed()->count()+1)]);
+        $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['quotationable_type' => 'App\Models\Project']);
         $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
@@ -464,7 +464,7 @@ class QuotationController extends Controller
                 if($tc_code == "BSC" or $tc_code == "SIP" or $tc_code == "CPC" or $tc_code == "SIT" or $tc_code == "PRE" or $tc_code == "DUM"){
 
                     $jobcard = $tc->jobcards()->create([
-                        'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
+                        'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->whereYear('created_at', date("Y"))->count()+1),
                         'jobcardable_id' => $tc->id,
                         'quotation_id' => $quotation->id,
                         'is_rii' => $taskcard->is_rii,
@@ -532,7 +532,7 @@ class QuotationController extends Controller
                 $additionals['center_of_gravity'] = null;
 
             $jobcard = $tc_inscrtuction->jobcards()->create([
-                'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
+                'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->whereYear('created_at', date("Y"))->count()+1),
                 'jobcardable_id' => $tc_inscrtuction->id,
                 'quotation_id' => $quotation->id,
                 'is_rii' => $eo_instruction->is_rii,

@@ -45,7 +45,7 @@ class leaveStore extends FormRequest
             $this->merge([
                 'employee_id' => optional(Employee::where('uuid', $this->employee_uuid)->first())->id,
                 'leavetype_id' => optional(LeaveType::where('uuid', $this->leave_type)->first())->id,
-                'code' => DocumentNumber::generate('LEAV-', Leave::withTrashed()->count()+1),
+                'code' => DocumentNumber::generate('LEAV-', Leave::withTrashed()->whereYear('created_at', date("Y"))->count()+1),
                 'status_id' => optional(Status::ofLeave()->where('code','open')->first())->id,
                 ]);
         });

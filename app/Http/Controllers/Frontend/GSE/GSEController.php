@@ -53,7 +53,7 @@ class GSEController extends Controller
      */
     public function store(GSEStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('GSE-', GSE::withTrashed()->count()+1)]);
+        $request->merge(['number' => DocumentNumber::generate('GSE-', GSE::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['returned_at' => Carbon::parse($request->returned_at)]);
         $request->merge(['returned_by' => Employee::where('uuid',$request->returned_by)->first()->user->id]);
         $request->merge(['request_id' => ItemRequest::where('uuid',$request->request_id)->first()->id]);

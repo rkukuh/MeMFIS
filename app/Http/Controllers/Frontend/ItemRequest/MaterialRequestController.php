@@ -52,7 +52,7 @@ class MaterialRequestController extends Controller
             ->where('of', 'item-request')
             ->pluck('id')
             ->first();
-        
+
         $ref = 'App\Models\JobCard';
         $jobcard = JobCard::where('uuid', $request->jc_no)->first();
         $refId = $jobcard->id;
@@ -62,7 +62,7 @@ class MaterialRequestController extends Controller
             $refId = Project::where('uuid', $request->project_no)->first()->id;
         }
 
-        $request->merge(['number' => DocumentNumber::generate('MTRQ-', ItemRequest::withTrashed()->count() + 1)]);
+        $request->merge(['number' => DocumentNumber::generate('MTRQ-', ItemRequest::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['type_id' => $type]);
         $request->merge(['requestable_type' => $ref]);
         $request->merge(['requestable_id' => $refId]);
