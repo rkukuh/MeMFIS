@@ -12,7 +12,11 @@
                         @slot('id', 'job_position_workshift')
                         @slot('name', 'job_position_workshift')
                         @slot('options', $workshifts)
-                        @slot('value', $employee->workshifts->first()->uuid)
+                        @if(sizeof($employee->workshifts) > 0)
+                            @slot('value', $employee->workshifts->first()->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
             </div>

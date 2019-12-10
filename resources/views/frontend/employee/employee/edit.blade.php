@@ -77,8 +77,8 @@
                                         @endif
                                         </div>
                                         <div class="col-sm-3 col-md-3 col-lg-3">
-                                        @if (isset($employee->department->name))
-                                        <h6>| {{ $employee->department->name }}</h6> 
+                                        @if (isset($employee->department->first()->name))
+                                        <h6>| {{ $employee->department->first()->name }}</h6> 
                                         @else
                                         <h6>| None</h6>
                                         @endif

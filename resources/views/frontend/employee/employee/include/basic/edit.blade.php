@@ -451,8 +451,8 @@
                         @slot('id', 'department')
                         @slot('name', 'department')
                         @slot('options', $departments)
-                        @if($employee->department)
-                            @slot('value', $employee->department->uuid)
+                        @if(sizeof($employee->department) > 0)
+                            @slot('value', $employee->department->first()->uuid)
                         @else
                             @slot('value', '')
                         @endif

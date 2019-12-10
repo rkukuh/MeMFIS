@@ -80,6 +80,7 @@
                     @component('frontend.common.input.text')
                         @slot('id', 'duration')
                         @slot('name', 'maximum_overtime')
+                        @slot('value', $maximum_overtime)
                         @slot('id_error', 'maximum_overtime')
                     @endcomponent
 
@@ -93,6 +94,7 @@
                     @component('frontend.common.input.text')
                         @slot('id', 'duration_1')
                         @slot('name', 'minimum_overtime')
+                        @slot('value', $minimum_overtime)
                         @slot('id_error', 'minimum_overtime')
                     @endcomponent
 
@@ -109,9 +111,11 @@
                         @slot('id', 'holiday_overtime')
                         @slot('name', 'holiday_overtime')
                         @slot('id_error', 'holiday_overtime')
+                        @slot('value', $employee->department->first()->pivot->overtime_allowance)
                         @slot('input_append','IDR per Day')
                     @endcomponent
                 </div>
+
             </div>
         </fieldset>
     </div>
