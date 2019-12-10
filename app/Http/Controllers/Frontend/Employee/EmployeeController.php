@@ -178,6 +178,17 @@ class EmployeeController extends Controller
                 ]);
         }
         
+        if($request->department_id){
+            $department = Department::where('id', $request->department_id)->first();
+            $employee->department()->attach($request->department_id, [
+                'joined_at' => $time,
+                'left_at' => null,
+                'maximum_overtime_period' => $department->maximum_period,
+                'overtime_threshold' => Carbon::createMidnightDate($time->year, $time->month, $time->day)->addHours(6),
+                'overtime_allowance' => $department->maximum_holiday
+            ]);
+        }
+
         // TODO: Return error message as JSON
         return response()->json($employee);
     }
@@ -326,9 +337,9 @@ class EmployeeController extends Controller
             }
 
             $department = null;
-            if($ht->department_id){
-                $department = Department::where('id',$ht->department_id)->first()->name;
-            }
+            // if($ht->department_id){
+            //     $department = Department::where('id',$ht->department_id)->first()->name;
+            // }
 
             $indirect_supervisor = null;
             if($ht->indirect_supervisor_id){
@@ -798,9 +809,9 @@ class EmployeeController extends Controller
             }
 
             $department = null;
-            if($ht->department_id){
-                $department = Department::where('id',$ht->department_id)->first()->name;
-            }
+            // if($ht->department_id){
+            //     $department = Department::where('id',$ht->department_id)->first()->name;
+            // }
 
             $indirect_supervisor = null;
             if($ht->indirect_supervisor_id){
@@ -1119,8 +1130,9 @@ class EmployeeController extends Controller
             $photo_profile['active'] = $employee->getFirstMedia('photo_profile_active')->getUrl(); 
         }
 
-
-        // dd($history);
+        $minimum_overtime = Carbon::createFromTimeString($employee->department->first()->pivot->overtime_threshold)->secondsSinceMidnight();
+        $maximum_overtime = ($employee->department->first()->pivot->maximum_overtime_period * 3600);
+        // dd($minimum_overtime);
         return view('frontend.employee.employee.edit',[
             'employee' => $employee,
             'age' => $age,
@@ -1154,6 +1166,8 @@ class EmployeeController extends Controller
             'supervisors' => $supervisors,
             'workshifts' => $workshifts,
             'countries' => $countries,
+            'minimum_overtime' => $minimum_overtime,
+            'maximum_overtime' => $maximum_overtime,
         ]);
     }
 
@@ -1166,8 +1180,35 @@ class EmployeeController extends Controller
      */
     public function update(EmployeeUpdate $request, Employee $employee)
     {
-
         $time_update = Carbon::now();
+
+        $history_data = [
+            'code' => $employee->code,
+            'first_name' => $employee->first_name,
+            'last_name' => $employee->last_name,
+            'dob' => $employee->dob,
+            'dob_place' => $employee->dob_place,
+            'gender' => $employee->gender,
+            'religion' => $employee->religion,
+            'marital_status' => $employee->marital_status,
+            'nationality' => $employee->nationality,
+            'country' => $employee->country,
+            'city' => $employee->city,
+            'zip' => $employee->zip,
+            'joined_date' => $employee->joined_date,
+            'job_title_id' => $employee->job_title_id,
+            'position_id' => $employee->position_id,
+            'department' => $employee->department->first(),
+            'statuses_id' => $employee->statuses,
+            'indirect_supervisor_id' => $employee->indirect_supervisor,
+            'supervisor_id' => $employee->supervisor,
+            'created_at' => $employee->created_at->toDateTimeString(),
+            'updated_at' => $time_update,
+        ];
+
+        /** todo checking history data */
+        // dd($history_data);
+
 
         $employee->addresses()->whereNull('addresses.updated_at')->update([
             'updated_at' => $time_update
@@ -1202,12 +1243,37 @@ class EmployeeController extends Controller
             'job_title_id' => $employee->job_title_id,
             'position_id' => $employee->position_id,
             'statuses_id' => $employee->statuses_id,
-            'department_id' => $employee->department_id,
             'indirect_supervisor_id' => $employee->indirect_supervisor_id,
             'supervisor_id' => $employee->supervisor_id,
             'created_at' => $employee->created_at->toDateTimeString(),
             'updated_at' => $time_update,
         ]);
+
+        $history_data = [[
+            'code' => $employee->code,
+            'first_name' => $employee->first_name,
+            'last_name' => $employee->last_name,
+            'dob' => $employee->dob,
+            'dob_place' => $employee->dob_place,
+            'gender' => $employee->gender,
+            'religion' => $employee->religion,
+            'marital_status' => $employee->marital_status,
+            'nationality' => $employee->nationality,
+            'country' => $employee->country,
+            'city' => $employee->city,
+            'zip' => $employee->zip_code,
+            'joined_date' => $employee->joined_date,
+            'job_title_id' => $employee->job_title_id,
+            'position_id' => $employee->position_id,
+            'depatment' => $employee->department->first(),
+            'statuses_id' => $employee->statuses_id,
+            'indirect_supervisor_id' => $employee->indirect_supervisor_id,
+            'supervisor_id' => $employee->supervisor_id,
+            'created_at' => $employee->created_at->toDateTimeString(),
+            'updated_at' => $time_update,
+        ]];
+
+        $employee->data_histories()->create();
 
         $employee->addresses()->create([
             'address' => $request->address_line_1,
@@ -1301,7 +1367,6 @@ class EmployeeController extends Controller
             'job_title_id' => $job_title,
             'position_id' => $position,
             'statuses_id' => $statuses,
-            'department_id' => $department,
             'indirect_supervisor_id' => $indirect,
             'supervisor_id' => $supervisor,
             'created_at' => $time_update,
@@ -1311,8 +1376,28 @@ class EmployeeController extends Controller
         if($request->document){
             $employee->addMedia($request->document)->toMediaCollection('id_card');
         }
-        
 
+        $current_department = $employee->department->first()->id;
+        $employee->department()->updateExistingPivot($current_department, ['deleted_at' => Carbon::now()   ]);
+
+        if($current_department <> $request->department_id){
+            $employee->department()->attach($request->department_id, [
+                'joined_at' => $time_update,
+                'left_at' => $request->left_at,
+                'maximum_overtime_period' => $request->maximum_overtime,
+                'overtime_threshold' => Carbon::createMidnightDate($time_update->year, $time_update->month, $time_update->day)->addHours($request->minimum_overtime),
+                'overtime_allowance' => $request->holiday_overtime
+            ]);
+        }else{
+            $employee->department()->updateExistingPivot($request->department_id, [
+                'joined_at' => $time_update,
+                'left_at' => $request->left_at,
+                'maximum_overtime_period' => $request->maximum_overtime,
+                'overtime_threshold' => Carbon::createMidnightDate($time_update->year, $time_update->month, $time_update->day)->addHours($request->minimum_overtime),
+                'overtime_allowance' => $request->holiday_overtime
+            ]);
+        }
+        
         // TODO: Return error message as JSON
         return response()->json($employee);
     }
