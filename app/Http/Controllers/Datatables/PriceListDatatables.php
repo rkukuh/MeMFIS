@@ -24,22 +24,6 @@ class PriceListDatatables extends Controller
     {
         ini_set('memory_limit', '-1');
 
-        // $items = Item::with('unit', 'prices')->get();
-
-        // foreach($items as $item){
-        //     $item->unit_name    .= $item->unit->name;
-        //     $item->last_update  .= $item->updated_at;
-
-        //     if($item->first()->audits->first()->user_id == 0){
-
-        //         $item->updated_by .= 'System';
-
-        //     }else{
-
-        //         $item->updated_by .= $item->first()->audits->last()->user_id;
-        //     }
-        // }
-
         $items =  DB::table('items')
         ->join('units', 'units.id', '=', 'items.unit_id')
         ->join('categorizables', 'categorizables.categorizable_id', '=', 'items.id')
@@ -56,12 +40,13 @@ class PriceListDatatables extends Controller
         */
 
         foreach($items as $item){
-            $Item = Item::find($item->id)->audits;
-            if(sizeOf($Item->toArray()) == 0){
+            $Item = Item::find($item->id)->prices()->orderBy('updated_at','DESC')->first()->audits;
+            if(sizeOf(Item::find($item->id)->prices->toArray()) == 0 or $Item->last()->user_id == null){
                 $item->updated_by = "System";
+                $item->last_update = "-";
             }else{
-                // $item->updated_by = $Item->last()->user_id;
-                // $item->last_update = $Item->last()->created_at;
+                $item->updated_by = User::find($Item->last()->user_id)->name;
+                $item->last_update = $Item->last()->created_at;
             }
         }
 
