@@ -44,6 +44,7 @@ require('frontend/task-release.php');
 require('frontend/taskcard.php');
 require('frontend/view-only.php');
 require('frontend/workpackage.php');
+require('frontend/workshop.php');
 require('frontend/work-progress-report.php');
 require('frontend/vendor.php');
 require('testing.php');

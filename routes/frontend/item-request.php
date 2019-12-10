@@ -28,6 +28,7 @@ Route::name('frontend.')->group(function () {
                         Route::put('/{itemRequest}/item/{item}', 'MaterialRequestController@updateItem')->name('items.update');
                         Route::delete('/{itemRequest}/item/{item}', 'MaterialRequestController@deleteItem')->name('items.destroy');
                         Route::put('/{itemRequest}/approve', 'MaterialRequestController@approve')->name('approve');
+                        Route::get('/{itemRequest}/print', 'MaterialRequestController@print')->name('print');
 
                     });
 

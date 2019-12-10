@@ -63,7 +63,7 @@ class VendorController extends Controller
         }
 
         $request->merge(['attention' => json_encode($attentions)]);
-        $request->merge(['code' => DocumentNumber::generate('VEN-', Vendor::withTrashed()->count()+1)]);
+        $request->merge(['code' => DocumentNumber::generate('VEN-', Vendor::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         if ($vendor = Vendor::create($request->all())) {
 
             if($request->bank_account_name){

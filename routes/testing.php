@@ -26,8 +26,9 @@ Route::name('testing.')->group(function () {
             ]);
         });
 
-        Route::get('/prr2', function () {
-            dd(App\Models\TaskCard::find(730)->tools);
+        Route::get('/doc', function () {
+
+            dd(App\Helpers\DocumentNumber::generate('PR-',1000));
         });
         Route::get('/prr', function () {
             // dd(App\Models\PurchaseRequest::find(3)->items->where('pivot.deleted_at',null));

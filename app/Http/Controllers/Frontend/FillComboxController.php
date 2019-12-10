@@ -14,6 +14,7 @@ use App\Models\FefoIn;
 use App\Models\Vendor;
 use App\Models\Status;
 use App\Models\JobCard;
+use App\Models\Quotation;
 use App\Models\License;
 use App\Models\Project;
 use App\Models\Station;
@@ -161,6 +162,21 @@ class FillComboxController extends Controller
 
         return json_encode($jobpositions);
 
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jobcardProject($jobcard)
+    {
+        $id = JobCard::where('uuid', $jobcard)->first()->quotation_id;
+        $quo = Quotation::where('id', $id)->first();
+        $project = $quo->quotationable;
+        $project->aircraft = $quo->quotationable->aircraft;
+
+        return $project;
     }
 
     /**
@@ -694,7 +710,7 @@ class FillComboxController extends Controller
             ->first()
             ->toArray();
 
-        return json_encode($expDate);
+        return json_encode(date('d-m-Y', strtotime($expDate['formatted'])));
     }
 
     /**

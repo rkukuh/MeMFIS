@@ -23,12 +23,17 @@
                                     Item @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.select2')
+                                <!-- @component('frontend.common.input.select2')
                                 @slot('text', 'Material')
                                 @slot('id', 'material')
                                 @slot('name', 'material')
                                 @slot('id_error', 'material')
                                 @slot('style', 'width:100%')
+                                @endcomponent -->
+
+                                @component('frontend.common.item.index')
+                                @slot('name_item','material')
+                                @slot('id_item','material')
                                 @endcomponent
                             </div>
 
@@ -78,11 +83,18 @@
                                             Unit @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.select2')
+                                        <!-- @component('frontend.common.input.select2')
                                         @slot('text', 'Unit')
                                         @slot('id', 'unit_id')
                                         @slot('name', 'unit_id')
                                         @slot('id_error', 'unit')
+                                        @endcomponent -->
+
+                                        @component('frontend.common.input.select2')
+                                        @slot('id', 'unit_material')
+                                        @slot('text', 'Unit')
+                                        @slot('name', 'unit_material')
+                                        @slot('id_error', 'unit_material')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -182,11 +194,12 @@
 @push('footer-scripts')
 <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
 
-<script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/material-uuid.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/material-uuid.js') }}"></script> -->
 
-<script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script> -->
 
 <script src="{{ asset('js/frontend/functions/select2/serial-number.js')}}"></script>
 @endpush

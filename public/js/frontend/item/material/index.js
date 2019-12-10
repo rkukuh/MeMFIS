@@ -1,7 +1,5 @@
 let Item = {
     init: function () {
-
-
         $('#item_datatable').DataTable({
             "dom": '<"top"f>rt<"bottom">pil',
             processing: true,

@@ -39,7 +39,7 @@ class CustomersImport implements ToModel, WithHeadingRow
 
         $customer = Customer::create([
             'name' => $row['name'],
-            'code' =>  DocumentNumber::generate('CUS-', Customer::withTrashed()->count()+1),
+            'code' =>  DocumentNumber::generate('CUS-', Customer::withTrashed()->whereYear('created_at', date("Y"))->count()+1),
             'attention' => json_encode($attentions),
             'payment_term' => $row['term_of_payment'],
         ]);

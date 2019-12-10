@@ -7,6 +7,8 @@ use App\Models\Employee;
 use App\Models\Storage;
 use App\Models\Approval;
 use App\Models\Item;
+use App\Models\Unit;
+use Carbon\Carbon;
 use App\Models\InventoryOut;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\InventoryOutStore;
@@ -43,7 +45,7 @@ class ToolInventoryOutController extends Controller
      */
     public function store(InventoryOutStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('IOUT-', InventoryOut::withTrashed()->count() + 1)]);
+        $request->merge(['number' => DocumentNumber::generate('IOUT-', InventoryOut::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['inventoryoutable_type' => 'App\Models\InventoryOut']);
         $request->merge(['inventoryoutable_id' => InventoryOut::withTrashed()->count() + 1]);
 
@@ -145,6 +147,8 @@ class ToolInventoryOutController extends Controller
      */
     public function addItem(InventoryOutStore $request, InventoryOut $inventoryOut, Item $item)
     {
+        $request->merge(['exp_date' => Carbon::parse($request->exp_date)]);
+        $request->merge(['unit_id' => Unit::where('uuid', $request->unit_id)->first()->id]);
         $exists = $inventoryOut->items()->where('item_id', $item->id)->first();
 
         if ($exists) {
@@ -172,9 +176,9 @@ class ToolInventoryOutController extends Controller
 
         $quantity_unit = $request->quantity;
 
-        if ($request->unit_id <> $item->unit_id) {
+        if ($request->unit_id != $item->unit_id) {
             $quantity = $request->quantity;
-            $qty_uom = $item->units->where('uom.unit_id', $item->unit_id)->first()->uom->quantity;
+            // $qty_uom = $item->units->where('uom.unit_id', $item->unit_id)->first()->uom->quantity;
 
             if (!is_null($request->unit_id)) {
                 $qty_uom = $item->units->where('uom.unit_id', $request->unit_id)->first()->uom->quantity;
@@ -207,6 +211,8 @@ class ToolInventoryOutController extends Controller
      */
     public function updateItem(InventoryOutUpdate $request, InventoryOut $inventoryOut, Item $item)
     {
+        $request->merge(['unit_id' => Unit::where('uuid', $request->unit_id)->first()->id]);
+
         $inventoryOut->items()->updateExistingPivot(
             $item->id,
             [
