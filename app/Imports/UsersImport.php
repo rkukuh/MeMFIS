@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\User;
 use App\Models\Type;
 use App\Models\Status;
+use App\Models\Department;
 use App\Models\Country;
 use App\Models\Religion;
 use App\Models\Workshift;
@@ -25,6 +26,7 @@ class UsersImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
+        $now = Carbon::now();
 
         $faker = Faker\Factory::create();
 
@@ -67,6 +69,8 @@ class UsersImport implements ToModel, WithHeadingRow
         ]; 
 
         $user->employee()->create($employee);
+        $departmentSize = Department::count('id');
+        $department = Department::where('id', rand(1, $departmentSize) )->first();
 
         $employee = $user->employee;
 
@@ -81,5 +85,39 @@ class UsersImport implements ToModel, WithHeadingRow
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
             ]);
+
+        $employee->department()->attach($department->id, [
+            'joined_at' => $now,
+            'left_at' => null,
+            'maximum_overtime_period' => $department->maximum_period,
+            'overtime_threshold' => Carbon::createMidnightDate($now->year, $now->month, $now->day)->addHours(6),
+            'overtime_allowance' => $department->maximum_holiday
+        ]);
+
+        if(rand(0,1)){
+            $current_department = $employee->department->first()->id;
+            $department = Department::where('id', rand(1, $departmentSize ) )->first();
+            $employee->department()->updateExistingPivot($current_department, ['deleted_at' => Carbon::now()   ]);
+
+            if($current_department == $department->id){
+                $department->id = Department::find($department->id + 1);
+
+                $employee->department()->attach($department->id, [
+                    'joined_at' => $now,
+                    'left_at' => null,
+                    'maximum_overtime_period' => $department->maximum_period,
+                    'overtime_threshold' => Carbon::createMidnightDate($now->year, $now->month, $now->day)->addHours(6),
+                    'overtime_allowance' => $department->maximum_holiday
+                ]);
+            }else{
+                $employee->department()->attach($department->id, [
+                    'joined_at' => $now,
+                    'left_at' => null,
+                    'maximum_overtime_period' => $department->maximum_period,
+                    'overtime_threshold' => Carbon::createMidnightDate($now->year, $now->month, $now->day)->addHours(6),
+                    'overtime_allowance' => $department->maximum_holiday
+                ]);
+            }
+        }
     }
 }
