@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Unit;
 use App\Models\Item;
 use Spatie\Tags\Tag;
+use App\Models\Price;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -28,6 +29,11 @@ class EnginesImport implements ToModel, WithHeadingRow
         ]);
 
         $item->save();
+
+        for($i=1;$i<=5;$i++){
+            $item->prices()
+            ->save(new Price (['amount' =>0,'level' =>$i]));
+        }
 
         $item->tags()
              ->attach(
