@@ -37,7 +37,7 @@ class History extends MemfisModel
      */
     public function conductedBy()
     {
-        return $this->belongsTo(Employee::class, 'conducted_by');
+        return $this->belongsTo(Employee::class, 'user_id');
     }
 
 }
