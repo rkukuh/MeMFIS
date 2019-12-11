@@ -64,8 +64,7 @@ class UsersImport implements ToModel, WithHeadingRow
             'marital_id' => Status::ofMarital()->where('code', $faker->randomElement(['married','single','cerai-hidup','cerai-mati']))->first()->id,
             'country_id' => Country::first()->id,
             'city' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
-            'joined_date' => Carbon::now()->toDateString(),
-            'updated_at' => null
+            'joined_date' => Carbon::now()->toDateString()
         ]; 
 
         $user->employee()->create($employee);
