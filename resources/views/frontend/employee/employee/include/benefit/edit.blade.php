@@ -55,37 +55,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            
-                            @for ($i = 0; $i < count($employee_benefit); $i++)
-                                
-                                <tr>
-                                <td align="left" width="30%">{{ $employee_benefit[$i]['benefit_name'] }}</td>
-                                    <td align="center" width="25%">
-                                        @component('frontend.common.input.number')
-                                            @slot('min', $employee_benefit[$i]['min'])
-                                            @slot('max', $employee_benefit[$i]['max'])
-                                            @slot('name', $employee_benefit[$i]['benefit_uuid'].'_amount')
-                                            @slot('id', $employee_benefit[$i]['benefit_uuid'].'_amount')
-                                            @slot('id_error', $employee_benefit[$i]['benefit_uuid'])
-                                        @endcomponent                    
-                                    </td>
-                                    <td  width="30%">
-                                    <p>Min~Max = {{ $employee_benefit[$i]['min'] }} - {{ $employee_benefit[$i]['max'] }} <br> Calculation Refrence: {{ $employee_benefit[$i]['base_calculation'] }}<br> Pro-rate Base Calculation:  {{ $employee_benefit[$i]['prorate_calculation'] }}</p>
-                                    </td>
-                                    <td align="center" width="15%">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('id', $employee_benefit[$i]['benefit_uuid'])
-                                            @slot('name', 'check_benefit')
-                                            @slot('value', $employee_benefit[$i]['benefit_uuid'])
-                                            @slot('onclik', 'checkboxFunction(this.id)')
-                                            @slot('size', '')
-                                            @slot('style','width:20px;')
-                                        @endcomponent
-                                    </td>
-                                </tr>
-
-                            @endfor
-
                         </table>
                     </div>
                 </div>
