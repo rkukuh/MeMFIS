@@ -662,7 +662,10 @@ class Employee extends MemfisModel implements HasMedia
      */
     public function workshifts()
     {
-        return $this->belongsToMany(Workshift::class);
+        return $this->belongsToMany(Workshift::class)
+                    ->withPivot('deleted_at')
+                    ->whereNull('employee_workshift.deleted_at')
+                    ->withTimestamps();
     }
 
     /**

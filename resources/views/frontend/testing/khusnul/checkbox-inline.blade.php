@@ -10,7 +10,7 @@
             class="{{ $class or ''}}"
             style="{{ $style or ''}}"
             value="{{ $value or ''}}"
-            onclick="{{ $onclik or ''}}"
+            onclick="{{ $onclick or ''}}"
             {{ $checked or ''}}
             {{ $disabled or ''}}
     >

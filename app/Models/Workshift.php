@@ -23,7 +23,10 @@ class Workshift extends MemfisModel
      */
     public function employees()
     {
-        return $this->belongsToMany(Employee::class);
+        return $this->belongsToMany(Employee::class)
+                    ->withPivot('deleted_at')
+                    ->whereNull('employee_workshift.deleted_at')
+                    ->withTimestamps();
     }
 
     /**

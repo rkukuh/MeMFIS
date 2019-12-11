@@ -512,10 +512,10 @@ class EmployeeController extends Controller
         }
 
         $position_min_max = null;
-        if(isset($employee->position()->first()->id)){
-            if(Position::find($employee->position()->first()->id)->benefit_current()->get()){
-                $position_min_max = Position::find($employee->position()->first()->id)->benefit_current()->get();
-            }
+        $position_min_max = $employee->position->benefits;
+
+        if($position_min_max){
+            $position_min_max = $employee->position->benefits;
         }
 
         $current = [
@@ -942,10 +942,11 @@ class EmployeeController extends Controller
         }
 
         $position_min_max = null;
-        if(isset($employee->position()->first()->id)){
-            if(Position::find($employee->position()->first()->id)->benefit_current()->get()){
-                $position_min_max = Position::find($employee->position()->first()->id)->benefit_current()->get();
-            }
+       
+        $position_min_max = $employee->position->benefits;
+
+        if($position_min_max){
+            $position_min_max = $employee->position->benefits;
         }
 
         $approve = [
@@ -957,6 +958,7 @@ class EmployeeController extends Controller
             'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNull('employee_bpjs.approved_at')->whereNull('employee_bpjs.deleted_at')->get()
         ];
 
+        // dd($approve);
          }else{
             $button_parameter = 'update';
         }
@@ -1047,12 +1049,13 @@ class EmployeeController extends Controller
         $current = [
             'approved_at' => $approved_at,
             'approved_name' => $approved_name,
-            'provisions' => $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->whereNull('employee_provisions.deleted_at')->get(),
+            'provisions' => $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNull('employee_provisions.deleted_at')->get(), //->whereNotNull('employee_provisions.approved_at')->whereNull('employee_provisions.deleted_at')->get(),
             'benefit_name' => $benefit_name,
             'benefit' => $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNotNull('employee_benefit.approved_at')->whereNull('employee_benefit.deleted_at')->get(),
             'bpjs_name' => $bpjs_name,
             'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->whereNull('employee_bpjs.deleted_at')->get()
         ];
+
       
         //EMPLOYEE WORKSHIFT CURRENT
         $workshift_current = [];
@@ -1134,7 +1137,8 @@ class EmployeeController extends Controller
         $minimum_overtime = Carbon::createFromTimeString($employee->department->first()->pivot->overtime_threshold)->secondsSinceMidnight();
         $maximum_overtime = ($employee->department->first()->pivot->maximum_overtime_period * 3600);
         $employee_benefit = $employee->position->benefits;
-        // dd($employee->position->benefits->first()->pivot->min);
+
+        // dd($approve['position_min_max']);
         return view('frontend.employee.employee.edit',[
             'employee' => $employee,
             'age' => $age,

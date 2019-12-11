@@ -21,5 +21,6 @@ class ExampleDataSeeder extends Seeder
         $this->call(BenefitExamples::class);
         $this->call(CompanyStructureExamples::class);
         $this->call(BenefitPositionExample::class);
+        $this->call(EmployeePositionDummy::class);
     }
 }
