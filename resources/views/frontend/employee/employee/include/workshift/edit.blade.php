@@ -129,6 +129,7 @@
 </div>
 
 @push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/fill-combobox/workshift.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/workshift.js') }}"></script>
     <script src="{{ asset('js/frontend/employee/workshift/create.js') }}"></script>
     <script src="{{ asset('js/frontend/employee/workshift/edit.js') }}"></script>
