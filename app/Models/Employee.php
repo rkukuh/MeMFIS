@@ -228,13 +228,14 @@ class Employee extends MemfisModel implements HasMedia
     /**
      * One-to-Many Polymorphic : An Employee may have zero or many personal data histories
      * 
+     * ebdh Abbreviation of Emplohee Basic Data History
      * This function will get all of the histories from given employee.
      * See:
      * - Employee's histories() method for the inverse
      */
-    public function data_histories()
+    public function ebdh()
     {
-        return $this->morphMany(History::class, 'historiable');
+        return $this->morphMany(History::class, 'historiable')->whereNull('table_name');
     }
 
     /**
