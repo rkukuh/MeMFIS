@@ -7,7 +7,8 @@ use App\MemfisModel;
 class History extends MemfisModel
 {
     protected $fillable = [
-        'data',
+        'history_data',
+        'table_name',
         'user_id'
     ];
 
@@ -18,7 +19,7 @@ class History extends MemfisModel
      *
      * This function will get all of the owning accessable models.
      * See:
-     * - Employee's data_histories() method for the inverse
+     * - Employee's ebdh() method for the inverse
      *
      * @return mixed
      */
