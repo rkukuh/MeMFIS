@@ -20,6 +20,7 @@ class History extends MemfisModel
      * This function will get all of the owning accessable models.
      * See:
      * - Employee's ebdh() method for the inverse
+     * - Employee's workshift_histories() method for the inverse
      *
      * @return mixed
      */
