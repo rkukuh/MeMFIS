@@ -45,47 +45,16 @@
                                     </td>
                                     <td align="center" width="15%">
                                         @component('frontend.common.input.checkbox')
-                                            @slot('id', $benefit->benefit_uuid)
+                                            @slot('id', $benefit->uuid)
                                             @slot('name', 'check_benefit')
-                                            @slot('value', $benefit->benefit_uuid)
-                                            @slot('onclik', 'checkboxFunction(this.id)')
+                                            @slot('value', $benefit->uuid)
+                                            @slot('onclick', 'checkboxFunction(this.id)')
                                             @slot('size', '')
                                             @slot('style','width:20px;')
                                         @endcomponent
                                     </td>
                                 </tr>
                             @endforeach
-                            
-                            @for ($i = 0; $i < count($employee_benefit); $i++)
-                                
-                                <tr>
-                                <td align="left" width="30%">{{ $employee_benefit[$i]['benefit_name'] }}</td>
-                                    <td align="center" width="25%">
-                                        @component('frontend.common.input.number')
-                                            @slot('min', $employee_benefit[$i]['min'])
-                                            @slot('max', $employee_benefit[$i]['max'])
-                                            @slot('name', $employee_benefit[$i]['benefit_uuid'].'_amount')
-                                            @slot('id', $employee_benefit[$i]['benefit_uuid'].'_amount')
-                                            @slot('id_error', $employee_benefit[$i]['benefit_uuid'])
-                                        @endcomponent                    
-                                    </td>
-                                    <td  width="30%">
-                                    <p>Min~Max = {{ $employee_benefit[$i]['min'] }} - {{ $employee_benefit[$i]['max'] }} <br> Calculation Refrence: {{ $employee_benefit[$i]['base_calculation'] }}<br> Pro-rate Base Calculation:  {{ $employee_benefit[$i]['prorate_calculation'] }}</p>
-                                    </td>
-                                    <td align="center" width="15%">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('id', $employee_benefit[$i]['benefit_uuid'])
-                                            @slot('name', 'check_benefit')
-                                            @slot('value', $employee_benefit[$i]['benefit_uuid'])
-                                            @slot('onclik', 'checkboxFunction(this.id)')
-                                            @slot('size', '')
-                                            @slot('style','width:20px;')
-                                        @endcomponent
-                                    </td>
-                                </tr>
-
-                            @endfor
-
                         </table>
                     </div>
                 </div>
@@ -173,7 +142,7 @@
                                 @component('frontend.common.input.checkbox')
                                     @slot('id', $bpjs->uuid)
                                     @slot('name', 'check_bpjs')
-                                    @slot('onclik','checkboxBPJSFunction(this.id)')
+                                    @slot('onclick','checkboxBPJSFunction(this.id)')
                                     @slot('value',$bpjs->uuid)
                                     @slot('style','width:20px;')
                                 @endcomponent
@@ -365,11 +334,11 @@
                                     <td align="left" width="30%">{{ $approve['benefit_name'][$l]['name']['name'] }}</td>
                                     <td align="center" width="25%">
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $approve['benefit'][$l]['amount'])
+                                            @slot('text', number_format($approve['benefit'][$l]['amount'], 2))
                                         @endcomponent       
                                     </td>
                                     <td  width="30%">
-                                        <p>Min~Max = {{ $approve['position_min_max'][$l]->pivot->min }} - {{ $approve['position_min_max'][$l]->pivot->max }} <br> Calculation Refrence: <br> Pro-rate Base Calculation:</p>
+                                        <p>Min~Max = {{ number_format($approve['position_min_max'][$l]->pivot->min, 2) }} - {{ number_format($approve['position_min_max'][$l]->pivot->max, 2) }} <br> Calculation Refrence: {{ $approve['position_min_max'][$l]->base_calculation }}<br> Pro-rate Base Calculation: {{ $approve['position_min_max'][$l]->prorate_calculation }}</p>
                                     </td>
                                     <td align="center" width="15%">
                                         @component('frontend.common.input.checkbox')
@@ -406,7 +375,7 @@
                     @php
                     $maximum_overtime = null;
                     if(isset($approve['provisions'][0]['maximum_overtime'])){
-                        $maximum_overtime = $approve['provisions'][0]['maximum_overtime'];
+                        $maximum_overtime = $approve['provisions'][0]['maximum_overtime'] / 3600;
                     }
                     @endphp
                     @component('frontend.common.input.number')
@@ -427,7 +396,7 @@
                     @php
                     $minimum_overtime = null;
                     if(isset($current['provisions'][0]['minimum_overtime'])){
-                        $minimum_overtime = $current['provisions'][0]['minimum_overtime'];
+                        $minimum_overtime = $current['provisions'][0]['minimum_overtime'] / 3600;
                     }
                     @endphp
                    @component('frontend.common.input.number')
@@ -532,12 +501,12 @@
                                 <td align="center" valign="top" class="pt-3">Minimum value</td>
                                 <td align="center" valign="top">
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', $approve['bpjs'][$i]['employee_min_value'])
+                                        @slot('text', number_format($approve['bpjs'][$i]['employee_min_value'], 2))
                                     @endcomponent
                                 </td>
                                 <td align="center" valign="top">
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', $approve['bpjs'][$i]['company_min_value'])
+                                        @slot('text', number_format($approve['bpjs'][$i]['company_min_value'], 2))
                                     @endcomponent
                                 </td>
                             </tr>
@@ -545,12 +514,12 @@
                                 <td align="center" valign="top" class="pt-3">Maximum Value</td>
                                 <td align="center" valign="top">
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', $approve['bpjs'][$i]['employee_max_value'])
+                                        @slot('text', number_format($approve['bpjs'][$i]['employee_max_value'], 2))
                                     @endcomponent
                                 </td>
                                 <td align="center" valign="top">
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', $approve['bpjs'][$i]['company_min_value'])
+                                        @slot('text', number_format($approve['bpjs'][$i]['company_min_value'], 2))
                                     @endcomponent
                                 </td>
                             </tr>
@@ -704,7 +673,7 @@
                     <div style="border-bottom:3px solid black">
                         <table width="100%" cellpadding="7" border="1">
                             <tr>
-                                <td align="left" width="30%"><b>Benefits Name</b></td>
+                                <td align="left" width="30%"><b>Benefits Name awu</b></td>
                                 <td align="center" width="25%"><b>Amount</b></td>
                                 <td align="center" width="30%"><b>Description</b></td>
                                 <td align="center" width="15%"><b>Action</b></td>
@@ -720,31 +689,31 @@
                                 }
                             @endphp
                             @for ($i = 0; $i < count($employee_benefit); $i++)
-                            @if (in_array($employee_benefit[$i]['benefit_uuid'], $search))
+                            @if (in_array($employee_benefit[$i]['uuid'], $search))
                             @php
-                                $key = array_search($employee_benefit[$i]['benefit_uuid'], $search)    
+                                $key = array_search($employee_benefit[$i]['uuid'], $search)    
                             @endphp
                             <tr>
-                                    <td align="left" width="30%">{{ $employee_benefit[$i]['benefit_name'] }}</td>
+                                    <td align="left" width="30%">{{ $employee_benefit[$i]['name'] }}</td>
                                         <td align="center" width="25%">
                                             @component('frontend.common.input.number')
-                                                @slot('min', $employee_benefit[$i]['min'])
-                                                @slot('max', $employee_benefit[$i]['max'])
-                                                @slot('name', $employee_benefit[$i]['benefit_uuid'].'_amount')
+                                                @slot('min', $employee_benefit[$i]->pivot->min)
+                                                @slot('max', $employee_benefit[$i]->pivot->max)
+                                                @slot('name', $employee_benefit[$i]['uuid'].'_amount')
                                                 @slot('value', $current['benefit'][$key]['amount'])
-                                                @slot('id', $employee_benefit[$i]['benefit_uuid'].'_amount')
-                                                @slot('id_error', $employee_benefit[$i]['benefit_uuid'])
+                                                @slot('id', $employee_benefit[$i]['uuid'].'_amount')
+                                                @slot('id_error', $employee_benefit[$i]['uuid'])
                                             @endcomponent                    
                                         </td>
                                         <td  width="30%">
-                                        <p>Min~Max = {{ $employee_benefit[$i]['min'] }} - {{ $employee_benefit[$i]['max'] }} <br> Calculation Refrence: {{ $employee_benefit[$i]['base_calculation'] }}<br> Pro-rate Base Calculation:  {{ $employee_benefit[$i]['prorate_calculation'] }}</p>
+                                        <p>Min~Max = {{ number_format($employee_benefit[$i]->pivot->min, 2) }} - {{ number_format($employee_benefit[$i]->pivot->max, 2) }} <br> Calculation Refrence: {{ $employee_benefit[$i]['base_calculation'] }}<br> Pro-rate Base Calculation:  {{ $employee_benefit[$i]['prorate_calculation'] }}</p>
                                         </td>
                                         <td align="center" width="15%">
                                             @component('frontend.common.input.checkbox')
-                                                @slot('id', $employee_benefit[$i]['benefit_uuid'])
+                                                @slot('id', $employee_benefit[$i]['uuid'])
                                                 @slot('name', 'check_benefit')
-                                                @slot('value', $employee_benefit[$i]['benefit_uuid'])
-                                                @slot('onclik', 'checkboxFunction(this.id)')
+                                                @slot('value', $employee_benefit[$i]['uuid'])
+                                                @slot('onclick', 'checkboxFunction(this.id)')
                                                 @slot('size', '')
                                                 @slot('checked','checked')
                                                 @slot('style','width:20px;')
@@ -753,7 +722,7 @@
                                     </tr>
                             @else
                                 <tr>
-                                <td align="left" width="30%">{{ $employee_benefit[$i]['benefit_name'] }}</td>
+                                <td align="left" width="30%">{{ $employee_benefit[$i]['name'] }}</td>
                                     <td align="center" width="25%">
                                         @component('frontend.common.input.number')
                                             @slot('min', $employee_benefit[$i]['min'])
@@ -771,7 +740,7 @@
                                             @slot('id', $employee_benefit[$i]['benefit_uuid'])
                                             @slot('name', 'check_benefit')
                                             @slot('value', $employee_benefit[$i]['benefit_uuid'])
-                                            @slot('onclik', 'checkboxFunction(this.id)')
+                                            @slot('onclick', 'checkboxFunction(this.id)')
                                             @slot('size', '')
                                             @slot('style','width:20px;')
                                         @endcomponent
@@ -890,7 +859,7 @@
                                         @component('frontend.common.input.checkbox')
                                             @slot('id', $current['bpjs_name'][$key]['name']['uuid'])
                                             @slot('name', 'check_bpjs')
-                                            @slot('onclik','checkboxBPJSFunction(this.id)')
+                                            @slot('onclick','checkboxBPJSFunction(this.id)')
                                             @slot('checked', 'checked');
                                             @slot('value',$current['bpjs_name'][$key]['name']['uuid'])
                                             @slot('style','width:20px;')
@@ -964,7 +933,7 @@
                                     @component('frontend.common.input.checkbox')
                                         @slot('id', $bpjs->uuid)
                                         @slot('name', 'check_bpjs')
-                                        @slot('onclik','checkboxBPJSFunction(this.id)')
+                                        @slot('onclick','checkboxBPJSFunction(this.id)')
                                         @slot('value',$bpjs->uuid)
                                         @slot('style','width:20px;')
                                     @endcomponent

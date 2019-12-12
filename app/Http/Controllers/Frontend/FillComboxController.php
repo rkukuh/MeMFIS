@@ -38,6 +38,7 @@ use App\Models\Nationality;
 use App\Models\InventoryOut;
 use App\Models\Manufacturer;
 use App\Models\PurchaseOrder;
+use App\Models\Workshift;
 use App\Models\Pivots\EmployeeLicense;
 use App\Http\Controllers\Controller;
 
@@ -1142,6 +1143,18 @@ class FillComboxController extends Controller
         $employees = Employee::pluck('first_name', 'code', 'id');
 
         return json_encode($employees);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function workshifts()
+    {
+        $workshifts = Workshift::pluck('name', 'uuid');
+
+        return json_encode($workshifts);
     }
 
     /**
