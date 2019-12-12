@@ -128,6 +128,17 @@ class Status extends MemfisModel
     }
 
     /**
+     * Scope a query to only include status of purchase request.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfPurchaseRequest(Builder $query)
+    {
+        return $query->where('of', 'purchase-request');
+    }
+
+    /**
      * Scope a query to only include status of project.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query

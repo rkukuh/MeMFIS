@@ -58,6 +58,19 @@ class PurchaseRequest extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many progresses.
+     *
+     * This function will get all JobCard's progresses.
+     * See: Progress's progressable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function progresses()
+    {
+        return $this->morphMany(Progress::class, 'progressable');
+    }
+
+    /**
      * One-to-Many: A purchase order may have one purchase request.
      *
      * This function will retrieve all the purchase orders of a purchase request.

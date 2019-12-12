@@ -17,10 +17,10 @@ class EOInstructionWorkPackagePredecessors extends Seeder
             $eo_instruction_workpackage = EOInstructionWorkPackage::find($i);
 
             for ($j = 1; $j <= rand(1, 5); $j++) {
-                $eo_instruction_workpackage->predecessors()->create([
-                    'previous' => EOInstruction::get()->random()->id,
-                    'order' => $j,
-                ]);
+                // $eo_instruction_workpackage->predecessors()->create([
+                //     'previous' => EOInstruction::get()->random()->id,
+                //     'order' => $j,
+                // ]);
             }
         }
     }

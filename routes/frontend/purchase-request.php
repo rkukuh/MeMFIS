@@ -19,6 +19,10 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['purchase-request-project' => 'purchaseRequest']
             ]);
 
+            Route::resource('purchase-request-service', 'ServicePurchaseRequestController', [
+                'parameters' => ['purchase-request-service' => 'purchaseRequest']
+            ]);
+
             Route::name('purchase-request.')->group(function () {
                 Route::prefix('purchase-request')->group(function () {
                     Route::get('/{purchaseRequest}/general/print', 'GeneralPurchaseRequestController@print')->name('general.print');

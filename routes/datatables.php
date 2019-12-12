@@ -469,6 +469,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/general', 'GeneralPurchaseRequestDatatables@index')->name('all.general');
+                Route::get('/project', 'ServicePurchaseRequestDatatables@index')->name('all.project');
                 Route::get('/project', 'ProjectPurchaseRequestDatatables@index')->name('all.project');
                 Route::get('/project/item/{project}', 'ProjectPurchaseRequestDatatables@projectItem')->name('item.project');
                 Route::get('/modal/general', 'GeneralPurchaseRequestDatatables@purchaseRequestModal')->name('modal.general.index');

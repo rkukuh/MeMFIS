@@ -25,7 +25,7 @@ let Employee_create_workshift = {
                                 timeOut: 5000
                             });
     
-                            location.reload();
+                            // location.reload();
                         }
                     }
                 });

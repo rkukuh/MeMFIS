@@ -12,6 +12,13 @@ use App\Models\Document;
 use App\Models\Employee;
 use App\Models\Language;
 use App\Models\BankAccount;
+use App\Models\Type;
+use App\Models\Status;
+use App\Models\Department;
+use App\Models\Country;
+use App\Models\Religion;
+use App\Models\Workshift;
+use App\Models\Nationality;
 use Faker\Generator as Faker;
 
 $factory->define(Employee::class, function (Faker $faker) {
@@ -25,15 +32,13 @@ $factory->define(Employee::class, function (Faker $faker) {
         'first_name' => $faker->randomElement([$firstNameMale, $firstNameFemale]),
         'last_name' => $faker->lastName(),
         'dob' => Carbon::now()->subYear(rand(20, 50)),
-        'dob_place' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
-        'gender' => $faker->randomElement(['m', 'f']),
-        'religion' => $faker->randomElement(['islam','khonghucu','budha','kristen','hindu']),
-        'marital_status' => $faker->randomElement(['s','m']),
-        'nationality' => $faker->randomElement(['Indonesia','Japan','Zimbabwe','South Africa']),
-        'country' => 'Indonesia',
+        'dob_place' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),            
+        'gender_id' => Type::ofGender()->where('code', $faker->randomElement(['male','female']))->first()->id,            
+        'religion_id' => Religion::where('code', $faker->randomElement(['christian-protestant','islam','kong-hu-cu','buddha','catholic','hindu']))->first()->id,
+        'marital_id' => Status::ofMarital()->where('code', $faker->randomElement(['married','single','cerai-hidup','cerai-mati']))->first()->id,
+        'country_id' => Country::first()->id,
         'city' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
         'joined_date' => Carbon::now()->toDateString(),
-        'updated_at' => null
     ];
 
 });
@@ -41,6 +46,7 @@ $factory->define(Employee::class, function (Faker $faker) {
 /** CALLBACKS */
 
 $factory->afterCreating(Employee::class, function ($employee, $faker) {
+    $now = Carbon::now();
 
     // Address
 
@@ -99,4 +105,29 @@ $factory->afterCreating(Employee::class, function ($employee, $faker) {
             );
         }
     }
+
+    // Department
+    $departmentSize = Department::count('id');
+    $department = Department::where('id', rand(1, $departmentSize) )->first();
+
+    $employee->department()->attach($department->id, [
+        'joined_at' => $now,
+        'left_at' => null,
+        'maximum_overtime_period' => $department->maximum_period,
+        'overtime_threshold' => Carbon::createMidnightDate($now->year, $now->month, $now->day)->addHours(6),
+        'overtime_allowance' => $department->maximum_holiday
+    ]);
+    
+    // Workshift
+    $workshift = Workshift::find($faker->randomElement([1,2])); 
+    $employee->workshifts()->attach($workshift->id, [
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+        ]);
+
+    // Nationality
+    $employee->nationalities()->attach(Nationality::first()->id, [
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+        ]);
 });

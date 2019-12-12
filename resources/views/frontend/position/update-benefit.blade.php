@@ -80,7 +80,7 @@
                                                             @slot('name', 'check')
                                                             @slot('checked','checked')
                                                             @slot('value', $b->uuid)
-                                                            @slot('onclik','checkboxFunction(this.id)')
+                                                            @slot('onclick','checkboxFunction(this.id)')
                                                             @slot('id_error', str_replace(' ', '', $b->uuid))
                                                         @endcomponent
                                                     </td>
@@ -109,7 +109,7 @@
                                                             @slot('id', str_replace(' ', '', $b->uuid))
                                                             @slot('name', 'check')
                                                             @slot('value', $b->uuid)
-                                                            @slot('onclik','checkboxFunction(this.id)')
+                                                            @slot('onclick','checkboxFunction(this.id)')
                                                             @slot('id_error', str_replace(' ', '', $b->uuid))
                                                         @endcomponent
                                                     </td>

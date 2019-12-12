@@ -83,7 +83,7 @@ let AdditionalTaskQtnEdit = {
                 } else {
                     // console.log("empty");
                 }
-        
+
             }
         });
 
@@ -200,7 +200,7 @@ let AdditionalTaskQtnEdit = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid_item="'+t.item.uuid+'" data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );
@@ -330,7 +330,7 @@ let AdditionalTaskQtnEdit = {
                 }
             ]
         });
-        
+
         $('.defect_card_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -422,7 +422,7 @@ let AdditionalTaskQtnEdit = {
 
         $('.footer').on('click', '.update-quotation', function () {
             calculate_total();
-            
+
             let is_ppn =  $('#is_ppn').prop("checked");
             let ppn = 0;
             if(is_ppn){
@@ -550,6 +550,7 @@ let AdditionalTaskQtnEdit = {
             // save_changes_button();
 
             let triggerid = $(this).data('uuid');
+            let uuid_item = $(this).data('uuid_item');
             // alert(triggerid);
             $.ajax({
                 headers: {
@@ -563,14 +564,21 @@ let AdditionalTaskQtnEdit = {
                     document.getElementById('price').value = data.price_amount;
                     document.getElementById('note').value = data.note;
                     $.ajax({
-                        url: '/get-units/',
+                        url: '/get-item-units/'+uuid_item,
                         type: 'GET',
                         dataType: 'json',
-                        success: function (unit) {
+                        success: function (data) {
                             $('select[name="unit_id"]').empty();
 
-                            $.each(unit, function (key, value) {
-                                if(key == data.unit_id){
+                            // $('select[name="unit_id"]').append(
+                            //     '<option value=""> Select a Unit</option>'
+                            // );
+
+                            $.each(data, function (key, value) {
+                                // $('select[name="unit_id"]').append(
+                                //     '<option value="' + key + '">' + value + '</option>'
+                                // );
+                                if(key == data.uuid){
                                     $('select[name="unit_id"]').append(
                                         '<option value="' + key + '" selected>' + value + '</option>'
                                     );
@@ -580,9 +588,31 @@ let AdditionalTaskQtnEdit = {
                                         '<option value="' + key + '">' + value + '</option>'
                                     );
                                 }
+
                             });
                         }
                     });
+                    // $.ajax({
+                    //     url: '/get-units/',
+                    //     type: 'GET',
+                    //     dataType: 'json',
+                    //     success: function (unit) {
+                    //         $('select[name="unit_id"]').empty();
+
+                    //         $.each(unit, function (key, value) {
+                    //             if(key == data.unit_id){
+                    //                 $('select[name="unit_id"]').append(
+                    //                     '<option value="' + key + '" selected>' + value + '</option>'
+                    //                 );
+                    //             }
+                    //             else{
+                    //                 $('select[name="unit_id"]').append(
+                    //                     '<option value="' + key + '">' + value + '</option>'
+                    //                 );
+                    //             }
+                    //         });
+                    //     }
+                    // });
 
                     // $('.btn-success').addClass('update');
                     // $('.btn-success').removeClass('add');
@@ -813,16 +843,16 @@ function calculate_total() {
     for (let i = 0; i < inputs.length; i++) {
         value[i] = parseFloat($(inputs[i]).val());
     }
-    
+
     const arrSum = arr => arr.reduce((a, b) => a + b, 0);
     let total_discount = $("#total_discount").attr("value");
     let subTotal = $('#sub_total').attr("value");
     grandTotal = parseFloat(subTotal) - parseFloat(total_discount) + parseFloat(arrSum(value));
-    
+
     if(currency !== 1){
         grandTotalRupiah = ( parseFloat(subTotal) - parseFloat(total_discount) + parseFloat(arrSum(value)) ) * exchange_rate;
     }
-  
+
     $('#grand_total').attr("value", grandTotal);
     $('#grand_total_rupiah').attr("value", grandTotalRupiah);
     $('#grand_total').html(ForeignFormatter.format(grandTotal));
