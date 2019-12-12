@@ -6,7 +6,9 @@ use Auth;
 use Carbon\Carbon;
 use App\Models\Item;
 use App\Models\Type;
+use App\Models\Status;
 use App\Models\Project;
+use App\Models\Progress;
 use App\Models\Approval;
 use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
@@ -54,6 +56,11 @@ class ProjectPurchaseRequestController extends Controller
         $request->merge(['requested_at' => Carbon::parse($request->requested_at)]);
         $request->merge(['required_at' => Carbon::parse($request->required_at)]);
         $purchaseRequest = PurchaseRequest::create($request->all());
+
+        $purchaseRequest->progresses()->save(new Progress([
+            'status_id' =>  Status::ofPurchaseRequest()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
 
         $items = QuotationWorkPackageTaskCardItem::with('item','item.unit')->where('quotation_id',Project::where('uuid',$request->project_id)->first()->quotations->first()->id)->get();
 
@@ -171,6 +178,11 @@ class ProjectPurchaseRequestController extends Controller
             'approvable_id' => $purchaseRequest->id,
             'conducted_by' => Auth::id(),
             'is_approved' => 1
+        ]));
+
+        $purchaseRequest->progresses()->save(new Progress([
+            'status_id' =>  Status::ofPurchaseRequest()->where('code','approve')->first()->id,
+            'progressed_by' => Auth::id()
         ]));
 
         return response()->json($purchaseRequest);

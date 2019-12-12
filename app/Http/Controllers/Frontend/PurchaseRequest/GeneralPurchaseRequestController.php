@@ -6,6 +6,8 @@ use Auth;
 use Carbon\Carbon;
 use App\Models\Item;
 use App\Models\Type;
+use App\Models\Status;
+use App\Models\Progress;
 use App\Models\Approval;
 use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
@@ -50,6 +52,11 @@ class GeneralPurchaseRequestController extends Controller
         $request->merge(['required_at' => Carbon::parse($request->required_at)]);
 
         $purchaseRequest = PurchaseRequest::create($request->all());
+
+        $purchaseRequest->progresses()->save(new Progress([
+            'status_id' =>  Status::ofPurchaseRequest()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
 
         return response()->json($purchaseRequest);
     }
@@ -120,6 +127,11 @@ class GeneralPurchaseRequestController extends Controller
             'approvable_id' => $purchaseRequest->id,
             'conducted_by' => Auth::id(),
             'is_approved' => 1
+        ]));
+
+        $purchaseRequest->progresses()->save(new Progress([
+            'status_id' =>  Status::ofPurchaseRequest()->where('code','approve')->first()->id,
+            'progressed_by' => Auth::id()
         ]));
 
         return response()->json($purchaseRequest);
