@@ -29,7 +29,11 @@ class ProjectPurchaseRequestDatatables extends Controller
             if($purchaseRequest->deleted_at <> null){
                 $purchaseRequest->status .= 'Void';
             }
-            else if(!empty($purchaseRequest->approvals->toArray())){
+            else{
+                $purchaseRequest->status .= $purchaseRequest->progresses->last()->status->name;
+            }
+
+            if(!empty($purchaseRequest->approvals->toArray())){
                 $purchaseRequest->status .= 'Approved';
 
 
@@ -40,10 +44,8 @@ class ProjectPurchaseRequestDatatables extends Controller
                     $purchaseRequest->conducted_at .= $purchaseRequest->approvals->first()->created_at;
                 }
 
-            }else{
-                $purchaseRequest->status .= 'Not Approved';
-
             }
+
             if($purchaseRequest->audits->first()->user_id ==  null){
                 $purchaseRequest->created_by.= "System";
 

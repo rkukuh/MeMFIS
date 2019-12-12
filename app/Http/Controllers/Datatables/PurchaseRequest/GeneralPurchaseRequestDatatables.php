@@ -26,9 +26,12 @@ class GeneralPurchaseRequestDatatables extends Controller
         foreach($purchaseRequests as $purchaseRequest){
             if($purchaseRequest->deleted_at <> null){
                 $purchaseRequest->status .= 'Void';
+            }else{
+                $purchaseRequest->status .= $purchaseRequest->progresses->last()->status->name;
             }
-            else if(!empty($purchaseRequest->approvals->toArray())){
-                $purchaseRequest->status .= 'Approved';
+
+            if(!empty($purchaseRequest->approvals->toArray())){
+                // $purchaseRequest->status .= 'Approved';
 
 
                 if(sizeof($purchaseRequest->approvals->toArray()) > 0){
@@ -38,10 +41,8 @@ class GeneralPurchaseRequestDatatables extends Controller
                     $purchaseRequest->conducted_at .= $purchaseRequest->approvals->first()->created_at;
                 }
 
-            }else{
-                $purchaseRequest->status .= 'Not Approved';
-
             }
+
             if($purchaseRequest->audits->first()->user_id ==  null){
                 $purchaseRequest->created_by.= "System";
 
