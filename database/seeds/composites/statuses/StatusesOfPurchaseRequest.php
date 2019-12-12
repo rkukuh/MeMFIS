@@ -14,19 +14,19 @@ class StatusesOfPurchaseRequest extends Seeder
     {
         Status::create([
             'code' => 'open',
-            'name' => 'OPEN',
+            'name' => 'Open',
             'of'   => 'purchase-request',
         ]);
 
         Status::create([
-            'code' => 'approve',
-            'name' => 'Approve',
+            'code' => 'approved',
+            'name' => 'Approved',
             'of'   => 'purchase-request',
         ]);
 
         Status::create([
             'code' => 'closed',
-            'name' => 'CLOSED',
+            'name' => 'Closed',
             'of'   => 'purchase-request',
         ]);
     }
