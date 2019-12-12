@@ -256,9 +256,15 @@ class PurchaseOrderController extends Controller
 
             $quantity_item_po = 0;
 
+            // dd($PurchaseOrders);
             foreach ($PurchaseOrders as $PurchaseOrder) {
                 $quantity_item_po = $quantity_item_po + $PurchaseOrder->items()->where('uuid', $item->uuid)->first()->pivot->quantity_unit;
             }
+            // dd(PurchaseOrderItem::where('purchase_order_id', $purchaseOrder->id)->first());
+
+            $quantity_item_po = $quantity_item_po + PurchaseOrderItem::where('purchase_order_id', $purchaseOrder->id)->where('item_id',$item->id)->first()->quantity_unit;
+            // dd($PurchaseOrder->items()->where('uuid', $item->uuid)->first()->pivot->quantity_unit);
+            // dd($quantity_item_po);
 
             if ($quantity_item_po > $quantity_item_pr) {
                 $status_notification = array(
@@ -269,6 +275,7 @@ class PurchaseOrderController extends Controller
             }
 
             if($quantity_item_po < $quantity_item_pr){
+                dd($quantity_item_po.'-'.$quantity_item_pr);
                 $status_pr_close = false;
             }
 
@@ -279,6 +286,7 @@ class PurchaseOrderController extends Controller
             'conducted_by' => Auth::id(),
             'is_approved' => 1,
         ]));
+        // dd($status_pr_close );
 
         if($status_pr_close == true){
             $purchaseOrder->purchase_request->progresses()->save(new Progress([
