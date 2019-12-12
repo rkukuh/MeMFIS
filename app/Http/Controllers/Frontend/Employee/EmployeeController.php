@@ -1187,20 +1187,20 @@ class EmployeeController extends Controller
     {
         $time_update = Carbon::now();
 
-        $employee->addresses()->whereNull('addresses.updated_at')->update([
-            'updated_at' => $time_update
+        $employee->addresses()->whereNull('addresses.deleted_at')->update([
+            'deleted_at' => $time_update
         ]);
 
-        $employee->phones()->whereNull('phones.updated_at')->update([
-            'updated_at' => $time_update
+        $employee->phones()->whereNull('phones.deleted_at')->update([
+            'deleted_at' => $time_update
         ]);
 
-        $employee->emails()->whereNull('emails.updated_at')->update([
-            'updated_at' => $time_update
+        $employee->emails()->whereNull('emails.deleted_at')->update([
+            'deleted_at' => $time_update
         ]);
 
-        $employee->documents()->whereNull('documents.updated_at')->update([
-            'updated_at' => $time_update
+        $employee->documents()->whereNull('documents.deleted_at')->update([
+            'deleted_at' => $time_update
         ]);
 
         $employee->update($request->all());
@@ -1245,7 +1245,7 @@ class EmployeeController extends Controller
             'joined_date' => $employee->joined_date,
             'job_title' => $employee->job_title,
             'position' => $employee->position,
-            'depatment' => $employee->department->first(),
+            'department' => $employee->department->first(),
             'statuses' => $employee->statuses,
             'indirect_supervisor' => $employee->indirect_supervisor,
             'supervisor' => $employee->supervisor,
@@ -1261,32 +1261,24 @@ class EmployeeController extends Controller
         $employee->addresses()->create([
             'address' => $request->address_line_1,
             'type_id' => Type::where('of','address')->where('code','primary')->first()->id,
-            'created_at' => $time_update,
-            'updated_at' => null
         ]);
 
         if($request->address_line_2){
             $employee->addresses()->create([
                 'address' => $request->address_line_2,
                 'type_id' => Type::where('of','address')->where('code','secondary')->first()->id,
-                'created_at' => $time_update,
-                'updated_at' => null
             ]);
         }
 
         $employee->phones()->create([
             'number' => $request->mobile_phone,
             'type_id' => Type::where('of','phone')->where('code','mobile')->first()->id,
-            'created_at' => $time_update,
-            'updated_at' => null
         ]);
 
         if($request->home_phone){
         $employee->phones()->create([
             'number' => $request->home_phone,
             'type_id' => Type::where('of','phone')->where('code','home')->first()->id,
-            'created_at' => $time_update,
-            'updated_at' => null
         ]);
         }
 
@@ -1294,8 +1286,6 @@ class EmployeeController extends Controller
             $employee->phones()->create([
                 'number' => $request->work_phone,
                 'type_id' => Type::where('of','phone')->where('code','work')->first()->id,
-                'created_at' => $time_update,
-                'updated_at' => null
             ]);
         }
 
@@ -1303,8 +1293,6 @@ class EmployeeController extends Controller
             $employee->phones()->create([
                 'number' => $request->other_phone,
                 'type_id' => Type::where('of','phone')->where('code','other')->first()->id,
-                'created_at' => $time_update,
-                'updated_at' => null
             ]);
         }
 
@@ -1319,8 +1307,6 @@ class EmployeeController extends Controller
         $employee->emails()->create([
             'address' => $request->secondary_email,
             'type_id' => Type::where('of','email')->where('code','secondary')->first()->id,
-            'created_at' => $time_update,
-            'updated_at' => null
         ]);
         }
 
@@ -1328,8 +1314,6 @@ class EmployeeController extends Controller
             $employee->documents()->create([
                 'number' => $request->card_number,
                 'type_id' => Type::where('of','document')->where('code','ktp')->first()->id,
-                'created_at' => $time_update,
-                'updated_at' => null
             ]);
         }
 
