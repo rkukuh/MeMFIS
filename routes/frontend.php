@@ -73,7 +73,6 @@ Route::name('frontend.')->group(function () {
 
         /** TRANSACTION */
 
-        Route::resource('workshop', 'WorkshopController');
         // Route::resource('mutation', 'MutationController');
         // Route::resource('item-request', 'ItemRequestController');
 

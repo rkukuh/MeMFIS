@@ -6,8 +6,6 @@ use Auth;
 use Carbon\Carbon;
 use App\Models\Item;
 use App\Models\Type;
-use App\Models\Status;
-use App\Models\Progress;
 use App\Models\Approval;
 use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
@@ -16,7 +14,7 @@ use App\Models\Pivots\PurchaseRequestItem;
 use App\Http\Requests\Frontend\PurchaseRequestUpdate;
 use App\Http\Requests\Frontend\PurchaseRequestStore;
 
-class GeneralPurchaseRequestController extends Controller
+class ServicePurchaseRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +23,7 @@ class GeneralPurchaseRequestController extends Controller
      */
     public function index()
     {
-        return view('frontend.purchase-request.general.index');
+        return view('frontend.purchase-request.service.index');
     }
 
     /**
@@ -35,7 +33,7 @@ class GeneralPurchaseRequestController extends Controller
      */
     public function create()
     {
-        return view('frontend.purchase-request.general.create');
+        return view('frontend.purchase-request.service.create');
     }
 
     /**
@@ -53,11 +51,6 @@ class GeneralPurchaseRequestController extends Controller
 
         $purchaseRequest = PurchaseRequest::create($request->all());
 
-        $purchaseRequest->progresses()->save(new Progress([
-            'status_id' =>  Status::ofPurchaseRequest()->where('code','open')->first()->id,
-            'progressed_by' => Auth::id()
-        ]));
-
         return response()->json($purchaseRequest);
     }
 
@@ -69,7 +62,7 @@ class GeneralPurchaseRequestController extends Controller
      */
     public function show(PurchaseRequest $purchaseRequest)
     {
-        return view('frontend.purchase-request.general.show', [
+        return view('frontend.purchase-request.service.show', [
             'purchaseRequest' => $purchaseRequest,
         ]);
 
@@ -83,7 +76,7 @@ class GeneralPurchaseRequestController extends Controller
      */
     public function edit(PurchaseRequest $purchaseRequest)
     {
-        return view('frontend.purchase-request.general.edit', [
+        return view('frontend.purchase-request.service.edit', [
             'purchaseRequest' => $purchaseRequest,
         ]);
     }
@@ -129,11 +122,6 @@ class GeneralPurchaseRequestController extends Controller
             'is_approved' => 1
         ]));
 
-        $purchaseRequest->progresses()->save(new Progress([
-            'status_id' =>  Status::ofPurchaseRequest()->where('code','approve')->first()->id,
-            'progressed_by' => Auth::id()
-        ]));
-
         return response()->json($purchaseRequest);
     }
 
@@ -145,7 +133,7 @@ class GeneralPurchaseRequestController extends Controller
      */
     public function print(PurchaseRequest $purchaseRequest)
     {
-        $pdf = \PDF::loadView('frontend/form/purchase_request_general',[
+        $pdf = \PDF::loadView('frontend/form/purchase_request_service',[
                 'username' => Auth::user()->name,
                 'purchaseRequest' => $purchaseRequest,
                 'items' => PurchaseRequestItem::where('purchase_request_id',$purchaseRequest->id)->get(),

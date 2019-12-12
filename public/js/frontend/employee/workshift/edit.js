@@ -12,7 +12,7 @@ let Employee_edit_workshift = {
                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
              },
              type: 'PUT',
-             url: '/employee/'+uuid+'/workshift/'+null,
+             url: '/employee/'+uuid+'/workshift/'+workshift,
              data: {
                  workshift: workshift
              },
@@ -25,7 +25,7 @@ let Employee_edit_workshift = {
                                 timeOut: 5000
                             });
     
-                            location.reload();
+                            // location.reload();
                         }
                     }
                 });

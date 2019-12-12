@@ -6,7 +6,9 @@ use Auth;
 use Carbon\Carbon;
 use App\Models\Item;
 use App\Models\Type;
+use App\Models\Status;
 use App\Models\Project;
+use App\Models\Progress;
 use App\Models\Approval;
 use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
@@ -55,10 +57,15 @@ class ProjectPurchaseRequestController extends Controller
         $request->merge(['required_at' => Carbon::parse($request->required_at)]);
         $purchaseRequest = PurchaseRequest::create($request->all());
 
+        $purchaseRequest->progresses()->save(new Progress([
+            'status_id' =>  Status::ofPurchaseRequest()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
+
         $items = QuotationWorkPackageTaskCardItem::with('item','item.unit')->where('quotation_id',Project::where('uuid',$request->project_id)->first()->quotations->first()->id)->get();
 
         foreach($items as $item){
-            $i = Item::find($item->item_id)->categories->first()->code;
+            // $i = Item::find($item->item_id)->categories->first()->code;
             // if($i == "raw" or $i == "cons" or $i == "comp"){
                 if($item->item->unit_id <> $item->unit_id){
                     $quantity = $item->quantity;
@@ -81,7 +88,7 @@ class ProjectPurchaseRequestController extends Controller
         $items_htcrr = QuotationHtcrrItem::with('item','item.unit')->where('quotation_id',Project::where('uuid',$request->project_id)->first()->quotations->first()->id)->get();
 
         foreach($items_htcrr as $item){
-            $i = Item::find($item->item_id)->categories->first()->code;
+            // $i = Item::find($item->item_id)->categories->first()->code;
             // if($i == "raw" or $i == "cons" or $i == "comp"){
                 if($item->item->unit_id <> $item->unit_id){
                     $quantity = $item->quantity;
@@ -171,6 +178,11 @@ class ProjectPurchaseRequestController extends Controller
             'approvable_id' => $purchaseRequest->id,
             'conducted_by' => Auth::id(),
             'is_approved' => 1
+        ]));
+
+        $purchaseRequest->progresses()->save(new Progress([
+            'status_id' =>  Status::ofPurchaseRequest()->where('code','approve')->first()->id,
+            'progressed_by' => Auth::id()
         ]));
 
         return response()->json($purchaseRequest);

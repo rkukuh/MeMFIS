@@ -46,16 +46,16 @@ class CompanyController extends Controller
 
         if (!empty($type_parameter)) {
             if (strtolower($type_parameter->name) == 'department') {
-                $type_id = Type::where('of', 'department')->where('code', 'unit')->first();
+                $type = Type::where('of', 'department')->where('code', 'unit')->first();
 
-                $company_id = Company::where('code', 'mmf')->first();
+                $company = Company::where('uuid', $request->parent_structure)->first();
 
-                if (!empty($company_id)) {
+                if (!empty($company)) {
                     $result = Department::create([
                         'code' => $request->code,
-                        'company_id' => $company_id->id,
+                        'company_id' => $company->id,
                         'parent_id' => null,
-                        'type_id' => $type_id->id,
+                        'type_id' => $type->id,
                         'name' => $request->name,
                         'maximum_period' => $request->maximum_period,
                         'maximum_holiday' => $request->maximum_holiday,

@@ -17,7 +17,8 @@ class CreateHistoriesTable extends Migration
             $table->increments('id');
             $table->char('uuid', 36)->unique();
             $table->morphs('historiable');
-            $table->json('data')->nullable();
+            $table->string('table_name')->nullable();
+            $table->json('history_data')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();       
             $table->softDeletes();

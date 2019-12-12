@@ -72,5 +72,8 @@ class OldDataImport extends Command
 
         $this->line('Importing: Employees, and create their user account');
         app()->make(OldDataController::class)->users();
+
+        $this->line('Importing: for descember simulation');
+        app()->make(OldDataController::class)->decemberSimulation();
     }
 }

@@ -21,7 +21,7 @@ class ServiceController extends Controller
 
     public function __construct()
     {
-        $this->tags = Tag::getWithType('item');
+        $this->tags = Tag::getWithType('service');
         $this->units = Unit::all();
         $this->manufacturers = Manufacturer::all();
         $this->categories = Category::ofItem()->where('code', 'service')->first();

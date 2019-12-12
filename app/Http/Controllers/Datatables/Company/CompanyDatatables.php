@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\Datatables\Company;
 
 use App\Models\Company;
+use App\Models\Department;
 use App\Http\Controllers\Controller;
 
 class CompanyDatatables extends Controller
 {
 
     public function index(){
+
         $company = Company::with('departments','type','parent')->get();
+
+        $department = Department::get();
+        
+        $company = $company->merge($department);
 
         $data = $alldata = json_decode($company);
 
