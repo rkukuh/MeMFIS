@@ -107,7 +107,7 @@ let PurchaseRequest = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if(t.status == "Approved"){
+                        if(t.status == "Approved" || t.status == "Closed"){
                             return (
                                 '<a href="/purchase-request/' +
                                 t.uuid +
