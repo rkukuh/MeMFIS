@@ -1230,7 +1230,7 @@ class EmployeeController extends Controller
             'updated_at' => $time_update,
         ]);
         
-        $history_data = [[
+        $history_data = [
             'code' => $employee->code,
             'first_name' => $employee->first_name,
             'last_name' => $employee->last_name,
@@ -1252,11 +1252,11 @@ class EmployeeController extends Controller
             'supervisor' => $employee->supervisor,
             'created_at' => $employee->created_at->toDateTimeString(),
             'updated_at' => $time_update,
-        ]];
+        ];
 
-        $employee->data_histories()->create([
+        $employee->ebdh()->create([
             'user_id' => Auth::id(),
-            'data' => json_encode($history_data)
+            'history_data' => json_encode($history_data)
         ]);
 
         $employee->addresses()->create([

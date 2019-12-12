@@ -189,6 +189,19 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
+     * One-to-Many Polymorphic : An Employee may have zero or many personal data histories
+     * 
+     * ebdh Abbreviation of Emplohee Basic Data History
+     * This function will get all of the histories from given employee.
+     * See:     
+     * * - History's historiable() method for the inverse
+     */
+    public function ebdh()
+    {
+        return $this->morphMany(History::class, 'historiable')->whereNull('table_name');
+    }
+
+    /**
      * Polymorphic: An employee can have zero or many faxes.
      *
      * This function will get all of the employee's faxable.
@@ -223,18 +236,6 @@ class Employee extends MemfisModel implements HasMedia
     {
         return $this->hasMany(EmployeeLicense::class)
                     ->where('license_id', License::ofGeneralLicense()->first()->id);
-    }
-
-    /**
-     * One-to-Many Polymorphic : An Employee may have zero or many personal data histories
-     * 
-     * This function will get all of the histories from given employee.
-     * See:
-     * - Employee's histories() method for the inverse
-     */
-    public function data_histories()
-    {
-        return $this->morphMany(History::class, 'historiable');
     }
 
     /**
@@ -666,6 +667,18 @@ class Employee extends MemfisModel implements HasMedia
                     ->withPivot('deleted_at')
                     ->whereNull('employee_workshift.deleted_at')
                     ->withTimestamps();
+    }
+
+    /**
+     * One-to-Many Polymorphic : An Employee may have zero or many workshift data histories
+     * 
+     * This function will get all of the workshift histories from given employee.
+     * See:
+     * - History's historiable() method for the inverse
+     */
+    public function workshift_histories()
+    {
+        return $this->morphMany(History::class, 'historiable')->where('table_name','employee_workshift');
     }
 
     /**

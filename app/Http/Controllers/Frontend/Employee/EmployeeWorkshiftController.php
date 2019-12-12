@@ -42,7 +42,7 @@ class EmployeeWorkshiftController extends Controller
     {
         $workshift = Workshift::where('uuid',$request->workshift)->first()->id;
 
-        $employee->workshifts()->create([
+        $employee->workshifts()->attach([
             'workshift_id' => $workshift,
             'updated_at' => null,
         ]);
@@ -79,21 +79,30 @@ class EmployeeWorkshiftController extends Controller
      * @param  \App\Models\EmployeeWorkshift  $employeeWorkshift
      * @return \Illuminate\Http\Response
      */
-    public function update(EmployeeWorkshiftUpdate $request, Employee $employee)
+    public function update(EmployeeWorkshiftUpdate $request, Employee $employee, Workshift $workshift)
     {
-        $workshift = Workshift::where('uuid',$request->workshift)->first()->id;
-        
-        $time = Carbon::now();
+        $history_data = $employee->workshifts->last();
 
-        $employee->workshifts()->whereNull('employee_workshift.updated_at')->update([
-            'updated_at' => $time,
+        // dump($history_data);
+
+        $update = $history_data->updateExistingPivot([
+            'deleted_at' => Carbon::now(),
         ]);
-        
-        $employee->workshifts()->create([
+
+        dump($update);
+
+        $res = $employee->workshift_histories()->create([
+            'user_id' => Auth::id(),
+            'history_data' => json_encode($history_data),
+            'table_name' => 'employee_workshift'
+        ]);
+
+        dd($res);
+
+        $employee->workshifts()->attach([
             'workshift_id' => $workshift,
-            'created_at' => $time,
-            'updated_at' => null,
         ]);
+
         return response()->json($workshift);
     }
 
