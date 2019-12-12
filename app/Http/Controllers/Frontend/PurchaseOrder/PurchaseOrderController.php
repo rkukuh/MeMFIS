@@ -11,6 +11,7 @@ use App\Models\Vendor;
 use App\Models\Status;
 use App\Models\Approval;
 use App\Models\Currency;
+use App\Models\Progress;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Helpers\DocumentNumber;
@@ -279,10 +280,12 @@ class PurchaseOrderController extends Controller
             'is_approved' => 1,
         ]));
 
-        $ppurchaseOrder->purchase_request->progresses()->save(new Progress([
-            'status_id' =>  Status::ofPurchaseRequest()->where('code','close')->first()->id,
-            'progressed_by' => Auth::id()
-        ]));
+        if($status_pr_close == true){
+            $purchaseOrder->purchase_request->progresses()->save(new Progress([
+                'status_id' =>  Status::ofPurchaseRequest()->where('code','closed')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+        }
 
         $status_notification = array(
             'status' => "success",
