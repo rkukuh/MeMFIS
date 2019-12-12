@@ -639,7 +639,6 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        // dd($employee->gender->uuid);
         /** Master data for populating select2 edit */
             $genders = Type::ofGender()->where('name','!=', 'All')->pluck('name', 'uuid');
             $nationalities = Nationality::pluck('nationality', 'uuid');
