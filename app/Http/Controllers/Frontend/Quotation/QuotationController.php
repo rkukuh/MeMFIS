@@ -338,29 +338,39 @@ class QuotationController extends Controller
     public function approve(Quotation $quotation, Request $request)
     {
         $amount = 0;
-        $error_messages = $work_progress= [];
+        $error_messages = $work_progress = [];
         $scheduled_payment_amounts = json_decode($quotation->scheduled_payment_amount);
+
         if(empty($scheduled_payment_amounts)){
+
             $error_message = array(
                 'message' => "Scheduled payment total hasn't been filled yet",
                 'title' => $quotation->number,
-                'alert-type' => "error"
+                'alert-type' => 'error'
             );
-            return response()->json(['error' => $error_messages], '403');
+
+            return response()->json(['error' => $error_message], '403');
         }
+
         foreach($scheduled_payment_amounts as $scheduled_payment_amount){
             $amount += $scheduled_payment_amount->amount;
             array_push($work_progress, $scheduled_payment_amount->work_progress);
         }
+
         if(intval($amount) != intval($quotation->grandtotal) ){
+            
             $error_message = array(
                 'message' => "Scheduled payment total amount not equal with sub total",
                 'title' => $quotation->number,
                 'alert-type' => "error"
-            );
-            array_push($error_messages, $error_message);
-            return response()->json(['error' => $error_messages], '403');
+            );            
+
+            return response()->json(['error' => $error_message], '403');
+
         }
+
+
+        // request TW work progress tidak harus 100%
         // if( max($work_progress) != 100){
 
         //     $error_message = array(
@@ -372,9 +382,9 @@ class QuotationController extends Controller
         // return response()->json(['error' => $error_messages], '403');
         // }
 
-        if(sizeof($error_messages) > 0){
-            return response()->json(['error' => $error_messages], '403');
-        }
+        // if(sizeof($error_messages) > 0){
+        //     return response()->json(['error' => $error_messages], '403');
+        // }
 
         $qw_json = $quotation->workpackages->toJson();
 
