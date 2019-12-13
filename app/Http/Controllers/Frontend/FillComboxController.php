@@ -14,7 +14,6 @@ use App\Models\FefoIn;
 use App\Models\Vendor;
 use App\Models\Status;
 use App\Models\JobCard;
-use App\Models\Quotation;
 use App\Models\License;
 use App\Models\Country;
 use App\Models\Project;
@@ -30,6 +29,8 @@ use App\Models\Facility;
 use App\Models\Religion;
 use App\Models\TaskCard;
 use App\Models\Position;
+use App\Models\Service;
+use App\Models\Quotation;
 use App\Models\LeaveType;
 use App\Models\Department;
 use App\Models\DefectCard;
@@ -731,6 +732,19 @@ class FillComboxController extends Controller
         $unit = $item->unit()->pluck('name', 'uuid');
         $units = $item->units()->pluck('name', 'uuid');
         $uom = $unit->toArray() + $units->toArray();
+
+        return json_encode($uom);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ServiceUnitUuid(Service $service)
+    {
+        $unit = $service->unit()->pluck('name', 'uuid');
+        $uom = $unit->toArray();
 
         return json_encode($uom);
     }

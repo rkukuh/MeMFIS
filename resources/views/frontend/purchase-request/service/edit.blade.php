@@ -242,8 +242,8 @@
     </script>
 
 
-    <script src="{{ asset('js/frontend/purchase-request/general/edit.js') }}"></script>
-    <script src="{{ asset('js/frontend/purchase-request/general/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/service/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/service/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-required.js')}}"></script>
     {{-- <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script> --}}

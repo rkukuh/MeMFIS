@@ -7,6 +7,8 @@ use App\Http\Requests\Frontend\ItemGeneralPurchaseRequestUpdate;
 use App\Http\Requests\Frontend\ItemProjectPurchaseRequestUpdate;
 use App\Http\Requests\Frontend\ItemPurchaseRequestStore;
 use App\Models\Item;
+use App\Models\Service;
+use Illuminate\Http\Request;
 use App\Models\Pivots\PurchaseRequestItem;
 use App\Models\PurchaseRequest;
 use App\Models\Unit;
@@ -58,6 +60,38 @@ class ItemPurchaseRequestController extends Controller
                 'quantity' => $request->quantity,
                 'unit_id' => $request->unit_id,
                 'quantity_unit' => $quantity_unit,
+                'note' => $request->remark,
+            ]);
+
+            return response()->json($purchaseRequest);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\ItemPurchaseRequestStore  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function serviceStore(Request $request, PurchaseRequest $purchaseRequest, Service $service)
+    {
+        $request->merge(['unit_id' => Unit::where('uuid', $request->unit_id)->first()->id]);
+        $exists = PurchaseRequestItem::where('purchase_request_id', $purchaseRequest->id)->where('item_id', $service->id)->first();
+        if ($exists) {
+            return response()->json(['title' => "Danger"]);
+        } else {
+            // $item = Item::find($item->id);
+            // if ($request->unit_id != $item->unit_id) {
+            //     $quantity = $request->quantity;
+            //     $qty_uom = $item->units->where('uom.unit_id', $request->unit_id)->first()->uom->quantity;
+            //     $quantity_unit = $qty_uom * $quantity;
+            // } else {
+            //     $quantity_unit = $request->quantity;
+            // }
+            $purchaseRequest->items()->attach($service->id, [
+                'quantity' => $request->quantity,
+                'unit_id' => $request->unit_id,
+                'quantity_unit' => $request->unit_id,
                 'note' => $request->remark,
             ]);
 
@@ -137,6 +171,22 @@ class ItemPurchaseRequestController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\ItemProjectPurchaseRequestUpdate  $request
+     * @param  \App\Models\PurchaseRequest  $purchaseRequest
+     * @return \Illuminate\Http\Response
+     */
+    public function updateService(ItemProjectPurchaseRequestUpdate $request, $item)
+    {
+        $purchaseRequest = PurchaseRequestItem::find($item);
+
+        $purchaseRequest->update($request->all());
+
+        return response()->json($purchaseRequest);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\PurchaseRequest  $purchaseRequest
@@ -145,7 +195,19 @@ class ItemPurchaseRequestController extends Controller
     public function destroy($item)
     {
         $purchaseRequest = PurchaseRequestItem::find($item)->delete();
+        return response()->json($purchaseRequest);
 
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\PurchaseRequest  $purchaseRequest
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyService($item)
+    {
+        $purchaseRequest = PurchaseRequestItem::find($item)->delete();
         return response()->json($purchaseRequest);
 
     }

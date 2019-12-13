@@ -240,18 +240,19 @@ let PurchaseRequest = {
         });
 
         $(".modal-footer").on("click", ".add-item", function() {
-            let item = $("#material").val();
+            let service = $("#service").val();
+            // alert(service);
             let quantity = $("input[name=qty]").val();
-            let unit = $("#unit_material").val();
+            let unit = $("#unit_service").val();
             let remark = $("#remark").val();
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: "/purchase-request/" + pr_uuid + "/item/" + item,
+                url: "/purchase-request/" + pr_uuid + "/service/" + service,
                 type: "post",
                 data: {
-                    item_id: item,
+                    service_id: service,
                     quantity: quantity,
                     unit_id: unit,
                     remark: remark,

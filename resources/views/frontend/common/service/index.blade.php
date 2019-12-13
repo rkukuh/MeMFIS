@@ -18,7 +18,7 @@
             @endcomponent
         </div>
 
-        <input type="hidden" class="input-item-uuid" name="{{ $name_item or 'item' }}" id="{{ $id_item or 'item' }}">
+        <input type="hidden" class="input-item-uuid" name="{{ $name_item or 'service' }}" id="{{ $id_item or 'service' }}">
     </div>
 </div>
 
