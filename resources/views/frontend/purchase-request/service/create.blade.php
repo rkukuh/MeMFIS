@@ -185,8 +185,8 @@
     </script>
 
 
-    <script src="{{ asset('js/frontend/purchase-request/general/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/purchase-request/general/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/service/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/service/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/purchase-request-type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/purchase-request-type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
