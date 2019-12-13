@@ -179,9 +179,9 @@
 
                                         @component('frontend.common.input.select2')
                                         @slot('text', 'Loaned To')
-                                        @slot('id', 'loaned')
-                                        @slot('name', 'loaned')
-                                        @slot('id_error', 'loaned')
+                                        @slot('id', 'received-by')
+                                        @slot('name', 'received-by')
+                                        @slot('id_error', 'received-by')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -287,7 +287,9 @@
 
 <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
-<script src="{{ asset('js/frontend/functions/select2/loaned.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/select2/loaned.js') }}"></script> -->
+<script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/ref-jobcard.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/jobcard-number.js') }}"></script>

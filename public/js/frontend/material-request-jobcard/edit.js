@@ -13,9 +13,11 @@ let MaterialRequestEdit = {
 
         if (jobcard_number == '') {
             $('#ref_project').text(project_code);
+            $('#project_ref_no').attr('checked', true);
+        } else {
+            $('#ref_jobcard').text(jobcard_number);
+            $('#jc_ref_no').attr('checked', true);
         }
-
-        $('#ref_jobcard').text(jobcard_number);
 
         function generate(type, uuid) {
             if (type == 'jc') {
@@ -106,7 +108,7 @@ let MaterialRequestEdit = {
                     width: 150
                 },
                 {
-                    field: 'description',
+                    field: 'name',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
