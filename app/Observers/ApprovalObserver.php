@@ -155,7 +155,10 @@ class ApprovalObserver
                     'storage_id' => $approval->approvable->storage_id,
                     'inventoried_at' => $approval->approvable->received_at,
                     'inventoryoutable_type' => 'App\Models\ItemRequest',
-                    'inventoryoutable_id' => InventoryOut::withTrashed()->count() + 1
+                    'inventoryoutable_id' => InventoryOut::withTrashed()->count() + 1,
+                    'received_by' => $approval->approvable->received_by,
+                    'section' => $approval->approvable->section,
+                    'description' => $approval->approvable->note,
                 ]);
 
                 foreach ($approval->approvable->items as $item) {

@@ -73,7 +73,7 @@ let ToolRequest = {
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'jc_no',
                     title: 'JC No.',
                     sortable: 'asc',
                     filterable: !1,
@@ -87,7 +87,7 @@ let ToolRequest = {
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'loaned_to',
                     title: 'Loaned To',
                     sortable: 'asc',
                     filterable: !1,
@@ -231,6 +231,7 @@ let ToolRequest = {
                             },
                             error: function (jqXhr, json, errorThrown) {
                                 let errors = jqXhr.responseJSON;
+                                console.log(errors.message);
                                 toastr.error(errors.message, errors.title, {
                                     "closeButton": true,
                                     "timeOut": "0",
