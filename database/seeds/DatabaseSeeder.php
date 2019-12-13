@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CurrenciesTableSeeder::class);
 
         /** MASTER */
-        
+
         $this->call(CountriesTableSeeder::class);
         $this->call(NationalitiesTableSeeder::class);
         $this->call(ReligionsTableSeeder::class);
@@ -160,6 +160,10 @@ class DatabaseSeeder extends Seeder
         /** PURCHASE REQUEST's ITEMs */
 
         $this->call(PurchaseRequestItemsTableSeeder::class);
+
+        /** PURCHASE REQUEST's SERVICEs */
+
+        $this->call(PurchaseRequestServicesTableSeeder::class);
 
         /** PURCHASE ORDER's ITEMs */
 
