@@ -146,7 +146,7 @@
                                                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                                                     @component('frontend.common.buttons.create-new')
                                                                         @slot('text', 'Service')
-                                                                        @slot('data_target', '#modal_general_material')
+                                                                        @slot('data_target', '#modal_service')
                                                                     @endcomponent
 
 
@@ -155,7 +155,7 @@
                                                             </div>
                                                         </div>
                                                         @include('frontend.purchase-request.service.modal-service')
-                                                        <div class="item_datatable" id="scrolling_both"></div>
+                                                        <div class="service_datatable" id="scrolling_both"></div>
                                                     </div>
                                                 </div>
                                             </div>

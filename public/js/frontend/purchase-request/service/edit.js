@@ -1,15 +1,14 @@
 let PurchaseRequest = {
     init: function() {
-        $(".item_datatable").mDatatable({
+        $(".service_datatable").mDatatable({
             data: {
                 type: "remote",
                 source: {
                     read: {
                         method: "GET",
                         url:
-                            "/datatables/purchase-request/item/" +
-                            pr_uuid +
-                            "/general/material",
+                            "/datatables/purchase-request/service/" +
+                            pr_uuid,
 
                         map: function(raw) {
                             let dataSet = raw;
@@ -53,19 +52,13 @@ let PurchaseRequest = {
                     filterable: !1,
                     template: function(t) {
                         return (
-                            '<a href="/item/' + t.item.uuid + '">' + t.item.code + "</a>"
+                            '<a href="/item/' + t.service.uuid + '">' + t.service.code + "</a>"
                         );
                     }
                 },
                 {
-                    field: "item.name",
+                    field: "service.name",
                     title: "Item Description",
-                    sortable: "asc",
-                    filterable: !1
-                },
-                {
-                    field: "stock_avaliable",
-                    title: "Stock Available",
                     sortable: "asc",
                     filterable: !1
                 },
@@ -87,106 +80,7 @@ let PurchaseRequest = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_general_material" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.item.uuid+' data-item_code='+t.item.code+' data-item_name='+t.item.name+' data-quantity='+t.quantity+' data-unit='+t.item.unit.uuid+' data-remark='+t.note+' data-id=' +
-                            t.id +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.id +
-                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
-                        );
-                    }
-                }
-            ]
-        });
-
-        $(".tool_datatable").mDatatable({
-            data: {
-                type: "remote",
-                source: {
-                    read: {
-                        method: "GET",
-                        url:
-                            "/datatables/purchase-request/item/" +
-                            pr_uuid +
-                            "/general/tool",
-
-                        map: function(raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== "undefined") {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: "default",
-                class: "",
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $("#generalSearch")
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: "code",
-                    title: "Part Number",
-                    sortable: "asc",
-                    filterable: !1,
-                    template: function(t) {
-                        return (
-                            '<a href="/item/' + t.item.uuid + '">' + t.item.code + "</a>"
-                        );
-                    }
-                },
-                {
-                    field: "item.name",
-                    title: "Item Description",
-                    sortable: "asc",
-                    filterable: !1
-                },
-                {
-                    field: "stock_avaliable",
-                    title: "Stock Available",
-                    sortable: "asc",
-                    filterable: !1
-                },
-                {
-                    field: "quantity",
-                    title: "Request Qty"
-                },
-                {
-                    field: "unit_name",
-                    title: "Unit"
-                },
-                {
-                    field: "note",
-                    title: "Remark"
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_general_tool" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-tool='+t.item.uuid+' data-item_code='+t.item.code+' data-item_name='+t.item.name+' data-quantity='+t.quantity+' data-unit='+t.item.unit.uuid+' data-remark='+t.note+' data-id=' +
+                            '<button data-toggle="modal" data-target="#modal_service" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-service" title="Service" data-service='+t.service.uuid+' data-service_code='+t.service.code+' data-service_name='+t.service.name+' data-quantity='+t.quantity+' data-unit='+t.service.unit.uuid+' data-remark='+t.note+' data-id=' +
                             t.id +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
@@ -239,7 +133,7 @@ let PurchaseRequest = {
             });
         });
 
-        $(".modal-footer").on("click", ".add-item", function() {
+        $(".modal-footer").on("click", ".add-service", function() {
             let service = $("#service").val();
             // alert(service);
             let quantity = $("input[name=qty]").val();
@@ -289,65 +183,7 @@ let PurchaseRequest = {
                                 timeOut: 5000
                             });
 
-                            let table = $(".item_datatable").mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        }
-                    }
-                }
-            });
-        });
-        $(".modal-footer-tool").on("click", ".add-tool", function() {
-            let item = $("#tool").val();
-            let quantity = $("input[name=qty_tool]").val();
-            let unit = $("#unit_tool").val();
-            let remark = $("#remark_tool").val();
-            $.ajax({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-                },
-                url: "/purchase-request/" + pr_uuid + "/item/" + item,
-                type: "post",
-                data: {
-                    item_id: item,
-                    quantity: quantity,
-                    unit_id: unit,
-                    remark: remark,
-                },
-                success: function(response) {
-                    if (response.errors) {
-                        if (response.errors.quantity) {
-                            $('#quantity-error').html(response.errors.quantity[0]);
-                        }
-                        // document.getElementById('account_code').value = account_code;
-
-                    } else {
-                        if (response.title == "Danger") {
-                            toastr.error("Item already exists!", "Error", {
-                                timeOut: 5000
-                            });
-                        } else {
-                            $('#modal_general_tool').modal('hide');
-
-                            $('#modal_general_tool').on('hidden.bs.modal', function (e) {
-                                $(this)
-                                .find("input,textarea")
-                                    .val('')
-                                    .end()
-                                .find("input[type=checkbox], input[type=radio]")
-                                    .prop("checked", "")
-                                    .end()
-                                // .find("select")
-                                //     .select2('val','All')
-                                //     .end();
-                            })
-
-                            toastr.success("Item has been added.", "Success", {
-                                timeOut: 5000
-                            });
-
-                            let table = $(".tool_datatable").mDatatable();
+                            let table = $(".service_datatable").mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -357,39 +193,38 @@ let PurchaseRequest = {
             });
         });
 
-        $('.item_datatable').on('click', '.edit-item', function () {
+        $('.service_datatable').on('click', '.edit-service', function () {
             let unit_uuid = $(this).data('unit');
+            let code = $(this).data('service_code');
+            let name = $(this).data('service_name');
 
-            let code = $(this).data('item_code');
-            let name = $(this).data('item_name');
-
-            $('.input-item-uuid').val($(this).data('item'));
+            $('.input-item-uuid').val();
 
             $('.search-item').html(code + " - " + name);
 
             $("#item").attr('disabled', true);
 
             $.ajax({
-                url: '/get-units/'+$(this).data('item'),
+                url: '/get-units-service/'+$(this).data('service'),
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    $('select[name="unit_material"]').empty();
+                    $('select[name="unit_service"]').empty();
 
-                    $('select[name="unit_material"]').append(
+                    $('select[name="unit_service"]').append(
                         '<option value=""> Select a Unit</option>'
                     );
 
                     $.each(data, function (key, value) {
-                        // $('select[name="unit_material"]').append(
+                        // $('select[name="unit_service"]').append(
                         //     '<option value="' + key + '">' + value + '</option>'
                         // );
                         if (key == unit_uuid) {
-                            $('select[name="unit_material"]').append(
+                            $('select[name="unit_service"]').append(
                                 '<option value="' + key + '" selected>' + value + '</option>'
                             );
                         } else {
-                            $('select[name="unit_material"]').append(
+                            $('select[name="unit_service"]').append(
                                 '<option value="' + key + '">' + value + '</option>'
                             );
                         }
@@ -427,59 +262,11 @@ let PurchaseRequest = {
             document.getElementById('uuid').value = $(this).data('id');
             document.getElementById('remark').value = $(this).data('remark');
 
-            $('.btn-success').addClass('update-item');
-            $('.btn-success').removeClass('add-item');
-        });
-        $('.tool_datatable').on('click', '.edit-item', function () {
-            let unit_uuid = $(this).data('unit');
-
-            let code = $(this).data('item_code');
-            let name = $(this).data('item_name');
-
-            $('.input-tool-uuid').val($(this).data('tool'));
-
-            $('.search-tool').html(code + " - " + name);
-
-            $("#item").attr('disabled', true);
-
-            $.ajax({
-                url: '/get-units/'+$(this).data('tool'),
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    $('select[name="unit_tool"]').empty();
-
-                    $('select[name="unit_tool"]').append(
-                        '<option value=""> Select a Unit</option>'
-                    );
-
-                    $.each(data, function (key, value) {
-                        // $('select[name="unit_tool"]').append(
-                        //     '<option value="' + key + '">' + value + '</option>'
-                        // );
-                        if (key == unit_uuid) {
-                            $('select[name="unit_tool"]').append(
-                                '<option value="' + key + '" selected>' + value + '</option>'
-                            );
-                        } else {
-                            $('select[name="unit_tool"]').append(
-                                '<option value="' + key + '">' + value + '</option>'
-                            );
-                        }
-
-                    });
-                }
-            });
-
-            document.getElementById('qty_tool').value = $(this).data('quantity');
-            document.getElementById('uuid_tool').value = $(this).data('id');
-            document.getElementById('remark_tool').value = $(this).data('remark');
-
-            $('.btn-success').addClass('update-tool');
-            $('.btn-success').removeClass('add-tool');
+            $('.btn-success').addClass('update-service');
+            $('.btn-success').removeClass('add-service');
         });
 
-        $(".modal-footer").on("click", ".update-item", function() {
+        $(".modal-footer").on("click", ".update-service", function() {
             let item = $("#material").val();
             let uuid = $("input[name=uuid]").val();
             let quantity = $("input[name=qty]").val();
@@ -490,7 +277,7 @@ let PurchaseRequest = {
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: '/purchase-request/general/item/'+uuid,
+                url: '/purchase-request/service/'+uuid,
                 type: "PUT",
                 data: {
                     item_id: item,
@@ -514,7 +301,7 @@ let PurchaseRequest = {
                         } else {
 
                             //    taskcard_reset();
-                            $('#modal_general_material').modal('hide');
+                            $('#modal_service').modal('hide');
 
                             toastr.success(
                                 "Item has been updated.",
@@ -524,64 +311,7 @@ let PurchaseRequest = {
                                 }
                             );
 
-                            let table = $(".item_datatable").mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-
-                            $('.btn-success').removeClass('update-item');
-                            $('.btn-success').addClass('add-item');
-                        }
-                    }
-                }
-            });
-        });
-        $(".modal-footer-tool").on("click", ".update-tool", function() {
-            let item = $("#tool").val();
-            let uuid = $("input[name=uuid_tool]").val();
-            let quantity = $("input[name=qty_tool]").val();
-            let unit = $("#unit_tool").val();
-            let remark = $("#remark_tool").val();
-
-            $.ajax({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-                },
-                url: '/purchase-request/general/item/'+uuid,
-                type: "PUT",
-                data: {
-                    item_id: item,
-                    quantity: quantity,
-                    unit_id: unit,
-                    note: remark,
-                },
-                success: function(response) {
-                    if (response.errors) {
-                        console.log(errors);
-                        // if (response.errors.title) {
-                        //     $('#title-error').html(response.errors.title[0]);
-                        // }
-
-                        // document.getElementById('manual_affected_id').value = manual_affected_id;
-                    } else {
-                        if (response.title == "Danger") {
-                            toastr.error("Item already exists!", "Error", {
-                                timeOut: 5000
-                            });
-                        } else {
-
-                            //    taskcard_reset();
-                            $('#modal_general_tool').modal('hide');
-
-                            toastr.success(
-                                "Item has been updated.",
-                                "Success",
-                                {
-                                    timeOut: 5000
-                                }
-                            );
-
-                            let table = $(".tool_datatable").mDatatable();
+                            let table = $(".service_datatable").mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -594,7 +324,7 @@ let PurchaseRequest = {
             });
         });
 
-        $('.item_datatable').on('click', '.delete', function () {
+        $('.service_datatable').on('click', '.delete', function () {
 
             swal({
                 title: 'Sure want to remove?',
@@ -613,56 +343,14 @@ let PurchaseRequest = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/purchase-request/item/'+$(this).data('id'),
+                        url: '/purchase-request/service/'+$(this).data('id'),
                         success: function (data) {
-                            toastr.success('Material has been deleted.', 'Deleted', {
+                            toastr.success('Service has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.item_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                }
-            });
-        });
-        $('.tool_datatable').on('click', '.delete', function () {
-
-            swal({
-                title: 'Sure want to remove?',
-                type: 'question',
-                confirmButtonText: 'Yes, REMOVE',
-                confirmButtonColor: '#d33',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            })
-            .then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/purchase-request/item/'+$(this).data('id'),
-                        success: function (data) {
-                            toastr.success('Material has been deleted.', 'Deleted', {
-                                    timeOut: 5000
-                                }
-                            );
-
-                            let table = $('.tool_datatable').mDatatable();
+                            let table = $('.service_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
