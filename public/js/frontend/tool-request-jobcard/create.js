@@ -232,7 +232,7 @@ let ToolRequestCreate = {
             let section_code = $('input[name=section_code]').val();
             let storage_id = $('#item_storage_id').val();
             let date = $('input[name=date]').val();
-            let received_by = $('#loaned').val();
+            let received_by = $('#received-by').val();
             let jc_no = $("#ref_jobcard").val();
             let project_no = $("#ref_project").val();
 
@@ -259,7 +259,7 @@ let ToolRequestCreate = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/item-request/tool-request-jobcard/' + response.uuid + '/edit';
+                        window.location.href = '/item-request/tool-request-jobcard/' + response.uuid + '/edit';
                     }
                 }
             });

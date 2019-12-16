@@ -87,7 +87,6 @@
                                                 @slot('id', 'jc_ref_no')
                                                 @slot('name', 'ref_no')
                                                 @slot('value', 'jc_ref_no')
-                                                @slot('disabled', 'disabled')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-11 col-md-11 col-lg-11">

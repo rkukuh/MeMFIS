@@ -19,9 +19,14 @@ class ItemRequestToolDatatables extends Controller
     public function index()
     {
         $items = ItemRequest::with('storage', 'approvals')->get();
+
         foreach ($items as $item) {
+            $item->jc_no = $item->requestable->number ?? '';
+            $item->status = 'Open';
+            $item->loaned_to = $item->receivedBy->first_name . ' ' . $item->receivedBy->last_name;
+
             if (!empty($item->approvals->first())) {
-                $item->status .= 'Approved';
+                $item->status = 'Approved';
 
                 if (isset($item->approvals)) {
                     $conducted_by  = User::find($item->approvals->first()->conducted_by);
