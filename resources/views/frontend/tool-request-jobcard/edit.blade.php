@@ -87,7 +87,6 @@
                                                 @slot('id', 'jc_ref_no')
                                                 @slot('name', 'ref_no')
                                                 @slot('value', 'jc_ref_no')
-                                                @slot('checked','checked')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-11 col-md-11 col-lg-11">
@@ -292,15 +291,19 @@
 @push('footer-scripts')
 <script>
     let request_uuid = '{{ $itemRequest->uuid }}';
+    let project_code = '{{ $project->code }}';
+    let project_uuid = '{{ $project->uuid }}';
+    let jobcard_number = '{{ $jobcard->number ?? null }}';
+    let jobcard_uuid = '{{ $jobcard->uuid ?? null }}';
 </script>
 
 <script src="{{ asset('js/frontend/tool-request-jobcard/edit.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
-<script src="{{ asset('js/frontend/functions/select2/loaned.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/select2/ref-jobcard.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/select2/ref-project.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/select2/ref-jobcard.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/ref-project.js') }}"></script> -->
 
 <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
 @endpush

@@ -193,6 +193,17 @@ class ToolRequestController extends Controller
     }
 
     /**
+     * Print the specified resource from storage.
+     *
+     * @param  \App\Models\ItemRequest  $itemRequest
+     * @return \Illuminate\Http\Response
+     */
+    public function print(ItemRequest $itemRequest)
+    {
+        //
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\ItemRequestUpdate  $request

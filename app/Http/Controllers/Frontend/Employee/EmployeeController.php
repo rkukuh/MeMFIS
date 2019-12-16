@@ -639,7 +639,6 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        // dd($employee->gender->uuid);
         /** Master data for populating select2 edit */
             $genders = Type::ofGender()->where('name','!=', 'All')->pluck('name', 'uuid');
             $nationalities = Nationality::pluck('nationality', 'uuid');
@@ -1188,50 +1187,13 @@ class EmployeeController extends Controller
     {
         $time_update = Carbon::now();
 
-        $employee->addresses()->whereNull('addresses.updated_at')->update([
-            'updated_at' => $time_update
-        ]);
+        dd($employee->addresses);
 
-        $employee->phones()->whereNull('phones.updated_at')->update([
-            'updated_at' => $time_update
-        ]);
-
-        $employee->emails()->whereNull('emails.updated_at')->update([
-            'updated_at' => $time_update
-        ]);
-
-        $employee->documents()->whereNull('documents.updated_at')->update([
-            'updated_at' => $time_update
-        ]);
-
-        $employee->update($request->all());
-
-
-        $employee->history()->create([
-            'code' => $employee->code,
-            'first_name' => $employee->first_name,
-            'last_name' => $employee->last_name,
-            'dob' => $employee->dob,
-            'dob_place' => $employee->dob_place,
-            'gender' => $employee->gender,
-            'religion' => $employee->religion,
-            'marital_status' => $employee->marital_status,
-            'nationality' => $employee->nationality,
-            'country' => $employee->country,
-            'city' => $employee->city,
-            'zip' => $employee->zip_code,
-            'joined_date' => $employee->joined_date,
-            'job_title_id' => $employee->job_title_id,
-            'position_id' => $employee->position_id,
-            'statuses_id' => $employee->statuses_id,
-            'indirect_supervisor_id' => $employee->indirect_supervisor_id,
-            'supervisor_id' => $employee->supervisor_id,
-            'created_at' => $employee->created_at->toDateTimeString(),
-            'updated_at' => $time_update,
-        ]);
-        
         $history_data = [
             'code' => $employee->code,
+            'addresses' => $employee->addresses()->with('type')->get(),
+            'phones' => $employee->phones()->with('type')->get(),
+            'emails' => $employee->emails()->with('type')->get(),
             'first_name' => $employee->first_name,
             'last_name' => $employee->last_name,
             'dob' => $employee->dob,
@@ -1246,48 +1208,58 @@ class EmployeeController extends Controller
             'joined_date' => $employee->joined_date,
             'job_title' => $employee->job_title,
             'position' => $employee->position,
-            'depatment' => $employee->department->first(),
+            'department' => $employee->department->first(),
             'statuses' => $employee->statuses,
             'indirect_supervisor' => $employee->indirect_supervisor,
-            'supervisor' => $employee->supervisor,
+            'supervisor' => $employee->supervisor()->with('gender','marital_status','country','religion','user','position')->first(),
             'created_at' => $employee->created_at->toDateTimeString(),
             'updated_at' => $time_update,
         ];
+
+        $employee->addresses()->whereNull('addresses.deleted_at')->update([
+            'deleted_at' => $time_update
+        ]);
+
+        $employee->phones()->whereNull('phones.deleted_at')->update([
+            'deleted_at' => $time_update
+        ]);
+
+        $employee->emails()->whereNull('emails.deleted_at')->update([
+            'deleted_at' => $time_update
+        ]);
+
+        $employee->documents()->whereNull('documents.deleted_at')->update([
+            'deleted_at' => $time_update
+        ]);
 
         $employee->ebdh()->create([
             'user_id' => Auth::id(),
             'history_data' => json_encode($history_data)
         ]);
 
+        $employee->update($request->all());
+
         $employee->addresses()->create([
             'address' => $request->address_line_1,
             'type_id' => Type::where('of','address')->where('code','primary')->first()->id,
-            'created_at' => $time_update,
-            'updated_at' => null
         ]);
 
         if($request->address_line_2){
             $employee->addresses()->create([
                 'address' => $request->address_line_2,
                 'type_id' => Type::where('of','address')->where('code','secondary')->first()->id,
-                'created_at' => $time_update,
-                'updated_at' => null
             ]);
         }
 
         $employee->phones()->create([
             'number' => $request->mobile_phone,
             'type_id' => Type::where('of','phone')->where('code','mobile')->first()->id,
-            'created_at' => $time_update,
-            'updated_at' => null
         ]);
 
         if($request->home_phone){
         $employee->phones()->create([
             'number' => $request->home_phone,
             'type_id' => Type::where('of','phone')->where('code','home')->first()->id,
-            'created_at' => $time_update,
-            'updated_at' => null
         ]);
         }
 
@@ -1295,8 +1267,6 @@ class EmployeeController extends Controller
             $employee->phones()->create([
                 'number' => $request->work_phone,
                 'type_id' => Type::where('of','phone')->where('code','work')->first()->id,
-                'created_at' => $time_update,
-                'updated_at' => null
             ]);
         }
 
@@ -1304,8 +1274,6 @@ class EmployeeController extends Controller
             $employee->phones()->create([
                 'number' => $request->other_phone,
                 'type_id' => Type::where('of','phone')->where('code','other')->first()->id,
-                'created_at' => $time_update,
-                'updated_at' => null
             ]);
         }
 
@@ -1320,8 +1288,6 @@ class EmployeeController extends Controller
         $employee->emails()->create([
             'address' => $request->secondary_email,
             'type_id' => Type::where('of','email')->where('code','secondary')->first()->id,
-            'created_at' => $time_update,
-            'updated_at' => null
         ]);
         }
 
@@ -1329,28 +1295,9 @@ class EmployeeController extends Controller
             $employee->documents()->create([
                 'number' => $request->card_number,
                 'type_id' => Type::where('of','document')->where('code','ktp')->first()->id,
-                'created_at' => $time_update,
-                'updated_at' => null
             ]);
         }
 
-        $employee->update([
-            'code' => $request->code,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'dob' => $request->dob,
-            'dob_place' => $request->dob_place,
-            'gender' => $request->gender,
-            'religion' => $request->religion,
-            'marital_status' => $request->marital_status,
-            'nationality' => $request->nationality,
-            'country' => $request->country,
-            'city' => $request->city,
-            'zip' => $request->zip_code,
-            'joined_date' => $request->joined_date,
-            'created_at' => $time_update,
-            'updated_at' => $time_update,
-        ]);
 
         if($request->document){
             $employee->addMedia($request->document)->toMediaCollection('id_card');
@@ -1361,8 +1308,8 @@ class EmployeeController extends Controller
             $current_department = $employee->department->first()->id;
         }
         
-        
         if($current_department <> $request->department_id){
+
             $employee->department()->updateExistingPivot($current_department, ['deleted_at' => Carbon::now()]);
             $employee->department()->attach($request->department_id, [
                 'joined_at' => $time_update,
@@ -1371,7 +1318,9 @@ class EmployeeController extends Controller
                 'overtime_threshold' => Carbon::createMidnightDate($time_update->year, $time_update->month, $time_update->day)->addHours($request->minimum_overtime),
                 'overtime_allowance' => $request->holiday_overtime
             ]);
+
         }elseif(empty($current_department)){
+
             $department = Department::where('id',$request->department_id)->first();
             $employee->department()->attach($request->department_id, [
                 'joined_at' => $time_update,
@@ -1380,8 +1329,9 @@ class EmployeeController extends Controller
                 'overtime_threshold' => Carbon::createMidnightDate($time_update->year, $time_update->month, $time_update->day)->addHours(6),
                 'overtime_allowance' => $department->holiday_overtime
             ]);
-        }
-        else{
+
+        }else{
+
             $employee->department()->updateExistingPivot($request->department_id, [
                 'joined_at' => $time_update,
                 'left_at' => $request->left_at,
@@ -1389,6 +1339,7 @@ class EmployeeController extends Controller
                 'overtime_threshold' => Carbon::createMidnightDate($time_update->year, $time_update->month, $time_update->day)->addHours($request->minimum_overtime),
                 'overtime_allowance' => $request->holiday_overtime
             ]);
+
         }
         
         // TODO: Return error message as JSON

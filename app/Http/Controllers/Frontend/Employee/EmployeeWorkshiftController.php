@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Frontend\Employee;
 use App\Models\EmployeeWorkshift;
 use App\Models\Employee;
 use App\Models\Workshift;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\EmployeeWorkshiftStore;
 use App\Http\Requests\Frontend\EmployeeWorkshiftUpdate;
-use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 
 class EmployeeWorkshiftController extends Controller
 {
@@ -44,7 +45,6 @@ class EmployeeWorkshiftController extends Controller
 
         $employee->workshifts()->attach([
             'workshift_id' => $workshift,
-            'updated_at' => null,
         ]);
 
         return response()->json($workshift);
@@ -81,29 +81,24 @@ class EmployeeWorkshiftController extends Controller
      */
     public function update(EmployeeWorkshiftUpdate $request, Employee $employee, Workshift $workshift)
     {
-        $history_data = $employee->workshifts->last();
+        $history_data = $employee->workshifts->first();
 
-        // dump($history_data);
-
-        $update = $history_data->updateExistingPivot([
+        // dd($history_data->name);
+        $update = $employee->workshifts()->updateExistingPivot($history_data->id, [
             'deleted_at' => Carbon::now(),
         ]);
+        if($update){
+            $res = $employee->workshift_histories()->create([
+                'user_id' => Auth::id(),
+                'history_data' => json_encode($history_data),
+                'table_name' => 'employee_workshift'
+            ]);  
+            
+            
+            $employee->workshifts()->attach( $workshift->id);
+        }
 
-        dump($update);
-
-        $res = $employee->workshift_histories()->create([
-            'user_id' => Auth::id(),
-            'history_data' => json_encode($history_data),
-            'table_name' => 'employee_workshift'
-        ]);
-
-        dd($res);
-
-        $employee->workshifts()->attach([
-            'workshift_id' => $workshift,
-        ]);
-
-        return response()->json($workshift);
+        return response()->json($employee->workshifts->last());
     }
 
     /**

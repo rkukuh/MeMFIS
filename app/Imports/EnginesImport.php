@@ -30,6 +30,12 @@ class EnginesImport implements ToModel, WithHeadingRow
 
         $item->save();
 
+        // $category = Category::ofItem()
+        //             ->where('name', 'Consumable')->first()->id;
+
+        // $item->categories()->sync($category);
+
+
         for($i=1;$i<=5;$i++){
             $item->prices()
             ->save(new Price (['amount' =>0,'level' =>$i]));
