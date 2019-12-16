@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Frontend\PurchaseRequest;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\ItemGeneralPurchaseRequestUpdate;
-use App\Http\Requests\Frontend\ItemProjectPurchaseRequestUpdate;
-use App\Http\Requests\Frontend\ItemPurchaseRequestStore;
 use App\Models\Item;
+use App\Models\Unit;
 use App\Models\Service;
 use Illuminate\Http\Request;
-use App\Models\Pivots\PurchaseRequestItem;
 use App\Models\PurchaseRequest;
-use App\Models\Unit;
+use App\Http\Controllers\Controller;
+use App\Models\Pivots\PurchaseRequestItem;
+use App\Models\Pivots\PurchaseRequestService;
+use App\Http\Requests\Frontend\ItemPurchaseRequestStore;
+use App\Http\Requests\Frontend\ItemGeneralPurchaseRequestUpdate;
+use App\Http\Requests\Frontend\ItemProjectPurchaseRequestUpdate;
 
 class ItemPurchaseRequestController extends Controller
 {
@@ -76,7 +77,7 @@ class ItemPurchaseRequestController extends Controller
     public function serviceStore(Request $request, PurchaseRequest $purchaseRequest, Service $service)
     {
         $request->merge(['unit_id' => Unit::where('uuid', $request->unit_id)->first()->id]);
-        $exists = PurchaseRequestItem::where('purchase_request_id', $purchaseRequest->id)->where('item_id', $service->id)->first();
+        $exists = PurchaseRequestService::where('purchase_request_id', $purchaseRequest->id)->where('item_id', $service->id)->first();
         if ($exists) {
             return response()->json(['title' => "Danger"]);
         } else {
@@ -88,7 +89,8 @@ class ItemPurchaseRequestController extends Controller
             // } else {
             //     $quantity_unit = $request->quantity;
             // }
-            $purchaseRequest->items()->attach($service->id, [
+            PurchaseRequestService::create( [
+                'service_id' => $service->id,
                 'quantity' => $request->quantity,
                 'unit_id' => $request->unit_id,
                 'quantity_unit' => $request->unit_id,
