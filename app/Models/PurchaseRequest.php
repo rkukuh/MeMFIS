@@ -58,6 +58,27 @@ class PurchaseRequest extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A purchase request may have zero or many item.
+     *
+     * This function will retrieve all the services of a purchase request.
+     * See: Item's purchase_requests() method for the inverse
+     *
+     * @return mixed
+     */
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'purchase_request_service', 'purchase_request_id', 'service_id')
+                    ->withPivot(
+                        'quantity_requirement',
+                        'quantity',
+                        'quantity_unit',
+                        'unit_id',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * Polymorphic: An entity can have zero or many progresses.
      *
      * This function will get all JobCard's progresses.
