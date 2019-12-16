@@ -318,9 +318,12 @@ class EmployeeAttendanceController extends Controller
                             }
 
                             $statuses = array_unique($statuses);
-                            // dump($statuses);
+                            dump($statuses);
+                            dump($employee->id);
+                            dump($attendance['date']);
 
-                            $attendance_to_update = EmployeeAttendance::where('employee_id',$employee->id)->whereDate('date',$attendance)->first();
+                            $attendance_to_update = EmployeeAttendance::where('employee_id',$employee->id)->whereDate('date',$attendance['date'])->first();
+                            // dd($attendance_to_update);
                             $attendance_statuses = $attendance_to_update->statuses;
                             foreach($attendance_statuses as $status_id){
                                 $attendance_to_update->statuses()->updateExistingPivot($status_id, ['deleted_at' => Carbon::now()]);
@@ -409,52 +412,52 @@ class EmployeeAttendanceController extends Controller
     public function createAttendances(){
         $days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
         // code yang seharusnya dijalankan sehari-hari
-        // $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
-        // // create attendance with null;
-        // $in = '00:00:00';
-        // $out = '00:00:00';
-        // foreach($employees as $employee){
-        //         EmployeeAttendance::create([
-        //         'employee_id' => $employee->id,
-        //         'date' => Carbon::today(),
-        //         'in' => $in,
-        //         'out' => $out
-        //     ]);
-        // }
-
-        // code yang dijalankan untuk trial
         $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
         // create attendance with null;
         $in = '00:00:00';
         $out = '00:00:00';
-        
         foreach($employees as $employee){
-            if(sizeof($employee->workshifts) > 0){
-                $workshift = $employee->workshifts->first();
-                $shifts = $workshift->workshift_schedules;
-                
-                for($day = 1 ; $day <= 31 ; $day++){
-                    $date = Carbon::create(2019, 11, $day, 0, 0, 0, 'Asia/Jakarta');
-    
-                    $attendance = EmployeeAttendance::create([
-                        'employee_id' => $employee->id,
-                        'date' => $date,
-                        'in' => $in,
-                        'out' => $out
-                    ]);
-    
-                    $shift = $shifts->where('days', $days[$date->dayOfWeek])->first();
-                    if($shift){
-                        $status = Status::ofAttendance()->where('code','absence')->first();
-                        $attendance->statuses()->attach($status->id);
-                    }else{
-                        $status = null;
-                    }
-
-
-                }
-            }
-
+                EmployeeAttendance::create([
+                'employee_id' => $employee->id,
+                'date' => Carbon::today(),
+                'in' => $in,
+                'out' => $out
+            ]);
         }
+
+        // code yang dijalankan untuk trial
+        // $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
+        // // create attendance with null;
+        // $in = '00:00:00';
+        // $out = '00:00:00';
+        
+        // foreach($employees as $employee){
+        //     if(sizeof($employee->workshifts) > 0){
+        //         $workshift = $employee->workshifts->first();
+        //         $shifts = $workshift->workshift_schedules;
+                
+        //         for($day = 1 ; $day <= 62 ; $day++){
+        //             $date = Carbon::create(2019, 11, $day, 0, 0, 0, 'Asia/Jakarta');
+    
+        //             $attendance = EmployeeAttendance::create([
+        //                 'employee_id' => $employee->id,
+        //                 'date' => $date,
+        //                 'in' => $in,
+        //                 'out' => $out
+        //             ]);
+    
+        //             $shift = $shifts->where('days', $days[$date->dayOfWeek])->first();
+        //             if($shift){
+        //                 $status = Status::ofAttendance()->where('code','absence')->first();
+        //                 $attendance->statuses()->attach($status->id);
+        //             }else{
+        //                 $status = null;
+        //             }
+
+
+        //         }
+        //     }
+
+        // }
     }
 }
