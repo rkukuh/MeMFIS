@@ -30,10 +30,13 @@ Route::name('frontend.')->group(function () {
                     Route::put('/{purchaseRequest}/project/approve', 'ProjectPurchaseRequestController@approve')->name('project.approve')->middleware('permission:purchase-request-approve');
                     Route::put('/{purchaseRequest}/general/approve', 'GeneralPurchaseRequestController@approve')->name('general.approve')->middleware('permission:purchase-request-approve');
                     Route::post('/{purchaseRequest}/item/{item}', 'ItemPurchaseRequestController@store')->name('item.store');
+                    Route::post('/{purchaseRequest}/service/{service}', 'ItemPurchaseRequestController@serviceStore')->name('service.store');
                     Route::put('/general/item/{item}', 'ItemPurchaseRequestController@updateGeneral')->name('general.update');
                     Route::put('/project/item/{item}', 'ItemPurchaseRequestController@updateProject')->name('project.update');
+                    Route::put('/service/service/{service}', 'ItemPurchaseRequestController@updateService')->name('service.update');
                     Route::get('/item/{item}', 'ItemPurchaseRequestController@edit')->name('item.edit');
                     Route::delete('/item/{item}', 'ItemPurchaseRequestController@destroy')->name('destroy');
+                    Route::delete('/service/{service}', 'ItemPurchaseRequestController@destroyService')->name('service.destroy');
                 });
             });
 

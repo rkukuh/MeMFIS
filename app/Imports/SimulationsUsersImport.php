@@ -52,10 +52,15 @@ class SimulationsUsersImport implements ToModel, WithHeadingRow
             );
         }
 
+        $full_name = explode(' ',$row['nama']);
+        $first_name = $full_name[0];
+        array_shift($full_name);
+        $last_name = join(' ',$full_name);
+
         $employee = [
             'code' => $row['nrp'],
-            'first_name' => ucwords(strtolower($row['nama'])),
-            'last_name' => ucwords(strtolower($row['nama'])),
+            'first_name' => ucwords(strtolower($first_name)),
+            'last_name' => ucwords(strtolower($last_name)),
             'dob' => Carbon::now()->subYear(rand(20, 50)),
             'dob_place' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
             'gender_id' => Type::ofGender()->where('code', $faker->randomElement(['male','female']))->first()->id,
