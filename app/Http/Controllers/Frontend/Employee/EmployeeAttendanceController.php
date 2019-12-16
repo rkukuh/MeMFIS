@@ -321,22 +321,25 @@ class EmployeeAttendanceController extends Controller
                             // dump($statuses);
 
                             $attendance_to_update = EmployeeAttendance::where('employee_id',$employee->id)->whereDate('date',$attendance)->first();
-                            $attendance_statuses = $attendance_to_update->statuses;
-                            foreach($attendance_statuses as $status_id){
-                                $attendance_to_update->statuses()->updateExistingPivot($status_id, ['deleted_at' => Carbon::now()]);
-                            }
-                            
                             if($attendance_to_update){
-                                $attendance_to_update->update([
-                                    'employee_id' => $employee->id,
-                                    'in' => $check_in,
-                                    'out' => $check_out,
-                                    'late_in' => $late,
-                                    'earlier_out' => $earlier_out,
-                                    'overtime' => $overtime
-                                ]);
                                 
-                                $attendance_to_update->statuses()->attach($statuses);
+                                $attendance_statuses = $attendance_to_update->statuses;
+                                foreach($attendance_statuses as $status_id){
+                                    $attendance_to_update->statuses()->updateExistingPivot($status_id, ['deleted_at' => Carbon::now()]);
+                                }
+                                
+                                if($attendance_to_update){
+                                    $attendance_to_update->update([
+                                        'employee_id' => $employee->id,
+                                        'in' => $check_in,
+                                        'out' => $check_out,
+                                        'late_in' => $late,
+                                        'earlier_out' => $earlier_out,
+                                        'overtime' => $overtime
+                                    ]);
+                                    
+                                    $attendance_to_update->statuses()->attach($statuses);
+                                }
                             }
                         }else{
                             /** TODO : if false, check for overtime */
@@ -353,7 +356,6 @@ class EmployeeAttendanceController extends Controller
                 
             }
 
-            dd("break");
             return redirect('import-fingerprint');
         }
     }
