@@ -13,7 +13,7 @@ class CompanyDatatables extends Controller
 
         $company = Company::with('departments','type','parent')->get();
 
-        $department = Department::get();
+        $department = Department::with('type','parent')->get();
         
         $company = $company->merge($department);
 
