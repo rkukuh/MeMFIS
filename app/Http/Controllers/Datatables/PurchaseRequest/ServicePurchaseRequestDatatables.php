@@ -22,7 +22,7 @@ class ServicePurchaseRequestDatatables extends Controller
      */
     public function index()
     {
-        $purchaseRequests = PurchaseRequest::with('type')->where('type_id','<>',Type::where('of','purchase-request')->where('name','Project')->first()->id)->get();
+        $purchaseRequests = PurchaseRequest::with('type')->wherehas('services')->get();
 
         foreach($purchaseRequests as $purchaseRequest){
             if($purchaseRequest->deleted_at <> null){
