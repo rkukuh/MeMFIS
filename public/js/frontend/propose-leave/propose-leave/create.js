@@ -54,4 +54,37 @@ $(document).ready(function() {
         mApp.unblock(".action-buttons");
     });
 
+    $('#leave_type').on('change', function() {
+        let employee_uuid = $('#search-employee-val').val();
+        let leave_type = $('#leave_type').val();
+        
+        if(employee_uuid){
+            let url = '/leave/' + employee_uuid + '/remaining/' + leave_type + '/days';
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: url,
+                success: function (data) {
+                    if (data.errors) {
+
+    
+                    } else {
+    
+                        $('#days_remaining').html(data+' day(s) remaining')
+    
+                    }
+                }
+            });
+        }else{
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Select employee first!',
+              })
+        }
+    });
+
+
 });

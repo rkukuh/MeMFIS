@@ -88,7 +88,7 @@
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6 mt-5">
-                                           <span id="note_remaining" class="text-danger mt-5">10 Days Remaining</span>
+                                           <span id="days_remaining" class="text-danger mt-5"></span>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
