@@ -11,7 +11,7 @@ class PurchaseRequestService extends Pivot
 {
     use SoftDeletes;
 
-    protected $table = 'purchase_request_services';
+    protected $table = 'purchase_request_service';
 
     protected $fillable = [
         'purchase_request_id',

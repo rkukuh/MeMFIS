@@ -12,7 +12,7 @@ use App\Http\Requests\Frontend\WorkshopStore;
 use App\Http\Requests\Frontend\WorkshopUpdate;
 use App\Helpers\DocumentNumber;
 
-class WorkshopController extends Controller
+class ItemWorkshopController extends Controller
 {
     /**
      * Display a listing of the resource.
