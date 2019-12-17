@@ -279,10 +279,12 @@ let PurchaseRequest = {
                                 .find("input[type=checkbox], input[type=radio]")
                                     .prop("checked", "")
                                     .end()
-                                // .find("select")
-                                //     .select2('val','All')
-                                //     .end();
+                                .find("select")
+                                    .select2('val','All')
+                                    .end();
                             })
+                            $('.search-item').html("Search Item");
+
 
                             toastr.success("Item has been added.", "Success", {
                                 timeOut: 5000
@@ -337,10 +339,13 @@ let PurchaseRequest = {
                                 .find("input[type=checkbox], input[type=radio]")
                                     .prop("checked", "")
                                     .end()
-                                // .find("select")
-                                //     .select2('val','All')
-                                //     .end();
+                                    .find("select")
+                                    .select2('val','All')
+                                    .end();
                             })
+
+                            $('.search-tool').html("Search Tool");
+
 
                             toastr.success("Item has been added.", "Success", {
                                 timeOut: 5000
