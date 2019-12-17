@@ -13,7 +13,7 @@ class CreatePurchaserequestservicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchase_request_services', function (Blueprint $table) {
+        Schema::create('purchase_request_service', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('purchase_request_id');
             $table->unsignedBigInteger('service_id');

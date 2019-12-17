@@ -469,7 +469,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/general', 'GeneralPurchaseRequestDatatables@index')->name('all.general');
-                Route::get('/project', 'ServicePurchaseRequestDatatables@index')->name('all.project');
+                Route::get('/service', 'ServicePurchaseRequestDatatables@index')->name('all.service');
                 Route::get('/project', 'ProjectPurchaseRequestDatatables@index')->name('all.project');
                 Route::get('/project/item/{project}', 'ProjectPurchaseRequestDatatables@projectItem')->name('item.project');
                 Route::get('/modal/general', 'GeneralPurchaseRequestDatatables@purchaseRequestModal')->name('modal.general.index');
@@ -478,6 +478,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/item/{purchaseRequest}/project/material', 'ProjectPurchaseRequestDatatables@pr_material')->name('pr.project.material');
                 Route::get('/item/{purchaseRequest}/general/tool', 'GeneralPurchaseRequestDatatables@pr_tool')->name('pr.general.tool');
                 Route::get('/item/{purchaseRequest}/project/tool', 'ProjectPurchaseRequestDatatables@pr_tool')->name('pr.project.tool');
+                Route::get('/service/{purchaseRequest}/', 'ServicePurchaseRequestDatatables@pr_service')->name('pr.service');
                 Route::get('/{purchase_request}/purchase-request', 'PurchaseRequestDatatables@item')->name('purchase-request');
                 Route::get('/modal', 'PurchaseRequestDatatables@modal')->name('purchase-request.modal');
 

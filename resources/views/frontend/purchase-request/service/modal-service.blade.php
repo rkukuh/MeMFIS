@@ -1,9 +1,9 @@
-<div class="modal fade" id="modal_general_material" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modal_service" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="TitleModalCustomer">Item</h5>
+                <h5 class="modal-title" id="TitleModalCustomer" style="margin:0">Service</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -71,7 +71,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-item')
+                                    @slot('class', 'add-service')
                                     @slot('type', 'button')
                                 @endcomponent
 
