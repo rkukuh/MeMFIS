@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Datatables\DefectCard;
 
+use DB;
 use Auth;
-use Carbon\Carbon;
 use App\User;
+use DataTables;
+use Carbon\Carbon;
 use App\Models\Status;
 use App\Models\Project;
 use App\Models\ListUtil;
@@ -57,7 +59,7 @@ class DefectCardDatatables extends Controller
 
             $jobcard->update_date       .= $jobcard->audits->last()->updated_at;
             $jobcard->updated_by        .= User::find($jobcard->audits->last()->user_id)->name;
-            
+
             // get skill
             if(isset($jobcard->jobcard->jobcardable->skills) ){
                 if(sizeof($jobcard->jobcard->jobcardable->skills) == 3){
@@ -191,6 +193,26 @@ class DefectCardDatatables extends Controller
         ];
 
         echo json_encode($result, JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function datatable()
+    {
+        ini_set('memory_limit', '-1');
+
+        $defectcards = DB::table('defectcards')
+                    ->join('jobcards', 'defectcards.jobcard_id', '=', 'jobcards.id')
+                    ->WhereNull('defectcards.deleted_at')
+                    ->select('defectcards.*', 'jobcards.number as jobcard_number')
+                    ->get();
+        dd($defectcards);
+
+
+        return Datatables::of($defectcards)->make();
     }
 
     /**
