@@ -27,8 +27,8 @@ class ApprovalObserver
                 $comp = GoodsReceived::find($approval->approvable_id)->items->load('categories')->where('categories.0.code', 'comp')->count();
                 $cons = GoodsReceived::find($approval->approvable_id)->items->load('categories')->where('categories.0.code', 'cons')->count();
                 $raw = GoodsReceived::find($approval->approvable_id)->items->load('categories')->where('categories.0.code', 'raw')->count();
-                // $journal = new TrxJournal();
-                // $journal->insertFromGRN($comp,$cons,$raw,$approval->approvable_id);
+                $journal = new TrxJournal();
+                $journal->insertFromGRN($comp,$cons,$raw,$approval->approvable_id);
                 $inv_in = $approval->approvable->inventoryIn()->create([
                     'storage_id' => $approval->approvable->storage_id,
                     'number' => DocumentNumber::generate('INV-IN-', InventoryIn::withTrashed()->whereYear('created_at', date("Y"))->count()+1),
