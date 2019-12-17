@@ -7,6 +7,7 @@ use App\Models\Status;
 use App\Models\Employee;
 use App\Models\LeaveType;
 use App\Helpers\DocumentNumber;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class leaveStore extends FormRequest
@@ -29,7 +30,10 @@ class leaveStore extends FormRequest
     public function rules()
     {
         return [
-            //
+            'leave_type'    => 'required:exists:leavetypes,uuid',
+            'start_date'    => 'required|date',
+            'end_date'      => 'required|date',
+            'description'   => 'required',
         ];
     }
 
