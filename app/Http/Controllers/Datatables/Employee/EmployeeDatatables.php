@@ -209,6 +209,7 @@ class EmployeeDatatables extends Controller
             'code'     => true,
             'uuid'     => true,
             'first_name'     => true,
+            'last_name'     => true,
             'Actions'      => true,
         ];
 
@@ -220,9 +221,12 @@ class EmployeeDatatables extends Controller
         }
 
         // get all raw data
-        $employees  = Employee::get();
+        $employees  = Employee::all();
 
-        // dd($employees);
+        foreach($employees as $employee){
+            $employee = $employee->full_name;
+        }
+
         $alldata = json_decode( $employees, true);
 
         $data = [];

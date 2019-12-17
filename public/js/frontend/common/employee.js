@@ -17,6 +17,9 @@ let Employee = {
                     data: "first_name"
                 },
                 {
+                    data: "last_name"
+                },
+                {
                     data: "Actions"
                 }
             ],
@@ -47,6 +50,7 @@ let Employee = {
             let uuid = $(this).data('uuid');
             let code = $(this).data('code');
             let name = $(this).data("first_name");
+            name     = name + $(this).data("last_name");
 
             document.getElementById('search-employee-val').value = uuid;
 
