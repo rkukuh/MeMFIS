@@ -23,6 +23,14 @@
                 <div class="m-portlet__body">
                     <div class="container">
                         <div class="row">
+
+                                @component('frontend.common.jobcard.index')
+                                    @slot('name_jobcard','jobcard')
+                                    @slot('id_jobcard','jobcard')
+                                @endcomponent
+                                @include('frontend.common.jobcard.modal')
+
+
     @include('frontend.common.account-code.index')
 
                             <div class="col-md-6">
