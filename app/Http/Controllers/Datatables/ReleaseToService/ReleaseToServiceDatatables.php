@@ -146,7 +146,7 @@ class ReleaseToServiceDatatables extends Controller
      */
     public function progress()
     {
-        $alldata = Project::with('rts','progresses','approvals')->wherehas('approvals')
+        $alldata = Project::with('rts','progresses','approvals','progresses')->wherehas('progresses')
                     ->whereNull('parent_id')
                     // ->whereHas('progresses', function ($query) {
                     // $query->where('status_id','<>', Status::where('code','rts')->where('of','project')->first()->id);
