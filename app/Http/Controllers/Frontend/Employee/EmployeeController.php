@@ -209,13 +209,13 @@ class EmployeeController extends Controller
 
         $data_documents = $employee->documents()->whereNull('documents.updated_at')->get();
         $data_emails = $employee->emails()->whereNull('emails.updated_at')->get();
-        $data_addreses = $employee->addresses()->whereNull('addresses.updated_at')->get();
+        $data_addresses = $employee->addresses()->whereNull('addresses.updated_at')->get();
         $data_phones = $employee->phones()->whereNull('phones.updated_at')->get();
         $data_file = $employee->getMedia('id_card');
 
         $documents[] = null; 
         $emails[] = null;
-        $addreses[] = null;
+        $addresses[] = null;
         $phones[] = null;
         $file[] = null;
 
@@ -229,9 +229,9 @@ class EmployeeController extends Controller
             $emails[$type->code] = $e->address;
         }
 
-        foreach($data_addreses as $ad){
+        foreach($data_addresses as $ad){
             $type = Type::find($ad->type_id);
-            $addreses[$type->code] = $ad->address;
+            $addresses[$type->code] = $ad->address;
         }
 
         foreach($data_phones as $p){
@@ -280,124 +280,14 @@ class EmployeeController extends Controller
         $jobDetails['supervisor'] = $name;
         }
         
-        //BASIC INFORMATION HISTORY
-        $employee_history = DB::table('employee_histories')->where('employee_id',$employee->id)->whereNotNull('updated_at')->orderBy('created_at','desc')->get();
        
-        $history = [];
-
-        $i = 0;
-        foreach($employee_history as $ht){
-            $addresses_history = null;
-            $phones_history = null;
-            $emails_history = null;
-
-            $addresses_history_data = $employee->addresses()->where('type_id',Type::where('code','primary')->first()->id)->where('addresses.created_at',$ht->created_at)->whereNotNull('addresses.updated_at')->first();
-            $phones_history_data = $employee->phones()->where('type_id',Type::where('code','mobile')->first()->id)->where('phones.created_at',$ht->created_at)->whereNotNull('phones.updated_at')->first();
-            $emails_history_data = $employee->emails()->where('type_id',Type::where('code','primary')->first()->id)->where('emails.created_at',$ht->created_at)->whereNotNull('emails.updated_at')->first();
-
-
-            if(isset($addresses_history_data->address)){
-                $addresses_history = $addresses_history_data->address;
-            }
-
-            if(isset($phones_history_data->number)){
-                $phones_history = $phones_history_data->number;
-            }
-
-            if(isset($emails_history_data->address)){
-                $emails_history = $emails_history_data->address;
-            }
-
-            if($ht->last_name == $ht->first_name){
-                $name = $ht->first_name;
-            }else{
-                $name = $ht->first_name.' '.$ht->last_name;
-            }
-
-            if($ht->gender == 'f'){
-                $gender = 'Female';
-            }else if($ht->gender == 'm'){
-                $gender = 'Male';
-            }else{
-                $gender = null;
-            }
-
-            $job_title = null;
-            if($ht->job_title_id){
-                $job_title = JobTitle::where('id',$ht->job_title_id)->first()->name;
-            }
-
-            $position = null;
-            if($ht->position_id){
-                $position = Position::where('id',$ht->position_id)->first()->name;
-            }
-
-            $status = null;
-            if($ht->statuses_id){
-                $status = Status::where('id',$ht->statuses_id)->first()->name;
-            }
-
-            $department = null;
-            // if($ht->department_id){
-            //     $department = Department::where('id',$ht->department_id)->first()->name;
-            // }
-
-            $indirect_supervisor = null;
-            if($ht->indirect_supervisor_id){
-                $indirect_supervisor_data = Employee::where('id',$ht->indirect_supervisor_id)->first();
-                
-                if($indirect_supervisor_data->last_name == $indirect_supervisor_data->first_name){
-                    $indirect_supervisor = $indirect_supervisor_data->first_name;
-                }else{
-                    $indirect_supervisor = $indirect_supervisor_data->first_name.' '.$indirect_supervisor_data->last_name;
-                }
-            }
-
-            $supervisor = null;
-            if($ht->supervisor_id){
-                $supervisor_data = Employee::where('id',$ht->supervisor_id)->first();
-                
-                if($supervisor_data->last_name == $supervisor_data->first_name){
-                    $supervisor = $supervisor_data->first_name;
-                }else{
-                    $supervisor = $supervisor_data->first_name.' '.$supervisor_data->last_name;
-                }
-            }
-
-            $history[$i] = [
-                'created_at' => $ht->created_at,
-                'updated_at' => $ht->updated_at,
-                'name' => $name,
-                'code' => $ht->code,
-                'dobdata' => $ht->dob.' & '.$ht->dob_place,
-                'gender' => $gender,
-                'nationality' => $ht->nationality,
-                'religion' => $ht->religion,
-                'martial_status' => $ht->marital_status,
-                'primary' => $addresses_history,
-                'city' => $ht->city,
-                'country' => $ht->country,
-                'mobile_phone' => $phones_history,
-                'primary' => $emails_history,
-                'job_title' => $job_title,
-                'position' => $position,
-                'status' => $status,
-                'department' => $department,
-                'joined_date' => $ht->joined_date,
-                'indirect_supervisor' => $indirect_supervisor,
-                'supervisor' => $supervisor
-            ];
-
-            $i++;
-        }
-
          //EMPLOYEE BENEFIT
          $employee_benefit = [];
          $employee_benefit_data = $employee->position()->get();
  
          if(isset($employee_benefit_data[0])){
              $j = 0;
-             for($i=0; $i<count($employee_benefit_data[0]->benefits); $i++){
+             for($i=0; $i < count($employee_benefit_data[0]->benefits); $i++){
                  if($employee_benefit_data[0]->benefits[$i]->pivot->updated_at == null){
  
                  $base_calculation = null;
@@ -420,7 +310,7 @@ class EmployeeController extends Controller
                  ];
                  $j++;
  
-             }
+                }
              }
          }
  
@@ -432,12 +322,10 @@ class EmployeeController extends Controller
         $created_at = $employee->employee_provisions()->select('employee_provisions.created_at')->whereNotNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->orderBy('created_at','DESC')->get();
         
         
-        $j = 0;
-        foreach($created_at as $ct){
-            $employee_benefit_history_data[$j] = $employee->employee_benefit()->where('employee_benefit.created_at',$ct->created_at)->whereNotNull('employee_benefit.updated_at')->whereNotNull('employee_benefit.approved_at')->get();
-            $employee_bpjs_history_data[$j] = $employee->employee_bpjs()->where('employee_bpjs.created_at',$ct->created_at)->whereNotNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->get();
-            $employee_provisions_history_data[$j] = $employee->employee_provisions()->where('employee_provisions.created_at',$ct->created_at)->whereNotNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->get();
-        $j++;
+        foreach($created_at as $key => $ct){
+            $employee_benefit_history_data[$key] = $employee->employee_benefit()->where('employee_benefit.created_at',$ct->created_at)->whereNotNull('employee_benefit.updated_at')->whereNotNull('employee_benefit.approved_at')->get();
+            $employee_bpjs_history_data[$key] = $employee->employee_bpjs()->where('employee_bpjs.created_at',$ct->created_at)->whereNotNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->get();
+            $employee_provisions_history_data[$key] = $employee->employee_provisions()->where('employee_provisions.created_at',$ct->created_at)->whereNotNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->get();
         }
 
         $employee_benefit_history = [];
@@ -479,20 +367,16 @@ class EmployeeController extends Controller
         $benefit_name = [];
         $bpjs_name = [];
 
-        $p = 0;
-        foreach($benefit_name_data as $bnd){
-            $benefit_name[$p] = [
+        foreach($benefit_name_data as $key => $bnd){
+            $benefit_name[$key] = [
                 'name' => Benefit::where('id',$bnd->benefit_id)->first()
             ];
-            $p++;
         }
         
-        $q = 0;
-        foreach($bpjs_name_data as $bpd){
-            $bpjs_name[$q] = [
+        foreach($bpjs_name_data as $key => $bpd){
+            $bpjs_name[$key] = [
                 'name' => BPJS::where('id',$bpd->bpjs_id)->first()
             ];
-            $q++;
         }
 
         $approved_at = null;
@@ -544,15 +428,13 @@ class EmployeeController extends Controller
         
         $data_workshift_history = $employee->workshifts()->whereNotNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->orderBy('created_at','DESC')->get();
 
-        $l = 0;
-        foreach($data_workshift_history as $dwh){
-            $workshift_history[$l] = [
+        foreach($data_workshift_history as $key => $dwh){
+            $workshift_history[$key] = [
                 'created_at' => $dwh->created_at,
                 'updated_at' => $dwh->updated_at,
-                'name' => Workshift::find($dwh->workshift_id)->name
+                'name' => Workshift::find($dwh->pivot->workshift_id)->name
             ];
 
-            $l++;
         }
         
         //EMPLOYEE ACCOUNT
@@ -580,15 +462,13 @@ class EmployeeController extends Controller
         
         $data_bank_history = $employee->bank_accounts()->whereNotNull('bank_accounts.updated_at')->get();
 
-        $r = 0;
-        foreach($data_bank_history as $dbh){
-            $bank_history[$r] = [
+        foreach($data_bank_history as $key => $dbh){
+            $bank_history[$key] = [
                 'created_at' => $dbh->created_at,
                 'updated_at' => $dbh->updated_at,
                 'account_number' => $dbh->number,
                 'bank_name' => Bank::find($dbh->bank_id)->name
             ];
-            $r++;
         }
 
         //EMPLOYEE TERMINATION
@@ -610,10 +490,9 @@ class EmployeeController extends Controller
             'age' => $age,
             'documents' => $documents,
             'emails' => $emails,
-            'addresses' => $addreses,
+            'addresses' => $employee->addresses,
             'phones' => $phones,
             'jobDetails' => $jobDetails,
-            'history' => $history,
             'file' => $file,
             'employee_benefit' => $employee_benefit,
             'employee_bpjs' => $employee_bpjs_data,
@@ -657,37 +536,33 @@ class EmployeeController extends Controller
         $dateOfBirth = $employee->dob;
         $age = Carbon::parse($dateOfBirth)->age;
 
-        $data_documents = $employee->documents()->whereNull('documents.updated_at')->get();
-        $data_emails = $employee->emails()->whereNull('emails.updated_at')->get();
-        $data_addreses = $employee->addresses()->whereNull('addresses.updated_at')->get();
-        $data_phones = $employee->phones()->whereNull('phones.updated_at')->get();
+        $data_documents = $employee->documents()->whereNull('deleted_at')->with('type')->get();
+        $data_emails = $employee->emails()->whereNull('deleted_at')->with('type')->get();
+        $data_addresses = $employee->addresses()->whereNull('deleted_at')->with('type')->get();
+        $data_phones = $employee->phones()->whereNull('deleted_at')->with('type')->get();
         $data_file = $employee->getMedia('id_card');
 
-        $documents[] = null; 
-        $emails[] = null;
-        $addreses[] = null;
-        $phones[] = null;
-        $file[] = null;
+        $documents = []; 
+        $emails = [];
+        $addresses = [];
+        $phones = [];
+        $file = [];
 
-        
-        foreach($data_documents as $dd){
-            $type = Type::find($dd->type_id);
-            $documents[$type->code] = $dd->number;
+
+        foreach( $data_addresses as $address){
+            $addresses[$address->type->code] = $address;
         }
 
-        foreach($data_emails as $e){
-            $type = Type::find($e->type_id);
-            $emails[$type->code] = $e->address;
-        }
-        
-        foreach($data_addreses as $ad){
-            $type = Type::find($ad->type_id);
-            $addreses[$type->code] = $ad->address;
+        foreach($data_documents as $data){
+            $documents[$data->type->code] = $data->number;
         }
 
-        foreach($data_phones as $p){
-            $type = Type::find($p->type_id);
-            $phones[$type->code] = $p->number;
+        foreach($data_emails as $data){
+            $emails[$data->type->code] = $data->address;
+        }
+      
+        foreach($data_phones as $data){
+            $phones[$data->type->code] = $data->number;
         }
 
         foreach($data_file as $f){
@@ -729,137 +604,6 @@ class EmployeeController extends Controller
                 $name = $first_name.' '.$last_name;
             }
         $jobDetails['supervisor'] = $name;
-        }
-
-        //BASIC INFORMATION HISTORY
-        $employee_history = DB::table('employee_histories')->where('employee_id',$employee->id)->whereNotNull('updated_at')->orderBy('created_at','desc')->get();
-       
-        $history = [];
-
-        $i = 0;
-        foreach($employee_history as $ht){
-            $addresses_history = null;
-            $phones_history = null;
-            $emails_history = null;
-
-            $addresses_history_data = $employee->addresses()->where('type_id',Type::where('code','primary')->first()->id)->where('addresses.created_at',$ht->created_at)->whereNotNull('addresses.updated_at')->first();
-            $phones_history_data = $employee->phones()->where('type_id',Type::where('code','mobile')->first()->id)->where('phones.created_at',$ht->created_at)->whereNotNull('phones.updated_at')->first();
-            $emails_history_data = $employee->emails()->where('type_id',Type::where('code','primary')->first()->id)->where('emails.created_at',$ht->created_at)->whereNotNull('emails.updated_at')->first();
-
-
-            if(isset($addresses_history_data->address)){
-                $addresses_history = $addresses_history_data->address;
-            }
-
-            if(isset($phones_history_data->number)){
-                $phones_history = $phones_history_data->number;
-            }
-
-            if(isset($emails_history_data->address)){
-                $emails_history = $emails_history_data->address;
-            }
-
-            if($ht->last_name == $ht->first_name){
-                $name = $ht->first_name;
-            }else{
-                $name = $ht->first_name.' '.$ht->last_name;
-            }
-
-            $temp = json_decode($ht->religion);
-            if(isset($temp)){
-                $religion = json_decode($ht->religion)->name;
-            }else{
-                $religion = null;
-            }
-
-            $temp = json_decode($ht->gender);
-            if(isset($temp)){
-                $gender = json_decode($ht->gender)->name;
-            }else{
-                $gender = null;
-            }
-
-            $temp = json_decode($ht->country);
-            if(isset($temp)){
-                $country = json_decode($ht->country)->name;
-            }else{
-                $country = null;
-            }
-
-            $temp = json_decode($ht->marital_status);
-            if(isset($temp)){
-                $marital_status = json_decode($ht->marital_status)->name;
-            }else{
-                $marital_status = null;
-            }
-
-            $job_title = null;
-            if($ht->job_title_id){
-                $job_title = JobTitle::where('id',$ht->job_title_id)->first()->name;
-            }
-
-            $position = null;
-            if($ht->position_id){
-                $position = Position::where('id',$ht->position_id)->first()->name;
-            }
-
-            $status = null;
-            if($ht->statuses_id){
-                $status = Status::where('id',$ht->statuses_id)->first()->name;
-            }
-
-            $department = null;
-            // if($ht->department_id){
-            //     $department = Department::where('id',$ht->department_id)->first()->name;
-            // }
-
-            $indirect_supervisor = null;
-            if($ht->indirect_supervisor_id){
-                $indirect_supervisor_data = Employee::where('id',$ht->indirect_supervisor_id)->first();
-                
-                if($indirect_supervisor_data->last_name == $indirect_supervisor_data->first_name){
-                    $indirect_supervisor = $indirect_supervisor_data->first_name;
-                }else{
-                    $indirect_supervisor = $indirect_supervisor_data->first_name.' '.$indirect_supervisor_data->last_name;
-                }
-            }
-
-            $supervisor = null;
-            if($ht->supervisor_id){
-                $supervisor_data = Employee::where('id',$ht->supervisor_id)->first();
-                
-                if($supervisor_data->last_name == $supervisor_data->first_name){
-                    $supervisor = $supervisor_data->first_name;
-                }else{
-                    $supervisor = $supervisor_data->first_name.' '.$supervisor_data->last_name;
-                }
-            }
-
-            $history[$i] = [
-                'created_at' => $ht->created_at,
-                'updated_at' => $ht->updated_at,
-                'name' => $name,
-                'code' => $ht->code,
-                'dobdata' => $ht->dob.' & '.$ht->dob_place,
-                'gender' => $gender,
-                'nationality' => $ht->nationality,
-                'religion' => $religion,
-                'martial_status' => $marital_status,
-                'primary' => $addresses_history,
-                'city' => $ht->city,
-                'country' => $country,
-                'mobile_phone' => $phones_history,
-                'primary' => $emails_history,
-                'job_title' => $job_title,
-                'position' => $position,
-                'status' => $status,
-                'department' => $department,
-                'joined_date' => $ht->joined_date,
-                'indirect_supervisor' => $indirect_supervisor,
-                'supervisor' => $supervisor
-            ];
-
-            $i++;
         }
 
         //EMPLOYEE BENEFIT
@@ -1137,16 +881,14 @@ class EmployeeController extends Controller
         $maximum_overtime = ($employee->department->first()->pivot->maximum_overtime_period * 3600);
         $employee_benefit = $employee->position->benefits;
 
-        // dd($approve['position_min_max']);
         return view('frontend.employee.employee.edit',[
             'employee' => $employee,
             'age' => $age,
             'documents' => $documents,
             'emails' => $emails,
-            'addresses' => $addreses,
+            'addresses' => $addresses,
             'phones' => $phones,
             'jobDetails' => $jobDetails,
-            'history' => $history,
             'file' => $file,
             'employee_benefit' => $employee_benefit,
             'employee_bpjs' => $employee_bpjs_data,

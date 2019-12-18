@@ -186,7 +186,7 @@
 
                     @component('frontend.common.input.text')
                         @if(array_key_exists('primary', $addresses))
-                            @slot('value', $addresses['primary'])
+                            @slot('value', $addresses['primary']->address)
                         @endif
                         @slot('id', 'address_line_1')
                         @slot('name', 'address_line_1')
@@ -200,7 +200,7 @@
 
                     @component('frontend.common.input.text')
                         @if(array_key_exists('secondary', $addresses))
-                            @slot('value', $addresses['secondary'])
+                            @slot('value', $addresses['secondary']->address)
                         @endif
                         @slot('id', 'address_line_2')
                         @slot('name', 'address_line_2')
