@@ -160,6 +160,24 @@ let Employee_create_benefit = {
                                 }else{
                                     $('#absence_punishment-error').html('');
                                 }
+                                
+                                if (data.errors.pph) {
+                                    $('#pph-error').html(data.errors.pph[0]);
+                                }else{
+                                    $('#pph-error').html('');
+                                }
+
+                                if (data.errors.uuid_bpjs) {
+                                    $('#BPJS-error').html(data.errors.uuid_bpjs[0]);
+                                }else{
+                                    $('#BPJS-error').html('');
+                                }
+
+                                if (data.errors.amount) {
+                                    $('#allowance-error').html(data.errors.amount[0]);
+                                }else{
+                                    $('#allowance-error').html('');
+                                }
                             });
                         } else {
     
