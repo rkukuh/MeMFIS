@@ -167,9 +167,9 @@ class ReleaseToServiceDatatables extends Controller
                         }
                     }
                 }
-                if(Status::where('id',$project->progresses->last()->status_id)->first()->code == 'open' and $quotation->jobcards->count() == 0){
-                    $status = 'OPEN';
-                }
+                // if(Status::where('id',$project->progresses->last()->status_id)->first()->code == 'open' and $quotation->jobcards->count() == 0){
+                //     $status = 'OPEN';
+                // }
             }
             if(Status::where('id',$project->progresses->last()->status_id)->first()->code == 'rts'){
                 $project->status = 'RTS';

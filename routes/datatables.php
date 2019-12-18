@@ -886,6 +886,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'JobCardDatatables@index')->name('all');
+                Route::get('/all', 'JobCardDatatables@datatable')->name('datatable.all');
                 Route::post('/filter', 'JobCardDatatables@filter')->name('filter');
                 Route::get('/{jobcard}/materials', 'JobCardDatatables@material')->name('material');
                 Route::get('/{jobcard}/tools', 'JobCardDatatables@tool')->name('tool');
@@ -947,6 +948,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'DefectCardDatatables@index')->name('all');
+                Route::get('/all', 'DefectCardDatatables@datatable')->name('datatable.all');
                 Route::get('/project', 'DefectCardDatatables@project')->name('all.project');
                 Route::get('/project/{project}', 'DefectCardDatatables@show')->name('all.show');
                 Route::post('/filter', 'DefectCardDatatables@filter')->name('filter');

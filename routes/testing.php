@@ -1,11 +1,11 @@
 <?php
-        // use DataTables;
+// use DataTables;
 
 Route::name('testing.')->group(function () {
 
     Route::group(['prefix' => '_test'], function () {
 
-        Route::get('/view/files', function() {
+        Route::get('/view/files', function () {
             $key = 'master/taskcard/routine/Progress Report 6 Nop 2019.pdf';
             $s3 = Storage::disk('s3');
             $client = $s3->getDriver()->getAdapter()->getClient();
@@ -13,7 +13,7 @@ Route::name('testing.')->group(function () {
 
             $command = $client->getCommand('GetObject', [
                 'Bucket' => $bucket,
-                'Key' => $key
+                'Key' => $key,
             ]);
 
             $request = $client->createPresignedRequest($command, '+20 minutes');
@@ -21,18 +21,18 @@ Route::name('testing.')->group(function () {
             $url = $request->getUri();
             // return (string) $request->getUri();
 
-            return view('frontend.testing.view-file',[
-                'url' => $url
+            return view('frontend.testing.view-file', [
+                'url' => $url,
             ]);
         });
 
         Route::get('/doc', function () {
 
-            dd(App\Helpers\DocumentNumber::generate('PR-',1000));
+            dd(App\Helpers\DocumentNumber::generate('PR-', 1000));
         });
         Route::get('/prr', function () {
             // dd(App\Models\PurchaseRequest::find(3)->items->where('pivot.deleted_at',null));
-            dd(App\Models\Pivots\PurchaseRequestItem::with('item','item.categories')->where('purchase_request_id',3)->whereHas('item', function ($query) {
+            dd(App\Models\Pivots\PurchaseRequestItem::with('item', 'item.categories')->where('purchase_request_id', 3)->whereHas('item', function ($query) {
                 $query->whereHas('categories', function ($query2) {
                     // dump($query2->get());
                     $query2->whereIn('code', ['raw', 'cons', 'comp']);
@@ -45,8 +45,7 @@ Route::name('testing.')->group(function () {
             // dd(App\Models\Pivots\PurchaseRequestItem::with('item',)->whereHas('item.categories', function ($query) {
             //     $query->where('categories.0.code','comp');
             //     // dump($query);
-        // })->get());
-
+            // })->get());
 
             // ->where('item.categories.[0].code','comp')->get()
         });
@@ -54,58 +53,15 @@ Route::name('testing.')->group(function () {
             $grn = App\Models\GoodsReceived::find(1)->items->load('categories')->where('categories.0.code', 'tool')->count();
             dd($grn);
         });
-        Route::get('/po', function () {
-            // $po = App\Models\PurchaseOrder::find(16);
-
-            // foreach ($po->promos as $promo) {
-            //     dump($promo->pivot);
-
-            //     // if ($promo->pivot->promo_id == 19) {
-            //     //     dump($promo->pivot);
-            //     // }
-            // }
-
-            // DB::table('promoables')
-            //         ->where('promoable_type', 'App\Models\PurchaseOrder')
-            //         ->where('promoable_id', 16)
-            //         ->where('promo_id', 19)
-            //         ->update([
-            //             'value' => 99,
-            //             'amount' => 9999
-            //         ]);
-        });
-
-        // Route::get('/serverSide', [
-        //     // 'as'   => 'serverSide',
-        //     'uses' => function () {
-        //         ini_set('memory_limit', '-1');
-        //         $users = App\Models\Item::all();
-        //         return DataTables::of($users)->make();
-        //     }
-        // ]);
-
-        // Route::get('/serverSide', [
-        //     'as'   => 'serverSide',
-        //     'uses' => function () {
-        //         ini_set('memory_limit', '-1');
-
-        //         $users = App\Models\Item::with('unit')->get();
-        //         // ->whereHas('categories', function ($query) {
-        //         //     $query->where('code','<>','tool');
-        //         // })->get();
-        //         return Datatables::of($users)->make();
-        //     }
-        // ]);
 
         Route::get('/server', function () {
             ini_set('memory_limit', '-1');
             $tsim_array = App\Models\Item::get();
-            foreach (array_chunk($tsim_array,1000) as $t) {
+            foreach (array_chunk($tsim_array, 1000) as $t) {
                 dd($t);
                 // DB::table('tsim')->insert($t);
 
-
-             }
+            }
 
         });
         Route::get('/docnum', function () {
@@ -119,17 +75,15 @@ Route::name('testing.')->group(function () {
         });
 
         Route::get('/check', function () {
-            $test  = new App\Models\CheckStock;
+            $test = new App\Models\CheckStock;
 
             $result = $test->item('a7455650-b740-47ec-9a30-ffbfdcc2446b');
             dd($result);
 
         });
         Route::get('/test22', function () {
-            $test  = Directoryxx\Finac\Model\APaymentA::all();
-
-            dd($test);
-
+            $journal = new Directoryxx\Finac\Model\TrxJournal();
+                dd($journal->insertFromGRN(1,2,1,1));
         });
 
         Route::get('/convert-unit-to-prelimary', function () {
@@ -139,27 +93,26 @@ Route::name('testing.')->group(function () {
             $quantity_sekarang = 2;
             $unit_sekarang = App\Models\Unit::find('11');
 
-            $qty_uom = $item->units->where('uom.unit_id',$unit_sekarang->id)->first()->uom->quantity; // quantity conversi
+            $qty_uom = $item->units->where('uom.unit_id', $unit_sekarang->id)->first()->uom->quantity; // quantity conversi
 
-            dd($qty_uom*$quantity_sekarang);
-
+            dd($qty_uom * $quantity_sekarang);
 
         });
 
         Route::get('/wp', function () {
 
-            $project_workpackage = App\Models\Pivots\ProjectWorkPackage::where('project_id',1)->where('workpackage_id',1)->first()->id;
-            $tes = App\Models\ProjectWorkPackageTaskCard::with('taskcard','taskcard.type','taskcard.task')->where('project_workpackage_id',$project_workpackage)
-            ->whereHas('taskcard', function ($query) {
-                $query->whereHas('type', function ($query) {
+            $project_workpackage = App\Models\Pivots\ProjectWorkPackage::where('project_id', 1)->where('workpackage_id', 1)->first()->id;
+            $tes = App\Models\ProjectWorkPackageTaskCard::with('taskcard', 'taskcard.type', 'taskcard.task')->where('project_workpackage_id', $project_workpackage)
+                ->whereHas('taskcard', function ($query) {
+                    $query->whereHas('type', function ($query) {
                         $query->where('name', 'Basic');
                     });
-                        // $query->where('task_id', $request->task_type_id);
-                //     });
-            })->get();
+                    // $query->where('task_id', $request->task_type_id);
+                    //     });
+                })->get();
             // dd($tes);
 
-            foreach($tes as $te){
+            foreach ($tes as $te) {
                 // dump($te->taskcard->type->name);
                 dump($te);
             }
@@ -217,16 +170,16 @@ Route::name('testing.')->group(function () {
 
         Route::get('/jobcard/{project}', function ($project) {
 
-            $project = App\Models\Project::where('uuid',$project)->first();
-            foreach($project->workpackages as $wp){
-                foreach($wp->taskcards as $tc){
+            $project = App\Models\Project::where('uuid', $project)->first();
+            foreach ($project->workpackages as $wp) {
+                foreach ($wp->taskcards as $tc) {
                     App\Models\JobCard::create([
-                        'number' => 'JC-DUM-'.md5(uniqid(rand(), true)),
+                        'number' => 'JC-DUM-' . md5(uniqid(rand(), true)),
                         'taskcard_id' => $tc->id,
                         'origin_taskcard' => $tc->toJson(),
                         'origin_taskcard_items' => $tc->items->toJson(),
                     ]);
-                                       // // echo $tc->title.'<br>';
+                    // // echo $tc->title.'<br>';
                     // foreach($tc->items as $item){
                     //     echo $item->name.'<br>';
                     // }
