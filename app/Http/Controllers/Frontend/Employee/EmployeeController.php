@@ -207,36 +207,32 @@ class EmployeeController extends Controller
         $dateOfBirth = $employee->dob;
         $age = Carbon::parse($dateOfBirth)->age;
 
-        $data_documents = $employee->documents()->whereNull('documents.updated_at')->get();
-        $data_emails = $employee->emails()->whereNull('emails.updated_at')->get();
-        $data_addresses = $employee->addresses()->whereNull('addresses.updated_at')->get();
-        $data_phones = $employee->phones()->whereNull('phones.updated_at')->get();
+        $data_documents = $employee->documents()->whereNull('deleted_at')->with('type')->get();
+        $data_emails = $employee->emails()->whereNull('deleted_at')->with('type')->get();
+        $data_addresses = $employee->addresses()->whereNull('deleted_at')->with('type')->get();
+        $data_phones = $employee->phones()->whereNull('deleted_at')->with('type')->get();
         $data_file = $employee->getMedia('id_card');
 
-        $documents[] = null; 
-        $emails[] = null;
-        $addresses[] = null;
-        $phones[] = null;
-        $file[] = null;
+        $documents = []; 
+        $emails = [];
+        $addresses = [];
+        $phones = [];
+        $file = [];
 
-        foreach($data_documents as $dd){
-            $type = Type::find($dd->type_id);
-            $documents[$type->code] = $dd->number;
+        foreach( $data_addresses as $address){
+            $addresses[$address->type->code] = $address;
         }
 
-        foreach($data_emails as $e){
-            $type = Type::find($e->type_id);
-            $emails[$type->code] = $e->address;
+        foreach($data_documents as $data){
+            $documents[$data->type->code] = $data->number;
         }
 
-        foreach($data_addresses as $ad){
-            $type = Type::find($ad->type_id);
-            $addresses[$type->code] = $ad->address;
+        foreach($data_emails as $data){
+            $emails[$data->type->code] = $data->address;
         }
-
-        foreach($data_phones as $p){
-            $type = Type::find($p->type_id);
-            $phones[$type->code] = $p->number;
+      
+        foreach($data_phones as $data){
+            $phones[$data->type->code] = $data->number;
         }
 
         foreach($data_file as $f){
@@ -490,7 +486,7 @@ class EmployeeController extends Controller
             'age' => $age,
             'documents' => $documents,
             'emails' => $emails,
-            'addresses' => $employee->addresses,
+            'addresses' => $addresses,
             'phones' => $phones,
             'jobDetails' => $jobDetails,
             'file' => $file,
@@ -568,6 +564,7 @@ class EmployeeController extends Controller
         foreach($data_file as $f){
             $file[$f->collection_name] = $f->file_name;
         }
+
         $jobDetails[] = null;
        
         if($employee->job_title()->first()){

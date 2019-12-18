@@ -37,22 +37,16 @@
                                                         <td align="center" width="55%"></td>
                                                     </tr>
                                                     <tr>
-                                                            @php
-                                                            $lastName = null;
-                                                            if($employee->last_name != $employee->first_name){
-                                                            $lastName = $employee->last_name;
-                                                            }
-                                                            @endphp
                                                         <td valign="top"><b>Name</b></td>
-                                                    <td valign="top" align="center">{{ $employee->first_name.' '.$lastName}}</td>
+                                                        <td valign="top" align="center">{{ $employee->first_name.' '.$employee->last_name}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Employee ID</b></td>
-                                                    <td valign="top" align="center">{{ $employee->code }}</td>
+                                                        <td valign="top" align="center">{{ $employee->code }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Place & Date of Birth</b></td>
-                                                    <td valign="top" align="center">{{ $employee->dob.' & '.$employee->dob_place }}</td>
+                                                        <td valign="top" align="center">{{ $employee->dob.' & '.$employee->dob_place }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Gender</b></td>
@@ -60,26 +54,20 @@
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Nationality</b></td>
-                                                    <td valign="top" align="center">{{ $employee->nationalities->first()->nationality }}</td>
+                                                        <td valign="top" align="center">{{ $employee->nationalities->first()->nationality }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Religion</b></td>
-                                                    <td valign="top" align="center">{{ $employee->religion->name }}</td>
+                                                        <td valign="top" align="center">{{ $employee->religion->name }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Martial Status</b></td>
-                                                    <td valign="top" align="center">{{ $employee->marital_status->name }}</td>
+                                                        <td valign="top" align="center">{{ $employee->marital_status->name }}</td>
                                                     </tr>
                                                 </table>
                                             </fieldset>
                                             <fieldset class="border p-2 mt-2">
                                                 <legend class="w-auto"><b>Contact Information Details</b></legend>
-                                                @php
-                                                $primary = null;
-                                                if(isset($addresses['primary'])){
-                                                $primary = $addresses['primary'];
-                                                }
-                                                @endphp
                                                 <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
                                                     <tr>
                                                         <td align="center" width="45%"><b>Contact Information</b></td>
@@ -87,7 +75,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Address Line 1</b></td>
-                                                    <td valign="top" align="center">{{ $primary }}</td>
+                                                    <td valign="top" align="center">@if(array_key_exists('primary', $addresses)) {{ $addresses['primary']->address }} @else - @endif</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>City</b></td>
