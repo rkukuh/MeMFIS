@@ -188,6 +188,15 @@ Route::group([
         Route::view('/job-scope/create', 'frontend.job-scope.create')->name('job-scope.create');
         Route::view('/job-scope/edit', 'frontend.job-scope.edit')->name('job-scope.edit');
         Route::view('/job-scope/show', 'frontend.job-scope.show')->name('job-scope.show');
+
+
+        /** PAYROLL */
+
+        Route::view('/payroll', 'frontend.payroll.index')->name('payroll.index');
+        Route::view('/payroll/create', 'frontend.payroll.create')->name('payroll.create');
+        Route::view('/payroll/edit', 'frontend.payroll.edit')->name('payroll.edit');
+        Route::view('/payroll/process', 'frontend.payroll.process')->name('payroll.process');
+
         
     });
 
