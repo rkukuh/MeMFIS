@@ -8,12 +8,15 @@ let Employee_edit_benefit = {
         var amount = []
         $("input[name='check_benefit']:checked").each(function(){
             
-            if($('input[name='+this.value+'_amount]').val() == '' || $('input[name='+this.value+'_amount]').val() < document.getElementById(this.value+'_amount').min){
-                $('#'+this.value+'-error').html('Must be greater than min value')
-                return_status = false
-            }else{
-                amount.push($('input[name='+this.value+'_amount]').val())
-                $('#'+this.value+'-error').html('')
+            if($('input[name='+$(this).val()+'_amount]').val() == '' || parseInt( $('input[name='+$(this).val()+'_amount]').val() ) < parseInt($('#'+$(this).val()+'_amount').attr('min')) ){
+                $('#'+$(this).val()+'-error').html('Must be greater than '+ formatter.format( $('#'+$(this).val()+'_amount').attr('min')) );
+                return_status = false;
+            }else if(parseInt( $('input[name='+$(this).val()+'_amount]').val() ) > parseInt( $('#'+$(this).val()+'_amount').attr('max')) ){
+                $('#'+$(this).val()+'-error').html('Must be lesser than '+ formatter.format( $('#'+$(this).val()+'_amount').attr('max')) );
+                return_status = false;
+            }else {
+                amount.push($('input[name='+$(this).val()+'_amount]').val());
+                $('#'+$(this).val()+'-error').html('');
             }
 
             uuid_benefit.push(this.value);
