@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.propose-leave.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.leave.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Propose Leave
                             </span>
@@ -77,15 +77,11 @@
                                                 Leave Types @include('frontend.common.label.required')
                                             </label>
                                             
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Leave Types')
-                                                @slot('id', 'leave_type')
+                                            @component('frontend.common.input.edit-select2')
                                                 @slot('name', 'leave_type')
-                                                @slot('id_error', 'leave_type')
+                                                @slot('options', $types)
+                                                @slot('value', $leave->leaveType->uuid)
                                             @endcomponent
-                                            {{-- Casual Leave(if setting daily based) = 3 Days Remaining 
-                                            Annual Leave = 10 Days Remaining
-                                            Sick  --}}
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6 mt-5">
                                            <span id="note_remaining" class="text-danger mt-5">10 Days Remaining</span>
@@ -98,10 +94,10 @@
                                             </label>
                                          
                                             @component('frontend.common.input.datepicker')
-                                                @slot('id', 'date')
-                                                @slot('text', 'Date')
-                                                @slot('name', 'date')
-                                                @slot('id_error','date')
+                                                @slot('id', 'start_date')
+                                                @slot('name', 'start_date')
+                                                @slot('value', $leave->start_date)
+                                                @slot('id_error','start_date')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -113,6 +109,7 @@
                                                 @slot('id', 'exp_date')
                                                 @slot('text', 'Date End')
                                                 @slot('name', 'exp_date')
+                                                @slot('value', $leave->end_date)
                                                 @slot('id_error','exp_date')
                                             @endcomponent
                                         </div>
@@ -127,7 +124,7 @@
                                                 @slot('rows', '5')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
-                                                @slot('text', 'Description')
+                                                @slot('value', 'Description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -137,14 +134,14 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-propose-leave')
-                                                        @slot('class', 'add-propose-leave')
+                                                        @slot('id', 'edit-propose-leave')
+                                                        @slot('class', 'edit-propose-leave')
+                                                        @slot('text', 'Update Leave Proposal')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
 
                                                     @include('frontend.common.buttons.back')
-
                                                 </div>
                                             </div>
                                         </div>
@@ -161,7 +158,12 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/leave-type.js')}}"></script>
+    <script> 
+        let url = "{{ route('frontend.leave.update', ['leave' => $leave->uuid]) }}"
+    </script>
+    <script src="{{ asset('js/frontend/propose-leave/propose-leave/edit.js')}}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/edit-select2.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
 @endpush

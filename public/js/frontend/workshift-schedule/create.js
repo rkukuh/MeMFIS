@@ -81,14 +81,14 @@ let Workshift = {
                     if (data.errors.description) {
                         $('#description-error').html(data.errors.description[0]);
                     }else{
-                        $('#description-error').html('')
+                        $('#description-error').html('');
                     }
                 } else {
-                    toastr.success('Data has been saved.', 'Succes', {
+                    toastr.success('Data has been saved.', 'Success', {
                         timeOut: 5000
                     });
 
-                    window.location.href='/workshift'
+                    window.location.href='/workshift';
                 }
             }
         });

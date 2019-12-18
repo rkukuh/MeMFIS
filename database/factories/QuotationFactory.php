@@ -44,7 +44,7 @@ $factory->define(Quotation::class, function (Faker $faker) {
             $charges = [];
 
             for ($i = 1; $i <= rand(1, 4); $i++) {
-                
+
                 $charge['type'] = 'Biaya ' . $i;
                 $charge['amount'] = rand(1, 10) * 100000;
 
@@ -63,7 +63,7 @@ $factory->define(Quotation::class, function (Faker $faker) {
         },
         'scheduled_payment_amount' => function () {
             $amounts = [];
-            
+
             for ($i = 0; $i < rand(2, 5); $i++) {
                 $amounts[] = rand(1, 10) * 1000000;
             }
@@ -141,13 +141,10 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
                 $unit = factory(Unit::class)->create();
             }
 
-            $quotation->items()->save($item, [
-                'taskcard_id' => $taskcard->id,
-                'pricelist_unit_id' => $unit->id,
-                'pricelist_price' => rand(1, 10) * 1000000,
-                'subtotal' => rand(10, 20) * 1000000,
-                'note' => $faker->randomElement([null, $faker->sentence]),
-            ]);
+            // $quotation->workshop()->save($item, [
+            //     'serial_number' => 'serial_number',
+            //     'complaint' => $faker->randomElement([null, $faker->sentence]),
+            // ]);
         }
     }
 
@@ -185,10 +182,10 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
 
             if ($faker->boolean) {
                 $disc_type = $faker->randomElement(['percentage', 'amount']);
-                
+
                 if ($disc_type == 'percentage') {
                     $disc_value = $faker->randomElement([5, 10, 15, 20, 25]);
-                } 
+                }
                 else if ($disc_type == 'amount') {
                     $disc_value = rand(1, 10) * 100000;
                 }
@@ -204,5 +201,5 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
             ]);
         }
     }
-    
+
 });

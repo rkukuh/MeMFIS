@@ -16,6 +16,7 @@ class EmployeeAttendances extends Migration
         Schema::create('employee_attendances', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedBigInteger('employee_id');
             $table->date('date');
             $table->time('in');
@@ -23,19 +24,18 @@ class EmployeeAttendances extends Migration
             $table->bigInteger('late_in')->nullable();
             $table->bigInteger('earlier_out')->nullable();
             $table->bigInteger('overtime')->nullable();
-            $table->unsignedBigInteger('statuses_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('employee_id')
-            ->references('id')->on('employees')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');
+            $table->foreign('parent_id')
+                    ->references('id')->on('employee_attendances')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
-            $table->foreign('statuses_id')
-            ->references('id')->on('statuses')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');
+            $table->foreign('employee_id')
+                    ->references('id')->on('employees')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 

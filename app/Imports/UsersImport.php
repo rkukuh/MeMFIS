@@ -3,6 +3,13 @@
 namespace App\Imports;
 
 use App\User;
+use App\Models\Type;
+use App\Models\Status;
+use App\Models\Department;
+use App\Models\Country;
+use App\Models\Religion;
+use App\Models\Workshift;
+use App\Models\Nationality;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -19,6 +26,7 @@ class UsersImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
+        $now = Carbon::now();
 
         $faker = Faker\Factory::create();
 
@@ -44,22 +52,76 @@ class UsersImport implements ToModel, WithHeadingRow
                 Role::where('name', 'employee')->first()
             );
         }
+        
+        $full_name = explode(' ',$row['nama']);
+        $first_name = $full_name[0];
+        array_shift($full_name);
+        $last_name = join(' ',$full_name);
 
-
-        $user->employee()->create([
+        $employee = [
             'code' => $row['nrp'],
-            'first_name' => ucwords(strtolower($row['nama'])),
-            'last_name' => ucwords(strtolower($row['nama'])),
+            'first_name' => ucwords(strtolower($first_name)),
+            'last_name' => ucwords(strtolower($last_name)),
             'dob' => Carbon::now()->subYear(rand(20, 50)),
             'dob_place' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
-            'gender' => $faker->randomElement(['m', 'f']),
-            'religion' => $faker->randomElement(['islam','khonghucu','budha','kristen','hindu']),
-            'marital_status' => $faker->randomElement(['s','m']),
-            'nationality' => $faker->randomElement(['Indonesia','Japan','Zimbabwe','South Africa']),
-            'country' => 'indonesia',
+            'gender_id' => Type::ofGender()->get()->random()->id,
+            'religion_id' => Religion::get()->random()->id,
+            'marital_id' => Status::ofMarital()->get()->random()->id,
+            'country_id' => Country::first()->id,
             'city' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
-            'joined_date' => Carbon::now()->toDateString(),
-            'updated_at' => null
+            'joined_date' => Carbon::now()->toDateString()
+        ]; 
+
+        $user->employee()->create($employee);
+        $departmentSize = Department::count('id');
+        $department = Department::where('id', rand(1, $departmentSize) )->first();
+
+        $employee = $user->employee;
+
+        $workshift = Workshift::find($faker->randomElement([1,2])); 
+
+        $employee->workshifts()->attach($workshift->id, [
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ]);
+        
+        $employee->nationalities()->attach(Nationality::first()->id, [
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ]);
+
+        $employee->department()->attach($department->id, [
+            'joined_at' => $now,
+            'left_at' => null,
+            'maximum_overtime_period' => $department->maximum_period,
+            'overtime_threshold' => Carbon::createMidnightDate($now->year, $now->month, $now->day)->addHours(6),
+            'overtime_allowance' => $department->maximum_holiday
         ]);
+
+        if(rand(0,1)){
+            $current_department = $employee->department->first()->id;
+            $department = Department::where('id', rand(1, $departmentSize ) )->first();
+            $employee->department()->updateExistingPivot($current_department, ['deleted_at' => Carbon::now()   ]);
+
+            if($current_department == $department->id){
+                $department->id = Department::find($department->id + 1);
+
+                $employee->department()->attach($department->id, [
+                    'joined_at' => $now,
+                    'left_at' => null,
+                    'maximum_overtime_period' => $department->maximum_period,
+                    'overtime_threshold' => Carbon::createMidnightDate($now->year, $now->month, $now->day)->addHours(6),
+                    'overtime_allowance' => $department->maximum_holiday
+                ]);
+            }else{
+                $employee->department()->attach($department->id, [
+                    'joined_at' => $now,
+                    'left_at' => null,
+                    'maximum_overtime_period' => $department->maximum_period,
+                    'overtime_threshold' => Carbon::createMidnightDate($now->year, $now->month, $now->day)->addHours(6),
+                    'overtime_allowance' => $department->maximum_holiday
+                ]);
+            }
+        }
     }
 }

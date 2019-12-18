@@ -146,9 +146,12 @@ class ReleaseToServiceDatatables extends Controller
      */
     public function progress()
     {
-        $alldata = Project::with('rts','progresses')->whereHas('progresses', function ($query) {
-                    $query->where('status_id','<>', Status::where('code','rts')->where('of','project')->first()->id);
-                    })->get();
+        $alldata = Project::with('rts','progresses')
+                    ->whereNull('parent_id')
+                    // ->whereHas('progresses', function ($query) {
+                    // $query->where('status_id','<>', Status::where('code','rts')->where('of','project')->first()->id);
+                    // })
+                    ->get();
 
         foreach($alldata as $project){
             $project->customer_name .= $project->customer->name;
@@ -184,6 +187,8 @@ class ReleaseToServiceDatatables extends Controller
                 $project->status .= $status;
             }
         }
+
+        // dd("break");
 
         $data = $alldata = json_decode($alldata);
 

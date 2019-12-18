@@ -10,33 +10,18 @@ class OvertimeDatatables extends Controller
 {
     public function index()
     {
-        $overtime_datas = Overtime::all();
-        $overtime = [];
+        $overtimes = Overtime::with('employee','status','approvals')->get();
 
-        $i = 0;
-        foreach($overtime_datas as $od){
-            $employee_data = $od->employee;
-            $formated_start = Carbon::parse($od->start,"Asia/Jakarta")->toTimeString();
-            $formated_end = Carbon::parse($od->end,"Asia/Jakarta")->toTimeString();
-            $formatted_date = Carbon::parse($od->date,"Asia/Jakarta")->toDateString();
-            $status_name = $od->statuses->name;
-            // $formated_time =
-            $overtime[$i] = [
-                "date" => $formatted_date,
-                "uuid" => $od->uuid,
-                "nrp" => $employee_data->code,
-                "employee_name" => $employee_data->first_name,
-                "start" => $formated_start,
-                "end" => $formated_end,
-                "total" => $od->total,
-                "desc" => $od->desc,
-                "status" => $status_name,
-                "id" => $od->id
-            ];
-            $i++;
+        foreach($overtimes as $overtime){
+            if(sizeof($overtime->approvals) > 0){
+                $conductedBy = $overtime->approvals->first()->conductedBy;
+                $overtime->conductedBy .= date_format($overtime->created_at,"d/m/Y") ." ".$conductedBy->full_name;
+            }else{
+                $overtime->conductedBy .= " ";
+            }
         }
 
-        $data = $alldata = $overtime;
+        $data = $alldata = json_decode($overtimes);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

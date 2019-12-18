@@ -203,6 +203,15 @@ class DefectCardEngineerController extends Controller
      */
     public function update(Request $request,DefectCard $defectcard)
     {
+        // $last_action = Progress::where('progressed_by', Auth::id())->orderBy('created_at', 'DESC')->first();
+        // if(Status::where('id',$last_action->status_id)->first()->code == 'progress'){
+        //     $error_notification = array(
+        //         'message' => "You can't run this defectcard",
+        //         'title' => "Danger",
+        //         'alert-type' => "error"
+        //     );
+        //     return redirect()->back()->with($error_notification);
+        // }
         // get all the helper
         $helpers_code = $defectcard->helpers->pluck('code')->toArray();
         $references = $defectcard->helpers->pluck('additionals')->toArray();
@@ -293,7 +302,8 @@ class DefectCardEngineerController extends Controller
      * Search the specified resource from storage.
      *
      * @param  \App\Models\DefectCard  $DefectCard
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\     
      */
     public function search(Request $request)
     {
@@ -315,15 +325,27 @@ class DefectCardEngineerController extends Controller
      * Add helper for related defect card in storage .
      *
      * @param  \App\Models\DefectCard  $DefectCard
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function add_helper(DefectCard $DefectCard, Request $request)
     {
+        
         $employee = Employee::where('code', $request->helper)->first();
-        $DefectCard->helpers()->attach($employee->id, ['additionals' => $request->reference]);
-        $DefectCard->current_helpers = $DefectCard->helpers()->count();
-
-        return response()->json($DefectCard);
+        $result = $DefectCard->helpers()->where('code', $employee->code)->first();
+        if(isset($result) ){
+            $error_message = array(
+                'message' => "Helper already exists!.",
+                'title' => $employee->code,
+                'alert-type' => "error"
+            );
+            return response()->json(['error' => $error_message], '403');
+        }else{
+            $DefectCard->helpers()->attach($employee->id, ['additionals' => $request->reference]);
+            $DefectCard->current_helpers = $DefectCard->helpers()->count();
+            
+            return response()->json($DefectCard);
+        }
     }
 
     /**

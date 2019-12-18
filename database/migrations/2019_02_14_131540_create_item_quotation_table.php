@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemQuotationTable extends Migration
+class CreateCostItemQuotationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,13 +15,12 @@ class CreateItemQuotationTable extends Migration
     {
         Schema::create('item_quotation', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('item_id');
+            $table->string('serial_number')->nullable();
             $table->unsignedBigInteger('quotation_id');
-            $table->unsignedBigInteger('taskcard_id');
-            $table->unsignedBigInteger('pricelist_unit_id');
-            $table->double('pricelist_price');
-            $table->double('subtotal');
-            $table->text('note')->nullable();
+            $table->text('complaint')->nullable();
+            $table->unsignedBigInteger('jobrequest_id');
             $table->timestamps();
             $table->softDeletes();
 
@@ -35,15 +34,11 @@ class CreateItemQuotationTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('taskcard_id')
-                    ->references('id')->on('taskcards')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+            // $table->foreign('jobrequest_id')
+            //         ->references('id')->on('jobrequests')
+            //         ->onUpdate('cascade')
+            //         ->onDelete('restrict');
 
-            $table->foreign('pricelist_unit_id')
-                    ->references('id')->on('units')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
         });
     }
 

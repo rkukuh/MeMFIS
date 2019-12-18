@@ -430,7 +430,7 @@
                             <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                            <button data-toggle="modal" data-target="#modal_helper" type="button" href="#" 
+                                            <button data-toggle="modal" data-target="#modal_helper" type="button" href="#"
                                             class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-md add-helper" title="Add Helper" >
                                             <i class="la la-plus-circle"></i> Add Helper</button>
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -474,6 +474,7 @@
                             </div>
 
                             @include('frontend.discrepancy.engineer.tool.modal')
+                            @include('frontend.common.tool.modal')
 
                             <div class="tools_datatable" id="scrolling_both"></div>
 
@@ -512,6 +513,7 @@
                             </div>
 
                             @include('frontend.discrepancy.engineer.material.modal')
+                            @include('frontend.common.item.modal')
 
                             <div class="materials_datatable" id="scrolling_both"></div>
                         </div>
@@ -554,13 +556,8 @@
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool-uom.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/helper.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>

@@ -14,6 +14,10 @@ let Discrepancy = {
             };
         });
         let simpan = $('.footer').on('click', '.add-discrepancy', function () {
+            $('.text-danger').each(function() {
+                $(this).empty();
+            });
+
             let zone = [];
             i = 0;
             $("#zone").val().forEach(function(entry) {
@@ -21,8 +25,13 @@ let Discrepancy = {
                 i++;
             });
 
+            if(zone.length == 0){
+                zone = null;
+            }else{
+                zone = JSON.stringify(zone);
+            }
+
             let uuid = $('input[name=uuid]').val();
-            zone = JSON.stringify(zone);
             let engineer_qty = $('input[name=engineer_qty]').val();
             let helper_quantity =  $('input[name=helper_quantity]').val();
             let manhours =  $('input[name=manhours]').val();
@@ -57,6 +66,8 @@ let Discrepancy = {
             }
             helper_array = JSON.stringify(helper_array);
 
+            
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -84,12 +95,18 @@ let Discrepancy = {
                         if (data.errors.propose) {
                             $('#propose-error').html(data.errors.propose[0]);
                         }
-                        // if (data.errors.name) {
-                        //     $('#name-error').html(data.errors.name[0]);
-                        // }
-                        // if (data.errors.payment_term) {
-                        //     $('#payment_term-error').html(data.errors.payment_term[0]);
-                        // }
+                        if (data.errors.complaint) {
+                            $('#complaint-error').html(data.errors.complaint[0]);
+                        }
+                        if (data.errors.estimation_manhour) {
+                            $('#manhours-error').html(data.errors.estimation_manhour[0]);
+                        }
+                        if (data.errors.zone) {
+                            $('#zone-error').html(data.errors.zone[0]);
+                        }
+                        if (data.errors.skill_id) {
+                            $('#otr-certification-error').html(data.errors.skill_id[0]);
+                        }
                         // document.getElementById('name').value = name;
                         // document.getElementById('term_of_payment').value = payment_term;
 
@@ -224,20 +241,28 @@ let helper = {
         } );
 
         $('.add_helper').on('click', function () {
+            mApp.block(".add_helper");
+            let addedHelpers = helper.column(0).data();
             let fname = $("#defectcard_helper option:selected").text();
             let defectcard_helper = $('#defectcard_helper').val();
             let reference = $("#reference").val();
-
-            let newRow = [];
-            newRow["code"] = defectcard_helper;
-            newRow["helper"] = fname;
-            newRow["reference"] = reference;
-            helper.row.add( newRow ).draw();
-            
-            $("#reference").val("");
-            $("#defectcard_helper").val("").select2();
-            
-            $("#modal_helper").modal("hide");
+            if($.inArray(defectcard_helper,addedHelpers) < 0){
+                let newRow = [];
+                newRow["code"] = defectcard_helper;
+                newRow["helper"] = fname;
+                newRow["reference"] = reference;
+                helper.row.add( newRow ).draw();
+                
+                $("#reference").val("");
+                $("#defectcard_helper").val("").select2();
+                
+                // $("#modal_helper").modal("hide");
+            }else{
+                toastr.error('Helper already exists!.', 'Danger', {
+                    timeOut: 5000
+                });
+            }
+            mApp.unblock(".add_helper");
         });
 
         $('#helper_datatable tbody').on( 'click', 'tr', function () {

@@ -14,11 +14,13 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfAddress::class);
         $this->call(TypesOfAPERI::class);
         $this->call(TypesOfARC::class);
+        $this->call(TypesOfAttendanceCorrection::class);
         $this->call(TypesOfAviationDegree::class);
         $this->call(TypesOfBenefitBaseCalculation::class);
         $this->call(TypesOfBenefitProrateCalculation::class);
         $this->call(TypesOfCapability::class);
         $this->call(TypesOfCoa::class);
+        $this->call(TypesOfCoaTransaction::class);
         $this->call(TypesOfCompany::class);
         $this->call(TypesOfDefectCardCloseReason::class);
         $this->call(TypesOfDefectCardPauseReason::class);
@@ -28,6 +30,7 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfEligibility::class);
         $this->call(TypesOfEmail::class);
         $this->call(TypesOfFax::class);
+        $this->call(TypesOfGender::class);
         $this->call(TypesOfHtCrrCloseReason::class);
         $this->call(TypesOfHtCrrPauseReason::class);
         $this->call(TypesOfHtCrrType::class);
@@ -35,6 +38,7 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfJobCardCloseReason::class);
         $this->call(TypesOfJobCardLogBook::class);
         $this->call(TypesOfJobCardPauseReason::class);
+        $this->call(TypesOfLeaveType::class);
         $this->call(TypesOfMaintenanceCycle::class);
         $this->call(TypesOfPhone::class);
         $this->call(TypesOfProject::class);

@@ -1,5 +1,5 @@
 @component('frontend.common.input.hidden')
-        @slot('id', 'employee_uuid')
+        
         @slot('name', 'employee_uuid')
         @slot('value', $employee->uuid)
 @endcomponent
@@ -229,10 +229,10 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/role.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/bank.js') }}"></script>
-    <script src="{{ asset('js/frontend/employee/employee/create_account.js') }}"></script>
-    <script src="{{ asset('js/frontend/employee/employee/edit_account.js') }}"></script>
-    <script src="{{ asset('js/frontend/employee/employee/create_bank.js') }}"></script>
-    <script src="{{ asset('js/frontend/employee/employee/edit_bank.js') }}"></script>
+    <script src="{{ asset('js/frontend/employee/bank-account/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/employee/bank-account/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/employee/bank/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/employee/bank/edit.js') }}"></script>
     <script>
     
     var BootstrapSwitch = {

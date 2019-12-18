@@ -96,7 +96,6 @@ class RTSProgressController extends Controller
                 }
             }
 
-
             if($mandatory_taskcard <> ""){
                 $error_notification = array(
                     'message' => "Mandatory is required done",
@@ -195,9 +194,12 @@ class RTSProgressController extends Controller
      * @param  \App\Models\RTS  $rts
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(RTS $rts)
     {
-        //
+        dd($rts);
+        return view('frontend.rts.edit', [
+            'rts' => $rts,
+        ]);
     }
 
     /**

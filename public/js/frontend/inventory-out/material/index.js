@@ -69,31 +69,35 @@ let InventoryOut = {
                     }
                 },
                 {
-                    field: '',
-                    title: 'Inventory Out No.',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                },
-                {
-                    field: 'storage_id',
-                    title: 'Storage',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        return t.storage_id
-                    }
-                },
-                {
                     field: 'number',
-                    title: 'Ref Doc',
+                    title: 'Inventory Out No.',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                     template: function (t) {
                         return '<a href="/inventory-out/material/' + t.uuid + '">' + t.number + "</a>"
                     }
+                },
+                {
+                    field: 'storage.name',
+                    title: 'Storage',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                    template: function (t) {
+                        return t.storage.name
+                    }
+                },
+                {
+                    field: 'ref_no',
+                    title: 'Ref Doc',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                    template: function (t) {
+                        return t.ref_no
+                    }
+                    
                 },
                 {
                     field: 'description',
@@ -113,7 +117,7 @@ let InventoryOut = {
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'created_by',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,

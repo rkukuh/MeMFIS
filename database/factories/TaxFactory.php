@@ -10,6 +10,7 @@ $factory->define(Tax::class, function (Faker $faker) {
         'taxable_type' => null,
         'taxable_id' => null,
         'type_id' => Type::ofTax()->get()->random()->id,
+        'method_type_id' => Type::ofTaxPaymentMethod()->get()->random()->id,
         'percent' => $faker->randomElement([5, 10, 15, 20]),
         'amount' => rand(10, 20) * 10000,
     ];

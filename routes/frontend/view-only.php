@@ -89,10 +89,10 @@ Route::group([
 
         /** Material Request */
 
-        Route::view('/material-transfer', 'frontend.material-transfer.index')->name('material-transfer.index');
-        Route::view('/material-transfer/create', 'frontend.material-transfer.create')->name('material-transfer.create');
-        Route::view('/material-transfer/edit', 'frontend.material-transfer.edit')->name('material-transfer.edit');
-        Route::view('/material-transfer/show', 'frontend.material-transfer.show')->name('material-transfer.show');
+        // Route::view('/material-transfer', 'frontend.material-transfer.index')->name('material-transfer.index');
+        // Route::view('/material-transfer/create', 'frontend.material-transfer.create')->name('material-transfer.create');
+        // Route::view('/material-transfer/edit', 'frontend.material-transfer.edit')->name('material-transfer.edit');
+        // Route::view('/material-transfer/show', 'frontend.material-transfer.show')->name('material-transfer.show');
 
         /** Category Item */
 
@@ -122,16 +122,16 @@ Route::group([
         // Route::view('/gse/inventory-out/show', 'frontend.gse.inventory-out.show')->name('gse.inventory-out.show');
 
 
-        /** STOCK MONITORING */
+        // /** STOCK MONITORING */
 
-        Route::view('/stock-monitoring', 'frontend.stock-monitoring.index')->name('stock-monitoring.index');
+        // Route::view('/stock-monitoring', 'frontend.stock-monitoring.index')->name('stock-monitoring.index');
 
         /** ATTENDANCE */
 
         Route::view('/attendance', 'frontend.attendance.index')->name('attendance.index');
 
-        Route::view('/attendance/overtime/create', 'frontend.attendance.overtime.create')->name('attendance.overtime.create');
-        Route::view('/attendance/overtime/approve', 'frontend.attendance.overtime.approve')->name('attendance.overtime.approve');
+        // Route::view('/attendance/overtime/create', 'frontend.attendance.overtime.create')->name('attendance.overtime.create');
+        // Route::view('/attendance/overtime/approve', 'frontend.attendance.overtime.approve')->name('attendance.overtime.approve');
 
         Route::view('/attendance/propose-leave/create', 'frontend.attendance.propose-leave.create')->name('attendance.propose-leave.create');
         Route::view('/attendance/propose-leave/approve-type-1', 'frontend.attendance.propose-leave.approve-type-1')->name('attendance.propose-leave.approve-type-1');
@@ -141,10 +141,10 @@ Route::group([
 
         /** ATTENDANCE CORRECTION */
 
-        Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
-        Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
-        Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
-        Route::view('/attendance-correction/approve', 'frontend.attendance-correction.approve')->name('attendance-correction.approve');
+        // Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
+        // Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
+        // Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
+        // Route::view('/attendance-correction/approve', 'frontend.attendance-correction.approve')->name('attendance-correction.approve');
 
         /** OVERTIME */
 
@@ -155,9 +155,9 @@ Route::group([
 
         /** PROPOSE LEAVE */
 
-        Route::view('/propose-leave', 'frontend.propose-leave.index')->name('propose-leave.index');
-        Route::view('/propose-leave/create', 'frontend.propose-leave.propose-leave.create')->name('propose-leave.create');
-        Route::view('/propose-leave/edit', 'frontend.propose-leave.propose-leave.edit')->name('propose-leave.edit');
+        // Route::view('/propose-leave', 'frontend.propose-leave.index')->name('propose-leave.index');
+        // Route::view('/propose-leave/create', 'frontend.propose-leave.propose-leave.create')->name('propose-leave.create');
+        // Route::view('/propose-leave/edit', 'frontend.propose-leave.propose-leave.edit')->name('propose-leave.edit');
         Route::view('/propose-leave/approve-type-1', 'frontend.propose-leave.propose-leave.approve-type-1')->name('propose-leave.approve-type-1');
         Route::view('/propose-leave/approve-type-2', 'frontend.propose-leave.propose-leave.approve-type-2')->name('propose-leave.approve-type-2');
 

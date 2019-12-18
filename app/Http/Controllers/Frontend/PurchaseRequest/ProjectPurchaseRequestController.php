@@ -10,7 +10,9 @@ use App\Models\Project;
 use App\Models\Approval;
 use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
+use App\Models\QuotationHtcrrItem;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\PurchaseRequestItem;
 use App\Models\QuotationWorkPackageTaskCardItem;
 use App\Http\Requests\Frontend\PurchaseRequestStore;
 use App\Http\Requests\Frontend\PurchaseRequestUpdate;
@@ -46,21 +48,55 @@ class ProjectPurchaseRequestController extends Controller
     public function store(PurchaseRequestStore $request)
     {
         $request->merge(['number' => DocumentNumber::generate('PR-', PurchaseRequest::withTrashed()->count()+1)]);
-        $request->merge(['project_id' =>Project::where('uuid',$request->project_id)->first()->id ]);
+        $request->merge(['purchase_requestable_type' => 'App\Models\Project']);
+        $request->merge(['purchase_requestable_id' =>Project::where('uuid',$request->project_id)->first()->id ]);
         $request->merge(['type_id' => Type::where('of','purchase-request')->where('name','Project')->first()->id ]);
         $request->merge(['requested_at' => Carbon::parse($request->requested_at)]);
         $request->merge(['required_at' => Carbon::parse($request->required_at)]);
         $purchaseRequest = PurchaseRequest::create($request->all());
 
-        $items = QuotationWorkPackageTaskCardItem::with('item','item.unit')->where('quotation_id',Project::find($request->project_id)->quotations->first()->id)->get();
+        $items = QuotationWorkPackageTaskCardItem::with('item','item.unit')->where('quotation_id',Project::where('uuid',$request->project_id)->first()->quotations->first()->id)->get();
 
         foreach($items as $item){
             $i = Item::find($item->item_id)->categories->first()->code;
             if($i == "raw" or $i == "cons" or $i == "comp"){
+                if($item->item->unit_id <> $item->unit_id){
+                    $quantity = $item->quantity;
+                    $qty_uom = $item->item->units->where('uom.unit_id',$item->unit_id)->first()->uom->quantity;
+                    $quantity_unit = $qty_uom*$quantity;
+                }
+                else{
+                    $quantity_unit = $item->quantity;
+                }
+
                 $purchaseRequest->items()->attach([$item->item_id => [
+                    'quantity_requirement'=> $item->quantity,
                     'quantity'=> $item->quantity,
                     'unit_id' => $item->unit_id,
-                    'quantity_unit' => $item->quantity]
+                    'quantity_unit' => $quantity_unit]
+                ]);
+            }
+        }
+
+        $items_htcrr = QuotationHtcrrItem::with('item','item.unit')->where('quotation_id',Project::where('uuid',$request->project_id)->first()->quotations->first()->id)->get();
+
+        foreach($items_htcrr as $item){
+            $i = Item::find($item->item_id)->categories->first()->code;
+            if($i == "raw" or $i == "cons" or $i == "comp"){
+                if($item->item->unit_id <> $item->unit_id){
+                    $quantity = $item->quantity;
+                    $qty_uom = $item->item->units->where('uom.unit_id',$item->unit_id)->first()->uom->quantity;
+                    $quantity_unit = $qty_uom*$quantity;
+                }
+                else{
+                    $quantity_unit = $item->quantity;
+                }
+
+                $purchaseRequest->items()->attach([$item->item_id => [
+                    'quantity_requirement'=> $item->quantity,
+                    'quantity'=> $item->quantity,
+                    'unit_id' => $item->unit_id,
+                    'quantity_unit' => $quantity_unit]
                 ]);
             }
         }
@@ -138,6 +174,24 @@ class ProjectPurchaseRequestController extends Controller
         ]));
 
         return response()->json($purchaseRequest);
+    }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\PurchaseRequest $purchaseRequest
+     * @return \Illuminate\Http\Response
+     */
+    public function print(PurchaseRequest $purchaseRequest)
+    {
+        $pdf = \PDF::loadView('frontend/form/purchase_request_project',[
+                'username' => Auth::user()->name,
+                'purchaseRequest' => $purchaseRequest,
+                'items' => PurchaseRequestItem::where('purchase_request_id',$purchaseRequest->id)->get(),
+                'created_by' => $purchaseRequest->audits->first()->user->name
+                ]);
+
+        return $pdf->stream();
     }
 
 }

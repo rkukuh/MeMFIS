@@ -105,7 +105,7 @@
                                         @slot('text', 'Ref. Document ')
                                         @slot('name', 'ref_no')
                                         @slot('id_error','ref_no')
-                                        @slot('value', $inventoryOut->ref_no)
+                                        @slot('value', $additionals->ref_no)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -197,8 +197,8 @@
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
                                                 @slot('type','button')
-                                                @slot('id', 'add-inventory-out')
-                                                @slot('class', 'add-inventory-out')
+                                                @slot('id', 'update-inventory-out')
+                                                @slot('class', 'update-inventory-out')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')

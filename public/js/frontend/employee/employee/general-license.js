@@ -78,7 +78,7 @@ let GeneralLicense = {
                 },
                 {
                     field: 'attendance_no',
-                    title: 'Attendace No',
+                    title: 'attendance No',
                     sortable: 'asc',
                     filterable: !1
                 },

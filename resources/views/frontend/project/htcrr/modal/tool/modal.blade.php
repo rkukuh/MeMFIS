@@ -5,7 +5,7 @@
             <div class="modal-header">
                 @include('frontend.common.label.create-new')
 
-                <h5 class="modal-title" id="TitleModalTool">
+                <h5 class="modal-title" id="TitleModalTool" style="margin-top:0px">
                     Tools
 
                     <small id="tool-storage" class="m--font-focus"></small>
@@ -17,7 +17,7 @@
             <div class="modal-body">
 
                     <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id=TtoolForm">
-                        <input type="hidden" class="form-control form-control-danger m-input" name="id" id="id">
+                        <input type="hidden" class="form-control form-control-danger m-input" name="htcrr_uuid_for_tool" id="htcrr_uuid_for_tool">
                         <div class="m-portlet__body">
                             <div class="form-group m-form__group row ">
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -25,12 +25,11 @@
                                         Tool @include('frontend.common.label.required')
                                     </label>
 
-                                    @component('frontend.common.input.select2')
-                                        @slot('id', 'tool')
-                                        @slot('text', 'tool')
-                                        @slot('name', 'tool')
-                                        @slot('id_error', 'tool')
+                                    @component('frontend.common.tool.index')
+                                        @slot('name_tool','tool')
+                                        @slot('id_tool','tool')
                                     @endcomponent
+
                                 </div>
                             </div>
                             <div class="form-group m-form__group row ">
@@ -98,7 +97,4 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool-uom.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 @endpush

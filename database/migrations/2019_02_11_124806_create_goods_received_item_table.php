@@ -22,7 +22,7 @@ class CreateGoodsReceivedItemTable extends Migration
             $table->double('quantity_unit');
             $table->unsignedBigInteger('unit_id');
             $table->double('price')->nullable();;
-            $table->double('already_received_amount')->nullable();;
+            $table->string('location')->nullable();;
             $table->string('note')->nullable();
             $table->timestamp('expired_at')->nullable();
             $table->timestamps();

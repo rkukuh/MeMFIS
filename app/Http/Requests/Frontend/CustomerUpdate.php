@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Frontend;
 
 use Illuminate\Validation\Rule;
+use Directoryxx\Finac\Model\Coa;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -57,7 +58,11 @@ class CustomerUpdate extends FormRequest
      */
     public function withValidator($validator)
     {
-        //
+        $validator->after(function ($validator) {
+            $this->merge([
+                'account_code' => optional(Coa::where('uuid', $this->account_code)->first())->id
+            ]);
+        });
     }
 
     protected function failedValidation(Validator $validator) {

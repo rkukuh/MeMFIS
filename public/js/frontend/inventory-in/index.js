@@ -79,7 +79,7 @@ let InventoryIn = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'ref_no',
                     title: 'Ref Doc',
                     sortable: 'asc',
                     filterable: !1,
@@ -113,8 +113,8 @@ let InventoryIn = {
                     width: 150
                 },
                 {
-                    field: '',
-                    title: 'Returned By',
+                    field: 'created_by',
+                    title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
@@ -226,13 +226,14 @@ let InventoryIn = {
                             table.originalDataSet = [];
                             table.reload();
                         },
-                        error: function (jqXhr, json, errorThrown) {
+                        error: function(jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
-                            toastr.error(errors.message, errors.title, {
-                                "closeButton": true,
-                                "timeOut": "0",
-                            }
-                            );
+                            $.each(errors, function(index, value) {
+                                toastr.error(value.message, value.title, {
+                                    closeButton: true,
+                                    timeOut: "0"
+                                });
+                            });
                         }
                     });
                 }

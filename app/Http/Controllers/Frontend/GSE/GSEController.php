@@ -158,8 +158,8 @@ class GSEController extends Controller
      */
     public function destroy(GSE $gse)
     {
-        $groundSupportEquiptment->delete();
+        $gse->delete();
 
-        return response()->json($groundSupportEquiptment);
+        return response()->json($gse);
     }
 }

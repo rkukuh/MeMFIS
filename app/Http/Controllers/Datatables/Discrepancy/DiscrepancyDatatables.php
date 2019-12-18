@@ -24,14 +24,14 @@ class DiscrepancyDatatables extends Controller
 
         foreach($DefectCard as $jobcard){
             if($jobcard->jobcard->jobcardable_type == "App\Models\TaskCard"){
-                $jobcard->tc_number    .= $jobcard->jobcard->number;
+                $jobcard->tc_number    .= $jobcard->jobcard->jobcardable->number;
                 $jobcard->tc_uuid    .= $jobcard->jobcard->uuid;
                 $jobcard->tc_title     .= $jobcard->jobcard->title;
                 if(isset($jobcard->jobcard->task_id)){
                     $jobcard->task_name .= $jobcard->jobcard->task->name;
                 }
             }else if($jobcard->jobcard->jobcardable_type == "App\Models\EOInstruction"){
-                $jobcard->tc_number    .= $jobcard->jobcard->number;
+                $jobcard->tc_number    .= $jobcard->jobcard->jobcardable->eo_header->number;
                 $jobcard->tc_uuid    .= $jobcard->jobcard->uuid;
                 $jobcard->tc_title     .= $jobcard->jobcard->title;
                 $jobcard->task_name    .= "-";
@@ -185,7 +185,7 @@ class DiscrepancyDatatables extends Controller
 
         foreach($DefectCard as $jobcard){
             if($jobcard->jobcard->jobcardable_type == "App\Models\TaskCard"){
-                $jobcard->tc_number    .= $jobcard->jobcard->number;
+                $jobcard->tc_number    .= $jobcard->jobcard->jobcardable->number;
                 $jobcard->tc_uuid    .= $jobcard->jobcard->uuid;
                 $jobcard->tc_title     .= $jobcard->jobcard->title;
                 if(isset($jobcard->jobcard->task_id)){
@@ -193,7 +193,7 @@ class DiscrepancyDatatables extends Controller
                 }
                 $jobcard->skill        .= $jobcard->jobcard->skill;
             }else if($jobcard->jobcard->jobcardable_type == "App\Models\EOInstruction"){
-                $jobcard->tc_number    .= $jobcard->jobcard->number;
+                $jobcard->tc_number    .= $jobcard->jobcard->jobcardable->eo_header->number;
                 $jobcard->tc_uuid    .= $jobcard->jobcard->uuid;
                 $jobcard->tc_title     .= $jobcard->jobcard->title;
                 $jobcard->task_name    .= "-";

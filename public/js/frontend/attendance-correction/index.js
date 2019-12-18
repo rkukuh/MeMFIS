@@ -6,7 +6,7 @@ let AttendanceCorrection = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/price-list-item',
+                        url: '/datatables/attendance-correction',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -55,13 +55,13 @@ let AttendanceCorrection = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'created_at',
                     title: 'Created Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'code',
+                    field: 'uuid',
                     title: 'Correction Number',
                     sortable: 'asc',
                     filterable: !1,
@@ -70,50 +70,38 @@ let AttendanceCorrection = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'employee.code',
                     title: 'NRP',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'employee.first_name',
                     title: 'Employee Name',
                     sortable: 'asc',
                     filterable: !1,
                 },
                
                 {
-                    field: '',
+                    field: 'correction_date',
                     title: 'Corrected Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
-                    title: 'Check-in',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: '',
-                    title: 'check-out',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: '',
+                    field: 'description',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'status.name',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'conductedBy',
                     title: 'Approval',
                     sortable: 'asc',
                     filterable: !1,
@@ -124,17 +112,21 @@ let AttendanceCorrection = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        return (
-                            '<a href="/attendance-correction/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</a>' +
-                            '<a href="#" data-toggle="modal" data-target="#modal_approve" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid + '">' +
-                                '<i class="la la-check"></i>' +
-                            '</a>' +
-                            '<a href="#" data-toggle="modal" data-target="#modal_reject" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid + '">' +
-                                '<i class="la la-remove"></i>' +
-                            '</a>'
-                        );
+                        if(t.status.name == "Open"){
+                            return (
+                                '<a href="/attendance-correction/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
+                                    '<i class="la la-pencil"></i>' +
+                                '</a>' +
+                                '<a href="#" data-toggle="modal" data-target="#modal_approve" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-check"></i>' +
+                                '</a>' +
+                                '<a href="#" data-toggle="modal" data-target="#modal_reject" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill reject" title="Reject" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-remove"></i>' +
+                                '</a>'
+                            );
+                        }else{
+                            return('');
+                        }
                     }
                 }
             ]
@@ -142,12 +134,128 @@ let AttendanceCorrection = {
 
     }
 };
-                                                                                                                                                                              
-
-
-
-
 
 jQuery(document).ready(function () {
     AttendanceCorrection.init();
+});
+
+$(document).ready(function() {
+    $('.attendance_correction_datatable').on("click",".approve", function() {
+        let correction_uuid = $(this).data("uuid");
+
+        swal({
+            title: '<label><h2>Are you sure?</h2><br> do you want to <strong style="color:#26C281;">approve</strong> this transaction ?</label>',
+            text: "Remark",
+            type: "question",
+            input: "textarea",
+            inputAttributes: {
+                autocapitalize: "on"
+            },
+            confirmButtonText: "Yes, Approve",
+            confirmButtonColor: "#34bfa3",
+            cancelButtonText: "Cancel",
+            showCancelButton: true,
+            showLoaderOnConfirm: true
+        }).then(result => {
+            if (result.value) {
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        )
+                    },
+                    type: "POST",
+                    data: {
+                        note: result.value
+                    },
+                    url:
+                        "/attendance-correction/" +
+                        correction_uuid +
+                        "/approve",
+                    success: function(data) {
+                        toastr.success(
+                            "Attendance correction has been approved.",
+                            "Approved",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+
+                        let table = $(".attendance_correction_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    },
+                    error: function(jqXhr, json, errorThrown) {
+                        let errors = jqXhr.responseJSON;
+                        $.each(errors.error, function(index, value) {
+                            toastr.error(value.message, value.title, {
+                                closeButton: true,
+                                timeOut: "0"
+                            });
+                        });
+                    }
+                });
+            }
+        });
+    });
+    $('.attendance_correction_datatable').on("click",".reject", function() {
+        let correction_uuid = $(this).data("uuid");
+
+        swal({
+            title: '<label><h2>Are you sure?</h2><br> do you want to <strong style="color:#E43A45;">reject</strong> this transaction ?</label>',
+            text: "Remark",
+            type: "question",
+            input: "textarea",
+            inputAttributes: {
+                autocapitalize: "on"
+            },
+            confirmButtonText: "Yes, Reject",
+            confirmButtonColor: "#E43A45",
+            cancelButtonText: "Cancel",
+            showCancelButton: true,
+            showLoaderOnConfirm: true
+        }).then(result => {
+            if (result.value) {
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        )
+                    },
+                    type: "POST",
+                    data: {
+                        note: result.value
+                    },
+                    url:
+                        "/attendance-correction/" +
+                        correction_uuid +
+                        "/reject",
+                    success: function(data) {
+                        toastr.success(
+                            "Attendance correction has been rejected.",
+                            "Rejected",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+
+                        let table = $(".attendance_correction_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    },
+                    error: function(jqXhr, json, errorThrown) {
+                        let errors = jqXhr.responseJSON;
+                        $.each(errors.error, function(index, value) {
+                            toastr.error(value.message, value.title, {
+                                closeButton: true,
+                                timeOut: "0"
+                            });
+                        });
+                    }
+                });
+            }
+        });
+    });
 });

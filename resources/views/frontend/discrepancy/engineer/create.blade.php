@@ -480,7 +480,7 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('/assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/discrepancy/engineer/create.js') }}"></script>
     <script src="{{ asset('js/frontend/discrepancy/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/discrepancy/repeater.js') }}"></script>

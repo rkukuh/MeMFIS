@@ -84,6 +84,8 @@ function successor_tc(triggeruuid) {
 };
 
 $('.modal-footer').on('click', '.add-successor', function () {
+    mApp.block(".add-successor");
+
     let tcuuid =$('#uuid-successor').val();
     let taskcard_successor =$('#taskcard_successor').val();
     let order_successor = $('input[name=order_successor]').val();
@@ -100,6 +102,7 @@ $('.modal-footer').on('click', '.add-successor', function () {
             order: order_successor,
         },
         success: function (data) {
+            mApp.unblock(".add-successor");
             if (data.errors) {
                 // if (data.errors.name) {
                 //     $('#name-error').html(data.errors.name[0]);
@@ -111,6 +114,7 @@ $('.modal-footer').on('click', '.add-successor', function () {
                 // }
 
             } else {
+
                 $('#add_modal_successor').modal('hide');
 
                 toastr.success('Predecessor has been created.', 'Success', {
@@ -211,6 +215,8 @@ function successor_instruction_tc(triggeruuid) {
 };
 
 $('.modal-footer').on('click', '.add-successor-instruction', function () {
+    mApp.block(".add-successor-instruction");
+
     let tcuuid =$('#uuid-successor').val();
     let instruction_successor =$('#instruction_successor').val();
     let order_successor = $('input[name=order_successor_instruction]').val();
@@ -227,6 +233,7 @@ $('.modal-footer').on('click', '.add-successor-instruction', function () {
             order: order_successor,
         },
         success: function (data) {
+            mApp.unblock(".add-successor-instruction");
             if (data.errors) {
                 // if (data.errors.name) {
                 //     $('#name-error').html(data.errors.name[0]);
@@ -238,6 +245,7 @@ $('.modal-footer').on('click', '.add-successor-instruction', function () {
                 // }
 
             } else {
+
                 $('#add_modal_successor_instruction').modal('hide');
 
                 toastr.success('Predecessor has been created.', 'Success', {

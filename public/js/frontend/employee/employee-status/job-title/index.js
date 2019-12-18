@@ -1,4 +1,4 @@
-let EmployeeJobTittle = {
+let EmployeeJobTitle = {
     init: function () {
         $('.m_datatable_job_title').mDatatable({
             data: {
@@ -6,7 +6,7 @@ let EmployeeJobTittle = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/job-tittle',
+                        url: '/datatables/job-title',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -61,7 +61,7 @@ let EmployeeJobTittle = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a id="view-job-tittle" data-toggle="modal" data-target="#modal_job_tittle" href="#" data-uuid=' +
+                        return '<a id="view-job-title" data-toggle="modal" data-target="#modal_job_title" href="#" data-uuid=' +
                             t.uuid +'>'+t.code+'</a>'
                     }
                 },
@@ -85,7 +85,7 @@ let EmployeeJobTittle = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button id="edit-job-tittle" data-toggle="modal" data-target="#modal_job_tittle" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-unit" title="Edit" data-uuid-job=' +
+                            '<button id="edit-job-title" data-toggle="modal" data-target="#modal_job_title" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-unit" title="Edit" data-uuid-job=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
@@ -98,54 +98,54 @@ let EmployeeJobTittle = {
         });
 
         let reset = function (){
-            $('#code_job_tittle').val('')
-            $('#name_job_tittle').val('')
-            $('#description_job_tittle').val('')
+            $('#code_job_title').val('')
+            $('#name_job_title').val('')
+            $('#description_job_title').val('')
             $('#specification').val('')
-            $('#code_job_tittle-error').html('')
-            $('#name_job_tittle-error').html('')
-            $('#description_job_tittle-error').html('')
+            $('#code_job_title-error').html('')
+            $('#name_job_title-error').html('')
+            $('#description_job_title-error').html('')
             $('#specification-error').html('')
         }
 
         let disabled = function(){
-            $('#code_job_tittle').attr('disabled', true)
-            $('#name_job_tittle').attr('disabled', true)
-            $('#description_job_tittle').attr('disabled', true)
+            $('#code_job_title').attr('disabled', true)
+            $('#name_job_title').attr('disabled', true)
+            $('#description_job_title').attr('disabled', true)
             $('#specification').attr('disabled', true)
-            $('.modal-change-job-tittle').hide()
-            $('#reset-job-tittle').hide()
+            $('.modal-change-job-title').hide()
+            $('#reset-job-title').hide()
             
         }
 
         let enabled = function(){
-            $('#code_job_tittle').attr('disabled', false)
-            $('#name_job_tittle').attr('disabled', false)
-            $('#description_job_tittle').attr('disabled', false)
+            $('#code_job_title').attr('disabled', false)
+            $('#name_job_title').attr('disabled', false)
+            $('#description_job_title').attr('disabled', false)
             $('#specification').attr('disabled', false)
-            $('.modal-change-job-tittle').show()
-            $('#reset-job-tittle').show()
+            $('.modal-change-job-title').show()
+            $('#reset-job-title').show()
         }
 
-        let button_reset = $(document).on('click','#reset-job-tittle', function (){
+        let button_reset = $(document).on('click','#reset-job-title', function (){
             reset()
         });
 
-        let button_close = $(document).on('click','#close-job-tittle', function (){
+        let button_close = $(document).on('click','#close-job-title', function (){
             reset()
         });
 
-        let show = $(document).on('click', '#add-job-tittle', function () {      
+        let show = $(document).on('click', '#add-job-title', function () {      
             reset()
             enabled()
             $('.labelModal-Job').children('span').text('Create New');
-            $('.modal-change-job-tittle').attr('id','add-job')
+            $('.modal-change-job-title').attr('id','add-job')
         });
 
         let store = $(document).on('click', '#add-job', function () {
-            let code = $('input[name=code_job_tittle]').val()
-            let name = $('input[name=name_job_tittle]').val()
-            let description_job = $('#description_job_tittle').val()
+            let code = $('input[name=code_job_title]').val()
+            let name = $('input[name=name_job_title]').val()
+            let description_job = $('#description_job_title').val()
             let specification = $('#specification').val()
 
             $.ajax({
@@ -153,7 +153,7 @@ let EmployeeJobTittle = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/job-tittle',
+                url: '/job-title',
                 data: {
                     _token: $('input[name=_token]').val(),
                     code: code,
@@ -164,19 +164,19 @@ let EmployeeJobTittle = {
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.code) {
-                            $('#code_job_tittle-error').html(data.errors.code[0]);
+                            $('#code_job_title-error').html(data.errors.code[0]);
                         }else{
-                            $('#code_job_tittle-error').html('');
+                            $('#code_job_title-error').html('');
                         }
                         if (data.errors.name) {
-                            $('#name_job_tittle-error').html(data.errors.name[0]);
+                            $('#name_job_title-error').html(data.errors.name[0]);
                         }else{
-                            $('#name_job_tittle-error').html('');
+                            $('#name_job_title-error').html('');
                         }
                         if (data.errors.description) {
-                            $('#description_job_tittle-error').html(data.errors.description[0]);
+                            $('#description_job_title-error').html(data.errors.description[0]);
                         }else{
-                            $('#description_job_tittle-error').html('');
+                            $('#description_job_title-error').html('');
                         }
                         if (data.errors.specification) {
                             $('#spesification-error').html(data.errors.description[0]);
@@ -184,9 +184,9 @@ let EmployeeJobTittle = {
                             $('#spesification-error').html('')
                         }
                     } else {
-                        $('#modal_job_tittle').modal('hide');
+                        $('#modal_job_title').modal('hide');
 
-                        toastr.success('Job tittle has been create.', 'Success', {
+                        toastr.success('Job title has been create.', 'Success', {
                             timeOut: 5000
                         });
 
@@ -200,11 +200,11 @@ let EmployeeJobTittle = {
         });
 
 
-        let edit = $(document).on('click', '#edit-job-tittle', function () {      
+        let edit = $(document).on('click', '#edit-job-title', function () {      
                reset()
                enabled()
                 $('.labelModal-Job').children('span').text('Edit');
-                $('.modal-change-job-tittle').attr('id','update-job')
+                $('.modal-change-job-title').attr('id','update-job')
                 let triggerid = $(this).data('uuid-job');
 
                 $('#employee_uuid').val(triggerid)
@@ -214,11 +214,11 @@ let EmployeeJobTittle = {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type: 'get',
-                    url: '/job-tittle/' + triggerid + '/edit',
+                    url: '/job-title/' + triggerid + '/edit',
                     success: function (data) {
-                        $('#code_job_tittle').val(data.code)
-                        $('#name_job_tittle').val(data.name)
-                        $('#description_job_tittle').val(data.description)
+                        $('#code_job_title').val(data.code)
+                        $('#name_job_title').val(data.name)
+                        $('#description_job_title').val(data.description)
                         $('#specification').val(data.specification)
                     },
                     error: function (jqXhr, json, errorThrown) {
@@ -234,11 +234,11 @@ let EmployeeJobTittle = {
 
             });
 
-            let showView = $(document).on('click', '#view-job-tittle', function () {      
+            let showView = $(document).on('click', '#view-job-title', function () {      
                 reset()
                 disabled()
                  $('.labelModal-Job').children('span').text('View');
-                 $('.modal-change-job-tittle').attr('id','update-job')
+                 $('.modal-change-job-title').attr('id','update-job')
                  let triggerid = $(this).data('uuid');
  
                  $('#employee_uuid').val(triggerid)
@@ -248,11 +248,11 @@ let EmployeeJobTittle = {
                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                      },
                      type: 'get',
-                     url: '/job-tittle/' + triggerid,
+                     url: '/job-title/' + triggerid,
                      success: function (data) {
-                         $('#code_job_tittle').val(data.code)
-                         $('#name_job_tittle').val(data.name)
-                         $('#description_job_tittle').val(data.description)
+                         $('#code_job_title').val(data.code)
+                         $('#name_job_title').val(data.name)
+                         $('#description_job_title').val(data.description)
                          $('#specification').val(data.specification)
                      },
                      error: function (jqXhr, json, errorThrown) {
@@ -270,9 +270,9 @@ let EmployeeJobTittle = {
 
 
             let update = $(document).on('click', '#update-job', function () {
-                let code = $('input[name=code_job_tittle]').val()
-                let name = $('input[name=name_job_tittle]').val()
-                let description_job = $('#description_job_tittle').val()
+                let code = $('input[name=code_job_title]').val()
+                let name = $('input[name=name_job_title]').val()
+                let description_job = $('#description_job_title').val()
                 let specification = $('#specification').val()
 
                 let triggerid = $('input[name=employee_uuid]').val()
@@ -282,7 +282,7 @@ let EmployeeJobTittle = {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type: 'put',
-                    url: '/job-tittle/' + triggerid,
+                    url: '/job-title/' + triggerid,
                     data: {
                         _token: $('input[name=_token]').val(),
                         code: code,
@@ -293,19 +293,19 @@ let EmployeeJobTittle = {
                     success: function (data) {
                         if (data.errors) {
                             if (data.errors.code) {
-                                $('#code_job_tittle-error').html(data.errors.code[0]);
+                                $('#code_job_title-error').html(data.errors.code[0]);
                             }else{
-                                $('#code_job_tittle-error').html('');
+                                $('#code_job_title-error').html('');
                             }
                             if (data.errors.name) {
-                                $('#name_job_tittle-error').html(data.errors.name[0]);
+                                $('#name_job_title-error').html(data.errors.name[0]);
                             }else{
-                                $('#name_job_tittle-error').html('');
+                                $('#name_job_title-error').html('');
                             }
                             if (data.errors.description) {
-                                $('#description_job_tittle-error').html(data.errors.description[0]);
+                                $('#description_job_title-error').html(data.errors.description[0]);
                             }else{
-                                $('#description_job_tittle-error').html('');
+                                $('#description_job_title-error').html('');
                             }
                             if (data.errors.specification) {
                                 $('#spesification-error').html(data.errors.description[0]);
@@ -313,9 +313,9 @@ let EmployeeJobTittle = {
                                 $('#spesification-error').html('')
                             }
                         } else {
-                            $('#modal_job_tittle').modal('hide');
+                            $('#modal_job_title').modal('hide');
 
-                            toastr.success('Job tittle has been updated.', 'Success', {
+                            toastr.success('Job title has been updated.', 'Success', {
                             timeOut: 5000
                             });
 
@@ -329,7 +329,7 @@ let EmployeeJobTittle = {
             });
 
             $('.m_datatable_job_title').on('click', '.delete', function () {
-                let uuid = $('#edit-job-tittle').data('uuid-job');
+                let uuid = $('#edit-job-title').data('uuid-job');
     
                 swal({
                     title: 'Sure want to remove?',
@@ -348,9 +348,9 @@ let EmployeeJobTittle = {
                                 )
                             },
                             type: 'DELETE',
-                            url: '/job-tittle/' + uuid + '',
+                            url: '/job-title/' + uuid + '',
                             success: function (data) {
-                                toastr.success('Job tittle has been deleted.', 'Deleted', {
+                                toastr.success('Job title has been deleted.', 'Deleted', {
                                         timeOut: 5000
                                     }
                                 );
@@ -383,5 +383,5 @@ let EmployeeJobTittle = {
 };
 
 jQuery(document).ready(function () {
-    EmployeeJobTittle.init();
+    EmployeeJobTitle.init();
 });

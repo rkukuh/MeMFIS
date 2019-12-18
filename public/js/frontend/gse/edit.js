@@ -102,7 +102,7 @@ let GseToolReturnedEdit = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_gse_item_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-expred='+t.pivot.expired_at+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_gse_item_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-sn='+t.pivot.serial_number+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
@@ -112,6 +112,31 @@ let GseToolReturnedEdit = {
                     }
                 }
             ]
+        });
+
+        $('select[name="tool"]').on("change", function() {
+            let item_uuid = $("#tool").val();
+
+            $.ajax({
+                url: '/get-tool-request/'+request_uuid+'/'+item_uuid,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                    $('select[name="serial_no"]').empty();
+
+                    $('select[name="serial_no"]').append(
+                        '<option value=""> Select Serial Number</option>'
+                    );
+
+                    $.each(data, function (key, value) {
+                        $('select[name="serial_no"]').append(
+                            '<option value="' + key + '">' + value + '</option>'
+                        );
+                    });
+                }
+            });
+
         });
 
         $('.footer').on('click', '.update-gse', function () {
@@ -152,17 +177,173 @@ let GseToolReturnedEdit = {
             });
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
+        $('.modal-footer').on('click', '.add-item', function () {
+            let item_uuid = $("#tool").val();
+            let serial_no = $("#serial_no").val();
+            let qty = $("#quantity").val();
+            let unit_id = $("#unit_tool").val();
+            let note = $("#remark").val();
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                url: '/gse/'+gse_uuid+'/item/'+item_uuid,
+                type: "POST",
+                data: {
+                    serial_no: serial_no,
+                    quantity: qty,
+                    unit_id: unit_id,
+                    note: note,
+                    // serial_numbers: serial_numbers,
+                },
+                success: function(response) {
+                    if (response.errors) {
+                        if (response.errors.quantity) {
+                            $('#quantity-error').html(response.errors.quantity[0]);
+                        }
+
+                    } else {
+                        if (response.title == "Danger") {
+                            toastr.error("Item already exists!", "Error", {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $('#modal_gse_item_add').modal('hide');
+
+                            toastr.success(
+                                "GSE's Item has been updated.",
+                                "Success",
+                                {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $(".gse_tool_returned_datatable").mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
+                    }
+                }
+            });
+        });
+        $('.gse_tool_returned_datatable').on('click', '.edit-item', function () {
+            let description = "";
+            let sn = $(this).data('sn');
+            document.getElementById('item-label').innerText = $(this).data('item');
+            let unit_id = $(this).data('unit');
+            $.ajax({
+                url: '/get-item-unit-uuid/'+$(this).data('uuid'),
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    let index = 1;
+
+                    $('select[name="unit_id"]').empty();
+
+                    $.each(data, function (key, value) {
+                        if (key == unit_id) {
+                            $('select[name="unit_id"]').append(
+                                '<option value="' + key + '" selected>' + value + '</option>'
+                            );
+                        } else {
+                            $('select[name="unit_id"]').append(
+                                '<option value="' + key + '">' + value + '</option>'
+                            );
+                        }
+
+                    });
+                }
+            });
+            $.ajax({
+                url: '/get-tool-request/'+request_uuid+'/'+$(this).data('uuid'),
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('select[name="sn"]').empty();
+
+                    $('select[name="sn"]').append(
+                        '<option value=""> Select Serial Number</option>'
+                    );
+                    $.each(data, function (key, value) {
+                        if(sn == value){
+                            $('select[name="sn"]').append(
+                                '<option value="' + key + '" selected>' + value + '</option>'
+                            );
+                        }else{
+                            $('select[name="sn"]').append(
+                                '<option value="' + key + '">' + value + '</option>'
+                            );
+
+                        }
+                    });
+                }
+            });
+
+            document.getElementById('qty').value = $(this).data('quantity');
+            document.getElementById('note-edit').value = $(this).data('note');
+
+            document.getElementById('uuid').value = $(this).data('uuid');
+        });
+        $(".modal-footer").on("click", ".update-item", function() {
+            let uuid = $("input[name=uuid]").val();
+            let sn = $("#sn").val();
+            let qty = $("#qty").val();
+            let unit_id = $("#unit_id").val();
+            let note = $("#note-edit").val();
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                url: '/gse/'+gse_uuid+'/item/'+uuid,
+                type: "PUT",
+                data: {
+                    serial_no: sn,
+                    quantity: qty,
+                    unit_id: unit_id,
+                    note: note,
+                },
+                success: function(response) {
+                    if (response.errors) {
+                        // if (response.errors.quantity) {
+                        //     $('#qty-error').html(response.errors.quantity[0]);
+                        // }
+                        // document.getElementById('manual_affected_id').value = manual_affected_id;
+                    } else {
+                        //    taskcard_reset();
+                        $('#modal_gse_item_edit').modal('hide');
+
+                        toastr.success(
+                            "GSE's item has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+
+                        let table = $(".gse_tool_returned_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                    }
+                }
+            });
+        });
+
+        $('.gse_tool_returned_datatable').on('click', '.delete', function () {
 
             swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
+            })
+            .then(result => {
                 if (result.value) {
                     $.ajax({
                         headers: {
@@ -171,22 +352,19 @@ let GseToolReturnedEdit = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/category/' + triggerid + '',
+                        url: '/gse/' + gse_uuid + '/item/'+$(this).data('uuid'),
                         success: function (data) {
-                            toastr.success(
-                                'Data Berhasil Dihapus.',
-                                'Sukses!', {
+                            toastr.success('Item GSE has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.gse_tool_returned_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
                         },
                         error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
                             let errors = jqXhr.responseJSON;
 
                             $.each(errors.errors, function (index, value) {
@@ -194,17 +372,6 @@ let GseToolReturnedEdit = {
                             });
                         }
                     });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
                 }
             });
         });

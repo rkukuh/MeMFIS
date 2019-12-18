@@ -27,7 +27,7 @@ class CreateTaskcardsTable extends Migration
             $table->integer('engineer_quantity')->nullable();
             $table->integer('helper_quantity')->nullable();
             $table->boolean('is_rii')->nullable();
-            $table->string('source')->nullable();
+            $table->longText('source')->nullable();
             $table->string('effectivity')->nullable();
             $table->unsignedDecimal('performance_factor', 8, 2)->nullable();
             $table->integer('sequence')->nullable();
