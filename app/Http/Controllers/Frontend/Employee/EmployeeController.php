@@ -1187,8 +1187,6 @@ class EmployeeController extends Controller
     {
         $time_update = Carbon::now();
 
-        dd($employee->addresses);
-
         $history_data = [
             'code' => $employee->code,
             'addresses' => $employee->addresses()->with('type')->get(),
