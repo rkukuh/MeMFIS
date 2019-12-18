@@ -3,15 +3,32 @@
 namespace App\Http\Controllers\Datatables\Company;
 
 use App\Models\Company;
+use App\Models\Department;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class CompanyDatatables extends Controller
 {
 
     public function index(){
-        $company = Company::with('departments','type','parent')->get();
 
-        $data = $alldata = json_decode($company);
+        $companies = Company::with('type','parent')->get();
+
+        $departments = Department::with('type','parent')->get();
+        
+        if(sizeof($departments) > sizeof($companies)){
+            foreach($companies as $company){
+                $departments->prepend($company);
+            }
+            
+            $data = $alldata = json_decode($departments);
+        }else{
+            foreach($departments as $department){
+                $companies->prepend($department);
+            }
+
+            $data = $alldata = json_decode($companies);
+        }
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

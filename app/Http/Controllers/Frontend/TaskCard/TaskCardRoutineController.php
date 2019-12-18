@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend\TaskCard;
+use Config;
 
 use App\Models\Type;
 use App\Models\Zone;
@@ -10,7 +11,6 @@ use App\Models\Station;
 use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\Threshold;
-use App\Helpers\DocumentNumber;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardRoutineStore;
@@ -335,7 +335,7 @@ class TaskCardRoutineController extends Controller
                 $data = $request->input('image');
                 $photo = $request->file('fileInput')->getClientOriginalName();
                 $destination = 'master/taskcard/routine/';
-                $stat = Storage::disk('public')->putFileAs($destination,$request->file('fileInput'), $photo);
+                $stat = Storage::disk('s3')->putFileAs($destination,$request->file('fileInput'), $photo);
             }
 
             return response()->json($taskCard);
@@ -379,6 +379,8 @@ class TaskCardRoutineController extends Controller
 
     public function createTaskcard($request)
     {
+        
+
         $accesses = $zones = $additionals = [];
 
         $additionals["internal_number"] = $request->additionals->internal_number;
@@ -467,13 +469,6 @@ class TaskCardRoutineController extends Controller
                 }
             }
 
-            if ($request->hasFile('fileInput')) {
-                $data = $request->input('image');
-                $photo = $request->file('fileInput')->getClientOriginalName();
-                $destination = 'master/taskcard/routine/';
-                $stat = Storage::disk('public')->putFileAs($destination,$request->file('fileInput'), $photo);
-            }
-
             if($request->station){
                 foreach ($request->applicability_airplane as $airplane) {
                     if(isset($request->station)){
@@ -486,6 +481,42 @@ class TaskCardRoutineController extends Controller
                     }
                 }
             }
+
+            if($request->hasFile('fileInput')) {
+     
+                //get filename without extension
+                $filename = $request->file('fileInput')->getClientOriginalName();
+         
+                //filename to store
+                $directory = 'master/taskcard/routine';
+         
+                //Upload File to s3
+                $key = Storage::disk('s3')->putFileAs($directory, $request->file('fileInput'), $filename);
+    
+                //todo: save file information into file table
+    
+                // // how to get url to view or download files
+                // $s3 = Storage::disk('s3');
+                // $client = $s3->getDriver()->getAdapter()->getClient();
+                // $bucket = Config::get('filesystems.disks.s3.bucket');
+    
+                // $command = $client->getCommand('GetObject', [
+                //     'Bucket' => $bucket,
+                //     'Key' => $key
+                // ]);
+    
+                // $request = $client->createPresignedRequest($command, '+20 minutes');
+    
+                // $url = $request->getUri();
+                // // return (string) $request->getUri();
+                // // return response()->download($url);
+                // return view('frontend.testing.view-file',[
+                //     'url' => $url
+                // ]);
+    
+                //Store $filenametostore in the database
+            }
+            
             return response()->json($taskcard);
         }else{
             // TODO: Return error message as JSON

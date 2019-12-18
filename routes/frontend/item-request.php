@@ -25,7 +25,6 @@ Route::name('frontend.')->group(function () {
 
                     Route::name('material-request-jobcard.')->group(function() {
 
-                        Route::post('/{itemRequest}/item/{item}', 'MaterialRequestController@addItem')->name('items.store');
                         Route::put('/{itemRequest}/item/{item}', 'MaterialRequestController@updateItem')->name('items.update');
                         Route::delete('/{itemRequest}/item/{item}', 'MaterialRequestController@deleteItem')->name('items.destroy');
                         Route::put('/{itemRequest}/approve', 'MaterialRequestController@approve')->name('approve');
@@ -42,7 +41,6 @@ Route::name('frontend.')->group(function () {
 
                 Route::prefix('tool-request-jobcard')->group(function () {
 
-                    Route::post('/{itemRequest}/item/{item}', 'ToolRequestController@addItem')->name('items.store');
                     Route::put('/{itemRequest}/item/{item}', 'ToolRequestController@updateItem')->name('items.update');
                     Route::delete('/{itemRequest}/item/{item}', 'ToolRequestController@deleteItem')->name('items.destroy');
                     Route::put('/{itemRequest}/approve', 'ToolRequestController@approve')->name('approve');

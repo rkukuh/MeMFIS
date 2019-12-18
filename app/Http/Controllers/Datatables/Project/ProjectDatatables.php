@@ -159,10 +159,12 @@ class ProjectDatatables extends Controller
     {
         $quotation = Quotation::where('quotationable_id',$project->id)->first()->id;
 
-        $defectcards = DefectCard::with('jobcard','jobcard.jobcardable')
+        $defectcards = DefectCard::with('jobcard','jobcard.jobcardable','approvals')
                                 ->whereHas('jobcard', function ($query) use ($quotation){
                                     $query->where('quotation_id', $quotation);
-                                })->where('project_additional_id', null)->get();
+                                })->where('project_additional_id', null)
+                                ->has('approvals','>',1)
+                                ->get();
 
                                 // RecordID
 

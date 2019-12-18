@@ -15,5 +15,12 @@ class ExampleDataSeeder extends Seeder
 
         $this->call(CertifiedStaff_GeneralLicense::class);
         $this->call(CertifiedStaff_AMEL::class);
+        $this->call(PositionExamples::class);
+        $this->call(LeaveTypeExamples::class);
+        $this->call(BPJSExamples::class);
+        $this->call(BenefitExamples::class);
+        $this->call(CompanyStructureExamples::class);
+        $this->call(BenefitPositionExample::class);
+        $this->call(EmployeePositionDummy::class);
     }
 }

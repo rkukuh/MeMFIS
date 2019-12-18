@@ -17,7 +17,7 @@ class CreateNationalitiesTable extends Migration
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('nationality');
-            $table->unsignedBigInteger('country_id');
+            $table->unsignedBigInteger('country_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -9,12 +9,12 @@ $(document).ready(function () {
                 $('select[name="employee"]').empty();
 
                 $('select[name="employee"]').append(
-                    '<option value=""> Select a Customer </option>'
+                    '<option value=""> Select an Employee </option>'
                 );
 
                 $.each(data, function (key, value) {
                     $('select[name="employee"]').append(
-                        '<option value="' + key + '">' + value + '</option>'
+                        '<option value="' + value.uuid + '">' + value.first_name +' '+ value.last_name + '</option>'
                     );
                 });
             }

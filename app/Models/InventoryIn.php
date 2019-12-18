@@ -16,6 +16,7 @@ class InventoryIn extends MemfisModel
         'inventoryinable_id',
         'description',
         'section',
+        'additional'
     ];
 
     protected $dates = ['inventoried_at'];

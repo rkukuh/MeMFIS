@@ -3,10 +3,11 @@
 namespace App\Http\Requests\Frontend;
 
 use App\Models\Item;
-use Illuminate\Validation\Rule;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Unit;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class ItemPurchaseRequestStore extends FormRequest
 {
@@ -40,23 +41,28 @@ class ItemPurchaseRequestStore extends FormRequest
      */
     public function withValidator($validator)
     {
-        // $validator->after(function ($validator) {
-        //     $this->merge(['quotation_unit' => '1']);
+        $validator->after(function ($validator) {
+            if (Unit::where('uuid', $this->unit_id)->first() == null) {
+                $validator->errors()->add('quantity', 'Unit not found');
+            } else {
+                $unit_id = Unit::where('uuid', $this->unit_id)->first()->id;
 
-        //     $item = Item::where('uuid',$this->item_id)->first();
-        //     if($this->unit_id == "".$item->unit_id.""){
-        //         //
-        //     }
-        //     else{
-        //         if($qty_uom2 = $item->units->where('uom.unit_id',$this->unit_id)->first() == null){
-        //             $validator->errors()->add('quantity', 'UOM have not Declared');
-        //         }
+                $item = Item::where('uuid', $this->item_id)->first();
+                if ($unit_id == "" . $item->unit_id . "") {
+                    //
+                } else {
+                    if ($qty_uom2 = $item->units->where('uom.unit_id', $unit_id)->first() == null) {
+                        $validator->errors()->add('quantity', 'UOM have not Declared');
+                    }
 
-        //     }
-        // });
+                }
+            }
+
+        });
     }
 
-    protected function failedValidation(Validator $validator) {
+    protected function failedValidation(Validator $validator)
+    {
         throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }

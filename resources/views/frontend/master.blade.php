@@ -40,6 +40,7 @@
         <script src="{{ asset('assets/metronic/demo/default/base/scripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/metronic/vendors/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
         <script src="{{ asset('assets/metronic/app/js/dashboard.js') }}"></script>
+        <script src="{{ asset('assets/metronic/demo/default/custom/components/base/blockui.js') }}"></script>
         <script>
             @if(Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}";

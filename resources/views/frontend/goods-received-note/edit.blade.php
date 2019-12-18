@@ -114,12 +114,18 @@
                                                             <label class="form-control-label">
                                                                 Received By @include('frontend.common.label.required')
                                                             </label>
-                                                            @component('frontend.common.input.select2')
-                                                                @slot('id', 'received-by')
-                                                                @slot('text', 'received-by')
-                                                                @slot('name', 'received-by')
-                                                                @slot('id_error', 'received-by')
-                                                            @endcomponent
+                                                            <select id="employee" name="employee" class="form-control m-select2" style="width:100%">
+                                                                <option value="">
+                                                                    &mdash; Select a Returned By &mdash;
+                                                                </option>
+
+                                                                @foreach ($employees as $employee)
+                                                                    <option value="{{ $employee->uuid }}"
+                                                                        @if ($employee->uuid == $employee_uuid) selected @endif>
+                                                                        {{ $employee->first_name." ".$employee->last_name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
@@ -245,10 +251,11 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="purchase_order_datatable" id="purchase_order_datatable"></div>
+                                                                <div class="item_purchase_order_datatable" id="item_purchase_order_datatable"></div>
 
                                                                 @include('frontend.goods-received-note.modal')
                                                                 @include('frontend.goods-received-note.modal-edit')
+                                                                @include('frontend.common.item.modal')
 
                                                             </div>
                                                         </div>
@@ -289,18 +296,20 @@
     <script>
         let grn_uuid = '{{$goodsReceived->uuid}}';
         let po_uuid = '{{$goodsReceived->purchase_order->uuid}}';
+        let urlItem = '/datatables/purchase-order/modal/item/'+po_uuid;
 
         $(document).ready(function () {
             document.getElementById('search-storage').innerHTML = '{{$goodsReceived->storage->name}}';
             document.getElementById('warehouse').value = '{{$goodsReceived->storage->uuid}}';
         });
     </script>
+    <script src="{{ asset('js/frontend/functions/select2/employee.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/material-po.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material-po.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
@@ -313,6 +322,5 @@
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
 
 @endpush

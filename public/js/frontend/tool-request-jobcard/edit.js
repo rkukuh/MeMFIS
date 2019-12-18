@@ -17,7 +17,7 @@ let ToolRequestEdit = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation',
+                        url: '/datatables/item-request/tool/' + request_uuid + '/items',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -57,30 +57,30 @@ let ToolRequestEdit = {
                 {
                     field: '#',
                     title: 'No',
-                    width:'40',
+                    width: '40',
                     sortable: 'asc',
                     filterable: !1,
                     textAlign: 'center',
-                    template: function (row, index, datatable) {   
+                    template: function (row, index, datatable) {
                         return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
                     }
                 },
                 {
-                    field: 'quotation_number',
+                    field: 'code',
                     title: 'Part Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'pivot.serial_number',
                     title: 'Serial Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'description',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
@@ -94,21 +94,21 @@ let ToolRequestEdit = {
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'pivot.quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'unit_name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: '',
+                    field: 'note',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
@@ -121,16 +121,15 @@ let ToolRequestEdit = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_tool_request" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-instruction_uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '<button data-toggle="modal" data-target="#modal_tool_request" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Edit" data-item=' +
+                            t.uuid + ' data-date=' + t.pivot.expired_at + ' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-serial=' + t.pivot.serial_number + ' data-remark=' + t.pivot.description + '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
                             t.uuid +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-exchange"></i>' +
-                            '</a>'+
+                            '<i class="la la-exchange"></i>' +
+                            '</a>' +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
+                            '<i class="la la-trash"></i>' +
                             '</a>'
                         );
                     }
@@ -138,108 +137,195 @@ let ToolRequestEdit = {
             ]
         });
 
-        let remove = $('.m_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
+        $('.tool_request_project_datatable').on('click', '.edit-item', function () {
+            let item_uuid = $(this).data('item');
+            let unit_id = $(this).data('unit');
 
-            swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
-            }).then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/category/' + triggerid + '',
-                        success: function (data) {
-                            toastr.success(
-                                'Data Berhasil Dihapus.',
-                                'Sukses!', {
-                                    timeOut: 5000
-                                }
+            $.ajax({
+                url: '/get-tools-uuid/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                    $('select[name="tool"]').empty();
+
+                    $.each(data, function (key, value) {
+                        if (key == item_uuid) {
+                            $('select[name="tool"]').append(
+                                '<option value="' + key + '" selected>' + value + '</option>'
                             );
-
-                            let table = $('.m_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
+                        } else {
+                            $('select[name="tool"]').append(
+                                '<option value="' + key + '">' + value + '</option>'
+                            );
                         }
+
                     });
-                    swal(
-                        'Deleted!',
-                        'Your imaginary file has been deleted.',
-                        'success'
-                    );
-                } else {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    );
+                }
+            });
+            $("#tool").attr('disabled', true);
+
+            $.ajax({
+                url: '/get-item-unit-uuid/' + $(this).data('item'),
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                    $('select[name="unit_id"]').empty();
+
+                    $.each(data, function (key, value) {
+                        if (key == unit_id) {
+                            $('select[name="unit_id"]').append(
+                                '<option value="' + key + '" selected>' + value + '</option>'
+                            );
+                        } else {
+                            $('select[name="unit_id"]').append(
+                                '<option value="' + key + '">' + value + '</option>'
+                            );
+                        }
+
+                    });
+                }
+            });
+
+            document.getElementById('qty_request').value = $(this).data('quantity');
+            document.getElementById('uuid').value = $(this).data('uuid');
+            let remark = $(this).data('remark');
+
+            if (remark === null) {
+                document.getElementById('item_remark').value = '';
+            } else {
+                document.getElementById('item_remark').value = $(this).data('remark');
+            }
+
+            document.getElementById('serial_no').value = $(this).data('serial');
+
+            $('.btn-success').addClass('update-item');
+            $('.btn-success').removeClass('add-item');
+        });
+
+        $(".modal-footer").on("click", ".update-item", function () {
+            let tool = $("#tool").val();
+            let quantity = $("input[name=qty_request]").val();
+            let exp_date = $("#exp_date").val();
+            let unit = $("#unit_id").val();
+            let remark = $("#remark").val();
+            let serial_no = $("#serial_no").val();
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                url: "/item-request/tool-request-jobcard/" + request_uuid + "/item/" + tool,
+                type: "PUT",
+                data: {
+                    item_id: tool,
+                    quantity: quantity,
+                    expired_at: exp_date,
+                    unit_id: unit,
+                    serial_no: serial_no,
+                    remark: remark,
+                },
+                success: function (response) {
+                    $('#modal_tool_request').modal('hide');
+
+                    $('#modal_tool_request').on('hidden.bs.modal', function (e) {
+                        $(this)
+                            .find("input,textarea")
+                            .val('')
+                            .end()
+                            .find("select")
+                            .select2('val', 'All')
+                            .end();
+                    });
+
+                    toastr.success("Item has been updated.", "Success", {
+                        timeOut: 5000
+                    });
+
+                    let table = $('.tool_request_project_datatable').mDatatable();
+
+                    table.originalDataSet = [];
+                    table.reload();
+
+                    $('.btn-success').addClass('add-item');
+                    $('.btn-success').removeClass('update-item');
                 }
             });
         });
 
-        $('.footer').on('click', '.add-tool-request', function () {
-            let received_at = $('input[name=date]').val();
+        $('.tool_request_project_datatable').on('click', '.delete', function () {
+
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+                .then(result => {
+                    if (result.value) {
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                    'content'
+                                )
+                            },
+                            type: 'DELETE',
+                            url: '/item-request/tool-request-jobcard/' + request_uuid + '/item/' + $(this).data('uuid'),
+                            success: function (data) {
+                                toastr.success('Item has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                                );
+
+                                let table = $('.tool_request_project_datatable').mDatatable();
+
+                                table.originalDataSet = [];
+                                table.reload();
+                            },
+                            error: function (jqXhr, json, errorThrown) {
+                                let errors = jqXhr.responseJSON;
+
+                                $.each(errors.errors, function (index, value) {
+                                    $('#delete-error').html(value);
+                                });
+                            }
+                        });
+                    }
+                });
+        });
+
+        $('.footer').on('click', '.update-item-request', function () {
+            let note = $('#description').val();
+            let section_code = $('input[name=section_code]').val();
+            let storage_id = $('#item_storage_id').val();
+            let date = $('input[name=date]').val();
             let received_by = $('#received-by').val();
-            let ref_po = $('input[name=ref-po]').val();
-            let do_no = $('input[name=do-no]').val();
-            let ref_date = $('input[name=date-ref-date]').val();
-            let warehouse = $('input[name=warehouse]').val();
-            let description = $('#description').val();
-            let vehicle_no = $('input[name=vehicle-no]').val();
-            let container_no = $('input[name=container-no]').val();
+            let jc_no = $("#ref_jobcard").val();
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '/goods-received',
-                type: 'POST',
+                url: '/item-request/tool-request-jobcard/' + request_uuid,
+                type: 'PUT',
                 data: {
-                    received_at:received_at,
-                    received_by:received_by,
-                    vehicle_no:vehicle_no,
-                    container_no:container_no,
-                    purchase_order_id:ref_po,
-                    storage_id:warehouse,
-                    description:description,
+                    jc_no: jc_no,
+                    storage_id: storage_id,
+                    requested_at: date,
+                    note: note,
+                    section: section_code,
+                    received_by: received_by
                 },
                 success: function (response) {
                     if (response.errors) {
-                        console.log(errors);
-                        // if (response.errors.title) {
-                        //     $('#title-error').html(response.errors.title[0]);
-                        // }
-
-                        // document.getElementById('manual_affected_id').value = manual_affected_id;
-
-
+                        console.log(errors)
                     } else {
-                        //    taskcard_reset();
-
-
-                        toastr.success('Taskcard has been created.', 'Success', {
+                        toastr.success('Item Request has been updated.', 'Success', {
                             timeOut: 5000
                         });
-
-                        // window.location.href = '/goods-received/'+response.uuid+'/edit';
                     }
                 }
             });

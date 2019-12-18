@@ -12,6 +12,7 @@ class Status extends MemfisModel
         'name',
         'of',
         'description',
+
     ];
 
     /******************************************* SCOPE *******************************************/
@@ -25,6 +26,17 @@ class Status extends MemfisModel
     public function scopeOfAttendance(Builder $query)
     {
         return $query->where('of', 'attendance');
+    }
+
+    /**
+     * Scope a query to only include status of attendance correction.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfAttendanceCorrection(Builder $query)
+    {
+        return $query->where('of', 'attendance-correction');
     }
 
     /**
@@ -80,6 +92,17 @@ class Status extends MemfisModel
     public function scopeOfJobCard(Builder $query)
     {
         return $query->where('of', 'jobcard');
+    }
+
+    /**
+     * Scope a query to only include status of leave.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfLeave(Builder $query)
+    {
+        return $query->where('of', 'leave');
     }
 
     /**
@@ -140,16 +163,67 @@ class Status extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * One-to-Many: An employee may have one or many Attendance.
+     *
+     * This function will retrieve employee of given Attendance.
+     * See: Employee's employee_attendance() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_attendance()
+    {
+        return $this->belongsToMany(EmployeeAttendance::class, 'employee_attendance_statuses', 'status_id', 'employee_attendance_id')
+                        ->withTimestamps()
+                        ->withPivot('deleted_at')
+                        ->wherePivot('deleted_at', null);
+    }
+
+    /**
+     * One-to-Many: A marital status have zero or many Employees.
+     *
+     * This function will retrieve employees of a given Marital Status.
+     * See: employee_marital's marital_status() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_marital()
+    {
+        return $this->hasMany(Employee::class);
+    }
+
+    /**
      * Polymorphic: An entity can have zero or many statuses.
      *
      * This function will get all of the owning statusable models.
      * See:
      * - JobCard's statuses() method for the inverse
+     * - EmployeeAttendance's statuses() method for the inverse
      *
      * @return mixed
      */
     public function statusable()
     {
         return $this->morphTo();
+    }
+
+    /**
+     * Get the progress that owns the status.
+     */
+    public function progress()
+    {
+        return $this->hasOne(Progress::class);
+    }
+
+    /**
+     * One-to-One: An leave have one Status.
+     *
+     * This function will retrieve status of a given leave.
+     * See: Leave's status() method for the inverse
+     *
+     * @return mixed
+     */
+    public function leave()
+    {
+        return $this->hasMany(Leave::class);
     }
 }

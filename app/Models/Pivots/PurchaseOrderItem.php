@@ -2,6 +2,8 @@
 
 namespace App\Models\Pivots;
 
+use App\Models\Item;
+use App\Models\Unit;
 use App\Models\Promo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -12,7 +14,29 @@ class PurchaseOrderItem extends Pivot
 
     protected $table = 'item_purchase_order';
 
+    protected $fillable = [
+        'purchase_order_id',
+        'item_id',
+        'quantity',
+        'quantity_unit',
+        'unit_id',
+        'price',
+        'subtotal_before_discount',
+        'subtotal_after_discount',
+        'note',
+    ];
+
     /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-Way: An item is an item.
+     *
+     * @return mixed
+     */
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
 
     /**
      * M-M Polymorphic: A promo can be applied to many entities.
@@ -26,9 +50,20 @@ class PurchaseOrderItem extends Pivot
     {
         return $this->morphToMany(Promo::class, 'promoable')
                         ->withPivot(
-                            'value', 
+                            'value',
                             'amount'
                         )
                         ->withTimestamps();
     }
+
+    /**
+     * One-Way: A Purchse Order's Item must have a unit assigned to.
+     *
+     * @return mixed
+     */
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
+
 }

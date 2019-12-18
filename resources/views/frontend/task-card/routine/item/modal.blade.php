@@ -5,7 +5,7 @@
             <div class="modal-header">
                 @include('frontend.common.label.create-new')
 
-                <h5 class="modal-title" id="TitleModalItem">
+                <h5 class="modal-title" id="TitleModalItem" style="margin-top:0px">
                     Item
 
                     <small id="item-storage" class="m--font-focus"></small>
@@ -25,11 +25,9 @@
                                         Item @include('frontend.common.label.required')
                                     </label>
 
-                                    @component('frontend.common.input.select2')
-                                        @slot('id', 'material')
-                                        @slot('text', 'Material')
-                                        @slot('name', 'material')
-                                        @slot('id_error', 'material')
+                                    @component('frontend.common.item.index')
+                                        @slot('name_item','material')
+                                        @slot('id_item','material')
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-3 col-md-3 col-lg-3">

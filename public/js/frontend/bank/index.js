@@ -86,6 +86,8 @@ let Bank = {
         });
 
         let simpan = $('.modal-footer').on('click', '.add-bank', function () {
+            mApp.block(".add-bank");
+
             let name = $('input[name=name]').val();
             let code = $('input[name=code]').val();
             let type_id =$('#type_id').val();
@@ -102,6 +104,8 @@ let Bank = {
                     code: code,
                 },
                 success: function (data) {
+                    mApp.unblock(".add-bank");
+
                     if (data.errors) {
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
@@ -113,6 +117,7 @@ let Bank = {
                         }
 
                     } else {
+
                         $('#modal_bank').modal('hide');
 
                         toastr.success('Bank has been created.', 'Success', {

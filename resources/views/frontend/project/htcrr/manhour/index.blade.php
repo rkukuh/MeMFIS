@@ -9,7 +9,7 @@
             <div class="col-sm-6 col-md-6 col-lg-6">
                 @component('frontend.common.label.data-info')
                     @slot('id', 'total_mhrs')
-                    @slot('text', $total_mhrs)
+                    @slot('text', number_format($total_mhrs, 2, ",","."))
                     @slot('value', $total_mhrs)
                 @endcomponent
             </div>
@@ -68,7 +68,7 @@
         $(document).ready(function () {
             let project_prfm_factor = $('#perfoma').val();
             let total  = project_prfm_factor*total_mhrs;
-            document.getElementById('total').innerHTML = total.toFixed(2);
+            document.getElementById('total').innerHTML = numberFormat.format(total.toFixed(2));
             let performa = 0;
         });
 
@@ -78,14 +78,14 @@
                 performa = $('#default').val();
                 document.getElementById('perfoma').value = $('#default').val();
                 $("#perfoma").prop('disabled', true);
-                document.getElementById('total').innerHTML = total.toFixed(2);
+                document.getElementById('total').innerHTML = numberFormat.format(total.toFixed(2));
             }
             else{
                 let total  = (1.6*total_mhrs);
                 performa = 1.6;
                 document.getElementById('perfoma').value = 1.6;
                 $("#perfoma").prop('disabled', false);
-                document.getElementById('total').innerHTML = total.toFixed(2);
+                document.getElementById('total').innerHTML = numberFormat.format(total.toFixed(2));
             }
         });
 

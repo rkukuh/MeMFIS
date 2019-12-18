@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_job_tittle" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_job_title" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,19 +15,16 @@
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                @component('frontend.common.input.hidden')
-                                @slot('id', 'employee_uuid')
-                                @slot('name', 'employee_uuid')
-                                @endcomponent
+
                                 
                                 <label class="form-control-label">
                                     Job Title Code  @include('frontend.common.label.required')
                                 </label>
 
                                 @component('frontend.common.input.text')
-                                    @slot('id', 'code_job_tittle')
-                                    @slot('name', 'code_job_tittle')
-                                    @slot('id_error', 'code_job_tittle')
+                                    @slot('id', 'code_job_title')
+                                    @slot('name', 'code_job_title')
+                                    @slot('id_error', 'code_job_title')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -36,9 +33,9 @@
                                 </label>
 
                                 @component('frontend.common.input.text')
-                                    @slot('id', 'name_job_tittle')
-                                    @slot('name', 'name_job_tittle')
-                                    @slot('id_error', 'name_job_tittle')
+                                    @slot('id', 'name_job_title')
+                                    @slot('name', 'name_job_title')
+                                    @slot('id_error', 'name_job_title')
                                 @endcomponent
                             </div>
                         </div>
@@ -49,10 +46,10 @@
                                 </label>
 
                                 @component('frontend.common.input.textarea')
-                                    @slot('id', 'description_job_tittle')
-                                    @slot('name', 'description_job_tittle')
+                                    @slot('id', 'description_job_title')
+                                    @slot('name', 'description_job_title')
                                     @slot('rows', '5')
-                                    @slot('id_error', 'description_job_tittle')
+                                    @slot('id_error', 'description_job_title')
                                 @endcomponent
                             </div>
                         </div>
@@ -78,13 +75,13 @@
                                         <div class="action-buttons">
                                                 {{-- <div id="button-div" style="height:0px;"> --}}
                                                     @component('frontend.common.buttons.submit')
-                                                        @slot('class', 'modal-change-job-tittle')
+                                                        @slot('class', 'modal-change-job-title')
                                                         @slot('type', 'button')
                                                     @endcomponent
                                                     {{-- </div>  --}}
-                                                    @include('frontend.common.buttons.reset',['id' => 'reset-job-tittle'])
+                                                    @include('frontend.common.buttons.reset',['id' => 'reset-job-title'])
                             
-                                                    @include('frontend.common.buttons.close',['id' => 'close-job-tittle'])
+                                                    @include('frontend.common.buttons.close',['id' => 'close-job-title'])
                                             </div>
                                     </div>
                             </div>

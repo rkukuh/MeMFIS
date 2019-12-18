@@ -13,6 +13,8 @@ use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\PurchaseOrderItem;
+use App\Models\Pivots\PurchaseRequestItem;
 use App\Http\Requests\Frontend\PurchaseOrderStore;
 use App\Http\Requests\Frontend\PurchaseOrderUpdate;
 
@@ -57,24 +59,25 @@ class PurchaseOrderController extends Controller
 
         $purchaseOrder = PurchaseOrder::create($request->all());
 
-        $items = PurchaseRequest::find($request->purchase_request_id)->items;
+        $items = PurchaseRequestItem::where('purchase_request_id',$request->purchase_request_id)->get();
+
 
         $PurchaseOrder = PurchaseOrder::where('purchase_request_id',$request->purchase_request_id)->count();
         if($PurchaseOrder == 1){
             foreach($items as $item){
-                $purchaseOrder->items()->attach([$item->pivot->item_id => [
-                    'quantity'=> $item->pivot->quantity,
-                    'quantity_unit' => $item->pivot->quantity_unit,
-                    'unit_id' => $item->pivot->unit_id
+                $purchaseOrder->items()->attach([$item->item_id => [
+                    'quantity'=> $item->quantity,
+                    'quantity_unit' => $item->quantity_unit,
+                    'unit_id' => $item->unit_id
                     ]
                 ]);
             }
         }else{
             foreach($items as $item){
-                $purchaseOrder->items()->attach([$item->pivot->item_id => [
+                $purchaseOrder->items()->attach([$item->item_id => [
                     'quantity'=> 0,
                     'quantity_unit' => 0,
-                    'unit_id' => $item->pivot->unit_id
+                    'unit_id' => $item->unit_id
                     ]
                 ]);
             }
@@ -144,23 +147,24 @@ class PurchaseOrderController extends Controller
             'top_start_at' => Carbon::parse($request->top_start_at),
             'top_type' => Type::where('code',$request->top_type)->first()->id,
             'vendor' => $request->vendor,
-            
+
         ]);
 
         $purchaseOrder->update($request->all());
-        
+
         //todo ppn
-        $tax = Type::ofTax()->where('uuid', $request->tax_type)->first();
+        $tax = Type::ofTaxPaymentMethod()->where('code', 'exclude')->first();
+        $tax_type = Type::ofTax()->where('code', 'ppn')->first();
         $subtotal_after_discount = $request->total_before_tax;
         $tax_amount = $tax_percentage = 0;
         if($tax->code == "include"){
             $tax_percentage = $request->tax_amount;
-            $tax_amount = $subtotal_after_discount / 1.1 * ($request->tax_amount / 100);
+            $tax_amount = $request->total_before_tax - ( $subtotal_after_discount / 1.1 * ($request->tax_amount / 100) );
         }elseif($tax->code == "exclude"){
             $tax_percentage = $request->tax_amount;
             $tax_amount = $subtotal_after_discount * ($request->tax_amount / 100);
         }
-        
+
         if(sizeof($purchaseOrder->taxes) > 0){
             if($tax->code == "none"){
                 $purchaseOrder->taxes()->delete();
@@ -168,7 +172,8 @@ class PurchaseOrderController extends Controller
                 $tax = Tax::where('uuid', $purchaseOrder->taxes->last()->uuid)->update([
                     'taxable_type' => 'App\Models\PurchaseOrder',
                     'taxable_id' => $purchaseOrder->id,
-                    'type_id' => $tax->id,
+                    'type_id' => $tax_type->id,
+                    'method_type_id' => $tax->id,
                     'percent' => $tax_percentage,
                     'amount' => $tax_amount
                 ]);
@@ -177,7 +182,8 @@ class PurchaseOrderController extends Controller
             $purchaseOrder->taxes()->save(new Tax([
                 'taxable_type' => 'App\Models\PurchaseOrder',
                 'taxable_id' => $purchaseOrder->id,
-                'type_id' => $tax->id,
+                'type_id' => $tax_type->id,
+                'method_type_id' => $tax->id,
                 'percent' => $tax_percentage,
                 'amount' => $tax_amount
             ]));
@@ -241,5 +247,29 @@ class PurchaseOrderController extends Controller
         );
 
         return response()->json($status_notification);
+    }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\PurchaseOrder $purchaseOrder
+     * @return \Illuminate\Http\Response
+     */
+    public function print(PurchaseOrder $purchaseOrder)
+    {
+        $items = PurchaseOrderItem::with('item','item.unit', 'item.categories')->where('purchase_order_id',$purchaseOrder->id)->whereHas('item', function ($query) {
+            $query->whereHas('categories', function ($query2) {
+                $query2->whereIn('code', ['raw', 'cons', 'comp']);
+            });
+        })->get();
+
+        $pdf = \PDF::loadView('frontend/form/purchase_order',[
+                'username' => Auth::user()->name,
+                'purchaseOrder' => $purchaseOrder,
+                'items' => $items,
+                'created_by' => $purchaseOrder->audits->first()->user->name
+                ]);
+
+        return $pdf->stream();
     }
 }

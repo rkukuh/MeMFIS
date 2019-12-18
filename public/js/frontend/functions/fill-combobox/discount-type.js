@@ -1,7 +1,25 @@
 $(document).ready(function () {
     DiscountType = function () {
-        $('select[name^="discount-type"]').append(new Option('Amount', 'amount'));
-        $('select[name^="discount-type"]').append(new Option('Percentage', 'percentage'));
+        $.ajax({
+            url: '/get-promos',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+
+                $('select[name^="discount-type"]').empty();
+
+                $('select[name^="discount-type"]').append(
+                    '<option value=""> Select a Currency</option>'
+                );
+
+                $.each(data, function (key, value) {
+                    $('select[name^="discount-type"]').append(
+                        '<option value="' + key + '">' + value + '</option>'
+                    );
+                });
+            }
+        });
+
     };
 
     DiscountType();

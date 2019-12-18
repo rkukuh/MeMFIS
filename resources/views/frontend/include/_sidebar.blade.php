@@ -17,7 +17,7 @@
                     <span class="m-menu__link-text">Dashboard</span>
                 </a>
             </li>
-            
+
             @hasanyrole('admin|marketing')
                 <li class="m-menu__section">
                     <h4 class="m-menu__section-text">
@@ -414,7 +414,7 @@
                     </a>
                 </li>
                 <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                    <a href="{{ route('frontend.vendor.index') }}" class="m-menu__link m-menu__toggle">
+                    <a href="{{ route('frontend.supplier.index') }}" class="m-menu__link m-menu__toggle">
                         <i class="m-menu__link-icon flaticon-list-3"></i>
                         <span class="m-menu__link-text">
                             Vendor
@@ -597,6 +597,16 @@
                                     </span>
                                 </a>
                             </li>
+                            <li class="m-menu__item" aria-haspopup="true">
+                                <a href="{{ route('frontend.service.index') }}" class="m-menu__link">
+                                    <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="m-menu__link-text">
+                                        Services
+                                    </span>
+                                </a>
+                            </li>
                             <li class="m-menu__item" aria-haspopup="true" style="display: none;">
                                 <a href="{{ route('frontend.category-item.index') }}" class="m-menu__link">
                                     <i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -609,6 +619,14 @@
                             </li>
                         </ul>
                     </div>
+                </li>
+                <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                    <a href="{{ route('frontend.stock-monitoring.index') }}" class="m-menu__link m-menu__toggle">
+                        <i class="m-menu__link-icon flaticon-list-3"></i>
+                        <span class="m-menu__link-text">
+                            Stock Monitoring
+                        </span>
+                    </a>
                 </li>
                 <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
                     <a href="{{ route('frontend.goods-received.index') }}" class="m-menu__link m-menu__toggle">
@@ -733,7 +751,7 @@
                     </a>
                 </li>
                 <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" style="display: none;">
-                    <a href="{{ route('frontend.vendor.index') }}" class="m-menu__link m-menu__toggle">
+                    <a href="{{ route('frontend.supplier.index') }}" class="m-menu__link m-menu__toggle">
                         <i class="m-menu__link-icon flaticon-list-3"></i>
                         <span class="m-menu__link-text">
                             Vendor
@@ -762,7 +780,7 @@
                                 </a>
                             </li>
                             <li class="m-menu__item" aria-haspopup="true">
-                                <a href="{{ route('frontend.storage.index') }}" class="m-menu__link">
+                                <a href="{{ route('frontend.warehouse.index') }}" class="m-menu__link">
                                     <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                         <span></span>
                                     </i>
@@ -1022,7 +1040,7 @@
                     </a>
                 </li>
                 <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                    <a href="{{ route('frontend.propose-leave.index') }}" class="m-menu__link m-menu__toggle">
+                    <a href="{{ route('frontend.leave.index') }}" class="m-menu__link m-menu__toggle">
                         <i class="m-menu__link-icon flaticon-list-3"></i>
                         <span class="m-menu__link-text">
                             Propose Leave
@@ -1037,7 +1055,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                <!-- <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
                     <a href="" class="m-menu__link m-menu__toggle">
                         <i class="m-menu__link-icon flaticon-list-3"></i>
                         <span class="m-menu__link-text">

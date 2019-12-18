@@ -21,7 +21,6 @@ class CreateGoodsReceivedTable extends Migration
             $table->unsignedBigInteger('received_by');
             $table->timestamp('received_at')->nullable();
             $table->string('vehicle_no')->nullable();
-            $table->string('container_no')->nullable();
             $table->unsignedBigInteger('storage_id');
             $table->text('description')->nullable();
             $table->json('additionals')->nullable();

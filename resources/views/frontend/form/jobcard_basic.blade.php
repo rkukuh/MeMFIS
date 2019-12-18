@@ -465,13 +465,13 @@
               <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$inspected_at}}</span></div>
             </td>
             <td width="34%" height="100" align="center" 
-              @if($rii_status==1)
+              @if($rii_status)
                 valign="bottom"
               @else
                 valign="middle"
               @endif
               >
-              @if($rii_status==1)
+              @if($rii_status)
                 <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
                 <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$rii_at}}</span></div>
               @else

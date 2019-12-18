@@ -8,11 +8,15 @@
                         Workshift Name @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
-                        @slot('text', 'Workshift Name')
+                    @component('frontend.common.input.edit-select2')
                         @slot('id', 'job_position_workshift')
                         @slot('name', 'job_position_workshift')
-                        @slot('id_error', 'job_position_workshift')
+                        @slot('options', $workshifts)
+                        @if(sizeof($employee->workshifts) > 0)
+                            @slot('value', $employee->workshifts->first()->uuid)
+                        @else
+                            @slot('value', '')
+                        @endif
                     @endcomponent
                 </div>
             </div>
@@ -101,18 +105,18 @@
     <div class="col-sm-12 col-md-12 col-lg-12 footer">
         <div class="flex">
             <div class="action-buttons">
-                @if (count($workshift_current) != null)
-                @component('frontend.common.buttons.submit')
-                    @slot('type','button')
-                    @slot('id', 'edit-workshift')
-                    @slot('class', 'edit-workshift')
-                @endcomponent
+                @if (count($employee->workshifts) != null)
+                    @component('frontend.common.buttons.submit')
+                        @slot('type','button')
+                        @slot('id', 'edit-workshift')
+                        @slot('class', 'edit-workshift')
+                    @endcomponent
                 @else
-                @component('frontend.common.buttons.submit')
-                    @slot('type','button')
-                    @slot('id', 'create-workshift')
-                    @slot('class', 'create-workshift')
-                @endcomponent
+                    @component('frontend.common.buttons.submit')
+                        @slot('type','button')
+                        @slot('id', 'create-workshift')
+                        @slot('class', 'create-workshift')
+                    @endcomponent
                 @endif
 
                 @include('frontend.common.buttons.reset')
@@ -125,7 +129,10 @@
 </div>
 
 @push('footer-scripts')
+@if (sizeof($employee->workshifts) < 1)
+    <script src="{{ asset('js/frontend/functions/fill-combobox/workshift.js') }}"></script>
+@endif
     <script src="{{ asset('js/frontend/functions/select2/workshift.js') }}"></script>
-    <script src="{{ asset('js/frontend/employee/employee/create_workshift.js') }}"></script>
-    <script src="{{ asset('js/frontend/employee/employee/edit_workshift.js') }}"></script>
+    <script src="{{ asset('js/frontend/employee/workshift/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/employee/workshift/edit.js') }}"></script>
 @endpush

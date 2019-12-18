@@ -1,5 +1,4 @@
-<div class="modal fade" id="discount_htcrr"  role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="discount_htcrr"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -16,7 +15,7 @@
             </div>
             <div class="modal-body">
 
-                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="ItemForm">
+                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="htcrrDiscountForm">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">

@@ -74,7 +74,9 @@
     <script>
         let project_uuid = '{{ $project->uuid }}';
         let anyChanges = false;
+        let numberFormat = new Intl.NumberFormat('id', { maximumSignificantDigits: 10});
     </script>
+
     <script src="{{ asset('js/frontend/project/htcrr/workpackage.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>

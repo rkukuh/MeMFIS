@@ -41,6 +41,8 @@ function predecessor_tc(triggeruuid) {
         $('<button type="button" data-toggle="modal" data-target="#add_modal_predecessor" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm add-predecessor-modal" id="predecessorBtn" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.modal-body .dataTables_filter');
 
         $('.dataTable').on('click', '.delete-predecessor', function () {
+            mApp.block(".delete-predecessor");
+
             let triggeruuid = $(this).data('uuid');
             swal({
                 title: 'Sure want to remove?',
@@ -61,6 +63,8 @@ function predecessor_tc(triggeruuid) {
                         type: 'DELETE',
                         url: '/workpackage/'+triggeruuid+'/predecessor ',
                         success: function (data) {
+                            mApp.unblock(".delete-predecessor");
+
                             toastr.success('Predecessor has been deleted.', 'Deleted', {
                                 timeOut: 5000
                             }
@@ -114,6 +118,8 @@ function predecessor_tc_show(triggeruuid) {
 };
 
 $('.modal-footer').on('click', '.add-predecessor', function () {
+    mApp.block(".add-predecessor");
+
     let tcuuid =$('#uuid-predecessor').val();
     let taskcard_predecessor =$('#taskcard_predecessor').val();
     let order_predecessor = $('input[name=order_predecessor]').val();
@@ -130,6 +136,7 @@ $('.modal-footer').on('click', '.add-predecessor', function () {
             order: order_predecessor,
         },
         success: function (data) {
+            mApp.unblock(".add-predecessor");
             if (data.errors) {
                 // if (data.errors.name) {
                 //     $('#name-error').html(data.errors.name[0]);
@@ -141,6 +148,7 @@ $('.modal-footer').on('click', '.add-predecessor', function () {
                 // }
 
             } else {
+
                 $('#add_modal_predecessor').modal('hide');
 
                 toastr.success('Predecessor has been created.', 'Success', {
@@ -196,6 +204,8 @@ function predecessor_instruction_tc(triggeruuid) {
     $('<button type="button" data-toggle="modal" data-target="#add_modal_predecessor_instruction" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm add-predecessor-instruction-modal" id="predecessorBtn" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.modal-body .dataTables_filter');
 
     $('.dataTable').on('click', '.delete-predecessor-instruction', function () {
+        mApp.block(".delete-predecessor-instruction");
+
         let triggeruuid = $(this).data('uuid');
         swal({
             title: 'Sure want to remove?',
@@ -216,6 +226,8 @@ function predecessor_instruction_tc(triggeruuid) {
                     type: 'DELETE',
                     url: '/workpackage/'+triggeruuid+'/predecessor/instruction',
                     success: function (data) {
+                        mApp.unblock(".delete-predecessor-instruction");
+
                         toastr.success('Predecessor has been deleted.', 'Deleted', {
                             timeOut: 5000
                         }
@@ -270,6 +282,8 @@ function predecessor_instruction_tc_show(triggeruuid) {
 };
 
 $('.modal-footer').on('click', '.add-predecessor-instruction', function () {
+mApp.block(".add-predecessor-instruction");
+
 let tcuuid =$('#uuid-predecessor').val();
 let instruction_predecessor =$('#instruction_predecessor').val();
 let order_predecessor = $('input[name=order_predecessor_instruction]').val();
@@ -286,6 +300,7 @@ $.ajax({
         order: order_predecessor,
     },
     success: function (data) {
+        mApp.unblock(".add-predecessor-instruction");
         if (data.errors) {
             // if (data.errors.name) {
             //     $('#name-error').html(data.errors.name[0]);
@@ -297,6 +312,7 @@ $.ajax({
             // }
 
         } else {
+
             $('#add_modal_predecessor_instruction').modal('hide');
 
             toastr.success('Predecessor has been created.', 'Success', {

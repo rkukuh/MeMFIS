@@ -42,4 +42,22 @@ class EmployeeBenefitUpdate extends FormRequest
             'absence_punishment' => 'required' 
         ];
     }
+
+
+    /**
+     * Set custom validation error message
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'uuid_bpjs.required' => 'BPJS is required, please select at least one.',
+            'amount.required' => 'Allowance is required, please select at least one.',
+        ];
+    }
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
+    }
 }

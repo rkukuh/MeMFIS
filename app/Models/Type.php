@@ -50,6 +50,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Address.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfAttendanceCorrection(Builder $query)
+    {
+        return $query->where('of', 'attendance-correction');
+    }
+
+    /**
      * Scope a query to only include type of Aviation School Degree.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -91,6 +102,28 @@ class Type extends MemfisModel
     public function scopeOfCapability(Builder $query)
     {
         return $query->where('of', 'capability');
+    }
+
+    /**
+     * Scope a query to only include type of Coa.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCoa(Builder $query)
+    {
+        return $query->where('of', 'coa');
+    }
+
+    /**
+     * Scope a query to only include type of Coa.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCoaTransaction(Builder $query)
+    {
+        return $query->where('of', 'coa-transaction');
     }
 
     /**
@@ -281,6 +314,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of leave type based on.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfLeaveType(Builder $query)
+    {
+        return $query->where('of', 'leave-type');
+    }
+
+    /**
      * Scope a query to only include type of Aircraft Maintenance Cycle.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -336,6 +380,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Quotation Item.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfQuotationItemCost(Builder $query)
+    {
+        return $query->where('of', 'quotation-item-cost');
+    }
+
+    /**
      * Scope a query to only include type of Regulator.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -344,6 +399,17 @@ class Type extends MemfisModel
     public function scopeOfRegulator(Builder $query)
     {
         return $query->where('of', 'regulator');
+    }
+
+    /**
+     * Scope a query to only include type of RIR's General Document.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfGender(Builder $query)
+    {
+        return $query->where('of', 'gender');
     }
 
     /**
@@ -572,6 +638,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Tax payment method.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfTaxPaymentMethod(Builder $query)
+    {
+        return $query->where('of', 'tax-payment-method');
+    }
+
+    /**
      * Scope a query to only include type of Term of Payment.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -618,6 +695,19 @@ class Type extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * One-to-Many: An attendance correction may have zero or many type.
+     *
+     * This function will retrieve all addresses of a type.
+     * See: Address's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function attendance_correction()
+    {
+        return $this->hasMany(AttendanceCorrection::class);
+    }
+
+    /**
      * One-to-Many: An address may have zero or many type.
      *
      * This function will retrieve all addresses of a type.
@@ -654,6 +744,19 @@ class Type extends MemfisModel
     public function emails()
     {
         return $this->hasMany(Email::class);
+    }
+
+    /**
+     * One-to-Mant: A gender have zero or many Employees.
+     *
+     * This function will retrieve Project of a given RTS.
+     * See: Employee's gender() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_gender()
+    {
+        return $this->hasMany(Employee::class, 'gender_id');
     }
 
     /**
@@ -895,15 +998,5 @@ class Type extends MemfisModel
     public function websites()
     {
         return $this->hasMany(Website::class);
-    
-    
-    /**
-     * One-to-Many: A website may have zero or many type.
-     *
-     * This function will retrieve all websites of a type.
-     * See: Website's type() method for the inverse
-     *
-     * @return mixed
-     */
-}
+    }
 }

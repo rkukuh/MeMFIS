@@ -56,6 +56,7 @@ class ProjectHMWorkPackageEOInstructionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\ProjectStore  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request,Project $project, WorkPackage $workpackage, EOInstruction $instruction)
@@ -89,6 +90,7 @@ class ProjectHMWorkPackageEOInstructionController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Project  $project
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project, WorkPackage $workPackage,Request $request)
@@ -100,6 +102,7 @@ class ProjectHMWorkPackageEOInstructionController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Project  $project
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project, WorkPackage $workPackage,Request $request)
@@ -124,6 +127,7 @@ class ProjectHMWorkPackageEOInstructionController extends Controller
      *
      * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
      * @param  \App\Models\WorkPackage  $workPackage
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function sequence(Request $request, ProjectWorkPackageTaskCard $ProjectWorkpackage)
@@ -138,6 +142,7 @@ class ProjectHMWorkPackageEOInstructionController extends Controller
      *
      * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
      * @param  \App\Models\WorkPackage  $workPackage
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function sequenceInstruction(Request $request, ProjectWorkPackageEOInstruction $ProjectWorkpackage)
@@ -152,6 +157,7 @@ class ProjectHMWorkPackageEOInstructionController extends Controller
      *
      * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
      * @param  \App\Models\WorkPackage  $workPackage
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function mandatory(Request $request, ProjectWorkPackageTaskCard $ProjectWorkpackage)
@@ -166,6 +172,7 @@ class ProjectHMWorkPackageEOInstructionController extends Controller
      *
      * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
      * @param  \App\Models\WorkPackage  $workPackage
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function mandatoryInstruction(Request $request, ProjectWorkPackageEOInstruction $ProjectWorkpackage)
@@ -180,6 +187,7 @@ class ProjectHMWorkPackageEOInstructionController extends Controller
      *
      * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
      * @param  \App\Models\WorkPackage  $workPackage
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function rii(Request $request, ProjectWorkPackageTaskCard $ProjectWorkpackage)
@@ -194,6 +202,7 @@ class ProjectHMWorkPackageEOInstructionController extends Controller
      *
      * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
      * @param  \App\Models\WorkPackage  $workPackage
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function riiInstruction(Request $request, ProjectWorkPackageEOInstruction $ProjectWorkpackage)

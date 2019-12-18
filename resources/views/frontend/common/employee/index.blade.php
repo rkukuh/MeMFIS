@@ -6,7 +6,7 @@
             <div class="search-journal" id="search-journal" name="search-journal">
                 {{ isset($employee) ? $employee->code ." - ".$employee->first_name : 'Search Employee Name' }}
             </div>
-            <input type="hidden" name="search-journal-val" id="search-journal-val" value="{{ isset($employee) ? $employee->uuid : null }}">
+            <input type="hidden" name="search-employee-val" id="search-employee-val" value="{{ isset($employee) ? $employee->uuid : null }}">
         </div>
 
         <div class="col-sm-3 col-md-3 col-lg-3 text-right p-2" style="padding: 0;">

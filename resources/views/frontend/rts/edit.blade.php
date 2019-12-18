@@ -51,7 +51,7 @@
 
                                         <select name="project" id="project" class="form-control m-select2" style="width:100%" disabled>
                                             @foreach ($projects as $project)
-                                                <option value="{{$project->id}}" @if($project->id == $projec->id) selected @endif>{{$project->code}}</option>
+                                            <option value="{{$project->id}}" @if($project->id == $rts->project->id) selected @endif>{{$project->code}}</option>
                                             @endforeach
                                         </select>
 
@@ -61,11 +61,8 @@
                                             A/C Type @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.select2')
-                                        @slot('text', 'Applicability Airplane')
-                                        @slot('id', 'applicability_airplane')
-                                        @slot('name', 'applicability_airplane')
-                                        @slot('id_error', 'applicability-airplane')
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', $rts->project->aircraft->name)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -76,10 +73,11 @@
                                         </label>
 
                                         @component('frontend.common.input.datepicker')
-                                        @slot('id', 'date')
-                                        @slot('text', 'Date')
-                                        @slot('name', 'date')
-                                        @slot('id_error', 'date')
+                                            @slot('id', 'date')
+                                            @slot('text', 'Date')
+                                            @slot('name', 'date')
+                                            @slot('id_error', 'date')
+                                            @slot('value', $rts->created_at)
                                         @endcomponent
                                     </div>
 
@@ -88,11 +86,8 @@
                                             A/C Reg @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.text')
-                                        @slot('text', 'Aircraft Register')
-                                        @slot('id', 'aircraft_register')
-                                        @slot('name', 'aircraft_register')
-                                        @slot('id_error', 'aircraft_register')
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', $rts->project->aircraft_register)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -103,33 +98,31 @@
                                             Work Performed @include('frontend.common.label.optional')
                                         </label>
 
-                                        @component('frontend.common.input.text')
-                                        @slot('id', 'work_performed')
-                                        @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed')
-                                        @slot('id_error', 'work_performed')
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', $rts->project->aircraft_sn)
                                         @endcomponent
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         @component('frontend.common.input.text')
-                                        @slot('id', 'work_performed')
-                                        @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed')
-                                        @slot('id_error', 'work_performed')
-                                        @slot('placeholder','Optional')
+                                            @slot('id', 'work_performed')
+                                            @slot('text', 'Work Performed')
+                                            @slot('name', 'work_performed')
+                                            @slot('id_error', 'work_performed')
+                                            @slot('placeholder','Optional')
                                         @endcomponent
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         @component('frontend.common.input.text')
-                                        @slot('id', 'work_performed')
-                                        @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed')
-                                        @slot('id_error', 'work_performed')
-                                        @slot('placeholder','Optional')
+                                            @slot('id', 'work_performed')
+                                            @slot('text', 'Work Performed')
+                                            @slot('name', 'work_performed')
+                                            @slot('id_error', 'work_performed')
+                                            @slot('placeholder','Optional')
+                                            @slot('value', $rts->work_performed)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -141,10 +134,11 @@
                                         </label>
 
                                         @component('frontend.common.input.textarea')
-                                        @slot('rows', '5')
-                                        @slot('id', 'work_data')
-                                        @slot('name', 'work_data')
-                                        @slot('text', 'Work Data')
+                                            @slot('rows', '5')
+                                            @slot('id', 'work_data')
+                                            @slot('name', 'work_data')
+                                            @slot('text', 'Work Data')
+                                            @slot('value', $rts->work_data)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -155,10 +149,11 @@
                                         </label>
 
                                         @component('frontend.common.input.textarea')
-                                        @slot('rows', '5')
-                                        @slot('id', 'exceptions')
-                                        @slot('name', 'exceptions')
-                                        @slot('text', 'xceptions')
+                                            @slot('rows', '5')
+                                            @slot('id', 'exceptions')
+                                            @slot('name', 'exceptions')
+                                            @slot('text', 'exceptions')
+                                            @slot('value', $rts->exception)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -171,29 +166,30 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
-                                                @slot('id', 'DGCA')
-                                                @slot('name', 'approval[]')
-                                                @slot('text', 'Indonesia DGCA No : 145D-093')
-                                                @slot('value', 'Indonesia DGCA No : 145D-093')
-                                                @slot('style_div','margin-top:30px')
+                                                    @slot('id', 'DGCA')
+                                                    @slot('name', 'approval[]')
+                                                    @slot('text', 'Indonesia DGCA No : 145D-093')
+                                                    @slot('value', 'Indonesia DGCA No : 145D-093')
+                                                    @slot('style_div','margin-top:30px')
+                                                    @slot('checked', 'checked')
                                                 @endcomponent
                                             </div>
                                             <!-- <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
-                                                @slot('id', 'FAA')
-                                                @slot('name', 'approval[]')
-                                                @slot('text', 'Federal Aviation Administration - FAA')
-                                                @slot('value', 'Federal Aviation Administration - FAA')
-                                                @slot('style_div','margin-top:30px')
+                                                        @slot('id', 'FAA')
+                                                        @slot('name', 'approval[]')
+                                                        @slot('text', 'Federal Aviation Administration - FAA')
+                                                        @slot('value', 'Federal Aviation Administration - FAA')
+                                                        @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
-                                                @slot('id', 'EASA')
-                                                @slot('name', 'approval[]')
-                                                @slot('text', 'European Union Aviation Safety Agency - EASA')
-                                                @slot('value', 'European Union Aviation Safety Agency - EASA')
-                                                @slot('style_div','margin-top:30px')
+                                                        @slot('id', 'EASA')
+                                                        @slot('name', 'approval[]')
+                                                        @slot('text', 'European Union Aviation Safety Agency - EASA')
+                                                        @slot('value', 'European Union Aviation Safety Agency - EASA')
+                                                        @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </div> -->
                                         </div>
@@ -236,15 +232,6 @@
 <script src="{{ asset('js/frontend/rts/form-reset.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-
-<script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
-
-<script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
-
-<script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>

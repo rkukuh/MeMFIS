@@ -207,7 +207,7 @@ class TaskCardEOController extends Controller
                 $data = $request->input('image');
                 $photo = $request->file('fileInput')->getClientOriginalName();
                 $destination = 'master/taskcard/non-routine/';
-                $stat = Storage::disk('public')->putFileAs($destination,$request->file('fileInput'), $photo);
+                $stat = Storage::disk('s3')->putFileAs($destination,$request->file('fileInput'), $photo);
             }
 
             return response()->json($taskCard);
@@ -280,7 +280,7 @@ class TaskCardEOController extends Controller
                 $data = $request->input('image');
                 $photo = $request->file('fileInput')->getClientOriginalName();
                 $destination = 'master/taskcard/non-routine/';
-                $stat = Storage::disk('public')->putFileAs($destination,$request->file('fileInput'), $photo);
+                $stat = Storage::disk('s3')->putFileAs($destination,$request->file('fileInput'), $photo);
             }
 
             return response()->json($taskcard);

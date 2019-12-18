@@ -132,6 +132,7 @@ class JobCardController extends Controller
      /**
      * Search the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
@@ -162,7 +163,7 @@ class JobCardController extends Controller
         $now = Carbon::now();
         $statuses = Status::ofJobCard()->get();
         $jobcard = JobCard::with('jobcardable','quotation')->where('uuid',$jobCard)->first();
-    
+
         foreach($jobcard->helpers as $helper){
             $helper->userID .= $helper->user->id;
         }
@@ -208,7 +209,7 @@ class JobCardController extends Controller
 
         if($jobcard->jobcardable_type == "App\Models\TaskCard"){
 
-            $rii_status = $jobcard->jobcardable->is_rii;
+            $rii_status = $jobcard->is_rii;
             if(sizeof($jobcard->helpers) > 0){
                 $helpers = join(',', $jobcard->helpers->pluck('full_name')->toArray());
             }else{
@@ -254,6 +255,7 @@ class JobCardController extends Controller
                 $prepared_by = "-";
                 $prepared_at = "-";
             }
+
 
             if($jobcard->jobcardable->type->code == "basic"){
 
@@ -345,7 +347,7 @@ class JobCardController extends Controller
             }
             elseif($jobcard->jobcardable->type->code == "preliminary"){
                 $m = new Merger();
-
+                
                 $defectcards = array_chunk($jobcard->defectcards->toArray(),15);
                 $last = false;
 
@@ -429,7 +431,7 @@ class JobCardController extends Controller
             $eo_additionals->TSN = json_decode($jobcard->additionals)->TSN;
             $eo_additionals->CSN = json_decode($jobcard->additionals)->CSN;
 
-            $rii_status = $jobcard->jobcardable->is_rii;
+            $rii_status = $jobcard->is_rii;
             if(sizeof($jobcard->helpers) > 0){
                 $helpers = join(',', $jobcard->helpers->pluck('full_name'));
             }else{

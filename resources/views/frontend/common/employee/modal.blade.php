@@ -12,7 +12,8 @@
                     <thead>
                         <tr>
                             <th>NRP</th>
-                            <th>Employee Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

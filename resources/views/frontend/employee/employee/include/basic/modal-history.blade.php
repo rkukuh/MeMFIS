@@ -37,57 +37,37 @@
                                                         <td align="center" width="55%"></td>
                                                     </tr>
                                                     <tr>
-                                                            @php
-                                                            $lastName = null;
-                                                            if($employee->last_name != $employee->first_name){
-                                                            $lastName = $employee->last_name;
-                                                            }
-                                                            @endphp
                                                         <td valign="top"><b>Name</b></td>
-                                                    <td valign="top" align="center">{{ $employee->first_name.' '.$lastName}}</td>
+                                                        <td valign="top" align="center">{{ $employee->first_name.' '.$employee->last_name}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Employee ID</b></td>
-                                                    <td valign="top" align="center">{{ $employee->code }}</td>
+                                                        <td valign="top" align="center">{{ $employee->code }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Place & Date of Birth</b></td>
-                                                    <td valign="top" align="center">{{ $employee->dob.' & '.$employee->dob_place }}</td>
+                                                        <td valign="top" align="center">{{ $employee->dob.' & '.$employee->dob_place }}</td>
                                                     </tr>
                                                     <tr>
-                                                        @php
-                                                            $gender = null;
-                                                            if($employee->gender == 'f'){
-                                                            $gender = 'Female';
-                                                            }else if($employee->gender == 'm'){
-                                                            $gender = 'Male';
-                                                            }
-                                                        @endphp
                                                         <td valign="top"><b>Gender</b></td>
-                                                        <td valign="top" align="center">{{ $gender }}</td>
+                                                        <td valign="top" align="center">{{ $employee->gender->name }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Nationality</b></td>
-                                                    <td valign="top" align="center">{{ $employee->nationality }}</td>
+                                                        <td valign="top" align="center">{{ $employee->nationalities->first()->nationality }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Religion</b></td>
-                                                    <td valign="top" align="center">{{ $employee->religion }}</td>
+                                                        <td valign="top" align="center">{{ $employee->religion->name }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Martial Status</b></td>
-                                                    <td valign="top" align="center">{{ $employee->marital_status }}</td>
+                                                        <td valign="top" align="center">{{ $employee->marital_status->name }}</td>
                                                     </tr>
                                                 </table>
                                             </fieldset>
                                             <fieldset class="border p-2 mt-2">
                                                 <legend class="w-auto"><b>Contact Information Details</b></legend>
-                                                @php
-                                                $address_1 = null;
-                                                if(isset($addresses['address_1'])){
-                                                $address_1 = $addresses['address_1'];
-                                                }
-                                                @endphp
                                                 <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
                                                     <tr>
                                                         <td align="center" width="45%"><b>Contact Information</b></td>
@@ -95,7 +75,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Address Line 1</b></td>
-                                                    <td valign="top" align="center">{{ $address_1 }}</td>
+                                                    <td valign="top" align="center">@if(array_key_exists('primary', $addresses)) {{ $addresses['primary']->address }} @else - @endif</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>City</b></td>
@@ -103,7 +83,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Country</b></td>
-                                                    <td valign="top" align="center">{{ $employee->country }}</td>
+                                                    <td valign="top" align="center">{{ $employee->country->name }}</td>
                                                     </tr>
                                                     <tr>
                                                             @php
@@ -117,22 +97,22 @@
                                                     </tr>
                                                     <tr>
                                                             @php
-                                                            $email_1 = null;
-                                                            if(isset($emails['email_1'])){
-                                                                $email_1 = $emails['email_1'];
+                                                            $primary = null;
+                                                            if(isset($emails['primary'])){
+                                                                $primary = $emails['primary'];
                                                             }
                                                             @endphp
-                                                        <td valign="top"><b>Email 1</b></td>
-                                                        <td valign="top" align="center">{{ $email_1 }}</td>
+                                                        <td valign="top"><b>Primary</b></td>
+                                                        <td valign="top" align="center">{{ $primary }}</td>
                                                     </tr>
                                                 </table>
                                             </fieldset>
                                             <fieldset class="border p-2 mt-2">
                                                 <legend class="w-auto"><b>Job Details</b></legend>
                                                 @php
-                                                $jobTittle  = null;
-                                                if(isset($jobDetails['job_tittle'])){
-                                                    $jobTittle = $jobDetails['job_tittle'];
+                                                $jobTitle  = null;
+                                                if(isset($jobDetails['job_title'])){
+                                                    $jobTitle = $jobDetails['job_title'];
                                                     }
                                                     
                                                 $position  = null;
@@ -167,7 +147,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Job Title</b></td>
-                                                    <td valign="top" align="center">{{ $jobTittle }}</td>
+                                                    <td valign="top" align="center">{{ $jobTitle }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Job Position</b></td>
@@ -221,128 +201,135 @@
                                     <div class="m-portlet m-portlet--mobile pb-3">
                                         <div class="m-portlet__body">
 
-                                            @for ($i = 0; $i < count($history); $i++)
-                                            
-                                            <div class="my-4">
-                                                <div class="d-flex justify-content-end">
-                                                    <h3 class="m-portlet__head-text">
-                                                        @php
-                                                            $created_time = $history[$i]['created_at'];
-                                                            $formatCreatedTime = strtotime($created_time);
-
-                                                            $updated_time = $history[$i]['updated_at'];
-                                                            $formatUpdatedTime = strtotime($updated_time);
-
-                                                            echo date("d F Y", $formatCreatedTime).' to '.date("d F Y", $formatUpdatedTime);
-                                                        @endphp
-                                                    </h3>
+                                            @foreach($employee->ebdh as $history)
+                                                <div class="my-4">
+                                                    <div class="d-flex justify-content-end">
+                                                        <h3 class="m-portlet__head-text">
+                                                            @php
+                                                            $data = json_decode( $history->history_data );
+                                                            @endphp
+                                                        </h3>
+                                                    </div>
+                                                    <fieldset class="border p-2">
+                                                        <legend class="w-auto"><b>Personal Details</b></legend>
+                                                        <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
+                                                            <tr>
+                                                                <td align="center" width="45%"><b>Personal Information</b></td>
+                                                                <td align="center" width="55%"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Name</b></td>
+                                                            <td valign="top" align="center">{{ $data->first_name }} {{ $data->last_name }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Employee ID</b></td>
+                                                                <td valign="top" align="center">{{ $data->code }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Place & Date of Birth</b></td>
+                                                                <td valign="top" align="center">{{ $data->dob_place }},{{ $data->dob }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Gender</b></td>
+                                                                <td valign="top" align="center">{{ $data->gender->name }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Nationality</b></td>
+                                                                <td valign="top" align="center">{{ $data->nationality->nationality }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Religion</b></td>
+                                                                <td valign="top" align="center">{{ $data->religion->name }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Martial Status</b></td>
+                                                                <td valign="top" align="center">{{ $data->marital_status->name }}</td>
+                                                            </tr>
+                                                        </table>
+                                                    </fieldset>
+                                                    <fieldset class="border p-2 mt-2">
+                                                        <legend class="w-auto"><b>Contact Information Details</b></legend>
+                                                        <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
+                                                            <tr>
+                                                                <td align="center" width="45%"><b>Contact Information</b></td>
+                                                                <td align="center" width="55%"></td>
+                                                            </tr>
+                                                            @if(sizeof($data->addresses) > 0)
+                                                                @foreach($data->addresses as $key => $address)
+                                                                <tr>
+                                                                    <td valign="top"><b>Address Line {{ $address->type->name }}</b></td>
+                                                                    <!-- TODO address -->
+                                                                    <td valign="top" align="center">{{ $address->address }}</td>
+                                                                </tr>
+                                                                @endforeach
+                                                            @endif
+                                                            <tr>
+                                                                <td valign="top"><b>City</b></td>
+                                                                <td valign="top" align="center">{{ $data->city }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Country</b></td>
+                                                                <td valign="top" align="center">{{ $data->country->name }}</td>
+                                                            </tr>
+                                                            @if(sizeof($data->phones) > 0)
+                                                                @foreach($data->phones as $key => $phone)
+                                                                <tr>
+                                                                    <td valign="top"><b>Mobile Phone {{ $phone->type->name }}</b></td>
+                                                                    <!-- TODO Mobile Phone -->
+                                                                    <td valign="top" align="center">{{ $phone->number }}</td>
+                                                                </tr>
+                                                                @endforeach
+                                                            @endif
+                                                            @if(sizeof($data->emails) > 0)
+                                                                @foreach($data->emails as $key => $email)
+                                                                <tr>
+                                                                    <td valign="top"><b>Email {{ $email->type->name }}</b></td>
+                                                                    <!-- TODO Mobile Phone -->
+                                                                    <td valign="top" align="center">{{ $email->address }}</td>
+                                                                </tr>
+                                                                @endforeach
+                                                            @endif
+                                                        </table>
+                                                    </fieldset>
+                                                    <fieldset class="border p-2 mt-2">
+                                                        <legend class="w-auto"><b>Job Details</b></legend>
+                                                        <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
+                                                            <tr>
+                                                                <td align="center" width="45%"><b>job Details Information</b></td>
+                                                                <td align="center" width="55%"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Job Title</b></td>
+                                                                <td valign="top" align="center">@if($data->job_title) {{ $data->job_title->name }} @endif</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Job Position</b></td>
+                                                                <td valign="top" align="center">@if($data->position) {{ $data->position->name }} @endif</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Employee Status</b></td>
+                                                                <td valign="top" align="center">@if($data->statuses) {{ $data->statuses->name }} @endif</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Department</b></td>
+                                                                <td valign="top" align="center">@if($data->department) {{ $data->department->name }} @endif</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Joined Date</b></td>
+                                                                <td valign="top" align="center">{{ $data->joined_date }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Supervisor</b></td>
+                                                                <td valign="top" align="center">@if($data->supervisor) {{ $data->supervisor->first_name }} {{ $data->supervisor->last_name }}@endif</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top"><b>Indirect Supervisor</b></td>
+                                                                <td valign="top" align="center">@if($data->indirect_supervisor) {{ $data->indirect_supervisor->first_name }} {{ $data->indirect_supervisor->last_name }}@endif</td>
+                                                            </tr>
+                                                        </table>
+                                                    </fieldset>
                                                 </div>
-                                                <fieldset class="border p-2">
-                                                    <legend class="w-auto"><b>Personal Details</b></legend>
-                                                    <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
-                                                        <tr>
-                                                            <td align="center" width="45%"><b>Personal Information</b></td>
-                                                            <td align="center" width="55%"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Name</b></td>
-                                                        <td valign="top" align="center">{{ $history[$i]['name'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Employee ID</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['code'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Place & Date of Birth</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['dobdata'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Gender</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['gender'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Nationality</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['nationality'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Religion</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['religion'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Martial Status</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['martial_status'] }}</td>
-                                                        </tr>
-                                                    </table>
-                                                </fieldset>
-                                                <fieldset class="border p-2 mt-2">
-                                                    <legend class="w-auto"><b>Contact Information Details</b></legend>
-                                                    <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
-                                                        <tr>
-                                                            <td align="center" width="45%"><b>Contact Information</b></td>
-                                                            <td align="center" width="55%"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Address Line 1</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['address_1'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>City</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['city'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Country</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['country'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Mobile Phone</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['mobile_phone'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Email 1</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['email_1'] }}</td>
-                                                        </tr>
-                                                    </table>
-                                                </fieldset>
-                                                <fieldset class="border p-2 mt-2">
-                                                    <legend class="w-auto"><b>Job Details</b></legend>
-                                                    <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
-                                                        <tr>
-                                                            <td align="center" width="45%"><b>job Details Information</b></td>
-                                                            <td align="center" width="55%"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Job Title</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['job_tittle'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Job Position</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['position'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Employee Status</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['status'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Department</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['department'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Joined Date</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['joined_date'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Supervisor</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['supervisor'] }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Indirect Supervisor</b></td>
-                                                            <td valign="top" align="center">{{ $history[$i]['indirect_supervisor'] }}</td>
-                                                        </tr>
-                                                    </table>
-                                                </fieldset>
-                                            </div>
-                                        
-                                            @endfor
+                                            @endforeach
 
                                         </div>
                                     </div>

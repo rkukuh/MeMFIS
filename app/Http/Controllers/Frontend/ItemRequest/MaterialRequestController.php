@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemRequestStore;
 use App\Http\Requests\Frontend\ItemRequestUpdate;
 use App\Helpers\DocumentNumber;
+use App\Models\JobCard;
+use App\Models\Type;
 
 class MaterialRequestController extends Controller
 {
@@ -43,11 +45,32 @@ class MaterialRequestController extends Controller
      */
     public function store(ItemRequestStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('ITEM-REQ', ItemRequest::withTrashed()->count() + 1)]);
+        $type = Type::where('code', '=', 'material')
+            ->where('of', 'item-request')
+            ->pluck('id')
+            ->first();
+
+        $request->merge(['number' => DocumentNumber::generate('MTRQ-', ItemRequest::withTrashed()->count() + 1)]);
+        $request->merge(['type_id' => $type]);
         $request->merge(['requestable_type' => 'App\Models\ItemRequest']);
         $request->merge(['requestable_id' => ItemRequest::withTrashed()->count() + 1]);
 
         $itemRequest = ItemRequest::create($request->all());
+
+        $jobcard = JobCard::where('uuid', $request->jc_no)->first();
+        $items = $jobcard->jobcardable->materials;
+
+        foreach ($items as $item) {
+            $itemRequest->items()->attach([
+                $item->id => [
+                    'request_id' => $itemRequest->id,
+                    'item_id' => $item->pivot->item_id,
+                    'unit_id' => $item->pivot->unit_id,
+                    'quantity' => $item->pivot->quantity,
+                    'note' => $item->pivot->note
+                ]
+            ]);
+        }
 
         return response()->json($itemRequest);
     }
@@ -126,70 +149,9 @@ class MaterialRequestController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Frontend\ItemRequestStore  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function addItem(ItemRequestStore $request, ItemRequest $itemRequest, Item $item)
-    {
-        $exists = $itemRequest->items()->where('item_id', $item->id)->first();
-
-        if ($exists) {
-            return response()->json(['title' => "Danger"]);
-        }
-
-        $item = Item::find($item->id);
-
-        if (!is_null($request->serial_no)) {
-            $itemRequest->items()->attach([
-                $item->id => [
-                    'quantity' => 1,
-                    'unit_id' => $item->unit_id,
-                    'quantity_in_primary_unit' => 1,
-                    'expired_at' => $request->exp_date,
-                    'serial_number' => $request->serial_no,
-                    'purchased_price' => 0, // ??
-                    'total' => 0, // ??
-                    'description' => $request->remark
-                ]
-            ]);
-
-            return response()->json($itemRequest);
-        }
-
-        $quantity_unit = $request->quantity;
-
-        if ($request->unit_id <> $item->unit_id) {
-            $quantity = $request->quantity;
-            $qty_uom = $item->units->where('uom.unit_id', $item->unit_id)->first()->uom->quantity;
-
-            if (!is_null($request->unit_id)) {
-                $qty_uom = $item->units->where('uom.unit_id', $request->unit_id)->first()->uom->quantity;
-            }
-
-            $quantity_unit = $qty_uom * $quantity;
-        }
-
-        $itemRequest->items()->attach([
-            $item->id => [
-                'quantity' => $request->quantity,
-                'unit_id' => $request->unit_id,
-                'quantity_in_primary_unit' => $quantity_unit,
-                'expired_at' => $request->exp_date,
-                'purchased_price' => 0, // ??
-                'total' => 0, // ??
-                'description' => $request->remark
-            ]
-        ]);
-
-        return response()->json($itemRequest);
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\InventoryInUpdate  $request
+     * @param  \App\Http\Requests\Frontend\ItemRequestUpdate  $request
      * @param  \App\Models\ItemRequest  $itemRequest
      * @return \Illuminate\Http\Response
      */
@@ -200,7 +162,7 @@ class MaterialRequestController extends Controller
             [
                 'quantity' => $request->quantity,
                 'unit_id' => $request->unit_id,
-                'description' => $request->remark
+                'note' => $request->remark
             ]
         );
 

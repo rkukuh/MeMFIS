@@ -52,7 +52,9 @@ class GoodsReceivedItemUpdate extends FormRequest
             $quantity_item_po = 0;
 
             foreach($GoodsReceiveds as $GoodsReceived){
-                $quantity_item_po = $quantity_item_po + $GoodsReceived->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
+                if($GoodsReceived->items()->where('uuid',$item->uuid)->first()){
+                    $quantity_item_po = $quantity_item_po + $GoodsReceived->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
+                }
             }
 
             if($this->unit_id <> $item->unit_id){

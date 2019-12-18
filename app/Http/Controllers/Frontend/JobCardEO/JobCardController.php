@@ -108,6 +108,7 @@ class JobCardController extends Controller
      /**
      * Search the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */

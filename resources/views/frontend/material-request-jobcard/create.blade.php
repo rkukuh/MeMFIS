@@ -118,7 +118,7 @@
                                                 @component('frontend.common.input.select2')
                                                 @slot('text', 'Project Ref No.')
                                                 @slot('id', 'ref_project')
-                                                @slot('name', 'ref_project')
+                                                @slot('name', 'project')
                                                 @slot('id_error', 'ref_project')
                                                 @slot('disabled', 'disabled')
                                                 @endcomponent
@@ -237,15 +237,15 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                                            <!-- <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                                                 @component('frontend.common.buttons.create-new')
                                                                 @slot('text', 'Item')
-                                                                <!-- @slot('data_target', '#modal_material_request') -->
+                                                                @slot('data_target', '#modal_material_request')
                                                                 @endcomponent
 
 
                                                                 <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                     </div>
                                                     @include('frontend.material-request-jobcard.modal')
@@ -261,8 +261,8 @@
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
                                                 @slot('type','button')
-                                                @slot('id', 'add-workpackage')
-                                                @slot('class', 'add-workpackage')
+                                                @slot('id', 'add-request')
+                                                @slot('class', 'add-request')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
@@ -291,11 +291,13 @@
 <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/ref-jobcard.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/jobcard-number.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/ref-project.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 
 <!-- <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script> -->

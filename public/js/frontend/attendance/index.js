@@ -14,6 +14,7 @@ let Attendance = {
                                 dataSet = raw.data;
                             }
 
+                            console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -55,19 +56,19 @@ let Attendance = {
                     }
                 },
                 {
-                    field: 'nrp',
+                    field: 'employee.code',
                     title: 'NRP',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'employee_name',
+                    field: 'employee.first_name',
                     title: 'Employee Name',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'days',
+                    field: 'day',
                     title: 'Day Name',
                     sortable: 'asc',
                     filterable: !1,
@@ -91,13 +92,13 @@ let Attendance = {
                     filterable: !1,
                 },
                 {
-                    field: 'late_in',
+                    field: 'late',
                     title: 'Late In',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'earlier_out',
+                    field: 'out',
                     title: 'Earlier Out',
                     sortable: 'asc',
                     filterable: !1,
@@ -109,52 +110,63 @@ let Attendance = {
                     filterable: !1,
                 },
                 {
-                    field: 'title',
+                    field: 'overtime_remark',
                     title: 'Approved Overtime',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        // if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return '<a data-toggle="modal" data-target="#modal_transaction_overtime" href="#">' + "Transaction No" + "</a>"
-                        // }
-                        // else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                        //     return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
-                        // }
+                        if(typeof t.parent === 'undefined' || t.parent === null){
+                            if(t.attendance_overtime){
+                                return '<a data-toggle="modal" data-target="#modal_transaction_overtime"  data-uuid="'+t.attendance_overtime.uuid+'" href="#" class="attendace_correction_modal">' + t.attendance_overtime.code + "</a>"
+                            }else{
+                                return "-";
+                            }
+                        }else{
+                            if(t.parent.attendance_overtime){
+                                return '<a data-toggle="modal" data-target="#modal_transaction_overtime"  data-uuid="'+t.parent.attendance_overtime.uuid+'" href="#" class="attendace_correction_modal">' + t.parent.attendance_overtime.code + "</a>"
+                            }else{
+                                return "-";
+                            }
+                        }
                     }
 
                 },
                 {
-                    field: 'title',
+                    field: 'leave_remark',
                     title: 'Leaves Remark',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        // if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return '<a data-toggle="modal" data-target="#modal_transaction_leave" href="#">' + "Transaction No" + "</a>"
-                        // }
-                        // else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                        //     return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
-                        // }
+                        if(t.leave){
+                            return '<a data-toggle="modal" data-uuid="'+t.leave.uuid+'" href="#" class="leave_modal">' + t.leave.code + "</a>";
+                        }else{
+                            return "-";
+                        }
                     }
-
                 },
                 {
-                    field: 'title',
+                    field: 'attendance_correction',
                     title: 'Correction Remark',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        // if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return '<a data-toggle="modal" data-target="#modal_transaction_correction" href="#">' + "Transaction No" + "</a>"
-                        // }
-                        // else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            // return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
-                        // }
+                        if(typeof t.parent === 'undefined' || t.parent === null){
+                            if(t.attendance_correction){
+                                return '<a data-toggle="modal" data-target="#modal_transaction_correction"  data-uuid="'+t.attendance_correction.uuid+'" href="#" class="attendace_correction_modal">' + t.attendance_correction.code + "</a>"
+                            }else{
+                                return "-";
+                            }
+                        }else{
+                            if(t.parent.attendance_correction){
+                                return '<a data-toggle="modal" data-target="#modal_transaction_correction"  data-uuid="'+t.parent.attendance_correction.uuid+'" href="#" class="attendace_correction_modal">' + t.parent.attendance_correction.code + "</a>"
+                            }else{
+                                return "-";
+                            }
+                        }
                     }
-
                 },
                 {
-                    field: 'statuses_name',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -174,4 +186,91 @@ let Attendance = {
 
 jQuery(document).ready(function () {
     Attendance.init();
+});
+
+$(document).ready(function() {
+
+    $('.attendance_datatable').on("click",".leave_modal", function() {
+        let leave_uuid = $(this).data("uuid");
+
+        $("#modal_transaction_leave").modal('show');
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                    "content"
+                )
+            },
+            type: "GET",
+            url:
+                "/leave/" +
+                leave_uuid +
+                "/api",
+            success: function(data) {
+                $("#leave-code").html(data.code);
+                $("#leave-status").html(data.status.name);
+                $("#leave-approve").html(data.conductedBy.first_name+";"+data.approval.created_at);
+                $("#leave-job-title").html(data.conductedBy.job_title_id);
+                $("#leave-remark").html(data.description);
+
+                $("#leave-start-date").html(data.start_date);
+                $("#leave-end-date").html(data.end_date);
+                $("#leave-type").html(data.leave_type.name);
+                $("#leave-type-description").html(data.leave_type.description);
+                $("#leave-created").html(data.created_at);
+
+            },
+            error: function(jqXhr, json, errorThrown) {
+                let errors = jqXhr.responseJSON;
+                $.each(errors.error, function(index, value) {
+                    toastr.error(value.message, value.title, {
+                        closeButton: true,
+                        timeOut: "0"
+                    });
+                });
+            }
+        });
+    });
+
+    $('.attendance_datatable').on("click",".attendace_correction_modal", function() {
+        let attcor_uuid = $(this).data("uuid");
+        $("#modal_transaction_correction").modal('show');
+
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                    "content"
+                )
+            },
+            type: "GET",
+            url:
+                "/attendance-correction/" +
+                attcor_uuid +
+                "/api",
+            success: function(data) {
+                console.log(data);
+                $("#attcor-code").html(data.code);
+                $("#attcor-status").html(data.status.name);
+                $("#attcor-approve").html(data.conductedBy);
+                $("#attcor-job-title").html(data.conductedBy.job_title_id);
+                $("#attcor-remark").html(data.description);
+
+                $("#attcor-code").html(data.code);
+                $("#attcor-check-in").html(data.attendance.in);
+                $("#attcor-check-out").html(data.attendance.out);
+                $("#attcor-description").html(data.description);
+                $("#attcor-created").html(data.created_at);
+
+            },
+            error: function(jqXhr, json, errorThrown) {
+                let errors = jqXhr.responseJSON;
+                $.each(errors.error, function(index, value) {
+                    toastr.error(value.message, value.title, {
+                        closeButton: true,
+                        timeOut: "0"
+                    });
+                });
+            }
+        });
+    });
+
 });

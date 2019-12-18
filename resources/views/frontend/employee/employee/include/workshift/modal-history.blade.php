@@ -23,7 +23,7 @@
                                                 <h3 class="m-portlet__head-text">
                                                     Current
                                                 </h3>
-                                                
+                                             
                                             </div>
                                         </div>
                                     </div>
@@ -34,13 +34,9 @@
                                                     <td align="center"><b>Workshift Information</b></td>
                                                 </tr>
                                                 <tr>
-                                                    @php
-                                                    $workshift_name = null;
-                                                        if(isset($workshift_current['name'])){
-                                                            $workshift_name = $workshift_current['name'];
-                                                        }
-                                                    @endphp
-                                                <td align="center" valign="top">{{ $workshift_name }}</td>
+                                        
+                                                <td align="center" valign="totd">{{ $employee->workshifts->last()->name }}</p>
+                                                   
                                                 </tr>
                                             </table>
                                         </div>
@@ -69,35 +65,17 @@
                                     <div class="m-portlet m-portlet--mobile pb-3">
                                         <div class="m-portlet__body">
 
-                                            @for ($i = 0; $i < count($workshift_history); $i++)
-
-                                            <div class="my-4">
-                                                <div class="d-flex justify-content-end">
-                                                    <h3 class="m-portlet__head-text">
-                                                            @php
-                                                            $created_time = $workshift_history[$i]['created_at'];
-                                                            $formatCreatedTime = strtotime($created_time);
-    
-                                                            $updated_time = $workshift_history[$i]['updated_at'];
-                                                            $formatUpdatedTime = strtotime($updated_time);
-
-                                                            echo date("d F Y", $formatCreatedTime).' to '.date("d F Y", $formatUpdatedTime);
-                                                        @endphp
-                                                    </h3>
-                                                </div>
-                                                <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
-                                                    <tr>
-                                                        <td align="center"><b>Workshift Information</b></td>
-                                                    </tr>
-                                                    <tr>
-                                                    <td align="center" valign="top">{{ $workshift_history[$i]['name'] }}</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <hr>
-
-                                            @endfor
-
+                                            <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
+                                                <tr>
+                                                    <td align="center" colspan="2"><b>Workshift Information</b></td>
+                                                </tr>
+                                                <tr>
+                                                @foreach($employee->workshift_histories as $key => $history)
+                                                    <td align="center" valign="top">{{ json_decode($history->history_data)->name }}</td>
+                                                    <td align="center" valign="top">{{ date("d F Y", strtotime(json_decode($history->history_data)->pivot->created_at))  }} ~ @if(array_key_exists($key + 1, $employee->workshift_histories))  {{ date("d F Y", strtotime(json_decode($employee->workshift_histories[$key+1]->history_data)->pivot->created_at))  }} @else now @endif</td>
+                                                @endforeach
+                                                </tr>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>

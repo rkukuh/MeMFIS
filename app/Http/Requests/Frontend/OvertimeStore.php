@@ -27,10 +27,10 @@ class OvertimeStore extends FormRequest
     public function rules()
     {
         return [
-            "search-journal-val" => auth()->user()->hasRole("admin") ? "required" : "",
-            "date" => ["bail","required", new OvertimeDateRule],
+            "search-employee-val" => auth()->user()->hasRole("admin") ? "required" : "",
+            // "date" => ["bail","required", new OvertimeDateRule],
             "start_time" => "required",
-            "end_time" => ["required",new OvertimeTimesRule($this->request->get("start_time"))],
+            // "end_time" => ["required",new OvertimeTimesRule($this->request->get("start_time"))],
             "description" => "bail|required|min:5|max:100"
         ];
     }

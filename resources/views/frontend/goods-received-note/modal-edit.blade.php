@@ -28,7 +28,7 @@
                                     @slot('id', 'item-label')
                                 @endcomponent
                             </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
                                     Expired Date
                                 </label>
@@ -38,6 +38,18 @@
                                     @slot('text', 'Expired Date')
                                     @slot('name', 'exp_date')
                                     @slot('id_error', 'exp_date')
+                                @endcomponent
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                <label class="form-control-label">
+                                    Location
+                                </label>
+
+                                @component('frontend.common.input.text')
+                                    @slot('id', 'item-location')
+                                    @slot('text', 'Location')
+                                    @slot('name', 'item-location')
+                                    @slot('id_error', 'item-location')
                                 @endcomponent
                             </div>
                         </div>

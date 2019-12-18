@@ -14,6 +14,7 @@ Route::name('frontend.')->group(function () {
             Route::resource('employee', 'EmployeeController');
             Route::resource('statuses', 'EmployeeStatusesController');
             Route::resource('import-fingerprint', 'EmployeeAttendanceController');
+            Route::get('/create-attendance', 'EmployeeAttendanceController@createAttendances');
 
             Route::name('employee.')->group(function () {
                 Route::prefix('employee')->group(function () {
