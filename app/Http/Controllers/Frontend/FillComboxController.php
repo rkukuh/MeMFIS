@@ -1154,7 +1154,7 @@ class FillComboxController extends Controller
      */
     public function employee()
     {
-        $employees = Employee::pluck('first_name', 'code', 'id');
+        $employees = Employee::select('first_name', 'last_name', 'uuid')->get();
 
         return json_encode($employees);
     }
