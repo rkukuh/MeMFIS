@@ -38,7 +38,7 @@ class CreateAttendancecorrectionsTable extends Migration
             ->onDelete('restrict');
 
             $table->foreign('attendance_id')
-            ->references('id')->on('employee_attendances')
+            ->references('id')->on('attendances')
             ->onUpdate('cascade')
             ->onDelete('restrict');
 

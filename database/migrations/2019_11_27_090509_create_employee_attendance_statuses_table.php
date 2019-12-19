@@ -21,7 +21,7 @@ class CreateEmployeeAttendanceStatusesTable extends Migration
             $table->softDeletes();
 
             $table->foreign('employee_attendance_id')
-                    ->references('id')->on('employee_attendances')
+                    ->references('id')->on('attendances')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
