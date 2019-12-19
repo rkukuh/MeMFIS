@@ -64,9 +64,9 @@ class UsersImport implements ToModel, WithHeadingRow
             'last_name' => ucwords(strtolower($last_name)),
             'dob' => Carbon::now()->subYear(rand(20, 50)),
             'dob_place' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
-            'gender_id' => Type::ofGender()->where('code', $faker->randomElement(['male','female']))->first()->id,
-            'religion_id' => Religion::where('code', $faker->randomElement(['christian-protestant','islam','kong-hu-cu','buddha','catholic','hindu']))->first()->id,
-            'marital_id' => Status::ofMarital()->where('code', $faker->randomElement(['married','single','cerai-hidup','cerai-mati']))->first()->id,
+            'gender_id' => Type::ofGender()->get()->random()->id,
+            'religion_id' => Religion::get()->random()->id,
+            'marital_id' => Status::ofMarital()->get()->random()->id,
             'country_id' => Country::first()->id,
             'city' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
             'joined_date' => Carbon::now()->toDateString()

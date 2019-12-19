@@ -201,7 +201,7 @@ let Quotation = {
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
-                        $('#discount').modal('hide');
+                        $('#discount_htcrr').modal('hide');
 
 
                         toastr.success('Discount has been updated.', 'Success', {

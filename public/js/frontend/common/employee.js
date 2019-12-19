@@ -17,6 +17,9 @@ let Employee = {
                     data: "first_name"
                 },
                 {
+                    data: "last_name"
+                },
+                {
                     data: "Actions"
                 }
             ],
@@ -25,7 +28,7 @@ let Employee = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-employee" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-first_name="' + t.first_name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-employee" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-first_name="' + t.first_name + '" data-last_name="' + t.last_name + '" >\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -46,7 +49,8 @@ let Employee = {
         $('.dataTable').on('click', '.select-employee', function () {
             let uuid = $(this).data('uuid');
             let code = $(this).data('code');
-            let name = $(this).data("first_name");
+            let name = $(this).data('first_name');
+            name     = name +' '+ $(this).data('last_name');
 
             document.getElementById('search-employee-val').value = uuid;
 

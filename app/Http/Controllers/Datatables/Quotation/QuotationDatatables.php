@@ -367,7 +367,6 @@ class QuotationDatatables extends Controller
             $workpackages[sizeof($workpackages)] = $htcrr_workpackage;
         }
 
-
         $data = $alldata = json_decode($workpackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

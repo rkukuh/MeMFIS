@@ -30,7 +30,7 @@ class HolidayStore extends FormRequest
             'code' => 'required',
             'name' => 'required',
             'start_date' => 'required|after_or_equal:'.Carbon::now()->toDateString(),
-            'end_date'=> 'required|date|after:start_date'
+            'end_date'=> 'required|date|after_or_equal:start_date'
         ];
     }
 

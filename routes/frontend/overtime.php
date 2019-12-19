@@ -18,6 +18,8 @@ Route::name('frontend.')->group(function () {
 
                     /** API */
                     Route::get('/{employee}/date/{date}', 'OvertimeController@getAttendance')->name('get.attendance');
+                    Route::POST('/{overtime}/approve', 'OvertimeController@approve')->name('approve');
+                    Route::POST('/{overtime}/reject', 'OvertimeController@reject')->name('reject');
 
                 });
             });

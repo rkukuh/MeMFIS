@@ -66,7 +66,7 @@ let Workpackage3 = {
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.unit_id',
+                    field: 'pivot.unit',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
@@ -159,7 +159,7 @@ let Workpackage3 = {
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.unit_id',
+                    field: 'pivot.unit',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,

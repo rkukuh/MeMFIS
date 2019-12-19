@@ -80,10 +80,6 @@ let Employee_edit_basic = {
                 formData.append('holiday_overtime', holiday_overtime);
                 formData.append('_method', 'PUT');
 
-                for (var pair of formData.entries()) {
-                    console.log(pair[0]+ ', ' + pair[1]); 
-                }
-                
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(

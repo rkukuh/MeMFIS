@@ -126,17 +126,21 @@ let Overtime = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        return (
-                            '<a href="/overtime/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</a>' +
-                            '<a href="#" data-toggle="modal" data-target="#modal_approve" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid + '">' +
-                                '<i class="la la-check"></i>' +
-                            '</a>' +
-                            '<a href="#" data-toggle="modal" data-target="#modal_reject" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid + '">' +
-                                '<i class="la la-remove"></i>' +
-                            '</a>'
-                        );
+                        if(t.approvals.length == 0){
+                            return (
+                                '<a href="/overtime/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
+                                    '<i class="la la-pencil"></i>' +
+                                '</a>' +
+                                '<a href="#" data-toggle="modal" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-check"></i>' +
+                                '</a>' +
+                                '<a href="#" data-toggle="modal" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill reject" title="Reject" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-remove"></i>' +
+                                '</a>'
+                            );
+                        }else{
+                            return ('PROCESSED');
+                        }
                     }
                 }
             ]
@@ -144,6 +148,124 @@ let Overtime = {
 
     }
 };
+
+$(document).ready(function() {
+    $(".overtime_datatable").on("click", ".approve", function() {
+        let overtime_uuid = $(this).data("uuid");
+
+        swal({
+            title: "Are you sure do you want to approve this transaction ?",
+            text: "",
+            type: "question",
+            input: "textarea",
+            inputAttributes: {
+                autocapitalize: "on"
+            },
+            confirmButtonText: "Yes, Approve",
+            confirmButtonColor: "#34bfa3",
+            cancelButtonText: "Cancel",
+            showCancelButton: true,
+            showLoaderOnConfirm: true
+        }).then(result => {
+            if (result.value) {
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        )
+                    },
+                    type: "POST",
+                    data: {
+                        note: result.value
+                    },
+                    url: "/overtime/" + overtime_uuid + "/approve",
+                    success: function(data) {
+                        toastr.success(
+                            "Overtime has been approved.",
+                            "Approved",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+
+                        let table = $(".overtime_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    },
+                    error: function(jqXhr, json, errorThrown) {
+
+                        let errors = jqXhr.responseJSON;
+                        
+                        toastr.error(errors.error.message, errors.error.title, {
+                            closeButton: true,
+                            timeOut: "0"
+                        });
+                        
+                    }
+                });
+            }
+        });
+    });
+
+    $(".overtime_datatable").on("click", ".reject", function() {
+        let overtime_uuid = $(this).data("uuid");
+
+        swal({
+            title: "Are you sure do you want to reject this transaction ?",
+            text: "",
+            type: "question",
+            input: "textarea",
+            inputAttributes: {
+                autocapitalize: "on"
+            },
+            confirmButtonText: "Yes, Reject",
+            confirmButtonColor: "#34bfa3",
+            cancelButtonText: "Cancel",
+            showCancelButton: true,
+            showLoaderOnConfirm: true
+        }).then(result => {
+            if (result.value) {
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        )
+                    },
+                    type: "POST",
+                    data: {
+                        note: result.value
+                    },
+                    url: "/overtime/" + overtime_uuid + "/reject",
+                    success: function(data) {
+                        toastr.success(
+                            "Overtime has been rejected.",
+                            "Rejected",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+
+                        let table = $(".overtime_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    },
+                    error: function(jqXhr, json, errorThrown) {
+
+                        let errors = jqXhr.responseJSON;
+                        
+                        toastr.error(errors.error.message, errors.error.title, {
+                            closeButton: true,
+                            timeOut: "0"
+                        });
+                        
+                    }
+                });
+            }
+        });
+    });
+});
 
 jQuery(document).ready(function () {
     Overtime.init();

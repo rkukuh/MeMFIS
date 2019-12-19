@@ -55,7 +55,7 @@
                                         <div class="col-sm-6 col-md-6 col-lg-6 form-group{{$errors->has("search-employee-val") ? " has-error" : ""}}">
                                             @hasanyrole('hrd|admin')
                                                 <label class="form-control-label">
-                                                    Propose Leave To @include('frontend.common.label.required')
+                                                    Propose Overtime To @include('frontend.common.label.required')
                                                 </label>
                                                 @component('frontend.common.input.hidden')
                                                     @slot('id', 'uuid_employee')

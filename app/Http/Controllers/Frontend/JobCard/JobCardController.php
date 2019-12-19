@@ -209,7 +209,7 @@ class JobCardController extends Controller
 
         if($jobcard->jobcardable_type == "App\Models\TaskCard"){
 
-            $rii_status = $jobcard->jobcardable->is_rii;
+            $rii_status = $jobcard->is_rii;
             if(sizeof($jobcard->helpers) > 0){
                 $helpers = join(',', $jobcard->helpers->pluck('full_name')->toArray());
             }else{
@@ -255,6 +255,7 @@ class JobCardController extends Controller
                 $prepared_by = "-";
                 $prepared_at = "-";
             }
+
 
             if($jobcard->jobcardable->type->code == "basic"){
 
@@ -430,7 +431,7 @@ class JobCardController extends Controller
             $eo_additionals->TSN = json_decode($jobcard->additionals)->TSN;
             $eo_additionals->CSN = json_decode($jobcard->additionals)->CSN;
 
-            $rii_status = $jobcard->jobcardable->is_rii;
+            $rii_status = $jobcard->is_rii;
             if(sizeof($jobcard->helpers) > 0){
                 $helpers = join(',', $jobcard->helpers->pluck('full_name'));
             }else{
