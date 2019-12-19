@@ -14,7 +14,7 @@ class CreateBenefitLeavetypeTable extends Migration
     public function up()
     {
         Schema::create('benefit_leavetype', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('leavetype_id')->nullable();
             $table->unsignedBigInteger('benefit_id')->nullable();
             $table->timestamps();
