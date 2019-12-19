@@ -1084,7 +1084,7 @@
                         <i class="m-menu__link-icon flaticon-list-3"></i>
                         <span class="m-menu__link-text">Payroll</span>
                     </a>
-                </li>
+                </li> -->
             @endrole
         </ul>
     </div>
