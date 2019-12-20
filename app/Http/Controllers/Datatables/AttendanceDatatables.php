@@ -19,16 +19,16 @@ class AttendanceDatatables extends Controller
         // $anam = Employee::where('id',50)->first();
         // $attendances = EmployeeAttendance::where('employee_id',$anam->id)->with('attendance_correction','attendance_overtime','employee','statuses','parent')->get();
 
-        $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses','parent');
+        $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses','parent')->orderBy('date', 'DESC');
         // ->whereMonth('created_at', Carbon::now()->month);
-
-        if( !in_array('hrd', $roles) || !in_array('admin', $roles) ){
-            $attendances->where('employee_id', Auth::User()->employee->id);
-        }
+        
+        // if( !in_array('hrd', $roles) || !in_array('admin', $roles) ){
+        //     $attendances->where('employee_id', Auth::User()->employee->id);
+        // }
 
         $attendances = $attendances->get();
 
-        // foreach($attendances as $attendance){
+        foreach($attendances as $attendance){
         //     //Time converison from second
         //     if($attendance->parent){
         //         $attendance->attendance_correction = $attendance->parent->attendance_correction;
@@ -46,7 +46,7 @@ class AttendanceDatatables extends Controller
         //     $attendance->late = gmdate('H:i:s',$attendance->late_in);
         //     $attendance->earlier = gmdate('H:i:s',$attendance->earlier_out);
         //     $attendance->overtime = gmdate('H:i:s',$attendance->overtime);
-        // }
+        }
 
         $data = $alldata = json_decode($attendances);
 
