@@ -358,7 +358,23 @@ class EmployeeAttendanceController extends Controller
                 
             }
 
-            return redirect('import-fingerprint')->with('success', ['title' => 'Unregistered NRP on system', 'message' => $nrps.' reupload again after registering these NRPs']);
+            $nrps = join("/br", $nrps);
+
+            if($nrps){
+                $error_notification = array(
+                    'message' => $nrps." reupload again after registering these NRPs",
+                    'title' => "Unregistered NRP on system",
+                    'alert-type' => "success"
+                );
+            }else{
+                $error_notification = array(
+                    'message' => "Successfully import employee attendances data",
+                    'title' => "Successful",
+                    'alert-type' => "success"
+                );
+            }
+
+            return redirect()->route('frontend.import-fingerprint.index')->with($error_notification);
         }
     }
 
@@ -411,27 +427,28 @@ class EmployeeAttendanceController extends Controller
      * Store a newly created employee attendances in storage.
      */
     public function createAttendances(){
-        $days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-        // code yang seharusnya dijalankan sehari-hari
-        $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
-        // create attendance with null;
-        $in = '00:00:00';
-        $out = '00:00:00';
+        // $days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        // // code yang seharusnya dijalankan sehari-hari
+        // $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
+        // // create attendance with null;
+        // $in = '00:00:00';
+        // $out = '00:00:00';
 
-        $attendance = EmployeeAttendance::whereMonth('created_at', Carbon::now()->month)->whereYear('created_at', Carbon::now()->year)->first();
+        // $attendance = EmployeeAttendance::whereMonth('created_at', Carbon::now()->month)->whereYear('created_at', Carbon::now()->year)->first();
 
-        if(empty($attendance)){
-            foreach($employees as $employee){
-                EmployeeAttendance::create([
-                    'employee_id' => $employee->id,
-                    'date' => Carbon::today(),
-                    'in' => $in,
-                    'out' => $out
-                ]);
-            }
-        }else{
-            return;
-        }
+        // if(empty($attendance)){
+        //     foreach($employees as $employee){
+        //         EmployeeAttendance::create([
+        //             'employee_id' => $employee->id,
+        //             'date' => Carbon::today(),
+        //             'in' => $in,
+        //             'out' => $out
+        //         ]);
+        //     }
+        // }else{
+        //     return;
+        // }
+
 
     }
 }
