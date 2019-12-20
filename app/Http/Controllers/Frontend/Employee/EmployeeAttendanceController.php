@@ -61,9 +61,9 @@ class EmployeeAttendanceController extends Controller
                     'Bucket' => $bucket,
                     'Key' => $last_import->path
                 ]);
-
+        
                 $requestS3 = $client->createPresignedRequest($command, '+20 minutes');
-
+        
                 $url = (string) $requestS3->getUri();
                 $last_index = sizeof(file($url)) - 1;
             }
@@ -72,9 +72,9 @@ class EmployeeAttendanceController extends Controller
 
             $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME);
             $filename = $name.'.'.$file->getClientOriginalExtension();
-
+            
             $exist = Storage::disk('s3')->url('attendance_files/'.$file->getClientOriginalName());
-
+        
             if($exist){
                 $random = str_random(5);
                 $filename = $name.'_'.$random.'.'.$file->getClientOriginalExtension();
@@ -91,7 +91,7 @@ class EmployeeAttendanceController extends Controller
                 'path' => $storagePath,
                 'imported_by' => Employee::where('user_id',Auth::id())->first()->id
             ]);
-
+            
             $data = $storagePath;
             $lines = file($file);
             $rows = [];
@@ -102,7 +102,7 @@ class EmployeeAttendanceController extends Controller
             $nrps = [];
 
             $index = 0;
-
+            
             // slice unneded data rows from last time import.
             // if($last_index){
             //     $lines = array_slice($lines,$last_index);
@@ -131,18 +131,18 @@ class EmployeeAttendanceController extends Controller
             $unique_nrp = array_values(array_unique($data_nrp));
 
             for($i=0;$i < count($unique_nrp); $i++){
-
+                
                 $x = 0;
                 $data_grouping_nrp = [];
 
                 for($j=0;$j < count($data_all); $j++){
-
+                        
                     if($unique_nrp[$i] == $data_all[$j]['nrp']){
                         $data_grouping_nrp[$x] = [
                             'date' => $data_all[$j]['date'],
                             'time' => $data_all[$j]['time']
                         ];
-
+                    
                         $data_grouping[$i] = [
                             'nrp' => $unique_nrp[$i],
                             $unique_nrp[$i] => $data_grouping_nrp
@@ -157,12 +157,12 @@ class EmployeeAttendanceController extends Controller
             //Next Grouping date
             $unique_date = array_values(array_unique($data_date));
 
-            for ($i=0; $i < count($data_grouping); $i++) {
+            for ($i=0; $i < count($data_grouping); $i++) { 
 
-                for ($x=0; $x <count($unique_date) ; $x++) {
+                for ($x=0; $x <count($unique_date) ; $x++) { 
                     $z = 0;
                     $data_grouping_date = [];
-                    for ($j=0; $j < count($data_grouping[$i][$data_grouping[$i]['nrp']]); $j++) {
+                    for ($j=0; $j < count($data_grouping[$i][$data_grouping[$i]['nrp']]); $j++) { 
                     if($unique_date[$x] == $data_grouping[$i][$data_grouping[$i]['nrp']][$j]['date']){
 
                         $data_grouping_date[$z] = $data_grouping[$i][$data_grouping[$i]['nrp']][$j]['time'];
@@ -200,34 +200,34 @@ class EmployeeAttendanceController extends Controller
                     if($workshifts){
                         $schedules = $workshifts->workshift_schedules;
                         foreach($attendances['date'] as $attendance){
-                            /** get shift for that day  */
+                            /** get shift for that day  */ 
                             $shift = $schedules->where('days', strtolower($attendance['days']) )->first();
-
+    
                             /** check if scan day on workshift or not */
                             if($shift){
                                 $overtime = 0;
                                 $statuses = [];
                                 /** if true, proceed updating attendances */
-
-                                /** set all the time from string into carbon, so it can be calculated for later purpose */
+    
+                                /** set all the time from string into carbon, so it can be calculated for later purpose */ 
                                 $shift->in = Carbon::createFromTimeString($shift->in, $timezone);
                                 $shift->out = Carbon::createFromTimeString($shift->out, $timezone);
                                 $shift->break_in = Carbon::createFromTimeString($shift->break_in, $timezone);
                                 $shift->break_out = Carbon::createFromTimeString($shift->break_out, $timezone);
-
-                                /**
-                                 *  use from workshift instead of manually input, but still using 30.
-                                 *  TODO: get time tolerance from table
+    
+                                /** 
+                                 *  use from workshift instead of manually input, but still using 30. 
+                                 *  TODO: get time tolerance from table  
                                  */
                                 $late_tolerance_time = $shift->in->addMinutes(30);
-
+    
                                 /** counting user finger scan time on given day */
                                 $count_timestamps = sizeof($attendance['time']);
-
+    
                                 /** give default value */
                                 $check_in   = Carbon::createFromTimeString('00:00:00', $timezone);
                                 $check_out  = Carbon::createFromTimeString('00:00:00', $timezone);
-
+    
                                 /** giving statuses depends on scan timestamps on that day */
                                 switch($count_timestamps){
                                     case 0:
@@ -237,21 +237,21 @@ class EmployeeAttendanceController extends Controller
                                     case 1:
                                         $status = Status::ofAttendance()->where('code','indiscipline')->first();
                                         array_push($statuses, $status->id);
-
+    
                                         /** TODO: identify which scan is missed, check in or check out */
                                         $scan_time = Carbon::createFromTimeString($attendance['time'][0], $timezone);
                                         $late_tolerance = $late_tolerance_time->diffInMinutes($check_in);
-
+    
                                         $probably_in = $scan_time->diffInMinutes($shift->in);
                                         $probably_out = $scan_time->diffInMinutes($shift->out);
-
+                                        
                                         if($probably_in < $probably_out){
                                             /** closer to shift in */
                                             if($check_in > $shift->in){
                                                 /** Late */
                                                 $status = Status::ofAttendance()->where('code','late')->first();
                                                 array_push($statuses, $status->id);
-
+        
                                                 $status = Status::ofAttendance()->where('code','indiscipline')->first();
                                                 array_push($statuses, $status->id);
                                             }elseif($check_in > $shift->in and $late_tolerance > 30){
@@ -265,52 +265,52 @@ class EmployeeAttendanceController extends Controller
                                                 /** earlier leave */
                                                 $status = Status::ofAttendance()->where('code','earlier-leave')->first();
                                                 array_push($statuses, $status->id);
-
+        
                                                 $status = Status::ofAttendance()->where('code','indiscipline')->first();
                                                 array_push($statuses, $status->id);
                                             }elseif($check_out > $shift->out){
                                                 /**  overtime */
-                                                $overtime = $check_out->diffInMinutes($shift->out);
+                                                $overtime = $check_out->diffInMinutes($shift->out); 
                                             }
                                         }
                                     break;
                                     case 2:
-
+                                        
                                         $check_in   = Carbon::createFromTimeString($attendance['time'][0], $timezone);
                                         $check_out  = Carbon::createFromTimeString($attendance['time'][1], $timezone);
                                         $late_tolerance = $late_tolerance_time->diffInMinutes($check_in);
-
+    
                                         if($check_in > $shift->in){
                                             /** Late */
                                             $status = Status::ofAttendance()->where('code','late')->first();
                                             array_push($statuses, $status->id);
                                             $status = Status::ofAttendance()->where('code','indiscipline')->first();
                                             array_push($statuses, $status->id);
-
+    
                                             $late = $shift->in->diffInSeconds($check_in);
                                         }elseif($check_in > $shift->in and $late_tolerance > 30){
                                             /** Very late */
                                             $status = Status::ofAttendance()->where('code','very-late')->first();
                                             array_push($statuses, $status->id);
-
+    
                                             $late = $shift->in->diffInSeconds($check_in);
                                         }
-
+    
                                         if($check_out < $shift->out){
                                             /** earlier leave */
                                             $status = Status::ofAttendance()->where('code','earlier-leave')->first();
                                             array_push($statuses, $status->id);
-
+    
                                             $status = Status::ofAttendance()->where('code','indiscipline')->first();
                                             array_push($statuses, $status->id);
-
+    
                                             $earlier_out = $shift->out->diffInSeconds($check_out);
-
+    
                                         }elseif($check_out > $shift->out){
                                             /**  overtime */
-                                            $overtime = $check_out->diffInMinutes($shift->out);
+                                            $overtime = $check_out->diffInMinutes($shift->out); 
                                         }
-
+    
                                         if($check_in <= $shift->in && $check_out >= $shift->out){
                                             /** Normal */
                                             $status = Status::ofAttendance()->where('code','normal')->first();
@@ -318,18 +318,18 @@ class EmployeeAttendanceController extends Controller
                                         }
                                     break;
                                 }
-
+    
                                 $statuses = array_unique($statuses);
                                 // dump($statuses);
-
+    
                                 $attendance_to_update = EmployeeAttendance::where('employee_id',$employee->id)->whereDate('date',$attendance)->first();
                                 if($attendance_to_update){
-
+                                    
                                     $attendance_statuses = $attendance_to_update->statuses;
                                     foreach($attendance_statuses as $status_id){
                                         $attendance_to_update->statuses()->updateExistingPivot($status_id, ['deleted_at' => Carbon::now()]);
                                     }
-
+                                    
                                     if($attendance_to_update){
                                         $attendance_to_update->update([
                                             'employee_id' => $employee->id,
@@ -339,13 +339,13 @@ class EmployeeAttendanceController extends Controller
                                             'earlier_out' => $earlier_out,
                                             'overtime' => $overtime
                                         ]);
-
+                                        
                                         $attendance_to_update->statuses()->attach($statuses);
                                     }
                                 }
                             }else{
                                 /** TODO : if false, check for overtime */
-
+    
                             }
                         }
                     }else{
@@ -355,7 +355,7 @@ class EmployeeAttendanceController extends Controller
                 }else{
                     array_push($nrps, $attendances['nrp']);
                 }
-
+                
             }
 
             $nrps = join("/br", $nrps);
@@ -429,53 +429,24 @@ class EmployeeAttendanceController extends Controller
     public function createAttendances(){
         $days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
         // code yang seharusnya dijalankan sehari-hari
-        // $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
-        // // create attendance with null;
-        // $in = '00:00:00';
-        // $out = '00:00:00';
-
-        // foreach($employees as $employee){
-        //         EmployeeAttendance::create([
-        //         'employee_id' => $employee->id,
-        //         'date' => Carbon::today(),
-        //         'in' => $in,
-        //         'out' => $out
-        //     ]);
-        // }
-
-        // code yang dijalankan untuk trial
         $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
         // create attendance with null;
         $in = '00:00:00';
         $out = '00:00:00';
 
-        foreach($employees as $employee){
-            if(sizeof($employee->workshifts) > 0){
-                $workshift = $employee->workshifts->first();
-                $shifts = $workshift->workshift_schedules;
+        $attendance = EmployeeAttendance::whereMonth('created_at', Carbon::now()->month)->whereYear('created_at', Carbon::now()->year)->first();
 
-                for($day = 1 ; $day <= 30 ; $day++){
-                    $date = Carbon::create(2019, 11, $day, 0, 0, 0, 'Asia/Jakarta');
-
-                    $attendance = EmployeeAttendance::create([
-                        'employee_id' => $employee->id,
-                        'date' => $date,
-                        'in' => $in,
-                        'out' => $out
-                    ]);
-
-                    $shift = $shifts->where('days', $days[$date->dayOfWeek])->first();
-                    if($shift){
-                        $status = Status::ofAttendance()->where('code','absence')->first();
-                        $attendance->statuses()->attach($status->id);
-                    }else{
-                        $status = null;
-                    }
-
-
-                }
+        if(empty($attendance)){
+            foreach($employees as $employee){
+                EmployeeAttendance::create([
+                    'employee_id' => $employee->id,
+                    'date' => Carbon::today(),
+                    'in' => $in,
+                    'out' => $out
+                ]);
             }
-
+        }else{
+            return;
         }
     }
 }
