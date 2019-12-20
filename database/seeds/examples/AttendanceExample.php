@@ -43,7 +43,7 @@ class AttendanceExample extends Seeder
                     for($day = 1 ; $day <= $daysInMonth ; $day++){
                         $date = Carbon::create(2019, $month, $day, 0, 0, 0, 'Asia/Jakarta');
 
-                        $employee_attendance = EmployeeAttendance::whereMonth('date', $bulan)->whereYear('date', 2019)->where('employee_id', $employee->id)->first();
+                        $employee_attendance = EmployeeAttendance::whereDate('date', $date)->where('employee_id', $employee->id)->first();
 
                         if(empty($employee_attendance)){
 
