@@ -51,6 +51,7 @@ class AttendanceExample extends Seeder
                         ]);
         
                         $shift = $shifts->where('days', $days[$date->dayOfWeek])->first();
+                        
                         if($shift){
                             $status = Status::ofAttendance()->where('code','absence')->first();
                             $attendance->statuses()->attach($status->id);

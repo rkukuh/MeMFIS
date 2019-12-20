@@ -434,10 +434,10 @@ class EmployeeAttendanceController extends Controller
         $in = '00:00:00';
         $out = '00:00:00';
 
-        $attendance = EmployeeAttendance::whereMonth('created_at', Carbon::now()->month)->whereYear('created_at', Carbon::now()->year)->first();
+        foreach($employees as $employee){
+            $attendance = EmployeeAttendance::whereDate('date', Carbon::now())->where('employee_id', $employee_id)->first();
 
-        if(empty($attendance)){
-            foreach($employees as $employee){
+            if(empty($attendance)){
                 EmployeeAttendance::create([
                     'employee_id' => $employee->id,
                     'date' => Carbon::today(),
@@ -445,8 +445,15 @@ class EmployeeAttendanceController extends Controller
                     'out' => $out
                 ]);
             }
-        }else{
-            return;
+
+            $shift = $shifts->where('days', $days[$date->dayOfWeek])->first();
+                        
+            if($shift){
+                $status = Status::ofAttendance()->where('code','absence')->first();
+                $attendance->statuses()->attach($status->id);
+            }else{
+                $status = null;
+            }
         }
     }
 }
