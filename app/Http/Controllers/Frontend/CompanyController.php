@@ -113,7 +113,11 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        return view('frontend.company.edit', ['company' => $company]);
+        return view('frontend.company.edit', [
+            'company' => $company,
+            'company' => $company,
+            'company' => $company,
+            ]);
     }
 
     /**
