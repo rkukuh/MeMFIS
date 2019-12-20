@@ -1,6 +1,6 @@
 let CompanySelect2 = {
     init: function () {
-        $('#company, #company_validate').select2({
+        $('select[name="company"], #company_validate').select2({
             placeholder: 'Select a Company'
         });
     }
@@ -9,4 +9,5 @@ let CompanySelect2 = {
 
 jQuery(document).ready(function () {
     CompanySelect2.init();
+    console.log($('#company'));
 });

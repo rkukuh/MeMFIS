@@ -1,6 +1,6 @@
-let CompanySelect2 = {
+let CompanyTypeSelect2 = {
     init: function () {
-        $('#company_type, #company_type_validate').select2({
+        $('select[name="company_type"], #company_type_validate').select2({
             placeholder: 'Select a Company'
         });
     }
@@ -8,5 +8,6 @@ let CompanySelect2 = {
 
 
 jQuery(document).ready(function () {
-    CompanySelect2.init();
+    CompanyTypeSelect2.init();
+    console.log($('#company_type'));
 });
