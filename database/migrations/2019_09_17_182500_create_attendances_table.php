@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EmployeeAttendances extends Migration
+class CreateAttendancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class EmployeeAttendances extends Migration
      */
     public function up()
     {
-        Schema::create('employee_attendances', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('parent_id')->nullable();
@@ -28,7 +28,7 @@ class EmployeeAttendances extends Migration
             $table->softDeletes();
 
             $table->foreign('parent_id')
-                    ->references('id')->on('employee_attendances')
+                    ->references('id')->on('attendances')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
@@ -46,6 +46,6 @@ class EmployeeAttendances extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_attendances');
+        Schema::dropIfExists('attendances');
     }
 }

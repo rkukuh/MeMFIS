@@ -6,7 +6,7 @@ use App\MemfisModel;
 
 class EmployeeAttendance extends MemfisModel
 {
-    protected $table = 'employee_attendances';
+    protected $table = 'attendances';
 
     protected $fillable = [
         'uuid',

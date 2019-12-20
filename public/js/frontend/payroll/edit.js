@@ -105,6 +105,14 @@ let Payroll = {
     }
 };
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
     Payroll.init();
+
+    console.log( $('#payrollgenerate') );
+    $('.payrollgenerate').on('click', function() {
+        let period = $('#daterange_payroll').val();
+
+        dates = period.split(' - ');
+        console.log(dates[0] < dates[1]);
+    });
 });
