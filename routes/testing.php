@@ -168,6 +168,61 @@ Route::name('testing.')->group(function () {
             ]);
         });
 
+        Route::get('/createnewdata', function () {
+            $days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+            $months = [];
+
+            for($bulan = 11 ; $bulan <= 12; $bulan++){
+                $attendance = App\Models\EmployeeAttendance::whereMonth('date', $bulan)->whereYear('date', 2019)->first();
+                if(empty($attendance)){
+                    array_push($months, $bulan);
+                }
+            }
+            // code yang dijalankan untuk trial
+            $employees = App\Models\Employee::get(); //todo where active and approved, tapi fitur belom ada
+            // create attendance with null;
+            $in = '00:00:00';
+            $out = '00:00:00';
+
+            foreach($months as $month){
+
+                $daysInMonth = Carbon\Carbon::create(2019, $month, 1, 0, 0, 0, 'Asia/Jakarta')->daysInMonth;
+
+                foreach($employees as $employee){
+                    if(sizeof($employee->workshifts) > 0){
+                        $workshift = $employee->workshifts->first();
+                        $shifts = $workshift->workshift_schedules;
+
+                        for($day = 1 ; $day <= $daysInMonth ; $day++){
+                            $date = Carbon\Carbon::create(2019, $month, $day, 0, 0, 0, 'Asia/Jakarta');
+
+                            $employee_attendance = App\Models\EmployeeAttendance::whereDate('date', $date)->where('employee_id', $employee->id)->first();
+
+                            if(empty($employee_attendance)){
+
+                                $attendance = App\Models\EmployeeAttendance::create([
+                                    'employee_id' => $employee->id,
+                                    'date' => $date,
+                                    'in' => $in,
+                                    'out' => $out
+                                ]);
+
+                                $shift = $shifts->where('days', $days[$date->dayOfWeek])->first();
+                                if($shift){
+                                    $status = App\Models\Status::ofAttendance()->where('code','absence')->first();
+                                    $attendance->statuses()->attach($status->id);
+                                }else{
+                                    $status = null;
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+            dd('done');
+        });
+
         Route::get('/jobcard/{project}', function ($project) {
 
             $project = App\Models\Project::where('uuid', $project)->first();

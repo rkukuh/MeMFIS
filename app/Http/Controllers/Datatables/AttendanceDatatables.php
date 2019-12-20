@@ -36,10 +36,10 @@ class AttendanceDatatables extends Controller
         //         $attendance->attendance_correction = $attendance->attendance_correction;
         //     }
 
-            if(sizeof($attendance->statuses) > 0){
-                $statuses =  $attendance->statuses()->pluck('name')->toArray();
-                $attendance->status = join(', ', $statuses);
-            }
+        //     if(sizeof($attendance->statuses) > 0){
+        //         $statuses =  $attendance->statuses()->pluck('name')->toArray();
+        //         $attendance->status = join(', ', $statuses);
+        //     }
 
         //     $date = Carbon::createFromFormat('Y-m-d', $attendance->date);
         //     $attendance->day = $days[$date->dayOfWeek];
