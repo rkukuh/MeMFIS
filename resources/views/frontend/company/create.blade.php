@@ -96,10 +96,9 @@
                                             </label>
 
                                             @component('frontend.common.input.select2')
-                                                @slot('text', 'Company Type')
-                                                @slot('id', 'company')
-                                                @slot('name', 'company')
-                                                @slot('id_error', 'company')
+                                                @slot('id', 'company_type')
+                                                @slot('name', 'company_type')
+                                                @slot('id_error', 'company_type')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -108,10 +107,9 @@
                                             </label>
 
                                             @component('frontend.common.input.select2')
-                                                @slot('text', 'Parent Structure')
-                                                @slot('id', 'parent_structure')
-                                                @slot('name', 'parent_structure')
-                                                @slot('id_error', 'parent_structure')
+                                                @slot('id', 'company')
+                                                @slot('name', 'company')
+                                                @slot('id_error', 'company')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -181,9 +179,13 @@
 @endsection
 
 @push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/fill-combobox/company.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/company.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/parent-structure.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/fill-combobox/company-type.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/company-type.js') }}"></script>
 
     <script src="{{ asset('js/frontend/company/create.js') }}"></script>
     <script src="{{ asset('js/frontend/company/form-reset.js') }}"></script>
 @endpush
+ 
