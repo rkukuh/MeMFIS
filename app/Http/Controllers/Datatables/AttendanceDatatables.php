@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Datatables;
+
+use Auth;
 use Carbon\Carbon;
 use App\Models\Employee;
 use App\Models\EmployeeAttendance;
@@ -11,12 +13,19 @@ class AttendanceDatatables extends Controller
     public function index(){
         ini_set('memory_limit', '-1');
         $days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        $roles = Auth::user()->roles()->pluck('name')->toArray();
 
         //testing
         // $anam = Employee::where('id',50)->first();
         // $attendances = EmployeeAttendance::where('employee_id',$anam->id)->with('attendance_correction','attendance_overtime','employee','statuses','parent')->get();
 
-        $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses','parent')->get();
+        $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses','parent')->whereMonth('created_at', Carbon::now()->month);
+        
+        if( !in_array('hrd', $roles) || !in_array('admin', $roles) ){
+            $attendances->where('employee_id', Auth::User()->employee->id);
+        }
+
+        $attendances = $attendances->get();
 
         foreach($attendances as $attendance){
             //Time converison from second

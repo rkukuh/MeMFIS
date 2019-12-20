@@ -80,7 +80,7 @@ class ItemRequest extends MemfisModel
      */
     public function receivedBy()
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(Employee::class, 'received_by');
     }
 
     /**

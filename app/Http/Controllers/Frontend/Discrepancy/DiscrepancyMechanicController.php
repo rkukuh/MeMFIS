@@ -57,7 +57,7 @@ class DiscrepancyMechanicController extends Controller
         $helpers = json_decode($request->helper_array);
         $zones = [];
 
-        $request->merge(['code' => DocumentNumber::generate('JDEF-', DefectCard::withTrashed()->count()+1)]);
+        $request->merge(['code' => DocumentNumber::generate('JDEF-', DefectCard::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
         $request->merge(['engineer_quantity' => 1]);
         $request->merge(['helper_quantity' => sizeof($helpers)]);
@@ -127,12 +127,13 @@ class DiscrepancyMechanicController extends Controller
             $propose_correction_text =  $defectcard->pivot->propose_correction_text;
         }
 
+        $zone_discrepancies = array();
         foreach($discrepancy->zones as $i => $zone_taskcard){
             $zone_discrepancies[$i] =  $zone_taskcard->id;
         }
 
         $skill = Type::ofTaskCardSkill()->get();
-        
+
         return view('frontend.discrepancy.mechanic.show', [
             'discrepancy' => $discrepancy,
             'skills' => $skill,
@@ -161,12 +162,13 @@ class DiscrepancyMechanicController extends Controller
             $propose_correction_text =  $defectcard->pivot->propose_correction_text;
         }
 
+        $zone_discrepancies = array();
         if(sizeof($discrepancy->zones)){
             foreach($discrepancy->zones as $i => $zone_taskcard){
                 $zone_discrepancies[$i] =  $zone_taskcard->id;
             }
         }
-        
+
         $skill = Type::ofTaskCardSkill()->get();
 
         return view('frontend.discrepancy.mechanic.edit', [

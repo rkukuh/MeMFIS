@@ -87,12 +87,13 @@ let PurchaseRequest = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_general_material" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item_uuid='+t.item.uuid+' data-item='+t.item.code+' data-item_code='+t.item.code+' data-item_name='+t.item.name+' data-quantity='+t.quantity+' data-unit='+t.unit_id+' data-remark='+t.note+' data-id=' +
-                            t.id +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.id +
-                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                            ''
+                            // '<button data-toggle="modal" data-target="#modal_general_material" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item_uuid='+t.item.uuid+' data-item='+t.item.code+' data-item_code='+t.item.code+' data-item_name='+t.item.name+' data-quantity='+t.quantity+' data-unit='+t.unit_id+' data-remark='+t.note+' data-id=' +
+                            // t.id +
+                            // '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            // '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
+                            // t.id +
+                            // ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                         );
                     }
                 }
@@ -186,12 +187,13 @@ let PurchaseRequest = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_general_tool" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item_uuid='+t.item.uuid+' data-tool='+t.item.code+' data-item_code='+t.item.code+' data-item_name='+t.item.name+' data-quantity='+t.quantity+' data-unit='+t.unit_id+' data-remark='+t.note+' data-id=' +
-                            t.id +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.id +
-                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                            ''
+                            // '<button data-toggle="modal" data-target="#modal_general_tool" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item_uuid='+t.item.uuid+' data-tool='+t.item.code+' data-item_code='+t.item.code+' data-item_name='+t.item.name+' data-quantity='+t.quantity+' data-unit='+t.unit_id+' data-remark='+t.note+' data-id=' +
+                            // t.id +
+                            // '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            // '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
+                            // t.id +
+                            // ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                         );
                     }
                 }

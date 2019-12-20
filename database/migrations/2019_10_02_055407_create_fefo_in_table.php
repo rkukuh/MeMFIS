@@ -25,6 +25,7 @@ class CreateFefoInTable extends Migration
             $table->string('serial_number')->nullable();
             $table->unsignedBigInteger('grn_id')->nullable();
             $table->double('price')->nullable();
+            $table->string('location')->nullable();;
             $table->timestamp('expired_at')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -84,7 +84,7 @@ class QuotationController extends Controller
         $contact['fax'] = $request->attention_fax;
         $contact['email'] = $request->attention_email;
 
-        $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::withTrashed()->count()+1)]);
+        $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['quotationable_type' => 'App\Models\Project']);
         $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
@@ -338,29 +338,39 @@ class QuotationController extends Controller
     public function approve(Quotation $quotation, Request $request)
     {
         $amount = 0;
-        $error_messages = $work_progress= [];
+        $error_messages = $work_progress = [];
         $scheduled_payment_amounts = json_decode($quotation->scheduled_payment_amount);
+
         if(empty($scheduled_payment_amounts)){
+
             $error_message = array(
                 'message' => "Scheduled payment total hasn't been filled yet",
                 'title' => $quotation->number,
-                'alert-type' => "error"
+                'alert-type' => 'error'
             );
-            return response()->json(['error' => $error_messages], '403');
+
+            return response()->json(['error' => $error_message], '403');
         }
+
         foreach($scheduled_payment_amounts as $scheduled_payment_amount){
             $amount += $scheduled_payment_amount->amount;
             array_push($work_progress, $scheduled_payment_amount->work_progress);
         }
+
         if(intval($amount) != intval($quotation->grandtotal) ){
+            
             $error_message = array(
                 'message' => "Scheduled payment total amount not equal with sub total",
                 'title' => $quotation->number,
                 'alert-type' => "error"
-            );
-            array_push($error_messages, $error_message);
-            return response()->json(['error' => $error_messages], '403');
+            );            
+
+            return response()->json(['error' => $error_message], '403');
+
         }
+
+
+        // request TW work progress tidak harus 100%
         // if( max($work_progress) != 100){
 
         //     $error_message = array(
@@ -372,9 +382,9 @@ class QuotationController extends Controller
         // return response()->json(['error' => $error_messages], '403');
         // }
 
-        if(sizeof($error_messages) > 0){
-            return response()->json(['error' => $error_messages], '403');
-        }
+        // if(sizeof($error_messages) > 0){
+        //     return response()->json(['error' => $error_messages], '403');
+        // }
 
         $qw_json = $quotation->workpackages->toJson();
 
@@ -464,7 +474,7 @@ class QuotationController extends Controller
                 if($tc_code == "BSC" or $tc_code == "SIP" or $tc_code == "CPC" or $tc_code == "SIT" or $tc_code == "PRE" or $tc_code == "DUM"){
 
                     $jobcard = $tc->jobcards()->create([
-                        'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
+                        'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->whereYear('created_at', date("Y"))->count()+1),
                         'jobcardable_id' => $tc->id,
                         'quotation_id' => $quotation->id,
                         'is_rii' => $taskcard->is_rii,
@@ -532,7 +542,7 @@ class QuotationController extends Controller
                 $additionals['center_of_gravity'] = null;
 
             $jobcard = $tc_inscrtuction->jobcards()->create([
-                'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
+                'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->whereYear('created_at', date("Y"))->count()+1),
                 'jobcardable_id' => $tc_inscrtuction->id,
                 'quotation_id' => $quotation->id,
                 'is_rii' => $eo_instruction->is_rii,

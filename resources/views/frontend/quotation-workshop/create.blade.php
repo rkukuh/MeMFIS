@@ -396,9 +396,9 @@
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/scheduled-payment.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
-    <script src="{{ asset('js/frontend/quotation/workpackage.js') }}"></script>
-    <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/quotation/repeater.js') }}"></script>
+    
+    <script src="{{ asset('js/frontend/quotation-workshop/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/quotation-workshop/repeater.js') }}"></script>
 
 
 @endpush

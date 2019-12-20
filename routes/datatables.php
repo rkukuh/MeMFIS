@@ -19,7 +19,9 @@ Route::name('datatables.')->group(function () {
 
         /** MASTER */
 
-        Route::get('/vendor', 'VendorDatatables@index')->name('vendor.index');
+        Route::get('/vendor', 'Vendor\VendorDatatables@index')->name('vendor.index');
+        Route::get('/vendor/{vendor}/addresses', 'Vendor\VendorAddressesDatatables@index')->name('vendor.addresses.index');
+
         Route::get('/aircraft', 'AircraftDatatables@index')->name('aircraft.index');
         Route::get('/language', 'LanguageDatatables@index')->name('language.index');
         Route::get('/currency', 'CurrencyDatatables@index')->name('currency.index');
@@ -467,6 +469,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/general', 'GeneralPurchaseRequestDatatables@index')->name('all.general');
+                Route::get('/service', 'ServicePurchaseRequestDatatables@index')->name('all.service');
                 Route::get('/project', 'ProjectPurchaseRequestDatatables@index')->name('all.project');
                 Route::get('/project/item/{project}', 'ProjectPurchaseRequestDatatables@projectItem')->name('item.project');
                 Route::get('/modal/general', 'GeneralPurchaseRequestDatatables@purchaseRequestModal')->name('modal.general.index');
@@ -475,6 +478,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/item/{purchaseRequest}/project/material', 'ProjectPurchaseRequestDatatables@pr_material')->name('pr.project.material');
                 Route::get('/item/{purchaseRequest}/general/tool', 'GeneralPurchaseRequestDatatables@pr_tool')->name('pr.general.tool');
                 Route::get('/item/{purchaseRequest}/project/tool', 'ProjectPurchaseRequestDatatables@pr_tool')->name('pr.project.tool');
+                Route::get('/service/{purchaseRequest}/', 'ServicePurchaseRequestDatatables@pr_service')->name('pr.service');
                 Route::get('/{purchase_request}/purchase-request', 'PurchaseRequestDatatables@item')->name('purchase-request');
                 Route::get('/modal', 'PurchaseRequestDatatables@modal')->name('purchase-request.modal');
 
@@ -882,6 +886,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'JobCardDatatables@index')->name('all');
+                Route::get('/all', 'JobCardDatatables@datatable')->name('datatable.all');
                 Route::post('/filter', 'JobCardDatatables@filter')->name('filter');
                 Route::get('/{jobcard}/materials', 'JobCardDatatables@material')->name('material');
                 Route::get('/{jobcard}/tools', 'JobCardDatatables@tool')->name('tool');
@@ -943,6 +948,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'DefectCardDatatables@index')->name('all');
+                Route::get('/all', 'DefectCardDatatables@datatable')->name('datatable.all');
                 Route::get('/project', 'DefectCardDatatables@project')->name('all.project');
                 Route::get('/project/{project}', 'DefectCardDatatables@show')->name('all.show');
                 Route::post('/filter', 'DefectCardDatatables@filter')->name('filter');
@@ -1088,6 +1094,7 @@ Route::name('datatables.')->group(function () {
                 /** Material Request */
                 Route::get('/material', 'ItemRequestMaterialDatatables@index')->name('material.all');
                 Route::get('/material/{itemRequest}/items', 'ItemRequestMaterialDatatables@getItemsByItemRequest')->name('material.items');
+                Route::get('/material/{uuid}/materials', 'ItemRequestMaterialDatatables@findMaterials')->name('material.find');
 
                 /** Tool Request */
                 Route::get('/tool', 'ItemRequestToolDatatables@index')->name('tools.all');
@@ -1110,6 +1117,21 @@ Route::name('datatables.')->group(function () {
                 Route::get('/material-transfer', 'MutationDatatables@index');
                 Route::get('/material-transfer/{mutation}/items', 'MutationDatatables@getItemsByMutation');
 
+            });
+        });
+
+        /** Workshop */
+
+        Route::name('workshop')->group(function() {
+
+            Route::group([
+
+                'prefix'    => 'workshop',
+                'namespace' => 'Workshop'
+
+            ], function () {
+
+                Route::get('/', 'WorkshopDatatables@index');
             });
         });
 

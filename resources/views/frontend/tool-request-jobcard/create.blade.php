@@ -118,7 +118,7 @@
                                                 @component('frontend.common.input.select2')
                                                 @slot('text', 'Project Ref No.')
                                                 @slot('id', 'ref_project')
-                                                @slot('name', 'ref_project')
+                                                @slot('name', 'project')
                                                 @slot('id_error', 'ref_project')
                                                 @slot('disabled', 'disabled')
                                                 @endcomponent
@@ -134,7 +134,6 @@
 
                                         @component('frontend.common.label.data-info')
                                         @slot('id', 'project_number')
-                                        @slot('text', 'generate setelah select ref jc HM')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -160,7 +159,6 @@
 
                                                 @component('frontend.common.label.data-info')
                                                 @slot('id', 'actype')
-                                                @slot('text', 'generate setelah select ref jc HM')
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -170,7 +168,6 @@
 
                                                 @component('frontend.common.label.data-info')
                                                 @slot('id', 'acreg')
-                                                @slot('text', 'generate setelah select ref jc HM')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -182,9 +179,9 @@
 
                                         @component('frontend.common.input.select2')
                                         @slot('text', 'Loaned To')
-                                        @slot('id', 'loaned')
-                                        @slot('name', 'loaned')
-                                        @slot('id_error', 'loaned')
+                                        @slot('id', 'received-by')
+                                        @slot('name', 'received-by')
+                                        @slot('id_error', 'received-by')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -290,12 +287,15 @@
 
 <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
-<script src="{{ asset('js/frontend/functions/select2/loaned.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/select2/loaned.js') }}"></script> -->
+<script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/ref-jobcard.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/jobcard-number.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/ref-project.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 
 <!-- <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script> -->

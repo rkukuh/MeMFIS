@@ -15,7 +15,7 @@ class BranchesTableSeeder extends Seeder
     public function run()
     {
         Branch::create([
-            'code' => DocumentNumber::generate('Branch-', Branch::withTrashed()->count() + 1),
+            'code' => DocumentNumber::generate('Branch-', Branch::withTrashed()->whereYear('created_at', date("Y"))->count()+1),
             'name' => 'Branch 1 ',
             'company_id' => Company::where('code', 'mmf')->first()->id,
         ]);

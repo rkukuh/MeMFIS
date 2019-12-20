@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Service;
+use App\Models\Payroll;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\ServiceStore;
-use App\Http\Requests\Frontend\ServiceUpdate;
+use App\Http\Requests\Frontend\PayrollStore;
+use App\Http\Requests\Frontend\PayrollUpdate;
 
-class ServiceController extends Controller
+class PayrollController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ServiceStore  $request
+     * @param  \App\Http\Requests\Frontend\PayrollStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ServiceStore $request)
+    public function store(PayrollStore $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Payroll  $payroll
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $service)
+    public function show(Payroll $payroll)
     {
         //
     }
@@ -54,10 +54,10 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Payroll  $payroll
      * @return \Illuminate\Http\Response
      */
-    public function edit(Service $service)
+    public function edit(Payroll $payroll)
     {
         //
     }
@@ -65,11 +65,11 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ServiceUpdate  $request
-     * @param  \App\Models\Service  $service
+     * @param  \App\Http\Requests\Frontend\PayrollUpdate  $request
+     * @param  \App\Models\Payroll  $payroll
      * @return \Illuminate\Http\Response
      */
-    public function update(ServiceUpdate $request, Service $service)
+    public function update(PayrollUpdate $request, Payroll $payroll)
     {
         //
     }
@@ -77,10 +77,10 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Payroll  $payroll
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy(Payroll $payroll)
     {
         //
     }

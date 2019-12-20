@@ -13,11 +13,13 @@ Route::name('component.')->group(function () {
 
     ], function () {
 
-        Route::get('get-tags', 'FillComboxController@tags')->name('get-tags');
+        Route::get('get-tags', 'FillComboxController@tagItem')->name('get-tags');
+        Route::get('get-tags-service', 'FillComboxController@tagService')->name('get-tags-service');
         Route::get('get-tools', 'FillComboxController@tool')->name('get-tool');
         Route::get('get-zones', 'FillComboxController@zone')->name('get-zones');
         Route::get('get-items', 'FillComboxController@item')->name('get-items');
-        Route::get('get-units', 'FillComboxController@units')->name('get-units');
+        Route::get('get-units', 'FillComboxController@unitItem')->name('get-units');
+        Route::get('get-unit-service', 'FillComboxController@unitService')->name('get-unit-service');
         Route::get('get-promos', 'FillComboxController@promo')->name('get-promos');
         Route::get('get-vendors', 'FillComboxController@vendor')->name('get-vendor');
         Route::get('get-genders', 'FillComboxController@gender')->name('get-genders');
@@ -42,6 +44,7 @@ Route::name('component.')->group(function () {
         Route::get('get-job-titles', 'FillComboxController@jobtitles')->name('get-job-titles');
         Route::get('get-licenses/{id}', 'FillComboxController@licenses')->name('get-licenses');
         Route::get('get-units/{item}', 'FillComboxController@UnitUuid')->name('get-unit-uuid');
+        Route::get('get-units-service/{service}', 'FillComboxController@ServiceUnitUuid')->name('get-unit-service-uuid');
         Route::get('get-defectcard', 'FillComboxController@defectcard')->name('get-defectcard');
         Route::get('get-currencies', 'FillComboxController@currencies')->name('get-currencies');
         Route::get('get-leave-types', 'FillComboxController@leaveType')->name('get-leave-types');
@@ -82,6 +85,7 @@ Route::name('component.')->group(function () {
         Route::get('get-item-unit-uuid/{item}', 'FillComboxController@itemUnitUuid')->name('get-item-unit-uuid');
         Route::get('get-expired-date/{item}', 'FillComboxController@itemExpiredDate')->name('get-expired-date');
         Route::get('get-jobcard/{jobcard}/items', 'FillComboxController@jobcardItems')->name('get-jobcard-items');
+        Route::get('get-jobcard/{jobcard}/project', 'FillComboxController@jobcardProject')->name('get-jobcard-project');
         Route::get('get-tool-request/{toolRequest}', 'FillComboxController@toolRequest')->name('get-tool-request');
         Route::get('get-serial-number/{item}', 'FillComboxController@itemSerialNumber')->name('get-serial-number');
         Route::get('get-po-materials/{purchaseOrder}', 'FillComboxController@poMaterial')->name('get-po-material');

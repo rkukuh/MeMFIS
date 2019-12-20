@@ -6,6 +6,8 @@ use Auth;
 use Carbon\Carbon;
 use App\Models\Item;
 use App\Models\Type;
+use App\Models\Status;
+use App\Models\Progress;
 use App\Models\Approval;
 use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
@@ -44,12 +46,17 @@ class GeneralPurchaseRequestController extends Controller
      */
     public function store(PurchaseRequestStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('PR-', PurchaseRequest::withTrashed()->count()+1)]);
+        $request->merge(['number' => DocumentNumber::generate('PRGN-', PurchaseRequest::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['type_id' => Type::where('of','purchase-request')->where('uuid',$request->type_id)->first()->id ]);
         $request->merge(['requested_at' => Carbon::parse($request->requested_at)]);
         $request->merge(['required_at' => Carbon::parse($request->required_at)]);
 
         $purchaseRequest = PurchaseRequest::create($request->all());
+
+        $purchaseRequest->progresses()->save(new Progress([
+            'status_id' =>  Status::ofPurchaseRequest()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
 
         return response()->json($purchaseRequest);
     }
@@ -120,6 +127,11 @@ class GeneralPurchaseRequestController extends Controller
             'approvable_id' => $purchaseRequest->id,
             'conducted_by' => Auth::id(),
             'is_approved' => 1
+        ]));
+
+        $purchaseRequest->progresses()->save(new Progress([
+            'status_id' =>  Status::ofPurchaseRequest()->where('code','approve')->first()->id,
+            'progressed_by' => Auth::id()
         ]));
 
         return response()->json($purchaseRequest);

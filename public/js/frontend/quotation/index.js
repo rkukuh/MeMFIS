@@ -332,11 +332,14 @@ let Quotation = {
                             table.reload();
                         },
                         error: function(jqXhr, json, errorThrown) {
+
                             let errors = jqXhr.responseJSON;
-                            toastr.error(errors.message, errors.title, {
+                            
+                            toastr.error(errors.error.message, errors.error.title, {
                                 closeButton: true,
                                 timeOut: "0"
                             });
+                            
                         }
                     });
                 }

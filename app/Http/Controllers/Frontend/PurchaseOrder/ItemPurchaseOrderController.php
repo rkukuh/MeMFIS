@@ -101,24 +101,27 @@ class ItemPurchaseOrderController extends Controller
             $quantity_unit = $request->quantity;
         }
 
-        $purchaseOrderItem = PurchaseOrderItem::where("item_id", $item->id)->first();
+        $purchaseOrderItem = PurchaseOrderItem::where("item_id", $item->id)->where("purchase_order_id", $purchaseOrder->id)->first();
         $request->merge([
-            'quantity_unit' =>$quantity_unit,
-            'subtotal_before_discount' => $subtotal_before_discount,
-            'subtotal_after_discount' => $subtotal_before_discount - $discount_amount
-
+            'unit_id'=>$request->unit_id,
+            'quantity'=> $request->quantity,
+            'quantity_unit'=> $quantity_unit,
+            'price'=> $request->price,
+            'subtotal_before_discount'=> $subtotal_before_discount ,
+            'subtotal_after_discount'=> $subtotal_before_discount - $discount_amount,
+            'note' => $request->note
         ]);
         $purchaseOrderItem->update($request->all());
 
-        $purchaseOrder->items()->updateExistingPivot($item->id,[
-                    'unit_id'=>$request->unit_id,
-                    'quantity'=> $request->quantity,
-                    'quantity_unit'=> $quantity_unit,
-                    'price'=> $request->price,
-                    'subtotal_before_discount'=> $subtotal_before_discount ,
-                    'subtotal_after_discount'=> $subtotal_before_discount - $discount_amount,
-                    'note' => $request->note
-                ]);
+        // $purchaseOrder->items()->updateExistingPivot($item->id,[
+        //             'unit_id'=>$request->unit_id,
+        //             'quantity'=> $request->quantity,
+        //             'quantity_unit'=> $quantity_unit,
+        //             'price'=> $request->price,
+        //             'subtotal_before_discount'=> $subtotal_before_discount ,
+        //             'subtotal_after_discount'=> $subtotal_before_discount - $discount_amount,
+        //             'note' => $request->note
+        //         ]);
 
         if($promo_type){
             if($promo_type->code == "discount-percent"){

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Datatables\JobCard;
 
+use DB;
+use DataTables;
 use Carbon\Carbon;
 use App\Models\Unit;
-use App\Models\JobCard;
-use App\Models\TaskCard;
 use App\Models\Status;
+use App\Models\JobCard;
 use App\Models\ListUtil;
+use App\Models\TaskCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -52,14 +54,14 @@ class JobCardDatatables extends Controller
                 $taskcard->status .= 'Released';
             }
             elseif($taskcard->is_rii == 1 and $taskcard->approvals->count()==1){
-                if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
+                // if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
                     $taskcard->status .= 'Waiting for RII';
-                }
+                // }
             }
             elseif($taskcard->is_rii == 0 and sizeof($taskcard->approvals)==1){
-                if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
+                // if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
                     $taskcard->status .= 'Released';
-                }
+                // }
             }
             elseif($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
                 $taskcard->status .= 'Closed';
@@ -165,6 +167,25 @@ class JobCardDatatables extends Controller
         ];
 
         echo json_encode($result, JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function datatable()
+    {
+        ini_set('memory_limit', '-1');
+
+        $jobcards =  DB::table('jobcards')
+                    ->join('quotations', 'quotations.id', '=', 'jobcards.quotation_id')
+                    ->WhereNull('jobcards.deleted_at')
+                    ->select('jobcards.*', 'quotations.number as quotation_number')
+                    ->get();
+
+
+        return Datatables::of($jobcards)->make();
     }
 
     /**

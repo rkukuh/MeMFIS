@@ -45,7 +45,7 @@ class HtCrrController extends Controller
     public function store(HtCrrStore $request)
     {
         // dd(Item::where('uuid',$request->part_number)->first()->id);
-        $number = HtCrr::withTrashed()->where('parent_id',null)->count()+1;
+        $number = HtCrr::withTrashed()->where('parent_id',null)->whereYear('created_at', date("Y"))->count()+1;
         $request->merge(['code' => DocumentNumber::generate('JCRI-',$number)]);
         $request->merge(['item_id' => Item::where('uuid',$request->item_id)->first()->id]);
         // dd($request->item_id);

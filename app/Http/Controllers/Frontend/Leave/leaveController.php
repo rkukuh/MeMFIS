@@ -9,6 +9,7 @@ use App\Models\Employee;
 use App\Models\LeaveType;
 
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
@@ -181,6 +182,34 @@ class leaveController extends Controller
         $leave->status = $leave->status;
         $leave->approval = $leave->approvals->last();
         $leave->conductedBy = $leave->approvals->last()->conductedBy;
+
         return response()->json($leave);
+    }
+
+    /**
+     * Get remaining days of given leave type for given employee.
+     * 
+     * @param  \App\Models\LeaveType  $leaveType
+     * @param  \App\Models\Employee  $employee
+     * @return \Illuminate\Http\Response
+     */
+    public function remaining_days(Employee $employee, LeaveType $leaveType){
+        $leaves = Leave::where('employee_id', $employee->id)->where('leavetype_id', $leaveType->id)->has('approvals', '>', 0)->get();
+
+        $leave_days = 0;
+
+        if($leaves){
+            foreach($leaves as $leave){
+                $start  = Carbon::parse($leave->start_date);
+                $end    = Carbon::parse($leave->end_date);
+                $diff   = $start->diffInDays($end);
+                $leave_days += $diff;
+            }
+        }
+
+        
+        $remaining_days = $leaveType->leave_period - $leave_days;
+
+        return response()->json($remaining_days);
     }
 }

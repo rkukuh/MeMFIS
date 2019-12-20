@@ -9,7 +9,11 @@
                         </label>
     
                         @component('frontend.common.label.data-info')
-                            @slot('text', $employee->code)
+                            @if($employee->code)
+                                @slot('text', $employee->code)
+                            @else
+                                @slot('text', '-')
+                            @endif
                         @endcomponent
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -20,7 +24,11 @@
                                 </label>
     
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', $employee->dob)
+                                    @if($employee->dob)
+                                        @slot('text', $employee->dob)
+                                    @else
+                                        @slot('text', '-')
+                                    @endif
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -29,7 +37,11 @@
                                 </label>
             
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', $employee->dob_place)
+                                    @if($employee->dob_place)    
+                                        @slot('text', $employee->dob_place)
+                                    @else
+                                        @slot('text', '-')
+                                    @endif
                                 @endcomponent
                             </div>
                         </div>
@@ -42,21 +54,24 @@
                         </label>
     
                         @component('frontend.common.label.data-info')
-                            @slot('text', $employee->first_name)
+                            @if($employee->first_name)
+                                @slot('text', $employee->first_name)
+                            @else
+                                @slot('text', '-')
+                            @endif
                         @endcomponent
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <label class="form-control-label">
                             Last Name 
                         </label>
-                        @php
-                            $lastName = null;
-                            if($employee->last_name != $employee->first_name){
-                                $lastName = $employee->last_name;
-                            }
-                        @endphp
+                        
                         @component('frontend.common.label.data-info')
-                            @slot('text', $lastName)
+                            @if($employee->last_name)
+                                @slot('text', $employee->last_name)
+                            @else
+                                @slot('text', '-')
+                            @endif
                         @endcomponent
                     </div>
                 </div>
@@ -69,13 +84,17 @@
                                 </label>
             
                                 @php
-                                $document = null;
-                                if(isset($documents['ktp'])){
-                                $document = $documents['ktp'];
-                                }
+                                    $document = null;
+                                    if(isset($documents['ktp'])){
+                                    $document = $documents['ktp'];
+                                    }
                                 @endphp
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', $document)
+                                    @if($document)
+                                        @slot('text', $document)
+                                    @else
+                                        @slot('text', '-')
+                                    @endif
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -84,14 +103,14 @@
                                 </label>
             
                                 @php
-                            $files = null;
-                            if(isset($file['id_card'])){
-                            $files = $file['id_card'];
-                            }
-                            @endphp
-                            @component('frontend.common.input.upload')
-                                @slot('text', $files)
-                            @endcomponent
+                                    $files = null;
+                                    if(isset($file['id_card'])){
+                                    $files = $file['id_card'];
+                                    }
+                                @endphp
+                                @component('frontend.common.input.upload')
+                                    @slot('text', $files)
+                                @endcomponent
                             </div>
                         </div>
                     </div>
@@ -102,25 +121,26 @@
                                     Gender 
                                 </label>
                                 
-                                @php
-                                  $gender = null;
-                                  if($employee->gender == 'f'){
-                                    $gender = 'Female';
-                                  }else if($employee->gender == 'm'){
-                                    $gender = 'Male';
-                                  }
-                                @endphp
+                               
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', $gender)
+                                    @if($employee->gender)
+                                        @slot('text', $employee->gender->name)
+                                    @else
+                                        @slot('text', '-')
+                                    @endif
                                 @endcomponent  
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Nationality 
                                 </label>
-            
+
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', $employee->nationality)
+                                    @if($employee->nationalities->first())
+                                        @slot('text', $employee->nationalities->first()->nationality)
+                                    @else
+                                        @slot('text', '-')
+                                    @endif
                                 @endcomponent
                             </div>
                         </div>
@@ -133,7 +153,7 @@
                         </label>
     
                         @component('frontend.common.label.data-info')
-                            @slot('text', $employee->religion)
+                            @slot('text', $employee->religion->name)
                         @endcomponent
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -142,7 +162,7 @@
                         </label>
     
                         @component('frontend.common.label.data-info')
-                            @slot('text', $employee->marital_status)
+                            @slot('text', $employee->marital_status->name)
                         @endcomponent
                     </div>
                 </div>
@@ -160,19 +180,12 @@
                             Address Line 1 
                         </label>
     
-                        @php
-                            $primary = null;
-                            if(isset($addresses['primary'])){
-                                $primary = $addresses['primary'];
-                            }
-    
-                            $secondary = null;
-                            if(isset($addresses['secondary'])){
-                                $secondary = $addresses['primary'];
-                            }
-                        @endphp
                         @component('frontend.common.label.data-info')
-                            @slot('text', $primary)
+                            @if(array_key_exists('primary', $addresses))
+                                @slot('text', $addresses['primary']->address)
+                            @else
+                                @slot('text', '-')
+                            @endif
                         @endcomponent
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -181,7 +194,11 @@
                         </label>
     
                         @component('frontend.common.label.data-info')
-                            @slot('text', $secondary)
+                            @if(array_key_exists('secondary', $addresses))
+                                @slot('text', $addresses['secondary']->address)
+                            @else
+                                @slot('text', '-')
+                            @endif
                         @endcomponent
                     </div>
                 </div>
@@ -192,7 +209,7 @@
                         </label>
     
                         @component('frontend.common.label.data-info')
-                            @slot('text', $employee->country)
+                            @slot('text', $employee->country->name)
                         @endcomponent
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -328,7 +345,11 @@
                                 </label>
             
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', $employee->joined_date)
+                                    @if($employee->joined_date)
+                                        @slot('text', $employee->joined_date)
+                                    @else
+                                        @slot('text', '-')
+                                    @endif
                                 @endcomponent
                             </div>
                         </div>
@@ -340,39 +361,12 @@
                             Job Title 
                         </label>
     
-                        @php
-                             $jobTitle  = null;
-                             if(isset($jobDetails['job_title'])){
-                                $jobTitle = $jobDetails['job_title'];
-                             }
-                             
-                             $position  = null;
-                             if(isset($jobDetails['position'])){
-                                $position = $jobDetails['position'];
-                             }
-    
-                             $status  = null;
-                             if(isset($jobDetails['status'])){
-                                $status = $jobDetails['status'];
-                             }
-    
-                             $department  = null;
-                             if(isset($jobDetails['department'])){
-                                $department = $jobDetails['department'];
-                             }
-    
-                             $indirect  = null;
-                             if(isset($jobDetails['indirect'])){
-                                $indirect = $jobDetails['indirect'];
-                             }
-    
-                             $supervisor  = null;
-                             if(isset($jobDetails['supervisor'])){
-                                $supervisor = $jobDetails['supervisor'];
-                             }
-                        @endphp
                         @component('frontend.common.label.data-info')
-                            @slot('text', $jobTitle)
+                            @if($employee->job_title)
+                                @slot('text', $employee->job_title->name)
+                            @else
+                                @slot('text', '-')
+                            @endif
                         @endcomponent
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -381,7 +375,11 @@
                         </label>
     
                         @component('frontend.common.label.data-info')
-                            @slot('text', $position)
+                            @if($employee->position)
+                                @slot('text', $employee->position->name)
+                            @else
+                                @slot('text', '-')
+                            @endif
                         @endcomponent
                     </div>
                 </div>
@@ -392,7 +390,11 @@
                         </label>
     
                         @component('frontend.common.label.data-info')
-                            @slot('text', $status)
+                            @if($employee->statusses)
+                                @slot('text', $employee->statusses->name)
+                            @else
+                                @slot('text', '-')
+                            @endif
                         @endcomponent
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -401,7 +403,11 @@
                         </label>
     
                         @component('frontend.common.label.data-info')
-                            @slot('text', $department)
+                            @if(sizeof($employee->department) > 0)
+                                @slot('text', $employee->department->first()->name)
+                            @else
+                                @slot('text', '-')
+                            @endif
                         @endcomponent
                     </div>
                 </div>
@@ -412,7 +418,11 @@
                         </label>
     
                         @component('frontend.common.label.data-info')
-                            @slot('text', $indirect)
+                            @if($employee->indirect_supervisor)
+                                @slot('text', $employee->indirect_supervisor->name)
+                            @else
+                                @slot('text', '-')
+                            @endif
                         @endcomponent
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -421,7 +431,11 @@
                         </label>
     
                         @component('frontend.common.label.data-info')
-                            @slot('text', $supervisor)
+                            @if($employee->supervisor)
+                                @slot('text', $employee->supervisor->name)
+                            @else
+                                @slot('text', '-')
+                            @endif
                         @endcomponent
                     </div>
                 </div>

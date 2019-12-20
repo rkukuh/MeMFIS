@@ -1,18 +1,68 @@
 let ToolRequestCreate = {
     init: function () {
+        var tableInit = true;
+
+        function getJobcard() {
+            $.ajax({
+                url: '/get-jobcard/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                    $('select[name="jc_no"]').empty();
+
+                    $('select[name="jc_no"]').append(
+                        '<option value=""> Select a Item</option>'
+                    );
+
+                    $.each(data, function (key, value) {
+                        $('select[name="jc_no"]').append(
+                            '<option value="' + key + '">' + value + '</option>'
+                        );
+                    });
+                }
+            });
+        };
+
+        function getProjects() {
+            $.ajax({
+                url: '/get-projects/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('select[name="project"]').empty();
+
+                    $('select[name="project"]').append(
+                        '<option value=""> Select a Project</option>'
+                    );
+
+                    $.each(data, function (key, value) {
+                        $('select[name="project"]').append(
+                            '<option value="' + key + '">' + value + '</option>'
+                        );
+                    });
+                }
+            });
+        };
 
         $('#jc_ref_no').on('click', function () {
-            $('#ref_project').prop("disabled", true);
+            getJobcard();
+            $('#ref_project').html('').prop("disabled", true);
             $('#ref_jobcard').removeAttr("disabled");
         });
 
         $('#project_ref_no').on('click', function () {
-            $('#ref_jobcard').prop("disabled", true);
+            getProjects();
+            $('#ref_jobcard').html('').prop("disabled", true);
             $('#ref_project').removeAttr("disabled");
         });
 
-        $("#ref_jobcard").change(function () {
-            let jobcard_uuid = $(this).val();
+        function createTable(type, uuid) {
+            if (type == 'jc') {
+                var url = '/datatables/jobcard/' + uuid + '/tools';
+            } else if (type == 'project') {
+                var url = '/datatables/project/additional/' + uuid + '/tools';
+            }
 
             $('.tool_request_project_datatable').mDatatable({
                 data: {
@@ -20,7 +70,7 @@ let ToolRequestCreate = {
                     source: {
                         read: {
                             method: 'GET',
-                            url: '/datatables/jobcard/' + jobcard_uuid + '/tools',
+                            url: url,
                             map: function (raw) {
                                 let dataSet = raw;
 
@@ -83,7 +133,7 @@ let ToolRequestCreate = {
                         width: 150
                     },
                     {
-                        field: 'description',
+                        field: 'name',
                         title: 'Item Description',
                         sortable: 'asc',
                         filterable: !1,
@@ -119,6 +169,62 @@ let ToolRequestCreate = {
                     }
                 ]
             });
+        }
+
+        function generate(type, uuid) {
+            if (type == 'jc') {
+                var url = '/get-jobcard/' + uuid + '/project';
+            } else if (type == 'project') {
+                var url = '/project/' + uuid;
+            }
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (response) {
+                    $("#project_number").empty().html(response.code);
+                    $("#actype").empty().html(response.aircraft.name);
+                    $("#acreg").empty().html(response.aircraft_register);
+                }
+            });
+        }
+
+        $('#ref_jobcard').change(function () {
+            if (tableInit == true) {
+                tableInit = false;
+                let project_uuid = $(this).val();
+                generate('jc', project_uuid);
+                createTable('jc', project_uuid);
+            }
+            else {
+                let project_uuid = $(this).val();
+                let table = $(".tool_request_project_datatable").mDatatable();
+                generate('jc', project_uuid);
+                table.destroy();
+                createTable('jc', project_uuid);
+                table = $(".tool_request_project_datatable").mDatatable();
+                table.originalDataSet = [];
+                table.reload();
+            }
+        });
+
+        $('#ref_project').change(function () {
+            if (tableInit == true) {
+                tableInit = false;
+                let project_uuid = $(this).val();
+                generate('project', project_uuid);
+                createTable('project', project_uuid);
+            }
+            else {
+                let project_uuid = $(this).val();
+                let table = $(".tool_request_project_datatable").mDatatable();
+                generate('project', project_uuid);
+                table.destroy();
+                createTable('project', project_uuid);
+                table = $(".tool_request_project_datatable").mDatatable();
+                table.originalDataSet = [];
+                table.reload();
+            }
         });
 
         $('.footer').on('click', '.add-request', function () {
@@ -126,8 +232,9 @@ let ToolRequestCreate = {
             let section_code = $('input[name=section_code]').val();
             let storage_id = $('#item_storage_id').val();
             let date = $('input[name=date]').val();
-            let loaned = $('#loaned').val();
+            let received_by = $('#received-by').val();
             let jc_no = $("#ref_jobcard").val();
+            let project_no = $("#ref_project").val();
 
             $.ajax({
                 headers: {
@@ -137,11 +244,12 @@ let ToolRequestCreate = {
                 type: 'POST',
                 data: {
                     jc_no: jc_no,
+                    project_no: project_no,
                     storage_id: storage_id,
                     requested_at: date,
                     note: note,
                     section: section_code,
-                    received_by: loaned
+                    received_by: received_by
                 },
                 success: function (response) {
                     if (response.errors) {

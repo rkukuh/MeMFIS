@@ -34,7 +34,6 @@ class EmployeeAttendanceDatatables extends Controller
         $i++;
         }
 
-        // dd($employees);
         $data = $alldata = $attendances;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

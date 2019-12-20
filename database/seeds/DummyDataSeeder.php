@@ -158,6 +158,10 @@ class DummyDataSeeder extends Seeder
 
         $this->call(PurchaseRequestItems::class);
 
+        /** PURCHASE REQUEST's SERVICEs */
+
+        $this->call(PurchaseRequestServices::class);
+
         /** PURCHASE ORDER's ITEMs */
 
         $this->call(PurchaseOrderItems::class);

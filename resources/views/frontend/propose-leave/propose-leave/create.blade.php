@@ -88,7 +88,11 @@
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6 mt-5">
-                                           <span id="note_remaining" class="text-danger mt-5">10 Days Remaining</span>
+                                           <span id="days_remaining" class="text-danger mt-5"></span>
+                                                @component('frontend.common.input.hidden')
+                                                    @slot('id', 'days')
+                                                    @slot('name', 'days')
+                                                @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -120,7 +124,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Description
+                                                Description @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.textarea')

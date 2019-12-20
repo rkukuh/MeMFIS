@@ -60,7 +60,7 @@ class DiscrepancyEngineerController extends Controller
         $helpers = json_decode($request->helper_array);
         $zones = [];
 
-        $request->merge(['code' => DocumentNumber::generate('JDEF-', DefectCard::withTrashed()->count()+1)]);
+        $request->merge(['code' => DocumentNumber::generate('JDEF-', DefectCard::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
         $request->merge(['engineer_quantity' => 1]);
         $request->merge(['helper_quantity' => sizeof($helpers)]);
@@ -136,6 +136,7 @@ class DiscrepancyEngineerController extends Controller
             $propose_correction_text =  $defectcard->pivot->propose_correction_text;
         }
 
+        $zone_discrepancies = array();
         foreach($discrepancy->zones as $i => $zone_taskcard){
             $zone_discrepancies[$i] =  $zone_taskcard->id;
         }
@@ -167,6 +168,7 @@ class DiscrepancyEngineerController extends Controller
             $propose_correction_text =  $defectcard->pivot->propose_correction_text;
         }
 
+        $zone_discrepancies = array();
         foreach($discrepancy->zones as $i => $zone_taskcard){
             $zone_discrepancies[$i] =  $zone_taskcard->id;
         }
@@ -255,7 +257,7 @@ class DiscrepancyEngineerController extends Controller
                 'is_approved' => 1
             ]));
         }
-        
+
 
         return response()->json($discrepancy);
     }

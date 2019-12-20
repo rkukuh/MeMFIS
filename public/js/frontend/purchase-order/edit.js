@@ -137,10 +137,10 @@ let PurchaseOrder = {
 
                         '<button data-toggle="modal" data-target="#modal_po" type="button" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Edit" data-uuid="' + t.item.uuid +'">' +
                             '<i class="la la-pencil"></i>' +
-                        '</button>'
-                        // '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                        // t.uuid +
-                        // ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                        '</button>'+
+                        '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                        t.uuid +
+                        ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                     );
                 }
             }
@@ -306,6 +306,7 @@ let PurchaseOrder = {
         });
 
         $('.modal-footer').on('click', '.update-item', function () {
+            // alert('s');
             let qty = $('#qty').val();
             let uuid = $('#uuid').val();
             let price = $('#price').val();

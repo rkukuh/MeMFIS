@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Service;
 
-use App\Models\Item;
+use App\Models\Service;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
 use App\Models\Price;
@@ -21,10 +21,10 @@ class ServiceController extends Controller
 
     public function __construct()
     {
-        $this->tags = Tag::getWithType('item');
+        $this->tags = Tag::getWithType('service');
         $this->units = Unit::all();
         $this->manufacturers = Manufacturer::all();
-        $this->categories = Category::ofItem()->get();
+        $this->categories = Category::ofItem()->where('code', 'service')->first();
     }
 
     /**
@@ -44,7 +44,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('frontend.item.tool.create');
+        return view('frontend.service.create');
     }
 
     /**
@@ -57,18 +57,18 @@ class ServiceController extends Controller
     {
         $tags = [];
         if($request->selectedtags){
-        foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags, 'item'));}
+        foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags, 'service'));}
         }
-        if ($tool = Item::create($request->all())) {
-            $tool->categories()->attach($request->category);
-            $tool->syncTags($tags);
+        if ($service = Service::create($request->all())) {
+            $service->categories()->attach($this->categories->id);
+            $service->syncTags($tags);
 
             for($i=1;$i<=5;$i++){
-                $tool->prices()
+                $service->prices()
                 ->save(new Price (['amount' =>0,'level' =>$i]));
             }
 
-            return response()->json($tool);
+            return response()->json($service);
         }
 
         // TODO: Return error message as JSON
@@ -78,13 +78,13 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $tool)
+    public function show(Service $service)
     {
-        return view('frontend.item.tool.show', [
-            'item' => $tool,
+        return view('frontend.service.show', [
+            'item' => $service,
             'units' => $this->units,
             'categories' => $this->categories,
             'manufacturers' => $this->manufacturers,
@@ -95,18 +95,18 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item $tool)
+    public function edit(Service $service)
     {
         $tags = array();
-        foreach($tool->tags as $i => $item_tag){
-            $tags[$i] =  $item_tag->name;
+        foreach($service->tags as $i => $service_tag){
+            $tags[$i] =  $service_tag->name;
         }
 
-        return view('frontend.item.tool.edit', [
-            'item' => $tool,
+        return view('frontend.service.edit', [
+            'item' => $service,
             'item_tags' => $tags,
             'tags' => $this->tags,
             'units' => $this->units,
@@ -119,18 +119,19 @@ class ServiceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\ServiceUpdate  $request
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(ServiceUpdate $request, Item $tool)
+    public function update(ServiceUpdate $request, Service $service)
     {
         $tags = [];
-        foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags, 'item'));}
-        if ($tool->update($request->all())) {
-            $tool->categories()->sync($request->category);
-            $tool->syncTags($tags);
+        if($request->selectedtags){
+            foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags, 'service'));}
+        }
+        if ($service->update($request->all())) {
+            $service->syncTags($tags);
 
-            return response()->json($tool);
+            return response()->json($service);
         }
 
         // TODO: Return error message as JSON
@@ -140,13 +141,13 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $tool)
+    public function destroy(Service $service)
     {
-        $tool->delete();
+        $service->delete();
 
-        return response()->json($tool);
+        return response()->json($service);
     }
 }

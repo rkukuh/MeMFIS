@@ -51,7 +51,7 @@ class ProjectHMController extends Controller
      */
     public function store(ProjectHMStore $request)
     {
-        $request->merge(['code' => DocumentNumber::generate('PROJ-', Project::withTrashed()->count()+1)]);
+        $request->merge(['code' => DocumentNumber::generate('PROJ-', Project::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
 
         $project = Project::create($request->all());
         if ($request->hasFile('fileInput')) {
@@ -91,7 +91,6 @@ class ProjectHMController extends Controller
                 'project' => $project->uuid
             ]);
         }
-        $attention = $project->quotations;
         return view('frontend.project.hm.edit',[
             'project' => $project,
             'aircrafts' => $this->aircrafts,

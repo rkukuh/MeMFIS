@@ -200,9 +200,8 @@
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
-
+                                                @include('frontend.common.item.modal')
                                                 @include('frontend.common.buttons.back')
-
                                             </div>
                                         </div>
                                     </div>
@@ -229,7 +228,7 @@
 <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script> -->
 
 <script src="{{ asset('js/frontend/inventory-in/edit.js') }}"></script>
 <script src="{{ asset('js/frontend/inventory-in/form-reset.js') }}"></script>

@@ -37,6 +37,7 @@ let ToolDatatables = {
             processing: true,
             responsive: true,
             serverSide: true,
+            deferLoading: 0,
             ajax: urlTool,
             columnDefs: [
                          {
@@ -63,6 +64,15 @@ let ToolDatatables = {
             $('#tool_datatable').DataTable().ajax.reload();
         });
 
+
+        $('#tool_datatable_filter input').unbind();
+        $('#tool_datatable_filter input').bind('keyup', function(e) {
+            if (e.keyCode === 13) {
+                let table = $('#tool_datatable').DataTable();
+                table.search(this.value).draw();
+
+            }
+        });
         $('.dataTable').on('click', '.select-tool', function () {
             $.ajax({
                 url: '/get-units/'+$(this).data('uuid'),
@@ -93,14 +103,6 @@ let ToolDatatables = {
             $('.search-tool').html(code + " - " + name);
             $('#modal_tool_search').modal('hide');
 
-
-            $('#tool_datatable_filter input').unbind();
-            $('#tool_datatable_filter input').bind('keyup', function(e) {
-                if (e.keyCode === 13) {
-                    let table = $('#tool_datatable').DataTable();
-                    table.search(this.value).draw();
-                }
-            });
         });
     }
 };

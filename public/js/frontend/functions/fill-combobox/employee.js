@@ -14,7 +14,7 @@ $(document).ready(function () {
 
                 $.each(data, function (key, value) {
                     $('select[name="employee"]').append(
-                        '<option value="' + key + '">' + value + '</option>'
+                        '<option value="' + value.uuid + '">' + value.first_name +' '+ value.last_name + '</option>'
                     );
                 });
             }

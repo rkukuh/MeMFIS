@@ -21,6 +21,7 @@ Route::name('frontend.')->group(function () {
 
                     /** API */
                     Route::get('/{leave}/api', 'leaveController@leaveModal')->name('leave.leaveModal');
+                    Route::get('/{employee}/remaining/{leaveType}/days', 'leaveController@remaining_days')->name('remaining-days');
                     // Route::get('/{employee}/date/{date}', 'leaveController@getAttendance')->name('get.attendance');
 
                 });

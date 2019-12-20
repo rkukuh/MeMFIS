@@ -29,6 +29,8 @@ use App\Models\Facility;
 use App\Models\Religion;
 use App\Models\TaskCard;
 use App\Models\Position;
+use App\Models\Service;
+use App\Models\Quotation;
 use App\Models\LeaveType;
 use App\Models\Department;
 use App\Models\DefectCard;
@@ -64,6 +66,7 @@ class FillComboxController extends Controller
     public function categories()
     {
         $categories = Category::ofItem()
+            ->where('code', '<>', 'service')
             ->pluck('name', 'id');
 
         return json_encode($categories);
@@ -78,6 +81,7 @@ class FillComboxController extends Controller
     {
         $categories = Category::ofItem()
             ->where('code', '<>', 'tool')
+            ->where('code', '<>', 'service')
             ->pluck('name', 'id');
 
         return json_encode($categories);
@@ -193,6 +197,21 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function jobcardProject($jobcard)
+    {
+        $id = JobCard::where('uuid', $jobcard)->first()->quotation_id;
+        $quo = Quotation::where('id', $id)->first();
+        $project = $quo->quotationable;
+        $project->aircraft = $quo->quotationable->aircraft;
+
+        return $project;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function jobtitles()
     {
         $jobtitles = JobTitle::pluck('name', 'uuid');
@@ -206,7 +225,7 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tags()
+    public function tagItem()
     {
         $tags = Tag::get()->pluck('name', 'id');
 
@@ -219,9 +238,38 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function units()
+    public function tagService()
     {
-        $units = Unit::selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
+        $tags = Tag::where('type','service')->get()->pluck('name', 'id');
+
+        return json_encode($tags);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function unitItem()
+    {
+        $type = Type::ofUnit()->where('code','service')->first()->id;
+        $units = Unit::where('type_id','<>',$type)->selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
+            ->pluck('name', 'id');
+
+        return json_encode($units);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function unitService()
+    {
+        $type = Type::ofUnit()->where('code','service')->first()->id;
+        $units = Unit::where('type_id',$type)->selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
             ->pluck('name', 'id');
 
         return json_encode($units);
@@ -288,7 +336,7 @@ class FillComboxController extends Controller
      */
     public function supervisors()
     {
-        $supervisors = Employee::pluck('first_name', 'uuid');
+        $supervisors = Employee::select('first_name', 'last_name', 'uuid')->get();
 
         return json_encode($supervisors);
     }
@@ -693,6 +741,19 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function ServiceUnitUuid(Service $service)
+    {
+        $unit = $service->unit()->pluck('name', 'uuid');
+        $uom = $unit->toArray();
+
+        return json_encode($uom);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function itemSerialNumber($item)
     {
         $serialNumbers = FefoIn::where('item_id', $item)
@@ -715,7 +776,7 @@ class FillComboxController extends Controller
             ->first()
             ->toArray();
 
-        return json_encode($expDate);
+        return json_encode(date('d-m-Y', strtotime($expDate['formatted'])));
     }
 
     /**
@@ -1033,7 +1094,7 @@ class FillComboxController extends Controller
      */
     public function projectPurchaseRequest()
     {
-        $projects = Project::has('quotations')->whereDoesntHave('purchase_requests')->pluck('title', 'uuid');
+        $projects = Project::has('quotations')->whereDoesntHave('purchase_requests')->pluck('code', 'uuid');
 
         return json_encode($projects);
     }
@@ -1093,7 +1154,7 @@ class FillComboxController extends Controller
      */
     public function employee()
     {
-        $employees = Employee::pluck('first_name', 'code', 'id');
+        $employees = Employee::select('first_name', 'last_name', 'uuid')->get();
 
         return json_encode($employees);
     }
@@ -1117,21 +1178,26 @@ class FillComboxController extends Controller
      */
     public function workOrder()
     {
-        $projects = Project::with('approvals', 'quotations')->whereHas('approvals')->get();
-        $work_orders = $result = [];
+        //TODO CHeck Cod because on server error
+        // $projects = Project::with('approvals', 'quotations')->whereHas('approvals')->get();
+        // $work_orders = $result = [];
 
-        foreach ($projects as $key => $project) {
-            if (sizeof($project->quotations) > 0) {
-                foreach ($project->quotations as $quotation) {
-                    if (sizeof($quotation->approvals) > 0) {
-                        $projects[$key] = "";
-                    }
-                };
-            }
-        }
+        // foreach ($projects as $key => $project) {
 
-        $work_orders = $projects->pluck('no_wo', 'uuid');
-        $work_orders = array_filter($work_orders->toArray());
+        //     if (sizeof($project->quotations) > 0) {
+        //         foreach ($project->quotations as $quotation) {
+        //             if (sizeof($quotation->approvals) > 0) {
+        //                 $projects[$key] = "";
+        //             }
+        //         };
+        //     }
+        // }
+
+        // $work_orders = $projects->pluck('no_wo', 'uuid');
+        // $work_orders = array_filter($work_orders->toArray());
+
+        $work_orders = Project::with('approvals')->whereHas('approvals')->pluck('no_wo','uuid');
+
         return json_encode($work_orders);
     }
 

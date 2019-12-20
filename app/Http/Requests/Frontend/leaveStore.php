@@ -7,6 +7,7 @@ use App\Models\Status;
 use App\Models\Employee;
 use App\Models\LeaveType;
 use App\Helpers\DocumentNumber;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class leaveStore extends FormRequest
@@ -29,7 +30,10 @@ class leaveStore extends FormRequest
     public function rules()
     {
         return [
-            //
+            'leave_type'    => 'required:exists:leavetypes,uuid',
+            'start_date'    => 'required|date',
+            'end_date'      => 'required|date',
+            'description'   => 'required',
         ];
     }
 
@@ -45,7 +49,7 @@ class leaveStore extends FormRequest
             $this->merge([
                 'employee_id' => optional(Employee::where('uuid', $this->employee_uuid)->first())->id,
                 'leavetype_id' => optional(LeaveType::where('uuid', $this->leave_type)->first())->id,
-                'code' => DocumentNumber::generate('LEAV-', Leave::withTrashed()->count()+1),
+                'code' => DocumentNumber::generate('LEAV-', Leave::withTrashed()->whereYear('created_at', date("Y"))->count()+1),
                 'status_id' => optional(Status::ofLeave()->where('code','open')->first())->id,
                 ]);
         });

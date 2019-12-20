@@ -44,7 +44,7 @@ class RIRController extends Controller
      */
     public function store(RIRStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('RIR-', RIR::withTrashed()->count()+1)]);
+        $request->merge(['number' => DocumentNumber::generate('RIRT-', RIR::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['vendor_id' => Vendor::where('uuid',$request->vendor)->first()->id]);
         $request->merge(['purchase_order_id' => PurchaseOrder::where('uuid',$request->purchase_order)->first()->id]);
         $request->merge(['status_id' => Status::ofRIR()->where('code',$request->status)->first()->id]);
@@ -189,7 +189,7 @@ class RIRController extends Controller
      */
     public function update(RIRUpdate $request, RIR $rir)
     {
-        $request->merge(['number' => DocumentNumber::generate('RIR-', RIR::withTrashed()->count()+1)]);
+        $request->merge(['number' => DocumentNumber::generate('RIR-', RIR::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['vendor' => Vendor::where('uuid',$request->vendor)->first()->id]);
         $request->merge(['status_id' => Status::ofRIR()->where('code',$request->status)->first()->id]);
         $request->merge(['packing_type' => Type::ofRIRPackingAndHandlingCheckType()->where('code',$request->packing_type)->first()->id]);

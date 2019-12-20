@@ -26,6 +26,7 @@ class CreateLeavetypesTable extends Migration
             $table->boolean('back_date')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('gender_id')
                     ->references('id')->on('types')

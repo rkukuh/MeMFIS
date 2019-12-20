@@ -549,6 +549,39 @@
                     <a href="/trial-balance" class="m-menu__link m-menu__toggle">
                         <i class="m-menu__link-icon flaticon-list-3"></i>
                         <span class="m-menu__link-text">Trial Balance</span>
+                    <a href="/general-ledger" class="m-menu__link m-menu__toggle">
+                        <i class="m-menu__link-icon flaticon-list-3"></i>
+                        <span class="m-menu__link-text">General Ledger</span>
+                    </a>
+                </li>
+                <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                    <a href="/balance-sheet" class="m-menu__link m-menu__toggle">
+                        <i class="m-menu__link-icon flaticon-list-3"></i>
+                        <span class="m-menu__link-text">Balance Sheet</span>
+                    </a>
+                </li>
+                <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                    <a href="/profit-loss" class="m-menu__link m-menu__toggle">
+                        <i class="m-menu__link-icon flaticon-list-3"></i>
+                        <span class="m-menu__link-text">Profit & Loss</span>
+                    </a>
+                </li>
+                <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                    <a href="/payroll" class="m-menu__link m-menu__toggle">
+                        <i class="m-menu__link-icon flaticon-list-3"></i>
+                        <span class="m-menu__link-text">Payroll</span>
+                    </a>
+                </li>
+                <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                    <a href="/master-asset" class="m-menu__link m-menu__toggle">
+                        <i class="m-menu__link-icon flaticon-list-3"></i>
+                        <span class="m-menu__link-text">Master Asset</span>
+                    </a>
+                </li>
+                <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                    <a href="/bond" class="m-menu__link m-menu__toggle">
+                        <i class="m-menu__link-icon flaticon-list-3"></i>
+                        <span class="m-menu__link-text">Bond</span>
                     </a>
                 </li>
             @endrole
@@ -725,6 +758,14 @@
                         <i class="m-menu__link-icon flaticon-list-3"></i>
                         <span class="m-menu__link-text">
                             Quotation Workshop
+                        </span>
+                    </a>
+                </li>
+                <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                    <a href="{{ route('frontend.job-scope.index') }}" class="m-menu__link m-menu__toggle">
+                        <i class="m-menu__link-icon flaticon-list-3"></i>
+                        <span class="m-menu__link-text">
+                            Job Scope Level Master
                         </span>
                     </a>
                 </li>
@@ -1065,6 +1106,12 @@
                         </span>
                     </a>
                 </li>
+                <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                    <a href="{{ route('frontend.payroll.index') }}" class="m-menu__link m-menu__toggle">
+                        <i class="m-menu__link-icon flaticon-list-3"></i>
+                        <span class="m-menu__link-text">Payroll</span>
+                    </a>
+                </li> -->
             @endrole
         </ul>
     </div>

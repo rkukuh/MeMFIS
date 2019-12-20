@@ -14,6 +14,9 @@
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border">
             <legend class="w-auto"><b>Allowance</b></legend>
+            @component('frontend.common.label.error')
+                @slot('id', 'allowance')
+            @endcomponent
             <div class="form-group m-form__group row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <div style="border-bottom:3px solid black">
@@ -30,7 +33,7 @@
                         <table width="100%" cellpadding="7">
                             @foreach($employee_benefit as $key => $benefit)
                             <tr>
-                                <td align="left" width="30%">{{ $benefit->name }}</td>
+                                <td align="left" width="30%">{{ $benefit->name }} </td>
                                     <td align="center" width="25%">
                                         @component('frontend.common.input.number')
                                             @slot('min', $benefit->pivot->min)
@@ -130,6 +133,9 @@
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-3">
             <legend class="w-auto"><b>BPJS</b></legend>
+            @component('frontend.common.label.error')
+                @slot('id', 'BPJS')
+            @endcomponent
             <div class="form-group m-form__group row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
 
@@ -215,6 +221,9 @@
         </fieldset>
         <fieldset class="border p-3 mt-3">
             <legend class="w-auto"><b>PPH 21</b></legend>
+            @component('frontend.common.label.error')
+                @slot('id', 'pph')
+            @endcomponent
             <div class="form-group m-form__group row">
                 <div class="col-sm-2 col-md-2 col-lg-2">
                     @component('frontend.common.input.radio')
@@ -313,6 +322,9 @@
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border">
             <legend class="w-auto"><b>Allowance</b></legend>
+            @component('frontend.common.label.error')
+                @slot('id', 'allowance')
+            @endcomponent
             <div class="form-group m-form__group row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <div style="border-bottom:3px solid black">
@@ -450,6 +462,9 @@
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-3">
             <legend class="w-auto"><b>BPJS</b></legend>
+            @component('frontend.common.label.error')
+                @slot('id', 'BPJS')
+            @endcomponent
             <div class="form-group m-form__group row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
 
@@ -532,6 +547,9 @@
         </fieldset>
         <fieldset class="border p-3 mt-3">
             <legend class="w-auto"><b>PPH 21</b></legend>
+            @component('frontend.common.label.error')
+                @slot('id', 'pph')
+            @endcomponent
             <div class="form-group m-form__group row">
                 <div class="col-sm-2 col-md-2 col-lg-2">
                         @php
@@ -668,12 +686,15 @@
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border">
             <legend class="w-auto"><b>Allowance</b></legend>
+            @component('frontend.common.label.error')
+                @slot('id', 'allowance')
+            @endcomponent
             <div class="form-group m-form__group row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <div style="border-bottom:3px solid black">
                         <table width="100%" cellpadding="7" border="1">
                             <tr>
-                                <td align="left" width="30%"><b>Benefits Name awu</b></td>
+                                <td align="left" width="30%"><b>Benefits Name</b></td>
                                 <td align="center" width="25%"><b>Amount</b></td>
                                 <td align="center" width="30%"><b>Description</b></td>
                                 <td align="center" width="15%"><b>Action</b></td>
@@ -689,12 +710,12 @@
                                 }
                             @endphp
                             @for ($i = 0; $i < count($employee_benefit); $i++)
-                            @if (in_array($employee_benefit[$i]['uuid'], $search))
-                            @php
-                                $key = array_search($employee_benefit[$i]['uuid'], $search)    
-                            @endphp
-                            <tr>
-                                    <td align="left" width="30%">{{ $employee_benefit[$i]['name'] }}</td>
+                                @if (in_array($employee_benefit[$i]['uuid'], $search))
+                                    @php
+                                        $key = array_search($employee_benefit[$i]['uuid'], $search)    
+                                    @endphp
+                                    <tr>
+                                        <td align="left" width="30%">{{ $employee_benefit[$i]['name'] }}</td>
                                         <td align="center" width="25%">
                                             @component('frontend.common.input.number')
                                                 @slot('min', $employee_benefit[$i]->pivot->min)
@@ -706,7 +727,7 @@
                                             @endcomponent                    
                                         </td>
                                         <td  width="30%">
-                                        <p>Min~Max = {{ number_format($employee_benefit[$i]->pivot->min, 2) }} - {{ number_format($employee_benefit[$i]->pivot->max, 2) }} <br> Calculation Refrence: {{ $employee_benefit[$i]['base_calculation'] }}<br> Pro-rate Base Calculation:  {{ $employee_benefit[$i]['prorate_calculation'] }}</p>
+                                            <p>Min~Max = {{ number_format($employee_benefit[$i]->pivot->min, 2) }} - {{ number_format($employee_benefit[$i]->pivot->max, 2) }} <br> Calculation Refrence: {{ $employee_benefit[$i]['base_calculation'] }}<br> Pro-rate Base Calculation:  {{ $employee_benefit[$i]['prorate_calculation'] }}</p>
                                         </td>
                                         <td align="center" width="15%">
                                             @component('frontend.common.input.checkbox')
@@ -720,32 +741,32 @@
                                             @endcomponent
                                         </td>
                                     </tr>
-                            @else
-                                <tr>
-                                <td align="left" width="30%">{{ $employee_benefit[$i]['name'] }}</td>
-                                    <td align="center" width="25%">
-                                        @component('frontend.common.input.number')
-                                            @slot('min', $employee_benefit[$i]['min'])
-                                            @slot('max', $employee_benefit[$i]['max'])
-                                            @slot('name', $employee_benefit[$i]['benefit_uuid'].'_amount')
-                                            @slot('id', $employee_benefit[$i]['benefit_uuid'].'_amount')
-                                            @slot('id_error', $employee_benefit[$i]['benefit_uuid'])
-                                        @endcomponent                    
-                                    </td>
-                                    <td  width="30%">
-                                    <p>Min~Max = {{ $employee_benefit[$i]['min'] }} - {{ $employee_benefit[$i]['max'] }} <br> Calculation Refrence: {{ $employee_benefit[$i]['base_calculation'] }}<br> Pro-rate Base Calculation:  {{ $employee_benefit[$i]['prorate_calculation'] }}</p>
-                                    </td>
-                                    <td align="center" width="15%">
-                                        @component('frontend.common.input.checkbox')
-                                            @slot('id', $employee_benefit[$i]['benefit_uuid'])
-                                            @slot('name', 'check_benefit')
-                                            @slot('value', $employee_benefit[$i]['benefit_uuid'])
-                                            @slot('onclick', 'checkboxFunction(this.id)')
-                                            @slot('size', '')
-                                            @slot('style','width:20px;')
-                                        @endcomponent
-                                    </td>
-                                </tr>
+                                @else
+                                    <tr>
+                                    <td align="left" width="30%">{{ $employee_benefit[$i]['name'] }}</td>
+                                        <td align="center" width="25%">
+                                            @component('frontend.common.input.number')
+                                                @slot('min', $employee_benefit[$i]['min'])
+                                                @slot('max', $employee_benefit[$i]['max'])
+                                                @slot('name', $employee_benefit[$i]['benefit_uuid'].'_amount')
+                                                @slot('id', $employee_benefit[$i]['benefit_uuid'].'_amount')
+                                                @slot('id_error', $employee_benefit[$i]['benefit_uuid'])
+                                            @endcomponent                    
+                                        </td>
+                                        <td  width="30%">
+                                        <p>Min~Max = {{ $employee_benefit[$i]['min'] }} - {{ $employee_benefit[$i]['max'] }} <br> Calculation Refrence: {{ $employee_benefit[$i]['base_calculation'] }}<br> Pro-rate Base Calculation:  {{ $employee_benefit[$i]['prorate_calculation'] }}</p>
+                                        </td>
+                                        <td align="center" width="15%">
+                                            @component('frontend.common.input.checkbox')
+                                                @slot('id', $employee_benefit[$i]['benefit_uuid'])
+                                                @slot('name', 'check_benefit')
+                                                @slot('value', $employee_benefit[$i]['benefit_uuid'])
+                                                @slot('onclick', 'checkboxFunction(this.id)')
+                                                @slot('size', '')
+                                                @slot('style','width:20px;')
+                                            @endcomponent
+                                        </td>
+                                    </tr>
                                 @endif
                             @endfor
 
@@ -838,6 +859,9 @@
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-3">
             <legend class="w-auto"><b>BPJS</b></legend>
+            @component('frontend.common.label.error')
+                @slot('id', 'BPJS')
+            @endcomponent
             <div class="form-group m-form__group row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
 
@@ -1006,6 +1030,9 @@
         </fieldset>
         <fieldset class="border p-3 mt-3">
             <legend class="w-auto"><b>PPH 21</b></legend>
+            @component('frontend.common.label.error')
+                @slot('id', 'pph')
+            @endcomponent
             <div class="form-group m-form__group row">
                 <div class="col-sm-2 col-md-2 col-lg-2">
                         @php

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Datatables;
+namespace App\Http\Controllers\Datatables\Vendor;
 
 use App\Models\Vendor;
 use App\Models\ListUtil;
@@ -16,7 +16,20 @@ class VendorDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(Vendor::all());
+        $vendors = Vendor::all();
+        foreach($vendors as $vendor){
+            if( $vendor->addresses->first() <> null){
+                $vendor->address.= $vendor->addresses->first()->address;
+            }
+            if( $vendor->phones->first() <> null){
+                $vendor->phone.= $vendor->phones->first()->number;
+            }
+            if( $vendor->emails->first() <> null){
+                $vendor->email.= $vendor->emails->first()->address;
+            }
+        }
+
+        $data = $alldata = json_decode($vendors);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

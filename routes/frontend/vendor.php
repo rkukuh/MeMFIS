@@ -17,6 +17,7 @@ Route::name('frontend.')->group(function () {
 
             Route::name('vendor.')->group(function () {
                 Route::prefix('vendor')->group(function () {
+                    Route::resource('/{vendor}/addresses', 'VendorAddressesController');
 
                 });
             });

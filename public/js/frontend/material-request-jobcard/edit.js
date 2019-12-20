@@ -1,15 +1,43 @@
 let MaterialRequestEdit = {
     init: function () {
 
-        $('#jc_ref_no').on('click', function () {
-            $('#ref_project').prop("disabled", true);
-            $('#ref_jobcard').removeAttr("disabled");
-        });
+        // $('#jc_ref_no').on('click', function () {
+        //     $('#ref_project').prop("disabled", true);
+        //     $('#ref_jobcard').removeAttr("disabled");
+        // });
 
-        $('#project_ref_no').on('click', function () {
-            $('#ref_jobcard').prop("disabled", true);
-            $('#ref_project').removeAttr("disabled");
-        });
+        // $('#project_ref_no').on('click', function () {
+        //     $('#ref_jobcard').prop("disabled", true);
+        //     $('#ref_project').removeAttr("disabled");
+        // });
+
+        if (jobcard_number == '') {
+            $('#ref_project').text(project_code);
+            $('#project_ref_no').attr('checked', true);
+        } else {
+            $('#ref_jobcard').text(jobcard_number);
+            $('#jc_ref_no').attr('checked', true);
+        }
+
+        function generate(type, uuid) {
+            if (type == 'jc') {
+                var url = '/datatables/jobcard/' + uuid + '/materials';
+            } else if (type == 'project') {
+                var url = '/project/' + uuid;
+
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (response) {
+                        $("#project_number").empty().html(response.code);
+                        $("#actype").empty().html(response.aircraft.name);
+                        $("#acreg").empty().html(response.aircraft_register);
+                    }
+                });
+            }
+        }
+
+        generate('project', project_uuid);
 
         $('.material_request_project_datatable').mDatatable({
             data: {
@@ -80,7 +108,7 @@ let MaterialRequestEdit = {
                     width: 150
                 },
                 {
-                    field: 'description',
+                    field: 'name',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
@@ -122,7 +150,7 @@ let MaterialRequestEdit = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_material_request" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Edit" data-item=' +
-                            t.uuid + ' data-date=' + t.pivot.expired_at + ' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-serial=' + t.pivot.serial_number + ' data-remark=' + t.pivot.description + '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            t.uuid + ' data-date=' + t.pivot.expired_at + ' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-serial=' + t.pivot.serial_number + ' data-remark=' + t.pivot.note + '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
                             t.uuid +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
@@ -166,6 +194,34 @@ let MaterialRequestEdit = {
             $("#material").attr('disabled', true);
 
             $.ajax({
+                url: '/get-serial-number/' + item_uuid,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('select[name="serial_no"]').empty();
+
+                    $('select[name="serial_no"]').append(
+                        '<option value=""> Select a Serial Number</option>'
+                    );
+
+                    $.each(data, function (key, value) {
+                        $('select[name="serial_no"]').append(
+                            '<option value="' + value + '">' + value + '</option>'
+                        );
+                    });
+                }
+            });
+
+            $.ajax({
+                url: '/get-expired-date/' + item_uuid,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $("#exp_date").text(data);
+                }
+            });
+
+            $.ajax({
                 url: '/get-item-unit-uuid/' + $(this).data('item'),
                 type: 'GET',
                 dataType: 'json',
@@ -189,6 +245,8 @@ let MaterialRequestEdit = {
             });
 
             document.getElementById('qty_request').value = $(this).data('quantity');
+            $("#jc_qty").text($(this).data('quantity'));
+            $("#qty_request").attr('max', $(this).data('quantity'));
             document.getElementById('uuid').value = $(this).data('uuid');
             let remark = $(this).data('remark');
 
@@ -209,7 +267,7 @@ let MaterialRequestEdit = {
             let quantity = $("input[name=qty_request]").val();
             let exp_date = $("#exp_date").val();
             let unit = $("#unit_id").val();
-            let remark = $("#remark").val();
+            let remark = $("#item_remark").val();
             let serial_no = $("#serial_no").val();
 
             $.ajax({

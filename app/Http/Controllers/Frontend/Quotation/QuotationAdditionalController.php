@@ -90,7 +90,7 @@ class QuotationAdditionalController extends Controller
         $defectcard_json["discount_value"] = 0;
         $defectcard_json["discount_type"] = "amount";
 
-        $request->merge(['number' => DocumentNumber::generate('QADD-', Quotation::withTrashed()->count()+1)]);
+        $request->merge(['number' => DocumentNumber::generate('QADD-', Quotation::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['data_defectcard' => json_encode($defectcard_json)]);
         $request->merge(['quotationable_type' => 'App\Models\Project']);

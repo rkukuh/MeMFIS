@@ -14,7 +14,7 @@ class CreateAttendancecorrectionsTable extends Migration
     public function up()
     {
         Schema::create('attendancecorrections', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
             $table->unsignedBigInteger('employee_id')->index();
@@ -38,7 +38,7 @@ class CreateAttendancecorrectionsTable extends Migration
             ->onDelete('restrict');
 
             $table->foreign('attendance_id')
-            ->references('id')->on('employee_attendances')
+            ->references('id')->on('attendances')
             ->onUpdate('cascade')
             ->onDelete('restrict');
 

@@ -1,8 +1,6 @@
 let Item = {
     init: function () {
-
-
-        var oTable = $('#item_datatable').DataTable({
+        $('#item_datatable').DataTable({
             "dom": '<"top"f>rt<"bottom">pil',
             processing: true,
             responsive: true,
@@ -76,6 +74,7 @@ let Item = {
             if (e.keyCode === 13) {
                 let table = $('.item_datatable').DataTable();
                 table.search(this.value).draw();
+
             }
         });
 

@@ -14,37 +14,55 @@ class StatusesOfMarital extends Seeder
     {
         Status::create([
             'code' => 'married',
-            'name' => 'Menikah',
+            'name' => 'Married',
             'of'   => 'marital',
         ]);
 
         Status::create([
-            'code' => 'single',
-            'name' => 'Belum Menikah',
+            'code' => 'mar-1-ch',
+            'name' => 'Married with 1 Child',
             'of'   => 'marital',
         ]);
 
         Status::create([
-            'code' => 'janda',
-            'name' => 'Janda',
+            'code' => 'mar-2-ch',
+            'name' => 'Married with 2 childs',
             'of'   => 'marital',
         ]);
 
         Status::create([
-            'code' => 'duda',
-            'name' => 'Duda',
+            'code' => 'mar-3-ch',
+            'name' => 'Married with 3 childs or more',
             'of'   => 'marital',
         ]);
 
         Status::create([
-            'code' => 'cerai-hidup',
-            'name' => 'Cerai Hidup',
+            'code' => 'not-married',
+            'name' => 'Not Married',
             'of'   => 'marital',
         ]);
 
         Status::create([
-            'code' => 'cerai-mati',
-            'name' => 'Cerai Mati',
+            'code' => 'nm-1-ch',
+            'name' => 'Not Married with 1 child',
+            'of'   => 'marital',
+        ]);
+
+        Status::create([
+            'code' => 'nm-2-ch',
+            'name' => 'Not Married with 2 childs',
+            'of'   => 'marital',
+        ]);
+
+        Status::create([
+            'code' => 'nm-3-ch',
+            'name' => 'Not Married with 3 childs or more',
+            'of'   => 'marital',
+        ]);
+
+        Status::create([
+            'code' => 'divorced',
+            'name' => 'Divorced',
             'of'   => 'marital',
         ]);
     }

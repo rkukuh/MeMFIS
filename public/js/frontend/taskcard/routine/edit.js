@@ -497,6 +497,8 @@ let TaskCard = {
         });
 
         $('.add-item').on('click', function () {
+            mApp.block(".modal-footer");
+
             let quantity = $('#quantity_material').val();
             let material = $('#material').val();
             let unit_material = $('#unit_material').val();
@@ -560,9 +562,13 @@ let TaskCard = {
 
                     }
                 }
+
             });
+            mApp.unblock(".modal-footer");
         });
         $('.add-tool').on('click', function () {
+            mApp.block(".modal-footer");
+
             let quantity = $('#quantity_tool').val();
             let tool = $('#tool').val();
             let unit_tool = $('#unit_tool').val();
@@ -626,6 +632,8 @@ let TaskCard = {
                     }
                 }
             });
+            mApp.unblock(".modal-footer");
+
         });
 
         $('.add-threshold').on('click', function () {
@@ -748,6 +756,8 @@ let TaskCard = {
 
 
         $('.footer').on('click', '.edit-taskcard', function () {
+            mApp.block(".footer");
+
             let status = true;
             let access = [];
             let i = 0;
@@ -928,7 +938,7 @@ let TaskCard = {
                 }
             });
         });
-
+        mApp.unblock(".footer");
     }
 };
 $(document).ready(function () {

@@ -195,5 +195,6 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/leave-types/create.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/gender.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/gender.js')}}"></script>
 @endpush
 

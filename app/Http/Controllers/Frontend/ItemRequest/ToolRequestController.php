@@ -14,6 +14,9 @@ use App\Http\Requests\Frontend\ItemRequestUpdate;
 use App\Helpers\DocumentNumber;
 use App\Models\JobCard;
 use App\Models\Type;
+use App\Models\Quotation;
+use App\Models\Project;
+use App\Models\DefectCard;
 
 class ToolRequestController extends Controller
 {
@@ -50,15 +53,45 @@ class ToolRequestController extends Controller
             ->pluck('id')
             ->first();
 
-        $request->merge(['number' => DocumentNumber::generate('MTRQ-', ItemRequest::withTrashed()->count() + 1)]);
+        $ref = 'App\Models\JobCard';
+        $jobcard = JobCard::where('uuid', $request->jc_no)->first();
+        $refId = null;
+
+        if ($jobcard) {
+            $refId = $jobcard->id;
+        }
+
+        if (empty($request->jc_no)) {
+            $ref = 'App\Models\Project';
+            $refId = Project::where('uuid', $request->project_no)->first()->id;
+        }
+
+        $request->merge(['number' => DocumentNumber::generate('MTRQ-', ItemRequest::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['type_id' => $type]);
-        $request->merge(['requestable_type' => 'App\Models\ItemRequest']);
-        $request->merge(['requestable_id' => ItemRequest::withTrashed()->count() + 1]);
+        $request->merge(['requestable_type' => $ref]);
+        $request->merge(['requestable_id' => $refId]);
 
         $itemRequest = ItemRequest::create($request->all());
+        $defectcards = [];
 
-        $jobcard = JobCard::where('uuid', $request->jc_no)->first();
-        $items = $jobcard->jobcardable->materials;
+        if (!$jobcard) {
+            $project = Project::where('uuid', $request->project_no)->first();
+            $defectcards = DefectCard::where('project_additional_id', $project->id)->get();
+        }
+
+        $items = [];
+
+        if ($jobcard) {
+            $items = $jobcard->jobcardable->tools;
+        }
+
+        if ($defectcards) {
+            foreach ($defectcards as $defectcard) {
+                foreach ($defectcard->tools as $item) {
+                    array_push($items, $item);
+                }
+            }
+        }
 
         foreach ($items as $item) {
             $itemRequest->items()->attach([
@@ -96,13 +129,24 @@ class ToolRequestController extends Controller
      */
     public function edit(ItemRequest $itemRequest)
     {
+        $project = $itemRequest->requestable;
+        $quo = Quotation::where('id', $project->quotation_id)->first();
+        $jobcard = null;
+
+        if ($quo) {
+            $jobcard = $project;
+            $project = $quo->quotationable;
+        }
+
         $storages = Storage::get();
         $employees = Employee::get();
 
-        return view('frontend.tool-request-jobcard.edit', [
+        return view('frontend.material-request-jobcard.edit', [
             'storages' => $storages,
             'employees' => $employees,
             'itemRequest' => $itemRequest,
+            'project' => $project,
+            'jobcard' => $jobcard,
         ]);
     }
 
@@ -146,6 +190,17 @@ class ToolRequestController extends Controller
         ]));
 
         return response()->json($itemRequest);
+    }
+
+    /**
+     * Print the specified resource from storage.
+     *
+     * @param  \App\Models\ItemRequest  $itemRequest
+     * @return \Illuminate\Http\Response
+     */
+    public function print(ItemRequest $itemRequest)
+    {
+        //
     }
 
     /**
