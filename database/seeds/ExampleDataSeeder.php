@@ -12,7 +12,7 @@ class ExampleDataSeeder extends Seeder
     public function run()
     {
         ini_set('memory_limit', '-1');
-
+        
         $this->call(CertifiedStaff_GeneralLicense::class);
         $this->call(CertifiedStaff_AMEL::class);
         $this->call(PositionExamples::class);
@@ -22,5 +22,6 @@ class ExampleDataSeeder extends Seeder
         $this->call(CompanyStructureExamples::class);
         $this->call(BenefitPositionExample::class);
         $this->call(EmployeePositionDummy::class);
+        $this->call(AttendanceExample::class);
     }
 }

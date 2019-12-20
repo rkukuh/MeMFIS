@@ -14,7 +14,6 @@ let Attendance = {
                                 dataSet = raw.data;
                             }
 
-                            console.log(dataSet);
                             return dataSet;
                         }
                     }

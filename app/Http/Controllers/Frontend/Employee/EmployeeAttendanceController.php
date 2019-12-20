@@ -358,7 +358,23 @@ class EmployeeAttendanceController extends Controller
 
             }
 
-            return redirect('import-fingerprint')->with('success', ['title' => 'Unregistered NRP on system', 'message' => $nrps.' reupload again after registering these NRPs']);
+            $nrps = join("/br", $nrps);
+
+            if($nrps){
+                $error_notification = array(
+                    'message' => $nrps." reupload again after registering these NRPs",
+                    'title' => "Unregistered NRP on system",
+                    'alert-type' => "success"
+                );
+            }else{
+                $error_notification = array(
+                    'message' => "Successfully import employee attendances data",
+                    'title' => "Successful",
+                    'alert-type' => "success"
+                );
+            }
+
+            return redirect()->route('frontend.import-fingerprint.index')->with($error_notification);
         }
     }
 
@@ -417,6 +433,7 @@ class EmployeeAttendanceController extends Controller
         // // create attendance with null;
         // $in = '00:00:00';
         // $out = '00:00:00';
+
         // foreach($employees as $employee){
         //         EmployeeAttendance::create([
         //         'employee_id' => $employee->id,
