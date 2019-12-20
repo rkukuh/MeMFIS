@@ -113,13 +113,13 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        $companies = Company::get()->toArray();
-        $departments = Department::get()->toArray();
+        $companies = Company::pluck('name','uuid')->toArray();
+        $departments = Department::pluck('name','uuid')->toArray();
 
         $companies = array_merge($companies, $departments);
 
         return view('frontend.company.edit', [
-            'type' => Type::ofCompany()->get(),
+            'types' => Type::ofCompany()->pluck('name','uuid'),
             'companies' => $companies,
             'company' => $company,
             ]);
