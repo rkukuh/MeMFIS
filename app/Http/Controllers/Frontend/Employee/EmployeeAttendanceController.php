@@ -427,28 +427,26 @@ class EmployeeAttendanceController extends Controller
      * Store a newly created employee attendances in storage.
      */
     public function createAttendances(){
-        // $days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-        // // code yang seharusnya dijalankan sehari-hari
-        // $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
-        // // create attendance with null;
-        // $in = '00:00:00';
-        // $out = '00:00:00';
+        $days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        // code yang seharusnya dijalankan sehari-hari
+        $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
+        // create attendance with null;
+        $in = '00:00:00';
+        $out = '00:00:00';
 
-        // $attendance = EmployeeAttendance::whereMonth('created_at', Carbon::now()->month)->whereYear('created_at', Carbon::now()->year)->first();
+        $attendance = EmployeeAttendance::whereMonth('created_at', Carbon::now()->month)->whereYear('created_at', Carbon::now()->year)->first();
 
-        // if(empty($attendance)){
-        //     foreach($employees as $employee){
-        //         EmployeeAttendance::create([
-        //             'employee_id' => $employee->id,
-        //             'date' => Carbon::today(),
-        //             'in' => $in,
-        //             'out' => $out
-        //         ]);
-        //     }
-        // }else{
-        //     return;
-        // }
-
-
+        if(empty($attendance)){
+            foreach($employees as $employee){
+                EmployeeAttendance::create([
+                    'employee_id' => $employee->id,
+                    'date' => Carbon::today(),
+                    'in' => $in,
+                    'out' => $out
+                ]);
+            }
+        }else{
+            return;
+        }
     }
 }
