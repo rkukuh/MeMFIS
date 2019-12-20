@@ -433,41 +433,5 @@ class EmployeeAttendanceController extends Controller
             return;
         }
 
-       
-
-        // code yang dijalankan untuk trial
-        // $employees = Employee::get(); //todo where active and approved, tapi fitur belom ada
-        // // create attendance with null;
-        // $in = '00:00:00';
-        // $out = '00:00:00';
-        
-        // foreach($employees as $employee){
-        //     if(sizeof($employee->workshifts) > 0){
-        //         $workshift = $employee->workshifts->first();
-        //         $shifts = $workshift->workshift_schedules;
-                
-        //         for($day = 1 ; $day <= 31 ; $day++){
-        //             $date = Carbon::create(2019, 11, $day, 0, 0, 0, 'Asia/Jakarta');
-    
-        //             $attendance = EmployeeAttendance::create([
-        //                 'employee_id' => $employee->id,
-        //                 'date' => $date,
-        //                 'in' => $in,
-        //                 'out' => $out
-        //             ]);
-    
-        //             $shift = $shifts->where('days', $days[$date->dayOfWeek])->first();
-        //             if($shift){
-        //                 $status = Status::ofAttendance()->where('code','absence')->first();
-        //                 $attendance->statuses()->attach($status->id);
-        //             }else{
-        //                 $status = null;
-        //             }
-
-
-        //         }
-        //     }
-
-        // }
     }
 }
