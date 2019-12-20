@@ -61,15 +61,10 @@ class AttendanceExample extends Seeder
                             }else{
                                 $status = null;
                             }
-
                         }
                     }
                 }
             }
         }
-
-
-
-
     }
 }
