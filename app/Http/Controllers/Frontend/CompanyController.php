@@ -113,9 +113,14 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
+        $companies = Company::get()->toArray();
+        $departments = Department::get()->toArray();
+
+        $companies = array_merge($companies, $departments);
+
         return view('frontend.company.edit', [
-            'company' => $company,
-            'company' => $company,
+            'type' => Type::ofCompany()->get(),
+            'companies' => $companies,
             'company' => $company,
             ]);
     }
