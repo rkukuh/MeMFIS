@@ -9,6 +9,7 @@ use App\Models\Type;
 use App\Models\Status;
 use App\Models\Progress;
 use App\Models\Approval;
+use App\Models\Category;
 use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
@@ -48,6 +49,7 @@ class GeneralPurchaseRequestController extends Controller
     {
         $request->merge(['number' => DocumentNumber::generate('PRGN-', PurchaseRequest::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['type_id' => Type::where('of','purchase-request')->where('uuid',$request->type_id)->first()->id ]);
+        $request->merge(['category_id' => Category::ofPurchaseRequest()->where('code','general')->first()->id ]);
         $request->merge(['requested_at' => Carbon::parse($request->requested_at)]);
         $request->merge(['required_at' => Carbon::parse($request->required_at)]);
 

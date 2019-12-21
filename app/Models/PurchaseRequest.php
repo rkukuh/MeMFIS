@@ -9,6 +9,7 @@ class PurchaseRequest extends MemfisModel
     protected $fillable = [
         'number',
         'type_id',
+        'category_id',
         'purchase_requestable_type',
         'purchase_requestable_id',
         'requested_at',
@@ -34,6 +35,19 @@ class PurchaseRequest extends MemfisModel
     public function approvals()
     {
         return $this->morphMany(Approval::class, 'approvable');
+    }
+
+    /**
+     * One-to-Many: A purchase request have zero or many category.
+     *
+     * This function will retrieve the type of an purchase request.
+     * See: Type's purchase_requests() method for the inverse
+     *
+     * @return mixed
+     */
+    public function category()
+    {
+        return $this->belongsTo(Type::class);
     }
 
     /**
