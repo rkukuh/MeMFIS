@@ -34,7 +34,6 @@ class ServicePurchaseRequestDatatables extends Controller
 
 
                 if(sizeof($purchaseRequest->approvals->toArray()) > 0){
-                    // dump("here");
                     $conducted_by  = User::find($purchaseRequest->approvals->first()->conducted_by);
                     $purchaseRequest->conducted_by .= $conducted_by->name;
                     $purchaseRequest->conducted_at .= $purchaseRequest->approvals->first()->created_at;
