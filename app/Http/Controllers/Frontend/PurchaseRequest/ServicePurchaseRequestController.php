@@ -13,7 +13,7 @@ use App\Models\Category;
 use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
-use App\Models\Pivots\PurchaseRequestItem;
+use App\Models\Pivots\PurchaseRequestService;
 use App\Http\Requests\Frontend\PurchaseRequestUpdate;
 use App\Http\Requests\Frontend\PurchaseRequestStore;
 
@@ -146,7 +146,7 @@ class ServicePurchaseRequestController extends Controller
         $pdf = \PDF::loadView('frontend/form/purchase_request_service',[
                 'username' => Auth::user()->name,
                 'purchaseRequest' => $purchaseRequest,
-                'items' => PurchaseRequestItem::where('purchase_request_id',$purchaseRequest->id)->get(),
+                'services' => PurchaseRequestService::where('purchase_request_id',$purchaseRequest->id)->get(),
                 'created_by' => $purchaseRequest->audits->first()->user->name
                 ]);
 
