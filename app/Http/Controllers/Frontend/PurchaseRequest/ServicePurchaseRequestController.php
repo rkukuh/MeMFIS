@@ -6,6 +6,8 @@ use Auth;
 use Carbon\Carbon;
 use App\Models\Item;
 use App\Models\Type;
+use App\Models\Status;
+use App\Models\Progress;
 use App\Models\Approval;
 use App\Models\Category;
 use App\Helpers\DocumentNumber;
@@ -124,7 +126,13 @@ class ServicePurchaseRequestController extends Controller
             'is_approved' => 1
         ]));
 
+        $purchaseRequest->progresses()->save(new Progress([
+            'status_id' =>  Status::ofPurchaseRequest()->where('code','approved')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
+
         return response()->json($purchaseRequest);
+
     }
 
     /**

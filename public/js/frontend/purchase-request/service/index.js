@@ -163,7 +163,7 @@ let PurchaseRequest = {
                             )
                         },
                         type: 'PUT',
-                        url: '/purchase-request/' +  purchase_request_uuid +'/general/approve',
+                        url: '/purchase-request/' +  purchase_request_uuid +'/service/approve',
                         success: function (data) {
                             toastr.success('Purchase Request has been Approved.', 'Approved', {
                                 timeOut: 5000

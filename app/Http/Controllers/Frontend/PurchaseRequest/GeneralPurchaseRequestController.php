@@ -132,7 +132,7 @@ class GeneralPurchaseRequestController extends Controller
         ]));
 
         $purchaseRequest->progresses()->save(new Progress([
-            'status_id' =>  Status::ofPurchaseRequest()->where('code','approve')->first()->id,
+            'status_id' =>  Status::ofPurchaseRequest()->where('code','approved')->first()->id,
             'progressed_by' => Auth::id()
         ]));
 
