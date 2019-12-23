@@ -41,6 +41,7 @@ class Benefit extends MemfisModel
                         'min',
                         'max'
                     )
+                    ->wherePivot('deleted_at', null)
                     ->withTimestamps();
     }
 
