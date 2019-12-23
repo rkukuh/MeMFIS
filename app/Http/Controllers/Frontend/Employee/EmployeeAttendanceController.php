@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend\Employee;
+
 use Config;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
@@ -320,8 +321,9 @@ class EmployeeAttendanceController extends Controller
                                 }
     
                                 $statuses = array_unique($statuses);
-                                // dump($statuses);
-    
+
+                                /** updating employee attendance */
+
                                 $attendance_to_update = EmployeeAttendance::where('employee_id',$employee->id)->whereDate('date',$attendance)->first();
                                 if($attendance_to_update){
                                     
@@ -330,22 +332,40 @@ class EmployeeAttendanceController extends Controller
                                         $attendance_to_update->statuses()->updateExistingPivot($status_id, ['deleted_at' => Carbon::now()]);
                                     }
                                     
-                                    if($attendance_to_update){
-                                        $attendance_to_update->update([
-                                            'employee_id' => $employee->id,
-                                            'in' => $check_in,
-                                            'out' => $check_out,
-                                            'late_in' => $late,
-                                            'earlier_out' => $earlier_out,
-                                            'overtime' => $overtime
-                                        ]);
-                                        
-                                        $attendance_to_update->statuses()->attach($statuses);
+                                    $attendance_to_update->update([
+                                        'employee_id' => $employee->id,
+                                        'in' => $check_in,
+                                        'out' => $check_out,
+                                        'late_in' => $late,
+                                        'earlier_out' => $earlier_out,
+                                        'overtime' => $overtime
+                                    ]);
+                                    
+                                    $attendance_to_update->statuses()->attach($statuses);
+
+                                }else{
+                                    /** create attendance if not found */
+                                    $attendance_statuses = $attendance_to_update->statuses;
+                                    foreach($attendance_statuses as $status_id){
+                                        $attendance_to_update->statuses()->updateExistingPivot($status_id, ['deleted_at' => Carbon::now()]);
                                     }
+                                    
+                                    $attendance_to_update = EmployeeAttendance::create([
+                                        'employee_id' => $employee->id,
+                                        'date' => $attendance,
+                                        'in' => $check_in,
+                                        'out' => $check_out,
+                                        'late_in' => $late,
+                                        'earlier_out' => $earlier_out,
+                                        'overtime' => $overtime
+                                    ]);
+        
+                                    $attendance_to_update->statuses()->attach($statuses);
+                           
                                 }
                             }else{
                                 /** TODO : if false, check for overtime */
-    
+
                             }
                         }
                     }else{
@@ -433,9 +453,12 @@ class EmployeeAttendanceController extends Controller
         // create attendance with null;
         $in = '00:00:00';
         $out = '00:00:00';
+        $date = Carbon::now();
 
         foreach($employees as $employee){
-            $attendance = EmployeeAttendance::whereDate('date', Carbon::now())->where('employee_id', $employee_id)->first();
+            $workshift = $employee->workshifts->first();
+            $shifts = $workshift->workshift_schedules;
+            $attendance = EmployeeAttendance::whereDate('date', Carbon::now())->where('employee_id', $employee->id)->first();
 
             if(empty($attendance)){
                 EmployeeAttendance::create([
