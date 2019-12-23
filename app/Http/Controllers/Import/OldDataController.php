@@ -6,6 +6,7 @@ use App\Imports\UsersImport;
 use App\Imports\FEFOINImport;
 use App\Imports\EnginesImport;
 use App\Imports\SimUserImport;
+use App\Imports\VendorsImport;
 use App\Imports\AircraftsImport;
 use App\Imports\CustomersImport;
 use App\Imports\WorkAreasImport;
@@ -15,7 +16,6 @@ use App\Imports\ManufacturersImport;
 use App\Imports\AttachItemToTaskCard;
 use App\Imports\TaskCardsBoeingImport;
 use App\Imports\TaskcardDecemberImport;
-use App\Imports\MaterialsAndToolsImport;
 use App\Imports\MasterItemDesemberImport;
 use App\Imports\TaskCardsCPCPTriganaimport;
 use App\Imports\MaterialsAndToolsImportDecember;
@@ -80,6 +80,11 @@ class OldDataController extends Controller
     public function users()
     {
         Excel::import(new UsersImport, $this->import_directory . 'users.xlsx');
+    }
+
+    public function vendors()
+    {
+        Excel::import(new VendorsImport, $this->import_directory . 'master-vendors.xlsx');
     }
 
     public function workAreas()

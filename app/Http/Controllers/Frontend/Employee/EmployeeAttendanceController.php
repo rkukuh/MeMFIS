@@ -13,8 +13,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Status;
 use App\Models\Employee;
 use App\Models\AttendanceFile;
-use App\Models\WorkshiftSchedule;
-use App\Models\EmployeeWorkshift;
 use App\Models\EmployeeAttendance;
 
 class EmployeeAttendanceController extends Controller
