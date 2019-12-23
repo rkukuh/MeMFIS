@@ -7,7 +7,7 @@ let BenefitsPosition = {
                 $('#'+this.id+'_min').attr('disabled', true)
                 $('#'+this.id+'_max').attr('disabled', true)
             }
-            
+
         });
         
         let update = $('.footer').on('click', '#update-benefit', function () {
@@ -78,6 +78,9 @@ let BenefitsPosition = {
                         $('#position_min'+index+'-error').attr('id',error_name[index]+'_min-error')
                         $('#position_max'+index+'-error').attr('id',error_name[index]+'_max-error')
                     });
+
+                    window.location.href='/position/'+position_uuid+'/edit';
+
                 }
             }
         });
