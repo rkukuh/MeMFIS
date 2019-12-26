@@ -1,3 +1,4 @@
+@can('scm_grn_create')
 @extends('frontend.master')
 
 @section('content')
@@ -243,3 +244,4 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/employee-uuid.js') }}"></script>
 
 @endpush
+@endcan

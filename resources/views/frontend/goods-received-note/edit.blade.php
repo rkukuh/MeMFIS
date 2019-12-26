@@ -1,3 +1,4 @@
+@can('scm_grn_edit')
 @extends('frontend.master')
 
 @section('content')
@@ -324,3 +325,4 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script>
 
 @endpush
+@endcan
