@@ -757,6 +757,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'TaskReleaseJobCardDatatables@index')->name('all');
+                Route::get('/ppc', 'TaskReleaseJobCardDatatables@ppc')->name('ppc');
                 Route::post('/filter', 'TaskReleaseJobCardDatatables@filter')->name('filter');
 
             });
