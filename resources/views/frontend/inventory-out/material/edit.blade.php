@@ -1,3 +1,4 @@
+@can('scm_inventory-out_edit')
 @extends('frontend.master')
 
 @section('content')
@@ -242,3 +243,4 @@
 
 <script src="{{ asset('js/frontend/inventory-out/material/edit.js') }}"></script>
 @endpush
+@endcan

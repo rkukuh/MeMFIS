@@ -1,3 +1,4 @@
+@can('scm_inventory-out_create')
 @extends('frontend.master')
 
 @section('content')
@@ -171,3 +172,4 @@
 
 <script src="{{ asset('js/frontend/inventory-out/tool/create.js') }}"></script>
 @endpush
+@endcan
