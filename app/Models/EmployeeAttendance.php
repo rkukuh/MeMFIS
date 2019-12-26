@@ -107,7 +107,7 @@ class EmployeeAttendance extends MemfisModel
 
     /*************************************** ACCESSOR ****************************************/
 
-    // to do accessor 
+    // to do accessor
     public function getLeaveAttribute(){
         // first filter by $this->employee
         $leave = Leave::where('employee_id', $this->employee_id)

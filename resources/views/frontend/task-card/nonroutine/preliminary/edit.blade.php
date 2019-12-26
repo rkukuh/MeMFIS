@@ -1,3 +1,4 @@
+{{-- @can('heavy-maintenace_taskcard_edit') --}}
 @extends('frontend.master')
 
 @section('content')
@@ -553,3 +554,5 @@
 
     {{-- <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script> --}}
 @endpush
+{{-- @endcan --}}
+

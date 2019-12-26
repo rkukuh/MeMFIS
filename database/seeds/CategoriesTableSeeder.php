@@ -12,6 +12,7 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $this->call(CategoriesOfItem::class);
+        $this->call(CategoriesOfPurchaseRequest::class);
         $this->call(CategoriesOfTaskCardEO::class);
     }
 }

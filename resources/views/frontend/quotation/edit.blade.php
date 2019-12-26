@@ -1,3 +1,4 @@
+{{-- @can('marketing_quotation_edit') --}}
 @extends('frontend.master')
 
 @section('content')
@@ -474,7 +475,7 @@
     $(document).ready(function() {
         let attentions = $('#attentions-val').val();
         let attention = $('#attention-val').val();
-        
+
         if (attentions) {
             let attn = JSON.parse(attentions);
             $('select[name="attention"]').empty();
@@ -588,3 +589,5 @@
 <script src="{{ asset('js/frontend/quotation/repeater.js') }}"></script>
 
 @endpush
+{{-- @endcan --}}
+

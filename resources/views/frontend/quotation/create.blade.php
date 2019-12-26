@@ -1,3 +1,4 @@
+{{-- @can('marketing_quotation_create') --}}
 @extends('frontend.master')
 
 @section('content')
@@ -491,7 +492,7 @@
 
     <script type="text/javascript">
         $("#type_website").on('change', function() {
-            
+
         });
         let simpan = $('.tes').on('click', '.save', function () {
         var usertype=[];
@@ -551,3 +552,4 @@
 
 
 @endpush
+{{-- @endcan --}}

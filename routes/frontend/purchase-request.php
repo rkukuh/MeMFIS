@@ -27,8 +27,10 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('purchase-request')->group(function () {
                     Route::get('/{purchaseRequest}/general/print', 'GeneralPurchaseRequestController@print')->name('general.print');
                     Route::get('/{purchaseRequest}/project/print', 'ProjectPurchaseRequestController@print')->name('project.print');
-                    Route::put('/{purchaseRequest}/project/approve', 'ProjectPurchaseRequestController@approve')->name('project.approve')->middleware('permission:purchase-request-approve');
-                    Route::put('/{purchaseRequest}/general/approve', 'GeneralPurchaseRequestController@approve')->name('general.approve')->middleware('permission:purchase-request-approve');
+                    Route::get('/{purchaseRequest}/service/print', 'ServicePurchaseRequestController@print')->name('service.print');
+                    Route::put('/{purchaseRequest}/project/approve', 'ProjectPurchaseRequestController@approve')->name('project.approve')->middleware('permission:scm_purchase-request_approve');
+                    Route::put('/{purchaseRequest}/general/approve', 'GeneralPurchaseRequestController@approve')->name('general.approve')->middleware('permission:scm_purchase-request_approve');
+                    Route::put('/{purchaseRequest}/service/approve', 'ServicePurchaseRequestController@approve')->name('service.approve')->middleware('permission:scm_purchase-request_approve');
                     Route::post('/{purchaseRequest}/item/{item}', 'ItemPurchaseRequestController@store')->name('item.store');
                     Route::post('/{purchaseRequest}/service/{service}', 'ItemPurchaseRequestController@serviceStore')->name('service.store');
                     Route::put('/general/item/{item}', 'ItemPurchaseRequestController@updateGeneral')->name('general.update');

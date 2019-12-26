@@ -9,6 +9,7 @@ use App\Models\Unit;
 use App\Models\Pivots\PurchaseRequestItem;
 use App\Models\Pivots\PurchaseRequestService;
 use App\Models\ListUtil;
+use App\Models\Category;
 use App\Models\CheckStock;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,7 +23,7 @@ class ServicePurchaseRequestDatatables extends Controller
      */
     public function index()
     {
-        $purchaseRequests = PurchaseRequest::with('type')->wherehas('services')->get();
+        $purchaseRequests = PurchaseRequest::with('type')->where('category_id', Category::ofPurchaseRequest()->where('code','service')->first()->id)->get();
 
         foreach($purchaseRequests as $purchaseRequest){
             if($purchaseRequest->deleted_at <> null){
@@ -33,7 +34,6 @@ class ServicePurchaseRequestDatatables extends Controller
 
 
                 if(sizeof($purchaseRequest->approvals->toArray()) > 0){
-                    // dump("here");
                     $conducted_by  = User::find($purchaseRequest->approvals->first()->conducted_by);
                     $purchaseRequest->conducted_by .= $conducted_by->name;
                     $purchaseRequest->conducted_at .= $purchaseRequest->approvals->first()->created_at;

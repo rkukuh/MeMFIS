@@ -7,959 +7,962 @@ class PermissionsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
+     * MODULE-NAME_MODEL-NAME_PERMISSION
+     * EXAMPLES :
+     *  accounting_accounting-receivable_create
+     *  heavy-maintenace_project_approve
      * @return void
      */
     public function run()
     {
         // ACCOUNT RECEIVABLE entity permissions:
 
-        Permission::create(['name' => 'account-receivable-create']);
-        Permission::create(['name' => 'account-receivable-read']);
-        Permission::create(['name' => 'account-receivable-edit']);
-        Permission::create(['name' => 'account-receivable-delete']);
-        Permission::create(['name' => 'account-receivable-remove']);
-        Permission::create(['name' => 'account-receivable-report']);
-        Permission::create(['name' => 'account-receivable-print']);
-        Permission::create(['name' => 'account-receivable-approve']);
-        Permission::create(['name' => 'account-receivable-reject']);
-        Permission::create(['name' => 'account-receivable-void']);
+        Permission::create(['name' => 'finance_account-receivable_create']);
+        Permission::create(['name' => 'finance_account-receivable_read']);
+        Permission::create(['name' => 'finance_account-receivable_edit']);
+        Permission::create(['name' => 'finance_account-receivable_delete']);
+        Permission::create(['name' => 'finance_account-receivable_remove']);
+        Permission::create(['name' => 'finance_account-receivable_report']);
+        Permission::create(['name' => 'finance_account-receivable_print']);
+        Permission::create(['name' => 'finance_account-receivable_approve']);
+        Permission::create(['name' => 'finance_account-receivable_reject']);
+        Permission::create(['name' => 'finance_account-receivable_void']);
 
         // ACCOUNT PAYABLE entity permissions:
 
-        Permission::create(['name' => 'account-payable-create']);
-        Permission::create(['name' => 'account-payable-read']);
-        Permission::create(['name' => 'account-payable-edit']);
-        Permission::create(['name' => 'account-payable-delete']);
-        Permission::create(['name' => 'account-payable-remove']);
-        Permission::create(['name' => 'account-payable-report']);
-        Permission::create(['name' => 'account-payable-print']);
-        Permission::create(['name' => 'account-payable-approve']);
-        Permission::create(['name' => 'account-payable-reject']);
-        Permission::create(['name' => 'account-payable-void']);
+        Permission::create(['name' => 'finance_account-payable_create']);
+        Permission::create(['name' => 'finance_account-payable_read']);
+        Permission::create(['name' => 'finance_account-payable_edit']);
+        Permission::create(['name' => 'finance_account-payable_delete']);
+        Permission::create(['name' => 'finance_account-payable_remove']);
+        Permission::create(['name' => 'finance_account-payable_report']);
+        Permission::create(['name' => 'finance_account-payable_print']);
+        Permission::create(['name' => 'finance_account-payable_approve']);
+        Permission::create(['name' => 'finance_account-payable_reject']);
+        Permission::create(['name' => 'finance_account-payable_void']);
 
         // AIRCRAFT  entity permissions:
 
-        Permission::create(['name' => 'aircraft-create']);
-        Permission::create(['name' => 'aircraft-read']);
-        Permission::create(['name' => 'aircraft-edit']);
-        Permission::create(['name' => 'aircraft-delete']);
-        Permission::create(['name' => 'aircraft-remove']);
-        Permission::create(['name' => 'aircraft-report']);
-        Permission::create(['name' => 'aircraft-print']);
-        Permission::create(['name' => 'aircraft-approve']);
-        Permission::create(['name' => 'aircraft-reject']);
-        Permission::create(['name' => 'aircraft-void']);
+        Permission::create(['name' => 'heavy-maintenace_aircraft_create']);
+        Permission::create(['name' => 'heavy-maintenace_aircraft_read']);
+        Permission::create(['name' => 'heavy-maintenace_aircraft_edit']);
+        Permission::create(['name' => 'heavy-maintenace_aircraft_delete']);
+        Permission::create(['name' => 'heavy-maintenace_aircraft_remove']);
+        Permission::create(['name' => 'heavy-maintenace_aircraft_report']);
+        Permission::create(['name' => 'heavy-maintenace_aircraft_print']);
+        Permission::create(['name' => 'heavy-maintenace_aircraft_approve']);
+        Permission::create(['name' => 'heavy-maintenace_aircraft_reject']);
+        Permission::create(['name' => 'heavy-maintenace_aircraft_void']);
 
-        // ASSIGN LEAVES entity permissions:
+        // ASSIGN LEAVES entity permissions: ???
 
-        Permission::create(['name' => 'assign-leaves-create']);
-        Permission::create(['name' => 'assign-leaves-read']);
-        Permission::create(['name' => 'assign-leaves-edit']);
-        Permission::create(['name' => 'assign-leaves-delete']);
-        Permission::create(['name' => 'assign-leaves-remove']);
-        Permission::create(['name' => 'assign-leaves-report']);
-        Permission::create(['name' => 'assign-leaves-print']);
-        Permission::create(['name' => 'assign-leaves-approve']);
-        Permission::create(['name' => 'assign-leaves-reject']);
-        Permission::create(['name' => 'assign-leaves-void']);
+        Permission::create(['name' => 'assign-leaves_create']);
+        Permission::create(['name' => 'assign-leaves_read']);
+        Permission::create(['name' => 'assign-leaves_edit']);
+        Permission::create(['name' => 'assign-leaves_delete']);
+        Permission::create(['name' => 'assign-leaves_remove']);
+        Permission::create(['name' => 'assign-leaves_report']);
+        Permission::create(['name' => 'assign-leaves_print']);
+        Permission::create(['name' => 'assign-leaves_approve']);
+        Permission::create(['name' => 'assign-leaves_reject']);
+        Permission::create(['name' => 'assign-leaves_void']);
 
         // ASSETS LEAVES entity permissions:
 
-        Permission::create(['name' => 'asset-create']);
-        Permission::create(['name' => 'asset-read']);
-        Permission::create(['name' => 'asset-edit']);
-        Permission::create(['name' => 'asset-delete']);
-        Permission::create(['name' => 'asset-remove']);
-        Permission::create(['name' => 'asset-report']);
-        Permission::create(['name' => 'asset-print']);
-        Permission::create(['name' => 'asset-approve']);
-        Permission::create(['name' => 'asset-reject']);
-        Permission::create(['name' => 'asset-void']);
+        Permission::create(['name' => 'finance_asset_create']);
+        Permission::create(['name' => 'finance_asset_read']);
+        Permission::create(['name' => 'finance_asset_edit']);
+        Permission::create(['name' => 'finance_asset_delete']);
+        Permission::create(['name' => 'finance_asset_remove']);
+        Permission::create(['name' => 'finance_asset_report']);
+        Permission::create(['name' => 'finance_asset_print']);
+        Permission::create(['name' => 'finance_asset_approve']);
+        Permission::create(['name' => 'finance_asset_reject']);
+        Permission::create(['name' => 'finance_asset_void']);
 
         // ATTENDANCE LIST entity permissions:
 
-        Permission::create(['name' => 'attendance-list-create']);
-        Permission::create(['name' => 'attendance-list-read']);
-        Permission::create(['name' => 'attendance-list-edit']);
-        Permission::create(['name' => 'attendance-list-delete']);
-        Permission::create(['name' => 'attendance-list-remove']);
-        Permission::create(['name' => 'attendance-list-report']);
-        Permission::create(['name' => 'attendance-list-print']);
-        Permission::create(['name' => 'attendance-list-approve']);
-        Permission::create(['name' => 'attendance-list-reject']);
-        Permission::create(['name' => 'attendance-list-void']);
+        Permission::create(['name' => 'human-resources_attendance-list_create']);
+        Permission::create(['name' => 'human-resources_attendance-list_read']);
+        Permission::create(['name' => 'human-resources_attendance-list_edit']);
+        Permission::create(['name' => 'human-resources_attendance-list_delete']);
+        Permission::create(['name' => 'human-resources_attendance-list_remove']);
+        Permission::create(['name' => 'human-resources_attendance-list_report']);
+        Permission::create(['name' => 'human-resources_attendance-list_print']);
+        Permission::create(['name' => 'human-resources_attendance-list_approve']);
+        Permission::create(['name' => 'human-resources_attendance-list_reject']);
+        Permission::create(['name' => 'human-resources_attendance-list_void']);
 
         // ATTENDANCE CORRECTION entity permissions:
 
-        Permission::create(['name' => 'attendance-correction-create']);
-        Permission::create(['name' => 'attendance-correction-read']);
-        Permission::create(['name' => 'attendance-correction-edit']);
-        Permission::create(['name' => 'attendance-correction-delete']);
-        Permission::create(['name' => 'attendance-correction-remove']);
-        Permission::create(['name' => 'attendance-correction-report']);
-        Permission::create(['name' => 'attendance-correction-print']);
-        Permission::create(['name' => 'attendance-correction-approve']);
-        Permission::create(['name' => 'attendance-correction-reject']);
-        Permission::create(['name' => 'attendance-correction-void']);
+        Permission::create(['name' => 'human-resources_attendance-correction_create']);
+        Permission::create(['name' => 'human-resources_attendance-correction_read']);
+        Permission::create(['name' => 'human-resources_attendance-correction_edit']);
+        Permission::create(['name' => 'human-resources_attendance-correction_delete']);
+        Permission::create(['name' => 'human-resources_attendance-correction_remove']);
+        Permission::create(['name' => 'human-resources_attendance-correction_report']);
+        Permission::create(['name' => 'human-resources_attendance-correction_print']);
+        Permission::create(['name' => 'human-resources_attendance-correction_approve']);
+        Permission::create(['name' => 'human-resources_attendance-correction_reject']);
+        Permission::create(['name' => 'human-resources_attendance-correction_void']);
 
         // BANKS entity permissions:
 
-        Permission::create(['name' => 'bank-create']);
-        Permission::create(['name' => 'bank-read']);
-        Permission::create(['name' => 'bank-edit']);
-        Permission::create(['name' => 'bank-delete']);
-        Permission::create(['name' => 'bank-remove']);
-        Permission::create(['name' => 'bank-report']);
-        Permission::create(['name' => 'bank-print']);
-        Permission::create(['name' => 'bank-approve']);
-        Permission::create(['name' => 'bank-reject']);
-        Permission::create(['name' => 'bank-void']);
+        Permission::create(['name' => 'finance_bank_create']);
+        Permission::create(['name' => 'finance_bank_read']);
+        Permission::create(['name' => 'finance_bank_edit']);
+        Permission::create(['name' => 'finance_bank_delete']);
+        Permission::create(['name' => 'finance_bank_remove']);
+        Permission::create(['name' => 'finance_bank_report']);
+        Permission::create(['name' => 'finance_bank_print']);
+        Permission::create(['name' => 'finance_bank_approve']);
+        Permission::create(['name' => 'finance_bank_reject']);
+        Permission::create(['name' => 'finance_bank_void']);
 
         // BALANCE SHEETS entity permissions:
 
-        Permission::create(['name' => 'balance-sheet-create']);
-        Permission::create(['name' => 'balance-sheet-read']);
-        Permission::create(['name' => 'balance-sheet-edit']);
-        Permission::create(['name' => 'balance-sheet-delete']);
-        Permission::create(['name' => 'balance-sheet-remove']);
-        Permission::create(['name' => 'balance-sheet-report']);
-        Permission::create(['name' => 'balance-sheet-print']);
-        Permission::create(['name' => 'balance-sheet-approve']);
-        Permission::create(['name' => 'balance-sheet-reject']);
-        Permission::create(['name' => 'balance-sheet-void']);
+        Permission::create(['name' => 'finance_balance-sheet_create']);
+        Permission::create(['name' => 'finance_balance-sheet_read']);
+        Permission::create(['name' => 'finance_balance-sheet_edit']);
+        Permission::create(['name' => 'finance_balance-sheet_delete']);
+        Permission::create(['name' => 'finance_balance-sheet_remove']);
+        Permission::create(['name' => 'finance_balance-sheet_report']);
+        Permission::create(['name' => 'finance_balance-sheet_print']);
+        Permission::create(['name' => 'finance_balance-sheet_approve']);
+        Permission::create(['name' => 'finance_balance-sheet_reject']);
+        Permission::create(['name' => 'finance_balance-sheet_void']);
 
         // BENEFITS entity permissions:
 
-        Permission::create(['name' => 'benefit-create']);
-        Permission::create(['name' => 'benefit-read']);
-        Permission::create(['name' => 'benefit-edit']);
-        Permission::create(['name' => 'benefit-delete']);
-        Permission::create(['name' => 'benefit-remove']);
-        Permission::create(['name' => 'benefit-report']);
-        Permission::create(['name' => 'benefit-print']);
-        Permission::create(['name' => 'benefit-approve']);
-        Permission::create(['name' => 'benefit-reject']);
-        Permission::create(['name' => 'benefit-void']);
+        Permission::create(['name' => 'human-resources_benefit_create']);
+        Permission::create(['name' => 'human-resources_benefit_read']);
+        Permission::create(['name' => 'human-resources_benefit_edit']);
+        Permission::create(['name' => 'human-resources_benefit_delete']);
+        Permission::create(['name' => 'human-resources_benefit_remove']);
+        Permission::create(['name' => 'human-resources_benefit_report']);
+        Permission::create(['name' => 'human-resources_benefit_print']);
+        Permission::create(['name' => 'human-resources_benefit_approve']);
+        Permission::create(['name' => 'human-resources_benefit_reject']);
+        Permission::create(['name' => 'human-resources_benefit_void']);
 
         // CATEGORY ITEM entity permissions:
 
-        Permission::create(['name' => 'category-item-create']);
-        Permission::create(['name' => 'category-item-read']);
-        Permission::create(['name' => 'category-item-edit']);
-        Permission::create(['name' => 'category-item-delete']);
-        Permission::create(['name' => 'category-item-remove']);
-        Permission::create(['name' => 'category-item-report']);
-        Permission::create(['name' => 'category-item-print']);
-        Permission::create(['name' => 'category-item-approve']);
-        Permission::create(['name' => 'category-item-reject']);
-        Permission::create(['name' => 'category-item-void']);
+        Permission::create(['name' => 'scm_category-item_create']);
+        Permission::create(['name' => 'scm_category-item_read']);
+        Permission::create(['name' => 'scm_category-item_edit']);
+        Permission::create(['name' => 'scm_category-item_delete']);
+        Permission::create(['name' => 'scm_category-item_remove']);
+        Permission::create(['name' => 'scm_category-item_report']);
+        Permission::create(['name' => 'scm_category-item_print']);
+        Permission::create(['name' => 'scm_category-item_approve']);
+        Permission::create(['name' => 'scm_category-item_reject']);
+        Permission::create(['name' => 'scm_category-item_void']);
 
         // CATEGORY ITEM CODE OF ACCOUNTING entity permissions:
 
-        Permission::create(['name' => 'category-item-coa-create']);
-        Permission::create(['name' => 'category-item-coa-read']);
-        Permission::create(['name' => 'category-item-coa-edit']);
-        Permission::create(['name' => 'category-item-coa-delete']);
-        Permission::create(['name' => 'category-item-coa-remove']);
-        Permission::create(['name' => 'category-item-coa-report']);
-        Permission::create(['name' => 'category-item-coa-print']);
-        Permission::create(['name' => 'category-item-coa-approve']);
-        Permission::create(['name' => 'category-item-coa-reject']);
-        Permission::create(['name' => 'category-item-coa-void']);
+        Permission::create(['name' => 'finance_category-item-coa_create']);
+        Permission::create(['name' => 'finance_category-item-coa_read']);
+        Permission::create(['name' => 'finance_category-item-coa_edit']);
+        Permission::create(['name' => 'finance_category-item-coa_delete']);
+        Permission::create(['name' => 'finance_category-item-coa_remove']);
+        Permission::create(['name' => 'finance_category-item-coa_report']);
+        Permission::create(['name' => 'finance_category-item-coa_print']);
+        Permission::create(['name' => 'finance_category-item-coa_approve']);
+        Permission::create(['name' => 'finance_category-item-coa_reject']);
+        Permission::create(['name' => 'finance_category-item-coa_void']);
 
-        // CALENDAR entity permissions:
+        // CALENDAR entity permissions: ???
 
-        Permission::create(['name' => 'calendar-create']);
-        Permission::create(['name' => 'calendar-read']);
-        Permission::create(['name' => 'calendar-edit']);
-        Permission::create(['name' => 'calendar-delete']);
-        Permission::create(['name' => 'calendar-remove']);
-        Permission::create(['name' => 'calendar-report']);
-        Permission::create(['name' => 'calendar-print']);
-        Permission::create(['name' => 'calendar-approve']);
-        Permission::create(['name' => 'calendar-reject']);
-        Permission::create(['name' => 'calendar-void']);
+        Permission::create(['name' => 'calendar_create']);
+        Permission::create(['name' => 'calendar_read']);
+        Permission::create(['name' => 'calendar_edit']);
+        Permission::create(['name' => 'calendar_delete']);
+        Permission::create(['name' => 'calendar_remove']);
+        Permission::create(['name' => 'calendar_report']);
+        Permission::create(['name' => 'calendar_print']);
+        Permission::create(['name' => 'calendar_approve']);
+        Permission::create(['name' => 'calendar_reject']);
+        Permission::create(['name' => 'calendar_void']);
 
-        // MASTER CAPABILITY entity permissions:
+        // MASTER CAPABILITY entity permissions: ???
 
-        Permission::create(['name' => 'capability-create']);
-        Permission::create(['name' => 'capability-read']);
-        Permission::create(['name' => 'capability-edit']);
-        Permission::create(['name' => 'capability-delete']);
-        Permission::create(['name' => 'capability-remove']);
-        Permission::create(['name' => 'capability-report']);
-        Permission::create(['name' => 'capability-print']);
-        Permission::create(['name' => 'capability-approve']);
-        Permission::create(['name' => 'capability-reject']);
-        Permission::create(['name' => 'capability-void']);
+        Permission::create(['name' => 'capability_create']);
+        Permission::create(['name' => 'capability_read']);
+        Permission::create(['name' => 'capability_edit']);
+        Permission::create(['name' => 'capability_delete']);
+        Permission::create(['name' => 'capability_remove']);
+        Permission::create(['name' => 'capability_report']);
+        Permission::create(['name' => 'capability_print']);
+        Permission::create(['name' => 'capability_approve']);
+        Permission::create(['name' => 'capability_reject']);
+        Permission::create(['name' => 'capability_void']);
 
         // CASHBOOK entity permissions:
 
-        Permission::create(['name' => 'cashbook-create']);
-        Permission::create(['name' => 'cashbook-read']);
-        Permission::create(['name' => 'cashbook-edit']);
-        Permission::create(['name' => 'cashbook-delete']);
-        Permission::create(['name' => 'cashbook-remove']);
-        Permission::create(['name' => 'cashbook-report']);
-        Permission::create(['name' => 'cashbook-print']);
-        Permission::create(['name' => 'cashbook-approve']);
-        Permission::create(['name' => 'cashbook-reject']);
-        Permission::create(['name' => 'cashbook-void']);
+        Permission::create(['name' => 'finance_cashbook_create']);
+        Permission::create(['name' => 'finance_cashbook_read']);
+        Permission::create(['name' => 'finance_cashbook_edit']);
+        Permission::create(['name' => 'finance_cashbook_delete']);
+        Permission::create(['name' => 'finance_cashbook_remove']);
+        Permission::create(['name' => 'finance_cashbook_report']);
+        Permission::create(['name' => 'finance_cashbook_print']);
+        Permission::create(['name' => 'finance_cashbook_approve']);
+        Permission::create(['name' => 'finance_cashbook_reject']);
+        Permission::create(['name' => 'finance_cashbook_void']);
 
         // CASH / BANK REPORT entity permissions:
 
-        Permission::create(['name' => 'cbr-create']);
-        Permission::create(['name' => 'cbr-read']);
-        Permission::create(['name' => 'cbr-edit']);
-        Permission::create(['name' => 'cbr-delete']);
-        Permission::create(['name' => 'cbr-remove']);
-        Permission::create(['name' => 'cbr-report']);
-        Permission::create(['name' => 'cbr-print']);
-        Permission::create(['name' => 'cbr-approve']);
-        Permission::create(['name' => 'cbr-reject']);
-        Permission::create(['name' => 'cbr-void']);
+        Permission::create(['name' => 'finance_cbr_create']);
+        Permission::create(['name' => 'finance_cbr_read']);
+        Permission::create(['name' => 'finance_cbr_edit']);
+        Permission::create(['name' => 'finance_cbr_delete']);
+        Permission::create(['name' => 'finance_cbr_remove']);
+        Permission::create(['name' => 'finance_cbr_report']);
+        Permission::create(['name' => 'finance_cbr_print']);
+        Permission::create(['name' => 'finance_cbr_approve']);
+        Permission::create(['name' => 'finance_cbr_reject']);
+        Permission::create(['name' => 'finance_cbr_void']);
 
         // CUSTOMER entity permissions:
 
-        Permission::create(['name' => 'customer-create']);
-        Permission::create(['name' => 'customer-read']);
-        Permission::create(['name' => 'customer-edit']);
-        Permission::create(['name' => 'customer-delete']);
-        Permission::create(['name' => 'customer-remove']);
-        Permission::create(['name' => 'customer-report']);
-        Permission::create(['name' => 'customer-print']);
-        Permission::create(['name' => 'customer-approve']);
-        Permission::create(['name' => 'customer-reject']);
-        Permission::create(['name' => 'customer-void']);
+        Permission::create(['name' => 'marketing_customer_create']);
+        Permission::create(['name' => 'marketing_customer_read']);
+        Permission::create(['name' => 'marketing_customer_edit']);
+        Permission::create(['name' => 'marketing_customer_delete']);
+        Permission::create(['name' => 'marketing_customer_remove']);
+        Permission::create(['name' => 'marketing_customer_report']);
+        Permission::create(['name' => 'marketing_customer_print']);
+        Permission::create(['name' => 'marketing_customer_approve']);
+        Permission::create(['name' => 'marketing_customer_reject']);
+        Permission::create(['name' => 'marketing_customer_void']);
 
         // MASTER COA entity permissions:
 
-        Permission::create(['name' => 'coa-create']);
-        Permission::create(['name' => 'coa-read']);
-        Permission::create(['name' => 'coa-edit']);
-        Permission::create(['name' => 'coa-delete']);
-        Permission::create(['name' => 'coa-remove']);
-        Permission::create(['name' => 'coa-report']);
-        Permission::create(['name' => 'coa-print']);
-        Permission::create(['name' => 'coa-approve']);
-        Permission::create(['name' => 'coa-reject']);
-        Permission::create(['name' => 'coa-void']);
+        Permission::create(['name' => 'finance_coa_create']);
+        Permission::create(['name' => 'finance_coa_read']);
+        Permission::create(['name' => 'finance_coa_edit']);
+        Permission::create(['name' => 'finance_coa_delete']);
+        Permission::create(['name' => 'finance_coa_remove']);
+        Permission::create(['name' => 'finance_coa_report']);
+        Permission::create(['name' => 'finance_coa_print']);
+        Permission::create(['name' => 'finance_coa_approve']);
+        Permission::create(['name' => 'finance_coa_reject']);
+        Permission::create(['name' => 'finance_coa_void']);
 
         // COMPANY STRUCTUR & DEPARTEMENT entity permissions:
 
-        Permission::create(['name' => 'csd-create']);
-        Permission::create(['name' => 'csd-read']);
-        Permission::create(['name' => 'csd-edit']);
-        Permission::create(['name' => 'csd-delete']);
-        Permission::create(['name' => 'csd-remove']);
-        Permission::create(['name' => 'csd-report']);
-        Permission::create(['name' => 'csd-print']);
-        Permission::create(['name' => 'csd-approve']);
-        Permission::create(['name' => 'csd-reject']);
-        Permission::create(['name' => 'csd-void']);
+        Permission::create(['name' => 'human-resources_csd_create']);
+        Permission::create(['name' => 'human-resources_csd_read']);
+        Permission::create(['name' => 'human-resources_csd_edit']);
+        Permission::create(['name' => 'human-resources_csd_delete']);
+        Permission::create(['name' => 'human-resources_csd_remove']);
+        Permission::create(['name' => 'human-resources_csd_report']);
+        Permission::create(['name' => 'human-resources_csd_print']);
+        Permission::create(['name' => 'human-resources_csd_approve']);
+        Permission::create(['name' => 'human-resources_csd_reject']);
+        Permission::create(['name' => 'human-resources_csd_void']);
 
         // DISCREPANCY FOUND entity permissions:
 
-        Permission::create(['name' => 'discrepancy-create']);
-        Permission::create(['name' => 'discrepancy-read']);
-        Permission::create(['name' => 'discrepancy-edit']);
-        Permission::create(['name' => 'discrepancy-delete']);
-        Permission::create(['name' => 'discrepancy-remove']);
-        Permission::create(['name' => 'discrepancy-report']);
-        Permission::create(['name' => 'discrepancy-print']);
-        Permission::create(['name' => 'discrepancy-approve']);
-        Permission::create(['name' => 'discrepancy-reject']);
-        Permission::create(['name' => 'discrepancy-void']);
+        Permission::create(['name' => 'heavy-maintenace_discrepancy_create']);
+        Permission::create(['name' => 'heavy-maintenace_discrepancy_read']);
+        Permission::create(['name' => 'heavy-maintenace_discrepancy_edit']);
+        Permission::create(['name' => 'heavy-maintenace_discrepancy_delete']);
+        Permission::create(['name' => 'heavy-maintenace_discrepancy_remove']);
+        Permission::create(['name' => 'heavy-maintenace_discrepancy_report']);
+        Permission::create(['name' => 'heavy-maintenace_discrepancy_print']);
+        Permission::create(['name' => 'heavy-maintenace_discrepancy_approve']);
+        Permission::create(['name' => 'heavy-maintenace_discrepancy_reject']);
+        Permission::create(['name' => 'heavy-maintenace_discrepancy_void']);
 
         // DEFECTCARD entity permissions:
 
-        Permission::create(['name' => 'defectcard-create']);
-        Permission::create(['name' => 'defectcard-read']);
-        Permission::create(['name' => 'defectcard-edit']);
-        Permission::create(['name' => 'defectcard-delete']);
-        Permission::create(['name' => 'defectcard-remove']);
-        Permission::create(['name' => 'defectcard-report']);
-        Permission::create(['name' => 'defectcard-print']);
-        Permission::create(['name' => 'defectcard-approve']);
-        Permission::create(['name' => 'defectcard-reject']);
-        Permission::create(['name' => 'defectcard-void']);
+        Permission::create(['name' => 'heavy-maintenace_defectcard_create']);
+        Permission::create(['name' => 'heavy-maintenace_defectcard_read']);
+        Permission::create(['name' => 'heavy-maintenace_defectcard_edit']);
+        Permission::create(['name' => 'heavy-maintenace_defectcard_delete']);
+        Permission::create(['name' => 'heavy-maintenace_defectcard_remove']);
+        Permission::create(['name' => 'heavy-maintenace_defectcard_report']);
+        Permission::create(['name' => 'heavy-maintenace_defectcard_print']);
+        Permission::create(['name' => 'heavy-maintenace_defectcard_approve']);
+        Permission::create(['name' => 'heavy-maintenace_defectcard_reject']);
+        Permission::create(['name' => 'heavy-maintenace_defectcard_void']);
 
-        // DEFECT REPORT entity permissions:
+        // DEFECT REPORT entity permissions: ???
 
-        Permission::create(['name' => 'defect-report-create']);
-        Permission::create(['name' => 'defect-report-read']);
-        Permission::create(['name' => 'defect-report-edit']);
-        Permission::create(['name' => 'defect-report-delete']);
-        Permission::create(['name' => 'defect-report-remove']);
-        Permission::create(['name' => 'defect-report-report']);
-        Permission::create(['name' => 'defect-report-print']);
-        Permission::create(['name' => 'defect-report-approve']);
-        Permission::create(['name' => 'defect-report-reject']);
-        Permission::create(['name' => 'defect-report-void']);
+        Permission::create(['name' => 'workshop_defect-report_create']);
+        Permission::create(['name' => 'workshop_defect-report_read']);
+        Permission::create(['name' => 'workshop_defect-report_edit']);
+        Permission::create(['name' => 'workshop_defect-report_delete']);
+        Permission::create(['name' => 'workshop_defect-report_remove']);
+        Permission::create(['name' => 'workshop_defect-report_report']);
+        Permission::create(['name' => 'workshop_defect-report_print']);
+        Permission::create(['name' => 'workshop_defect-report_approve']);
+        Permission::create(['name' => 'workshop_defect-report_reject']);
+        Permission::create(['name' => 'workshop_defect-report_void']);
 
         // EMPLOYMENT STATUS entity permissions:
 
-        Permission::create(['name' => 'employment-status-create']);
-        Permission::create(['name' => 'employment-status-read']);
-        Permission::create(['name' => 'employment-status-edit']);
-        Permission::create(['name' => 'employment-status-delete']);
-        Permission::create(['name' => 'employment-status-remove']);
-        Permission::create(['name' => 'employment-status-report']);
-        Permission::create(['name' => 'employment-status-print']);
-        Permission::create(['name' => 'employment-status-approve']);
-        Permission::create(['name' => 'employment-status-reject']);
-        Permission::create(['name' => 'employment-status-void']);
+        Permission::create(['name' => 'human-resources_employment-status_create']);
+        Permission::create(['name' => 'human-resources_employment-status_read']);
+        Permission::create(['name' => 'human-resources_employment-status_edit']);
+        Permission::create(['name' => 'human-resources_employment-status_delete']);
+        Permission::create(['name' => 'human-resources_employment-status_remove']);
+        Permission::create(['name' => 'human-resources_employment-status_report']);
+        Permission::create(['name' => 'human-resources_employment-status_print']);
+        Permission::create(['name' => 'human-resources_employment-status_approve']);
+        Permission::create(['name' => 'human-resources_employment-status_reject']);
+        Permission::create(['name' => 'human-resources_employment-status_void']);
 
         // EMPLOYEE entity permissions:
 
-        Permission::create(['name' => 'employee-create']);
-        Permission::create(['name' => 'employee-read']);
-        Permission::create(['name' => 'employee-edit']);
-        Permission::create(['name' => 'employee-delete']);
-        Permission::create(['name' => 'employee-remove']);
-        Permission::create(['name' => 'employee-report']);
-        Permission::create(['name' => 'employee-print']);
-        Permission::create(['name' => 'employee-approve']);
-        Permission::create(['name' => 'employee-reject']);
-        Permission::create(['name' => 'employee-void']);
+        Permission::create(['name' => 'human-resources_employee_create']);
+        Permission::create(['name' => 'human-resources_employee_read']);
+        Permission::create(['name' => 'human-resources_employee_edit']);
+        Permission::create(['name' => 'human-resources_employee_delete']);
+        Permission::create(['name' => 'human-resources_employee_remove']);
+        Permission::create(['name' => 'human-resources_employee_report']);
+        Permission::create(['name' => 'human-resources_employee_print']);
+        Permission::create(['name' => 'human-resources_employee_approve']);
+        Permission::create(['name' => 'human-resources_employee_reject']);
+        Permission::create(['name' => 'human-resources_employee_void']);
 
         // EVENT/HOLIDAYS entity permissions:
 
-        Permission::create(['name' => 'event-holiday-create']);
-        Permission::create(['name' => 'event-holiday-read']);
-        Permission::create(['name' => 'event-holiday-edit']);
-        Permission::create(['name' => 'event-holiday-delete']);
-        Permission::create(['name' => 'event-holiday-remove']);
-        Permission::create(['name' => 'event-holiday-report']);
-        Permission::create(['name' => 'event-holiday-print']);
-        Permission::create(['name' => 'event-holiday-approve']);
-        Permission::create(['name' => 'event-holiday-reject']);
-        Permission::create(['name' => 'event-holiday-void']);
+        Permission::create(['name' => 'human-resources_event-holiday_create']);
+        Permission::create(['name' => 'human-resources_event-holiday_read']);
+        Permission::create(['name' => 'human-resources_event-holiday_edit']);
+        Permission::create(['name' => 'human-resources_event-holiday_delete']);
+        Permission::create(['name' => 'human-resources_event-holiday_remove']);
+        Permission::create(['name' => 'human-resources_event-holiday_report']);
+        Permission::create(['name' => 'human-resources_event-holiday_print']);
+        Permission::create(['name' => 'human-resources_event-holiday_approve']);
+        Permission::create(['name' => 'human-resources_event-holiday_reject']);
+        Permission::create(['name' => 'human-resources_event-holiday_void']);
 
         // GENERAL LEDGER entity permissions:
 
-        Permission::create(['name' => 'general-ledger-create']);
-        Permission::create(['name' => 'general-ledger-read']);
-        Permission::create(['name' => 'general-ledger-edit']);
-        Permission::create(['name' => 'general-ledger-delete']);
-        Permission::create(['name' => 'general-ledger-remove']);
-        Permission::create(['name' => 'general-ledger-report']);
-        Permission::create(['name' => 'general-ledger-print']);
-        Permission::create(['name' => 'general-ledger-approve']);
-        Permission::create(['name' => 'general-ledger-reject']);
-        Permission::create(['name' => 'general-ledger-void']);
+        Permission::create(['name' => 'finance_general-ledger_create']);
+        Permission::create(['name' => 'finance_general-ledger_read']);
+        Permission::create(['name' => 'finance_general-ledger_edit']);
+        Permission::create(['name' => 'finance_general-ledger_delete']);
+        Permission::create(['name' => 'finance_general-ledger_remove']);
+        Permission::create(['name' => 'finance_general-ledger_report']);
+        Permission::create(['name' => 'finance_general-ledger_print']);
+        Permission::create(['name' => 'finance_general-ledger_approve']);
+        Permission::create(['name' => 'finance_general-ledger_reject']);
+        Permission::create(['name' => 'finance_general-ledger_void']);
 
         // GOODS RECEIVED NOTE entity permissions:
 
-        Permission::create(['name' => 'grn-create']);
-        Permission::create(['name' => 'grn-read']);
-        Permission::create(['name' => 'grn-edit']);
-        Permission::create(['name' => 'grn-delete']);
-        Permission::create(['name' => 'grn-remove']);
-        Permission::create(['name' => 'grn-report']);
-        Permission::create(['name' => 'grn-print']);
-        Permission::create(['name' => 'grn-approve']);
-        Permission::create(['name' => 'grn-reject']);
-        Permission::create(['name' => 'grn-void']);
+        Permission::create(['name' => 'scm_grn_create']);
+        Permission::create(['name' => 'scm_grn_read']);
+        Permission::create(['name' => 'scm_grn_edit']);
+        Permission::create(['name' => 'scm_grn_delete']);
+        Permission::create(['name' => 'scm_grn_remove']);
+        Permission::create(['name' => 'scm_grn_report']);
+        Permission::create(['name' => 'scm_grn_print']);
+        Permission::create(['name' => 'scm_grn_approve']);
+        Permission::create(['name' => 'scm_grn_reject']);
+        Permission::create(['name' => 'scm_grn_void']);
 
         // GSE/TOOL RETURNED entity permissions:
 
-        Permission::create(['name' => 'gse-tool-create']);
-        Permission::create(['name' => 'gse-tool-read']);
-        Permission::create(['name' => 'gse-tool-edit']);
-        Permission::create(['name' => 'gse-tool-delete']);
-        Permission::create(['name' => 'gse-tool-remove']);
-        Permission::create(['name' => 'gse-tool-report']);
-        Permission::create(['name' => 'gse-tool-print']);
-        Permission::create(['name' => 'gse-tool-approve']);
-        Permission::create(['name' => 'gse-tool-reject']);
-        Permission::create(['name' => 'gse-tool-void']);
+        Permission::create(['name' => 'scm_gse-tool_create']);
+        Permission::create(['name' => 'scm_gse-tool_read']);
+        Permission::create(['name' => 'scm_gse-tool_edit']);
+        Permission::create(['name' => 'scm_gse-tool_delete']);
+        Permission::create(['name' => 'scm_gse-tool_remove']);
+        Permission::create(['name' => 'scm_gse-tool_report']);
+        Permission::create(['name' => 'scm_gse-tool_print']);
+        Permission::create(['name' => 'scm_gse-tool_approve']);
+        Permission::create(['name' => 'scm_gse-tool_reject']);
+        Permission::create(['name' => 'scm_gse-tool_void']);
 
         // INTERCHANGE entity permissions:
 
-        Permission::create(['name' => 'interchange-create']);
-        Permission::create(['name' => 'interchange-read']);
-        Permission::create(['name' => 'interchange-edit']);
-        Permission::create(['name' => 'interchange-delete']);
-        Permission::create(['name' => 'interchange-remove']);
-        Permission::create(['name' => 'interchange-report']);
-        Permission::create(['name' => 'interchange-print']);
-        Permission::create(['name' => 'interchange-approve']);
-        Permission::create(['name' => 'interchange-reject']);
-        Permission::create(['name' => 'interchange-void']);
+        Permission::create(['name' => 'scm_interchange_create']);
+        Permission::create(['name' => 'scm_interchange_read']);
+        Permission::create(['name' => 'scm_interchange_edit']);
+        Permission::create(['name' => 'scm_interchange_delete']);
+        Permission::create(['name' => 'scm_interchange_remove']);
+        Permission::create(['name' => 'scm_interchange_report']);
+        Permission::create(['name' => 'scm_interchange_print']);
+        Permission::create(['name' => 'scm_interchange_approve']);
+        Permission::create(['name' => 'scm_interchange_reject']);
+        Permission::create(['name' => 'scm_interchange_void']);
 
         // IMPORT FROM FINGERPRINT MACHINE entity permissions:
 
-        Permission::create(['name' => 'import-ffm-create']);
-        Permission::create(['name' => 'import-ffm-read']);
-        Permission::create(['name' => 'import-ffm-edit']);
-        Permission::create(['name' => 'import-ffm-delete']);
-        Permission::create(['name' => 'import-ffm-remove']);
-        Permission::create(['name' => 'import-ffm-report']);
-        Permission::create(['name' => 'import-ffm-print']);
-        Permission::create(['name' => 'import-ffm-approve']);
-        Permission::create(['name' => 'import-ffm-reject']);
-        Permission::create(['name' => 'import-ffm-void']);
+        Permission::create(['name' => 'human-resources_import-ffm_create']);
+        Permission::create(['name' => 'human-resources_import-ffm_read']);
+        Permission::create(['name' => 'human-resources_import-ffm_edit']);
+        Permission::create(['name' => 'human-resources_import-ffm_delete']);
+        Permission::create(['name' => 'human-resources_import-ffm_remove']);
+        Permission::create(['name' => 'human-resources_import-ffm_report']);
+        Permission::create(['name' => 'human-resources_import-ffm_print']);
+        Permission::create(['name' => 'human-resources_import-ffm_approve']);
+        Permission::create(['name' => 'human-resources_import-ffm_reject']);
+        Permission::create(['name' => 'human-resources_import-ffm_void']);
 
         // INVOICE entity permissions:
 
-        Permission::create(['name' => 'invoice-create']);
-        Permission::create(['name' => 'invoice-read']);
-        Permission::create(['name' => 'invoice-edit']);
-        Permission::create(['name' => 'invoice-delete']);
-        Permission::create(['name' => 'invoice-remove']);
-        Permission::create(['name' => 'invoice-report']);
-        Permission::create(['name' => 'invoice-print']);
-        Permission::create(['name' => 'invoice-approve']);
-        Permission::create(['name' => 'invoice-reject']);
-        Permission::create(['name' => 'invoice-void']);
+        Permission::create(['name' => 'finance_invoice_create']);
+        Permission::create(['name' => 'finance_invoice_read']);
+        Permission::create(['name' => 'finance_invoice_edit']);
+        Permission::create(['name' => 'finance_invoice_delete']);
+        Permission::create(['name' => 'finance_invoice_remove']);
+        Permission::create(['name' => 'finance_invoice_report']);
+        Permission::create(['name' => 'finance_invoice_print']);
+        Permission::create(['name' => 'finance_invoice_approve']);
+        Permission::create(['name' => 'finance_invoice_reject']);
+        Permission::create(['name' => 'finance_invoice_void']);
 
         // ITEMS entity permissions:
 
-        Permission::create(['name' => 'item-create']);
-        Permission::create(['name' => 'item-read']);
-        Permission::create(['name' => 'item-edit']);
-        Permission::create(['name' => 'item-delete']);
-        Permission::create(['name' => 'item-remove']);
-        Permission::create(['name' => 'item-report']);
-        Permission::create(['name' => 'item-print']);
-        Permission::create(['name' => 'item-approve']);
-        Permission::create(['name' => 'item-reject']);
-        Permission::create(['name' => 'item-void']);
+        Permission::create(['name' => 'scm_item_create']);
+        Permission::create(['name' => 'scm_item_read']);
+        Permission::create(['name' => 'scm_item_edit']);
+        Permission::create(['name' => 'scm_item_delete']);
+        Permission::create(['name' => 'scm_item_remove']);
+        Permission::create(['name' => 'scm_item_report']);
+        Permission::create(['name' => 'scm_item_print']);
+        Permission::create(['name' => 'scm_item_approve']);
+        Permission::create(['name' => 'scm_item_reject']);
+        Permission::create(['name' => 'scm_item_void']);
 
         // INVENTORY IN entity permissions:
 
-        Permission::create(['name' => 'inventory-in-create']);
-        Permission::create(['name' => 'inventory-in-read']);
-        Permission::create(['name' => 'inventory-in-edit']);
-        Permission::create(['name' => 'inventory-in-delete']);
-        Permission::create(['name' => 'inventory-in-remove']);
-        Permission::create(['name' => 'inventory-in-report']);
-        Permission::create(['name' => 'inventory-in-print']);
-        Permission::create(['name' => 'inventory-in-approve']);
-        Permission::create(['name' => 'inventory-in-reject']);
-        Permission::create(['name' => 'inventory-in-void']);
+        Permission::create(['name' => 'scm_inventory-in_create']);
+        Permission::create(['name' => 'scm_inventory-in_read']);
+        Permission::create(['name' => 'scm_inventory-in_edit']);
+        Permission::create(['name' => 'scm_inventory-in_delete']);
+        Permission::create(['name' => 'scm_inventory-in_remove']);
+        Permission::create(['name' => 'scm_inventory-in_report']);
+        Permission::create(['name' => 'scm_inventory-in_print']);
+        Permission::create(['name' => 'scm_inventory-in_approve']);
+        Permission::create(['name' => 'scm_inventory-in_reject']);
+        Permission::create(['name' => 'scm_inventory-in_void']);
 
         // INVENTORY OUT entity permissions:
 
-        Permission::create(['name' => 'inventory-out-create']);
-        Permission::create(['name' => 'inventory-out-read']);
-        Permission::create(['name' => 'inventory-out-edit']);
-        Permission::create(['name' => 'inventory-out-delete']);
-        Permission::create(['name' => 'inventory-out-remove']);
-        Permission::create(['name' => 'inventory-out-report']);
-        Permission::create(['name' => 'inventory-out-print']);
-        Permission::create(['name' => 'inventory-out-approve']);
-        Permission::create(['name' => 'inventory-out-reject']);
-        Permission::create(['name' => 'inventory-out-void']);
+        Permission::create(['name' => 'scm_inventory-out_create']);
+        Permission::create(['name' => 'scm_inventory-out_read']);
+        Permission::create(['name' => 'scm_inventory-out_edit']);
+        Permission::create(['name' => 'scm_inventory-out_delete']);
+        Permission::create(['name' => 'scm_inventory-out_remove']);
+        Permission::create(['name' => 'scm_inventory-out_report']);
+        Permission::create(['name' => 'scm_inventory-out_print']);
+        Permission::create(['name' => 'scm_inventory-out_approve']);
+        Permission::create(['name' => 'scm_inventory-out_reject']);
+        Permission::create(['name' => 'scm_inventory-out_void']);
 
         // JOBCARD entity permissions:
 
-        Permission::create(['name' => 'jobcard-create']);
-        Permission::create(['name' => 'jobcard-read']);
-        Permission::create(['name' => 'jobcard-edit']);
-        Permission::create(['name' => 'jobcard-delete']);
-        Permission::create(['name' => 'jobcard-remove']);
-        Permission::create(['name' => 'jobcard-report']);
-        Permission::create(['name' => 'jobcard-print']);
-        Permission::create(['name' => 'jobcard-approve']);
-        Permission::create(['name' => 'jobcard-reject']);
-        Permission::create(['name' => 'jobcard-void']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard_create']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard_read']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard_edit']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard_delete']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard_remove']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard_report']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard_print']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard_approve']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard_reject']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard_void']);
 
         // JOURNAL entity permissions:
 
-        Permission::create(['name' => 'journal-create']);
-        Permission::create(['name' => 'journal-read']);
-        Permission::create(['name' => 'journal-edit']);
-        Permission::create(['name' => 'journal-delete']);
-        Permission::create(['name' => 'journal-remove']);
-        Permission::create(['name' => 'journal-report']);
-        Permission::create(['name' => 'journal-print']);
-        Permission::create(['name' => 'journal-approve']);
-        Permission::create(['name' => 'journal-reject']);
-        Permission::create(['name' => 'journal-void']);
+        Permission::create(['name' => 'finance_journal_create']);
+        Permission::create(['name' => 'finance_journal_read']);
+        Permission::create(['name' => 'finance_journal_edit']);
+        Permission::create(['name' => 'finance_journal_delete']);
+        Permission::create(['name' => 'finance_journal_remove']);
+        Permission::create(['name' => 'finance_journal_report']);
+        Permission::create(['name' => 'finance_journal_print']);
+        Permission::create(['name' => 'finance_journal_approve']);
+        Permission::create(['name' => 'finance_journal_reject']);
+        Permission::create(['name' => 'finance_journal_void']);
 
         // JOBCARD HARD TIME entity permissions:
 
-        Permission::create(['name' => 'jobcard-hardtime-create']);
-        Permission::create(['name' => 'jobcard-hardtime-read']);
-        Permission::create(['name' => 'jobcard-hardtime-edit']);
-        Permission::create(['name' => 'jobcard-hardtime-delete']);
-        Permission::create(['name' => 'jobcard-hardtime-remove']);
-        Permission::create(['name' => 'jobcard-hardtime-report']);
-        Permission::create(['name' => 'jobcard-hardtime-print']);
-        Permission::create(['name' => 'jobcard-hardtime-approve']);
-        Permission::create(['name' => 'jobcard-hardtime-reject']);
-        Permission::create(['name' => 'jobcard-hardtime-void']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard-hardtime_create']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard-hardtime_read']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard-hardtime_edit']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard-hardtime_delete']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard-hardtime_remove']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard-hardtime_report']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard-hardtime_print']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard-hardtime_approve']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard-hardtime_reject']);
+        Permission::create(['name' => 'heavy-maintenace_jobcard-hardtime_void']);
 
         // JOBCARD WORKSHOP entity permissions:
 
-        Permission::create(['name' => 'jobcard-workshop-create']);
-        Permission::create(['name' => 'jobcard-workshop-read']);
-        Permission::create(['name' => 'jobcard-workshop-edit']);
-        Permission::create(['name' => 'jobcard-workshop-delete']);
-        Permission::create(['name' => 'jobcard-workshop-remove']);
-        Permission::create(['name' => 'jobcard-workshop-report']);
-        Permission::create(['name' => 'jobcard-workshop-print']);
-        Permission::create(['name' => 'jobcard-workshop-approve']);
-        Permission::create(['name' => 'jobcard-workshop-reject']);
-        Permission::create(['name' => 'jobcard-workshop-void']);
+        Permission::create(['name' => 'workshop_jobcard-workshop_create']);
+        Permission::create(['name' => 'workshop_jobcard-workshop_read']);
+        Permission::create(['name' => 'workshop_jobcard-workshop_edit']);
+        Permission::create(['name' => 'workshop_jobcard-workshop_delete']);
+        Permission::create(['name' => 'workshop_jobcard-workshop_remove']);
+        Permission::create(['name' => 'workshop_jobcard-workshop_report']);
+        Permission::create(['name' => 'workshop_jobcard-workshop_print']);
+        Permission::create(['name' => 'workshop_jobcard-workshop_approve']);
+        Permission::create(['name' => 'workshop_jobcard-workshop_reject']);
+        Permission::create(['name' => 'workshop_jobcard-workshop_void']);
 
-        // JOB SCOPE LEVEL entity permissions:
+        // JOB SCOPE LEVEL entity permissions: ???
 
-        Permission::create(['name' => 'jsl-create']);
-        Permission::create(['name' => 'jsl-read']);
-        Permission::create(['name' => 'jsl-edit']);
-        Permission::create(['name' => 'jsl-delete']);
-        Permission::create(['name' => 'jsl-remove']);
-        Permission::create(['name' => 'jsl-report']);
-        Permission::create(['name' => 'jsl-print']);
-        Permission::create(['name' => 'jsl-approve']);
-        Permission::create(['name' => 'jsl-reject']);
-        Permission::create(['name' => 'jsl-void']);
+        Permission::create(['name' => 'jsl_create']);
+        Permission::create(['name' => 'jsl_read']);
+        Permission::create(['name' => 'jsl_edit']);
+        Permission::create(['name' => 'jsl_delete']);
+        Permission::create(['name' => 'jsl_remove']);
+        Permission::create(['name' => 'jsl_report']);
+        Permission::create(['name' => 'jsl_print']);
+        Permission::create(['name' => 'jsl_approve']);
+        Permission::create(['name' => 'jsl_reject']);
+        Permission::create(['name' => 'jsl_void']);
 
-        // JOB REQUEST entity permissions:
+        // JOB REQUEST entity permissions: ???
 
-        Permission::create(['name' => 'job-request-create']);
-        Permission::create(['name' => 'job-request-read']);
-        Permission::create(['name' => 'job-request-edit']);
-        Permission::create(['name' => 'job-request-delete']);
-        Permission::create(['name' => 'job-request-remove']);
-        Permission::create(['name' => 'job-request-report']);
-        Permission::create(['name' => 'job-request-print']);
-        Permission::create(['name' => 'job-request-approve']);
-        Permission::create(['name' => 'job-request-reject']);
-        Permission::create(['name' => 'job-request-void']);
+        Permission::create(['name' => 'job-request_create']);
+        Permission::create(['name' => 'job-request_read']);
+        Permission::create(['name' => 'job-request_edit']);
+        Permission::create(['name' => 'job-request_delete']);
+        Permission::create(['name' => 'job-request_remove']);
+        Permission::create(['name' => 'job-request_report']);
+        Permission::create(['name' => 'job-request_print']);
+        Permission::create(['name' => 'job-request_approve']);
+        Permission::create(['name' => 'job-request_reject']);
+        Permission::create(['name' => 'job-request_void']);
 
         // LEAVE PERIOD entity permissions:
 
-        Permission::create(['name' => 'leave-period-create']);
-        Permission::create(['name' => 'leave-period-read']);
-        Permission::create(['name' => 'leave-period-edit']);
-        Permission::create(['name' => 'leave-period-delete']);
-        Permission::create(['name' => 'leave-period-remove']);
-        Permission::create(['name' => 'leave-period-report']);
-        Permission::create(['name' => 'leave-period-print']);
-        Permission::create(['name' => 'leave-period-approve']);
-        Permission::create(['name' => 'leave-period-reject']);
-        Permission::create(['name' => 'leave-period-void']);
+        Permission::create(['name' => 'human-resources_leave-period_create']);
+        Permission::create(['name' => 'human-resources_leave-period_read']);
+        Permission::create(['name' => 'human-resources_leave-period_edit']);
+        Permission::create(['name' => 'human-resources_leave-period_delete']);
+        Permission::create(['name' => 'human-resources_leave-period_remove']);
+        Permission::create(['name' => 'human-resources_leave-period_report']);
+        Permission::create(['name' => 'human-resources_leave-period_print']);
+        Permission::create(['name' => 'human-resources_leave-period_approve']);
+        Permission::create(['name' => 'human-resources_leave-period_reject']);
+        Permission::create(['name' => 'human-resources_leave-period_void']);
 
         // LEAVE TYPES entity permissions:
 
-        Permission::create(['name' => 'leave-types-create']);
-        Permission::create(['name' => 'leave-types-read']);
-        Permission::create(['name' => 'leave-types-edit']);
-        Permission::create(['name' => 'leave-types-delete']);
-        Permission::create(['name' => 'leave-types-remove']);
-        Permission::create(['name' => 'leave-types-report']);
-        Permission::create(['name' => 'leave-types-print']);
-        Permission::create(['name' => 'leave-types-approve']);
-        Permission::create(['name' => 'leave-types-reject']);
-        Permission::create(['name' => 'leave-types-void']);
+        Permission::create(['name' => 'human-resources_leave-types_create']);
+        Permission::create(['name' => 'human-resources_leave-types_read']);
+        Permission::create(['name' => 'human-resources_leave-types_edit']);
+        Permission::create(['name' => 'human-resources_leave-types_delete']);
+        Permission::create(['name' => 'human-resources_leave-types_remove']);
+        Permission::create(['name' => 'human-resources_leave-types_report']);
+        Permission::create(['name' => 'human-resources_leave-types_print']);
+        Permission::create(['name' => 'human-resources_leave-types_approve']);
+        Permission::create(['name' => 'human-resources_leave-types_reject']);
+        Permission::create(['name' => 'human-resources_leave-types_void']);
 
         // LEAVE REPORT entity permissions:
 
-        Permission::create(['name' => 'leave-report-create']);
-        Permission::create(['name' => 'leave-report-read']);
-        Permission::create(['name' => 'leave-report-edit']);
-        Permission::create(['name' => 'leave-report-delete']);
-        Permission::create(['name' => 'leave-report-remove']);
-        Permission::create(['name' => 'leave-report-report']);
-        Permission::create(['name' => 'leave-report-print']);
-        Permission::create(['name' => 'leave-report-approve']);
-        Permission::create(['name' => 'leave-report-reject']);
-        Permission::create(['name' => 'leave-report-void']);
+        Permission::create(['name' => 'human-resources_leave_report_create']);
+        Permission::create(['name' => 'human-resources_leave_report_read']);
+        Permission::create(['name' => 'human-resources_leave_report_edit']);
+        Permission::create(['name' => 'human-resources_leave_report_delete']);
+        Permission::create(['name' => 'human-resources_leave_report_remove']);
+        Permission::create(['name' => 'human-resources_leave_report_report']);
+        Permission::create(['name' => 'human-resources_leave_report_print']);
+        Permission::create(['name' => 'human-resources_leave_report_approve']);
+        Permission::create(['name' => 'human-resources_leave_report_reject']);
+        Permission::create(['name' => 'human-resources_leave_report_void']);
 
         // LEAVE DATALIST entity permissions:
 
-        Permission::create(['name' => 'leave-datalist-create']);
-        Permission::create(['name' => 'leave-datalist-read']);
-        Permission::create(['name' => 'leave-datalist-edit']);
-        Permission::create(['name' => 'leave-datalist-delete']);
-        Permission::create(['name' => 'leave-datalist-remove']);
-        Permission::create(['name' => 'leave-datalist-report']);
-        Permission::create(['name' => 'leave-datalist-print']);
-        Permission::create(['name' => 'leave-datalist-approve']);
-        Permission::create(['name' => 'leave-datalist-reject']);
-        Permission::create(['name' => 'leave-datalist-void']);
+        Permission::create(['name' => 'human-resources_leave-datalist_create']);
+        Permission::create(['name' => 'human-resources_leave-datalist_read']);
+        Permission::create(['name' => 'human-resources_leave-datalist_edit']);
+        Permission::create(['name' => 'human-resources_leave-datalist_delete']);
+        Permission::create(['name' => 'human-resources_leave-datalist_remove']);
+        Permission::create(['name' => 'human-resources_leave-datalist_report']);
+        Permission::create(['name' => 'human-resources_leave-datalist_print']);
+        Permission::create(['name' => 'human-resources_leave-datalist_approve']);
+        Permission::create(['name' => 'human-resources_leave-datalist_reject']);
+        Permission::create(['name' => 'human-resources_leave-datalist_void']);
 
-        // Manufacturer  entity permissions:
+        // Manufacturer  entity permissions: ???
 
-        Permission::create(['name' => 'manufacturer-create']);
-        Permission::create(['name' => 'manufacturer-read']);
-        Permission::create(['name' => 'manufacturer-edit']);
-        Permission::create(['name' => 'manufacturer-delete']);
-        Permission::create(['name' => 'manufacturer-remove']);
-        Permission::create(['name' => 'manufacturer-report']);
-        Permission::create(['name' => 'manufacturer-print']);
-        Permission::create(['name' => 'manufacturer-approve']);
-        Permission::create(['name' => 'manufacturer-reject']);
-        Permission::create(['name' => 'manufacturer-void']);
+        Permission::create(['name' => 'manufacturer_create']);
+        Permission::create(['name' => 'manufacturer_read']);
+        Permission::create(['name' => 'manufacturer_edit']);
+        Permission::create(['name' => 'manufacturer_delete']);
+        Permission::create(['name' => 'manufacturer_remove']);
+        Permission::create(['name' => 'manufacturer_report']);
+        Permission::create(['name' => 'manufacturer_print']);
+        Permission::create(['name' => 'manufacturer_approve']);
+        Permission::create(['name' => 'manufacturer_reject']);
+        Permission::create(['name' => 'manufacturer_void']);
 
         // MATERIAL REQUEST JOBCARD entity permissions:
 
-        Permission::create(['name' => 'mrj-create']);
-        Permission::create(['name' => 'mrj-read']);
-        Permission::create(['name' => 'mrj-edit']);
-        Permission::create(['name' => 'mrj-delete']);
-        Permission::create(['name' => 'mrj-remove']);
-        Permission::create(['name' => 'mrj-report']);
-        Permission::create(['name' => 'mrj-print']);
-        Permission::create(['name' => 'mrj-approve']);
-        Permission::create(['name' => 'mrj-reject']);
-        Permission::create(['name' => 'mrj-void']);
+        Permission::create(['name' => 'scm_mrj_create']);
+        Permission::create(['name' => 'scm_mrj_read']);
+        Permission::create(['name' => 'scm_mrj_edit']);
+        Permission::create(['name' => 'scm_mrj_delete']);
+        Permission::create(['name' => 'scm_mrj_remove']);
+        Permission::create(['name' => 'scm_mrj_report']);
+        Permission::create(['name' => 'scm_mrj_print']);
+        Permission::create(['name' => 'scm_mrj_approve']);
+        Permission::create(['name' => 'scm_mrj_reject']);
+        Permission::create(['name' => 'scm_mrj_void']);
 
         // MATERIAL TRANSFER entity permissions:
 
-        Permission::create(['name' => 'material-transfer-create']);
-        Permission::create(['name' => 'material-transfer-read']);
-        Permission::create(['name' => 'material-transfer-edit']);
-        Permission::create(['name' => 'material-transfer-delete']);
-        Permission::create(['name' => 'material-transfer-remove']);
-        Permission::create(['name' => 'material-transfer-report']);
-        Permission::create(['name' => 'material-transfer-print']);
-        Permission::create(['name' => 'material-transfer-approve']);
-        Permission::create(['name' => 'material-transfer-reject']);
-        Permission::create(['name' => 'material-transfer-void']);
+        Permission::create(['name' => 'scm_material-transfer_create']);
+        Permission::create(['name' => 'scm_material-transfer_read']);
+        Permission::create(['name' => 'scm_material-transfer_edit']);
+        Permission::create(['name' => 'scm_material-transfer_delete']);
+        Permission::create(['name' => 'scm_material-transfer_remove']);
+        Permission::create(['name' => 'scm_material-transfer_report']);
+        Permission::create(['name' => 'scm_material-transfer_print']);
+        Permission::create(['name' => 'scm_material-transfer_approve']);
+        Permission::create(['name' => 'scm_material-transfer_reject']);
+        Permission::create(['name' => 'scm_material-transfer_void']);
 
         // OVERTIME entity permissions:
 
-        Permission::create(['name' => 'overtime-create']);
-        Permission::create(['name' => 'overtime-read']);
-        Permission::create(['name' => 'overtime-edit']);
-        Permission::create(['name' => 'overtime-delete']);
-        Permission::create(['name' => 'overtime-remove']);
-        Permission::create(['name' => 'overtime-report']);
-        Permission::create(['name' => 'overtime-print']);
-        Permission::create(['name' => 'overtime-approve']);
-        Permission::create(['name' => 'overtime-reject']);
-        Permission::create(['name' => 'overtime-void']);
+        Permission::create(['name' => 'human-resources_overtime_create']);
+        Permission::create(['name' => 'human-resources_overtime_read']);
+        Permission::create(['name' => 'human-resources_overtime_edit']);
+        Permission::create(['name' => 'human-resources_overtime_delete']);
+        Permission::create(['name' => 'human-resources_overtime_remove']);
+        Permission::create(['name' => 'human-resources_overtime_report']);
+        Permission::create(['name' => 'human-resources_overtime_print']);
+        Permission::create(['name' => 'human-resources_overtime_approve']);
+        Permission::create(['name' => 'human-resources_overtime_reject']);
+        Permission::create(['name' => 'human-resources_overtime_void']);
 
         // PAYROLL entity permissions:
 
-        Permission::create(['name' => 'payroll-create']);
-        Permission::create(['name' => 'payroll-read']);
-        Permission::create(['name' => 'payroll-edit']);
-        Permission::create(['name' => 'payroll-delete']);
-        Permission::create(['name' => 'payroll-remove']);
-        Permission::create(['name' => 'payroll-report']);
-        Permission::create(['name' => 'payroll-print']);
-        Permission::create(['name' => 'payroll-approve']);
-        Permission::create(['name' => 'payroll-reject']);
-        Permission::create(['name' => 'payroll-void']);
+        Permission::create(['name' => 'human-resources_payroll_create']);
+        Permission::create(['name' => 'human-resources_payroll_read']);
+        Permission::create(['name' => 'human-resources_payroll_edit']);
+        Permission::create(['name' => 'human-resources_payroll_delete']);
+        Permission::create(['name' => 'human-resources_payroll_remove']);
+        Permission::create(['name' => 'human-resources_payroll_report']);
+        Permission::create(['name' => 'human-resources_payroll_print']);
+        Permission::create(['name' => 'human-resources_payroll_approve']);
+        Permission::create(['name' => 'human-resources_payroll_reject']);
+        Permission::create(['name' => 'human-resources_payroll_void']);
 
         // PETTY CASH / BON SEMENTARA entity permissions:
 
-        Permission::create(['name' => 'pettycash-create']);
-        Permission::create(['name' => 'pettycash-read']);
-        Permission::create(['name' => 'pettycash-edit']);
-        Permission::create(['name' => 'pettycash-delete']);
-        Permission::create(['name' => 'pettycash-remove']);
-        Permission::create(['name' => 'pettycash-report']);
-        Permission::create(['name' => 'pettycash-print']);
-        Permission::create(['name' => 'pettycash-approve']);
-        Permission::create(['name' => 'pettycash-reject']);
-        Permission::create(['name' => 'pettycash-void']);
+        Permission::create(['name' => 'finance_pettycash_create']);
+        Permission::create(['name' => 'finance_pettycash_read']);
+        Permission::create(['name' => 'finance_pettycash_edit']);
+        Permission::create(['name' => 'finance_pettycash_delete']);
+        Permission::create(['name' => 'finance_pettycash_remove']);
+        Permission::create(['name' => 'finance_pettycash_report']);
+        Permission::create(['name' => 'finance_pettycash_print']);
+        Permission::create(['name' => 'finance_pettycash_approve']);
+        Permission::create(['name' => 'finance_pettycash_reject']);
+        Permission::create(['name' => 'finance_pettycash_void']);
 
         // PROJECT entity permissions:
 
-        Permission::create(['name' => 'project-create']);
-        Permission::create(['name' => 'project-read']);
-        Permission::create(['name' => 'project-edit']);
-        Permission::create(['name' => 'project-delete']);
-        Permission::create(['name' => 'project-remove']);
-        Permission::create(['name' => 'project-report']);
-        Permission::create(['name' => 'project-print']);
-        Permission::create(['name' => 'project-approve']);
-        Permission::create(['name' => 'project-reject']);
-        Permission::create(['name' => 'project-void']);
+        Permission::create(['name' => 'heavy-maintenace_project_create']);
+        Permission::create(['name' => 'heavy-maintenace_project_read']);
+        Permission::create(['name' => 'heavy-maintenace_project_edit']);
+        Permission::create(['name' => 'heavy-maintenace_project_delete']);
+        Permission::create(['name' => 'heavy-maintenace_project_remove']);
+        Permission::create(['name' => 'heavy-maintenace_project_report']);
+        Permission::create(['name' => 'heavy-maintenace_project_print']);
+        Permission::create(['name' => 'heavy-maintenace_project_approve']);
+        Permission::create(['name' => 'heavy-maintenace_project_reject']);
+        Permission::create(['name' => 'heavy-maintenace_project_void']);
 
         // PRICE LIST entity permissions:
 
-        Permission::create(['name' => 'pricelist-create']);
-        Permission::create(['name' => 'pricelist-read']);
-        Permission::create(['name' => 'pricelist-edit']);
-        Permission::create(['name' => 'pricelist-delete']);
-        Permission::create(['name' => 'pricelist-remove']);
-        Permission::create(['name' => 'pricelist-report']);
-        Permission::create(['name' => 'pricelist-print']);
-        Permission::create(['name' => 'pricelist-approve']);
-        Permission::create(['name' => 'pricelist-reject']);
-        Permission::create(['name' => 'pricelist-void']);
+        Permission::create(['name' => 'marketing_pricelist_create']);
+        Permission::create(['name' => 'marketing_pricelist_read']);
+        Permission::create(['name' => 'marketing_pricelist_edit']);
+        Permission::create(['name' => 'marketing_pricelist_delete']);
+        Permission::create(['name' => 'marketing_pricelist_remove']);
+        Permission::create(['name' => 'marketing_pricelist_report']);
+        Permission::create(['name' => 'marketing_pricelist_print']);
+        Permission::create(['name' => 'marketing_pricelist_approve']);
+        Permission::create(['name' => 'marketing_pricelist_reject']);
+        Permission::create(['name' => 'marketing_pricelist_void']);
 
         // PURCHASE REQUEST entity permissions:
 
-        Permission::create(['name' => 'purchase-request-create']);
-        Permission::create(['name' => 'purchase-request-read']);
-        Permission::create(['name' => 'purchase-request-edit']);
-        Permission::create(['name' => 'purchase-request-delete']);
-        Permission::create(['name' => 'purchase-request-remove']);
-        Permission::create(['name' => 'purchase-request-report']);
-        Permission::create(['name' => 'purchase-request-print']);
-        Permission::create(['name' => 'purchase-request-approve']);
-        Permission::create(['name' => 'purchase-request-reject']);
-        Permission::create(['name' => 'purchase-request-void']);
+        Permission::create(['name' => 'scm_purchase-request_create']);
+        Permission::create(['name' => 'scm_purchase-request_read']);
+        Permission::create(['name' => 'scm_purchase-request_edit']);
+        Permission::create(['name' => 'scm_purchase-request_delete']);
+        Permission::create(['name' => 'scm_purchase-request_remove']);
+        Permission::create(['name' => 'scm_purchase-request_report']);
+        Permission::create(['name' => 'scm_purchase-request_print']);
+        Permission::create(['name' => 'scm_purchase-request_approve']);
+        Permission::create(['name' => 'scm_purchase-request_reject']);
+        Permission::create(['name' => 'scm_purchase-request_void']);
 
         // PURCHASE ORDER entity permissions:
 
-        Permission::create(['name' => 'purchase-order-create']);
-        Permission::create(['name' => 'purchase-order-read']);
-        Permission::create(['name' => 'purchase-order-edit']);
-        Permission::create(['name' => 'purchase-order-delete']);
-        Permission::create(['name' => 'purchase-order-remove']);
-        Permission::create(['name' => 'purchase-order-report']);
-        Permission::create(['name' => 'purchase-order-print']);
-        Permission::create(['name' => 'purchase-order-approve']);
-        Permission::create(['name' => 'purchase-order-reject']);
-        Permission::create(['name' => 'purchase-order-void']);
+        Permission::create(['name' => 'scm_purchase-order_create']);
+        Permission::create(['name' => 'scm_purchase-order_read']);
+        Permission::create(['name' => 'scm_purchase-order_edit']);
+        Permission::create(['name' => 'scm_purchase-order_delete']);
+        Permission::create(['name' => 'scm_purchase-order_remove']);
+        Permission::create(['name' => 'scm_purchase-order_report']);
+        Permission::create(['name' => 'scm_purchase-order_print']);
+        Permission::create(['name' => 'scm_purchase-order_approve']);
+        Permission::create(['name' => 'scm_purchase-order_reject']);
+        Permission::create(['name' => 'scm_purchase-order_void']);
 
         // PROPOSE LEAVE entity permissions:
 
-        Permission::create(['name' => 'propose-leave-create']);
-        Permission::create(['name' => 'propose-leave-read']);
-        Permission::create(['name' => 'propose-leave-edit']);
-        Permission::create(['name' => 'propose-leave-delete']);
-        Permission::create(['name' => 'propose-leave-remove']);
-        Permission::create(['name' => 'propose-leave-report']);
-        Permission::create(['name' => 'propose-leave-print']);
-        Permission::create(['name' => 'propose-leave-approve']);
-        Permission::create(['name' => 'propose-leave-reject']);
-        Permission::create(['name' => 'propose-leave-void']);
+        Permission::create(['name' => 'human-resources_propose-leave_create']);
+        Permission::create(['name' => 'human-resources_propose-leave_read']);
+        Permission::create(['name' => 'human-resources_propose-leave_edit']);
+        Permission::create(['name' => 'human-resources_propose-leave_delete']);
+        Permission::create(['name' => 'human-resources_propose-leave_remove']);
+        Permission::create(['name' => 'human-resources_propose-leave_report']);
+        Permission::create(['name' => 'human-resources_propose-leave_print']);
+        Permission::create(['name' => 'human-resources_propose-leave_approve']);
+        Permission::create(['name' => 'human-resources_propose-leave_reject']);
+        Permission::create(['name' => 'human-resources_propose-leave_void']);
 
         // PROFIT LOSS entity permissions:
 
-        Permission::create(['name' => 'profit-loss-create']);
-        Permission::create(['name' => 'profit-loss-read']);
-        Permission::create(['name' => 'profit-loss-edit']);
-        Permission::create(['name' => 'profit-loss-delete']);
-        Permission::create(['name' => 'profit-loss-remove']);
-        Permission::create(['name' => 'profit-loss-report']);
-        Permission::create(['name' => 'profit-loss-print']);
-        Permission::create(['name' => 'profit-loss-approve']);
-        Permission::create(['name' => 'profit-loss-reject']);
-        Permission::create(['name' => 'profit-loss-void']);
+        Permission::create(['name' => 'finance_profit-loss_create']);
+        Permission::create(['name' => 'finance_profit-loss_read']);
+        Permission::create(['name' => 'finance_profit-loss_edit']);
+        Permission::create(['name' => 'finance_profit-loss_delete']);
+        Permission::create(['name' => 'finance_profit-loss_remove']);
+        Permission::create(['name' => 'finance_profit-loss_report']);
+        Permission::create(['name' => 'finance_profit-loss_print']);
+        Permission::create(['name' => 'finance_profit-loss_approve']);
+        Permission::create(['name' => 'finance_profit-loss_reject']);
+        Permission::create(['name' => 'finance_profit-loss_void']);
 
         // POSITION entity permissions:
 
-        Permission::create(['name' => 'position-create']);
-        Permission::create(['name' => 'position-read']);
-        Permission::create(['name' => 'position-edit']);
-        Permission::create(['name' => 'position-delete']);
-        Permission::create(['name' => 'position-remove']);
-        Permission::create(['name' => 'position-report']);
-        Permission::create(['name' => 'position-print']);
-        Permission::create(['name' => 'position-approve']);
-        Permission::create(['name' => 'position-reject']);
-        Permission::create(['name' => 'position-void']);
+        Permission::create(['name' => 'human-resources_position_create']);
+        Permission::create(['name' => 'human-resources_position_read']);
+        Permission::create(['name' => 'human-resources_position_edit']);
+        Permission::create(['name' => 'human-resources_position_delete']);
+        Permission::create(['name' => 'human-resources_position_remove']);
+        Permission::create(['name' => 'human-resources_position_report']);
+        Permission::create(['name' => 'human-resources_position_print']);
+        Permission::create(['name' => 'human-resources_position_approve']);
+        Permission::create(['name' => 'human-resources_position_reject']);
+        Permission::create(['name' => 'human-resources_position_void']);
 
         // QUOTATION entity permissions:
 
-        Permission::create(['name' => 'quotation-create']);
-        Permission::create(['name' => 'quotation-read']);
-        Permission::create(['name' => 'quotation-edit']);
-        Permission::create(['name' => 'quotation-delete']);
-        Permission::create(['name' => 'quotation-remove']);
-        Permission::create(['name' => 'quotation-report']);
-        Permission::create(['name' => 'quotation-print']);
-        Permission::create(['name' => 'quotation-approve']);
-        Permission::create(['name' => 'quotation-reject']);
-        Permission::create(['name' => 'quotation-void']);
+        Permission::create(['name' => 'marketing_quotation_create']);
+        Permission::create(['name' => 'marketing_quotation_read']);
+        Permission::create(['name' => 'marketing_quotation_edit']);
+        Permission::create(['name' => 'marketing_quotation_delete']);
+        Permission::create(['name' => 'marketing_quotation_remove']);
+        Permission::create(['name' => 'marketing_quotation_report']);
+        Permission::create(['name' => 'marketing_quotation_print']);
+        Permission::create(['name' => 'marketing_quotation_approve']);
+        Permission::create(['name' => 'marketing_quotation_reject']);
+        Permission::create(['name' => 'marketing_quotation_void']);
 
         // RELEASE TO SERVICE entity permissions:
 
-        Permission::create(['name' => 'rts-create']);
-        Permission::create(['name' => 'rts-read']);
-        Permission::create(['name' => 'rts-edit']);
-        Permission::create(['name' => 'rts-delete']);
-        Permission::create(['name' => 'rts-remove']);
-        Permission::create(['name' => 'rts-report']);
-        Permission::create(['name' => 'rts-print']);
-        Permission::create(['name' => 'rts-approve']);
-        Permission::create(['name' => 'rts-reject']);
-        Permission::create(['name' => 'rts-void']);
+        Permission::create(['name' => 'heavy-maintenace_rts_create']);
+        Permission::create(['name' => 'heavy-maintenace_rts_read']);
+        Permission::create(['name' => 'heavy-maintenace_rts_edit']);
+        Permission::create(['name' => 'heavy-maintenace_rts_delete']);
+        Permission::create(['name' => 'heavy-maintenace_rts_remove']);
+        Permission::create(['name' => 'heavy-maintenace_rts_report']);
+        Permission::create(['name' => 'heavy-maintenace_rts_print']);
+        Permission::create(['name' => 'heavy-maintenace_rts_approve']);
+        Permission::create(['name' => 'heavy-maintenace_rts_reject']);
+        Permission::create(['name' => 'heavy-maintenace_rts_void']);
 
         // RECEIVING INSPECTION REPORT entity permissions:
 
-        Permission::create(['name' => 'receiving-inspection-report-create']);
-        Permission::create(['name' => 'receiving-inspection-report-read']);
-        Permission::create(['name' => 'receiving-inspection-report-edit']);
-        Permission::create(['name' => 'receiving-inspection-report-delete']);
-        Permission::create(['name' => 'receiving-inspection-report-remove']);
-        Permission::create(['name' => 'receiving-inspection-report-report']);
-        Permission::create(['name' => 'receiving-inspection-report-print']);
-        Permission::create(['name' => 'receiving-inspection-report-approve']);
-        Permission::create(['name' => 'receiving-inspection-report-reject']);
-        Permission::create(['name' => 'receiving-inspection-report-void']);
+        Permission::create(['name' => 'scm_receiving-inspection_report_create']);
+        Permission::create(['name' => 'scm_receiving-inspection_report_read']);
+        Permission::create(['name' => 'scm_receiving-inspection_report_edit']);
+        Permission::create(['name' => 'scm_receiving-inspection_report_delete']);
+        Permission::create(['name' => 'scm_receiving-inspection_report_remove']);
+        Permission::create(['name' => 'scm_receiving-inspection_report_report']);
+        Permission::create(['name' => 'scm_receiving-inspection_report_print']);
+        Permission::create(['name' => 'scm_receiving-inspection_report_approve']);
+        Permission::create(['name' => 'scm_receiving-inspection_report_reject']);
+        Permission::create(['name' => 'scm_receiving-inspection_report_void']);
 
-        // SETTING entity permissions:
+        // SETTING entity permissions: ???
 
-        Permission::create(['name' => 'setting-create']);
-        Permission::create(['name' => 'setting-read']);
-        Permission::create(['name' => 'setting-edit']);
-        Permission::create(['name' => 'setting-delete']);
-        Permission::create(['name' => 'setting-remove']);
-        Permission::create(['name' => 'setting-report']);
-        Permission::create(['name' => 'setting-print']);
-        Permission::create(['name' => 'setting-approve']);
-        Permission::create(['name' => 'setting-reject']);
-        Permission::create(['name' => 'setting-void']);
+        Permission::create(['name' => 'setting_create']);
+        Permission::create(['name' => 'setting_read']);
+        Permission::create(['name' => 'setting_edit']);
+        Permission::create(['name' => 'setting_delete']);
+        Permission::create(['name' => 'setting_remove']);
+        Permission::create(['name' => 'setting_report']);
+        Permission::create(['name' => 'setting_print']);
+        Permission::create(['name' => 'setting_approve']);
+        Permission::create(['name' => 'setting_reject']);
+        Permission::create(['name' => 'setting_void']);
 
         // STOCK MONITORING entity permissions:
 
-        Permission::create(['name' => 'stock-monitoring-create']);
-        Permission::create(['name' => 'stock-monitoring-read']);
-        Permission::create(['name' => 'stock-monitoring-edit']);
-        Permission::create(['name' => 'stock-monitoring-delete']);
-        Permission::create(['name' => 'stock-monitoring-remove']);
-        Permission::create(['name' => 'stock-monitoring-report']);
-        Permission::create(['name' => 'stock-monitoring-print']);
-        Permission::create(['name' => 'stock-monitoring-approve']);
-        Permission::create(['name' => 'stock-monitoring-reject']);
-        Permission::create(['name' => 'stock-monitoring-void']);
+        Permission::create(['name' => 'scm_stock-monitoring_create']);
+        Permission::create(['name' => 'scm_stock-monitoring_read']);
+        Permission::create(['name' => 'scm_stock-monitoring_edit']);
+        Permission::create(['name' => 'scm_stock-monitoring_delete']);
+        Permission::create(['name' => 'scm_stock-monitoring_remove']);
+        Permission::create(['name' => 'scm_stock-monitoring_report']);
+        Permission::create(['name' => 'scm_stock-monitoring_print']);
+        Permission::create(['name' => 'scm_stock-monitoring_approve']);
+        Permission::create(['name' => 'scm_stock-monitoring_reject']);
+        Permission::create(['name' => 'scm_stock-monitoring_void']);
 
         // STORAGE entity permissions:
 
-        Permission::create(['name' => 'storage-create']);
-        Permission::create(['name' => 'storage-read']);
-        Permission::create(['name' => 'storage-edit']);
-        Permission::create(['name' => 'storage-delete']);
-        Permission::create(['name' => 'storage-remove']);
-        Permission::create(['name' => 'storage-report']);
-        Permission::create(['name' => 'storage-print']);
-        Permission::create(['name' => 'storage-approve']);
-        Permission::create(['name' => 'storage-reject']);
-        Permission::create(['name' => 'storage-void']);
+        Permission::create(['name' => 'scm_storage_create']);
+        Permission::create(['name' => 'scm_storage_read']);
+        Permission::create(['name' => 'scm_storage_edit']);
+        Permission::create(['name' => 'scm_storage_delete']);
+        Permission::create(['name' => 'scm_storage_remove']);
+        Permission::create(['name' => 'scm_storage_report']);
+        Permission::create(['name' => 'scm_storage_print']);
+        Permission::create(['name' => 'scm_storage_approve']);
+        Permission::create(['name' => 'scm_storage_reject']);
+        Permission::create(['name' => 'scm_storage_void']);
 
         // STRIP REPORT entity permissions:
 
-        Permission::create(['name' => 'strip-report-create']);
-        Permission::create(['name' => 'strip-report-read']);
-        Permission::create(['name' => 'strip-report-edit']);
-        Permission::create(['name' => 'strip-report-delete']);
-        Permission::create(['name' => 'strip-report-remove']);
-        Permission::create(['name' => 'strip-report-report']);
-        Permission::create(['name' => 'strip-report-print']);
-        Permission::create(['name' => 'strip-report-approve']);
-        Permission::create(['name' => 'strip-report-reject']);
-        Permission::create(['name' => 'strip-report-void']);
+        Permission::create(['name' => 'workshop_strip_report_create']);
+        Permission::create(['name' => 'workshop_strip_report_read']);
+        Permission::create(['name' => 'workshop_strip_report_edit']);
+        Permission::create(['name' => 'workshop_strip_report_delete']);
+        Permission::create(['name' => 'workshop_strip_report_remove']);
+        Permission::create(['name' => 'workshop_strip_report_report']);
+        Permission::create(['name' => 'workshop_strip_report_print']);
+        Permission::create(['name' => 'workshop_strip_report_approve']);
+        Permission::create(['name' => 'workshop_strip_report_reject']);
+        Permission::create(['name' => 'workshop_strip_report_void']);
 
         // TASKCARD entity permissions:
 
-        Permission::create(['name' => 'taskcard-create']);
-        Permission::create(['name' => 'taskcard-read']);
-        Permission::create(['name' => 'taskcard-edit']);
-        Permission::create(['name' => 'taskcard-delete']);
-        Permission::create(['name' => 'taskcard-remove']);
-        Permission::create(['name' => 'taskcard-report']);
-        Permission::create(['name' => 'taskcard-print']);
-        Permission::create(['name' => 'taskcard-approve']);
-        Permission::create(['name' => 'taskcard-reject']);
-        Permission::create(['name' => 'taskcard-void']);
+        Permission::create(['name' => 'heavy-maintenace_taskcard_create']);
+        Permission::create(['name' => 'heavy-maintenace_taskcard_read']);
+        Permission::create(['name' => 'heavy-maintenace_taskcard_edit']);
+        Permission::create(['name' => 'heavy-maintenace_taskcard_delete']);
+        Permission::create(['name' => 'heavy-maintenace_taskcard_remove']);
+        Permission::create(['name' => 'heavy-maintenace_taskcard_report']);
+        Permission::create(['name' => 'heavy-maintenace_taskcard_print']);
+        Permission::create(['name' => 'heavy-maintenace_taskcard_approve']);
+        Permission::create(['name' => 'heavy-maintenace_taskcard_reject']);
+        Permission::create(['name' => 'heavy-maintenace_taskcard_void']);
 
         // TOOL REQUEST JOBCARD entity permissions:
 
-        Permission::create(['name' => 'trj-create']);
-        Permission::create(['name' => 'trj-read']);
-        Permission::create(['name' => 'trj-edit']);
-        Permission::create(['name' => 'trj-delete']);
-        Permission::create(['name' => 'trj-remove']);
-        Permission::create(['name' => 'trj-report']);
-        Permission::create(['name' => 'trj-print']);
-        Permission::create(['name' => 'trj-approve']);
-        Permission::create(['name' => 'trj-reject']);
-        Permission::create(['name' => 'trj-void']);
+        Permission::create(['name' => 'scm_trj_create']);
+        Permission::create(['name' => 'scm_trj_read']);
+        Permission::create(['name' => 'scm_trj_edit']);
+        Permission::create(['name' => 'scm_trj_delete']);
+        Permission::create(['name' => 'scm_trj_remove']);
+        Permission::create(['name' => 'scm_trj_report']);
+        Permission::create(['name' => 'scm_trj_print']);
+        Permission::create(['name' => 'scm_trj_approve']);
+        Permission::create(['name' => 'scm_trj_reject']);
+        Permission::create(['name' => 'scm_trj_void']);
 
         // TRIAL BALANCE entity permissions:
 
-        Permission::create(['name' => 'trial-balance-create']);
-        Permission::create(['name' => 'trial-balance-read']);
-        Permission::create(['name' => 'trial-balance-edit']);
-        Permission::create(['name' => 'trial-balance-delete']);
-        Permission::create(['name' => 'trial-balance-remove']);
-        Permission::create(['name' => 'trial-balance-report']);
-        Permission::create(['name' => 'trial-balance-print']);
-        Permission::create(['name' => 'trial-balance-approve']);
-        Permission::create(['name' => 'trial-balance-reject']);
-        Permission::create(['name' => 'trial-balance-void']);
+        Permission::create(['name' => 'finance_trial-balance_create']);
+        Permission::create(['name' => 'finance_trial-balance_read']);
+        Permission::create(['name' => 'finance_trial-balance_edit']);
+        Permission::create(['name' => 'finance_trial-balance_delete']);
+        Permission::create(['name' => 'finance_trial-balance_remove']);
+        Permission::create(['name' => 'finance_trial-balance_report']);
+        Permission::create(['name' => 'finance_trial-balance_print']);
+        Permission::create(['name' => 'finance_trial-balance_approve']);
+        Permission::create(['name' => 'finance_trial-balance_reject']);
+        Permission::create(['name' => 'finance_trial-balance_void']);
 
         // UNIT entity permissions:
 
-        Permission::create(['name' => 'unit-create']);
-        Permission::create(['name' => 'unit-read']);
-        Permission::create(['name' => 'unit-edit']);
-        Permission::create(['name' => 'unit-delete']);
-        Permission::create(['name' => 'unit-remove']);
-        Permission::create(['name' => 'unit-report']);
-        Permission::create(['name' => 'unit-print']);
-        Permission::create(['name' => 'unit-approve']);
-        Permission::create(['name' => 'unit-reject']);
-        Permission::create(['name' => 'unit-void']);
+        Permission::create(['name' => 'scm_unit_create']);
+        Permission::create(['name' => 'scm_unit_read']);
+        Permission::create(['name' => 'scm_unit_edit']);
+        Permission::create(['name' => 'scm_unit_delete']);
+        Permission::create(['name' => 'scm_unit_remove']);
+        Permission::create(['name' => 'scm_unit_report']);
+        Permission::create(['name' => 'scm_unit_print']);
+        Permission::create(['name' => 'scm_unit_approve']);
+        Permission::create(['name' => 'scm_unit_reject']);
+        Permission::create(['name' => 'scm_unit_void']);
 
-        // USER entity permissions:
+        // USER entity permissions: ???
 
-        Permission::create(['name' => 'user-create']);
-        Permission::create(['name' => 'user-read']);
-        Permission::create(['name' => 'user-edit']);
-        Permission::create(['name' => 'user-delete']);
-        Permission::create(['name' => 'user-remove']);
-        Permission::create(['name' => 'user-report']);
-        Permission::create(['name' => 'user-print']);
-        Permission::create(['name' => 'user-approve']);
-        Permission::create(['name' => 'user-reject']);
-        Permission::create(['name' => 'user-void']);
+        Permission::create(['name' => 'user_create']);
+        Permission::create(['name' => 'user_read']);
+        Permission::create(['name' => 'user_edit']);
+        Permission::create(['name' => 'user_delete']);
+        Permission::create(['name' => 'user_remove']);
+        Permission::create(['name' => 'user_report']);
+        Permission::create(['name' => 'user_print']);
+        Permission::create(['name' => 'user_approve']);
+        Permission::create(['name' => 'user_reject']);
+        Permission::create(['name' => 'user_void']);
 
         // VENDOR entity permissions:
 
-        Permission::create(['name' => 'vendor-create']);
-        Permission::create(['name' => 'vendor-read']);
-        Permission::create(['name' => 'vendor-edit']);
-        Permission::create(['name' => 'vendor-delete']);
-        Permission::create(['name' => 'vendor-remove']);
-        Permission::create(['name' => 'vendor-report']);
-        Permission::create(['name' => 'vendor-print']);
-        Permission::create(['name' => 'vendor-approve']);
-        Permission::create(['name' => 'vendor-reject']);
-        Permission::create(['name' => 'vendor-void']);
+        Permission::create(['name' => 'scm_vendor_create']);
+        Permission::create(['name' => 'scm_vendor_read']);
+        Permission::create(['name' => 'scm_vendor_edit']);
+        Permission::create(['name' => 'scm_vendor_delete']);
+        Permission::create(['name' => 'scm_vendor_remove']);
+        Permission::create(['name' => 'scm_vendor_report']);
+        Permission::create(['name' => 'scm_vendor_print']);
+        Permission::create(['name' => 'scm_vendor_approve']);
+        Permission::create(['name' => 'scm_vendor_reject']);
+        Permission::create(['name' => 'scm_vendor_void']);
 
         // WORKSHIFT SCHEDULE entity permissions:
 
-        Permission::create(['name' => 'workshift-schedule-create']);
-        Permission::create(['name' => 'workshift-schedule-read']);
-        Permission::create(['name' => 'workshift-schedule-edit']);
-        Permission::create(['name' => 'workshift-schedule-delete']);
-        Permission::create(['name' => 'workshift-schedule-remove']);
-        Permission::create(['name' => 'workshift-schedule-report']);
-        Permission::create(['name' => 'workshift-schedule-print']);
-        Permission::create(['name' => 'workshift-schedule-approve']);
-        Permission::create(['name' => 'workshift-schedule-reject']);
-        Permission::create(['name' => 'workshift-schedule-void']);
+        Permission::create(['name' => 'human-resources_workshift-schedule_create']);
+        Permission::create(['name' => 'human-resources_workshift-schedule_read']);
+        Permission::create(['name' => 'human-resources_workshift-schedule_edit']);
+        Permission::create(['name' => 'human-resources_workshift-schedule_delete']);
+        Permission::create(['name' => 'human-resources_workshift-schedule_remove']);
+        Permission::create(['name' => 'human-resources_workshift-schedule_report']);
+        Permission::create(['name' => 'human-resources_workshift-schedule_print']);
+        Permission::create(['name' => 'human-resources_workshift-schedule_approve']);
+        Permission::create(['name' => 'human-resources_workshift-schedule_reject']);
+        Permission::create(['name' => 'human-resources_workshift-schedule_void']);
 
         // WORKPACKAGE entity permissions:
 
-        Permission::create(['name' => 'workpackage-create']);
-        Permission::create(['name' => 'workpackage-read']);
-        Permission::create(['name' => 'workpackage-edit']);
-        Permission::create(['name' => 'workpackage-delete']);
-        Permission::create(['name' => 'workpackage-remove']);
-        Permission::create(['name' => 'workpackage-report']);
-        Permission::create(['name' => 'workpackage-print']);
-        Permission::create(['name' => 'workpackage-approve']);
-        Permission::create(['name' => 'workpackage-reject']);
-        Permission::create(['name' => 'workpackage-void']);
+        Permission::create(['name' => 'heavy-maintenace_workpackage_create']);
+        Permission::create(['name' => 'heavy-maintenace_workpackage_read']);
+        Permission::create(['name' => 'heavy-maintenace_workpackage_edit']);
+        Permission::create(['name' => 'heavy-maintenace_workpackage_delete']);
+        Permission::create(['name' => 'heavy-maintenace_workpackage_remove']);
+        Permission::create(['name' => 'heavy-maintenace_workpackage_report']);
+        Permission::create(['name' => 'heavy-maintenace_workpackage_print']);
+        Permission::create(['name' => 'heavy-maintenace_workpackage_approve']);
+        Permission::create(['name' => 'heavy-maintenace_workpackage_reject']);
+        Permission::create(['name' => 'heavy-maintenace_workpackage_void']);
 
         // WORK PROGRESS REPORT entity permissions:
 
-        Permission::create(['name' => 'wpr-create']);
-        Permission::create(['name' => 'wpr-read']);
-        Permission::create(['name' => 'wpr-edit']);
-        Permission::create(['name' => 'wpr-delete']);
-        Permission::create(['name' => 'wpr-remove']);
-        Permission::create(['name' => 'wpr-report']);
-        Permission::create(['name' => 'wpr-print']);
-        Permission::create(['name' => 'wpr-approve']);
-        Permission::create(['name' => 'wpr-reject']);
-        Permission::create(['name' => 'wpr-void']);
+        Permission::create(['name' => 'heavy-maintenace_wpr_create']);
+        Permission::create(['name' => 'heavy-maintenace_wpr_read']);
+        Permission::create(['name' => 'heavy-maintenace_wpr_edit']);
+        Permission::create(['name' => 'heavy-maintenace_wpr_delete']);
+        Permission::create(['name' => 'heavy-maintenace_wpr_remove']);
+        Permission::create(['name' => 'heavy-maintenace_wpr_report']);
+        Permission::create(['name' => 'heavy-maintenace_wpr_print']);
+        Permission::create(['name' => 'heavy-maintenace_wpr_approve']);
+        Permission::create(['name' => 'heavy-maintenace_wpr_reject']);
+        Permission::create(['name' => 'heavy-maintenace_wpr_void']);
 
     }
 }

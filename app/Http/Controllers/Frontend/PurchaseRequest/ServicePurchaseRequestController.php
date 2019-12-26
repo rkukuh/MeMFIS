@@ -6,11 +6,14 @@ use Auth;
 use Carbon\Carbon;
 use App\Models\Item;
 use App\Models\Type;
+use App\Models\Status;
+use App\Models\Progress;
 use App\Models\Approval;
+use App\Models\Category;
 use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
-use App\Models\Pivots\PurchaseRequestItem;
+use App\Models\Pivots\PurchaseRequestService;
 use App\Http\Requests\Frontend\PurchaseRequestUpdate;
 use App\Http\Requests\Frontend\PurchaseRequestStore;
 
@@ -46,6 +49,7 @@ class ServicePurchaseRequestController extends Controller
     {
         $request->merge(['number' => DocumentNumber::generate('PRGN-', PurchaseRequest::withTrashed()->whereYear('created_at', date("Y"))->count()+1)]);
         $request->merge(['type_id' => Type::where('of','purchase-request')->where('uuid',$request->type_id)->first()->id ]);
+        $request->merge(['category_id' => Category::ofPurchaseRequest()->where('code','service')->first()->id ]);
         $request->merge(['requested_at' => Carbon::parse($request->requested_at)]);
         $request->merge(['required_at' => Carbon::parse($request->required_at)]);
 
@@ -122,7 +126,13 @@ class ServicePurchaseRequestController extends Controller
             'is_approved' => 1
         ]));
 
+        $purchaseRequest->progresses()->save(new Progress([
+            'status_id' =>  Status::ofPurchaseRequest()->where('code','approved')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
+
         return response()->json($purchaseRequest);
+
     }
 
     /**
@@ -136,7 +146,7 @@ class ServicePurchaseRequestController extends Controller
         $pdf = \PDF::loadView('frontend/form/purchase_request_service',[
                 'username' => Auth::user()->name,
                 'purchaseRequest' => $purchaseRequest,
-                'items' => PurchaseRequestItem::where('purchase_request_id',$purchaseRequest->id)->get(),
+                'services' => PurchaseRequestService::where('purchase_request_id',$purchaseRequest->id)->get(),
                 'created_by' => $purchaseRequest->audits->first()->user->name
                 ]);
 

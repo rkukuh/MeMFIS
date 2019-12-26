@@ -8,6 +8,7 @@ use App\Models\Type;
 use App\Models\Unit;
 use App\Models\Pivots\PurchaseRequestItem;
 use App\Models\ListUtil;
+use App\Models\Category;
 use App\Models\CheckStock;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,7 +22,7 @@ class GeneralPurchaseRequestDatatables extends Controller
      */
     public function index()
     {
-        $purchaseRequests = PurchaseRequest::with('type')->where('type_id','<>',Type::where('of','purchase-request')->where('name','Project')->first()->id)->get();
+        $purchaseRequests = PurchaseRequest::with('type')->where('type_id','<>',Type::where('of','purchase-request')->where('name','Project')->first()->id)->where('category_id', Category::ofPurchaseRequest()->where('code','general')->first()->id)->get();
 
         foreach($purchaseRequests as $purchaseRequest){
             if($purchaseRequest->deleted_at <> null){

@@ -43,6 +43,17 @@ class Category extends MemfisModel
     }
 
     /**
+     * Scope a query to only include category of purchase request.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfPurchaseRequest(Builder $query)
+    {
+        return $query->where('of', 'purchase-request');
+    }
+
+    /**
      * Scope a query to only include category of task card EO.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query

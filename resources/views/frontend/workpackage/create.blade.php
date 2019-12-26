@@ -1,3 +1,4 @@
+{{-- @can('heavy-maintenace_workpackage_create') --}}
 @extends('frontend.master')
 
 @section('content')
@@ -149,3 +150,5 @@
     <script src="{{ asset('js/frontend/workpackage/create.js') }}"></script>
     <script src="{{ asset('js/frontend/workpackage/form-reset.js') }}"></script>
 @endpush
+{{-- @endcan --}}
+

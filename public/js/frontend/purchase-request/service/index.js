@@ -111,7 +111,7 @@ let PurchaseRequest = {
                             return (
                                 '<a href="/purchase-request/' +
                                 t.uuid +
-                                '/general/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' +
+                                '/service/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' +
                                 t.uuid +
                                 '">' +
                                 '<i class="la la-print"></i>' +
@@ -131,7 +131,7 @@ let PurchaseRequest = {
                                 '</a>'+
                                 '<a href="purchase-request/' +
                                 t.uuid +
-                                '/general/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' +
+                                '/service/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' +
                                 t.uuid +
                                 '">' +
                                 '<i class="la la-print"></i>' +
@@ -163,7 +163,7 @@ let PurchaseRequest = {
                             )
                         },
                         type: 'PUT',
-                        url: '/purchase-request/' +  purchase_request_uuid +'/general/approve',
+                        url: '/purchase-request/' +  purchase_request_uuid +'/service/approve',
                         success: function (data) {
                             toastr.success('Purchase Request has been Approved.', 'Approved', {
                                 timeOut: 5000

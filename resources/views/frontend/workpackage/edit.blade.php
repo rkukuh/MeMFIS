@@ -1,3 +1,4 @@
+{{-- @can('heavy-maintenace_workpackage_edit') --}}
 @extends('frontend.master')
 
 @section('content')
@@ -221,7 +222,7 @@
 
         .margin-info {
             margin-left: 5px
-        } 
+        }
         @media (min-width: 992px){
             .modal-xl {
                 max-width: 1300px !important;
@@ -263,3 +264,5 @@
 
     <script src="{{ asset('js/frontend/workpackage/modal/datatables.js')}}"></script>
 @endpush
+{{-- @endcan --}}
+
