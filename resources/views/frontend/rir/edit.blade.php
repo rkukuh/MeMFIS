@@ -1,3 +1,4 @@
+@can('scm_receiving-inspection_report_edit')
 @extends('frontend.master')
 
 @section('content')
@@ -703,3 +704,4 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
 @endpush
+@endcan

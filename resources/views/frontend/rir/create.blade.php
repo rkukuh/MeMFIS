@@ -1,3 +1,4 @@
+@can('scm_receiving-inspection_report_create')
 @extends('frontend.master')
 
 @section('content')
@@ -226,3 +227,4 @@
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
 @endpush
+@endcan
