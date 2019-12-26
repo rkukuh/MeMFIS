@@ -1,3 +1,4 @@
+@can('scm_purchase-order_create')
 @extends('frontend.master')
 
 @section('content')
@@ -361,3 +362,4 @@
     <script src="{{ asset('js/frontend/functions/datepicker/by-date.js')}}"></script>
 
 @endpush
+@endcan

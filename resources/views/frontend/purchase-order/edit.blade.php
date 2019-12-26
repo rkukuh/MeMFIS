@@ -1,3 +1,4 @@
+@can('scm_purchase-order_create')
 @extends('frontend.master')
 
 @section('content')
@@ -491,3 +492,4 @@
     <script src="{{ asset('js/frontend/functions/datepicker/by-date.js')}}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush
+@endcan
