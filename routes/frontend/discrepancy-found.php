@@ -37,7 +37,8 @@ Route::name('frontend.')->group(function () {
                     Route::POST('{jobcard}/mechanic/create', 'DiscrepancyMechanicController@create')->name('jobcard.mechanic.discrepancy.create');
                     Route::GET('{jobcard}/mechanic/', 'DiscrepancyMechanicController@create')->name('jobcard.mechanic.discrepancy');
                     Route::PUT('{discrepancy}/engineer/approve', 'DiscrepancyEngineerController@approve')->name('jobcard.engineer.discrepancy.approve')->middleware('permission:heavy-maintenace_discrepancy_approve');
-                    Route::PUT('{discrepancy}/ppc/approve', 'DiscrepancyPPCController@approve')->name('jobcard.ppc.discrepancy.approve')->middleware('permission:heavy-maintenace_discrepancy_approve');
+                    Route::PUT('{discrepancy}/ppc/approve', 'DiscrepancyPPCController@approve')->name('jobcard.ppc.discrepancy.approve');
+                    // Route::PUT('{discrepancy}/ppc/approve', 'DiscrepancyPPCController@approve')->name('jobcard.ppc.discrepancy.approve')->middleware('permission:heavy-maintenace_discrepancy_approve');
 
                     /** Transaction: Item */
                     Route::resource('/{discrepancy}/item', 'DiscrepancyItemController');
