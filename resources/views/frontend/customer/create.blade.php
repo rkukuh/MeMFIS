@@ -1,3 +1,4 @@
+@can('marketing_customer_create')
 @extends('frontend.master')
 
 @section('content')
@@ -861,3 +862,4 @@
 
 </script>
 @endpush
+@endcan

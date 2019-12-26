@@ -1,3 +1,4 @@
+@can('marketing_customer_edit')
 @extends('frontend.master')
 
 @section('content')
@@ -1213,3 +1214,4 @@
 <script src="{{ asset('js/frontend/customer/repeater.js') }}"></script>
 <script src="{{ asset('js/frontend/customer/form-reset.js') }}"></script>
 @endpush
+@endcan
