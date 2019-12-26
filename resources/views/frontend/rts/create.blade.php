@@ -1,3 +1,4 @@
+@can('heavy-maintenace_rts_create')
 @extends('frontend.master')
 
 @section('content')
@@ -283,3 +284,4 @@
 </script>
 
 @endpush
+@endcan
