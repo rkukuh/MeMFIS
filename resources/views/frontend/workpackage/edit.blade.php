@@ -1,4 +1,4 @@
-{{-- @can('heavy-maintenace_workpackage_edit') --}}
+@can('heavy-maintenace_workpackage_edit')
 @extends('frontend.master')
 
 @section('content')
@@ -264,5 +264,5 @@
 
     <script src="{{ asset('js/frontend/workpackage/modal/datatables.js')}}"></script>
 @endpush
-{{-- @endcan --}}
+@endcan
 

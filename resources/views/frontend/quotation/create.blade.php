@@ -1,4 +1,4 @@
-{{-- @can('marketing_quotation_create') --}}
+@can('marketing_quotation_create')
 @extends('frontend.master')
 
 @section('content')
@@ -552,4 +552,4 @@
 
 
 @endpush
-{{-- @endcan --}}
+@endcan

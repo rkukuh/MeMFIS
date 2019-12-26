@@ -1,4 +1,4 @@
-{{-- @can('marketing_quotation_create') --}}
+@can('marketing_quotation_create')
 @extends('frontend.master')
 
 @section('content')
@@ -509,5 +509,5 @@
     <script src="{{ asset('js/frontend/quotation/scheduled-payment.js') }}"></script>
 
 @endpush
-{{-- @endcan --}}
+@endcan
 

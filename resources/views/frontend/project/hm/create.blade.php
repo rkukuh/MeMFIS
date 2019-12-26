@@ -1,4 +1,4 @@
-{{-- @can('heavy-maintenace_project_create') --}}
+@can('heavy-maintenace_project_create')
 @extends('frontend.master')
 
 @section('content')
@@ -220,5 +220,5 @@
     <script src="{{ asset('js/frontend/project/form-reset.js') }}"></script>
 
 @endpush
-{{-- @endcan --}}
+@endcan
 
