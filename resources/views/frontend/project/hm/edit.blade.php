@@ -1,4 +1,4 @@
-@can('heavy-maintenace_project_edit')
+{{-- @can('heavy-maintenace_project_edit') --}}
 @extends('frontend.master')
 
 @section('content')
@@ -331,4 +331,5 @@
     <script src="{{ asset('js/frontend/project/hm/edit.js') }}"></script>
 
 @endpush
-@endcan
+{{-- @endcan --}}
+

@@ -1,4 +1,4 @@
-@can('heavy-maintenace_taskcard_create')
+{{-- @can('heavy-maintenace_taskcard_create') --}}
 @extends('frontend.master')
 
 @section('content')
@@ -797,4 +797,5 @@
 </script>
 @endpush
 
-@endcan
+{{-- @endcan --}}
+

@@ -1,4 +1,4 @@
-@can('marketing_quotation_create')
+{{-- @can('marketing_quotation_create') --}}
 
 @extends('frontend.master')
 
@@ -443,4 +443,5 @@
     {{-- <script src="{{ asset('/assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/scheduled-payment.js') }}"></script> --}}
 @endpush
-@endcan
+{{-- @endcan --}}
+

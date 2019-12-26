@@ -1,4 +1,4 @@
-@can('marketing_quotation_edit')
+{{-- @can('marketing_quotation_edit') --}}
 @extends('frontend.master')
 
 @section('content')
@@ -589,4 +589,5 @@
 <script src="{{ asset('js/frontend/quotation/repeater.js') }}"></script>
 
 @endpush
-@endcan
+{{-- @endcan --}}
+

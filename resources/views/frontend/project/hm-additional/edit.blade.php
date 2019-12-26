@@ -1,4 +1,4 @@
-@can('heavy-maintenace_project_edit')
+{{-- @can('heavy-maintenace_project_edit') --}}
 @extends('frontend.master')
 
 @section('content')
@@ -314,4 +314,5 @@
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm-additional/edit.js')}}"></script>
 @endpush
-@endcan
+{{-- @endcan --}}
+
