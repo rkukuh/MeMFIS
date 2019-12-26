@@ -1,3 +1,4 @@
+@can('heavy-maintenace_taskcard_edit')
 @extends('frontend.master')
 
 @section('content')
@@ -883,3 +884,4 @@
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/edit.js') }}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush
+@endcan
