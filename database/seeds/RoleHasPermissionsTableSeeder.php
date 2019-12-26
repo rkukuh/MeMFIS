@@ -715,16 +715,16 @@ class RoleHasPermissionsTableSeeder extends Seeder
         $wj->givePermissionTo('capability_reject');
         $wj->givePermissionTo('capability_void');
 
-        $wj->givePermissionTo('defect_report_create');
-        $wj->givePermissionTo('defect_report_read');
-        $wj->givePermissionTo('defect_report_edit');
-        $wj->givePermissionTo('defect_report_delete');
-        $wj->givePermissionTo('defect_report_remove');
-        $wj->givePermissionTo('defect_report_report');
-        $wj->givePermissionTo('defect_report_print');
-        $wj->givePermissionTo('defect_report_approve');
-        $wj->givePermissionTo('defect_report_reject');
-        $wj->givePermissionTo('defect_report_void');
+        $wj->givePermissionTo('workshop_defect-report_create');
+        $wj->givePermissionTo('workshop_defect-report_read');
+        $wj->givePermissionTo('workshop_defect-report_edit');
+        $wj->givePermissionTo('workshop_defect-report_delete');
+        $wj->givePermissionTo('workshop_defect-report_remove');
+        $wj->givePermissionTo('workshop_defect-report_report');
+        $wj->givePermissionTo('workshop_defect-report_print');
+        $wj->givePermissionTo('workshop_defect-report_approve');
+        $wj->givePermissionTo('workshop_defect-report_reject');
+        $wj->givePermissionTo('workshop_defect-report_void');
 
         $wj->givePermissionTo('jsl_create');
         $wj->givePermissionTo('jsl_read');
@@ -785,16 +785,17 @@ class RoleHasPermissionsTableSeeder extends Seeder
         $quality->givePermissionTo('capability_reject');
         $quality->givePermissionTo('capability_void');
 
-        $quality->givePermissionTo('defect_report_create');
-        $quality->givePermissionTo('defect_report_read');
-        $quality->givePermissionTo('defect_report_edit');
-        $quality->givePermissionTo('defect_report_delete');
-        $quality->givePermissionTo('defect_report_remove');
-        $quality->givePermissionTo('defect_report_report');
-        $quality->givePermissionTo('defect_report_print');
-        $quality->givePermissionTo('defect_report_approve');
-        $quality->givePermissionTo('defect_report_reject');
-        $quality->givePermissionTo('defect_report_void');
+        // unknow
+        $quality->givePermissionTo('workshop_defect-report_create');
+        $quality->givePermissionTo('workshop_defect-report_read');
+        $quality->givePermissionTo('workshop_defect-report_edit');
+        $quality->givePermissionTo('workshop_defect-report_delete');
+        $quality->givePermissionTo('workshop_defect-report_remove');
+        $quality->givePermissionTo('workshop_defect-report_report');
+        $quality->givePermissionTo('workshop_defect-report_print');
+        $quality->givePermissionTo('workshop_defect-report_approve');
+        $quality->givePermissionTo('workshop_defect-report_reject');
+        $quality->givePermissionTo('workshop_defect-report_void');
 
         $quality->givePermissionTo('jsl_create');
         $quality->givePermissionTo('jsl_read');
@@ -833,16 +834,16 @@ class RoleHasPermissionsTableSeeder extends Seeder
         $workshop->givePermissionTo('capability_reject');
         $workshop->givePermissionTo('capability_void');
 
-        $workshop->givePermissionTo('defect_report_create');
-        $workshop->givePermissionTo('defect_report_read');
-        $workshop->givePermissionTo('defect_report_edit');
-        $workshop->givePermissionTo('defect_report_delete');
-        $workshop->givePermissionTo('defect_report_remove');
-        $workshop->givePermissionTo('defect_report_report');
-        $workshop->givePermissionTo('defect_report_print');
-        $workshop->givePermissionTo('defect_report_approve');
-        $workshop->givePermissionTo('defect_report_reject');
-        $workshop->givePermissionTo('defect_report_void');
+        $workshop->givePermissionTo('workshop_defect-report_create');
+        $workshop->givePermissionTo('workshop_defect-report_read');
+        $workshop->givePermissionTo('workshop_defect-report_edit');
+        $workshop->givePermissionTo('workshop_defect-report_delete');
+        $workshop->givePermissionTo('workshop_defect-report_remove');
+        $workshop->givePermissionTo('workshop_defect-report_report');
+        $workshop->givePermissionTo('workshop_defect-report_print');
+        $workshop->givePermissionTo('workshop_defect-report_approve');
+        $workshop->givePermissionTo('workshop_defect-report_reject');
+        $workshop->givePermissionTo('workshop_defect-report_void');
 
         $workshop->givePermissionTo('jsl_create');
         $workshop->givePermissionTo('jsl_read');

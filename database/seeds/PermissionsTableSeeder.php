@@ -290,16 +290,16 @@ class PermissionsTableSeeder extends Seeder
 
         // DEFECT REPORT entity permissions: ???
 
-        Permission::create(['name' => 'defect_report_create']);
-        Permission::create(['name' => 'defect_report_read']);
-        Permission::create(['name' => 'defect_report_edit']);
-        Permission::create(['name' => 'defect_report_delete']);
-        Permission::create(['name' => 'defect_report_remove']);
-        Permission::create(['name' => 'defect_report_report']);
-        Permission::create(['name' => 'defect_report_print']);
-        Permission::create(['name' => 'defect_report_approve']);
-        Permission::create(['name' => 'defect_report_reject']);
-        Permission::create(['name' => 'defect_report_void']);
+        Permission::create(['name' => 'workshop_defect-report_create']);
+        Permission::create(['name' => 'workshop_defect-report_read']);
+        Permission::create(['name' => 'workshop_defect-report_edit']);
+        Permission::create(['name' => 'workshop_defect-report_delete']);
+        Permission::create(['name' => 'workshop_defect-report_remove']);
+        Permission::create(['name' => 'workshop_defect-report_report']);
+        Permission::create(['name' => 'workshop_defect-report_print']);
+        Permission::create(['name' => 'workshop_defect-report_approve']);
+        Permission::create(['name' => 'workshop_defect-report_reject']);
+        Permission::create(['name' => 'workshop_defect-report_void']);
 
         // EMPLOYMENT STATUS entity permissions:
 
