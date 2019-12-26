@@ -1,3 +1,4 @@
+@can('marketing_quotation_create')
 @extends('frontend.master')
 
 @section('content')
@@ -308,7 +309,7 @@
                                             @endcomponent
                                         </div>
                                     </div>
-                                   
+
                                     <div class="form-group m-form__group row" style="margin-top:-12px;">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
@@ -358,7 +359,7 @@
                                                                                 <label class="form-control-label">
                                                                                     Work Progress
                                                                                 </label>
-                                                        
+
                                                                                 @component('frontend.common.input.number')
                                                                                     @slot('id', 'work_progress_scheduled')
                                                                                     @slot('name', 'work_progress_scheduled')
@@ -371,7 +372,7 @@
                                                                                 <label class="form-control-label">
                                                                                     Amount
                                                                                 </label>
-                                                        
+
                                                                                 @component('frontend.common.input.number')
                                                                                     @slot('id', 'amount_scheduled')
                                                                                     @slot('name', 'amount_scheduled')
@@ -382,7 +383,7 @@
                                                                                 <label class="form-control-label">
                                                                                     Description
                                                                                 </label>
-                                                        
+
                                                                                 @component('frontend.common.input.text')
                                                                                     @slot('text', 'description_scheduled')
                                                                                     @slot('name', 'description_scheduled')
@@ -483,7 +484,7 @@
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/additional/edit.js')}}"></script>
     <script src="{{ asset('js/frontend/quotation/additional/summary.js') }}"></script>
-    
+
     <script src="{{ asset('js/frontend/functions/fill-combobox/discount-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
 
@@ -508,4 +509,4 @@
     <script src="{{ asset('js/frontend/quotation/scheduled-payment.js') }}"></script>
 
 @endpush
-
+@endcan

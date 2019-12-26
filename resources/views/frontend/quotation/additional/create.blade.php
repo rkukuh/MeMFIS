@@ -1,3 +1,5 @@
+@can('marketing_quotation_create')
+
 @extends('frontend.master')
 
 @section('content')
@@ -426,7 +428,7 @@
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/charge-type.js') }}"></script>
-    
+
 
     <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
@@ -441,4 +443,4 @@
     {{-- <script src="{{ asset('/assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/scheduled-payment.js') }}"></script> --}}
 @endpush
-
+@endcan
