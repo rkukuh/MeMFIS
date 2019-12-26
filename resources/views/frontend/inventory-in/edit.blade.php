@@ -1,3 +1,4 @@
+@can('scm_inventory-in_edit')
 @extends('frontend.master')
 
 @section('content')
@@ -234,3 +235,4 @@
 <script src="{{ asset('js/frontend/inventory-in/form-reset.js') }}"></script>
 
 @endpush
+@endcan
