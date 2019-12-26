@@ -1,3 +1,4 @@
+@can('scm_vendor_edit')
 @extends('frontend.master')
 
 @section('content')
@@ -1120,3 +1121,4 @@
 <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
 @endpush
+@endcan
