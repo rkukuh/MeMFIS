@@ -1,3 +1,4 @@
+@can('scm_purchase-request_edit')
 @extends('frontend.master')
 
 @section('content')
@@ -249,3 +250,4 @@
     {{-- <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script> --}}
 
 @endpush
+@endcan

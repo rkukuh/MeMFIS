@@ -1,3 +1,4 @@
+@can('scm_purchase-request_create')
 @extends('frontend.master')
 
 @section('content')
@@ -193,3 +194,4 @@
     <script src="{{ asset('js/frontend/functions/datepicker/date-required.js')}}"></script>
 
 @endpush
+@endcan
