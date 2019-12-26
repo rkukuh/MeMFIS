@@ -96,6 +96,7 @@ let TaskCard = {
                                 "</a>"
                             );
                         } else if(t.rts){
+                            return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' +
                             t.uuid +
                             '">' +
@@ -108,6 +109,7 @@ let TaskCard = {
                             '">' +
                             '<i class="la la-pencil"></i>' +
                             "</a>"
+                            );
                         }else{
                             return (
                                 '<a href="/rts/' +
