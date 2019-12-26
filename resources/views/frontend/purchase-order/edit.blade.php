@@ -1,4 +1,4 @@
-@can('scm_purchase-order_create')
+@can('scm_purchase-order_edit')
 @extends('frontend.master')
 
 @section('content')
