@@ -1,4 +1,5 @@
-    @extends('frontend.master')
+@can('heavy-maintenace_project_edit')
+@extends('frontend.master')
 
 @section('content')
     <div class="m-subheader hidden">
@@ -324,9 +325,10 @@
     {{-- <script src="{{ asset('js/frontend/project/create.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/project/form-reset.js') }}"></script>
     {{-- <script src="{{ asset('js/frontend/project/hm/datatables.js')}}"></script> --}}
-    
+
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     {{-- <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/project/hm/edit.js') }}"></script>
 
 @endpush
+@endcan

@@ -1,3 +1,4 @@
+@can('heavy-maintenace_project_edit')
 @extends('frontend.master')
 
 @section('content')
@@ -194,7 +195,7 @@
                                                         @slot('name', 'performance_factor')
                                                         @if(empty($project->data_defectcard))
                                                             @slot('value', 1.6)
-                                                        @else 
+                                                        @else
                                                             @slot('value', json_decode($project->data_defectcard)->performance_factor)
                                                         @endif
                                                         @slot('id_error', 'performance_factor')
@@ -210,7 +211,7 @@
                                                         @if(empty($project->data_defectcard))
                                                             @slot('text', $project->defectcards()->sum('estimation_manhour') * 1.6)
                                                             @slot('value', $project->defectcards()->sum('estimation_manhour') * 1.6)
-                                                        @else 
+                                                        @else
                                                         @slot('text', $project->defectcards()->sum('estimation_manhour') * json_decode($project->data_defectcard)->performance_factor)
                                                         @slot('value', $project->defectcards()->sum('estimation_manhour') * json_decode($project->data_defectcard)->performance_factor)
                                                         @endif
@@ -313,4 +314,4 @@
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm-additional/edit.js')}}"></script>
 @endpush
-
+@endcan
