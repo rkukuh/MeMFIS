@@ -1,4 +1,4 @@
-@can('scm_receiving-inspection_report_create')
+@can('scm_receiving-inspection_report_edit')
 @extends('frontend.master')
 
 @section('content')
