@@ -83,5 +83,5 @@
 
 @push('footer-scripts')
 <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
-<script src="{{ asset('js/frontend/rts/progress.js')}}"></script>
+<script src="{{ asset('js/frontend/rts/pg.js')}}"></script>
 @endpush
