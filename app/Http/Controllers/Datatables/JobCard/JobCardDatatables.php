@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Datatables\JobCard;
 
 use DB;
+use Auth;
 use DataTables;
 use Carbon\Carbon;
 use App\Models\Unit;
@@ -75,9 +76,12 @@ class JobCardDatatables extends Controller
             // elseif($taskcard->progresses->count()==1){
             //     $taskcard->status .= 'Open';
             // }
-
-            $taskcard->status .= $taskcard->progresses->last()->status->code;
-
+            // dd();
+            if(sizeOf($taskcard->progresses->where('progressed_by',Auth::id())->toArray()) <> 0){
+                $taskcard->status .= $taskcard->progresses->where('progressed_by',Auth::id())->last()->status->code;
+            }else{
+                $taskcard->status .= 'Open';
+            }
 
             $taskcard->actual .= $taskcard->ActualManhour;
 
