@@ -757,7 +757,6 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'TaskReleaseJobCardDatatables@index')->name('all');
-                Route::get('/ppc', 'TaskReleaseJobCardDatatables@ppc')->name('ppc');
                 Route::post('/filter', 'TaskReleaseJobCardDatatables@filter')->name('filter');
 
             });
@@ -887,6 +886,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'JobCardDatatables@index')->name('all');
+                Route::get('/ppc', 'JobCardDatatables@ppc')->name('ppc');
                 Route::get('/all', 'JobCardDatatables@datatable')->name('datatable.all');
                 Route::post('/filter', 'JobCardDatatables@filter')->name('filter');
                 Route::get('/{jobcard}/materials', 'JobCardDatatables@material')->name('material');

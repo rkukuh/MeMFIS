@@ -237,7 +237,7 @@ class JobCardDatatables extends Controller
             //     $taskcard->status .= 'Open';
             // }
 
-            $taskcard->status .= $taskcard->progresses->last()->status->code;
+            // $taskcard->status .= $taskcard->progresses->last()->status->code;
 
 
             $taskcard->actual .= $taskcard->ActualManhour;

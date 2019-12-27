@@ -154,6 +154,61 @@ Route::name('testing.')->group(function () {
             return $pdf->stream();
         });
 
+        Route::get('/tj', function () {
+            $jobcard = App\Models\JobCard::find(1);
+
+            dump($jobcard->progresses->groupby('progressed_by')->count()-1);
+
+            $pending = 0;
+            $closed = 0;
+            $status = null;
+            foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+                // if($jobcard->progresses->where('progressed_by',Auth::id())->last()->status->name)
+                // dump($jobcard->progresses->where('progressed_by',162)->last()->status->name);
+                // dump($values->last()->status->name);
+                if($values->last()->status->code == 'pending'){
+                    $pending++;
+                }else if($values->last()->status->code == 'closed'){
+                    $closed++;
+                }
+                if($values->last()->status->code == 'released' and $status <> 'rii-released' ){
+                    $status = 'RELEASED';
+                }else if($values->last()->status->code == 'rii-released'){
+                    $status = 'RII RELEASED';
+                }
+                // $date1 = null;
+                // foreach($values as $value){
+                //     dump($value);
+                    // if($statuses->where('id',$value->status_id)->first()->code <> "open" or $statuses->where('id',$value->status_id)->first()->code <> "released" or $statuses->where('id',$value->status_id)->first()->code <> "rii-released"){
+                    //     if($jobcard->helpers->where('userID',$key)->first() == null){
+                    //         if($date1 <> null){
+                    //             $t1 = Carbon::parse($date1);
+                    //             $t2 = Carbon::parse($value->created_at);
+                    //             $diff = $t1->diffInSeconds($t2);
+                    //             $manhours = $manhours + $diff;
+                    //         }
+                    //         $date1 = $value->created_at;
+                    //     }
+                    // }
+
+                // }
+            }
+
+            // dump( $pending);
+            if($jobcard->progresses->groupby('progressed_by')->count()-1 == $closed){
+                $status = 'CLOSED';
+            }
+            else if($jobcard->progresses->groupby('progressed_by')->count()-1 == $pending){
+                $status = 'PENDING';
+            }
+            else if($status == null){
+                $status = 'IN-PROGRESS';
+            }
+
+            dump($status);
+
+        });
+
         Route::get('/barcode-print', function () {
             $pdf = \PDF::loadView('frontend/form/barcode');
             return $pdf->stream();
