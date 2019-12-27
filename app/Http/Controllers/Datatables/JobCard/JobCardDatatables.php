@@ -44,39 +44,6 @@ class JobCardDatatables extends Controller
 
             $count_user = $taskcard->progresses->groupby('progressed_by')->count()-1;
 
-            // $status = [];
-            // foreach($taskcard->progresses->groupby('progressed_by') as $key => $value){
-            //     if(Status::ofJobCard()->where('id',$taskcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
-            //         array_push($status, 'Pending');
-            //     }
-            // }
-
-            // if($taskcard->is_rii == 1 and $taskcard->approvals->count()==2){
-            //     $taskcard->status .= 'Released';
-            // }
-            // elseif($taskcard->is_rii == 1 and $taskcard->approvals->count()==1){
-            //     // if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-            //         $taskcard->status .= 'Waiting for RII';
-            //     // }
-            // }
-            // elseif($taskcard->is_rii == 0 and sizeof($taskcard->approvals)==1){
-            //     // if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-            //         $taskcard->status .= 'Released';
-            //     // }
-            // }
-            // elseif($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-            //     $taskcard->status .= 'Closed';
-            // }
-            // elseif(sizeof($status) == $count_user and $count_user <> 0){
-            //     $taskcard->status .= 'Pending';
-            // }
-            // elseif(sizeof($status) <> $count_user and $count_user <> 0){
-            //     $taskcard->status .= 'Progress';
-            // }
-            // elseif($taskcard->progresses->count()==1){
-            //     $taskcard->status .= 'Open';
-            // }
-            // dd();
             if(sizeOf($taskcard->progresses->where('progressed_by',Auth::id())->toArray()) <> 0){
                 $taskcard->status .= $taskcard->progresses->where('progressed_by',Auth::id())->last()->status->code;
             }else{
