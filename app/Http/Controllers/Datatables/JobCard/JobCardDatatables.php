@@ -202,43 +202,33 @@ class JobCardDatatables extends Controller
                 $taskcard->skill        .= $taskcard->jobcardable->skill;
             }
 
-            $count_user = $taskcard->progresses->groupby('progressed_by')->count()-1;
+            $pending = 0;
+            $closed = 0;
+            $status = null;
+            foreach($taskcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+                if($values->last()->status->code == 'pending'){
+                    $pending++;
+                }else if($values->last()->status->code == 'closed'){
+                    $closed++;
+                }
+                if($values->last()->status->code == 'released' and $status <> 'rii-released' ){
+                    $status = 'RELEASED';
+                }else if($values->last()->status->code == 'rii-released'){
+                    $status = 'RII RELEASED';
+                }
+            }
 
-            // $status = [];
-            // foreach($taskcard->progresses->groupby('progressed_by') as $key => $value){
-            //     if(Status::ofJobCard()->where('id',$taskcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
-            //         array_push($status, 'Pending');
-            //     }
-            // }
+            if($taskcard->progresses->groupby('progressed_by')->count()-1 == $closed){
+                $status = 'CLOSED';
+            }
+            else if($taskcard->progresses->groupby('progressed_by')->count()-1 == $pending){
+                $status = 'PENDING';
+            }
+            else if($status == null){
+                $status = 'IN-PROGRESS';
+            }
 
-            // if($taskcard->is_rii == 1 and $taskcard->approvals->count()==2){
-            //     $taskcard->status .= 'Released';
-            // }
-            // elseif($taskcard->is_rii == 1 and $taskcard->approvals->count()==1){
-            //     // if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-            //         $taskcard->status .= 'Waiting for RII';
-            //     // }
-            // }
-            // elseif($taskcard->is_rii == 0 and sizeof($taskcard->approvals)==1){
-            //     // if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-            //         $taskcard->status .= 'Released';
-            //     // }
-            // }
-            // elseif($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-            //     $taskcard->status .= 'Closed';
-            // }
-            // elseif(sizeof($status) == $count_user and $count_user <> 0){
-            //     $taskcard->status .= 'Pending';
-            // }
-            // elseif(sizeof($status) <> $count_user and $count_user <> 0){
-            //     $taskcard->status .= 'Progress';
-            // }
-            // elseif($taskcard->progresses->count()==1){
-            //     $taskcard->status .= 'Open';
-            // }
-
-            // $taskcard->status .= $taskcard->progresses->last()->status->code;
-
+            $taskcard->status .= $status;
 
             $taskcard->actual .= $taskcard->ActualManhour;
 
