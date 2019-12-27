@@ -20,7 +20,7 @@ Route::name('frontend.')->group(function () {
             Route::prefix('quotation-additional')->group(function () {
                 Route::get('/create/{project}','QuotationAdditionalController@create')->name('quotation-additional.create');
                 Route::post('/{quotation}/discount','QuotationAdditionalController@discount')->name('quotation-additional.discount');
-                Route::post('/{quotation}/approve', 'QuotationAdditionalController@approve')->name('quotation.approve');
+                Route::post('/{quotation}/approve', 'QuotationAdditionalController@approve')->name('quotation.approve')->middleware('permission:marketing_quotation_approve');
                 Route::get('/{quotation}/print', 'QuotationAdditionalController@print');
             });
 
