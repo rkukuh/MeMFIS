@@ -194,7 +194,9 @@ Route::name('testing.')->group(function () {
                 // }
             }
 
-            // dump( $pending);
+            // dump( $jobcard->progresses->groupby('progressed_by')->count()-1);
+            dump( $closed);
+            dump( $pending);
             if($jobcard->progresses->groupby('progressed_by')->count()-1 == $closed){
                 $status = 'CLOSED';
             }
