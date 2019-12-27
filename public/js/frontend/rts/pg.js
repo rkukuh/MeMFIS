@@ -87,41 +87,39 @@ let TaskCard = {
                     template: function(t, e, i) {
                         if (t.status == "RTS") {
                             return (
-                                'first'
-                                // '<a href="rts/' +
-                                // t.rts.uuid +
-                                // '/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' +
-                                // t.rts.uuid +
-                                // '">' +
-                                // '<i class="la la-print"></i>' +
-                                // "</a>"
+                                '<a href="rts/' +
+                                t.rts.uuid +
+                                '/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' +
+                                t.rts.uuid +
+                                '">' +
+                                '<i class="la la-print"></i>' +
+                                "</a>"
                             );
-                        } else {
+                        } else if(t.rts) {
                             return (
-                                'second'
-                            // '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' +
-                            // t.uuid +
-                            // '">' +
-                            // '<i class="la la-check"></i>' +
-                            // "</a>" +
-                            // '<a href="/rts/' +
-                            // t.rts.uuid +
-                            // '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' +
-                            // t.rts.uuid +
-                            // '">' +
-                            // '<i class="la la-pencil"></i>' +
-                            // "</a>"
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' +
+                            t.uuid +
+                            '">' +
+                            '<i class="la la-check"></i>' +
+                            "</a>" +
+                            '<a href="/rts/' +
+                            t.rts.uuid +
+                            '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' +
+                            t.rts.uuid +
+                            '">' +
+                            '<i class="la la-pencil"></i>' +
+                            "</a>"
                             );
-                        // }else{
-                        //     return (
-                        //         '<a href="/rts/' +
-                        //         t.uuid +
-                        //         '/project" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' +
-                        //         t.uuid +
-                        //         '">' +
-                        //         '<i class="la la-pencil"></i>' +
-                        //         "</a>"
-                        //     );
+                        }else{
+                            return (
+                                '<a href="/rts/' +
+                                t.uuid +
+                                '/project" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' +
+                                t.uuid +
+                                '">' +
+                                '<i class="la la-pencil"></i>' +
+                                "</a>"
+                            );
                         }
                     }
                 }

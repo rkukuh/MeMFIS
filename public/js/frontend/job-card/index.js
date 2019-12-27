@@ -11,7 +11,7 @@ let JobCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/jobcard',
+                        url: '/datatables/jobcard/ppc',
 
                         map: function (raw) {
                             let dataSet = raw;
