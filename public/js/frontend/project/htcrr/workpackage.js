@@ -601,7 +601,7 @@ function htcrr_tool(triggeruuid) {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: 'post',
-            url: '/project-hm/htcrr/'+htcrr_uuid+'/item/',
+            url: '/project-hm/htcrr/'+htcrr_uuid+'/item',
             data: {
                 _token: $('input[name=_token]').val(),
                 item_id: tool,
@@ -754,7 +754,7 @@ function htcrr_material(triggeruuid) {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: 'post',
-            url: '/project-hm/htcrr/'+htcrr_uuid+'/item/',
+            url: '/project-hm/htcrr/'+htcrr_uuid+'/item',
             data: {
                 _token: $('input[name=_token]').val(),
                 item_id: material,
