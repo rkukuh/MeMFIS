@@ -61,10 +61,13 @@ let Attendance = {
                     filterable: !1,
                 },
                 {
-                    field: 'employee.first_name',
+                    field: 'employee.full_name',
                     title: 'Employee Name',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (row, index, datatable) {   
+                        return (row.employee.first_name + ' ' + row.employee.last_name)
+                    }
                 },
                 {
                     field: 'day',
