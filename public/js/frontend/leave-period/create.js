@@ -57,7 +57,7 @@ let leavePeriod = {
                         timeOut: 5000
                     });
 
-                    window.location.href='/leave-period'
+                    window.location.href='/leave-period';
                 }
             }
         });

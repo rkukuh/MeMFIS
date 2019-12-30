@@ -1,18 +1,18 @@
 $(document).ready(function () {
-    EmployementStatuses = function () {
+    Company = function () {
         $.ajax({
-            url: '/get-employment-statuses',
+            url: '/get-company-types',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                $('select[name="employee_status"]').empty();
+                $('#company_type').empty();
 
-                $('select[name="employee_status"]').append(
-                    '<option value=""> Select an Employment Status</option>'
+                $('#company_type').append(
+                    '<option value=""> Select Company Type</option>'
                 );
 
                 $.each(data, function (key, value) {
-                    $('select[name="employee_status"]').append(
+                    $('#company_type').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );
                 });
@@ -20,5 +20,5 @@ $(document).ready(function () {
         });
     };
 
-    EmployementStatuses();
+    Company();
 });

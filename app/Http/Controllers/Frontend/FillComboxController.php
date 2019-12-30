@@ -19,6 +19,7 @@ use App\Models\Country;
 use App\Models\Project;
 use App\Models\Station;
 use App\Models\Storage;
+use App\Models\Company;
 use App\Models\JobTitle;
 use App\Models\Aircraft;
 use App\Models\Category;
@@ -1239,6 +1240,36 @@ class FillComboxController extends Controller
             ->pluck('name', 'uuid');
 
         return json_encode($customerLevel);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function company()
+    {
+        $companies = Company::pluck('name', 'uuid')->toArray();
+        $departments = Department::pluck('name', 'uuid')->toArray();
+
+        $companies = array_merge($companies, $departments);
+
+        return json_encode($companies);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function company_type()
+    {
+        $company_types = Type::ofCompany()
+                            ->pluck('name', 'uuid');
+
+        return json_encode($company_types);
 
     }
 

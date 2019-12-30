@@ -28,6 +28,52 @@ $("#date").on("change", function(){
 
 });
 
+$("#start_time").on("change", function(){
+
+    let start_time = $("#start_time").val();
+        start_time = start_time.split(':');
+
+    let end_time =  $("#end_time").val();
+        end_time = end_time.split(':');
+
+    let start = new Date();
+    let end = new Date();
+
+    start.setHours(start_time[0]);
+    start.setMinutes(start_time[1]);
+
+    end.setHours(end_time[0]);
+    end.setMinutes(end_time[1]);    
+
+    $("input[type=number][name=hours]").val(end.getHours() - start.getHours());
+    $("input[type=number][name=minutes]").val(end.getMinutes() - start.getMinutes());
+    $("input[type=number][name=second]").val(end.getSeconds() - start.getSeconds());
+
+});
+
+$("#end_time").on("change", function(){
+
+    let start_time = $("#start_time").val();
+        start_time = start_time.split(':');
+
+    let end_time =  $("#end_time").val();
+        end_time = end_time.split(':');
+
+    let start = new Date();
+    let end = new Date();
+
+    start.setHours(start_time[0]);
+    start.setMinutes(start_time[1]);
+
+    end.setHours(end_time[0]);
+    end.setMinutes(end_time[1]);    
+
+    $("input[type=number][name=hours]").val(end.getHours() - start.getHours());
+    $("input[type=number][name=minutes]").val(end.getMinutes() - start.getMinutes());
+    $("input[type=number][name=second]").val(end.getSeconds() - start.getSeconds());
+
+});
+
 $(document).ready(function(){
     $('#start_time').timepicker({
         timeFormat: 'HH:mm:ss',

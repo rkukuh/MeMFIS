@@ -19,7 +19,7 @@ class AttendanceDatatables extends Controller
         // $anam = Employee::where('id',50)->first();
         // $attendances = EmployeeAttendance::where('employee_id',$anam->id)->with('attendance_correction','attendance_overtime','employee','statuses','parent')->get();
 
-        $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses','parent')->orderBy('date', 'DESC');
+        $attendances = EmployeeAttendance::with('attendance_correction','attendance_overtime','employee','statuses','parent')->orderBy('date', 'DESC')->take(1000);
         // ->whereMonth('created_at', Carbon::now()->month);
         
         // if( !in_array('hrd', $roles) || !in_array('admin', $roles) ){
@@ -29,23 +29,23 @@ class AttendanceDatatables extends Controller
         $attendances = $attendances->get();
 
         foreach($attendances as $attendance){
-        //     //Time converison from second
-        //     if($attendance->parent){
-        //         $attendance->attendance_correction = $attendance->parent->attendance_correction;
-        //     }else{
-        //         $attendance->attendance_correction = $attendance->attendance_correction;
-        //     }
+            //Time converison from second
+            if($attendance->parent){
+                $attendance->attendance_correction = $attendance->parent->attendance_correction;
+            }else{
+                $attendance->attendance_correction = $attendance->attendance_correction;
+            }
 
-        //     if(sizeof($attendance->statuses) > 0){
-        //         $statuses =  $attendance->statuses()->pluck('name')->toArray();
-        //         $attendance->status = join(', ', $statuses);
-        //     }
+            if(sizeof($attendance->statuses) > 0){
+                $statuses =  $attendance->statuses()->pluck('name')->toArray();
+                $attendance->status = join(', ', $statuses);
+            }
 
-        //     $date = Carbon::createFromFormat('Y-m-d', $attendance->date);
-        //     $attendance->day = $days[$date->dayOfWeek];
-        //     $attendance->late = gmdate('H:i:s',$attendance->late_in);
-        //     $attendance->earlier = gmdate('H:i:s',$attendance->earlier_out);
-        //     $attendance->overtime = gmdate('H:i:s',$attendance->overtime);
+            $date = Carbon::createFromFormat('Y-m-d', $attendance->date);
+            $attendance->day = $days[$date->dayOfWeek];
+            $attendance->late = gmdate('H:i:s',$attendance->late_in);
+            $attendance->earlier = gmdate('H:i:s',$attendance->earlier_out);
+            $attendance->overtime = gmdate('H:i:s',$attendance->overtime);
         }
 
         $data = $alldata = json_decode($attendances);
