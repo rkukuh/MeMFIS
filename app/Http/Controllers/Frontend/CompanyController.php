@@ -115,6 +115,7 @@ class CompanyController extends Controller
 
         $companies = array_merge($companies, $departments);
 
+        // dd(isset($comdept->parent));
         return view('frontend.company.edit', [
             'types' => Type::ofCompany()->pluck('name','uuid'),
             'companies' => $companies,

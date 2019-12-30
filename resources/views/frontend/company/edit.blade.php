@@ -118,7 +118,7 @@
                                             @component('frontend.common.input.edit-select2')
                                                 @slot('id', 'company')
                                                 @slot('name', 'company')
-                                                @slot('options', $types)
+                                                @slot('options', $companies)
                                                 @if(isset($company->parent))
                                                     @slot('value', $company->parent->uuid)
                                                 @else
