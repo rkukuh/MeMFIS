@@ -171,6 +171,28 @@ class RoleHasPermissionsTableSeeder extends Seeder
         $ppic->givePermissionTo('heavy-maintenace_workpackage_reject');
         $ppic->givePermissionTo('heavy-maintenace_workpackage_void');
 
+        $ppic->givePermissionTo('heavy-maintenace_task-release_create');
+        $ppic->givePermissionTo('heavy-maintenace_task-release_read');
+        $ppic->givePermissionTo('heavy-maintenace_task-release_edit');
+        $ppic->givePermissionTo('heavy-maintenace_task-release_delete');
+        $ppic->givePermissionTo('heavy-maintenace_task-release_remove');
+        $ppic->givePermissionTo('heavy-maintenace_task-release_report');
+        $ppic->givePermissionTo('heavy-maintenace_task-release_print');
+        $ppic->givePermissionTo('heavy-maintenace_task-release_approve');
+        $ppic->givePermissionTo('heavy-maintenace_task-release_reject');
+        $ppic->givePermissionTo('heavy-maintenace_task-release_void');
+
+        $ppic->givePermissionTo('heavy-maintenace_rii-release_create');
+        $ppic->givePermissionTo('heavy-maintenace_rii-release_read');
+        $ppic->givePermissionTo('heavy-maintenace_rii-release_edit');
+        $ppic->givePermissionTo('heavy-maintenace_rii-release_delete');
+        $ppic->givePermissionTo('heavy-maintenace_rii-release_remove');
+        $ppic->givePermissionTo('heavy-maintenace_rii-release_report');
+        $ppic->givePermissionTo('heavy-maintenace_rii-release_print');
+        $ppic->givePermissionTo('heavy-maintenace_rii-release_approve');
+        $ppic->givePermissionTo('heavy-maintenace_rii-release_reject');
+        $ppic->givePermissionTo('heavy-maintenace_rii-release_void');
+
         // SUPPLY CHAIN MANAGEMENT role permissions:
 
         $scm = Role::where('name', 'scm')->first();

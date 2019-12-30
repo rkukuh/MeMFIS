@@ -782,6 +782,32 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'heavy-maintenace_rts_reject']);
         Permission::create(['name' => 'heavy-maintenace_rts_void']);
 
+        // TASK RELEASE entity permissions:
+
+        Permission::create(['name' => 'heavy-maintenace_task-release_create']);
+        Permission::create(['name' => 'heavy-maintenace_task-release_read']);
+        Permission::create(['name' => 'heavy-maintenace_task-release_edit']);
+        Permission::create(['name' => 'heavy-maintenace_task-release_delete']);
+        Permission::create(['name' => 'heavy-maintenace_task-release_remove']);
+        Permission::create(['name' => 'heavy-maintenace_task-release_report']);
+        Permission::create(['name' => 'heavy-maintenace_task-release_print']);
+        Permission::create(['name' => 'heavy-maintenace_task-release_approve']);
+        Permission::create(['name' => 'heavy-maintenace_task-release_reject']);
+        Permission::create(['name' => 'heavy-maintenace_task-release_void']);
+
+        // RII RELEASE entity permissions:
+
+        Permission::create(['name' => 'heavy-maintenace_rii-release_create']);
+        Permission::create(['name' => 'heavy-maintenace_rii-release_read']);
+        Permission::create(['name' => 'heavy-maintenace_rii-release_edit']);
+        Permission::create(['name' => 'heavy-maintenace_rii-release_delete']);
+        Permission::create(['name' => 'heavy-maintenace_rii-release_remove']);
+        Permission::create(['name' => 'heavy-maintenace_rii-release_report']);
+        Permission::create(['name' => 'heavy-maintenace_rii-release_print']);
+        Permission::create(['name' => 'heavy-maintenace_rii-release_approve']);
+        Permission::create(['name' => 'heavy-maintenace_rii-release_reject']);
+        Permission::create(['name' => 'heavy-maintenace_rii-release_void']);
+
         // RECEIVING INSPECTION REPORT entity permissions:
 
         Permission::create(['name' => 'scm_receiving-inspection_report_create']);
