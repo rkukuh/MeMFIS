@@ -7,6 +7,7 @@ use App\Models\Item;
 use App\Models\TaskCard;
 use App\Models\EOInstruction;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\EOInstructionItem;
 use App\Http\Requests\Frontend\EOItemInstructionStore;
 use App\Http\Requests\Frontend\EOItemInstructionUpdate;
 
@@ -40,6 +41,10 @@ class EOInstructionItemController extends Controller
      */
     public function store(EOInstruction $taskcard, EOItemInstructionStore $request)
     {
+        $exists = EOInstructionItem::where('eo_id',$taskcard->id)->where('item_id',Item::where('uuid',$request->item_id)->first()->id)->first();
+        if($exists){
+            return response()->json(['title' => "Danger"]);
+        }else{
         $request->merge(['item_id' => Item::where('uuid',$request->item_id)->first()->id]);
         $request->merge(['unit_id' => Unit::where('uuid',$request->unit_id)->first()->id]);
 
@@ -51,6 +56,7 @@ class EOInstructionItemController extends Controller
         ]);
 
         return response()->json($taskcard);
+        }
     }
 
     /**

@@ -694,6 +694,11 @@ let TaskCard = {
                         document.getElementById('quantity').value = quantity;
 
                     } else {
+                        if (data.title == "Danger") {
+                            toastr.error("Item already exists!", "Error", {
+                                timeOut: 5000
+                            });
+                        } else {
 
                         toastr.success('Material has been created.', 'Success', {
                             timeOut: 5000
@@ -716,6 +721,7 @@ let TaskCard = {
                                 .select2('val','All')
                                 .end();
                         })
+                        }
                     }
                 }
             });
@@ -1029,7 +1035,11 @@ let TaskCard = {
                         document.getElementById('tool').value = tool;
                         document.getElementById('quantity').value = quantity;
                     } else {
-
+                        if (data.title == "Danger") {
+                            toastr.error("Tool already exists!", "Error", {
+                                timeOut: 5000
+                            });
+                        } else {
                         toastr.success('Tool has been created.', 'Success', {
                             timeOut: 5000
                         });
@@ -1050,7 +1060,7 @@ let TaskCard = {
                                 .select2('val','All')
                                 .end();
                         })
-
+                        }
 
                     }
                 }
