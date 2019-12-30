@@ -431,6 +431,19 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'scm_item_reject']);
         Permission::create(['name' => 'scm_item_void']);
 
+        // ITEMS entity permissions:
+
+        Permission::create(['name' => 'scm_service_create']);
+        Permission::create(['name' => 'scm_service_read']);
+        Permission::create(['name' => 'scm_service_edit']);
+        Permission::create(['name' => 'scm_service_delete']);
+        Permission::create(['name' => 'scm_service_remove']);
+        Permission::create(['name' => 'scm_service_report']);
+        Permission::create(['name' => 'scm_service_print']);
+        Permission::create(['name' => 'scm_service_approve']);
+        Permission::create(['name' => 'scm_service_reject']);
+        Permission::create(['name' => 'scm_service_void']);
+
         // INVENTORY IN entity permissions:
 
         Permission::create(['name' => 'scm_inventory-in_create']);
