@@ -103,10 +103,11 @@
                                                Company Type   
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'company')
-                                                @slot('name', 'company')
-                                                @slot('id_error', 'company')
+                                            @component('frontend.common.input.edit-select2')
+                                                @slot('id', 'company_type')
+                                                @slot('name', 'company_type')
+                                                @slot('options', $types)
+                                                @slot('value', $company->type->uuid)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -114,10 +115,15 @@
                                                Parent Structure
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'parent_structure')
-                                                @slot('name', 'parent_structure')
-                                                @slot('id_error', 'parent_structure')
+                                            @component('frontend.common.input.edit-select2')
+                                                @slot('id', 'company')
+                                                @slot('name', 'company')
+                                                @slot('options', $types)
+                                                @if(isset($company->parent))
+                                                    @slot('value', $company->parent->uuid)
+                                                @else
+                                                    @slot('value', null)
+                                                @endif
                                             @endcomponent
                                         </div>
                                     </div>
@@ -190,7 +196,7 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/company.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/parent-structure.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/company-type.js') }}"></script>
 
     <script src="{{ asset('js/frontend/company/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/company/form-reset.js') }}"></script>

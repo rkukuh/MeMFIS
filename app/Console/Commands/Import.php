@@ -89,13 +89,17 @@ class Import extends Command
                 $this->line('Importing: Task Cards data ATR-72');
                 app()->make(OldDataController::class)->taskCardsATR();
                 break;
-           case 'fefoin':
+            case 'fefoin':
                 $this->line('Importing: First In First Out In');
                 app()->make(OldDataController::class)->fefoin();
                 break;
             case 'sim-dec':
                 $this->line('Importing: data for simulation on december 2019');
                 app()->make(OldDataController::class)->decemberSimulation();
+                break;
+            case 'vendors':
+                $this->line('Importing: Master vendors');
+                app()->make(OldDataController::class)->vendors();
                 break;
             default:
                 $this->line('Importing: File not Found');

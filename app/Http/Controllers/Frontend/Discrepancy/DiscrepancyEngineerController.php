@@ -67,7 +67,8 @@ class DiscrepancyEngineerController extends Controller
         $defectcard = DefectCard::create($request->all());
 
         foreach($helpers as $helper){
-            $employee = Employee::where('code', $helper[0])->first();
+            $employee = Employee::where('uuid', $helper[0])->first();
+            
             $defectcard->helpers()->attach($employee->id, ['additionals' => $helper[2]]);
         }
 

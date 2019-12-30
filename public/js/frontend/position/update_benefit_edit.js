@@ -1,14 +1,16 @@
 let BenefitsPosition = {
     init: function () {
 
-            $("input[name='check']").each(function(){
-                if($('#'+this.id+'').not(':checked')){
-                    $('#'+this.id+'_min').attr('disabled', true)
-                    $('#'+this.id+'_max').attr('disabled', true)
-                }
-            });
+        $("input[type='checkbox'][name='check']").each(function(){
+
+            if($('#'+this.id+'').is(':not(:checked)')){
+                $('#'+this.id+'_min').attr('disabled', true)
+                $('#'+this.id+'_max').attr('disabled', true)
+            }
+
+        });
         
-    let update = $('.footer').on('click', '#update-benefit', function () {
+        let update = $('.footer').on('click', '#update-benefit', function () {
         var code = []
         var min = []
         var max = []
@@ -76,6 +78,9 @@ let BenefitsPosition = {
                         $('#position_min'+index+'-error').attr('id',error_name[index]+'_min-error')
                         $('#position_max'+index+'-error').attr('id',error_name[index]+'_max-error')
                     });
+
+                    window.location.href='/position/'+position_uuid+'/edit';
+
                 }
             }
         });

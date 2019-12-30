@@ -65,20 +65,19 @@ class BenefitsPositionController extends Controller
      */
     public function edit($id)
     {
-        $position_now = Position::with('benefit_current')->where('positions.uuid',$id)->get();
-        $benefit = Benefit::get();
+        $position = Position::with('benefits')->where('uuid',$id)->first();
+        $benefits = Benefit::get();
         $search = array();
         $min = array();
         $max = array();
 
-        for($i=0;$i < count($position_now[0]->benefit_current); $i++){
-            array_push($search,$position_now[0]->benefit_current[$i]->name);
-            array_push($min,$position_now[0]->benefit_current[$i]->pivot->min);
-            array_push($max,$position_now[0]->benefit_current[$i]->pivot->max);
+        foreach($position->benefits as $benefit){
+            array_push($search,$benefit->name);
+            array_push($min,$benefit->pivot->min);
+            array_push($max,$benefit->pivot->max);
         }
 
-        // dd($position_now[0]);
-        return view('frontend.position.update-benefit',['benefit' => $benefit,'search' => $search,'min' => $min,'max' => $max,'uuid' => $id]);
+        return view('frontend.position.update-benefit',['benefits' => $benefits,'search' => $search,'min' => $min,'max' => $max,'uuid' => $id]);
     }
 
     /**
@@ -96,9 +95,9 @@ class BenefitsPositionController extends Controller
         //Update old benefits
         $updateTime = DB::table('benefit_position')
         ->where('position_id',$id_position)
-        ->whereNull('updated_at')
+        ->whereNull('deleted_at')
         ->update([
-            'updated_at' => $time
+            'deleted_at' => $time
         ]);
         
         if(isset($request->code)){
@@ -111,7 +110,6 @@ class BenefitsPositionController extends Controller
                 'position_id' => $id_position,
                 'min' => $request->position_min[$i],
                 'max' => $request->position_max[$i],
-                'created_at' => $time
             ]);
         }
     }else{
