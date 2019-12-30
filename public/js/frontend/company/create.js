@@ -44,7 +44,7 @@ let CompanyStructure = {
                         timeOut: 5000
                     });
 
-                    // window.location.href = '/company';
+                    window.location.href = '/company';
                 }
             }
         });
