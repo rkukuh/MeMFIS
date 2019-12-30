@@ -1,3 +1,4 @@
+@can('scm_item_create')
 @extends('frontend.master')
 
 @section('content')
@@ -359,3 +360,4 @@
     <script src="{{ asset('js/frontend/item/material/create.js') }}"></script>
     <script src="{{ asset('js/frontend/item/material/form-reset.js') }}"></script>
 @endpush
+@endcan
