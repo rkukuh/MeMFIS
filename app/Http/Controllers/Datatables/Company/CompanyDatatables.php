@@ -22,9 +22,11 @@ class CompanyDatatables extends Controller
             array_push($datas, $company);
         }
 
+
         foreach($departments as $department){
             array_push($datas, $department);
         }
+
 
         // if(sizeof($departments) > sizeof($companies)){
         //     foreach($companies as $company){
@@ -40,7 +42,7 @@ class CompanyDatatables extends Controller
         //     $data = $alldata = json_decode($companies);
         // }
 
-        $data = $alldata = json_decode($datas);
+        $data = $alldata = $datas;
 
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
