@@ -16,19 +16,32 @@ class CompanyDatatables extends Controller
 
         $departments = Department::with('type','parent')->get();
         
-        if(sizeof($departments) > sizeof($companies)){
-            foreach($companies as $company){
-                $departments->prepend($company);
-            }
-            
-            $data = $alldata = json_decode($departments);
-        }else{
-            foreach($departments as $department){
-                $companies->prepend($department);
-            }
+        $datas = [];
 
-            $data = $alldata = json_decode($companies);
+        foreach($companies as $company){
+            array_push($datas, $company);
         }
+
+        foreach($departments as $department){
+            array_push($datas, $department);
+        }
+
+        // if(sizeof($departments) > sizeof($companies)){
+        //     foreach($companies as $company){
+        //         $departments->prepend($company);
+        //     }
+            
+        //     $data = $alldata = json_decode($departments);
+        // }else{
+        //     foreach($departments as $department){
+        //         $companies->prepend($department);
+        //     }
+
+        //     $data = $alldata = json_decode($companies);
+        // }
+
+        $data = $alldata = json_decode($datas);
+
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
