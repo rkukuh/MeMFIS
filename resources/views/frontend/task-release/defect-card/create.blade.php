@@ -1,3 +1,4 @@
+@can('heavy-maintenace_task-release_create')
 @extends('frontend.master')
 
 @section('content')
@@ -464,3 +465,4 @@
     </script>
     <script src="{{ asset('js/frontend/defect-card/items.js')}}"></script>
 @endpush
+@endcan

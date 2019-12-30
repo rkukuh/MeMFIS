@@ -1,3 +1,4 @@
+@can('heavy-maintenace_task-release_create')
 @extends('frontend.master')
 
 @section('content')
@@ -351,3 +352,4 @@
     });
     </script>
 @endpush
+@endcan
