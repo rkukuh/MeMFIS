@@ -1,3 +1,4 @@
+@can('scm_service_create')
 @extends('frontend.master')
 
 @section('content')
@@ -255,3 +256,4 @@
     <script src="{{ asset('js/frontend/service/create.js') }}"></script>
     <script src="{{ asset('js/frontend/service/form-reset.js') }}"></script>
 @endpush
+@endcan
