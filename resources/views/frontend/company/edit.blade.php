@@ -52,9 +52,9 @@
                                 <div class="m-portlet__body">
 
                                         @component('frontend.common.input.hidden')
-                                        @slot('id', 'company_uuid')
-                                        @slot('name', 'company_uuid')
-                                        @slot('value', $company->uuid)
+                                            @slot('id', 'company_uuid')
+                                            @slot('name', 'company_uuid')
+                                            @slot('value', $company->uuid)
                                         @endcomponent
 
                                     <div class="form-group m-form__group row">

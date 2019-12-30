@@ -102,8 +102,14 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $company)
+    public function edit($company)
     {
+        $comdept = Company::where('uuid', $company)->first();
+
+        if(empty($comdept)){
+            $comdept = Department::where('uuid', $company)->first();
+        }
+
         $companies = Company::pluck('name','uuid')->toArray();
         $departments = Department::pluck('name','uuid')->toArray();
 
@@ -112,7 +118,7 @@ class CompanyController extends Controller
         return view('frontend.company.edit', [
             'types' => Type::ofCompany()->pluck('name','uuid'),
             'companies' => $companies,
-            'company' => $company,
+            'company' => $comdept,
             ]);
     }
 
