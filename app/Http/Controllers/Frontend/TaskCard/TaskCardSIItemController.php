@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\TaskCard;
 use App\Models\Unit;
 use App\Models\Item;
 use App\Models\TaskCard;
+use App\Models\Pivots\ItemTaskCard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardSIItemStore;
 use App\Http\Requests\Frontend\TaskCardSIItemUpdate;
@@ -40,16 +41,21 @@ class TaskCardSIItemController extends Controller
      */
     public function store(TaskCard $taskcard, TaskCardSIItemStore $request)
     {
-        $request->merge(['item_id' => Item::where('uuid',$request->item_id)->first()->id]);
-        $request->merge(['unit_id' => Unit::where('uuid',$request->unit_id)->first()->id]);
-        $taskcard->items()->attach($taskcard->id, [
-            'item_id' => $request->item_id,
-            'unit_id' => $request->unit_id,
-            'quantity' => $request->quantity,
-            'note' => $request->note
-        ]);
+        $exists = ItemTaskCard::where('taskcard_id',$taskcard->id)->where('item_id',Item::where('uuid',$request->item_id)->first()->id)->first();
+        if($exists){
+            return response()->json(['title' => "Danger"]);
+        }else{
+            $request->merge(['item_id' => Item::where('uuid',$request->item_id)->first()->id]);
+            $request->merge(['unit_id' => Unit::where('uuid',$request->unit_id)->first()->id]);
+            $taskcard->items()->attach($taskcard->id, [
+                'item_id' => $request->item_id,
+                'unit_id' => $request->unit_id,
+                'quantity' => $request->quantity,
+                'note' => $request->note
+            ]);
 
-        return response()->json($taskcard);
+            return response()->json($taskcard);
+        }
     }
 
     /**
