@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    JobPosition = function () {
+    EmployementStatuses = function () {
         $.ajax({
             url: '/get-employment-statuses',
             type: 'GET',
@@ -19,5 +19,6 @@ $(document).ready(function () {
             }
         });
     };
-    JobPosition();
+
+    EmployementStatuses();
 });

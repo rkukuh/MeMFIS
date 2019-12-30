@@ -77,23 +77,23 @@ let EmployeeJobTitle = {
                     sortable: 'asc',
                     filterable: !1,
                 },
-                {
-                    field: 'Action',
-                    width: 110,
-                    title: 'Action',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<button id="edit-job-title" data-toggle="modal" data-target="#modal_job_title" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-unit" title="Edit" data-uuid-job=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                            t.uuid +
-                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
-                        );
-                    }
-                }
+                // {
+                //     field: 'Action',
+                //     width: 110,
+                //     title: 'Action',
+                //     sortable: !1,
+                //     overflow: 'visible',
+                //     template: function (t, e, i) {
+                //         return (
+                //             '<button id="edit-job-title" data-toggle="modal" data-target="#modal_job_title" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-unit" title="Edit" data-uuid-job=' +
+                //             t.uuid +
+                //             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                //             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                //             t.uuid +
+                //             ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                //         );
+                //     }
+                // }
             ]
         });
 
