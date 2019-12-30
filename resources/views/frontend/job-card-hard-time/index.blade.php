@@ -1,3 +1,4 @@
+@can('heavy-maintenace_jobcard_read')
 @extends('frontend.master')
 
 @section('content')
@@ -106,3 +107,4 @@
         });
     </script>
 @endpush
+@endcan
