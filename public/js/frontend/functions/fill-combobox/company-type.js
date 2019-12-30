@@ -1,7 +1,7 @@
 $(document).ready(function () {
     Company = function () {
         $.ajax({
-            url: '/get-companiy-types',
+            url: '/get-company-types',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
