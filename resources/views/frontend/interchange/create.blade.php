@@ -1,3 +1,4 @@
+@can('scm_interchange_create')
 @extends('frontend.master')
 
 @section('content')
@@ -169,3 +170,4 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/interchange/create.js')}}"></script>
 @endpush
+@endcan

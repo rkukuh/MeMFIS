@@ -1,3 +1,4 @@
+@can('scm_interchange_edit')
 @extends('frontend.master')
 
 @section('content')
@@ -168,3 +169,4 @@
     </div>
 </div>
 @endsection
+@endcan
