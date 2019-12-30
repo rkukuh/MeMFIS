@@ -39,56 +39,47 @@ class CompanyController extends Controller
      */
     public function store(CompanyStore $request)
     {
-        $type_parameter = Type::where('uuid', $request->company)->first();
+        // dd($request->all());
+        $parent = Company::where('uuid', $request->company)->first();
+        $type = Type::where('uuid', $request->company_type)->first();
 
-        $type_id = null;
-        $parent_id = null;
+        if (strtolower($type->name) == 'department') {
+            
+            $company = Company::where('code', 'mmf')->first();
 
-        if (!empty($type_parameter)) {
-            if (strtolower($type_parameter->name) == 'department') {
-                $type = Type::where('of', 'department')->where('code', 'unit')->first();
-
-                $company = Company::where('uuid', $request->parent_structure)->first();
-
-                if (!empty($company)) {
-                    $result = Department::create([
-                        'code' => $request->code,
-                        'company_id' => $company->id,
-                        'parent_id' => null,
-                        'type_id' => $type->id,
-                        'name' => $request->name,
-                        'maximum_period' => $request->maximum_period,
-                        'maximum_holiday' => $request->maximum_holiday,
-                        'description' => $request->description
-                    ]);
-
-                    // TODO: Return error message as JSON
-                    return response()->json($result);
-                }else{
-                    return response()->json(['error' => 'Company ID MMF tidak ditemukan']);
-                }
-
-            } else {
-                $parent = Company::select('id')->where('uuid', $request->parent_structure)->first();
-
-                if (!empty($parent->id)) {
-                    $parent_id = $parent->id;
-                }
-
-
-                $result = Company::create([
+            if (!empty($company)) {
+                $result = Department::create([
                     'code' => $request->code,
+                    'company_id' => $company->id,
+                    'parent_id' => $parent->id,
+                    'type_id' => $type->id,
                     'name' => $request->name,
                     'maximum_period' => $request->maximum_period,
                     'maximum_holiday' => $request->maximum_holiday,
-                    'description' => $request->description,
-                    'parent_id' => $parent_id,
-                    'type_id' => $type_parameter->id
+                    'description' => $request->description
                 ]);
 
-                // TODO: Return error message as JSON
                 return response()->json($result);
+            }else{
+                // TODO: Return error message as JSON
+                return response()->json(['error' => 'Company ID MMF tidak ditemukan']);
             }
+
+        } else {
+
+            $result = Company::create([
+                'code' => $request->code,
+                'name' => $request->name,
+                'maximum_period' => $request->maximum_period,
+                'maximum_holiday' => $request->maximum_holiday,
+                'description' => $request->description,
+                'parent_id' => $parent->id,
+                'type_id' => $type->id
+            ]);
+
+            // TODO: Return error message as JSON
+            return response()->json($result);
+
         }
 
         

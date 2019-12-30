@@ -4,11 +4,12 @@ let CompanyStructure = {
 
         let code = $('input[name=code]').val()
         let name = $('input[name=name]').val()
-        let maximum_period = $('input[name=max_overtime_per_period]').val()
-        let maximum_holiday = $('input[name=holiday_overtime_allowance]').val()
         let description = $('#description').val()
         let company = $('#company').val()
+        let company_type = $('#company_type').val()
         let parent_structure = $('#parent_structure').val()
+        let maximum_period = $('input[name=max_overtime_per_period]').val()
+        let maximum_holiday = $('input[name=holiday_overtime_allowance]').val()
 
         $.ajax({
             headers: {
@@ -24,6 +25,7 @@ let CompanyStructure = {
                 maximum_holiday: maximum_holiday,
                 description: description,
                 company: company,
+                company_type: company_type,
                 parent_structure: parent_structure,
             },
             success: function (data) {
@@ -42,7 +44,7 @@ let CompanyStructure = {
                         timeOut: 5000
                     });
 
-                    window.location.href = '/company';
+                    // window.location.href = '/company';
                 }
             }
         });
