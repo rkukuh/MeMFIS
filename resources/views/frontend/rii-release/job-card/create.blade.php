@@ -1,3 +1,4 @@
+@can('heavy-maintenace_rii-release_create')
 @extends('frontend.master')
 
 @section('content')
@@ -344,3 +345,4 @@
         });
     </script>
 @endpush
+@endcan
