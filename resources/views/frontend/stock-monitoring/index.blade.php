@@ -1,3 +1,4 @@
+@can('scm_stock-monitoring_read')
 @extends('frontend.master')
 
 @section('content')
@@ -88,3 +89,4 @@
     <script src="{{ asset('js/frontend/stock-monitoring/by-partnumber/index.js')}}"></script>
     <script src="{{ asset('js/frontend/stock-monitoring/by-storage/index.js')}}"></script>
 @endpush
+@endcan
