@@ -37,9 +37,11 @@ let Benefit = {
                       }); 
 
                 } else {
-                    toastr.success('Data has been saved.', 'Succes', {
+                    toastr.success('Data has been saved.', 'Success', {
                         timeOut: 5000
                     });
+
+                    window.location.href = "/benefit";
                 }
             }
         });

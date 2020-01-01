@@ -87,7 +87,10 @@ let Bpjs = {
                         timeOut: 5000
                     });
 
-                    reset()
+                    reset();
+
+                    window.location.href = "/benefit";
+
                 }
         }
 
