@@ -15,26 +15,26 @@ class DepartmentsTableSeeder extends Seeder
     {
         /** PRODUCTION */
 
-        $production = Department::create([
+        $production = Company::create([
             'code' => 'production',
-            'company_id' => Company::where('code', 'mmf')->first()->id,
+            'parent_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Production',
             'maximum_period' => 60,
             'maximum_holiday' => 100000,
         ]);
 
-        Department::create([
+        Company::create([
             'code' => 'hm',
-            'company_id' => Company::where('code', 'mmf')->first()->id,
+            'parent_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Heavy Maintenance',
             'parent_id' => $production->id,
             'maximum_period' => 60,
             'maximum_holiday' => 100000,
         ]);
 
-        Department::create([
+        Company::create([
             'code' => 'ss',
-            'company_id' => Company::where('code', 'mmf')->first()->id,
+            'parent_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Special Service',
             'parent_id' => $production->id,
             'maximum_period' => 60,
@@ -43,18 +43,18 @@ class DepartmentsTableSeeder extends Seeder
 
         /** PRODUCTION > WORKSHOP */
 
-        $workshop = Department::create([
+        $workshop = Company::create([
             'code' => 'workshop',
-            'company_id' => Company::where('code', 'mmf')->first()->id,
+            'parent_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Workshop',
             'parent_id' => $production->id,
             'maximum_period' => 60,
             'maximum_holiday' => 100000,
         ]);
 
-        Department::create([
+        Company::create([
             'code' => 'instrument',
-            'company_id' => Company::where('code', 'mmf')->first()->id,
+            'parent_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Instrument Shop',
             'parent_id' => $workshop->id,
             'maximum_period' => 60,
@@ -65,9 +65,9 @@ class DepartmentsTableSeeder extends Seeder
 
         /** SUPPORTING */
 
-        Department::create([
+        Company::create([
             'code' => 'supporting',
-            'company_id' => Company::where('code', 'mmf')->first()->id,
+            'parent_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Supporting',
             'maximum_period' => 60,
             'maximum_holiday' => 100000,
@@ -75,9 +75,9 @@ class DepartmentsTableSeeder extends Seeder
 
         /** FINANCE */
 
-        Department::create([
+        Company::create([
             'code' => 'finance',
-            'company_id' => Company::where('code', 'mmf')->first()->id,
+            'parent_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Finance',
             'maximum_period' => 60,
             'maximum_holiday' => 100000,
@@ -85,9 +85,9 @@ class DepartmentsTableSeeder extends Seeder
 
         /** ACCOUNTING */
 
-        Department::create([
+        Company::create([
             'code' => 'accounting',
-            'company_id' => Company::where('code', 'mmf')->first()->id,
+            'parent_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Accounting',
             'maximum_period' => 60,
             'maximum_holiday' => 100000,
@@ -95,9 +95,9 @@ class DepartmentsTableSeeder extends Seeder
 
         /** MARKETING */
 
-        Department::create([
+        Company::create([
             'code' => 'marketing',
-            'company_id' => Company::where('code', 'mmf')->first()->id,
+            'parent_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Marketing',
             'maximum_period' => 60,
             'maximum_holiday' => 100000,
@@ -105,9 +105,9 @@ class DepartmentsTableSeeder extends Seeder
 
         /** MATERIAL */
 
-        Department::create([
+        Company::create([
             'code' => 'material',
-            'company_id' => Company::where('code', 'mmf')->first()->id,
+            'parent_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Material Planning',
             'maximum_period' => 60,
             'maximum_holiday' => 100000,
@@ -115,9 +115,9 @@ class DepartmentsTableSeeder extends Seeder
 
         /** QUALITY */
 
-        Department::create([
+        Company::create([
             'code' => 'quality',
-            'company_id' => Company::where('code', 'mmf')->first()->id,
+            'parent_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Quality',
             'maximum_period' => 60,
             'maximum_holiday' => 100000,
