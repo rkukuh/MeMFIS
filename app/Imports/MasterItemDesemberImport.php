@@ -165,22 +165,30 @@ class MasterItemDesemberImport implements ToModel, WithHeadingRow
 
             $manufactur_id = Manufacturer::where('code', $row['manufacturer'])->first()->id;
 
-            $item = new Item([
-                'code'              => $row['pn'],
-                'name'              => $row['name'],
-                'unit_id'           => $unit,
-                'manufactur_id'     => $manufactur_id,
-                'is_stock'          => $is_stock,
-            ]);
+            if(!$unit || !$manufactur_id){
+                dump($row);
+            }else if(!$category){
+                dump($row);
+            }else{
 
-            $item->save();
+                $item = new Item([
+                    'code'              => $row['pn'],
+                    'name'              => $row['name'],
+                    'unit_id'           => $unit,
+                    'manufactur_id'     => $manufactur_id,
+                    'is_stock'          => $is_stock,
+                ]);
 
-            for($i=1;$i<=5;$i++){
-                $item->prices()
-                ->save(new Price (['amount' =>0,'level' =>$i]));
+                $item->save();
+
+                for($i=1;$i<=5;$i++){
+                    $item->prices()
+                    ->save(new Price (['amount' =>0,'level' =>$i]));
+                }
+
+                $item->categories()->sync($category);
+
             }
-
-            $item->categories()->sync($category);
         }
     }
 }
