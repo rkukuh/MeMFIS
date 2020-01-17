@@ -24,7 +24,7 @@ class EmployeeAttendanceStore extends FormRequest
     public function rules()
     {
         return [
-            //
+            'document' => 'file|mimetypes:text/plain',
         ];
     }
 }

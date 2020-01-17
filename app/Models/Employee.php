@@ -23,15 +23,14 @@ class Employee extends MemfisModel implements HasMedia
         'last_name',
         'dob',
         'dob_place',
-        'gender',
-        'religion',
-        'marital_status',
-        'nationality',
-        'country',
+        'gender_id',
+        'religion_id',
+        'marital_id',
+        'country_id',
         'city',
         'zip',
         'joined_date',
-        'job_tittle_id',
+        'job_title_id',
         'position_id',
         'statuses_id',
         'department_id',
@@ -91,9 +90,22 @@ class Employee extends MemfisModel implements HasMedia
      * @return mixed
      */
     public function approvals()
-    
     {
         return $this->hasMany(Approval::class);
+    }
+
+
+    /**
+     * One-to-Many: Many attendance corrections proposed by one employee.
+     *
+     * This function will retrieve all the attendance corrections of an employee.
+     * See: AttendanceCorrection's employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function attendance_corrections()
+    {
+        return $this->hasMany(AttendanceCorrection::class);
     }
 
     /**
@@ -123,6 +135,19 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
+     * One-to-Many: An Employee have one Country.
+     *
+     * This function will retrieve Country of a given Employee.
+     * See: Country's employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    /**
      * Many-to-Many: A Defect Card may have zero or many helper.
      *
      * This function will retrieve all the Defect Cards of a helper.
@@ -133,7 +158,8 @@ class Employee extends MemfisModel implements HasMedia
     public function defectcards()
     {
         return $this->belongsToMany(DefectCard::class, 'defectcard_employee', 'employee_id', 'defectcard_id')
-                    ->withPivot('additionals')
+                    ->withPivot('additionals','deleted_at')
+                    ->whereNull('defectcard_employee.deleted_at')
                     ->withTimestamps();
     }
 
@@ -177,6 +203,19 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
+     * One-to-Many: An Employee have one Gender.
+     *
+     * This function will retrieve Gender of a given Employee.
+     * See: Type's employee_gender() method for the inverse
+     *
+     * @return mixed
+     */
+    public function gender()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+    /**
      * One-Way: An employee may have zero or many general licenses.
      *
      * @return mixed
@@ -188,16 +227,43 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
-     * One-to-One: An Employee have one Jobtittle.
+     * One-to-One: An Employee have one Jobtitle.
      *
-     * This function will retrieve Job Tittle of a given Employee.
-     * See: Jobtittle employee() method for the inverse
+     * This function will retrieve Job Title of a given Employee.
+     * See: Jobtitle employee() method for the inverse
      *
      * @return mixed
      */
-    public function job_tittle()
+    public function job_title()
     {
-        return $this->belongsTo(JobTittle::class);
+        return $this->belongsTo(JobTitle::class);
+    }
+
+    /**
+     * One-to-Many: Many leave proposed by one employee.
+     *
+     * This function will retrieve the employee proposed for a leave.
+     * See: Leave's employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function leave()
+    {
+        return $this->hasMany(Leave::class);
+    }
+
+    /**
+     * Many-to-Many: An employee may have zero or many nationalities.
+     *
+     * This function will retrieve all the nationalities of an employee.
+     * See: Nationality's employees() method for the inverse
+     *
+     * @return mixed
+     */
+    public function nationalities()
+    {
+        return $this->belongsToMany(Nationality::class)
+                    ->withTimestamps();
     }
 
     /**
@@ -240,16 +306,16 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
-     * One-to-Many: An Employee have one or many Workshift or History.
+     * One-to-Many: An employee may have zero or many attendance.
      *
-     * This function will retrieve Workshift of a given Employee.
-     * See: EmployeeWorkshift employee() method for the inverse
+     * This function will retrieve the employees of a attendance.
+     * See: EmployeeAttendance employee() method for the inverse
      *
      * @return mixed
      */
-    public function workshift()
+    public function employee_attendance()
     {
-        return $this->hasMany(EmployeeWorkshift::class);
+        return $this->hasMany(EmployeeAttendance::class);
     }
 
     /**
@@ -265,6 +331,18 @@ class Employee extends MemfisModel implements HasMedia
         return $this->hasMany(EmployeeBenefit::class);
     }
 
+    /**
+     * One-to-Many: An Employee have one or many bpjs.
+     *
+     * This function will retrieve bpjs of a given Employee.
+     * See: employee_bpjs employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_bpjs()
+    {
+        return $this->hasMany(EmployeeBPJS::class);
+    }
 
     /**
      * One-to-One: An employee may have zero or one termination.
@@ -280,29 +358,16 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
-     * One-to-Many: An employee may have zero or many attendance.
+     * One-to-Many: A marital status have zero or many Employees.
      *
-     * This function will retrieve the employees of a attendance.
-     * See: EmployeeAttendance employee() method for the inverse
-     *
-     * @return mixed
-     */
-    public function employee_attendace()
-    {
-        return $this->hasMany(EmployeeAttendance::class);
-    }
-
-    /**
-     * One-to-Many: An Employee have one or many bpjs.
-     *
-     * This function will retrieve bpjs of a given Employee.
+     * This function will retrieve employees of a given Marital Status.
      * See: employee_bpjs employee() method for the inverse
      *
      * @return mixed
      */
-    public function employee_bpjs()
+    public function employee_marital()
     {
-        return $this->hasMany(EmployeeBPJS::class);
+        return $this->belongsTo(Status::class);
     }
 
     /**
@@ -538,6 +603,19 @@ class Employee extends MemfisModel implements HasMedia
     public function websites()
     {
         return $this->morphMany(Website::class, 'websiteable');
+    }
+
+    /**
+     * Many-to-Many: An employee may have zero or many workshift.
+     *
+     * This function will retrieve all the workshift of an employee.
+     * See: Workshift's employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workshifts()
+    {
+        return $this->belongsToMany(Workshift::class);
     }
 
     /**

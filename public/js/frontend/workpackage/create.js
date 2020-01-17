@@ -45,7 +45,7 @@ let Workpackage2 = {
             columns: [
                 {
                     field: 'title',
-                    title: 'Tittle',
+                    title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
@@ -94,10 +94,10 @@ let Workpackage2 = {
         });
 
         let simpan = $('.action-buttons').on('click', '.add-workpackage', function () {
+            mApp.block(".add-workpackage");
+
             $('#name-error').html('');
             $('#simpan').text('Simpan');
-
-
             let title = $('input[name=title]').val();
             let applicability_airplane = $('#applicability_airplane').val();
             let description = $('#description').val();
@@ -116,6 +116,7 @@ let Workpackage2 = {
                     is_template:'1',
                 },
                 success: function (data) {
+                    mApp.unblock(".add-workpackage");
                     if (data.errors) {
                         if (data.errors.aircraft_id) {
                             $('#applicability-airplane-error').html(data.errors.aircraft_id[0]);

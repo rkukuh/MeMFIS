@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.propose-leave.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.leave.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Propose Leave
                             </span>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <form id="itemform" name="itemform">
+                            <form id="leaveForm" name="leaveForm" >
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -56,7 +56,10 @@
                                                 <label class="form-control-label">
                                                     Propose Leave To @include('frontend.common.label.optional')
                                                 </label>
-                                            
+                                                @component('frontend.common.input.hidden')
+                                                    @slot('id', 'uuid_employee')
+                                                    @slot('name', 'uuid_employee')
+                                                @endcomponent
                                                 @include('frontend.common.employee.index')
                                             @endrole
                                             @hasanyrole('employee')
@@ -83,9 +86,6 @@
                                                 @slot('name', 'leave_type')
                                                 @slot('id_error', 'leave_type')
                                             @endcomponent
-                                            {{-- Casual Leave(if setting daily based) = 3 Days Remaining 
-                                            Annual Leave = 10 Days Remaining
-                                            Sick  --}}
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6 mt-5">
                                            <span id="note_remaining" class="text-danger mt-5">10 Days Remaining</span>
@@ -100,8 +100,8 @@
                                             @component('frontend.common.input.datepicker')
                                                 @slot('id', 'date')
                                                 @slot('text', 'Date')
-                                                @slot('name', 'date')
-                                                @slot('id_error','date')
+                                                @slot('name', 'start_date')
+                                                @slot('id_error','start_date')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -112,8 +112,8 @@
                                             @component('frontend.common.input.datepicker')
                                                 @slot('id', 'exp_date')
                                                 @slot('text', 'Date End')
-                                                @slot('name', 'exp_date')
-                                                @slot('id_error','exp_date')
+                                                @slot('name', 'end_date')
+                                                @slot('id_error','end_date')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -136,9 +136,9 @@
                                             <div class="flex">
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
                                                         @slot('id', 'add-propose-leave')
                                                         @slot('class', 'add-propose-leave')
+                                                        @slot('type', 'button')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -160,7 +160,11 @@
 @endsection
 
 @push('footer-scripts')
+    <script> let url = "{{ route('frontend.leave.store') }}"</script>
+    <script src="{{ asset('js/frontend/propose-leave/propose-leave/create.js')}}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/leave-type.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/leave-type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
 @endpush

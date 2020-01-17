@@ -1,6 +1,6 @@
 let goods_received_note = {
     init: function () {
-        $('.purchase_order_datatable').mDatatable({
+        $('.item_purchase_order_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -69,14 +69,14 @@ let goods_received_note = {
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'qty_pr',
                     title: 'Qty PR',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'qty_po',
                     title: 'Qty PO',
                     sortable: 'asc',
                     filterable: !1,
@@ -111,12 +111,19 @@ let goods_received_note = {
                     width: 150,
                 },
                 {
+                    field: 'pivot.location',
+                    title: 'Location',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_grn" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-expred='+t.pivot.expired_at+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_grn" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-location='+t.pivot.location+' data-unit='+t.pivot.unit_id+' data-expred='+t.pivot.expired_at+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
@@ -130,7 +137,7 @@ let goods_received_note = {
 
         $('.footer').on('click', '.update-goods-received', function () {
             let received_at = $('input[name=date]').val();
-            let received_by = $('#received-by').val();
+            let received_by = $('#employee').val();
             let ref_po = $('input[name=ref-po]').val();
             let do_no = $('input[name=deliv-number]').val();
             let do_date = $('input[name=do-date]').val();
@@ -180,6 +187,8 @@ let goods_received_note = {
         });
 
         $('.modal-footer').on('click', '.add-item', function () {
+            let qty = $("#quantity").val();
+
             let serial_numbers = [];
             $("input[name^=serial_number]").each(function() {
                 serial_numbers.push(this.value);
@@ -189,10 +198,9 @@ let goods_received_note = {
                 return el != null && el != "";
 
             });
-
             let item_uuid = $("#material").val();
-            let exp_date = $("#exp_date_2").val();
-            let qty = $("#quantity").val();
+            let exp_date = $('input[name=exp_date2]').val();
+            let location = $('input[name=location]').val();
             let unit_id = $("#unit_material").val();
             let note = $("#remark").val();
             if($("#is_serial_number").is(":checked")) {
@@ -218,6 +226,7 @@ let goods_received_note = {
                 data: {
                     exp_date: exp_date,
                     quantity: qty,
+                    location: location,
                     unit_id: unit_id,
                     note: note,
                     serial_numbers: serial_numbers,
@@ -249,7 +258,7 @@ let goods_received_note = {
                                 }
                             );
 
-                            let table = $(".purchase_order_datatable").mDatatable();
+                            let table = $(".item_purchase_order_datatable").mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -258,7 +267,7 @@ let goods_received_note = {
                 }
             });
         });
-        $('.purchase_order_datatable').on('click', '.edit-item', function () {
+        $('.item_purchase_order_datatable').on('click', '.edit-item', function () {
             let description = "";
             document.getElementById('item-label').innerText = $(this).data('item');
             if($(this).data('description') != null){
@@ -269,10 +278,8 @@ let goods_received_note = {
             document.getElementById('item-description').innerText = description;
             let unit_id = $(this).data('unit');
 
-            $('select[name="unit_material"]').empty();
-
             $.ajax({
-                url: '/get-units',
+                url: '/get-item-unit-uuid/'+$(this).data('uuid'),
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -294,9 +301,11 @@ let goods_received_note = {
                     });
                 }
             });
+
             document.getElementById('qty').value = $(this).data('quantity');
             document.getElementById('exp_date').value = $(this).data('expred');
             document.getElementById('note').value = $(this).data('note');
+            document.getElementById('item-location').value = $(this).data('location');
 
             document.getElementById('uuid').value = $(this).data('uuid');
         });
@@ -305,6 +314,7 @@ let goods_received_note = {
             let uuid = $("input[name=uuid]").val();
             let exp_date = $("#exp_date").val();
             let qty = $("#qty").val();
+            let location = $("#item-location").val();
             let unit_id = $("#unit_id").val();
             let note = $("#note").val();
 
@@ -317,6 +327,7 @@ let goods_received_note = {
                 data: {
                     exp_date: exp_date,
                     quantity: qty,
+                    location: location,
                     unit_id: unit_id,
                     note: note,
                 },
@@ -338,7 +349,7 @@ let goods_received_note = {
                             }
                         );
 
-                        let table = $(".purchase_order_datatable").mDatatable();
+                        let table = $(".item_purchase_order_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -347,7 +358,7 @@ let goods_received_note = {
                 }
             });
         });
-        $('.purchase_order_datatable').on('click', '.delete', function () {
+        $('.item_purchase_order_datatable').on('click', '.delete', function () {
 
             swal({
                 title: 'Sure want to remove?',
@@ -373,7 +384,7 @@ let goods_received_note = {
                                 }
                             );
 
-                            let table = $('.purchase_order_datatable').mDatatable();
+                            let table = $('.item_purchase_order_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -418,56 +429,56 @@ $("#is_serial_number_edit").on("change", function () {
     }
 });
 
-$("#material").on("change", function () {
+// $("#material").on("change", function () {
 
-    let item_uuid = $("#material").val();
-    $.ajax({
-        url: '/label/get-good-received/'+grn_uuid+'/item/'+ item_uuid ,
-        type: 'GET',
-        dataType: 'json',
-        success: function (qty_item) {
-            document.getElementById('item_reciveded').innerText = qty_item;
-        }
-    });
-    $("#quantity").prop("min", 1);
-    $.ajax({
-        url: '/get-item-po-details/'+po_uuid+'/'+item_uuid,
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            $("#quantity").val(parseInt(data.pivot.quantity));
-            $("#quantity").prop("max", data.pivot.quantity);
-            $('.clone').remove();
-            for (let number = 0; number < data.pivot.quantity; number++) {
-                let clone = $(".blueprint").clone();
-                clone.removeClass("blueprint hidden");
-                clone.addClass("clone");
-                $(".serial_number_inputs").after(clone);
-                clone.slideDown("slow",function(){});
-            }
-        }
-    });
-});
+//     let item_uuid = $("#material").val();
+//     $.ajax({
+//         url: '/label/get-good-received/'+grn_uuid+'/item/'+ item_uuid ,
+//         type: 'GET',
+//         success: function (qty_item) {
+//             document.getElementById('item_reciveded').innerText = qty_item;
+//         }
+//     });
+//     $("#quantity").prop("min", 1);
+//     $.ajax({
+//         url: '/get-item-po-details/'+po_uuid+'/'+item_uuid,
+//         type: 'GET',
+//         dataType: 'json',
+//         success: function (data) {
+//             $("#quantity").val(parseInt(data.pivot.quantity));
+//             $("#quantity").prop("max", data.pivot.quantity);
+//             $('.clone').remove();
+//             for (let number = 0; number < data.pivot.quantity; number++) {
+//                 let clone = $(".blueprint").clone();
+//                 clone.removeClass("blueprint hidden");
+//                 clone.addClass("clone");
+//                 $(".serial_number_inputs").after(clone);
+//                 clone.slideDown("slow",function(){});
+//             }
+//         }
+//     });
+// });
 
-$("#quantity").on("change", function () {
-    let qty = $("#quantity").val();
-    let max = $("#quantity").attr("max");
-    $('.clone').remove();
-    if($("#quantity").val() < max){
-        for (let number = 0; number < qty; number++) {
-            let clone = $(".blueprint").clone();
-            clone.removeClass("blueprint hidden");
-            clone.addClass("clone");
-            $(".serial_number_inputs").after(clone);
-            clone.slideDown("slow",function(){});
-        }
-    }else{
-        for (let number = 0; number < max; number++) {
-            let clone = $(".blueprint").clone();
-            clone.removeClass("blueprint hidden");
-            clone.addClass("clone");
-            $(".serial_number_inputs").after(clone);
-            clone.slideDown("slow",function(){});
-        }
-        }
-});
+// $("#quantity").on("change", function () {
+//     let qty = parseInt($("#quantity").val());
+//     let max = parseInt($("#quantity").attr("max"));
+//     $('.clone').remove();
+//     if(qty <= max){
+//         for (let number = 0; number < qty; number++) {
+//             let clone = $(".blueprint").clone();
+//             clone.removeClass("blueprint hidden");
+//             clone.addClass("clone");
+//             $(".serial_number_inputs").after(clone);
+//             clone.slideDown("slow",function(){});
+//         }
+//     }else{
+//         $("#quantity").val(max)
+//         for (let number = 0; number < max; number++) {
+//             let clone = $(".blueprint").clone();
+//             clone.removeClass("blueprint hidden");
+//             clone.addClass("clone");
+//             $(".serial_number_inputs").after(clone);
+//             clone.slideDown("slow",function(){});
+//         }
+//     }
+// });

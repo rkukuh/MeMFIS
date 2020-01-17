@@ -23,7 +23,7 @@ class EmployeeHistories extends Model
         'city',
         'zip',
         'joined_date',
-        'job_tittle_id',
+        'job_title_id',
         'position_id',
         'statuses_id',
         'department_id',

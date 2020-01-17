@@ -175,12 +175,6 @@ let Customer = {
             });
             attn_name_array.pop();
 
-            let attn_ext_array = [];
-            $('input[name^=attn-ext]').each(function (i) {
-                attn_ext_array[i] = $(this).val();
-            });
-            attn_ext_array.pop();
-
             let attn_fax_array = [];
             $('input[name^=attn-fax]').each(function (i) {
                 attn_fax_array[i] = $(this).val();
@@ -225,7 +219,6 @@ let Customer = {
                     attn_phone_array:attn_phone_array,
                     attn_name_array:attn_name_array,
                     attn_position_array:attn_position_array,
-                    attn_ext_array:attn_ext_array,
                     attn_fax_array:attn_fax_array,
                     attn_email_array:attn_email_array,
                     level:level,
@@ -264,6 +257,8 @@ let Customer = {
         });
 
         $('.modal-footer').on('click', '.add-address', function () {
+            mApp.block(".add-address");
+
             let address = $('#address-modal').val();
             let address_type = $('#address_type').val();
 
@@ -278,6 +273,8 @@ let Customer = {
                     address_type: address_type
                 },
                 success: function (data) {
+                    mApp.unblock(".add-address");
+
                     if (data.errors) {
                         $.each(data.errors, function (key, value) {
                             var name = $("input[name='"+key+"']");
@@ -288,6 +285,7 @@ let Customer = {
                             name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
                           });
                     } else {
+
                         $('#modal_address').modal('hide');
 
                         let table = $('.customer_address_datatable').mDatatable();

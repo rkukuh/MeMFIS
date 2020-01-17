@@ -77,7 +77,7 @@
 
     #content2 .container table{
       margin-left: 12px;
-    
+
     }
     #content3, #content4{
       margin-top:5px;
@@ -134,7 +134,7 @@
                         <td width="29%">{{ $jobcard->quotation->quotationable->code }}</td>
                         <td width="20%">Est. Mhrs</td>
                         <td width="1%">:</td>
-                        <td width="29%">{{ $taskcard->estimation_manhour }}</td>
+                        <td width="29%">{{ $jobcard->estimation_manhour }}</td>
                       </tr>
                       <tr>
                         <td width="20%"></td>
@@ -306,7 +306,7 @@
                                   @else
                                   src="./img/check-box-empty.png"
                                   @endif
-                                  alt="" width="10"> 
+                                  alt="" width="10">
                                   <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                           </li>
                           <li style="margin-left:12px;">
@@ -315,7 +315,7 @@
                               @else
                               src="./img/check-box-empty.png"
                               @endif
-                              alt="" width="11"> 
+                              alt="" width="11">
                               <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
                           </li>
                         </ul>

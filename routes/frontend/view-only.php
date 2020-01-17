@@ -54,19 +54,19 @@ Route::group([
 
         /** Material Request */
 
-        Route::view('/material-request-jobcard', 'frontend.material-request-jobcard.index')->name('material-request-jobcard.index');
+        // Route::view('/material-request-jobcard', 'frontend.material-request-jobcard.index')->name('material-request-jobcard.index');
 
-        Route::view('/material-request-jobcard/create', 'frontend.material-request-jobcard.create')->name('material-request-jobcard.create');
-        Route::view('/material-request-jobcard/edit', 'frontend.material-request-jobcard.edit')->name('material-request-jobcard.edit');
-        Route::view('/material-request-jobcard/show', 'frontend.material-request-jobcard.show')->name('material-request-jobcard.show');
+        // Route::view('/material-request-jobcard/create', 'frontend.material-request-jobcard.create')->name('material-request-jobcard.create');
+        // Route::view('/material-request-jobcard/edit', 'frontend.material-request-jobcard.edit')->name('material-request-jobcard.edit');
+        // Route::view('/material-request-jobcard/show', 'frontend.material-request-jobcard.show')->name('material-request-jobcard.show');
 
         /** Tool Request */
 
-        Route::view('/tool-request-jobcard', 'frontend.tool-request-jobcard.index')->name('tool-request-jobcard.index');
+        // Route::view('/tool-request-jobcard', 'frontend.tool-request-jobcard.index')->name('tool-request-jobcard.index');
 
-        Route::view('/tool-request-jobcard/create', 'frontend.tool-request-jobcard.create')->name('tool-request-jobcard.create');
-        Route::view('/tool-request-jobcard/edit', 'frontend.tool-request-jobcard.edit')->name('tool-request-jobcard.edit');
-        Route::view('/tool-request-jobcard/show', 'frontend.tool-request-jobcard.show')->name('tool-request-jobcard.show');
+        // Route::view('/tool-request-jobcard/create', 'frontend.tool-request-jobcard.create')->name('tool-request-jobcard.create');
+        // Route::view('/tool-request-jobcard/edit', 'frontend.tool-request-jobcard.edit')->name('tool-request-jobcard.edit');
+        // Route::view('/tool-request-jobcard/show', 'frontend.tool-request-jobcard.show')->name('tool-request-jobcard.show');
 
         /** Inventory In */
 
@@ -89,10 +89,10 @@ Route::group([
 
         /** Material Request */
 
-        Route::view('/material-transfer', 'frontend.material-transfer.index')->name('material-transfer.index');
-        Route::view('/material-transfer/create', 'frontend.material-transfer.create')->name('material-transfer.create');
-        Route::view('/material-transfer/edit', 'frontend.material-transfer.edit')->name('material-transfer.edit');
-        Route::view('/material-transfer/show', 'frontend.material-transfer.show')->name('material-transfer.show');
+        // Route::view('/material-transfer', 'frontend.material-transfer.index')->name('material-transfer.index');
+        // Route::view('/material-transfer/create', 'frontend.material-transfer.create')->name('material-transfer.create');
+        // Route::view('/material-transfer/edit', 'frontend.material-transfer.edit')->name('material-transfer.edit');
+        // Route::view('/material-transfer/show', 'frontend.material-transfer.show')->name('material-transfer.show');
 
         /** Category Item */
 
@@ -101,25 +101,30 @@ Route::group([
         Route::view('/category-item/edit', 'frontend.category-item.edit')->name('category-item.edit');
         Route::view('/category-item/show', 'frontend.category-item.show')->name('category-item.show');
 
-        /** GSE-Tool Returned */
+        // /** GSE-Tool Returned */
 
-        Route::view('/gse', 'frontend.gse.index')->name('gse.index');
+        // Route::view('/gse', 'frontend.gse.index')->name('gse.index');
 
-        Route::view('/gse/hm/create', 'frontend.gse.hm.create')->name('gse.hm.create');
-        Route::view('/gse/hm/edit', 'frontend.gse.hm.edit')->name('gse.hm.edit');
-        Route::view('/gse/hm/show', 'frontend.gse.hm.show')->name('gse.hm.show');
+        // Route::view('/gse/hm/create', 'frontend.gse.hm.create')->name('gse.hm.create');
+        // Route::view('/gse/hm/edit', 'frontend.gse.hm.edit')->name('gse.hm.edit');
+        // Route::view('/gse/hm/show', 'frontend.gse.hm.show')->name('gse.hm.show');
 
-        Route::view('/gse/workshop/create', 'frontend.gse.workshop.create')->name('gse.workshop.create');
-        Route::view('/gse/workshop/edit', 'frontend.gse.workshop.edit')->name('gse.workshop.edit');
-        Route::view('/gse/workshop/show', 'frontend.gse.workshop.show')->name('gse.workshop.show');
+        // Route::view('/gse/workshop/create', 'frontend.gse.workshop.create')->name('gse.workshop.create');
+        // Route::view('/gse/workshop/edit', 'frontend.gse.workshop.edit')->name('gse.workshop.edit');
+        // Route::view('/gse/workshop/show', 'frontend.gse.workshop.show')->name('gse.workshop.show');
 
-        Route::view('/gse/defectcard/create', 'frontend.gse.defectcard.create')->name('gse.defectcard.create');
-        Route::view('/gse/defectcard/edit', 'frontend.gse.defectcard.edit')->name('gse.defectcard.edit');
-        Route::view('/gse/defectcard/show', 'frontend.gse.defectcard.show')->name('gse.defectcard.show');
+        // Route::view('/gse/defectcard/create', 'frontend.gse.defectcard.create')->name('gse.defectcard.create');
+        // Route::view('/gse/defectcard/edit', 'frontend.gse.defectcard.edit')->name('gse.defectcard.edit');
+        // Route::view('/gse/defectcard/show', 'frontend.gse.defectcard.show')->name('gse.defectcard.show');
 
-        Route::view('/gse/inventory-out/create', 'frontend.gse.inventory-out.create')->name('gse.inventory-out.create');
-        Route::view('/gse/inventory-out/edit', 'frontend.gse.inventory-out.edit')->name('gse.inventory-out.edit');
-        Route::view('/gse/inventory-out/show', 'frontend.gse.inventory-out.show')->name('gse.inventory-out.show');
+        // Route::view('/gse/inventory-out/create', 'frontend.gse.inventory-out.create')->name('gse.inventory-out.create');
+        // Route::view('/gse/inventory-out/edit', 'frontend.gse.inventory-out.edit')->name('gse.inventory-out.edit');
+        // Route::view('/gse/inventory-out/show', 'frontend.gse.inventory-out.show')->name('gse.inventory-out.show');
+
+
+        // /** STOCK MONITORING */
+
+        // Route::view('/stock-monitoring', 'frontend.stock-monitoring.index')->name('stock-monitoring.index');
 
         /** ATTENDANCE */
 
@@ -136,10 +141,10 @@ Route::group([
 
         /** ATTENDANCE CORRECTION */
 
-        Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
-        Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
-        Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
-        Route::view('/attendance-correction/approve', 'frontend.attendance-correction.approve')->name('attendance-correction.approve');
+        // Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
+        // Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
+        // Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
+        // Route::view('/attendance-correction/approve', 'frontend.attendance-correction.approve')->name('attendance-correction.approve');
 
         /** OVERTIME */
 
@@ -150,9 +155,9 @@ Route::group([
 
         /** PROPOSE LEAVE */
 
-        Route::view('/propose-leave', 'frontend.propose-leave.index')->name('propose-leave.index');
-        Route::view('/propose-leave/create', 'frontend.propose-leave.propose-leave.create')->name('propose-leave.create');
-        Route::view('/propose-leave/edit', 'frontend.propose-leave.propose-leave.edit')->name('propose-leave.edit');
+        // Route::view('/propose-leave', 'frontend.propose-leave.index')->name('propose-leave.index');
+        // Route::view('/propose-leave/create', 'frontend.propose-leave.propose-leave.create')->name('propose-leave.create');
+        // Route::view('/propose-leave/edit', 'frontend.propose-leave.propose-leave.edit')->name('propose-leave.edit');
         Route::view('/propose-leave/approve-type-1', 'frontend.propose-leave.propose-leave.approve-type-1')->name('propose-leave.approve-type-1');
         Route::view('/propose-leave/approve-type-2', 'frontend.propose-leave.propose-leave.approve-type-2')->name('propose-leave.approve-type-2');
 
@@ -164,6 +169,18 @@ Route::group([
         Route::view('/waiting-rii', 'frontend.defect-card.progress.waiting-rii')->name('progress.waiting-rii');
         Route::view('/release', 'frontend.defect-card.progress.release')->name('progress.release');
 
+
+        /** QUOTATION WORKSHOP */
+
+        Route::view('/quotation-workshop', 'frontend.quotation-workshop.index')->name('quotation-workshop.index');
+        Route::view('/quotation-workshop/create', 'frontend.quotation-workshop.create')->name('quotation-workshop.create');
+        Route::view('/quotation-workshop/edit', 'frontend.quotation-workshop.edit')->name('quotation-workshop.edit');
+        Route::view('/quotation-workshop/show', 'frontend.quotation-workshop.show')->name('quotation-workshop.show');
+
+
+        Route::view('/quotation-workshop/edit/item/create', 'frontend.quotation-workshop.item.create')->name('quotation-workshop.item.create');
+        Route::view('/quotation-workshop/edit/item/show', 'frontend.quotation-workshop.item.show')->name('quotation-workshop.item.show');
+        
     });
 
 });

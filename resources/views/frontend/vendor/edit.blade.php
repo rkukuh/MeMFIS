@@ -17,7 +17,7 @@
                     -
                 </li>
                 <li class="m-nav__item">
-                    <a href="{{ route('frontend.vendor.index') }}" class="m-nav__link">
+                    <a href="{{ route('frontend.supplier.index') }}" class="m-nav__link">
                         <span class="m-nav__link-text">
                             Vendor
                         </span>
@@ -65,7 +65,7 @@
 
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Term of Payment 
+                                            Term of Payment
                                         </label>
 
                                         @component('frontend.common.input.number')
@@ -626,41 +626,13 @@
                                         Account Code @include('frontend.common.label.optional')
                                     </label>
 
-                                    <div style="background-color:beige;padding:15px 10px 5px 15px;">
-
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-8 col-md-8 col-lg-8">
-                                                @if (isset($vendor->journal))
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('padding', '0')
-                                                    @slot('class', 'search-journal')
-                                                    @slot('text', $vendor->account_code_and_name)
-                                                @endcomponent
-                                                @else
-                                                <div class="search-journal" id="search-journal">
-                                                    Search account code
-                                                </div>
-                                                @endif
-                                            </div>
-
-                                            <div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding: 0;">
-                                                @component('frontend.common.account-code.button-create')
-                                                    @slot('text', '')
-                                                    @slot('size', 'sm')
-                                                    @slot('icon', 'search')
-                                                    @slot('data_target', '#modal_account_code')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    @include('frontend.common.account-code.modal')
+                                    @include('frontend.common.account-code.index')
 
                                     @component('frontend.common.input.hidden')
                                         @slot('id', 'account_code')
                                         @slot('name', 'account_code')
-                                        @slot('value', $vendor->account_code)
                                     @endcomponent
+
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -669,9 +641,9 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <label class="form-control-label">
-                                                            Bank Name 
+                                                            Bank Name
                                                         </label>
-                                    
+
                                                         @component('frontend.common.input.select2')
                                                             @slot('text', 'Bank Account Name')
                                                             @slot('id', 'bank_name')
@@ -685,7 +657,7 @@
                                                         <label class="form-control-label">
                                                             Bank Account Name
                                                         </label>
-                                    
+
                                                         @component('frontend.common.input.input')
                                                             @slot('text', 'Bank Account Name')
                                                             @slot('id', 'bank_account_name')
@@ -698,7 +670,7 @@
                                                         <label class="form-control-label">
                                                             Bank Account Number
                                                         </label>
-                                    
+
                                                         @component('frontend.common.input.number')
                                                             @slot('text', 'Bank Account Number')
                                                             @slot('id', 'bank_account_number')
@@ -713,7 +685,7 @@
                                                         <label class="form-control-label">
                                                             Currency
                                                         </label>
-                                    
+
                                                         @component('frontend.common.input.select2')
                                                             @slot('id', 'currency')
                                                             @slot('text', 'Currency')
@@ -725,7 +697,7 @@
                                                         <label class="form-control-label">
                                                             Swift Code
                                                         </label>
-                                    
+
                                                         @component('frontend.common.input.text')
                                                             @slot('text', 'Swift Code')
                                                             @slot('id', 'swift_code')
@@ -741,9 +713,9 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Active 
+                                            Active
                                         </label><br>
-                    
+
                                         @component('frontend.common.input.switch')
                                             @slot('text', 'Active')
                                             @slot('name', 'active')
@@ -758,10 +730,10 @@
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
-                                                @component('frontend.common.buttons.submit')
+                                                @component('frontend.common.buttons.update')
                                                     @slot('type','button')
-                                                    @slot('id', 'add-vendor')
-                                                    @slot('class', 'add-vendor')
+                                                    @slot('id', 'edit-vendor')
+                                                    @slot('class', 'edit-vendor')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
@@ -834,7 +806,7 @@
                 </div>
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
-                        <div class="form-group m-form__group row">                          
+                        <div class="form-group m-form__group row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="repeaterAttention">
                                     @if($attentions)
@@ -876,16 +848,6 @@
                                                                 @endforeach
                                                             @endif
                                                         </select>
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3 hidden">
-                                                        <label class="form-control-label">
-                                                            Extension
-                                                        </label>
-                                                        @component('frontend.common.input.text')
-                                                            @slot('name', 'attn-ext')
-                                                            @slot('text', 'Ext')
-                                                            @slot('value', $attention->ext)
-                                                        @endcomponent
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
@@ -1137,6 +1099,12 @@
         BootstrapSwitch.init()
     });
 </script>
+<script>
+    let vendor_uuid = '{{ $vendor->uuid }}';
+
+    $('.search-journal').html('{{$coa}}');
+</script>
+
 <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/website.js') }}"></script> --}}
 <script src="{{ asset('js/frontend/vendor/edit.js') }}"></script>

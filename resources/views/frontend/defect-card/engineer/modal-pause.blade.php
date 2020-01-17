@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" method="POST" action="{{route('frontend.defectcard-engineer.update',$defectcard->uuid)}}" id="WorkpackageForm">
+                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" method="POST" action="{{route('frontend.defectcard-engineer.update',$defectcard->uuid)}}" id="PauseForm">
                     {{method_field('PATCH')}}
                     {!! csrf_field() !!}
                     <input type="hidden" name="progress" value="{{$pending->uuid}}">

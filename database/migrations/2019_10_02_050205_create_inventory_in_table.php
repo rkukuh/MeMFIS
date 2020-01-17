@@ -20,15 +20,16 @@ class CreateInventoryInTable extends Migration
             $table->unsignedBigInteger('storage_id');
             $table->timestamp('inventoried_at');
             $table->nullableMorphs('inventoryinable');
-            $table->text('description')->nullable();
+            $table->json('additional')->nullable();
             $table->string('section')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('storage_id')
-                ->references('id')->on('storages')
-                ->onUpdate('cascade')
-                ->onDelete('restrict');
+                    ->references('id')->on('storages')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 

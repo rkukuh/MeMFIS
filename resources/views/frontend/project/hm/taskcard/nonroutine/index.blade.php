@@ -319,11 +319,11 @@
                     <div class="action-buttons m--align-center">
                     @component('frontend.common.buttons.summary')
                         @slot('text', 'Blank Work Package Summary')
-                        @slot('href', route('frontend.workPackage.summary.workpackage', $workPackage->uuid) )
+                        @slot('href', route('frontend.project-hm.summary.workpackage', ['project' => $project->uuid, 'workPackage' => $workPackage->uuid]) )
                     @endcomponent
                     @component('frontend.common.buttons.summary')
                         @slot('text', 'Non-routine Summary')
-                        @slot('href', route('frontend.workPackage.summary.nonroutine', $workPackage->uuid) )
+                        @slot('href', route('frontend.project-hm.summary.nonroutine', ['project' => $project->uuid, 'workPackage' => $workPackage->uuid]) )
                     @endcomponent
                     </div>
                 </div>

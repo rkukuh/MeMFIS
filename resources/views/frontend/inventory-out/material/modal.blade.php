@@ -185,5 +185,8 @@
 <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/material-uuid.js') }}"></script>
 
+<script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+
 <script src="{{ asset('js/frontend/functions/select2/serial-number.js')}}"></script>
 @endpush

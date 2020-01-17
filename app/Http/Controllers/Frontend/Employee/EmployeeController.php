@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\Frontend\Employee;
 
+use App\User;
+use Carbon\Carbon;
+use App\Models\Bank;
+use App\Models\Type;
+use App\Models\BPJS;
+use App\Models\Status;
+use App\Models\Benefit;
 use App\Models\Employee;
+use App\Models\Position;
+use App\Models\JobTitle;
+use App\Models\Workshift;
+use App\Models\Department;
+use App\Models\EmployeeProvisions;
+use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\EmployeeStore;
 use App\Http\Requests\Frontend\EmployeeUpdate;
-use App\Models\Bank;
-use App\Models\JobTittle;
-use App\Models\Position;
-use App\Models\Status;
-use App\Models\Department;
-use App\Models\Type;
-use App\User;
-use App\Models\BPJS;
-use App\Models\Benefit;
-use App\Models\EmployeeProvisions;
-use App\Models\Workshift;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Request;
-use DB;
 
 class EmployeeController extends Controller
 {
@@ -52,47 +52,11 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeStore $request)
     {
-
-        $job_tittle = JobTittle::where('uuid', $request->job_title)->first()->id;
-        $position = Position::where('uuid', $request->job_position)->first()->id;
-        $statuses = Status::where('uuid', $request->employee_status)->first()->id;
-        $department = Department::where('uuid', $request->department)->first()->id;
-
-        $indirect = null;
-        if($request->indirect_supervisor){
-            $indirect = Employee::where('uuid', $request->indirect_supervisor)->first()->id;   
-        }
-
-        $supervisor = null;
-        if($request->supervisor){
-        $supervisor = Employee::where('uuid', $request->indirect_supervisor)->first()->id;
-        }
+        // dd($request->all());
 
         $time = Carbon::now();
 
-        $employee = Employee::create([
-            'code' => $request->code,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'dob' => $request->dob,
-            'dob_place' => $request->dob_place,
-            'gender' => $request->gender,
-            'religion' => $request->religion,
-            'marital_status' => $request->marital_status,
-            'nationality' => $request->nationality,
-            'country' => $request->country,
-            'city' => $request->city,
-            'zip' => $request->zip_code,
-            'joined_date' => $request->joined_date,
-            'job_tittle_id' => $job_tittle,
-            'position_id' => $position,
-            'statuses_id' => $statuses,
-            'department_id' => $department,
-            'indirect_supervisor_id' => $indirect,
-            'supervisor_id' => $supervisor,
-            'created_at' => $time,
-            'updated_at' => null,
-        ]);
+        $employee = Employee::create($request->all());
 
         $employee->addresses()->create([
             'address' => $request->address_line_1,
@@ -228,8 +192,8 @@ class EmployeeController extends Controller
 
         $jobDetails[] = null;
  
-        if($employee->job_tittle()->first()){
-            $jobDetails['job_tittle'] = $employee->job_tittle()->first()->name;
+        if($employee->job_title()->first()){
+            $jobDetails['job_title'] = $employee->job_title()->first()->name;
         };
         if($employee->position()->first()){
             $jobDetails['position'] = $employee->position()->first()->name;
@@ -305,9 +269,9 @@ class EmployeeController extends Controller
                 $gender = null;
             }
 
-            $job_tittle = null;
-            if($ht->job_tittle_id){
-                $job_tittle = JobTittle::where('id',$ht->job_tittle_id)->first()->name;
+            $job_title = null;
+            if($ht->job_title_id){
+                $job_title = JobTitle::where('id',$ht->job_title_id)->first()->name;
             }
 
             $position = null;
@@ -362,7 +326,7 @@ class EmployeeController extends Controller
                 'country' => $ht->country,
                 'mobile_phone' => $phones_history,
                 'email_1' => $emails_history,
-                'job_tittle' => $job_tittle,
+                'job_title' => $job_title,
                 'position' => $position,
                 'status' => $status,
                 'department' => $department,
@@ -514,8 +478,8 @@ class EmployeeController extends Controller
         
         //EMPLOYEE WORKSHIFT CURRENT
         $workshift_current = [];
-        if(isset($employee->workshift()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id)){
-            $data_workshift = Workshift::find($employee->workshift()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id);
+        if(isset($employee->workshifts()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id)){
+            $data_workshift = Workshift::find($employee->workshifts()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id);
             $workshift_current = [
                 'name' => $data_workshift->name,
                 'data' => $data_workshift->workshift_schedules()->get()
@@ -525,7 +489,7 @@ class EmployeeController extends Controller
         //EMPLOYEE WORKSHIFT HISTORY
         $workshift_history = [];
         
-        $data_workshift_history = $employee->workshift()->whereNotNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->orderBy('created_at','DESC')->get();
+        $data_workshift_history = $employee->workshifts()->whereNotNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->orderBy('created_at','DESC')->get();
 
         $l = 0;
         foreach($data_workshift_history as $dwh){
@@ -664,8 +628,8 @@ class EmployeeController extends Controller
         }
         $jobDetails[] = null;
        
-        if($employee->job_tittle()->first()){
-            $jobDetails['job_tittle'] = $employee->job_tittle()->first()->name;
+        if($employee->job_title()->first()){
+            $jobDetails['job_title'] = $employee->job_title()->first()->name;
         };
         if($employee->position()->first()){
             $jobDetails['position'] = $employee->position()->first()->name;
@@ -742,9 +706,9 @@ class EmployeeController extends Controller
                 $gender = null;
             }
 
-            $job_tittle = null;
-            if($ht->job_tittle_id){
-                $job_tittle = JobTittle::where('id',$ht->job_tittle_id)->first()->name;
+            $job_title = null;
+            if($ht->job_title_id){
+                $job_title = JobTitle::where('id',$ht->job_title_id)->first()->name;
             }
 
             $position = null;
@@ -799,7 +763,7 @@ class EmployeeController extends Controller
                 'country' => $ht->country,
                 'mobile_phone' => $phones_history,
                 'email_1' => $emails_history,
-                'job_tittle' => $job_tittle,
+                'job_title' => $job_title,
                 'position' => $position,
                 'status' => $status,
                 'department' => $department,
@@ -1004,8 +968,8 @@ class EmployeeController extends Controller
       
         //EMPLOYEE WORKSHIFT CURRENT
         $workshift_current = [];
-        if(isset($employee->workshift()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id)){
-            $data_workshift = Workshift::find($employee->workshift()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id);
+        if(isset($employee->workshifts()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id)){
+            $data_workshift = Workshift::find($employee->workshifts()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id);
             $workshift_current = [
                 'name' => $data_workshift->name,
                 'data' => $data_workshift->workshift_schedules()->get()
@@ -1015,7 +979,7 @@ class EmployeeController extends Controller
         //EMPLOYEE WORKSHIFT HISTORY
         $workshift_history = [];
         
-        $data_workshift_history = $employee->workshift()->whereNotNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->orderBy('created_at','DESC')->get();
+        $data_workshift_history = $employee->workshifts()->whereNotNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->orderBy('created_at','DESC')->get();
 
         $l = 0;
         foreach($data_workshift_history as $dwh){
@@ -1114,7 +1078,7 @@ class EmployeeController extends Controller
      */
     public function update(EmployeeUpdate $request, Employee $employee)
     {
-        $job_tittle = JobTittle::where('uuid', $request->job_tittle)->first()->id;
+        $job_title = JobTitle::where('uuid', $request->job_title)->first()->id;
         $position = Position::where('uuid', $request->job_position)->first()->id;
         $statuses = Status::where('uuid', $request->employee_status)->first()->id;
         $department = Department::where('uuid', $request->department)->first()->id;
@@ -1161,7 +1125,7 @@ class EmployeeController extends Controller
             'city' => $employee->city,
             'zip' => $employee->zip_code,
             'joined_date' => $employee->joined_date,
-            'job_tittle_id' => $employee->job_tittle_id,
+            'job_title_id' => $employee->job_title_id,
             'position_id' => $employee->position_id,
             'statuses_id' => $employee->statuses_id,
             'department_id' => $employee->department_id,
@@ -1260,7 +1224,7 @@ class EmployeeController extends Controller
             'city' => $request->city,
             'zip' => $request->zip_code,
             'joined_date' => $request->joined_date,
-            'job_tittle_id' => $job_tittle,
+            'job_title_id' => $job_title,
             'position_id' => $position,
             'statuses_id' => $statuses,
             'department_id' => $department,
@@ -1293,6 +1257,11 @@ class EmployeeController extends Controller
         return response()->json($employee);
     }
 
+    /**
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Employee  $employee
+     * 
+     */
     public function update_file(Employee $employee,Request $request){
         $rules = array(
             'document' => 'image|nullable'

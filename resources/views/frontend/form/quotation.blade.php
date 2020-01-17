@@ -320,13 +320,13 @@
                         @if($jobRequest[$a]->jobrequest_discount_value == null && $jobRequest[$a]->jobrequest_discount_type== null)
                         <td width="17%" align="center" valign="top"></td>
                         @else
-                            @if($jobRequest[$a]->jobrequest_discount_type==  'amount')
+                            @if($jobRequest[$a]->jobrequest_discount_type==  'discount-amount')
                             <td width="17%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->jobrequest_discount_value, 2) }}</td>
-                            @elseif($jobRequest[$a]->jobrequest_discount_type== 'percentage'){
-                            <td width="17%" align="center" valign="top">{{ $jobRequest[$a]->jobrequest_discount_value }}%</td>
+                            @elseif($jobRequest[$a]->jobrequest_discount_type== 'discount-percent'){
+                            <td width="17%" align="center" valign="top">{{ number_format($jobRequest[$a]->jobrequest_discount_percentage, 2) }}%</td>
                             @endif
                         @endif
-                            <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->total_manhours_with_performance_factor * $jobRequest[$a]->jobrequest_manhour_rate_amount + $jobRequest[$a]->facilities_price_amount + $jobRequest[$a]->mat_tool_price, 2) }}</td>
+                        <td width="17%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->total_manhours_with_performance_factor * $jobRequest[$a]->jobrequest_manhour_rate_amount + $jobRequest[$a]->facilities_price_amount + $jobRequest[$a]->mat_tool_price, 2) }}</td>
                     </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
@@ -385,8 +385,8 @@
                 </tr>
                 @endif
                 <tr>
-                    <th width="25%" valign="top" align="left">Grand Total in USD</th>
-                    <th width="25%" valign="top" align="right">{{ $quotation->currency->symbol }} {{ number_format($subTotal + $totalCharge - $discount, 2) }}</th>
+                    <th width="25%" valign="top" align="left" style="border-top:  2px solid black;">Grand Total in USD</th>
+                    <th width="25%" valign="top" align="right" style="border-top:  2px solid black;">{{ $quotation->currency->symbol }} {{ number_format($subTotal + $totalCharge - $discount, 2) }}</th>
                 </tr>
                 <tr>
                     <th width="25%" valign="top" align="left">Grand Total in Rupiah</th>

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Frontend\Quotation;
 
 use Auth;
+use App;
+
+use App\User;
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\Status;
@@ -26,6 +29,7 @@ use App\Models\Pivots\QuotationWorkPackage;
 use App\Http\Requests\Frontend\QuotationStore;
 use App\Http\Requests\Frontend\QuotationUpdate;
 use App\Models\QuotationWorkPackageTaskCardItem;
+use iio\libmergepdf\Merger;
 
 class QuotationAdditionalController extends Controller
 {
@@ -54,8 +58,8 @@ class QuotationAdditionalController extends Controller
     public function create(Project $project)
     {
         $websites = Type::ofWebsite()->get();
-        $total_manhour = $project->defectcards()->sum('estimation_manhour');
-        
+        $total_manhour = json_decode($project->data_defectcard)->total_manhour_with_performance_factor;
+
         return view('frontend.quotation.additional.create', [
             'project' => $project,
             'websites' => $websites,
@@ -70,7 +74,7 @@ class QuotationAdditionalController extends Controller
      * @param  \App\Http\Requests\Frontend\QuotationStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuotationStore $request)
     {
         $project = Project::where('uuid', $request->project_id)->first();
         $contact = $defectcard_json = [];
@@ -83,6 +87,8 @@ class QuotationAdditionalController extends Controller
 
         $defectcard_json["manhour_rate"] = $request->manhour_rate;
         $defectcard_json["total_manhour"] = $request->total_manhour;
+        $defectcard_json["discount_value"] = 0;
+        $defectcard_json["discount_type"] = "amount";
 
         $request->merge(['number' => DocumentNumber::generate('QADD-', Quotation::withTrashed()->count()+1)]);
         $request->merge(['attention' => json_encode($contact)]);
@@ -94,7 +100,7 @@ class QuotationAdditionalController extends Controller
         $request->merge(['scheduled_payment_amount' => json_encode([])]);
 
         $defectcards = DefectCard::where('project_additional_id',$project->id)->get();
-       
+
         $quotation = Quotation::create($request->all());
 
         $customer = Customer::find($quotation->parent->quotationable->customer->id)->levels->last()->score;
@@ -164,7 +170,8 @@ class QuotationAdditionalController extends Controller
         $scheduled_payment_amount = [];
         $scheduled_payment_amount = json_decode($quotation->scheduled_payment_amount);
         $charges = json_decode($quotation->charge);
-        $total_manhour = $quotation->quotationable->defectcards()->sum('estimation_manhour');
+        $data_defectcard = json_decode($quotation->data_defectcard, true);
+        $total_manhour = $data_defectcard["total_manhour"];
         $attention = json_decode($quotation->attention);
 
         return view('frontend.quotation.additional.edit',[
@@ -183,6 +190,8 @@ class QuotationAdditionalController extends Controller
      *
      * @param  \App\Http\Requests\Frontend\QuotationUpdate  $request
      * @param  \App\Models\Quotation  $quotation
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Quotation $quotation)
@@ -210,8 +219,10 @@ class QuotationAdditionalController extends Controller
         $attention['fax'] = $request->attention_fax;
         $attention['email'] = $request->attention_email;
 
+        $defectcard_json = json_decode($quotation->data_defectcard, true);
         $defectcard_json["manhour_rate"] = $request->manhour_rate;
         $defectcard_json["total_manhour"] = $request->total_manhour;
+        $defectcard_json = json_encode($defectcard_json, true);
 
         $request->charge = json_decode($request->charge);
         $request->chargeType = json_decode($request->chargeType);
@@ -224,13 +235,15 @@ class QuotationAdditionalController extends Controller
                 array_push($charges, $charge);
         }
 
-        $request->merge(['attention' => json_encode($attention)]);
-        $request->merge(['charge' => json_encode($charges)]);
-        $request->merge(['data_defectcard' => json_encode($defectcard_json)]);
-        $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
-        $request->merge(['scheduled_payment_amount' => json_encode($scheduled_payment_amount)]);
-        $request->merge(['project_id' => $project->id]);
-        $request->merge(['customer_id' => $project->customer->id]);
+        $request->merge([
+            'project_id' => $project->id,
+            'charge' => json_encode($charges),
+            'data_defectcard' => $defectcard_json,
+            'attention' => json_encode($attention),
+            'customer_id' => $project->customer->id,
+            'scheduled_payment_amount' => json_encode($scheduled_payment_amount),
+            'scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id,
+            ]);
 
         // dd($request->all());
         $quotation->update($request->all());
@@ -266,12 +279,12 @@ class QuotationAdditionalController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Project  $project
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function approve(Quotation $quotation)
+    public function approve(Quotation $quotation, Request $request)
     {
         //todo validation scheduled payment amount and progress
-
         $amount = 0;
         $error_messages = $work_progress= [];
         $scheduled_payment_amounts = json_decode($quotation->scheduled_payment_amount);
@@ -296,15 +309,15 @@ class QuotationAdditionalController extends Controller
             );
             array_push($error_messages, $error_message);
         }
-        if( max($work_progress) != 100){
+        // if( max($work_progress) != 100){
 
-            $error_message = array(
-                'message' => "Scheduled payment work progress still not 100%",
-                'title' => $quotation->number,
-                'alert-type' => "error"
-            );
-            array_push($error_messages, $error_message);
-        }
+        //     $error_message = array(
+        //         'message' => "Scheduled payment work progress still not 100%",
+        //         'title' => $quotation->number,
+        //         'alert-type' => "error"
+        //     );
+        //     array_push($error_messages, $error_message);
+        // }
 
         if(sizeof($error_messages) > 0){
             return response()->json(['error' => $error_messages], '403');
@@ -313,6 +326,7 @@ class QuotationAdditionalController extends Controller
         $quotation->approvals()->save(new Approval([
             'approvable_id' => $quotation->id,
             'conducted_by' => Auth::id(),
+            'note' => $request->note,
             'is_approved' => 1
         ]));
 
@@ -345,6 +359,7 @@ class QuotationAdditionalController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Quotation  $quotation
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function discount(Request $request, Quotation $quotation)
@@ -368,47 +383,99 @@ class QuotationAdditionalController extends Controller
     public function print(Quotation $quotation)
     {
         $username = Auth::user()->name;
-        $totalCharge = $totalFacility = $totalMatTool = $manhourPrice = 0;
+        $totalCharge = $discount = 0;
         if(json_decode($quotation->charge) !== null) {
             foreach(json_decode($quotation->charge) as $charge){
                 $totalCharge =  $totalCharge +  $charge->amount;
             }
         }
 
-        $workpackages = $quotation->workpackages;
-        foreach($workpackages as $workPackage){
-            $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
-            ->where('workpackage_id',$workPackage->id)
-            ->first();
+        $items = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.jobcardable','item','unit','price')->where('quotation_id', $quotation->id)->get();
+        $total_item_price = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.jobcardable','item','unit','price')->where('quotation_id', $quotation->id)
+        ->sum('subtotal');
 
-            $quotation_workpackage = QuotationWorkPackage::where('quotation_id',$quotation->id)
-            ->where('workpackage_id',$workPackage->id)
-            ->first();
+        $total_item_quantity = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.jobcardable','item','unit','price')->where('quotation_id', $quotation->id)
+        ->sum('quantity');
 
-            if($project_workpackage){
-                $workPackage->total_manhours_with_performance_factor = $project_workpackage->total_manhours_with_performance_factor;
-                $manhourPrice += $workPackage->total_manhours_with_performance_factor & $quotation_workpackage->manhour_rate;
-                $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
-                ->with('facility')
-                ->sum('price_amount');
-                $workPackage->facilities_price_amount = $ProjectWorkPackageFacility;
-                $totalFacility += $workPackage->facilities_price_amount;
+        $data_defectcard = json_decode($quotation->data_defectcard);
+        $total_manhour = $data_defectcard->total_manhour;
+        $mat_tool_price = QuotationDefectCardItem::where('quotation_id', $quotation->id)->sum('subtotal');
+        $grandtotal = $data_defectcard->total_manhour * $data_defectcard->manhour_rate + $mat_tool_price;
 
-                $workPackage->mat_tool_price = QuotationWorkPackageTaskCardItem::where('quotation_id',$quotation->id)->where('workpackage_id',$workPackage->id)->sum('subtotal');
-                $totalMatTool += $workPackage->mat_tool_price;
-            }
+        if($data_defectcard->discount_type = "percentage"){
+            $discount = $grandtotal * ($data_defectcard->discount_value / 100);
+        }else{
+            $discount = $data_defectcard->discount_value;
         }
 
-        $pdf = \PDF::loadView('frontend/form/additional_quotation_1',[
+        $page_merger = new Merger();
+        $created_by = User::find($quotation->audits->first()->user_id)->name;
+
+        $page1 = \View::make('frontend/form/additional_quotation_1')->with([
+                'page' => 1,
                 'username' => $username,
+                'discount' => $discount,
                 'quotation' => $quotation,
-                'workpackages' => $workpackages,
+                'GrandTotal' => $grandtotal,
+                'created_by' => $created_by,
                 'totalCharge' => $totalCharge,
+                'total_manhour' => $total_manhour,
+                'mat_tool_price' => $mat_tool_price,
+                'data_defectcard' => $data_defectcard,
                 'attention' => json_decode($quotation->attention),
-                'GrandTotal' => $manhourPrice + $totalFacility + $totalMatTool
-                ]);
-                
-        return $pdf->stream();
+                ])->render();
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($page1)->setPaper('a4', 'portrait');
+        $page_merger->addRaw($pdf->output());
+
+        $page2 = \View::make('frontend/form/additional_quotation_2')->with([
+                'page' => 2,
+                'username' => $username,
+                'discount' => $discount,
+                'quotation' => $quotation,
+                'GrandTotal' => $grandtotal,
+                'created_by' => $created_by,
+                'totalCharge' => $totalCharge,
+                'total_manhour' => $total_manhour,
+                'mat_tool_price' => $mat_tool_price,
+                'data_defectcard' => $data_defectcard,
+                'attention' => json_decode($quotation->attention),
+                ])->render();
+
+        $pdf2 = App::make('dompdf.wrapper');
+        $pdf2->loadHTML($page2)->setPaper('a4', 'portrait');
+        $page_merger->addRaw($pdf2->output());
+
+        $page3 = \View::make('frontend/form/additional_quotation_3')->with([
+                'page' => 3,
+                'numbering' => 0,
+                'items' => $items,
+                'username' => $username,
+                'discount' => $discount,
+                'quotation' => $quotation,
+                'created_by' => $created_by,
+                'GrandTotal' => $grandtotal,
+                'totalCharge' => $totalCharge,
+                'total_manhour' => $total_manhour,
+                'mat_tool_price' => $mat_tool_price,
+                'data_defectcard' => $data_defectcard,
+                'total_item_price' => $total_item_price,
+                'total_item_quantity' => $total_item_quantity,
+                'attention' => json_decode($quotation->attention),
+                ])->render();
+
+        $pdf3 = App::make('dompdf.wrapper');
+        $pdf3->loadHTML($page3)->setPaper('a4', 'portrait');
+        $page_merger->addRaw($pdf3->output());
+
+        file_put_contents('storage/Quotation/Additional/'.$quotation->uuid.'.pdf', $page_merger->merge());
+        $quotationAdditional = new \PDF;
+        $quotationAdditional = $quotation->uuid.'.pdf';
+
+        return response()->file(
+            public_path('storage/Quotation/Additional/'.$quotation->uuid.'.pdf')
+        );
     }
 
 }

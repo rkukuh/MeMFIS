@@ -53,13 +53,7 @@ let summary = {
             },
             {
                 field: 'name',
-                title: 'Title',
-                sortable: 'asc',
-                filterable: !1,
-            },
-            {
-                field: 'description',
-                title: 'Material Description',
+                title: 'Name',
                 sortable: 'asc',
                 filterable: !1,
             },
@@ -133,12 +127,6 @@ let summary = {
             {
                 field: 'name',
                 title: 'Title',
-                sortable: 'asc',
-                filterable: !1,
-            },
-            {
-                field: 'description',
-                title: 'Tool Description',
                 sortable: 'asc',
                 filterable: !1,
             },

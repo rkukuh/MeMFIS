@@ -17,7 +17,7 @@
         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
             @component('frontend.common.buttons.create')
                 @slot('text', 'Propose Leave')
-                @slot('href', route('frontend.propose-leave.create') )
+                @slot('href', route('frontend.leave.create') )
             @endcomponent
 
             <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -30,7 +30,7 @@
 
     <div class="propose_leave_datatable" id="scrolling_both"></div>
 
-    @include('frontend.propose-leave.modal-approve')
-    @include('frontend.propose-leave.modal-reject')
+    <!-- @include('frontend.propose-leave.modal-approve') -->
+    <!-- @include('frontend.propose-leave.modal-reject') -->
     @include('frontend.propose-leave.propose-leave.transaction-view')
 </div>

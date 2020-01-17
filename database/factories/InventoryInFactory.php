@@ -5,6 +5,7 @@ use App\Models\Item;
 use App\Models\Unit;
 use App\Models\Branch;
 use App\Models\Storage;
+use App\Models\Employee;
 use App\Models\InventoryIn;
 use App\Models\GoodsReceived;
 use Faker\Generator as Faker;
@@ -31,6 +32,14 @@ $factory->define(InventoryIn::class, function (Faker $faker) {
 
             return factory(GoodsReceived::class)->create()->id;
         },
+        'additional' => function () use ($faker) {
+            $additional = [
+                'ref_no' => 'TC-INT-DUM-' . $faker->unixTime(),
+                'created_by' => Employee::get()->random()->id,
+            ];
+
+            return $faker->randomElement([null, json_encode($additional)]);
+        },
         'section' => null,
         'description' => $faker->randomElement([null, $faker->sentence]),
     ];
@@ -41,11 +50,13 @@ $factory->define(InventoryIn::class, function (Faker $faker) {
 
 $factory->afterCreating(InventoryIn::class, function ($inventory_in, $faker) {
 
+    $number = $faker->unixTime();
+
     // Branch
-    
+
     if ($faker->boolean) {
         for ($i = 1; $i <= rand(1, 3); $i++) {
-            $inventory_in->branches()->save(Branch::get()->random());
+            $inventory_in->branches()->attach(Branch::get()->random()->id);
         }
     }
 
@@ -69,7 +80,7 @@ $factory->afterCreating(InventoryIn::class, function ($inventory_in, $faker) {
             }
 
             $inventory_in->items()->save($item, [
-                'serial_number' => null,
+                'serial_number' => 'SN-DUM-' . $number,
                 'quantity' => rand(1, 10),
                 'quantity_in_primary_unit' => rand(1, 10),
                 'unit_id' => $unit->id,

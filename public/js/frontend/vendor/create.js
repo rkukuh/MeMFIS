@@ -29,7 +29,7 @@ let Vendor = {
             type_phone_array = type_phone_array.filter(function (el) {
 
                 return el != null && el != "";
-        
+
             });
 
             let fax_array = [];
@@ -49,7 +49,7 @@ let Vendor = {
             type_fax_array = type_fax_array.filter(function (el) {
 
                 return el != null && el != "";
-        
+
             });
 
             let email_array = [];
@@ -65,11 +65,11 @@ let Vendor = {
                     type_email_array[i] = $(this).val();
                 }
             });
-            
+
             type_email_array = type_email_array.filter(function (el) {
 
                 return el != null && el != "";
-            
+
             });
 
 
@@ -109,12 +109,6 @@ let Vendor = {
             });
             attn_name_array.pop();
 
-            let attn_ext_array = [];
-            $('#attn-ext ').each(function (i) {
-                attn_ext_array[i] = $(this).val();
-            });
-            attn_ext_array.pop();
-
             let attn_fax_array = [];
             $('#attn-fax ').each(function (i) {
                 attn_fax_array[i] = $(this).val();
@@ -145,7 +139,7 @@ let Vendor = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/vendor',
+                url: '/supplier',
                 // cache: false,
                 // processData: false,
                 // contentType: false,
@@ -166,7 +160,6 @@ let Vendor = {
                     attn_phone_array:attn_phone_array,
                     attn_name_array:attn_name_array,
                     attn_position_array:attn_position_array,
-                    attn_ext_array:attn_ext_array,
                     attn_fax_array:attn_fax_array,
                     attn_email_array:attn_email_array,
                     bank_name:bank_name,
@@ -200,7 +193,7 @@ let Vendor = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/vendor/' + data.uuid + '/edit';
+                        window.location.href = '/supplier/' + data.uuid + '/edit';
 
                     }
                 }

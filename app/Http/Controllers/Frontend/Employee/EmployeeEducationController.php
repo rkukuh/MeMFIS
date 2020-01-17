@@ -70,6 +70,7 @@ class EmployeeEducationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
@@ -105,6 +106,7 @@ class EmployeeEducationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
@@ -118,6 +120,10 @@ class EmployeeEducationController extends Controller
         return response()->json($education);
     }
 
+    /**
+     * @param  \Illuminate\Http\Request  $request
+     * 
+     */
     public function update_file(Request $request){
         $rules = array(
             'document' => 'image|nullable'

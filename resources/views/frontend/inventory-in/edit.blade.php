@@ -76,6 +76,7 @@
                                         @slot('text', 'Ref No.')
                                         @slot('name', 'ref-no')
                                         @slot('id_error','ref-no')
+                                        @slot('value', $additionals->ref_no)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">

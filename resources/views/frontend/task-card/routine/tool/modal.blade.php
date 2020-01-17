@@ -5,7 +5,7 @@
             <div class="modal-header">
                 @include('frontend.common.label.create-new')
 
-                <h5 class="modal-title" id="TitleModalTool">
+                <h5 class="modal-title" id="TitleModalTool" style="margin-top:0px">
                     Tool
 
                     <small id="tool-storage" class="m--font-focus"></small>
@@ -25,12 +25,11 @@
                                         Tool @include('frontend.common.label.required')
                                     </label>
 
-                                    @component('frontend.common.input.select2')
-                                        @slot('id', 'tool')
-                                        @slot('text', 'tool')
-                                        @slot('name', 'tool')
-                                        @slot('id_error', 'tool')
+                                    @component('frontend.common.tool.index')
+                                        @slot('name_tool','tool')
+                                        @slot('id_tool','tool')
                                     @endcomponent
+
                                 </div>
                                 <div class="col-sm-3 col-md-3 col-lg-3">
                                     <label class="form-control-label">

@@ -55,6 +55,19 @@ class Project extends MemfisModel
     }
 
     /**
+     * M-M Polymorphic: A branch can be applied to many entities.
+     *
+     * This function will get all the branches that are applied to a given project.
+     * See: Branch's projects() method for the inverse
+     *
+     * @return mixed
+     */
+    public function branches()
+    {
+        return $this->morphToMany(Branch::class, 'branchable');
+    }
+
+    /**
      * One-to-Many (self-join): A Project may have none or many sub-project.
      *
      * This function will retrieve the sub-project of a project, if any.

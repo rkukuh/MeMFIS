@@ -6,6 +6,7 @@ use App\User;
 use App\Models\HtCrr;
 use App\Models\ListUtil;
 use App\Models\Quotation;
+use App\Models\Pivots\QuotationWorkPackage;
 use App\Models\WorkPackage;
 use App\Models\QuotationHtcrrItem;
 use App\Models\Pivots\ProjectWorkPackage;
@@ -31,13 +32,15 @@ class QuotationDatatables extends Controller
             }
             else if(!empty($quotation->approvals->toArray())){
                 $quotation->status .= 'Approved';
+               
 
-                if(isset($quotation->approvals)){
+                if(sizeof($quotation->approvals->toArray()) > 0){
+                    // dump("here");
                     $conducted_by  = User::find($quotation->approvals->first()->conducted_by);
                     $quotation->conducted_by .= $conducted_by->name;
-                }else{
-                    $quotation->conducted_by .= '';
+                    $quotation->conducted_at .= $quotation->approvals->first()->created_at;
                 }
+                    
             }else{
                 $quotation->status .= 'Not Approved';
 
@@ -59,6 +62,8 @@ class QuotationDatatables extends Controller
             }
 
         }
+
+        // dd("break");
         $data = $alldata = json_decode($quotations);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -285,6 +290,27 @@ class QuotationDatatables extends Controller
         $workpackages = $quotation->workpackages;
 
         foreach($workpackages as $workPackage){
+            /** get discount from promoable */
+            $quotationworkpackage = QuotationWorkPackage::where('quotation_id', $quotation->id)->where('workpackage_id', $workPackage->id)->first();
+            $workPackage->jobrequest_discount_type =  null;
+            $workPackage->jobrequest_discount_value =  null;
+            $workPackage->jobrequest_discount_percentage =  null;
+
+            $promo = $quotationworkpackage->promos->first();
+            if($promo){
+                $workPackage->jobrequest_discount_type =  $promo->code;
+                $workPackage->jobrequest_discount_value =  $promo->pivot->amount;
+
+                switch($promo->code){
+                    case "discount-amount":
+                        $workPackage->jobrequest_discount_percentage =  $promo->pivot->value * 100;
+                        break;
+                    case "discount-percent":
+                        $workPackage->jobrequest_discount_percentage =  $promo->pivot->value;
+                        break;
+                }
+            }
+
             $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
@@ -302,7 +328,7 @@ class QuotationDatatables extends Controller
         }
 
         $htcrrs = HtCrr::where('project_id',$quotation->quotationable->id)->whereNull('parent_id')->get();
-        $mats_tools_htcrr = QuotationHtcrrItem::where('quotation_id', $quotation->id)->sum('price_amount');
+        $mats_tools_htcrr = QuotationHtcrrItem::where('quotation_id', $quotation->id)->sum('subtotal');
         if (sizeof($htcrrs) > 0) {
             $htcrr_workpackage = new WorkPackage();
             $htcrr_workpackage->code = "Workpackage HT CRR";
@@ -311,6 +337,32 @@ class QuotationDatatables extends Controller
             $htcrr_workpackage->mat_tool_price = $mats_tools_htcrr;
             $htcrr_workpackage->is_template = "htcrr";
             $htcrr_workpackage->ac_type = $quotation->quotationable->aircraft->name;
+
+            if($quotation->promos->first()){
+                $promo = $quotation->promos->first();
+                switch($promo->code){
+                    case "discount-amount":
+                        $htcrr_workpackage->jobrequest_discount_amount = $promo->pivot->amount;
+                        // array_push($discount, $disc);
+                        $htcrr_workpackage->jobrequest_discount_percentage =  $promo->pivot->value * 100;
+                        break;
+                    case "discount-percent":
+
+                        $htcrr_workpackage->jobrequest_discount_amount =  $promo->pivot->amount;
+
+                        // array_push($discount, $disc);
+                        $htcrr_workpackage->jobrequest_discount_percentage =  $promo->pivot->value;
+                        break;
+                    default:
+                        // array_push($discount, 0);
+                }
+                $htcrr_workpackage->jobrequest_discount_type =  $quotation->promos->first()->code;
+                $htcrr_workpackage->jobrequest_discount_value =  $quotation->promos->first()->pivot->amount;
+            }else{
+                $htcrr_workpackage->jobrequest_discount_value = null;
+                $htcrr_workpackage->jobrequest_discount_type = null;
+                $htcrr_workpackage->jobrequest_discount_percentage =  null;
+            }
 
             $workpackages[sizeof($workpackages)] = $htcrr_workpackage;
         }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\TaskCard;
 
+use App\Models\Unit;
 use App\Models\Item;
 use App\Models\TaskCard;
 use App\Http\Controllers\Controller;
@@ -39,6 +40,8 @@ class TaskCardSIItemController extends Controller
      */
     public function store(TaskCard $taskcard, TaskCardSIItemStore $request)
     {
+        $request->merge(['item_id' => Item::where('uuid',$request->item_id)->first()->id]);
+        $request->merge(['unit_id' => Unit::where('uuid',$request->unit_id)->first()->id]);
         $taskcard->items()->attach($taskcard->id, [
             'item_id' => $request->item_id,
             'unit_id' => $request->unit_id,

@@ -39,6 +39,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Schools::class);
         $this->call(Employees::class);
         $this->call(Items::class);
+        $this->call(Services::class);
         $this->call(Licenses::class);
         $this->call(Certifications::class);
         $this->call(Customers::class);
@@ -46,23 +47,24 @@ class DummyDataSeeder extends Seeder
         $this->call(Facilities::class);
         $this->call(Manhours::class);
         $this->call(Promos::class);
-        
+
         $this->call(Departments::class);
         $this->call(Benefits::class);
         $this->call(Positions::class);
         $this->call(LeavePeriods::class);
         $this->call(BPJSS::class);
-        $this->call(JobTittles::class);
+        $this->call(JobTitles::class);
         $this->call(LeaveTypes::class);
         $this->call(Holidays::class);
         $this->call(Workshifts::class);
-        
-        $this->call(BankAccounts::class);
 
+        $this->call(BankAccounts::class);
         $this->call(Overtimes::class);
 
         /** POLYMORPH */
 
+        $this->call(GSEs::class);
+        $this->call(RIRs::class);
         $this->call(Faxes::class);
         $this->call(Zones::class);
         $this->call(Emails::class);
@@ -110,6 +112,9 @@ class DummyDataSeeder extends Seeder
         $this->call(HtCrrs::class);
         $this->call(DefectCards::class);
         $this->call(RTSs::class);
+        $this->call(Mutations::class);
+        $this->call(ItemRequests::class);
+        $this->call(Workshops::class);
 
         /** PROJECT'S WORKPACKAGEs */
 
@@ -148,6 +153,10 @@ class DummyDataSeeder extends Seeder
         /** QUOTATION's DEFECTCARDs */
 
         $this->call(QuotationDefectCardItems::class);
+
+        /** PURCHASE REQUEST's ITEMs */
+
+        $this->call(PurchaseRequestItems::class);
 
         /** PURCHASE ORDER's ITEMs */
 

@@ -41,7 +41,7 @@ let RefJobcard = {
 
         $('.dataTables_filter').on('click', '.refresh', function () {
             $('#ref_jobcard_number_datatable').DataTable().ajax.reload();
-            $('#purhcase_order_datatable').DataTable().ajax.reload();
+            $('#purchase_order_datatable').DataTable().ajax.reload();
 
         });
 

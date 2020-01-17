@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use Directoryxx\Finac\Model\Coa;
 
 class GoodsReceived extends MemfisModel
 {
@@ -14,7 +15,6 @@ class GoodsReceived extends MemfisModel
         'received_by',
         'received_at',
         'vehicle_no',
-        'container_no',
         'storage_id',
         'description',
         'additionals',
@@ -40,10 +40,36 @@ class GoodsReceived extends MemfisModel
     }
 
     /**
-     * Polymorphic: An entity can have zero or one inventory in.
+     * M-M Polymorphic: A branch can be applied to many entities.
+     *
+     * This function will get all the branches that are applied to a given InventoryIn.
+     * See: Branch's inventory_ins() method for the inverse
+     *
+     * @return mixed
+     */
+    public function branches()
+    {
+        return $this->morphToMany(Branch::class, 'branchable');
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many coa.
+     *
+     * This function will get all good received's coa.
+     * See: Coa's coa() method for the inverse
+     *
+     * @return mixed
+     */
+    public function coa()
+    {
+        return $this->morphToMany(Coa::class, 'coable');
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or one goods received.
      *
      * This function will get all TaskCard's quotations.
-     * See: Inventory's inventory() method for the inverse
+     * See: Inventory's goods_received() method for the inverse
      *
      * @return mixed
      */
@@ -69,7 +95,7 @@ class GoodsReceived extends MemfisModel
                         'quantity_unit',
                         'unit_id',
                         'price',
-                        'already_received_amount',
+                        'location',
                         'note',
                         'expired_at'
                     )

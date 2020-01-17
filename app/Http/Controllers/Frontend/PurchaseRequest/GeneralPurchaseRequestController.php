@@ -10,6 +10,7 @@ use App\Models\Approval;
 use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\PurchaseRequestItem;
 use App\Http\Requests\Frontend\PurchaseRequestUpdate;
 use App\Http\Requests\Frontend\PurchaseRequestStore;
 
@@ -123,4 +124,23 @@ class GeneralPurchaseRequestController extends Controller
 
         return response()->json($purchaseRequest);
     }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\PurchaseRequest $purchaseRequest
+     * @return \Illuminate\Http\Response
+     */
+    public function print(PurchaseRequest $purchaseRequest)
+    {
+        $pdf = \PDF::loadView('frontend/form/purchase_request_general',[
+                'username' => Auth::user()->name,
+                'purchaseRequest' => $purchaseRequest,
+                'items' => PurchaseRequestItem::where('purchase_request_id',$purchaseRequest->id)->get(),
+                'created_by' => $purchaseRequest->audits->first()->user->name
+                ]);
+
+        return $pdf->stream();
+    }
+
 }

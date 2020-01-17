@@ -62,6 +62,7 @@ $factory->afterCreating(PurchaseRequest::class, function ($purchase_request, $fa
 
             $purchase_request->items()->save($item, [
                 'quantity' => rand(1, 10),
+                'quantity_requirement' => rand(1, 10),
                 'quantity_unit' => rand(1, 10),
                 'unit_id' => $unit->id,
                 'note' => $faker->randomElement([null, $faker->sentence]),

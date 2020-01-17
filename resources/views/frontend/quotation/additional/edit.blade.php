@@ -279,7 +279,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                 Quotation Title
+                                                 Quotation Title @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.textarea')
@@ -504,7 +504,7 @@
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/repeater.js') }}"></script>
 
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('/assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/scheduled-payment.js') }}"></script>
 
 @endpush

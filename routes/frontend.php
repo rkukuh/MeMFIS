@@ -52,11 +52,11 @@ Route::name('frontend.')->group(function () {
         Route::resource('bank', 'BankController');
         Route::resource('promo', 'PromoController');
         Route::resource('school', 'SchoolController');
-        Route::resource('vendor', 'VendorController');
+        Route::resource('warehouse', 'StorageController',[
+            'parameters' => ['warehouse' => 'storage']
+        ]);
         Route::resource('branch', 'BranchController');
-        Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
-        // Route::resource('manhour', 'ManhourController');
         Route::resource('benefit', 'BenefitController');
         Route::resource('company', 'CompanyController');
         Route::resource('holiday', 'HolidayController');
@@ -65,12 +65,18 @@ Route::name('frontend.')->group(function () {
         Route::resource('facility', 'FacilityController');
         Route::resource('workshift', 'WorkshiftController');
         Route::resource('leave-type', 'LeaveTypeController');
-        Route::resource('job-tittle', 'JobTittleController');
+        Route::resource('job-title', 'JobTitleController');
         Route::resource('department', 'DepartmentController');
         Route::resource('leave-period','LeavePeriodController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
-        Route::resource('overtime', 'OvertimeController');
+
+        /** TRANSACTION */
+
+        Route::resource('workshop', 'WorkshopController');
+        Route::resource('service', 'ServiceController');
+        // Route::resource('mutation', 'MutationController');
+        // Route::resource('item-request', 'ItemRequestController');
 
         /** CERTIFICATION */
 

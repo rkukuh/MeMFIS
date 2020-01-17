@@ -6,7 +6,7 @@ let Vendor = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/customer',
+                        url: '/datatables/vendor',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -50,7 +50,7 @@ let Vendor = {
                     sortable: 'asc',
                     filterable: !1,
                     textAlign: 'center',
-                    template: function (row, index, datatable) {   
+                    template: function (row, index, datatable) {
                         return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
                     }
                 },

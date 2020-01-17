@@ -153,7 +153,7 @@
                 <div class="col-6">
                     @component('frontend.testing.khusnul.checkbox-inline')
                         @slot('name', '1')
-                        @slot('text','Statisfactory')
+                        @slot('text','Satisfactory')
                     @endcomponent
                     @component('frontend.testing.khusnul.checkbox-inline')
                         @slot('name', '2')
@@ -269,7 +269,7 @@
                 <div class="col-4">
                     @component('frontend.common.input.checkbox')
                         @slot('name', '1')
-                        @slot('text','Statisfactory')
+                        @slot('text','Satisfactory')
                     @endcomponent
                     @component('frontend.common.input.checkbox')
                         @slot('name', '2')

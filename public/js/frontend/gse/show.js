@@ -6,7 +6,7 @@ let GseToolReturnedShow = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation',
+                        url: "/datatables/gse/item/" + gse_uuid,
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -42,7 +42,7 @@ let GseToolReturnedShow = {
                     }
                 }
             },
-            columns: [  
+            columns: [
                 {
                     field: '#',
                     title: 'No',
@@ -50,47 +50,47 @@ let GseToolReturnedShow = {
                     sortable: 'asc',
                     filterable: !1,
                     textAlign: 'center',
-                    template: function (row, index, datatable) {   
+                    template: function (row, index, datatable) {
                         return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
                     }
                 },
                 {
-                    field: '',
+                    field: 'code',
                     title: 'Part Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'pivot.serial_number',
                     title: 'Serial Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'name',
                     title: 'Tool Description',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'pivot.quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'unit_name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: '',
+                    field: 'pivot.note',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,

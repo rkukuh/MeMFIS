@@ -47,7 +47,7 @@ let Workpackage = {
             columns: [
                 {
                     field: 'title',
-                    title: 'Tittle',
+                    title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
@@ -735,6 +735,7 @@ let Workpackage = {
         });
 
         let show = $('.m_datatable').on('click', '.show', function () {
+
             $('#button').hide();
             $('#simpan').text('Perbarui');
 

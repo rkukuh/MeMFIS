@@ -52,6 +52,7 @@ class ProjectHMAdditionalController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Http\Requests\Frontend\ProjectStore  $request
      * @return \Illuminate\Http\Response
      */
@@ -66,6 +67,7 @@ class ProjectHMAdditionalController extends Controller
         $parent_id = $project->id;
         $project = $project->replicate();
         $project->parent_id = $parent_id;
+        $project->title = $request->title;
         $project->data_defectcard = $data_defectcard;
         $project->code = DocumentNumber::generate('PJAD-', Project::withTrashed()->count()+1);
         $project->save();
@@ -132,6 +134,7 @@ class ProjectHMAdditionalController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Http\Requests\Frontend\ProjectUpdate  $request
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
@@ -152,6 +155,7 @@ class ProjectHMAdditionalController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
@@ -251,6 +255,7 @@ class ProjectHMAdditionalController extends Controller
      * Get all the selected discrepancy found.
      * after that sum all the estimation manhour and return
      * as json and calculate it on client side.
+     * @param  \Illuminate\Http\Request  $request
      */
     public function calculateManhours(Request $request){
         $request->uuids = json_decode($request->uuids);

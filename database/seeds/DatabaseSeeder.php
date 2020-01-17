@@ -27,9 +27,12 @@ class DatabaseSeeder extends Seeder
         $this->call(StatusesTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(CurrenciesTableSeeder::class);
-        
+
         /** MASTER */
         
+        $this->call(CountriesTableSeeder::class);
+        $this->call(NationalitiesTableSeeder::class);
+        $this->call(ReligionsTableSeeder::class);
         $this->call(TaxesTableSeeder::class);
         $this->call(BanksTableSeeder::class);
         $this->call(StoragesTableSeeder::class);
@@ -41,6 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SchoolsTableSeeder::class);
         $this->call(EmployeesTableSeeder::class);
         $this->call(ItemsTableSeeder::class);
+        $this->call(ServicesTableSeeder::class);
         $this->call(LicensesTableSeeder::class);
         $this->call(CertificationsTableSeeder::class);
         $this->call(CustomersTableSeeder::class);
@@ -48,23 +52,24 @@ class DatabaseSeeder extends Seeder
         $this->call(FacilitiesTableSeeder::class);
         $this->call(ManhoursTableSeeder::class);
         $this->call(PromosTableSeeder::class);
-        
+
         $this->call(DepartmentsTableSeeder::class);
         $this->call(BenefitsTableSeeder::class);
         $this->call(PositionsTableSeeder::class);
         $this->call(LeavePeriodsTableSeeder::class);
         $this->call(BPJSSTableSeeder::class);
-        $this->call(JobTittlesTableSeeder::class);
+        $this->call(JobTitlesTableSeeder::class);
         $this->call(LeaveTypesTableSeeder::class);
         $this->call(HolidaysTableSeeder::class);
         $this->call(WorkshiftsTableSeeder::class);
-        
-        $this->call(BankAccountsTableSeeder::class);
 
+        $this->call(BankAccountsTableSeeder::class);
         $this->call(OvertimesTableSeeder::class);
 
         /** POLYMORPH */
 
+        $this->call(GSEsTableSeeder::class);
+        $this->call(RIRsTableSeeder::class);
         $this->call(FaxesTableSeeder::class);
         $this->call(ZonesTableSeeder::class);
         $this->call(PhonesTableSeeder::class);
@@ -110,7 +115,10 @@ class DatabaseSeeder extends Seeder
         $this->call(HtCrrsTableSeeder::class);
         $this->call(DefectCardsTableSeeder::class);
         $this->call(RTSTableSeeder::class);
-        
+        $this->call(MutationsTableSeeder::class);
+        $this->call(ItemRequestsTableSeeder::class);
+        $this->call(WorkshopsTableSeeder::class);
+
         /** PROJECT'S WORKPACKAGEs */
 
         $this->call(ProjectWorkPackagesTableSeeder::class);
@@ -138,7 +146,7 @@ class DatabaseSeeder extends Seeder
         $this->call(QuotationWorkPackageItemsTableSeeder::class);
 
         /** QUOTATION's WORKPACKAGE's TASKCARDs */
-        
+
         $this->call(QuotationWorkPackageTaskCardItemsTableSeeder::class);
 
         /** QUOTATION's HT/CRRs */
@@ -149,6 +157,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call(QuotationDefectCardItemsTableSeeder::class);
 
+        /** PURCHASE REQUEST's ITEMs */
+
+        $this->call(PurchaseRequestItemsTableSeeder::class);
+
         /** PURCHASE ORDER's ITEMs */
 
         $this->call(PurchaseOrderItemsTableSeeder::class);
@@ -157,5 +169,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(FefoInsTableSeeder::class);
         $this->call(FefoOutsTableSeeder::class);
+
     }
 }

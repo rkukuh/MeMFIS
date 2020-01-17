@@ -380,6 +380,8 @@ let Datatables = {
         });
 
         $("#basic_datatable").on("click", ".select-basic", function() {
+            mApp.block(".select-basic");
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -391,11 +393,13 @@ let Datatables = {
                     taskcard: $(this).data("uuid")
                 },
                 success: function(data) {
+                    mApp.unblock(".select-basic");
                     if (data.title == "Danger") {
                         toastr.error("Task card already exists!", "Error", {
                             timeOut: 5000
                         });
                     } else {
+
                         $("#modal_basic").modal("hide");
 
                         toastr.success("Task Card has been added.", "Success", {
@@ -412,6 +416,8 @@ let Datatables = {
         });
 
         $("#sip_datatable").on("click", ".select-sip", function() {
+            mApp.block(".select-sip");
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -423,11 +429,13 @@ let Datatables = {
                     taskcard: $(this).data("uuid")
                 },
                 success: function(data) {
+                    mApp.unblock(".select-sip");
                     if (data.title == "Danger") {
                         toastr.error("Task card already exists!", "Error", {
                             timeOut: 5000
                         });
                     } else {
+
                         $("#modal_sip").modal("hide");
 
                         toastr.success("Task Card has been added.", "Success", {
@@ -444,6 +452,8 @@ let Datatables = {
         });
 
         $("#cpcp_datatable").on("click", ".select-cpcp", function() {
+            mApp.block(".select-cpcp");
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -455,12 +465,14 @@ let Datatables = {
                     taskcard: $(this).data("uuid")
                 },
                 success: function(data) {
+                    mApp.unblock(".select-cpcp");
                     if (data.errors) {
                         // if (data.errors.name) {
                         //     $('#name-error').html(data.errors.name[0]);
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
+
                         $("#modal_cpcp").modal("hide");
 
                         toastr.success("Task Card has been added.", "Success", {
@@ -477,6 +489,8 @@ let Datatables = {
         });
 
         $("#si_datatable").on("click", ".select-si", function() {
+            mApp.block(".select-si");
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -488,12 +502,14 @@ let Datatables = {
                     taskcard: $(this).data("uuid")
                 },
                 success: function(data) {
+                    mApp.unblock(".select-si");
                     if (data.errors) {
                         // if (data.errors.name) {
                         //     $('#name-error').html(data.errors.name[0]);
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
+
                         $("#modal_si").modal("hide");
 
                         toastr.success("Task Card has been added.", "Success", {
@@ -510,6 +526,8 @@ let Datatables = {
         });
 
         $("#preliminary_datatable").on("click", ".select-preliminary", function() {
+            mApp.block(".select-preliminary");
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -521,12 +539,14 @@ let Datatables = {
                     taskcard: $(this).data("uuid")
                 },
                 success: function(data) {
+                    mApp.unblock(".select-preliminary");
                     if (data.errors) {
                         // if (data.errors.name) {
                         //     $('#name-error').html(data.errors.name[0]);
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
+
                         $("#modal_preliminary").modal("hide");
 
                         toastr.success("Task Card has been added.", "Success", {

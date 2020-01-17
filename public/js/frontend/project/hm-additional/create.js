@@ -146,13 +146,7 @@ let AdditionalTaskCreate = (function() {
                 },
                 {
                     field: 'name',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Material Description',
+                    title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -238,12 +232,6 @@ let AdditionalTaskCreate = (function() {
                 {
                     field: 'name',
                     title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Tool Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -337,6 +325,8 @@ let AdditionalTaskCreate = (function() {
             });
 
             $('.add-project-additional').on('click', function () {
+                mApp.block(".add-project-additional");
+
                 let data = new FormData();
                 data.append("defectcard_uuid", UUID);
                 data.append("title", $("#additional_project_title").val());
@@ -355,9 +345,12 @@ let AdditionalTaskCreate = (function() {
                     cache: false,
                     data:data,
                     success: function (data) {
+                        mApp.unblock(".add-project-additional");
+
                         if (data.errors) {
 
                         } else {
+
                             toastr.success('Project Aditional has been created.', 'Success', {
                                 timeOut: 5000
                             });

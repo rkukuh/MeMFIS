@@ -10,7 +10,7 @@ let GseToolReturned = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation',
+                        url: '/datatables/gse',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -54,70 +54,60 @@ let GseToolReturned = {
                     sortable: 'asc',
                     filterable: !1,
                     textAlign: 'center',
-                    template: function (row, index, datatable) {   
+                    template: function (row, index, datatable) {
                         return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
                     }
                 },
                 {
-                    field: 'requested_at',
+                    field: 'created_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'customer.name',
-                    title: 'Inventory In No.',
+                    field: 'number',
+                    title: 'GSE Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'number',
+                    field: '',
                     title: 'Ref Document',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
-                    template: function (t) {
-                        return '<a href="/quotation/'+t.uuid+'">' + t.number + "</a>"
-                    }
+                    // template: function (t) {
+                    //     return '<a href="#'+t.uuid+'">' + t.number + "</a>"
+                    // }
                 },
                 {
-                    field: 'project.no_wo',
+                    field: 'storage.name',
                     title: 'Storage',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'project.code',
+                    field: 'note',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'created_by',
+                    field: '',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: '',
                     title: 'Returned By',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return ''
-                    }
 
                 },
                 {
@@ -132,7 +122,7 @@ let GseToolReturned = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/quotation/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="/gse/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
                             '</a>' +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
@@ -141,7 +131,7 @@ let GseToolReturned = {
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid + '">' +
                                 '<i class="la la-check"></i>' +
                             '</a>'+
-                            '<a href="quotation/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
+                            '<a href="gse/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
                                 '<i class="la la-print"></i>' +
                             '</a>'
 
@@ -152,7 +142,7 @@ let GseToolReturned = {
         });
 
         $('.gse_tool_returned_datatable').on('click', '.delete', function () {
-            let quotation_uuid = $(this).data('id');
+            let gse_uuid = $(this).data('id');
 
             swal({
                 title: 'Sure want to remove?',
@@ -171,14 +161,14 @@ let GseToolReturned = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/quotation/' + quotation_uuid + '',
+                        url: '/gse/' + gse_uuid + '',
                         success: function (data) {
-                            toastr.success('Quotation has been deleted.', 'Deleted', {
+                            toastr.success('GSE has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.gse_tool_returned_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -196,7 +186,7 @@ let GseToolReturned = {
         });
 
         $('.gse_tool_returned_datatable').on('click', '.approve', function () {
-            let quotation_uuid = $(this).data('id');
+            let gse_uuid = $(this).data('id');
 
             swal({
                 title: 'Sure want to Approve?',
@@ -215,23 +205,25 @@ let GseToolReturned = {
                             )
                         },
                         type: 'POST',
-                        url: '/quotation/' + quotation_uuid + '/approve',
+                        url: '/gse/' + gse_uuid + '/approve',
                         success: function (data) {
-                            toastr.success('Quotation has been approved.', 'Approved', {
+                            toastr.success('GSE has been approved.', 'Approved', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.gse_tool_returned_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
                         },
-                        error: function (jqXhr, json, errorThrown) {
+                        error: function(jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
+                            $.each(errors, function(index, value) {
+                                toastr.error(value.message, value.title, {
+                                    closeButton: true,
+                                    timeOut: "0"
+                                });
                             });
                         }
                     });

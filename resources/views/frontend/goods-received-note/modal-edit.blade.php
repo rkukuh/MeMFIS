@@ -28,7 +28,7 @@
                                     @slot('id', 'item-label')
                                 @endcomponent
                             </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
                                     Expired Date
                                 </label>
@@ -38,6 +38,18 @@
                                     @slot('text', 'Expired Date')
                                     @slot('name', 'exp_date')
                                     @slot('id_error', 'exp_date')
+                                @endcomponent
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                <label class="form-control-label">
+                                    Location
+                                </label>
+
+                                @component('frontend.common.input.text')
+                                    @slot('id', 'item-location')
+                                    @slot('text', 'Location')
+                                    @slot('name', 'item-location')
+                                    @slot('id_error', 'item-location')
                                 @endcomponent
                             </div>
                         </div>
@@ -55,7 +67,7 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
-                                    Recived Items
+                                    Received Items
                                 </label>
                                 @component('frontend.common.label.data-info')
                                     @slot('text', '0')
@@ -64,12 +76,12 @@
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
-                                    Qty Recieved
+                                    Qty Received
                                 </label>
 
                                 @component('frontend.common.input.number')
                                     @slot('id', 'qty')
-                                    @slot('text', 'Qty Recieved')
+                                    @slot('text', 'Qty Received')
                                     @slot('name', 'qty')
                                     @slot('id_error', 'qty')
                                 @endcomponent

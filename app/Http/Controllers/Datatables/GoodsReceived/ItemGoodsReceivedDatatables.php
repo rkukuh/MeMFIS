@@ -19,8 +19,10 @@ class ItemGoodsReceivedDatatables extends Controller
     {
         $goodReceiveds = $goodReceived->items;
 
-        foreach($goodReceiveds as $goodReceived){
-            $goodReceived->unit_name .= Unit::find($goodReceived->pivot->unit_id)->name;
+        foreach($goodReceiveds as $GoodReceived){
+            $GoodReceived->unit_name .= Unit::find($GoodReceived->pivot->unit_id)->name;
+            $GoodReceived->qty_pr .= $goodReceived->purchase_order->purchase_request->items->where('id',$GoodReceived->id)->first()->pivot->quantity_unit." ".Unit::find($GoodReceived->unit_id)->name;
+            $GoodReceived->qty_po .= $goodReceived->purchase_order->items->where('id',$GoodReceived->id)->first()->pivot->quantity_unit." ".Unit::find($GoodReceived->unit_id)->name;
         }
 
         $data = $alldata = json_decode($goodReceiveds);

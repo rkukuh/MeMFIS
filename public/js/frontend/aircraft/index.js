@@ -93,6 +93,8 @@ let Aircraft = {
         });
 
         let simpan = $('.modal-footer').on('click', '.add-aircraft', function () {
+            mApp.block(".modal-footer");
+
             let name = $('input[name=name]').val();
             let code = $('input[name=code]').val();
             let manufacturer_id =$('#manufacturer_id').val();
@@ -110,6 +112,8 @@ let Aircraft = {
                     manufacturer_id: manufacturer_id
                 },
                 success: function (data) {
+                    mApp.unblock(".modal-footer");
+
                     if (data.errors) {
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
@@ -126,6 +130,7 @@ let Aircraft = {
 
 
                     } else {
+
                         $('#modal_aircraft').modal('hide');
 
                         toastr.success('Aircraft has been created.', 'Success', {

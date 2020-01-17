@@ -16,6 +16,24 @@ class CheckStock extends Model
      * @param  string  $value
      * @return string
      */
+    public function itemFree($item)
+    {
+        $item_id = Item::where('uuid',$item)->first()->id;
+
+        $SumQuantity = FefoIn::with('item','storage')->where('grn_id',null)
+                        ->sum('quantity');
+        $SumUsedQuantity = FefoIn::with('item','storage')->where('grn_id',null)
+                        ->sum('used_quantity');
+
+        return $SumQuantity-$SumUsedQuantity;
+    }
+
+    /**
+     * Get the Item's stock.
+     *
+     * @param  string  $value
+     * @return string
+     */
     public function item($item)
     {
         $item_id = Item::where('uuid',$item)->first()->id;

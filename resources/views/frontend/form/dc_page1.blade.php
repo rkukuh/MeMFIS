@@ -109,7 +109,7 @@
             <li>
                 <div class="jobcard-info">
                     <fieldset>
-                        <legend>DC No : DC-022877</legend>
+                        <legend>DC No : {{$defectcard->code}}</legend>
                         <div class="jobcard-info-detail">
                         <table width="80%" cellpadding="3">
                             <tr>
@@ -337,30 +337,42 @@
                     <td width="40%" align="center" rowspan="2">Reference</td>
                     <td width="16%" align="center" rowspan="2">Date</td>
                     <td width="8%" align="center" rowspan="2">Actual Mhrs.</td>
-                    <td width="15%" align="center">ENG</td>
+                    <td width="15%" align="center">MECHANIC</td>
                     <td width="15%" align="center">ENG</td>
                 </tr>
                 <tr style="background: #f7dd16;">
                     <td width="15%" align="center">(Name)</td>
                     <td width="15%" align="center">(Stamp + Sign)</td>
                 </tr>
+                @foreach($defectcard->helpers as $key => $helper)
                 <tr>
-                    <td width="6%" align="center" valign="top"></td>
-                    <td width="40%" valign="top">-</td>
-                    <td width="16%" align="center" valign="top">-</td>
-                    <td width="8%" align="center" valign="top">-</td>
-                    <td width="15%" align="center" valign="top">-</td>
-                    <td width="15%" align="center" valign="top">-</td>
+                    <td width="6%" align="center" valign="top">{{ $key + 1}}</td>
+                    <td width="40%" valign="top">{{ $helper->pivot->additionals }}</td>
+                    <td width="16%" align="center" valign="top">@if(array_key_exists($helper->id, $date_close) && isset($date_close[$helper->id])) {{ $date_close[$helper->id] }} @else - @endif</td>
+                    <td width="8%" align="center" valign="top">@if(array_key_exists($helper->id, $actual_manhours)) {{ number_format($actual_manhours[$helper->id], 2) }} @else - @endif</td>
+                    <td width="15%" align="center" valign="top">{{ $helper->first_name }} </td>
+                    <td width="15%" align="center" valign="top">{{ $released_by }} @if($released_at){{ date_format($released_at, 'd-m-Y') }} @endif</td>
                 </tr>
+                @endforeach
                 <tr>
                     <td colspan="3" valign="top"><b>Remark :</b> <br>* <span style="padding-left:1.1em">FOR RII</span> <br> ** <span style="padding-left:.5em">CHECK AS APPLICABLE </span><br> *** OTHER THAN ABOVE MENTIONED, DESCRIBE, SAY</td>
-                    <td valign="top" align="center"><b>Total</b> <div style="padding-top:12px">12012</div></td>
+                    <td valign="top" align="center"><b>Total</b> <div style="padding-top:12px">{{ number_format(array_sum($actual_manhours), 2) }}</div></td>
                     <td colspan="2" valign="top">   
                         <div style="position:relative">
+                        @if($defectcard->is_rii == 1)
                             <b>RII Item :</b>
                             <div style="position:absolute; right:0;top:42px;">
-                                (Stamp + Sign)
+                                {{ $rii_by }} @if($rii_at){{ date_format($rii_at, 'd-m-Y') }} @endif
                             </div>
+                        @else
+                            <b>RII Item :</b>
+                            <div style="position:absolute; right:0;top:42px;">
+                                {{ $rii_by }} @if($rii_at){{ date_format($rii_at, 'd-m-Y') }} @endif
+                            </div>
+                            <div>
+                                <img src="./img/RII.png" alt="" width="220px" height="50px">
+                            </div>
+                        @endif
                         </div>
                     </td>
                 </tr>

@@ -62,16 +62,19 @@ class RTSProgressController extends Controller
                             if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "rii-released" and Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "open"){
                                 $running_taskcard = $running_taskcard.", ".$jobcard->jobcardable->number;
                             }
-                            // elseif(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "rii-released"){
-                            //     $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
-                            // }
                         }else{
-                            if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released"  and Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "open"){
+                            if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released" and Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "open"){
                                 $running_taskcard = $running_taskcard.", ".$jobcard->jobcardable->number;
                             }
-                            // elseif(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released"){
-                            //     $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
-                            // }
+                        }
+                    }
+                    if(sizeof($jobcard->progresses) <> 0){
+                        if( Status::where('id',$jobcard->progresses->last()->status_id)->first()->code == "open"){
+                            if($jobcard->jobcardable_type == "App\Models\TaskCard"){
+                                $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
+                            }else if($jobcard->jobcardable_type == "App\Models\EOInstruction"){
+                                $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->eo_header->number;
+                            }
                         }
                     }
                 }
@@ -80,31 +83,18 @@ class RTSProgressController extends Controller
                     foreach($childs as $child){
                         $defectcards = DefectCard::where('quotation_additional_id',$child->id)->get();
                         foreach($defectcards as $defectcard){
-                            // dump(Status::where('id',$defectcard->progresses->last()->status_id)->first()->code);
                             if($defectcard->is_rii == 1){
-                                // dump('1');
                                 if(Status::where('id',$defectcard->progresses->last()->status_id)->first()->code <> "rii-released" and Status::where('id',$defectcard->progresses->last()->status_id)->first()->code <> "open"){
                                     $running_defectcard = $running_defectcard.", ".$defectcard->code;
                                 }
-                                // elseif(Status::where('id',$defectcard->progresses->last()->status_id)->first()->code <> "rii-released"){
-                                //     $defectcard_number = $defectcard_number.", ".$defectcard->code;
-                                // }
                             }else{
-                                // dump('0');
-                                if(Status::where('id',$defectcard->progresses->last()->status_id)->first()->code <> "released"  and Status::where('id',$defectcard->progresses->last()->status_id)->first()->code <> "open"){
+                                if(Status::where('id',$defectcard->progresses->last()->status_id)->first()->code <> "released" and Status::where('id',$defectcard->progresses->last()->status_id)->first()->code <> "open"){
                                     $running_defectcard = $running_defectcard.", ".$defectcard->code;
-                                    // dump('a');
                                 }
-                                // elseif(Status::where('id',$defectcard->progresses->last()->status_id)->first()->code <> "released"){
-                                //     $defectcard_number = $defectcard_number.", ".$defectcard->code;
-                                //     dump('b');
-                                // }
                         }
                     }
                 }
             }
-
-            // dd( $running_defectcard);
 
             if($mandatory_taskcard <> ""){
                 $error_notification = array(
@@ -135,12 +125,12 @@ class RTSProgressController extends Controller
 
             $taskcard_number = substr($taskcard_number, 2);
             $defectcard_number = substr($defectcard_number, 2);
-
             $projects = Project::all();
             $rts = RTS::where('project_id',$project->id)->first();
+
             return view('frontend.rts.create', [
                 'rts' => $rts,
-                'projec' => $project,
+                'project' => $project,
                 'projects' => $projects,
                 'taskcard_number' =>$taskcard_number,
                 'defectcard_number' =>$defectcard_number
@@ -156,8 +146,6 @@ class RTSProgressController extends Controller
      */
     public function store(RTSStore $request)
     {
-        $request->merge(['work_performed' => $request->work_performed.'.'.$request->work_performed_addtional ]);
-
         $quotations = Quotation::where('quotationable_id',$request->project_id)->get();
 
         $taskcard_number = "";
@@ -165,7 +153,7 @@ class RTSProgressController extends Controller
             $jobcards = JobCard::where('quotation_id',$quotation->id)->get();
             foreach($jobcards as $jobcard){
                 if(sizeof($jobcard->progresses) <> 0){
-                    if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "closed"){
+                    if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released"){
                         if($jobcard->jobcardable_type == "App\Models\TaskCard"){
                             $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
                         }else if($jobcard->jobcardable_type == "App\Models\EOInstruction"){
@@ -178,23 +166,14 @@ class RTSProgressController extends Controller
 
         $taskcard_number = substr($taskcard_number, 2);
 
-        $request->merge(['exception' => $taskcard_number ]);
+        $request->merge([
+                        'exception' => $taskcard_number,
+                        'work_performed' => $request->work_performed.'.'.$request->work_performed_addtional 
+                    ]);
+
+                    
         $rts = RTS::create($request->all());
-
-        if($request->approval <> null){
-            $rts->approvals()->save(new Approval([
-                'approvable_id' => $rts->id,
-                'conducted_by' => Auth::id(),
-                'is_approved' => 1
-            ]));
-        }
-
-        $project = Project::find($request->project_id);
-        $project->progresses()->save(new Progress([
-            'status_id' =>  Status::where('code','rts')->first()->id,
-            'progressed_by' => Auth::id()
-        ]));
-
+                    
         return response()->json($rts);
     }
 
@@ -215,9 +194,12 @@ class RTSProgressController extends Controller
      * @param  \App\Models\RTS  $rts
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(RTS $rts)
     {
-        //
+        dd($rts);
+        return view('frontend.rts.edit', [
+            'rts' => $rts,
+        ]);
     }
 
     /**

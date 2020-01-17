@@ -504,6 +504,17 @@
 @push('footer-scripts')
     <script>
         let uuid = '{{$defectcard->uuid}}';
+        $("#modal_pause").on("show.bs.modal", function(){
+            let references = [];
+            $('input[name^=reference').each(function (i) {
+                references[i] = $(this).val();
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: 'reference[]',
+                    value:$(this).val()
+                }).appendTo('#PauseForm');
+            });
+        });
     </script>
     <script src="{{ asset('js/frontend/defect-card/items.js')}}"></script>
 @endpush

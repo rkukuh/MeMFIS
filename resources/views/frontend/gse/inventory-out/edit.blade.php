@@ -60,6 +60,7 @@
                                                 @slot('id', 'date')
                                                 @slot('text', 'Date')
                                                 @slot('name', 'date')
+                                                @slot('value',  $groundSupportEquiptment->returned_at)
                                                 @slot('id_error','date')
                                             @endcomponent
                                         </div>
@@ -70,61 +71,29 @@
                                                 Ref Document No. @include('frontend.common.label.required')
                                             </label>
 
-                                            @include('frontend.common.warehouse.index')
-
-                                            @component('frontend.common.input.hidden')
-                                                @slot('id', 'warehouse')
-                                                @slot('name', 'warehouse')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Project No.
-                                            </label>
-
                                             @component('frontend.common.label.data-info')
-                                                @slot('id', 'project_number')
-                                                @slot('text', 'generate')
+                                                @slot('text', $groundSupportEquiptment->request->number)
                                             @endcomponent
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Storage @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Storage')
-                                                @slot('id', 'item_storage_id')
-                                                @slot('name', 'item_storage_id')
-                                                @slot('id_error', 'item_storage_id')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        A/C Type
-                                                    </label>
+                                            <select id="item_storage_id" name="item_storage_id" class="form-control m-select2" style="width:100%">
+                                                <option value="">
+                                                    &mdash; Select a Storage &mdash;
+                                                </option>
 
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('id', 'actype')
-                                                        @slot('text', 'Generate')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        A/C Reg
-                                                    </label>
-
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('id', 'acreg')
-                                                        @slot('text', 'Generate')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
+                                                @foreach ($storages as $storage)
+                                                    <option value="{{ $storage->id }}"
+                                                        @if ($storage->id == $groundSupportEquiptment->storage_id) selected @endif>
+                                                        {{ $storage->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
+
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -132,12 +101,19 @@
                                                 Returned By @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', ' Returned By')
-                                                @slot('id', 'returned_by')
-                                                @slot('name', 'returned_by')
-                                                @slot('id_error', 'returned_by')
-                                            @endcomponent
+                                            <select id="employee" name="employee" class="form-control m-select2" style="width:100%">
+                                                <option value="">
+                                                    &mdash; Select a Returned By &mdash;
+                                                </option>
+
+                                                @foreach ($employees as $employee)
+                                                    <option value="{{ $employee->uuid }}"
+                                                        @if ($employee->uuid == $employee_uuid) selected @endif>
+                                                        {{ $employee->first_name." ".$employee->last_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -148,6 +124,7 @@
                                                 @slot('text', 'Section Code')
                                                 @slot('id', 'section')
                                                 @slot('name', 'section')
+                                                @slot('value', $groundSupportEquiptment->section)
                                                 @slot('id_error', 'section')
                                             @endcomponent
                                         </div>
@@ -160,9 +137,10 @@
 
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
-                                                @slot('id', 'description')
-                                                @slot('name', 'description')
-                                                @slot('text', 'Description')
+                                                @slot('id', 'note')
+                                                @slot('name', 'note')
+                                                @slot('value', $groundSupportEquiptment->note)
+                                                @slot('text', 'Note')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -193,18 +171,22 @@
                                                                     <div class="form-group m-form__group row align-items-center">
                                                                         <div class="col-md-4">
                                                                             <div class="m-input-icon m-input-icon--left">
-                                                                                <input type="text" class="form-control m-input" placeholder="Search..."
-                                                                                    id="generalSearch">
-                                                                                <span class="m-input-icon__icon m-input-icon__icon--left">
-                                                                                    <span><i class="la la-search"></i></span>
-                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                                                    @component('frontend.common.buttons.create-new')
+                                                                        @slot('text', 'Item')
+                                                                        @slot('data_target', '#modal_gse_item_add')
+                                                                    @endcomponent
+
+                                                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         @include('frontend.gse.modal')
+                                                        @include('frontend.gse.modal-edit')
                                                         <div class="gse_tool_returned_datatable" id="gse_tool_returned_datatable"></div>
                                                     </div>
                                                 </div>
@@ -215,10 +197,10 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
+                                                    @component('frontend.common.buttons.update')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-gse')
-                                                        @slot('class', 'add-gse')
+                                                        @slot('id', 'update-gse')
+                                                        @slot('class', 'update-gse')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -242,10 +224,11 @@
 
 
 @push('footer-scripts')
-
-    <script src="{{ asset('js/frontend/gse/create.js') }}"></script>
+    <script>
+        let gse_uuid = '{{$groundSupportEquiptment->uuid}}';
+    </script>
+    <script src="{{ asset('js/frontend/gse/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/returned-by.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/employee.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
 @endpush

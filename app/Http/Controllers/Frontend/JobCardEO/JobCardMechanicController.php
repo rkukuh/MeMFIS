@@ -95,6 +95,11 @@ class JobCardMechanicController extends Controller
      */
     public function edit(JobCard $jobcard)
     {
+        $srm = [];
+        $srm["scheduled_priority"]   = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->scheduled_priority_id)->first();
+        $srm["recurrence"]           = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->recurrence_id)->first();
+        $srm["manual_affected"]      = Type::where('id', json_decode($jobcard->origin_jobcardable)->eo_header->manual_affected_id)->first();
+
         foreach($jobcard->helpers as $helper){
             $helper->userID .= $helper->user->id;
         }
@@ -121,7 +126,8 @@ class JobCardMechanicController extends Controller
                     'tools' => $jobcard->jobcardable->tools,
                     'progresses' => $progresses,
                     'status' => $this->statuses->where('code','open')->first(),
-                'helper_quantity' => $helper_quantity,
+                    'helper_quantity' => $helper_quantity,
+                'srm' => $srm
                 ]);
             }else{
                 return redirect()->route('frontend.jobcard.index')->with($this->error_notification);
@@ -141,6 +147,7 @@ class JobCardMechanicController extends Controller
                 'pending' => $this->statuses->where('code','pending')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
                 'helper_quantity' => $helper_quantity,
+                'srm' => $srm
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "pending"){
@@ -153,6 +160,7 @@ class JobCardMechanicController extends Controller
                 'open' => $this->statuses->where('code','open')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
                 'helper_quantity' => $helper_quantity,
+                'srm' => $srm
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "closed"){
@@ -163,6 +171,7 @@ class JobCardMechanicController extends Controller
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
                 'helper_quantity' => $helper_quantity,
+                'srm' => $srm
             ]);
         }
         else{
@@ -173,6 +182,7 @@ class JobCardMechanicController extends Controller
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
                 'helper_quantity' => $helper_quantity,
+                'srm' => $srm
             ]);
         }
 

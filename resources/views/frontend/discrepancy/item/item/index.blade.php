@@ -26,11 +26,9 @@
                                         Item @include('frontend.common.label.required')
                                     </label>
 
-                                    @component('frontend.common.input.select2')
-                                        @slot('id', 'material')
-                                        @slot('text', 'Material')
-                                        @slot('name', 'material')
-                                        @slot('id_error', 'material')
+                                    @component('frontend.common.item.index')
+                                        @slot('name_item','material')
+                                        @slot('id_item','material')
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">

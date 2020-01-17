@@ -82,8 +82,8 @@
 
                             <div class="attendance_correction_datatable" id="scrolling_both"></div>
 
-                            @include('frontend.attendance-correction.modal-approve')
-                            @include('frontend.attendance-correction.modal-reject')
+                            <!-- @include('frontend.attendance-correction.modal-approve') -->
+                            <!-- @include('frontend.attendance-correction.modal-reject') -->
                             @include('frontend.attendance-correction.transaction-view')
                         </div>
                     </div>

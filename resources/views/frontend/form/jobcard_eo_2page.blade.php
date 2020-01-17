@@ -305,10 +305,10 @@
                                 {{ $jobcard->jobcardable->eo_header->category->name }}
                             </td>
                             <td valign="top" width="20%">
-                                {{ $eo_additionals->scheduled_priority_text }} {{ $eo_additionals->scheduled_priority_type }}
+                                @if($eo_additionals->scheduled_priority_text !== "null") {{ $eo_additionals->scheduled_priority_text }} {{ $eo_additionals->scheduled_priority_type }}  @else {{ $srm["scheduled_priority"]->name }} @endif
                             </td>
                             <td valign="top" width="20%">
-                                {{ $eo_additionals->recurrence_text }} {{ $eo_additionals->recurrence_type }}
+                                @if($eo_additionals->recurrence_text !== null){{ $eo_additionals->recurrence_text }} {{ $eo_additionals->recurrence_type }}  @else {{ $srm["recurrence"]->name }} @endif
                             </td>
                             <td valign="top" width="20%">
                                 {{ $eo_additionals->manual_affected }}
@@ -449,11 +449,14 @@
                             <div style="width:100%;height:20px;text-align:center;padding-left:5px;">{{ $inspected_by }} : {{ $inspected_at }}</div>
                         </td>
                         <td width="34%" height="100" align="center" valign="bottom"
-                            @if($rii_status==0) style="background:grey" @endif>
+                            @if($rii_status==0)  @endif>
                             @if($rii_status==1)
-                            <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
-                            <div style="width:100%;height:20px;text-align:left;padding-left:5px;">
-                                Date : <span>{{$rii_at}}</span></div>
+                                <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
+                                <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$rii_at}}</span></div>
+                            @else
+                                <div>
+                                <img src="./img/RII.png" alt="" width="230px">
+                                </div>
                             @endif
                         </td>
                     </tr>

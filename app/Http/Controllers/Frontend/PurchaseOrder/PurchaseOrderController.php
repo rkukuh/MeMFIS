@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\PurchaseOrder;
 
 use Auth;
 use Carbon\Carbon;
+use App\Models\Tax;
 use App\Models\Type;
 use App\Models\Vendor;
 use App\Models\Approval;
@@ -12,6 +13,8 @@ use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\PurchaseOrderItem;
+use App\Models\Pivots\PurchaseRequestItem;
 use App\Http\Requests\Frontend\PurchaseOrderStore;
 use App\Http\Requests\Frontend\PurchaseOrderUpdate;
 
@@ -47,6 +50,7 @@ class PurchaseOrderController extends Controller
     {
         $request->merge(['number' => DocumentNumber::generate('PO-', PurchaseOrder::withTrashed()->count()+1)]);
         $request->merge(['purchase_request_id' => PurchaseRequest::where('uuid',$request->purchase_request_id)->first()->id]);
+        $request->merge(['vendor_id' => Vendor::where('uuid',$request->vendor_id)->first()->id]);
         $request->merge(['ordered_at' => Carbon::parse($request->ordered_at)]);
         $request->merge(['valid_until' => Carbon::parse($request->valid_until)]);
         $request->merge(['ship_at' => Carbon::parse($request->ship_at)]);
@@ -55,24 +59,25 @@ class PurchaseOrderController extends Controller
 
         $purchaseOrder = PurchaseOrder::create($request->all());
 
-        $items = PurchaseRequest::find($request->purchase_request_id)->items;
+        $items = PurchaseRequestItem::where('purchase_request_id',$request->purchase_request_id)->get();
+
 
         $PurchaseOrder = PurchaseOrder::where('purchase_request_id',$request->purchase_request_id)->count();
         if($PurchaseOrder == 1){
             foreach($items as $item){
-                $purchaseOrder->items()->attach([$item->pivot->item_id => [
-                    'quantity'=> $item->pivot->quantity,
-                    'quantity_unit' => $item->pivot->quantity_unit,
-                    'unit_id' => $item->pivot->unit_id
+                $purchaseOrder->items()->attach([$item->item_id => [
+                    'quantity'=> $item->quantity,
+                    'quantity_unit' => $item->quantity_unit,
+                    'unit_id' => $item->unit_id
                     ]
                 ]);
             }
         }else{
             foreach($items as $item){
-                $purchaseOrder->items()->attach([$item->pivot->item_id => [
+                $purchaseOrder->items()->attach([$item->item_id => [
                     'quantity'=> 0,
                     'quantity_unit' => 0,
-                    'unit_id' => $item->pivot->unit_id
+                    'unit_id' => $item->unit_id
                     ]
                 ]);
             }
@@ -135,13 +140,54 @@ class PurchaseOrderController extends Controller
      */
     public function update(PurchaseOrderUpdate $request, PurchaseOrder $purchaseOrder)
     {
-        $request->merge(['ordered_at' => Carbon::parse($request->ordered_at)]);
-        $request->merge(['valid_until' => Carbon::parse($request->valid_until)]);
-        $request->merge(['ship_at' => Carbon::parse($request->ship_at)]);
-        $request->merge(['top_start_at' => Carbon::parse($request->top_start_at)]);
-        $request->merge(['top_type' => Type::where('code',$request->top_type)->first()->id]);
+        $request->merge([
+            'ordered_at' => Carbon::parse($request->ordered_at),
+            'valid_until' => Carbon::parse($request->valid_until),
+            'ship_at' => Carbon::parse($request->ship_at),
+            'top_start_at' => Carbon::parse($request->top_start_at),
+            'top_type' => Type::where('code',$request->top_type)->first()->id,
+            'vendor' => $request->vendor,
+
+        ]);
 
         $purchaseOrder->update($request->all());
+
+        //todo ppn
+        $tax = Type::ofTaxPaymentMethod()->where('code', 'exclude')->first();
+        $tax_type = Type::ofTax()->where('code', 'ppn')->first();
+        $subtotal_after_discount = $request->total_before_tax;
+        $tax_amount = $tax_percentage = 0;
+        if($tax->code == "include"){
+            $tax_percentage = $request->tax_amount;
+            $tax_amount = $request->total_before_tax - ( $subtotal_after_discount / 1.1 * ($request->tax_amount / 100) );
+        }elseif($tax->code == "exclude"){
+            $tax_percentage = $request->tax_amount;
+            $tax_amount = $subtotal_after_discount * ($request->tax_amount / 100);
+        }
+
+        if(sizeof($purchaseOrder->taxes) > 0){
+            if($tax->code == "none"){
+                $purchaseOrder->taxes()->delete();
+            }else{
+                $tax = Tax::where('uuid', $purchaseOrder->taxes->last()->uuid)->update([
+                    'taxable_type' => 'App\Models\PurchaseOrder',
+                    'taxable_id' => $purchaseOrder->id,
+                    'type_id' => $tax_type->id,
+                    'method_type_id' => $tax->id,
+                    'percent' => $tax_percentage,
+                    'amount' => $tax_amount
+                ]);
+            }
+        }else{
+            $purchaseOrder->taxes()->save(new Tax([
+                'taxable_type' => 'App\Models\PurchaseOrder',
+                'taxable_id' => $purchaseOrder->id,
+                'type_id' => $tax_type->id,
+                'method_type_id' => $tax->id,
+                'percent' => $tax_percentage,
+                'amount' => $tax_amount
+            ]));
+        }
 
         return response()->json($purchaseOrder);
     }
@@ -201,5 +247,29 @@ class PurchaseOrderController extends Controller
         );
 
         return response()->json($status_notification);
+    }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\PurchaseOrder $purchaseOrder
+     * @return \Illuminate\Http\Response
+     */
+    public function print(PurchaseOrder $purchaseOrder)
+    {
+        $items = PurchaseOrderItem::with('item','item.unit', 'item.categories')->where('purchase_order_id',$purchaseOrder->id)->whereHas('item', function ($query) {
+            $query->whereHas('categories', function ($query2) {
+                $query2->whereIn('code', ['raw', 'cons', 'comp']);
+            });
+        })->get();
+
+        $pdf = \PDF::loadView('frontend/form/purchase_order',[
+                'username' => Auth::user()->name,
+                'purchaseOrder' => $purchaseOrder,
+                'items' => $items,
+                'created_by' => $purchaseOrder->audits->first()->user->name
+                ]);
+
+        return $pdf->stream();
     }
 }

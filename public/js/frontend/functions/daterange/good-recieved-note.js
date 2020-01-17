@@ -1,4 +1,4 @@
-var GoodRecievedNoteDaterangepicker = {
+var GoodReceivedNoteDaterangepicker = {
     init: function () {
         ! function () {
             $("#daterange_good_recieved_note").daterangepicker({
@@ -10,5 +10,5 @@ var GoodRecievedNoteDaterangepicker = {
     }
 };
 jQuery(document).ready(function () {
-    GoodRecievedNoteDaterangepicker.init()
+    GoodReceivedNoteDaterangepicker.init()
 });

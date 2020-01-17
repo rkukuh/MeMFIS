@@ -61,27 +61,29 @@ let Overtime = {
                     filterable: !1,
                 },
                 {
-                    field: 'uuid',
+                    field: 'code',
                     title: 'Overtime Number',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a data-toggle="modal" data-target="#modal_transaction_correction" href="#">' + t.uuid + "</a>"
+                        return '<a data-toggle="modal" data-target="#modal_transaction_correction" href="#">' + t.code + "</a>"
                     }
                 },
                 {
-                    field: 'nrp',
+                    field: 'employee.code',
                     title: 'NRP',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'employee_name',
+                    field: 'employee_full_name',
                     title: 'Employee Name',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return t.employee.first_name +' '+ t.employee.last_name
+                    }
                 },
-               
                 {
                     field: 'start',
                     title: 'Start Time',
@@ -107,13 +109,13 @@ let Overtime = {
                     filterable: !1,
                 },
                 {
-                    field: 'status',
+                    field: 'status.name',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'conductedBy',
                     title: 'Approval',
                     sortable: 'asc',
                     filterable: !1,
@@ -142,11 +144,6 @@ let Overtime = {
 
     }
 };
-                                                                                                                                                                              
-
-
-
-
 
 jQuery(document).ready(function () {
     Overtime.init();

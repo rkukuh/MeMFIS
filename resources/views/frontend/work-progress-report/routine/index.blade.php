@@ -257,7 +257,7 @@
                                 </div>
                                 <div class="col" align="center">
                                     <span class="m-widget15__stats">
-                                        {{ number_format($manhours["cpcp"]["total"] / 2) }}
+                                        {{ number_format($manhours["sip"]["total"] / 2) }}
                                     </span>
                                 </div>
                                 <div class="col" align="right">

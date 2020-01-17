@@ -13,6 +13,7 @@ class BankAccount extends MemfisModel
         'bank_accountable_type',
         'bank_accountable_id',
         'bank_id',
+        'currency_id',
         'created_at',
         'updated_at'
     ];
@@ -48,5 +49,18 @@ class BankAccount extends MemfisModel
     public function bank()
     {
         return $this->belongsTo(Bank::class);
+    }
+
+    /**
+     * One-to-Many: A bank account may have one currency.
+     *
+     * This function will retrieve the currency of a bank account.
+     * See: Currency's bank_accounts() method for the inverse
+     *
+     * @return mixed
+     */
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
     }
 }

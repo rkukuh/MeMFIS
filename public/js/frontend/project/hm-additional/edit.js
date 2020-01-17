@@ -244,13 +244,7 @@ let AdditionalTaskCreate = (function() {
                 },
                 {
                     field: 'name',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Material Description',
+                    title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -324,12 +318,6 @@ let AdditionalTaskCreate = (function() {
                 {
                     field: 'name',
                     title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Tool Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -460,6 +448,8 @@ let AdditionalTaskCreate = (function() {
             });
 
             $('.add-project-additional').on('click', function () {
+                mApp.block(".add-project-additional");
+
                 let data = new FormData();
                 data.append("defectcard_uuid", UUID);
                 data.append("title", $("#additional_project_title").val());
@@ -479,9 +469,11 @@ let AdditionalTaskCreate = (function() {
                     cache: false,
                     data:data,
                     success: function (data) {
+                        mApp.unblock(".add-project-additional");
                         if (data.errors) {
 
                         } else {
+
                             toastr.success('Defectcard has been created.', 'Success', {
                                 timeOut: 5000
                             });
@@ -501,6 +493,8 @@ let AdditionalTaskCreate = (function() {
                 });
             });
             $('.delete-project-additional').on('click', function () {
+                mApp.block(".delete-project-additional");
+
                 let data = new FormData();
                 data.append("defectcard_uuid", UUID_Selected);
 
@@ -515,9 +509,11 @@ let AdditionalTaskCreate = (function() {
                     cache: false,
                     data:data,
                     success: function (data) {
+                        mApp.unblock(".delete-project-additional");
                         if (data.errors) {
 
                         } else {
+
                             toastr.success('Defectcard Aditional has been deleted.', 'Success', {
                                 timeOut: 5000
                             });
@@ -549,6 +545,8 @@ jQuery(document).ready(function () {
 });
 
 $('.footer-additional').on('click', '.update-additional-data', function () {
+    mApp.block(".update-additional-data");
+
     let total_manhours = $("#estimation_manhour").attr('value');
     let additional_project_title = $("#additional_project_title").val();
     let performance_factor = $("#performance_factor").val();
@@ -567,6 +565,7 @@ $('.footer-additional').on('click', '.update-additional-data', function () {
             total_manhours_with_performance_factor:total_manhours_with_performance_factor,
         },
         success: function (data) {
+            mApp.unblock(".update-additional-data");
             if (data.errors) {
                 // if (data.errors.customer_id) {
                 //     $('#customer-error').html(data.errors.customer_id[0]);
@@ -575,6 +574,7 @@ $('.footer-additional').on('click', '.update-additional-data', function () {
                 // document.getElementById('customer').value = data.getAll('customer_id');
 
             } else {
+
                 toastr.success('Project Additional has been Updated.', 'Success', {
                     timeOut: 5000
                 });

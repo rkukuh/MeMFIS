@@ -50,18 +50,18 @@ let Grn = {
                     sortable: 'asc',
                     filterable: !1,
                     textAlign: 'center',
-                    template: function (row, index, datatable) {   
+                    template: function (row, index, datatable) {
                         return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
                     }
                 },
                 {
-                    field: '',
+                    field: 'created_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'number',
                     title: 'GRN Number',
                     sortable: 'asc',
                     filterable: !1,
@@ -70,7 +70,7 @@ let Grn = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'purchase_order.purchase_request.number',
                     title: 'PR Number',
                     sortable: 'asc',
                     filterable: !1,
@@ -82,7 +82,7 @@ let Grn = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'purchase_order.vendor.name',
                     title: 'Vendor',
                     sortable: 'asc',
                     filterable: !1,
@@ -120,7 +120,7 @@ let Grn = {
                                 '<a href="/goods-received/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-pencil"></i>' +
                                 '</a>' +
-                                '<a href="inventory-in/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
+                                '<a href="/goods-received/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
                                     '<i class="la la-print"></i>' +
                                 '</a>'
                             );
@@ -162,11 +162,13 @@ let Grn = {
                             table.originalDataSet = [];
                             table.reload();
                         },
-                        error: function (jqXhr, json, errorThrown) {
+                        error: function(jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
+                            $.each(errors, function(index, value) {
+                                toastr.error(value.message, value.title, {
+                                    closeButton: true,
+                                    timeOut: "0"
+                                });
                             });
                         }
                     });

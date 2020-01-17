@@ -149,17 +149,6 @@ Route::get('/purchase-request-project-doc', function () {
     return $pdf->stream();
 });
 
-Route::get('/material-request-project-doc', function () {
-    $pdf = \PDF::loadView('frontend/form/material_request_project');
-    return $pdf->stream();
-});
-
-Route::get('/material-request-general-doc', function () {
-    $pdf = \PDF::loadView('frontend/form/material_request_general');
-    return $pdf->stream();
-});
-
-
 Route::get('/additional-quotation-page1', function () {
     $pdf = \PDF::loadView('frontend/form/additional_quotation_1');
     return $pdf->stream();
@@ -230,6 +219,66 @@ Route::get('/jobcard-sb-1page', function () {
 
 Route::get('/jobcard-sb-2page', function () {
     $pdf = \PDF::loadView('frontend/form/jobcard_sb_2page');
+    return $pdf->stream();
+});
+
+Route::get('/tool-request-dc', function () {
+    $pdf = \PDF::loadView('frontend/form/tool_request_dc');
+    $pdf->setPaper('A5', 'potrait');
+    return $pdf->stream();
+});
+
+Route::get('/tool-request-hm', function () {
+    $pdf = \PDF::loadView('frontend/form/tool_request_hm');
+    $pdf->setPaper('A5', 'potrait');
+    return $pdf->stream();
+});
+
+Route::get('/tool-request-workshop', function () {
+    $pdf = \PDF::loadView('frontend/form/tool_request_workshop');
+    $pdf->setPaper('A5', 'potrait');
+    return $pdf->stream();
+});
+
+Route::get('/material-request-dc', function () {
+    $pdf = \PDF::loadView('frontend/form/material_request_dc');
+    $pdf->setPaper('A5', 'potrait');
+    return $pdf->stream();
+});
+
+Route::get('/material-request-hm', function () {
+    $pdf = \PDF::loadView('frontend/form/material_request_hm');
+    $pdf->setPaper('A5', 'potrait');
+    return $pdf->stream();
+});
+
+Route::get('/material-request-workshop', function () {
+    $pdf = \PDF::loadView('frontend/form/material_request_workshop');
+    $pdf->setPaper('A5', 'potrait');
+    return $pdf->stream();
+});
+
+Route::get('/inventory-out-tool', function () {
+    $pdf = \PDF::loadView('frontend/form/inventory_out_tool');
+    $pdf->setPaper('A5', 'potrait');
+    return $pdf->stream();
+});
+
+Route::get('/inventory-out-material', function () {
+    $pdf = \PDF::loadView('frontend/form/inventory_out_material');
+    $pdf->setPaper('A5', 'potrait');
+    return $pdf->stream();
+});
+
+Route::get('/inventory-in-docs', function () {
+    $pdf = \PDF::loadView('frontend/form/inventory_in');
+    $pdf->setPaper('A5', 'potrait');
+    return $pdf->stream();
+});
+
+Route::get('/gse-tool-returned', function () {
+    $pdf = \PDF::loadView('frontend/form/gse_tool_returned');
+    $pdf->setPaper('A5', 'potrait');
     return $pdf->stream();
 });
 

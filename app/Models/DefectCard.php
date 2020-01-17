@@ -54,7 +54,8 @@ class DefectCard extends MemfisModel
     public function helpers()
     {
         return $this->belongsToMany(Employee::class, 'defectcard_employee', 'defectcard_id', 'employee_id')
-                    ->withPivot('additionals')
+                    ->withPivot('additionals','deleted_at')
+                    ->whereNull('defectcard_employee.deleted_at')
                     ->withTimestamps();
     }
 

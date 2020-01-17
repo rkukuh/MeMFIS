@@ -62,11 +62,11 @@ class TaskReleaseDefectCardDatatables extends Controller
                     $defectcard->status .= 'Waiting for RII';
             }
             elseif($defectcard->is_rii == 0 and sizeof($defectcard->approvals)==3){
-                if($defectcard->progresses->where('status_id', Status::ofDefectCard()->where('code','released')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
+                if($defectcard->progresses->where('status_id', Status::ofDefectCard()->where('code','released')->first()->id)->groupby('progressed_by')->count() == ($count_user - 1) and $count_user <> 0){
                     $defectcard->status .= 'Released';
                 }
             }
-            elseif($defectcard->progresses->where('status_id', Status::ofDefectCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
+            elseif($defectcard->progresses->where('status_id', Status::ofDefectCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == ($count_user - 1) and $count_user <> 0){
                 $defectcard->status .= 'Closed';
             }
             elseif(sizeof($status) == $count_user and $count_user <> 0){
@@ -89,7 +89,6 @@ class TaskReleaseDefectCardDatatables extends Controller
             if($defectcard->approvals->toArray() == []){
                 $conducted_by = "";
                 $conducted_at = "";
-
             }
             else{
                 $conducted_by = User::find($defectcard->approvals->last()->conducted_by)->name;
@@ -105,9 +104,10 @@ class TaskReleaseDefectCardDatatables extends Controller
             $defectcard->update_date       .= $defectcard->audits->last()->updated_at;
             $defectcard->updated_by        .= User::find($defectcard->audits->last()->user_id)->name;
 
-
+            // dump("Count User = ".$count_user);
+            // dump($defectcard->progresses->where('status_id', Status::ofDefectCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() );
         }
-
+        // dd($DefectCard->whereIn('status',['Closed','Released','Waiting for RII','RII Released'])->all());
         $data = $alldata = json_decode(collect(array_values($DefectCard->whereIn('status',['Closed','Released','Waiting for RII','RII Released'])->all())));
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

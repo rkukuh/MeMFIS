@@ -5,7 +5,7 @@
             <div class="modal-header">
                 @include('frontend.common.label.create-new')
 
-                <h5 class="modal-title" id="TitleModalInstruction">
+                <h5 class="modal-title" id="TitleModalInstruction" style="margin-top:0px">
                     Good Received Notes
 
                     <small id="instruction" class="m--font-focus"></small>
@@ -23,15 +23,13 @@
                                     Item
                                 </label>
 
-                                @component('frontend.common.input.select2')
-                                    @slot('text', 'Item')
-                                    @slot('id', 'material')
-                                    @slot('name', 'material')
-                                    @slot('id_error', 'item')
-                                    @slot('style', 'width:100%')
+                                @component('frontend.common.item.index')
+                                    @slot('name_item','material')
+                                    @slot('id_item','material')
                                 @endcomponent
+
                             </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
                                     Expired Date
                                 </label>
@@ -43,11 +41,23 @@
                                     @slot('id_error', 'exp_date2')
                                 @endcomponent
                             </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                <label class="form-control-label">
+                                    Location
+                                </label>
+
+                                @component('frontend.common.input.text')
+                                    @slot('id', 'location')
+                                    @slot('text', 'Location')
+                                    @slot('name', 'location')
+                                    @slot('id_error', 'location')
+                                @endcomponent
+                            </div>
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
-                                    Recived Items
+                                    Received Items
                                 </label>
                                 @component('frontend.common.label.data-info')
                                     @slot('text', '0')
@@ -56,12 +66,12 @@
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
-                                    Qty Recieved
+                                    Qty Received
                                 </label>
 
                                 @component('frontend.common.input.number')
                                     @slot('id', 'quantity')
-                                    @slot('text', 'Qty Recieved')
+                                    @slot('text', 'Qty Received')
                                     @slot('name', 'quantity')
                                     @slot('id_error', 'quantity')
                                 @endcomponent
